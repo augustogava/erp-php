@@ -1,0 +1,332 @@
+/* Sistema ERP - Stylesheet Modernizado */
+
+/* Reset e Base */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Arial, Helvetica, sans-serif;
+    font-size: 13px;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f6fa;
+}
+
+/* Links */
+a:link, a:visited {
+    color: #2c3e50;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #3498db;
+    text-decoration: underline;
+}
+
+a:active {
+    color: #fff;
+    background-color: #3498db;
+    text-decoration: none;
+}
+
+/* Classes de Texto */
+.texto {
+    font-family: 'Segoe UI', Arial, Helvetica, sans-serif;
+    font-size: 13px;
+    color: #2c3e50;
+    text-decoration: none;
+}
+
+.textobold {
+    font-family: 'Segoe UI', Arial, Helvetica, sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: #2c3e50;
+    text-decoration: none;
+}
+
+.textoboldbranco {
+    font-family: 'Segoe UI', Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    color: #fff;
+    text-decoration: none;
+    padding: 4px 8px;
+}
+
+.textopreto {
+    font-family: 'Segoe UI', Arial, Helvetica, sans-serif;
+    font-size: 13px;
+    color: #333;
+}
+
+.textopretobold {
+    font-family: 'Segoe UI', Arial, Helvetica, sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: #333;
+}
+
+/* Menu Tree */
+.treemenu {
+    font-family: 'Segoe UI', Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    color: #2c3e50;
+    line-height: 1.6;
+}
+
+.treemenu a {
+    color: #2c3e50;
+    padding: 2px 4px;
+    display: inline-block;
+}
+
+.treemenu a:hover {
+    color: #3498db;
+    background-color: #ecf0f1;
+    border-radius: 3px;
+}
+
+/* Títulos */
+.titulos {
+    font-family: 'Segoe UI', Arial, Helvetica, sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: #2c3e50;
+    text-decoration: none;
+}
+
+.chamadas {
+    font-family: 'Segoe UI', Arial, Helvetica, sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    color: #2c3e50;
+    text-decoration: none;
+}
+
+/* Formulários */
+.formulario {
+    font-family: 'Segoe UI', Arial, Helvetica, sans-serif;
+    font-size: 13px;
+    color: #333;
+    text-decoration: none;
+    border: 1px solid #bdc3c7;
+    border-radius: 4px;
+    padding: 6px 10px;
+    transition: border-color 0.2s;
+}
+
+.formulario:focus {
+    border-color: #3498db;
+    outline: none;
+}
+
+.formularioselect {
+    font-family: 'Segoe UI', Arial, Helvetica, sans-serif;
+    font-size: 13px;
+    color: #333;
+    text-decoration: none;
+    border: 1px solid #bdc3c7;
+    border-radius: 4px;
+    padding: 6px 10px;
+    width: 100%;
+    background-color: #fff;
+}
+
+.formularioselect:focus {
+    border-color: #3498db;
+    outline: none;
+}
+
+.form1 {
+    width: auto;
+    font-family: 'Segoe UI', Arial, Helvetica, sans-serif;
+    font-size: 13px;
+    color: #333;
+    border: 1px solid #bdc3c7;
+    border-radius: 4px;
+    padding: 6px 10px;
+}
+
+.formularioselectsemborda {
+    font-family: 'Segoe UI', Arial, Helvetica, sans-serif;
+    font-size: 13px;
+    color: #333;
+    text-decoration: none;
+    width: 100%;
+    border: none;
+    background: transparent;
+}
+
+/* Botões */
+input[type="submit"], input[type="button"], button {
+    font-family: 'Segoe UI', Arial, Helvetica, sans-serif;
+    font-size: 13px;
+    padding: 8px 16px;
+    background: linear-gradient(135deg, #3498db, #2980b9);
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+input[type="submit"]:hover, input[type="button"]:hover, button:hover {
+    background: linear-gradient(135deg, #2980b9, #1f5f8b);
+    transform: translateY(-1px);
+}
+
+/* Micro texto */
+.microtxt {
+    font-family: 'Segoe UI', Arial, Helvetica, sans-serif;
+    font-size: 11px;
+    color: #7f8c8d;
+    text-decoration: none;
+}
+
+/* Paginação */
+.paginacao {
+    font-family: 'Segoe UI', Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    color: #2c3e50;
+    text-decoration: none;
+    padding: 4px 8px;
+}
+
+.paginacao2 {
+    font-family: 'Segoe UI', Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    color: #3498db;
+    text-decoration: none;
+    padding: 4px 8px;
+    background-color: #ecf0f1;
+    border-radius: 3px;
+}
+
+/* Post-it */
+.postit {
+    font-family: 'Segoe UI', Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    color: #333;
+    text-decoration: none;
+    background-color: #fff9c4;
+    width: 100%;
+    border: none;
+    border-radius: 4px;
+    padding: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Background e Fundos */
+.background {
+    background: linear-gradient(135deg, #2c3e50, #3498db);
+}
+
+.fundo_top {
+    background: linear-gradient(135deg, #2c3e50, #34495e);
+}
+
+/* Cores de texto */
+.branco {
+    font-family: 'Segoe UI', Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    color: #fff;
+    text-decoration: none;
+}
+
+.rodape {
+    font-family: 'Segoe UI', Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    color: #fff;
+    text-decoration: none;
+}
+
+.txt_inf {
+    font-family: 'Segoe UI', Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    color: #7f8c8d;
+}
+
+/* Células */
+.celula1pix {
+    border: 1px solid #ecf0f1;
+}
+
+/* Menu */
+.menu {
+    font-family: 'Segoe UI', Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: #2c3e50;
+    text-decoration: none;
+}
+
+.menu_help {
+    font-family: 'Segoe UI', Arial, Helvetica, sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    color: #2c3e50;
+    text-decoration: none;
+}
+
+/* Help/Info */
+.texto_help {
+    font-family: 'Segoe UI', Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    font-weight: normal;
+    color: #333;
+    text-decoration: none;
+}
+
+.texto_help_ver {
+    font-family: 'Segoe UI', Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    font-weight: normal;
+    color: #e74c3c;
+    text-decoration: none;
+}
+
+/* Cores extras */
+.sinza {
+    font-family: 'Segoe UI', Arial, Helvetica, sans-serif;
+    font-size: 13px;
+    color: #7f8c8d;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.sinzaescuro {
+    font-family: 'Segoe UI', Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    color: #2c3e50;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.brank {
+    font-family: 'Segoe UI', Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+/* Tabelas */
+table {
+    border-collapse: collapse;
+}
+
+/* Scroll em iframes */
+iframe {
+    border: none;
+}
+
+/* Highlight de linhas em tabelas */
+tr[onMouseover] {
+    transition: background-color 0.15s;
+}

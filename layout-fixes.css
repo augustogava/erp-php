@@ -1,0 +1,156 @@
+/* ==============================================
+   GLOBAL LAYOUT FIX - Remove Multiple Scrolls
+   ============================================== */
+
+/* Reset básico */
+* {
+    box-sizing: border-box;
+}
+
+html {
+    overflow-x: hidden;
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    overflow-x: hidden;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+/* Remove scrolls duplos */
+iframe {
+    border: none;
+    overflow: auto;
+}
+
+/* Container responsivo sem scroll duplo */
+.erp-container-fluid {
+    max-width: 100%;
+    padding: 16px;
+    margin: 0 auto;
+    overflow-x: hidden;
+}
+
+/* Tabelas responsivas */
+.erp-table-container {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    margin-bottom: 16px;
+}
+
+.erp-table {
+    min-width: 600px;
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+    .erp-container-fluid {
+        padding: 8px;
+    }
+    
+    .erp-row {
+        flex-direction: column;
+    }
+    
+    .erp-col {
+        flex: 1 1 100% !important;
+        max-width: 100%;
+    }
+    
+    .erp-card {
+        margin-bottom: 12px;
+    }
+    
+    .erp-table {
+        font-size: 13px;
+    }
+}
+
+/* ==============================================
+   FONT AWESOME LOCAL ICONS
+   ============================================== */
+
+/* Já está carregado no all.css, mas garantindo */
+.fa, .fas, .far, .fal, .fab, .fa-solid, .fa-regular, .fa-light, .fa-brands {
+    font-family: 'Font Awesome 6 Free', 'Font Awesome 6 Pro', 'Font Awesome 6 Brands';
+    font-weight: 900;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    display: inline-block;
+    font-style: normal;
+    font-variant: normal;
+    text-rendering: auto;
+    line-height: 1;
+}
+
+/* Icon sizes */
+.fa-xs { font-size: 0.75em; }
+.fa-sm { font-size: 0.875em; }
+.fa-lg { font-size: 1.25em; }
+.fa-xl { font-size: 1.5em; }
+.fa-2x { font-size: 2em; }
+
+/* Correção para ícones em botões */
+.erp-btn i,
+.erp-btn .fa,
+.erp-btn .fas {
+    margin-right: 6px;
+    vertical-align: middle;
+}
+
+/* ==============================================
+   FIX PARA LAYOUT IFRAME (index.php)
+   ============================================== */
+
+/* Para o layout principal com iframes */
+.main-layout {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.main-header {
+    flex-shrink: 0;
+    z-index: 1000;
+}
+
+.main-body {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+}
+
+.main-sidebar {
+    flex-shrink: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.main-content {
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+/* ==============================================
+   RESPONSIVE UTILITIES
+   ============================================== */
+
+/* Hide on mobile */
+@media (max-width: 768px) {
+    .hide-mobile {
+        display: none !important;
+    }
+}
+
+/* Show only on mobile */
+@media (min-width: 769px) {
+    .show-mobile {
+        display: none !important;
+    }
+}

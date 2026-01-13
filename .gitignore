@@ -1,0 +1,35 @@
+# Environment
+.env
+.env.local
+.env.*.local
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Temp files
+*.tmp
+*.bak
+*.cache
+
+# Docker
+mysql_data/
+
+# Uploads (se existir pasta de uploads)
+uploads/*
+!uploads/.gitkeep
+
+# Compiled files
+*.pyc
+__pycache__/

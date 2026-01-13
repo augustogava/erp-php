@@ -1,0 +1,11 @@
+<?
+include("conecta.php");
+unset($_SESSION["login_funcionario"]);
+unset($_SESSION["login_codigo"]);
+unset($_SESSION["login_nome"]);
+unset($_SESSION["login_cargo"]);
+unset($_SESSION["login_nivel_nome"]);
+unset($_SESSION["login_nivel"]);
+unset($_SESSION["login_c1"]);
+header("Location:../adm/index.php");
+?>
