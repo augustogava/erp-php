@@ -1,6 +1,8 @@
 <?php
 include("conecta.php");
 include("seguranca.php");
+$acao=Input::request("acao");
+$sel=Input::request("sel");
 $bd=new set_bd;
 if(empty($acao)) $acao="entrar";
 $where="WHERE prodserv_sep.sit='P' AND vendas.id=prodserv_sep.pedido AND prodserv_sep.cliente=clientes.id AND prodserv_sep.status='2' ";

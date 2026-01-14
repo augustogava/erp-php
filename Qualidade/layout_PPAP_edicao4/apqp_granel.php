@@ -1,6 +1,18 @@
 <?php
 include("conecta.php");
 include("seguranca.php");
+$acao=Input::request("acao");
+$local=Input::request("local");
+$email=Input::request("email");
+$ap1=Input::request("ap1");
+$ap2=Input::request("ap2");
+$ap3=Input::request("ap3");
+$lap1=Input::request("lap1");
+$lap2=Input::request("lap2");
+$lap3=Input::request("lap3");
+$tap1=Input::request("tap1");
+$tap12=Input::request("tap12");
+$tap13=Input::request("tap13");
 if(empty($acao)) $acao="entrar";
 $pc=$_SESSION["mpc"];
 $npc=$_SESSION["npc"];

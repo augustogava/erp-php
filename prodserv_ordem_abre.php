@@ -1,6 +1,11 @@
 <?php
 include("conecta.php");
 include("seguranca.php");
+$acao=Input::request("acao");
+$id=Input::request("id");
+$previsao=Input::request("previsao");
+$obs=Input::request("obs");
+$status=Input::request("status");
 if(empty($acao)) $acao="inc";
 if($acao=="alt"){
 	$sql=mysql_query("SELECT * FROM prodserv_ordem WHERE id='$id'");

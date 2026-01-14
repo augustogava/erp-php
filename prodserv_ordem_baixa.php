@@ -1,5 +1,22 @@
 <?php
 include("conecta.php");
+$acao=Input::request("acao");
+$id=Input::request("id");
+$ped=Input::request("ped");
+$produto=Input::request("produto");
+$tamanho=Input::request("tamanho");
+$item=Input::request("item");
+$cs=Input::request("cs");
+$ci=Input::request("ci");
+$cr=Input::request("cr");
+$perfil=Input::request("perfil");
+$trilho=Input::request("trilho");
+$pvc=Input::request("pvc");
+$arrebites=Input::request("arrebites");
+$parafusos=Input::request("parafusos");
+$buchas=Input::request("buchas");
+$penduralg=Input::request("penduralg");
+$penduralp=Input::request("penduralp");
 $acao=verifi($permi,$acao);
 if(!empty($acao)){
 	$loc="Ordem Separação Imp.";

@@ -1,5 +1,22 @@
 <?php
 include("conecta.php");
+$acao=Input::request("acao");
+$id=Input::request("id");
+$cliente=Input::request("cliente");
+$cliente_tipo=Input::request("cliente_tipo");
+$conta=Input::request("conta");
+$parcelamento=Input::request("parcelamento");
+$categoria=Input::request("categoria");
+$documento=Input::request("documento");
+$emissao=Input::request("emissao");
+$valor=Input::request("valor");
+$competencia=Input::request("competencia");
+$fluxo=Input::request("fluxo");
+$cartorio=Input::request("cartorio");
+$cobranca=Input::request("cobranca");
+$demonstrativo=Input::request("demonstrativo");
+$historico=Input::request("historico");
+$banco=Input::request("banco");
 if(empty($acao)) header("Location:cr.php");
 $acao=verifi($permi,$acao);
 if(!empty($acao)){

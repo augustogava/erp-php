@@ -1,6 +1,12 @@
 <?php
 include("conecta.php");
 include("seguranca.php");
+$buscar=Input::request("buscar");
+$acao=Input::request("acao");
+$bdescr=Input::request("bdescr");
+$bfitn=Input::request("bfitn");
+$id=Input::request("id");
+$wp=Input::request("wp");
 $acao=verifi($permi,$acao);
 $hora=hora();
 $hj=date("Y-m-d");

@@ -1,6 +1,10 @@
 <?php
 include("conecta.php");
 include("seguranca.php");
+$acao=Input::request("acao");
+$pedidon=Input::request("pedidon");
+$cp=Input::request("cp");
+$err=Input::request("err");
 $bd=new set_bd();
 $acao=verifi($permi,$acao);
 if(!empty($acao)){

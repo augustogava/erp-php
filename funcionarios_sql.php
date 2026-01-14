@@ -1,6 +1,22 @@
 <?php
 include("conecta.php");
 include("seguranca.php");
+$acao=Input::request("acao");
+$id=Input::request("id");
+$nome=Input::request("nome");
+$nascimento=Input::request("nascimento");
+$rg=Input::request("rg");
+$carteira=Input::request("carteira");
+$admissao=Input::request("admissao");
+$cargo=Input::request("cargo");
+$org=Input::request("org");
+$filial=Input::request("filial");
+$centro=Input::request("centro");
+$cooperado=Input::request("cooperado");
+$grupo=Input::request("grupo");
+$email=Input::request("email");
+$bcod=Input::request("bcod");
+$bnome=Input::request("bnome");
 if(empty($acao)) exit;
 if(!empty($acao)){
 	$loc="Funcionarios";

@@ -1,5 +1,8 @@
 <?php
 include("conecta.php");
+$acao = Input::request('acao', '');
+$id = Input::request('id', '');
+
 if(empty($id)){
 	print"<script>window.close();</script>;";
 }

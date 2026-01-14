@@ -1,6 +1,13 @@
 <?php 
 include("conecta.php");
 include("seguranca.php");
+
+$acao = Input::request('acao', '');
+$menu = Input::request('menu', '');
+$submenus = Input::request('submenus', []);
+if (!is_array($submenus)) {
+	$submenus = [];
+}
 if(empty($acao)) $acao="entrar";
 if($acao=="ok"){
 	for($i=0;$i<sizeof($submenus);$i++){

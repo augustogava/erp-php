@@ -1,6 +1,23 @@
 <?php
 include("conecta.php");
 include("seguranca.php");
+$acao=Input::request("acao");
+$id=Input::request("id");
+$cod_inst=Input::request("cod_inst");
+$inst=Input::request("inst");
+$usuario=Input::request("usuario");
+$fabr=Input::request("fabr");
+$data2=Input::request("data2");
+$tipo=Input::request("tipo");
+$usode=Input::request("usode");
+$usoa=Input::request("usoa");
+$resol=Input::request("resol");
+$unidade=Input::request("unidade");
+$normas=Input::request("normas");
+$sit=Input::request("sit");
+$outro=Input::request("outro");
+$custo=Input::request("custo");
+$obs=Input::request("obs");
 $acao=verifi($permi,$acao);
 if(!empty($acao)){
 	$loc="Metrologia - Inc Inst";

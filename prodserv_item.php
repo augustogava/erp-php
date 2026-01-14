@@ -1,6 +1,11 @@
 <?php
 include("conecta.php");
 include("seguranca.php");
+$acao=Input::request("acao");
+$ps=Input::request("ps");
+$id=Input::request("id");
+$psb=Input::request("psb");
+$class=Input::request("class");
 if(empty($acao)) $acao="entrar";
 if(!empty($ps)){
 	$_SESSION["ps2"]=$ps;

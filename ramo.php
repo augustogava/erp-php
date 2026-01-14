@@ -1,6 +1,9 @@
 <?php
 include("conecta.php");
 include("seguranca.php");
+$acao=Input::request("acao");
+$nome=Input::request("nome");
+$id=Input::request("id");
 $acao=verifi($permi,$acao);
 if(!empty($acao)){
 	$loc="Ramo";

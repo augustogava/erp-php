@@ -1,6 +1,8 @@
 ]<?php
 include("conecta.php");
 include("seguranca.php");
+$acao=Input::request("acao");
+$cli=Input::request("cli");
 $bd=new set_bd;
 $acao=verifi($permi,$acao);
 if(!empty($acao)){

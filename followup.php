@@ -4,6 +4,10 @@ include("seguranca.php");
 $fwcli=7;
 $wtitulo = "";
 $wdesc = "";
+
+$bid = Input::request('bid', '');
+$bdata = Input::request('bdata', '');
+$bpal = Input::request('bpal', '');
 if(!empty($bid)){
 	$sql=mysql_query("SELECT * FROM followup WHERE id='$bid'");
 	$res=mysql_fetch_array($sql);

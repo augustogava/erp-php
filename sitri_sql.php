@@ -1,5 +1,9 @@
 <?php
 include("conecta.php");
+$acao=Input::request("acao");
+$nome=Input::request("nome");
+$apelido=Input::request("apelido");
+$id=Input::request("id");
 if(empty($acao)) exit;
 $acao=verifi($permi,$acao);
 if(!empty($acao)){

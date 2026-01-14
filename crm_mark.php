@@ -1,6 +1,24 @@
 <?php
 include("conecta.php");
 include("seguranca.php");
+$acao=Input::request("acao");
+$nome=Input::request("nome");
+$custo_total=Input::request("custo_total");
+$custo=Input::request("custo");
+$ramo=Input::request("ramo");
+$grupo=Input::request("grupo");
+$linha_cot=Input::request("linha_cot");
+$linha_com=Input::request("linha_com");
+$estado=Input::request("estado");
+$cidade=Input::request("cidade");
+$porte=Input::request("porte");
+$tipo=Input::request("tipo");
+$arq=Input::request("arq");
+$contato=Input::request("contato");
+$autonomia=Input::request("autonomia");
+$facao=Input::request("facao");
+$fcao=Input::request("fcao");
+$id=Input::request("id");
 $bd=new set_bd;
 $acao=verifi($permi,$acao);
 if(!empty($acao)){

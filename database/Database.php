@@ -21,9 +21,23 @@ final class Database
     {
         mysqli_report(MYSQLI_REPORT_OFF);
 
-        $conn = @mysqli_connect($host, $user, $password, $database);
+        // DB can take a few seconds to become ready on container startup.
+        $retries = 20;
+        $sleepSeconds = 1;
+        $conn = false;
+        $lastError = '';
+
+        for ($i = 0; $i < $retries; $i++) {
+            $conn = @mysqli_connect($host, $user, $password, $database);
+            if ($conn) {
+                break;
+            }
+            $lastError = mysqli_connect_error();
+            sleep($sleepSeconds);
+        }
+
         if (!$conn) {
-            throw new RuntimeException('Erro de conexao: ' . mysqli_connect_error());
+            throw new RuntimeException('Erro de conexao: ' . $lastError);
         }
 
         $this->connection = $conn;

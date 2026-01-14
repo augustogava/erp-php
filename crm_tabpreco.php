@@ -1,6 +1,10 @@
 <?php
 include("conecta.php");
 include("seguranca.php");
+$acao=Input::request("acao");
+$cat=Input::request("cat");
+$nome=Input::request("nome");
+$buscar=Input::request("buscar");
 unset($_SESSION["ps"]);
 $acao=verifi($permi,$acao);
 if(!empty($acao)){

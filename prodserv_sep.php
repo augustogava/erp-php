@@ -1,6 +1,21 @@
 <?php
 include("conecta.php");
 include("seguranca.php");
+$acao=Input::request("acao");
+$bde=Input::request("bde");
+$bate=Input::request("bate");
+$pedido=Input::request("pedido");
+$status=Input::request("status");
+$produto=Input::request("produto");
+$razao=Input::request("razao");
+$id=Input::request("id");
+$previsao=Input::request("previsao");
+$coleta=Input::request("coleta");
+$motorista=Input::request("motorista");
+$placa=Input::request("placa");
+$obs=Input::request("obs");
+$transportadora=Input::request("transportadora");
+$buscar=Input::request("buscar");
 $bd=new set_bd;
 if(empty($acao)) $acao="entrar";
 $where="WHERE prodserv_sep.sit='P' AND vendas.id=prodserv_sep.pedido AND prodserv_sep.cliente=clientes.id ";

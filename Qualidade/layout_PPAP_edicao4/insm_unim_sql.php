@@ -1,5 +1,9 @@
 <?php
 include("conecta.php");
+$acao=Input::request("acao");
+$id=Input::request("id");
+$nome=Input::request("nome");
+$apelido=Input::request("apelido");
 if(empty($acao)) exit;
 if(!empty($acao)){
 	$loc="Recebimento - Unidades";

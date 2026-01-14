@@ -1,5 +1,21 @@
 <?php
 include("conecta.php");
+$acao=Input::request("acao");
+$id=Input::request("id");
+$parcelado=Input::request("parcelado");
+$ent_sn=Input::request("ent_sn");
+$ent_perc=Input::request("ent_perc");
+$desconto=Input::request("desconto");
+$multa=Input::request("multa");
+$jurosdia=Input::request("jurosdia");
+$descricao=Input::request("descricao");
+$parcelas=Input::request("parcelas");
+$intervalo=Input::request("intervalo");
+$carencia=Input::request("carencia");
+$alt=Input::request("alt");
+$alts=Input::request("alts");
+$vencimento=Input::request("vencimento");
+$obs=Input::request("obs");
 if(empty($acao)) exit;
 if($acao=="exc"){
 	if(!empty($id)){

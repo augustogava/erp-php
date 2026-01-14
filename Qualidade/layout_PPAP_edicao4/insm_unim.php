@@ -1,6 +1,8 @@
 <?php
 include("conecta.php");
 include("seguranca.php");
+$acao=Input::request("acao");
+$id=Input::request("id");
 if(!empty($acao)){
 	$loc="Metrologia - Unid de Medida";
 	$pagina=$_SERVER['SCRIPT_FILENAME'];

@@ -1,6 +1,10 @@
 <?php
 include("conecta.php");
 include("seguranca.php");
+$acao=Input::request("acao");
+$emissao=Input::request("emissao");
+$emissao2=Input::request("emissao2");
+$wsit=Input::request("wsit");
 if(empty($acao)) $acao="entrar";
 if($acao=="entrar"){
 	if(empty($emissao)){

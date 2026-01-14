@@ -1,6 +1,11 @@
 <?php
 include("conecta.php");
 include("seguranca.php");
+$acao=Input::request("acao");
+$texto=Input::request("texto");
+$placa=Input::request("placa");
+$id=Input::request("id");
+$buscar=Input::request("buscar");
 if(empty($acao)) $acao="entrar";
 $where="";
 if(!empty($texto)){

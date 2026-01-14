@@ -1,6 +1,12 @@
 <?php
 include("conecta.php");
 include("seguranca.php");
+$buscar=Input::request("buscar");
+$acao=Input::request("acao");
+$bnome=Input::request("bnome");
+$bcodi=Input::request("bcodi");
+$id=Input::request("id");
+$wp=Input::request("wp");
 $hora=hora();
 $hj=date("Y-m-d");
 $quem1=$_SESSION["login_nome"];

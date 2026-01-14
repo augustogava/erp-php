@@ -1,6 +1,16 @@
 <?php
 include("conecta.php");
 include("seguranca.php");
+
+$acao = Input::request('acao', '');
+$d = Input::request('d', '');
+$dia = Input::request('dia', '');
+$d2 = Input::request('d2', '');
+$dia2 = Input::request('dia2', '');
+$fun = Input::request('fun', '');
+$usu = Input::request('usu', '');
+$tipod = Input::request('tipod', '');
+$externo = Input::request('externo', '');
 if(!empty($acao)){
 	$loc="Status";
 	$pagina=$_SERVER['SCRIPT_FILENAME'];

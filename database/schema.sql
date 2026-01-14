@@ -150,6 +150,13 @@ INSERT INTO `submenus` (`id`, `menu`, `texto`, `url`, `posicao`) VALUES
 (13, 7, 'Empresa', 'empresa.php', 1),
 (14, 7, 'Usuários', 'clientes_login.php', 2);
 
+-- Grant all menus/submenus to Admin (nivel 1) by default
+UPDATE `niveis`
+SET
+  `menus` = (SELECT GROUP_CONCAT(id ORDER BY id) FROM `menus`),
+  `submenus` = (SELECT GROUP_CONCAT(id ORDER BY id) FROM `submenus`)
+WHERE `id` = 1;
+
 CREATE TABLE IF NOT EXISTS `cliente_login` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `cliente` int(11) DEFAULT NULL,

@@ -2,6 +2,9 @@
 include("conecta.php");
 include("seguranca.php");
 
+$setbco = Input::request('setbco', '');
+$bdias = Input::request('bdias', '');
+
 if(empty($setbco) and empty($_SESSION["banco_ativo"])){
 	header("Location:bancos.php");
 	exit;

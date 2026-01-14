@@ -2,6 +2,10 @@
 include("conecta.php");
 $popup=true;
 include("seguranca.php");
+$bnome=Input::request("bnome");
+$bapelido=Input::request("bapelido");
+$wp=Input::request("wp");
+$campo=Input::request("campo");
 
 if(!empty($bnome)){
 	$cond.=" AND nome LIKE '%$bnome%' ";

@@ -1,6 +1,12 @@
 <?php
 include("conecta.php");
 include("seguranca.php");
+$acao=Input::request("acao");
+$idpai=Input::request("idpai");
+$codigo=Input::request("codigo");
+$texto=Input::request("texto");
+$ativo=Input::request("ativo");
+$id=Input::request("id");
 if(empty($acao)) exit;
 $acao=verifi($permi,$acao);
 if(!empty($acao)){

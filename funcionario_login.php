@@ -1,6 +1,15 @@
 <?php
 include("conecta.php");
 include("seguranca.php");
+$acao=Input::request("acao");
+$id=Input::request("id");
+$login=Input::request("login");
+$senha=Input::request("senha");
+$nivel=Input::request("nivel");
+$sit=Input::request("sit");
+$porra=Input::request("porra");
+$primeiro=Input::request("primeiro");
+$img=$_FILES["img"]["tmp_name"] ?? null;
 if(!empty($acao)){
 	$loc="Funcionario_login";
 	$pagina=$_SERVER['SCRIPT_FILENAME'];

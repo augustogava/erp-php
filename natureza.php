@@ -2,7 +2,11 @@
 include("conecta.php");
 include("seguranca.php");
 if(empty($acao)) $acao="entrar";
-$acao=verifi($permi,$acao);
+$acao = Input::request('acao', '');
+$id = Input::request('id', '');
+$nome = Input::request('nome', '');
+$codigo = Input::request('codigo', '');
+$acao = verifi($permi, $acao);
 if(!empty($acao)){
 	$loc="Natureza";
 	$pagina=$_SERVER['SCRIPT_FILENAME'];

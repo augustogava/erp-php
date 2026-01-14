@@ -1,5 +1,8 @@
 <?php
 include("conecta.php");
+$acao=Input::request("acao");
+$tipo=Input::request("tipo");
+$arquivo=Input::request("arquivo");
 
 if($acao=="ir"){
 	if($tipo=="abrir"){

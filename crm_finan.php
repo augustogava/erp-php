@@ -1,6 +1,8 @@
 <?php
 include("conecta.php");
 include("seguranca.php");
+$acao=Input::request("acao");
+$cli=Input::request("cli");
 $acao=verifi($permi,$acao);
 if(!empty($acao)){
 	$loc="Status Pedido";

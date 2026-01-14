@@ -1,6 +1,17 @@
 <?php
 include("conecta.php");
 include("seguranca.php");
+$acao=Input::request("acao");
+$id=Input::request("id");
+$tipo=Input::request("tipo");
+$descricao=Input::request("descricao");
+$inst_cali=Input::request("inst_cali");
+$inst_util=Input::request("inst_util");
+$org_cali=Input::request("org_cali");
+$cad_med=Input::request("cad_med");
+$tip_med=Input::request("tip_med");
+$desc=Input::request("desc");
+$bnome=Input::request("bnome");
 $acao=verifi($permi,$acao);
 $hora=hora();
 $hj=date("Y-m-d");

@@ -1,6 +1,11 @@
 <?php
 include("conecta.php");
 include("seguranca.php");
+$conf=Input::request("conf");
+$exc=Input::request("exc");
+$cal_dia=Input::request("cal_dia");
+$cal_mes=Input::request("cal_mes");
+$cal_ano=Input::request("cal_ano");
 $codigo=$_SESSION["login_codigo"];
 $nivel=$_SESSION["login_nivel"];
 
@@ -29,12 +34,9 @@ if(!empty($exc)){
 	unset($exc);
 }
 
-if (!empty($_GET['cal_dia'])) $cal_dia = $_GET['cal_dia'];
-	else $cal_dia = date("d",time());
-if (!empty($_GET['cal_mes'])) $cal_mes = $_GET['cal_mes'];
-	else  $cal_mes = date("m",time());
-if (!empty($_GET['cal_ano'])) $cal_ano = $_GET['cal_ano'];
-	else $cal_ano = date("Y",time());
+if (empty($cal_dia)) $cal_dia = date("d",time());
+if (empty($cal_mes)) $cal_mes = date("m",time());
+if (empty($cal_ano)) $cal_ano = date("Y",time());
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">

@@ -1,5 +1,11 @@
 <?php
 include("conecta.php");
+$acao=Input::request("acao");
+$id=Input::request("id");
+$desconto=Input::request("desconto");
+$nome=Input::request("nome");
+$parcelamento=Input::request("parcelamento");
+$op=Input::request("op");
 if(empty($acao)) exit;
 if($acao=="exc"){
 	if(!empty($id)){

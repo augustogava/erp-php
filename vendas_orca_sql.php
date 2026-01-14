@@ -1,5 +1,27 @@
 <?php
 include("conecta.php");
+$acao=Input::request("acao");
+$cli=Input::request("cli");
+$id=Input::request("id");
+$contato=Input::request("contato");
+$vendedor=Input::request("vendedor");
+$cod=Input::request("cod");
+$acaom=Input::request("acaom");
+$cliente=Input::request("cliente");
+$telefone=Input::request("telefone");
+$email=Input::request("email");
+$emissao=Input::request("emissao");
+$qtd=Input::request("qtd");
+$prodserv=Input::request("prodserv");
+$unitario=Input::request("unitario");
+$local=Input::request("local");
+$altura=Input::request("altura");
+$largura=Input::request("largura");
+$desconto=Input::request("desconto");
+$material=Input::request("material");
+$maisum=Input::request("maisum");
+$delsel=Input::request("delsel");
+$del=Input::request("del");
 if(empty($acao)) exit;
 $acao=verifi($permi,$acao);
 if(!empty($acao)){

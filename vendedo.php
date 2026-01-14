@@ -1,6 +1,10 @@
 <?php
 include("conecta.php");
 include("seguranca.php");
+$acao=Input::request("acao");
+$id=Input::request("id");
+$bcod=Input::request("bcod");
+$bnome=Input::request("bnome");
 $nivel=$_SESSION["login_nivel"];
 if(!empty($acao)){
 	$loc="Funcionarios";

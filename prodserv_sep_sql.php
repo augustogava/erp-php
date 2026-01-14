@@ -1,5 +1,9 @@
 <?php
 include("conecta.php");
+$acao=Input::request("acao");
+$cp=Input::request("cp");
+$id=Input::request("id");
+$ped=Input::request("ped");
 if(empty($acao)) exit;
 $hj=date("Y-m-d");
 $acao=verifi($permi,$acao);

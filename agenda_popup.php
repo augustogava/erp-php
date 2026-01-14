@@ -1,5 +1,6 @@
 <?php
 include("conecta.php");
+$cpm=Input::request("cpm");
 $sql=mysql_query("SELECT * FROM agenda WHERE numero='$cpm'");
 $res=mysql_fetch_array($sql);
 $nome=$res["nome"];

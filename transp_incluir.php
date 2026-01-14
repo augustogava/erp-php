@@ -1,6 +1,9 @@
 <?php
 include("conecta.php");
 include("seguranca.php");
+$acao=Input::request("acao");
+$id=Input::request("id");
+$cidade=Input::request("cidade");
 $acao=verifi($permi,$acao);
 if(!empty($acao)){
 	$loc="Transportadora";

@@ -1,6 +1,8 @@
 <?php
 include("conecta.php");
 include("seguranca.php");
+$acao=Input::request("acao");
+$id=Input::request("id");
 $bd=new set_bd;
 $data=date("Y-m-d");
 $hora=hora();

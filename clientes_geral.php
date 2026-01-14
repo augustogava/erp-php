@@ -4,6 +4,66 @@ include("seguranca.php");
 
 $nivel=$_SESSION["login_nivel"];
 
+$acao = Input::request('acao', '');
+$id = Input::request('id', '');
+$tipop = Input::request('tipop', '');
+$nome = Input::request('nome', '');
+$fantasia = Input::request('fantasia', '');
+$status = Input::request('status', '');
+$tipo = Input::request('tipo', '');
+$endereco = Input::request('endereco', '');
+$bairro = Input::request('bairro', '');
+$cep = Input::request('cep', '');
+$cidade = Input::request('cidade', '');
+$estado = Input::request('estado', '');
+$fone = Input::request('fone', '');
+$fone2 = Input::request('fone2', '');
+$ddd = Input::request('ddd', '');
+$ddd2 = Input::request('ddd2', '');
+$dddf = Input::request('dddf', '');
+$fax = Input::request('fax', '');
+$cnpj = Input::request('cnpj', '');
+$cpf = Input::request('cpf', '');
+$ie = Input::request('ie', '');
+$im = Input::request('im', '');
+$vendedor = Input::request('vendedor', '');
+$comissao = Input::request('comissao', '');
+$regiao = Input::request('regiao', '');
+$contabil = Input::request('contabil', '');
+$banco1 = Input::request('banco1', '');
+$banco2 = Input::request('banco2', '');
+$banco3 = Input::request('banco3', '');
+$banco4 = Input::request('banco4', '');
+$banco5 = Input::request('banco5', '');
+$email = Input::request('email', '');
+$site = Input::request('site', '');
+$grupo = Input::request('grupo', '');
+$porte_che = Input::request('porte_che', '');
+$porte_fun = Input::request('porte_fun', '');
+$porte_fat = Input::request('porte_fat', '');
+$ramo = Input::request('ramo', '');
+$complemento = Input::request('complemento', '');
+$origem = Input::request('origem', Input::request('origem_cad', ''));
+$loja = Input::request('loja', '');
+$transportadora = Input::request('transportadora', '');
+
+$endereco_cob = Input::request('endereco_cob', '');
+$bairro_cob = Input::request('bairro_cob', '');
+$cep_cob = Input::request('cep_cob', '');
+$cidade_cob = Input::request('cidade_cob', '');
+$estado_cob = Input::request('estado_cob', '');
+
+$endereco_ent = Input::request('endereco_ent', '');
+$bairro_ent = Input::request('bairro_ent', '');
+$cep_ent = Input::request('cep_ent', '');
+$cidade_ent = Input::request('cidade_ent', '');
+$estado_ent = Input::request('estado_ent', '');
+$endereco_ins = Input::request('endereco_ins', '');
+$bairro_ins = Input::request('bairro_ins', '');
+$cep_ins = Input::request('cep_ins', '');
+$cidade_ins = Input::request('cidade_ins', '');
+$estado_ins = Input::request('estado_ins', '');
+
 if(!empty($acao)){
 	$loc="Clientes Geral";
 	$pagina=$_SERVER['SCRIPT_FILENAME'];

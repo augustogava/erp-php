@@ -1,5 +1,12 @@
 <?php
 include("conecta.php");
+$acao=Input::request("acao");
+$motivo=Input::request("motivo");
+$vias=Input::request("vias");
+$responsavel=Input::request("responsavel");
+$id=Input::request("id");
+$pedido=Input::request("pedido");
+$cp=Input::request("cp");
 if($acao=="cance"){
 	mysql_query("UPDATE nf SET motivo='$motivo',vias='$vias',responsavel='$responsavel',data_can=NOW(),vis='N' WHERE id='$id'");
 	//$sql=mysql_query("DELETE FROM e_compra WHERE id='$compra'");

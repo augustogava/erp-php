@@ -1,6 +1,31 @@
 <?php
 include("conecta.php");
 include("seguranca.php");
+$acao=Input::request("acao");
+$id=Input::request("id");
+$p=Input::request("p");
+$nome=Input::request("nome");
+$codigo=Input::request("codigo");
+$unidade=Input::request("unidade");
+$embalagem=Input::request("embalagem");
+$altura=Input::request("altura");
+$largura=Input::request("largura");
+$profundidade=Input::request("profundidade");
+$peso_l=Input::request("peso_l");
+$peso_b=Input::request("peso_b");
+$prazo=Input::request("prazo");
+$frete=Input::request("frete");
+$icms=Input::request("icms");
+$ipi=Input::request("ipi");
+$qtd_minimo=Input::request("qtd_minimo");
+$pf=Input::request("pf");
+$garantia=Input::request("garantia");
+$descricao=Input::request("descricao");
+$espec=Input::request("espec");
+$contato=Input::request("contato");
+$tel=Input::request("tel");
+$email=Input::request("email");
+$foto=$_FILES["foto"]["tmp_name"] ?? null;
 $acao=verifi($permi,$acao);
 if(empty($acao)){ $acao="entrar"; }
 if(!empty($acao)){

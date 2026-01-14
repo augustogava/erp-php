@@ -1,5 +1,18 @@
 <?php
 include("conecta.php");
+$acao=Input::request("acao");
+$id=Input::request("id");
+$perfil=Input::request("perfil");
+$inferior=Input::request("inferior");
+$superior=Input::request("superior");
+$cristal=Input::request("cristal");
+$nome=Input::request("nome");
+$b1=Input::request("b1");
+$b2=Input::request("b2");
+$b3=Input::request("b3");
+$co1=Input::request("co1");
+$co2=Input::request("co2");
+$ps=Input::request("ps");
 if(empty($acao)) exit;
 $acao=verifi($permi,$acao);
 if(!empty($acao)){

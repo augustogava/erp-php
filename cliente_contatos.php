@@ -1,7 +1,23 @@
 <?php
 include("conecta.php");
 include("seguranca.php");
-$acao=verifi($permi,$acao);
+$acao = Input::request('acao', '');
+$id = Input::request('id', '');
+$cli = Input::request('cli', '');
+$pag = Input::request('pag', '');
+$nome = Input::request('nome', '');
+$email = Input::request('email', '');
+$fone1 = Input::request('fone1', '');
+$fone2 = Input::request('fone2', '');
+$fax = Input::request('fax', '');
+$ramal1 = Input::request('ramal1', '');
+$ramal2 = Input::request('ramal2', '');
+$ramal3 = Input::request('ramal3', '');
+$cargo = Input::request('cargo', '');
+$celular = Input::request('celular', '');
+$autonomia = Input::request('autonomia', '');
+$atuacao = Input::request('atuacao', '');
+$acao = verifi($permi, $acao);
 if(!empty($acao)){
 	$loc="Cliente Contato";
 	$pagina=$_SERVER['SCRIPT_FILENAME'];

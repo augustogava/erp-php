@@ -1,6 +1,15 @@
 <?php
 include("conecta.php");
 include("seguranca.php");
+$acao=Input::request("acao");
+$cliente=Input::request("cliente");
+$titulo=Input::request("titulo");
+$descricao=Input::request("descricao");
+$tipo=Input::request("tipo");
+$contato=Input::request("contato");
+$vendedor=Input::request("vendedor");
+$id=Input::request("id");
+$idf=Input::request("idf");
 if($acao=="inc"){
 	$data=date("Y-m-d");
 	$hora=hora();

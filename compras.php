@@ -1,6 +1,11 @@
 <?php
 include("conecta.php");
 include("seguranca.php");
+$acao=Input::request("acao");
+$emissao=Input::request("emissao");
+$emissao2=Input::request("emissao2");
+$wsit=Input::request("wsit");
+$id=Input::request("id");
 $acao=verifi($permi,$acao);
 $nivel=$_SESSION["login_nivel"];
 

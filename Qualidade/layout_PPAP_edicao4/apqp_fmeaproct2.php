@@ -1,9 +1,9 @@
 <?php
 include("conecta.php");
 include("seguranca.php");
+$wop=Input::request("wop") ?: $_SESSION["wop"];
 $pc=$_SESSION["mpc"];
 $npc=$_SESSION["npc"];
-$wop=$_SESSION["wop"];
 $sql=mysql_query("SELECT apqp_fmeaproci.* FROM apqp_fmeaproci,apqp_fmeaproc WHERE apqp_fmeaproc.peca='$pc' AND apqp_fmeaproci.fmea=apqp_fmeaproc.id AND apqp_fmeaproci.item='$wop'");
 if(mysql_num_rows($sql)){
 	$res=mysql_fetch_array($sql);

@@ -1,5 +1,31 @@
 <?php
 include("conecta.php");
+$acao=Input::request("acao");
+$local=Input::request("local");
+$email=Input::request("email");
+$car=Input::request("car");
+$dtpor=Input::request("dtpor");
+$dispno=Input::request("dispno");
+$dispnu=Input::request("dispnu");
+$por=Input::request("por");
+$obs=Input::request("obs");
+$nop=Input::request("nop");
+$ncic=Input::request("ncic");
+$npc1=Input::request("npc1");
+$apf=Input::request("apf");
+$mpf=Input::request("mpf");
+$tap123=Input::request("tap123");
+$ap=Input::request("ap");
+$lap=Input::request("lap");
+$prefixes=["a","b","c"];
+foreach($prefixes as $p){
+	for($i=1;$i<=3;$i++){
+		for($j=1;$j<=10;$j++){
+			$key=$p.$i.$j;
+			$$key=Input::request($key);
+		}
+	}
+}
 $apqp=new set_apqp;
 $acao=verifi($permi,$acao);
 $pc=$_SESSION["mpc"];

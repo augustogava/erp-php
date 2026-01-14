@@ -1,5 +1,8 @@
 <?php
 include("conecta.php");
+$acao=Input::request("acao");
+$pedido=Input::request("pedido");
+$id=Input::request("id");
 $acao=verifi($permi,$acao);
 if(!empty($acao)){
 	$loc="Ordem Separação Imp.";

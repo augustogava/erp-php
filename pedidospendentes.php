@@ -1,6 +1,10 @@
 <?php
 include("conecta.php");
 include("seguranca.php");
+$acao=Input::request("acao");
+$data=Input::request("data");
+$id=Input::request("id");
+$buscar=Input::request("buscar");
 $qtecnico="vendas@cyberhosting.com.br";
 $busca = "";
 if(!empty($data)){

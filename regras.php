@@ -1,7 +1,17 @@
 <?php
 include("conecta.php");
 include("seguranca.php");
-$acao=verifi($permi,$acao);
+$acao = Input::request('acao', '');
+$estados = Input::request('estados', []);
+$cidades = Input::request('cidades', []);
+$minimo = Input::request('minimo', '');
+if (!is_array($estados)) {
+	$estados = [];
+}
+if (!is_array($cidades)) {
+	$cidades = [];
+}
+$acao = verifi($permi, $acao);
 if(!empty($acao)){
 	$loc="Cargos";
 	$pagina=$_SERVER['SCRIPT_FILENAME'];

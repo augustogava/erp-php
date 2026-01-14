@@ -1,5 +1,18 @@
 <?php
 include("conecta.php");
+$btipo=Input::request("btipo");
+$acao=Input::request("acao");
+$fantasia=Input::request("fantasia");
+$nome=Input::request("nome");
+$fone=Input::request("fone");
+$fax=Input::request("fax");
+$email=Input::request("email");
+$cel=Input::request("cel");
+$buscar=Input::request("buscar");
+$wp=Input::request("wp");
+$bcli=Input::request("bcli");
+$cnpj=Input::request("cnpj");
+$id=Input::request("id");
 if(empty($btipo)) $btipo="clientes";
 if(empty($acao)) $acao="entrar";
 if($acao=="adi"){

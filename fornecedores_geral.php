@@ -4,6 +4,30 @@ include("seguranca.php");
 
 $nivel=$_SESSION["login_nivel"];
 
+$acao = Input::request('acao', '');
+$id = Input::request('id', '');
+$nome = Input::request('nome', '');
+$fantasia = Input::request('fantasia', '');
+$endereco = Input::request('endereco', '');
+$bairro = Input::request('bairro', '');
+$cidade = Input::request('cidade', '');
+$estado = Input::request('estado', '');
+$cep = Input::request('cep', '');
+$tipo = Input::request('tipo', '');
+$cpf = Input::request('cpf', '');
+$cnpj = Input::request('cnpj', '');
+$fone = Input::request('fone', '');
+$fax = Input::request('fax', '');
+$ie = Input::request('ie', '');
+$im = Input::request('im', '');
+$contato = Input::request('contato', '');
+$email = Input::request('email', '');
+$site = Input::request('site', '');
+$celular = Input::request('celular', '');
+$fone2 = Input::request('fone2', '');
+$aceita = Input::request('aceita', '');
+$loja = Input::request('loja', '');
+
 if(!empty($acao)){
 	$loc="Fornecedores Geral";
 	$pagina=$_SERVER['SCRIPT_FILENAME'];

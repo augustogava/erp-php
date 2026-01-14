@@ -1,7 +1,12 @@
 <?php
 include("conecta.php");
 include("seguranca.php");
-$acao=verifi($permi,$acao);
+$acao = Input::request('acao', '');
+$pedido = Input::request('pedido', '');
+$cp = Input::request('cp', '');
+$err = Input::request('err', '');
+$errtent = Input::request('errtent', '');
+$acao = verifi($permi, $acao);
 if(!empty($acao)){
 	$loc="Status Pedido";
 	$pagina=$_SERVER['SCRIPT_FILENAME'];

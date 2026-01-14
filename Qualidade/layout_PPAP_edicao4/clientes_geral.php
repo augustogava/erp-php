@@ -1,6 +1,10 @@
 <?php
 include("conecta.php");
 include("seguranca.php");
+$fields=["acao","id","cod_forn","nome","fantasia","loja","status","tipo","atividade","endereco","bairro","cep","cidade","estado","fone","fax","contato","departamento","cpf","cnpj","ie","im","vendedor","comissao","regiao","contabil","banco1","banco2","banco3","banco4","banco5","email","site","logo","tag","relatorios","bcod","bnome"];
+foreach($fields as $field){
+	$$field=Input::request($field);
+}
 $hora=hora();
 $hj=date("Y-m-d");
 $quem1=$_SESSION["login_nome"];
@@ -16,9 +20,6 @@ if(!empty($acao)){
 }
 if(empty($acao)) $acao="inc";
 if($acao=="incluir"){
-	foreach($_REQUEST as $name=>$valor){
-		$$name=$valor;
-	}
 	$comissao=valor2banco($comissao);
 		if(empty($cpf)){
 			if(!CalculaCNPJ($cnpj)){

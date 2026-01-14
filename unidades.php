@@ -1,6 +1,10 @@
 <?php
 include("conecta.php");
-$acao=verifi($permi,$acao);
+$acao = Input::request('acao', '');
+$id = Input::request('id', '');
+$nome = Input::request('nome', '');
+$apelido = Input::request('apelido', '');
+$acao = verifi($permi, $acao);
 if(!empty($acao)){
 	$loc="Unidades";
 	$pagina=$_SERVER['SCRIPT_FILENAME'];

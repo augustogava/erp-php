@@ -10,7 +10,8 @@ services:
       - .:/var/www/html
       - ./php.ini:/usr/local/etc/php/conf.d/custom.ini
     depends_on:
-      - db
+      db:
+        condition: service_healthy
     environment:
       - DB_HOST=db
       - DB_USER=erp_user
@@ -33,7 +34,13 @@ services:
     volumes:
       - mysql_data:/var/lib/mysql
       - ./database/schema.sql:/docker-entrypoint-initdb.d/01-schema.sql
+      - ./database/seed_menus.sql:/docker-entrypoint-initdb.d/02-seed_menus.sql
     command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h localhost -uroot -proot_password --silent"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
     networks:
       - erp_network
     restart: unless-stopped
@@ -48,7 +55,8 @@ services:
       PMA_USER: erp_user
       PMA_PASSWORD: erp_password
     depends_on:
-      - db
+      db:
+        condition: service_healthy
     networks:
       - erp_network
     restart: unless-stopped

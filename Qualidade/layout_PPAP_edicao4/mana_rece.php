@@ -1,6 +1,7 @@
 <?php
 include("conecta.php");
 include("seguranca.php");
+$acao=Input::request("acao");
 unset($_SESSION["mpc"]);
 ?>
 <html>

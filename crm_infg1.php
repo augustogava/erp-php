@@ -1,6 +1,7 @@
 <?php
 include("conecta.php");
 include("seguranca.php");
+$cli=Input::request("cli");
 ?>
 <html>
 <head>

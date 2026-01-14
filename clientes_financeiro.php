@@ -1,6 +1,51 @@
 <?php
 include("conecta.php");
 include("seguranca.php");
+
+$acao = Input::request('acao', '');
+$id = Input::request('id', '');
+$bcod = Input::request('bcod', '');
+$bnome = Input::request('bnome', '');
+$classe = Input::request('classe', '');
+$frete = Input::request('frete', '');
+$cond = Input::request('cond', '');
+$desconto = Input::request('desconto', '');
+$prioridade = Input::request('prioridade', '');
+$risco = Input::request('risco', '');
+$credito_lim = Input::request('credito_lim', '');
+$credito_ven = Input::request('credito_ven', '');
+$compra_mai = Input::request('compra_mai', '');
+$atraso_med = Input::request('atraso_med', '');
+$saldo_mai = Input::request('saldo_mai', '');
+$compra_num = Input::request('compra_num', '');
+$compra_pri = Input::request('compra_pri', '');
+$compra_ult = Input::request('compra_ult', '');
+$visitas_freq = Input::request('visitas_freq', '');
+$visitas_ult = Input::request('visitas_ult', '');
+$mens = Input::request('mens', '');
+$pagamentos = Input::request('pagamentos', '');
+$saldo_titulo = Input::request('saldo_titulo', '');
+$saldo_lib = Input::request('saldo_lib', '');
+$suframa = Input::request('suframa', '');
+$atrasados = Input::request('atrasados', '');
+$acumulado = Input::request('acumulado', '');
+$saldo_ped = Input::request('saldo_ped', '');
+$protestos_tit = Input::request('protestos_tit', '');
+$protestos_ult = Input::request('protestos_ult', '');
+$cheques_dev = Input::request('cheques_dev', '');
+$cheques_ult = Input::request('cheques_ult', '');
+$atraso_mai = Input::request('atraso_mai', '');
+$dupl_mai = Input::request('dupl_mai', '');
+$tabela = Input::request('tabela', '');
+$natureza = Input::request('natureza', '');
+$iss = Input::request('iss', '');
+$icms = Input::request('icms', '');
+$agregador = Input::request('agregador', '');
+$saldo_moe = Input::request('saldo_moe', '');
+$pagtos_atras = Input::request('pagtos_atras', '');
+$grupo_cli = Input::request('grupo_cli', '');
+$suframa_desc = Input::request('suframa_desc', '');
+
 if(!empty($acao)){
 	$loc="Clientes Financeiro";
 	$pagina=$_SERVER['SCRIPT_FILENAME'];

@@ -1,5 +1,26 @@
 <?php
 include("conecta.php");
+$acao=Input::request("acao");
+$id=Input::request("id");
+$fornecedor=Input::request("fornecedor");
+$idfornecedor=Input::request("idfornecedor");
+$iditem=Input::request("iditem");
+$sit=Input::request("sit");
+$skip_lote=Input::request("skip_lote");
+$tempo_limite=Input::request("tempo_limite");
+$ref_forn=Input::request("ref_forn");
+$papp=Input::request("papp");
+$data2=Input::request("data2");
+$validade=Input::request("validade");
+$status=Input::request("status");
+$atualiza=Input::request("atualiza");
+$notifica=Input::request("notifica");
+$norma=Input::request("norma");
+$plano=Input::request("plano");
+$nivel=Input::request("nivel");
+$nqa=Input::request("nqa");
+$just=Input::request("just");
+$skip=Input::request("skip");
 if(empty($acao)) exit;
 if(!empty($acao)){
 	$loc="Recebimento - Skip Lote";

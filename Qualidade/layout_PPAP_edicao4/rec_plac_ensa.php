@@ -1,6 +1,26 @@
 <?php
 include("conecta.php");
 include("seguranca.php");
+$acao=Input::request("acao");
+$id=Input::request("id");
+$id3=Input::request("id3");
+$codens=Input::request("codens");
+$idcodens=Input::request("idcodens");
+$unim=Input::request("unim");
+$idunim=Input::request("idunim");
+$nomi=Input::request("nomi");
+$afi=Input::request("afi");
+$afs=Input::request("afs");
+$plaa=Input::request("plaa");
+$tipi=Input::request("tipi");
+$idtipi=Input::request("idtipi");
+$nive=Input::request("nive");
+$meto=Input::request("meto");
+$obs=Input::request("obs");
+$fitn=Input::request("fitn");
+$verf=Input::request("verf");
+$descr=Input::request("descr");
+$del=Input::request("del", []);
 $acao=verifi($permi,$acao);
 $hora=hora();
 $hj=date("Y-m-d");

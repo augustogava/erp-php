@@ -1,6 +1,20 @@
 <?php
 include("conecta.php");
 include("seguranca.php");
+
+$acao = Input::request('acao', '');
+$id = Input::request('id', '');
+$login = Input::request('login', '');
+$senha = Input::request('senha', '');
+$nivel = Input::request('nivel', '');
+$sit = Input::request('sit', '');
+$porra = Input::request('porra', '');
+$primeiro = Input::request('primeiro', '');
+$bcod = Input::request('bcod', '');
+$bnome = Input::request('bnome', '');
+$imgTmp = $_FILES['img']['tmp_name'] ?? '';
+$imgType = $_FILES['img']['type'] ?? '';
+
 if(!empty($acao)){
 	$loc="Clientes Login";
 	$pagina=$_SERVER['SCRIPT_FILENAME'];
@@ -27,8 +41,8 @@ if($acao=="alt"){
 	$prim=$res["primeiro"];
 }elseif($acao=="alterar"){
 	//Assinatura
-	if(!empty($img)){
-		if($_FILES["img"]["type"]!="image/x-png"){
+	if(!empty($imgTmp)){
+		if($imgType!="image/x-png" && $imgType!="image/png"){
 			$_SESSION["mensagem"]="\\nA imagem deve ter extensão .png";
 			header("Location:clientes_login.php?acao=inc&id=$id");
 			exit;	
@@ -37,7 +51,7 @@ if($acao=="alt"){
 			$res=mysql_fetch_array($sql);
 			$nomeid=$res["assinatura"]+1;
 			$arquivo="$patch/assinaturas/$nomeid.png";
-			copy($img, "$arquivo");
+			copy($imgTmp, "$arquivo");
 			$sql=mysql_query("UPDATE cliente_login SET assinatura='$nomeid' WHERE funcionario='$id'");
 		//fim
 		}
@@ -58,8 +72,8 @@ if($acao=="alt"){
 		}	
 	}
 }elseif($acao=="incluir"){
-	if(!empty($img)){
-		if($_FILES["img"]["type"]!="image/x-png"){
+	if(!empty($imgTmp)){
+		if($imgType!="image/x-png" && $imgType!="image/png"){
 			$_SESSION["mensagem"]="\\nA imagem deve ter extensão .png";
 			header("Location:clientes_login.php?acao=inc&id=$id");
 			exit;	
@@ -68,7 +82,7 @@ if($acao=="alt"){
 			$res=mysql_fetch_array($sql);
 			$nomeid=$res["assinatura"]+1;
 			$arquivo="$patch/assinaturas/$nomeid.png";
-			copy($img, "$arquivo");
+			copy($imgTmp, "$arquivo");
 		//fim
 		}
 	}

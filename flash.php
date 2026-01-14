@@ -1,6 +1,8 @@
 <?php
 include("conecta.php");
 //include("seguranca.php");
+$acao=Input::request("acao");
+$alun=$_FILES["alun"]["tmp_name"] ?? null;
 $acao=verifi($permi,$acao);
 if(!empty($acao)){
 	$loc="Flash";

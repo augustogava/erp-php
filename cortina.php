@@ -1,6 +1,12 @@
 <?php
 include("conecta.php");
 include("seguranca.php");
+$acao=Input::request("acao");
+$id=Input::request("id");
+$nome=Input::request("nome");
+$tubo=Input::request("tubo");
+$perfil1=Input::request("perfil1");
+$perfil2=Input::request("perfil2");
 $acao=verifi($permi,$acao);
 if(!empty($acao)){
 	$loc="Cortina";

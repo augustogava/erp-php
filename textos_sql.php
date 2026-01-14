@@ -1,5 +1,9 @@
 <?php
 include("conecta.php");
+$acao=Input::request("acao");
+$placa=Input::request("placa");
+$texto=Input::request("texto");
+$id=Input::request("id");
 if(empty($acao)) exit;
 if($acao=="incluir"){
 	$sql=mysql_query("SELECT * FROM prodserv WHERE id='$placa'");

@@ -1,6 +1,10 @@
 <?php
 include("conecta.php");
 include("seguranca.php");
+$acao=Input::request("acao");
+$bde=Input::request("bde");
+$bate=Input::request("bate");
+$id=Input::request("id");
 $acao=verifi($permi,$acao);
 if(!empty($acao)){
 	$loc="Compras Cotacoes";

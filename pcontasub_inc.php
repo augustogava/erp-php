@@ -1,6 +1,9 @@
 <?php
 include("conecta.php");
 include("seguranca.php");
+$acao=Input::request("acao");
+$id=Input::request("id");
+$idpai=Input::request("idpai");
 if(empty($acao)) $acao="inc";
 if($acao=="alt"){
 	$sql=mysql_query("SELECT * FROM pcontas WHERE id='$id'");

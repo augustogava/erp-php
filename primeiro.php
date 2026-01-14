@@ -1,6 +1,10 @@
 <?php
 include("conecta.php");
 include("seguranca.php");
+$acao=Input::request("acao");
+$senha=Input::request("senha");
+$id=Input::request("id");
+$antigo=Input::request("antigo");
 if(!empty($acao)){
 	$loc="Alterar Senha";
 	$pagina=$_SERVER['SCRIPT_FILENAME'];

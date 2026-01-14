@@ -2,7 +2,11 @@
 include("conecta.php");
 include("seguranca.php");
 $nivel=$_SESSION["login_nivel"];
-$acao=verifi($permi,$acao);
+$acao = Input::request('acao', '');
+$id = Input::request('id', '');
+$bnome = Input::request('bnome', '');
+$bcod = Input::request('bcod', '');
+$acao = verifi($permi, $acao);
 
 if(!empty($acao)){
 	$loc="Fornecedores";

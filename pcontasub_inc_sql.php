@@ -1,5 +1,11 @@
 <?php
 include("conecta.php");
+$acao=Input::request("acao");
+$idpai=Input::request("idpai");
+$descricao=Input::request("descricao");
+$codigo=Input::request("codigo");
+$tipo=Input::request("tipo");
+$id=Input::request("id");
 if(empty($acao)) exit;
 if($acao=="incluir"){
 	$sql=mysql_query("INSERT INTO pcontas (idpai,descricao,codigo,tipo) VALUES ('$idpai','$descricao','$codigo','$tipo')");

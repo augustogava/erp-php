@@ -1,6 +1,11 @@
 <?php 
 include("conecta.php");
 include("seguranca.php");
+$acao=Input::request("acao");
+$filtro=Input::request("filtro");
+$msg=Input::request("msg");
+$assunto=Input::request("assunto");
+$de=Input::request("de");
 function checaEmail($email) {
     $e = explode("@",$email);
     if(count($e) <= 1) {

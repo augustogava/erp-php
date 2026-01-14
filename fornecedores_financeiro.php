@@ -1,7 +1,26 @@
 <?php
 include("conecta.php");
 include("seguranca.php");
-$acao=verifi($permi,$acao);
+$acao = Input::request('acao', '');
+$id = Input::request('id', '');
+$bcod = Input::request('bcod', '');
+$bnome = Input::request('bnome', '');
+$risco = Input::request('risco', '');
+$cond = Input::request('cond', '');
+$compra_mai = Input::request('compra_mai', '');
+$atraso_med = Input::request('atraso_med', '');
+$atraso_mai = Input::request('atraso_mai', '');
+$compra_num = Input::request('compra_num', '');
+$compra_pri = Input::request('compra_pri', '');
+$compra_ult = Input::request('compra_ult', '');
+$dupl_saldo = Input::request('dupl_saldo', '');
+$natureza = Input::request('natureza', '');
+$saldo_moe = Input::request('saldo_moe', '');
+$agencia = Input::request('agencia', '');
+$conta = Input::request('conta', '');
+$tipo = Input::request('tipo', '');
+$iss = Input::request('iss', '');
+$acao = verifi($permi, $acao);
 if(!empty($acao)){
 	$loc="Fornecedores";
 	$pagina=$_SERVER['SCRIPT_FILENAME'];

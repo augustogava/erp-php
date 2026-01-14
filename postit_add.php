@@ -1,6 +1,13 @@
 <?php
 include("conecta.php");
 include("seguranca.php");
+$acao = Input::request('acao', '');
+$id = Input::request('id', '');
+$titulo = Input::request('titulo', '');
+$msg = Input::request('msg', '');
+$quem = Input::request('quem', '');
+$todos = Input::request('todos', '');
+$denum = Input::request('denum', '');
 if(empty($acao)) $acao="entrar";
 if($acao=="res"){
 	$sql=mysql_query("SELECT * FROM postit WHERE id='$id'");

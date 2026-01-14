@@ -1,6 +1,17 @@
 <?php
 include("conecta.php");
 //include("seguranca.php");
+
+$acao = Input::request('acao', '');
+$nivel = Input::request('nivel', '');
+$menu = Input::request('menu', []);
+$submenu = Input::request('submenu', []);
+if (!is_array($menu)) {
+	$menu = [];
+}
+if (!is_array($submenu)) {
+	$submenu = [];
+}
 if(empty($acao)) $acao="entrar";
 if($acao=="marcar"){
 	$wmenu="";

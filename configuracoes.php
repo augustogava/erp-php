@@ -27,7 +27,7 @@ if($docker){
 $wpaginacao=10;
 $caminho=preg_replace("/\\\\/","/",__FILE__);
 $caminho = dirname($caminho);
-$permi=$_SESSION["permissao"];
+$permi = $_SESSION["permissao"] ?? null;
 $patch=$caminho;
 
 /**

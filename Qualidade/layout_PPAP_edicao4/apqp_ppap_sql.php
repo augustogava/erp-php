@@ -1,6 +1,12 @@
 <?php
 include("conecta.php");
 require('pdf/fpdf.php');
+$acao=Input::request("acao");
+$lingua=Input::request("lingua");
+$email=Input::request("email");
+$pc=Input::request("pc");
+$nome=Input::request("nome", []);
+$nome2=Input::request("nome2", []);
 $quem=$_SESSION["login_nome"];
 $who=$_SESSION["login_codigo"];
 $npc=$_SESSION["npc"];
@@ -51,8 +57,6 @@ if($acao=="email"){
 		header("location:apqp_ppap.php");
 		exit;
 	}
-	$pc=$_POST["pc"];
-	$nome=$_POST["nome"];
 	$sqlp=mysql_query("SELECT * FROM apqp_pc WHERE id='$pc'"); $resp=mysql_fetch_array($sqlp); $pecaa=$resp["numero"]."-".$resp["rev"];
 		include ("classes/jpgraph/jpgraph.php");
 		include ("classes/jpgraph/jpgraph_line.php");

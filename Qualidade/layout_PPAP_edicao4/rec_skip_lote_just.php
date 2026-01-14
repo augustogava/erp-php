@@ -1,6 +1,7 @@
 <?php
 include("conecta.php");
 include("seguranca.php");
+$acao=Input::request("acao");
 $acao=verifi($permi,$acao);
 ?>
 <html>

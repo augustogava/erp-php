@@ -1,6 +1,12 @@
  <?php
 include("conecta.php");
 include("seguranca.php");
+$acao=Input::request("acao");
+$perfil=Input::request("perfil");
+$b1=Input::request("b1");
+$b2=Input::request("b2");
+$val=Input::request("val");
+$id=Input::request("id");
 if(empty($acao)) $acao="entrar";
 if($acao=="incluir"){
 	$b1=valor2banco($b1);

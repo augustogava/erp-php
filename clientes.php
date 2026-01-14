@@ -1,6 +1,12 @@
 <?php
 include("conecta.php");
 include("seguranca.php");
+$acao=Input::request("acao");
+$buscar=Input::request("buscar");
+$bnome=Input::request("bnome");
+$bcod=Input::request("bcod");
+$wp=Input::request("wp");
+$id=Input::request("id");
 $nivel=$_SESSION["login_nivel"];
 
 if(!empty($acao)){

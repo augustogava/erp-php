@@ -1,6 +1,15 @@
 <?php
 include("conecta.php");
 include("seguranca.php");
+$acao=Input::request("acao");
+$id=Input::request("id");
+$descr=Input::request("descr");
+$forma=Input::request("forma");
+$tipo=Input::request("tipo");
+$resp=Input::request("resp");
+$origem=Input::request("origem");
+$obs=Input::request("obs");
+$local=Input::request("local");
 $apqp=new set_apqp;
 $hora=hora();
 $hj=date("Y-m-d");

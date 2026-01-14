@@ -1,6 +1,11 @@
 <?php
 include("conecta.php");
 include("seguranca.php");
+$acao=Input::request("acao");
+$id=Input::request("id");
+$cod=Input::request("cod");
+$descricao=Input::request("descricao");
+$classe=Input::request("classe");
 $acao=verifi($permi,$acao);
 $hora=hora();
 $hj=date("Y-m-d");

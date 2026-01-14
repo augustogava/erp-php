@@ -2,6 +2,18 @@
 include("conecta.php");
 include("seguranca.php");
 
+$acao=Input::request("acao");
+$mot=Input::request("mot");
+$id=Input::request("id");
+$cliente=Input::request("cliente");
+$vendedor=Input::request("vendedor");
+$contato=Input::request("contato");
+$bde=Input::request("bde");
+$bate=Input::request("bate");
+$cliente_busca=Input::request("cliente_busca");
+$proposta=Input::request("proposta");
+$status=Input::request("status");
+$representante=Input::request("representante");
 $nivel=$_SESSION["login_nivel"];
 
 if(!empty($acao)){

@@ -1,6 +1,12 @@
 <?php
 include("conecta.php");
 include("seguranca.php");
+
+$acao = Input::request('acao', '');
+$id = Input::request('id', '');
+$menu = Input::request('menu', '');
+$texto = Input::request('texto', '');
+$url = Input::request('url', '');
 if(empty($acao)) $acao="entrar";
 if($acao=="exc"){
 	$sql=mysql_query("DELETE FROM submenus WHERE id='$id'");

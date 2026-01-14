@@ -2,6 +2,9 @@
 include("conecta.php");
 $popup=true;
 include("seguranca.php");
+$bdesc=Input::request("bdesc");
+$btipo=Input::request("btipo");
+$wp=Input::request("wp");
 
 if(!empty($bdesc)){
 	$cond.=" AND descricao LIKE '%$bdesc%' ";

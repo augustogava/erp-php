@@ -1,5 +1,15 @@
 <?php
 include("conecta.php");
+$acao=Input::request("acao");
+$id=Input::request("id");
+$nome=Input::request("nome");
+$trilho=Input::request("trilho");
+$pvc=Input::request("pvc");
+$arrebites=Input::request("arrebites");
+$parafusos=Input::request("parafusos");
+$buchas=Input::request("buchas");
+$penduralg=Input::request("penduralg");
+$penduralp=Input::request("penduralp");
 if(empty($acao)) exit;
 $acao=verifi($permi,$acao);
 if(!empty($acao)){

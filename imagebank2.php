@@ -1,5 +1,6 @@
 <?php
 include("conecta.php");
+$acao=Input::request("acao");
 if(empty($_SESSION["login_nome"]) or empty($_SESSION["login_nivel"])){
 	print "<script>top.window.close();</script>";
 	exit;

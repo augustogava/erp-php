@@ -1,5 +1,8 @@
 <?php
 include("conecta.php");
+$acao=Input::request("acao");
+$nome=Input::request("nome");
+$id=Input::request("id");
 if(empty($acao)) exit;
 if($acao=="incluir"){
 	$sql=mysql_query("INSERT INTO tamanho (nome) VALUES ('$nome')");

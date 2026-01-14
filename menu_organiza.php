@@ -1,6 +1,12 @@
 <?php 
 include("conecta.php");
 include("seguranca.php");
+
+$acao = Input::request('acao', '');
+$menus = Input::request('menus', []);
+if (!is_array($menus)) {
+	$menus = [];
+}
 if($acao=="ok"){
 	for($i=0;$i<sizeof($menus);$i++){
 		$id=$menus[$i];

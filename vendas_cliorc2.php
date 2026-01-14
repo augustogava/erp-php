@@ -1,5 +1,10 @@
 <?php
 include("conecta.php");
+$btipo=Input::request("btipo");
+$acao=Input::request("acao");
+$wp=Input::request("wp");
+$bcli=Input::request("bcli");
+$cli=Input::request("cli");
 if(empty($btipo)) $btipo="clientes";
 if(empty($acao)) $acao="entrar";
 ?>

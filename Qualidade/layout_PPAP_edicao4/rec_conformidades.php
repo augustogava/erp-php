@@ -1,6 +1,12 @@
 <?php
 include("conecta.php");
 include("seguranca.php");
+$buscar=Input::request("buscar");
+$acao=Input::request("acao");
+$bdescr=Input::request("bdescr");
+$bcod=Input::request("bcod");
+$id=Input::request("id");
+$wp=Input::request("wp");
 if(!empty($acao)){
 	$loc="Recebimento - Não Conformidades";
 	$pagina=$_SERVER['SCRIPT_FILENAME'];

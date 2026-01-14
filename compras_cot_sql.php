@@ -1,5 +1,20 @@
 <?php
 include("conecta.php");
+$acao=Input::request("acao");
+$id=Input::request("id");
+$fornecedor=Input::request("fornecedor");
+$data=Input::request("data");
+$ucd=Input::request("ucd");
+$ucv=Input::request("ucv");
+$prazo=Input::request("prazo");
+$qtd=Input::request("qtd", []);
+$prodserv=Input::request("prodserv", []);
+$unitario=Input::request("unitario", []);
+$valor2=Input::request("valor2");
+$maisum=Input::request("maisum");
+$delsel=Input::request("delsel");
+$del=Input::request("del", []);
+$sit=Input::request("sit", []);
 if(empty($acao)) exit;
 $acao=verifi($permi,$acao);
 if(!empty($acao)){

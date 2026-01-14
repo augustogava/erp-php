@@ -1,11 +1,14 @@
 <?php
 include("conecta.php");
+$buscar=Input::request("buscar");
+$wp=Input::request("wp");
+$bcli=Input::request("bcli");
+$ps=Input::request("ps");
 if($buscar){
 	unset($wp);
 }
-if(!empty($_GET["ps"])){
-	$_SESSION["ps3"]=$_GET["ps"];
-	$ps=$_GET["ps"];
+if(!empty($ps)){
+	$_SESSION["ps3"]=$ps;
 }else{
 	$ps=$_SESSION["ps3"];
 }

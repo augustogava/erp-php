@@ -1,6 +1,10 @@
 <?php
 include("conecta.php");
 if(empty($btipo)) $btipo="rec_plac";
+$btipo=Input::request("btipo") ?: $btipo;
+$buscar=Input::request("buscar");
+$bitem=Input::request("bitem");
+$wp=Input::request("wp");
 
 if($buscar){
 	unset($wp);

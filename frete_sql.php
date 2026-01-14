@@ -1,5 +1,15 @@
 <?php
 include("conecta.php");
+$acao=Input::request("acao");
+$id=Input::request("id");
+$regiao=Input::request("regiao");
+$cep_inicial=Input::request("cep_inicial");
+$cep_final=Input::request("cep_final");
+for($i=1; $i<=31; $i++){
+	${"peso_preco".$i}=Input::request("peso_preco".$i);
+	${"peso_ini".$i}=Input::request("peso_ini".$i);
+	${"peso_fin".$i}=Input::request("peso_fin".$i);
+}
 function valor2banco2($vl){
 	$vl=str_replace(".",".",$vl);
 	return str_replace(",",".",$vl);

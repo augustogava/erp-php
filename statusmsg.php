@@ -1,6 +1,11 @@
 <?php
 include("conecta.php");
 $hj=date("Y-m-d");
+
+$acao = Input::request('acao', '');
+$usu = Input::request('usu', '');
+$nome = Input::request('nome', '');
+$msg = Input::request('msg', '');
 if(empty($usu)){
 print "<script>window.close();</script>";
 }

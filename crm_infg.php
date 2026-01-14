@@ -1,6 +1,12 @@
 <?php
 include("conecta.php");
 include("seguranca.php");
+$acao=Input::request("acao");
+$cli=Input::request("cli");
+$cal_dia=Input::request("cal_dia");
+$cal_mes=Input::request("cal_mes");
+$cal_ano=Input::request("cal_ano");
+$id=Input::request("id");
 $_SESSION["idp"]=$id;
 if(!empty($acao)){
 	$loc="CRM";

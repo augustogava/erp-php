@@ -1,6 +1,12 @@
 <?php
 include("conecta.php");
 include("seguranca.php");
+$buscar=Input::request("buscar");
+$acao=Input::request("acao");
+$desc=Input::request("desc");
+$bcod=Input::request("bcod");
+$id=Input::request("id");
+$bnome=Input::request("bnome");
 
 if($buscar){
 	unset($wp);

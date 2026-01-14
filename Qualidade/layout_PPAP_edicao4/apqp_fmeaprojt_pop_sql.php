@@ -1,5 +1,9 @@
 <?php
 include("conecta.php");
+$acao=Input::request("acao");
+$peca=Input::request("peca");
+$op=Input::request("op");
+$del=Input::request("del", []);
 $apqp=new set_apqp;
 $acao=verifi($permi,$acao);
 if($acao=="sel"){

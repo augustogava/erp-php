@@ -1,7 +1,9 @@
 <?php
 include("conecta.php");
 include("seguranca.php");
-$acao=verifi($permi,$acao);
+$acao = Input::request('acao', '');
+$id = Input::request('id', '');
+$acao = verifi($permi, $acao);
 $nivel=$_SESSION["login_nivel"];
 
 if(!empty($acao)){

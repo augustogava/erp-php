@@ -1,6 +1,14 @@
 <?php
 include("conecta.php");
 include("seguranca.php");
+$acao=Input::request("acao");
+$op=Input::request("op");
+$id=Input::request("id");
+$numero=Input::request("numero");
+$macloc=Input::request("macloc");
+$descricao=Input::request("descricao");
+$tipo=Input::request("tipo");
+$simbolo=Input::request("simbolo");
 if(empty($acao)) $acao="inc";
 if($acao=="alt"){
 	$sql=mysql_query("SELECT * FROM apqp_op WHERE id='$op'");

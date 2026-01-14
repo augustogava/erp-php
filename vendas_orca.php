@@ -1,6 +1,14 @@
 <?php
 include("conecta.php");
 include("seguranca.php");
+$acao=Input::request("acao");
+$bde=Input::request("bde");
+$bate=Input::request("bate");
+$id=Input::request("id");
+$mot=Input::request("mot");
+$cliente=Input::request("cliente");
+$vendedor=Input::request("vendedor");
+$contato=Input::request("contato");
 $acao=verifi($permi,$acao);
 if(!empty($acao)){
 	$loc="Vendas Orçamento";

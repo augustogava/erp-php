@@ -1,5 +1,8 @@
 <?php
 include("conecta.php");
+$acao=Input::request("acao");
+$faturar=Input::request("faturar");
+$faturamento=Input::request("faturamento");
 $hj=date("Y-m-d");
 $acao=verifi($permi,$acao);
 if(!empty($acao)){

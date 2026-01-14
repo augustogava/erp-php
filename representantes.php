@@ -1,7 +1,11 @@
 <?php
 include("conecta.php");
 include("seguranca.php");
-$acao=verifi($permi,$acao);
+$acao = Input::request('acao', '');
+$id = Input::request('id', '');
+$nome = Input::request('nome', '');
+$cidades = Input::request('cidades', []);
+$acao = verifi($permi, $acao);
 if(!empty($acao)){
 	$loc="Representante";
 	$pagina=$_SERVER['SCRIPT_FILENAME'];

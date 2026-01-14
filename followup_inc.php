@@ -1,6 +1,11 @@
 <?php
 include("conecta.php");
 include("seguranca.php");
+
+$acao = Input::request('acao', '');
+$cliente = Input::request('cliente', '');
+$titulo = Input::request('titulo', '');
+$descricao = Input::request('descricao', '');
 if($acao=="inc"){
 	$data=date("Y-m-d");
 	$hora=hora();

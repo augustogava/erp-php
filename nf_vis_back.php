@@ -1,5 +1,9 @@
 <?php
 include("conecta.php");
+$nf=Input::request("nf");
+$acao=Input::request("acao");
+$id=Input::request("id");
+$cp=Input::request("cp");
 if(!isset($nf)) exit;
 $hj=date("Y-m-d");
 if($acao=="imp"){

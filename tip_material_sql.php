@@ -1,5 +1,9 @@
 <?php
 include("conecta.php");
+$acao=Input::request("acao");
+$nome=Input::request("nome");
+$valor=Input::request("valor");
+$id=Input::request("id");
 if(empty($acao)) exit;
 if($acao=="incluir"){
 	$valor=valor2banco($valor);

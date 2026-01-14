@@ -1,5 +1,10 @@
 <?php
 include("conecta.php");
+$acao=Input::request("acao");
+$compra=Input::request("compra");
+$email=Input::request("email");
+$fornecedor=Input::request("fornecedor");
+$id=Input::request("id");
 $acao=verifi($permi,$acao);
 if(!empty($acao)){
 	$loc="Compras Mandar Email";

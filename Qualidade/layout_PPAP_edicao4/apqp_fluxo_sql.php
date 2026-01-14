@@ -1,5 +1,15 @@
 <?php
 include("conecta.php");
+$acao=Input::request("acao");
+$local=Input::request("local");
+$email=Input::request("email");
+$linha=Input::request("linha");
+$i1=Input::request("i1", []);
+$i2=Input::request("i2", []);
+$op=Input::request("op", []);
+$ap=Input::request("ap");
+$lap=Input::request("lap");
+$ope=Input::request("ope");
 $apqp=new set_apqp;
 //$acao=verifi($permi,$acao);
 $pc=$_SESSION["mpc"];

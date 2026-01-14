@@ -2,6 +2,10 @@
 include("conecta.php");
 include("seguranca.php");
 
+$acao=Input::request("acao");
+$nome=Input::request("nome");
+$tipo=Input::request("tipo");
+$id=Input::request("id");
 $nivel=$_SESSION["login_nivel"];
 
 if(!empty($acao)){

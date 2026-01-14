@@ -1,6 +1,13 @@
 <?php
 include("conecta.php");
 include("seguranca.php");
+$acao=Input::request("acao");
+$id=Input::request("id");
+$nome=Input::request("nome");
+$pasta=Input::request("pasta");
+$arquivos=isset($_FILES["arquivos"]["tmp_name"]) ? $_FILES["arquivos"]["tmp_name"] : Input::request("arquivos");
+$arquivos_size=isset($_FILES["arquivos"]["size"]) ? $_FILES["arquivos"]["size"] : Input::request("arquivos_size");
+$arquivos_name=isset($_FILES["arquivos"]["name"]) ? $_FILES["arquivos"]["name"] : Input::request("arquivos_name");
 if(empty($acao)) exit;
 if($acao=="inc"){
 	if($arquivos <> 'none') {

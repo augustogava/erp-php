@@ -1,5 +1,10 @@
 <?php
 include("conecta.php");
+$acao=Input::request("acao");
+$buscar=Input::request("buscar");
+$bcli=Input::request("bcli");
+$id=Input::request("id");
+$wp=Input::request("wp");
 if($buscar){
 	unset($wp);
 }

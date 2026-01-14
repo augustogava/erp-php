@@ -1,7 +1,7 @@
 <?php
 include("conecta.php");
 
-$valor = $_REQUEST["valor"];
+$valor = Input::request("valor");
 mysql_query("INSERT INTO grupos (nome) VALUES('$valor')");
 
 ?>

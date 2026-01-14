@@ -1,6 +1,12 @@
 <?php
 include("conecta.php");
 include("seguranca.php");
+$acao=Input::request("acao");
+$menu=Input::request("menu");
+$pc=Input::request("pc");
+$num=Input::request("num");
+$rev=Input::request("rev");
+$id=Input::request("id");
 if($menu=="S"){
 	$_SESSION["mpc"]=$pc;
 	$_SESSION["npc"]="($num - $rev)";

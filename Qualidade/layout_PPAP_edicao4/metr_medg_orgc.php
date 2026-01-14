@@ -2,6 +2,9 @@
 include("conecta.php");
 $popup=true;
 include("seguranca.php");
+$bdesc=Input::request("bdesc");
+$bcod=Input::request("bcod");
+$wp=Input::request("wp");
 
 if(!empty($bdesc)&&empty($bcod)){
 	$cond.="WHERE metr_lab_fant like '%$bdesc%' ";

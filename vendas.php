@@ -1,6 +1,13 @@
 <?php
 include("conecta.php");
 include("seguranca.php");
+$acao=Input::request("acao");
+$bde=Input::request("bde");
+$bate=Input::request("bate");
+$vendedor_a=Input::request("vendedor_a");
+$proposta=Input::request("proposta");
+$status=Input::request("status");
+$id=Input::request("id");
 $acao=verifi($permi,$acao);
 $nivel=$_SESSION["login_nivel"];
 

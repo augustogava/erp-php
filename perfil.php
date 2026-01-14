@@ -1,6 +1,14 @@
 <?php
 include("conecta.php");
 include("seguranca.php");
+$acao=Input::request("acao");
+$b1=Input::request("b1");
+$b2=Input::request("b2");
+$val=Input::request("val");
+$nome=Input::request("nome");
+$perfil=Input::request("perfil");
+$id=Input::request("id");
+$class=Input::request("class");
 $acao=verifi($permi,$acao);
 if(!empty($acao)){
 	$loc="Perfil";

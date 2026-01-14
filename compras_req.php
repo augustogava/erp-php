@@ -1,6 +1,12 @@
 <?php
 include("conecta.php");
 include("seguranca.php");
+$acao=Input::request("acao");
+$buscar=Input::request("buscar");
+$bde=Input::request("bde");
+$bate=Input::request("bate");
+$bnum=Input::request("bnum");
+$id=Input::request("id");
 $acao=verifi($permi,$acao);
 if(!empty($acao)){
 	$loc="Requisicao de Compra";

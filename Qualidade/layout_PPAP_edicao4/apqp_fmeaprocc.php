@@ -1,6 +1,12 @@
 <?php
 include("conecta.php");
 include("seguranca.php");
+$acao=Input::request("acao");
+$local=Input::request("local");
+$email=Input::request("email");
+$ap=Input::request("ap");
+$lap=Input::request("lap");
+$id=Input::request("id");
 $apqp=new set_apqp;
 if(empty($acao)) $acao="entrar";
 $pc=$_SESSION["mpc"];

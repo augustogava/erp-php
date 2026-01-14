@@ -1,6 +1,25 @@
 <?php
 include("conecta.php");
 include("seguranca.php");
+$acao=Input::request("acao");
+$locall=Input::request("locall");
+$forncod=Input::request("forncod");
+$wcar=Input::request("wcar");
+$maisum=Input::request("maisum");
+$ap=Input::request("ap");
+$lap=Input::request("lap");
+$ap2=Input::request("ap2");
+$delsel=Input::request("delsel");
+$del=Input::request("del", []);
+$forn=Input::request("forn", []);
+$cli=Input::request("cli", []);
+$ok=Input::request("ok", []);
+$data_t=Input::request("data_t", []);
+$quant_test=Input::request("quant_test", []);
+$local=Input::request("local");
+$email=Input::request("email");
+$id=Input::request("id");
+$rep1=Input::request("rep1");
 $apqp=new set_apqp;
 $pc=$_SESSION["mpc"];
 $npc=$_SESSION["npc"];

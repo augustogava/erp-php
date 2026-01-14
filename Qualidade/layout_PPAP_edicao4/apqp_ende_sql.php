@@ -1,5 +1,26 @@
 <?php
 include("conecta.php");
+$acao=Input::request("acao");
+$local=Input::request("local");
+$email=Input::request("email");
+$locall=Input::request("locall");
+$rep=Input::request("rep");
+$dtrep=Input::request("dtrep");
+$forncod=Input::request("forncod");
+$rep1=Input::request("rep1");
+$maisum=Input::request("maisum");
+$delsel=Input::request("delsel");
+$del=Input::request("del", []);
+$ap=Input::request("ap");
+$lap=Input::request("lap");
+$ap2=Input::request("ap2");
+$forn=Input::request("forn", []);
+$cli=Input::request("cli", []);
+$ok=Input::request("ok", []);
+$data_t=Input::request("data_t", []);
+$quant_test=Input::request("quant_test", []);
+$id=Input::request("id");
+$fase=Input::request("fase");
 $apqp=new set_apqp;
 $acao=verifi($permi,$acao);
 $pc=$_SESSION["mpc"];

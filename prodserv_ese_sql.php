@@ -1,5 +1,11 @@
 <?php
 include("conecta.php");
+$acao=Input::request("acao");
+$qtd=Input::request("qtd");
+$valor=Input::request("valor");
+$item=Input::request("item");
+$doc=Input::request("doc");
+$act=Input::request("act");
 if(empty($acao)) exit;
 $qtd=valor2banco($qtd);
 $valor=valor2banco($valor);

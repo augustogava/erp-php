@@ -1,6 +1,17 @@
 <?php
 include("conecta.php");
 include("seguranca.php");
+$acao=Input::request("acao");
+$alt=Input::request("alt");
+$nome=Input::request("nome");
+$texto=Input::request("texto");
+$titulo=Input::request("titulo");
+$data=Input::request("data");
+$hora=Input::request("hora");
+$cal_ano=Input::request("cal_ano");
+$cal_mes=Input::request("cal_mes");
+$cal_dia=Input::request("cal_dia");
+$cliente=Input::request("cliente");
 if(empty($acao)){ $acao="entrar"; }
 $nivel=$_SESSION["login_nivel"];
 $agendador=$_SESSION["login_nome"];

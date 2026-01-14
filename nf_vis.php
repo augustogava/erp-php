@@ -1,5 +1,22 @@
 <?php
 include("conecta.php");
+$nf=Input::request("nf");
+$acao=Input::request("acao");
+$id=Input::request("id");
+$cp=Input::request("cp");
+$tipo=Input::request("tipo");
+$numero_nota=Input::request("numero_nota");
+$numero_formulario=Input::request("numero_formulario");
+$especie=Input::request("especie");
+$quantidade=Input::request("quantidade");
+$marca=Input::request("marca");
+$placa=Input::request("placa");
+$linha1=Input::request("linha1");
+$linha2=Input::request("linha2");
+$linha3=Input::request("linha3");
+$qtde=Input::request("qtde");
+$imp=Input::request("imp");
+$nn=Input::request("nn");
 $bd=new set_bd;
 if(!isset($nf)) exit;
 $hj=date("Y-m-d");

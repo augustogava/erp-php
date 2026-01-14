@@ -1,6 +1,10 @@
 <?php
 include("conecta.php");
 if(empty($btipo)) $btipo="fornecedores";
+$btipo=Input::request("btipo") ?: $btipo;
+$buscar=Input::request("buscar");
+$bcli=Input::request("bcli");
+$wp=Input::request("wp");
 if($btipo=="clientes"){
 	$bt="C";
 	$bt2="Cliente";

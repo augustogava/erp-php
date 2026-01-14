@@ -1,5 +1,9 @@
 <?php
 include("conecta.php");
+$acao=Input::request("acao");
+$nome=Input::request("nome");
+$publica=Input::request("publica");
+$id=Input::request("id");
 if(empty($acao)) exit;
 if($acao=="inc"){
 	$sql=mysql_query("INSERT INTO up_pastas (nome,publica,dono) VALUES ('$nome','$publica','$_SESSION[login_codigo]')");

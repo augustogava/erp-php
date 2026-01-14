@@ -1,6 +1,8 @@
 <?php
 include("conecta.php");
 include("seguranca.php");
+$acao=Input::request("acao");
+$id=Input::request("id");
 if(empty($acao)) $acao="entrar";
 if($acao=="alt"){
 	$sql=mysql_query("SELECT * FROM tip_material WHERE id='$id'");

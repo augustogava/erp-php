@@ -1,5 +1,13 @@
 <?php
 include("conecta.php");
+$acao=Input::request("acao");
+$id=Input::request("id");
+$anual=Input::request("anual");
+$dia=Input::request("dia");
+$descricao=Input::request("descricao");
+$cal_dia=Input::request("cal_dia");
+$cal_mes=Input::request("cal_mes");
+$cal_ano=Input::request("cal_ano");
 if(empty($acao)) exit;
 $acao=verifi($permi,$acao);
 if(!empty($acao)){

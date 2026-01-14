@@ -2,6 +2,9 @@
 include("conecta.php");
 $popup=true;
 include("seguranca.php");
+$bdesc=Input::request("bdesc");
+$bcod=Input::request("bcod");
+$wp=Input::request("wp");
 
 if(!empty($bdesc)){
 	$cond.=" AND metr_instr_desc LIKE '%$bdesc%' ";

@@ -1,5 +1,12 @@
 <?php
 include("conecta.php");
+$acao=Input::request("acao");
+$ps=Input::request("ps");
+$item=Input::request("item");
+$qtd=Input::request("qtd");
+$fixo=Input::request("fixo");
+$val=Input::request("val");
+$id=Input::request("id");
 if(empty($acao)) exit;
 $acao=verifi($permi,$acao);
 if(!empty($acao)){

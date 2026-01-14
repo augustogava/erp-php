@@ -1,8 +1,14 @@
 <?php
 include("conecta.php");
 include("seguranca.php");
-if($_GET["muda"]){
-	$_SESSION["wop"]=$_GET["wop"];
+$acao=Input::request("acao");
+$muda=Input::request("muda");
+$wop=Input::request("wop");
+$fase=Input::request("fase");
+$local=Input::request("local");
+$email=Input::request("email");
+if($muda){
+	$_SESSION["wop"]=$wop;
 }else{
 	$wop=$_SESSION["wop"];
 }

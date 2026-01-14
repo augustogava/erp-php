@@ -1,6 +1,18 @@
 <?php
 include("conecta.php");
 include("seguranca.php");
+$acao=Input::request("acao");
+$id=Input::request("id");
+$nome=Input::request("nome");
+$apelido_fat=Input::request("apelido_fat");
+$endereco_fat=Input::request("endereco_fat");
+$bairro_fat=Input::request("bairro_fat");
+$cidade_fat=Input::request("cidade_fat");
+$estado_fat=Input::request("estado_fat");
+$cep_fat=Input::request("cep_fat");
+$fone_fat=Input::request("fone_fat");
+$cnpj_fat=Input::request("cnpj_fat");
+$ie_fat=Input::request("ie_fat");
 
 $nivel=$_SESSION["login_nivel"];
 

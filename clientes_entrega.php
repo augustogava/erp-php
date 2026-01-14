@@ -1,6 +1,25 @@
 <?php
 include("conecta.php");
 include("seguranca.php");
+
+$acao = Input::request('acao', '');
+$id = Input::request('id', '');
+$bcod = Input::request('bcod', '');
+$bnome = Input::request('bnome', '');
+$endereco = Input::request('endereco', '');
+$bairro = Input::request('bairro', '');
+$cep = Input::request('cep', '');
+$cidade = Input::request('cidade', '');
+$estado = Input::request('estado', '');
+$cnpj = Input::request('cnpj', '');
+$ie = Input::request('ie', '');
+$transp = Input::request('transp', '');
+$endereco_ins = Input::request('endereco_ins', '');
+$bairro_ins = Input::request('bairro_ins', '');
+$cep_ins = Input::request('cep_ins', '');
+$cidade_ins = Input::request('cidade_ins', '');
+$estado_ins = Input::request('estado_ins', '');
+
 if(!empty($acao)){
 	$loc="Clientes Financeiro";
 	$pagina=$_SERVER['SCRIPT_FILENAME'];
