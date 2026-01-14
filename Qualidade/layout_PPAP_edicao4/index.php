@@ -140,8 +140,8 @@ function MM_openBrWindow(theURL,winName,features) { //v2.0
           <td height="25" colspan="2">
 		  <table width="100%"  border="0" cellpadding="2" cellspacing="0" background="imagens/fundo_top.gif">
 		  <tr class="branco" background="imagens/fundo_top.gif">
-			<td width="34%" ><span><? print $_SESSION["login_nome"]; ?> - <? print $_SESSION["login_cargo"]; ?></span></td>
-			<td width="30%"><span><? print $_SESSION["login_nivel_nome"]; ?></span></td>
+			<td width="34%" ><span><?php print $_SESSION["login_nome"]; ?> - <?php print $_SESSION["login_cargo"]; ?></span></td>
+			<td width="30%"><span><?php print $_SESSION["login_nivel_nome"]; ?></span></td>
 			<td width="36%"><div align="right">Online a:
 			      <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,29,0" width="101" height="18">
                       <param name="movie" value="swf/contador.swf">

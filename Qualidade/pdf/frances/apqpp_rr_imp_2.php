@@ -1,6 +1,6 @@
 <?php
 $npc=$_SESSION["npc"];
-$sql=mysql_query("SELECT *,apqp_pc.nome AS nome, clientes.fantasia AS nomecli FROM apqp_pc,clientes WHERE apqp_pc.id='$pc' AND apqp_pc.cliente=clientes.id") or die("nao");
+$sql=mysql_query("SELECT *,apqp_pc.nome AS nome, clientes.fantasia AS nomecli FROM apqp_pc,clientes WHERE apqp_pc.id='$pc' AND apqp_pc.cliente=clientes.id") or erp_db_fail();
 $res=mysql_fetch_array($sql);
 if(!mysql_num_rows($sql)) exit;
 $sql=mysql_query("SELECT * FROM empresa");
@@ -50,7 +50,7 @@ if(mysql_num_rows($sqlh))
 	$pdf->SetXY(5, 1);
 	$pdf->SetFont('Arial','B',14,'C');
 	$pdf->Cell(40);
-	$pdf->Cell(0, 18, 'ÉTUDE DE RÉPÉTABILITÉ ET REPRODUCTIBILITÉ');
+	$pdf->Cell(0, 18, 'Ã‰TUDE DE RÃ‰PÃ‰TABILITÃ‰ ET REPRODUCTIBILITÃ‰');
 	$pdf->SetFont('Arial','',8);
 		$pdf->SetXY(180, 5);
 		$pdf->SetFont('Arial','B',8);
@@ -59,43 +59,43 @@ if(mysql_num_rows($sqlh))
 		$pdf->SetXY(5, 18);
 		$pdf->MultiCell(80,5,"Client \n $cliente",1);
 		$pdf->SetXY(85, 18);
-		$pdf->MultiCell(60,5,"Numéro de Pièce (Client)\n $peca",1);
+		$pdf->MultiCell(60,5,"NumÃ©ro de PiÃ¨ce (Client)\n $peca",1);
 		$pdf->SetXY(145, 18);
-		$pdf->MultiCell(60,5,"Numéro de Plan / Rév. / Date\n $rev ",1);
+		$pdf->MultiCell(60,5,"NumÃ©ro de Plan / RÃ©v. / Date\n $rev ",1);
 		//linha 2
 		$pdf->SetXY(5, 28);
 		$pdf->MultiCell(80,5,"Fournisseur\n $razao",1);
 		$pdf->SetXY(85, 28);
-		$pdf->MultiCell(60,5,"Numéro de Pièce (Fournisseur)\n $num",1);
+		$pdf->MultiCell(60,5,"NumÃ©ro de PiÃ¨ce (Fournisseur)\n $num",1);
 		$pdf->SetXY(145, 28);
-		$pdf->MultiCell(60,5,"Révision Pièce (Fournisseur)\n $revi",1);
+		$pdf->MultiCell(60,5,"RÃ©vision PiÃ¨ce (Fournisseur)\n $revi",1);
 		//linha 3
 		$pdf->SetXY(5, 38);
-		$pdf->MultiCell(80,5,"Nom de Pièce\n $nome",1);
+		$pdf->MultiCell(80,5,"Nom de PiÃ¨ce\n $nome",1);
 		$pdf->SetXY(85, 38);
-		$pdf->MultiCell(60,5,"Code Équipement de Mesure\n $disp",1);
+		$pdf->MultiCell(60,5,"Code Ã‰quipement de Mesure\n $disp",1);
 		$pdf->SetXY(145, 38);
-		$pdf->MultiCell(60,5,"Nom Équipement de Mesure\n $dispo",1);
+		$pdf->MultiCell(60,5,"Nom Ã‰quipement de Mesure\n $dispo",1);
 		//linha 4
 		$pdf->SetXY(5, 48);
-		$pdf->MultiCell(40,5,"Caract. Nº\n $num",1);
+		$pdf->MultiCell(40,5,"Caract. NÂº\n $num",1);
 		$pdf->SetXY(45, 48);
-		$pdf->MultiCell(40,5,"Caractéristique\n $carac",1);
+		$pdf->MultiCell(40,5,"CaractÃ©ristique\n $carac",1);
 		$pdf->SetXY(85, 48);
 		$pdf->MultiCell(60,5,"Specification\n $espec",1);
 		$pdf->SetXY(145, 48);
-		$pdf->MultiCell(60,5,"Tolérance\n $tol",1);
+		$pdf->MultiCell(60,5,"TolÃ©rance\n $tol",1);
 		//linha 5
 		$pdf->SetXY(5,58);
-		$pdf->MultiCell(80,5,"Exécuté Par\n $por",1);
+		$pdf->MultiCell(80,5,"ExÃ©cutÃ© Par\n $por",1);
 		$pdf->SetXY(85, 58);
-		$pdf->MultiCell(30,5,"Date d'Étude\n $data",1);
+		$pdf->MultiCell(30,5,"Date d'Ã‰tude\n $data",1);
 		$pdf->SetXY(115, 58);
 		$pdf->MultiCell(30,5,"# Cicles\n $ens",1);
 		$pdf->SetXY(145, 58);
-		$pdf->MultiCell(30,5,"# Opérateurs\n $ope",1);
+		$pdf->MultiCell(30,5,"# OpÃ©rateurs\n $ope",1);
 		$pdf->SetXY(175, 58);
-		$pdf->MultiCell(30,5,"# Échantillons\n $amo",1);
+		$pdf->MultiCell(30,5,"# Ã‰chantillons\n $amo",1);
 		//linha 6
 		$pdf->SetXY(5, 68);
 		$pdf->MultiCell(200,5,"Remarques\n $obs",1);
@@ -104,18 +104,18 @@ if(mysql_num_rows($sqlh))
 	$pdf->SetFont('Arial','B',14);
 	$pdf->MultiCell(205,5,"Moyennes",0,'C');
 	$pdf->SetXY(5, 150);
-	$pdf->MultiCell(205,5,"Étendues",0,'C');
+	$pdf->MultiCell(205,5,"Ã‰tendues",0,'C');
 	//linha 8
 	$pdf->SetFont('Arial','B',8);
 	$pdf->SetXY(5, 140);
 	$num_graf=$resp["id"];
 	include('apqp_rr_xbar2.php');
 	$pdf->Image("imagens_fotos/rr_xgraf$num_graf.png",60,90,100,50);
-	$pdf->MultiCell(205,5,"% À l'extérieur de Limites de Contrôle: ".$resp["mpf"]." X: ".banco2valor3($resp["average"])." XLCL: ".banco2valor3($resp["lcl"])." XUCL: ".banco2valor3($resp["uclx"])."",0,'C');
+	$pdf->MultiCell(205,5,"% Ã€ l'extÃ©rieur de Limites de ContrÃ´le: ".$resp["mpf"]." X: ".banco2valor3($resp["average"])." XLCL: ".banco2valor3($resp["lcl"])." XUCL: ".banco2valor3($resp["uclx"])."",0,'C');
 	$pdf->SetXY(5, 210);
 	include('apqp_rr_rbar2.php');
 	$pdf->Image("imagens_fotos/rr_rgraf$num_graf.png",60,160,100,50);
-	$pdf->MultiCell(205,5,"% Précise de la limite de commande: ".$resp["apf"]." R: ".banco2valor3($resp["rbar"])." RUCL: ".banco2valor3($resp["uclr"])."",0,'C');
+	$pdf->MultiCell(205,5,"% PrÃ©cise de la limite de commande: ".$resp["apf"]." R: ".banco2valor3($resp["rbar"])." RUCL: ".banco2valor3($resp["uclr"])."",0,'C');
 	//em baixo rodape
 $pdf->SetFont('Arial','B',5);  
 $pdf->SetXY(168,269);

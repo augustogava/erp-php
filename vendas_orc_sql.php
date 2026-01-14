@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 if(empty($acao)) exit;
 //$acao=verifi($permi,$acao);
@@ -17,11 +17,11 @@ if($acao=="inc"){
 	$id=$res["id"];
 	if(!empty($cli)){
 		//followup
-		$sql=mysql_query("INSERT INTO followup (cliente,tipo,data,hora,titulo,descricao,contato,vendedor) VALUES ('$cli','3','$hj','$hora','followup','Proposta Nº $id foi criadaa.','','$_SESSION[login_codigo]')");
+		$sql=mysql_query("INSERT INTO followup (cliente,tipo,data,hora,titulo,descricao,contato,vendedor) VALUES ('$cli','3','$hj','$hora','followup','Proposta NÂº $id foi criadaa.','','$_SESSION[login_codigo]')");
 	}
 	$sql=mysql_query("INSERT INTO vendas_orcamento_list (orcamento) VALUES ('$id')");
 }elseif($acao=="gvenda"){
-	$sql=mysql_query("UPDATE vendas_orcamento SET sit='1' WHERE id='$id'") or die("erro");
+	$sql=mysql_query("UPDATE vendas_orcamento SET sit='1' WHERE id='$id'") or erp_db_fail();
 	$sql=mysql_query("SELECT * FROM vendas_orcamento WHERE id='$id'");
 	$res=mysql_fetch_array($sql);
 	$cli=mysql_query("SELECT * FROM clientes WHERE id='$res[cliente]'");
@@ -55,7 +55,7 @@ if($acao=="inc"){
 	$sql=mysql_query("INSERT INTO vendas (cliente,acao,emissao,vendedor,fretepor,parcelamento,previsao,frete,frete_tp,natureza,valor,representante) VALUES ('$res[cliente]','$res[acao]','$hj','$res[vendedor]','$por','$res[p_pag]','$prev','$res[frete_val]','$freti','$natu','$res[valor]','$res[representante]')");
 	$max=mysql_query("SELECT MAX(id) as id from vendas"); $rmax=mysql_fetch_array($max);
 		//followup
-	$sql=mysql_query("INSERT INTO followup (cliente,tipo,data,hora,titulo,descricao,contato,vendedor) VALUES ('$res[cliente]','3','$hj','$hora','followup','Proposta foi fechada e gerada a venda Nº: $rmax[id]','$contato','$res[vendedor]')");
+	$sql=mysql_query("INSERT INTO followup (cliente,tipo,data,hora,titulo,descricao,contato,vendedor) VALUES ('$res[cliente]','3','$hj','$hora','followup','Proposta foi fechada e gerada a venda NÂº: $rmax[id]','$contato','$res[vendedor]')");
 	
 	$sql=mysql_query("SELECT MAX(id) AS id FROM vendas");
 	$res=mysql_fetch_array($sql);
@@ -113,7 +113,7 @@ if($acao=="inc"){
 	if($sql){
 		$_SESSION["mensagem"]="Proposta alterada com sucesso!";
 	}else{
-		$_SESSION["mensagem"]="A proposta não pôde ser alterado!";
+		$_SESSION["mensagem"]="A proposta nÃ£o pÃ´de ser alterado!";
 	}
 	if($maisum){
 		$sql=mysql_query("INSERT INTO vendas_orcamento_list (orcamento) VALUES ('$id')");
@@ -137,9 +137,9 @@ if($acao=="inc"){
 	$sql=mysql_query("DELETE FROM vendas_orcamento WHERE id='$id'");
 	if($sql){
 		$sql=mysql_query("DELETE FROM vendas_orcamento_list WHERE orcamento='$id'");
-		$_SESSION["mensagem"]="Proposta excluída com sucesso!";
+		$_SESSION["mensagem"]="Proposta excluÃ­da com sucesso!";
 	}else{
-		$_SESSION["mensagem"]="A proposta não pôde ser excluído!";
+		$_SESSION["mensagem"]="A proposta nÃ£o pÃ´de ser excluÃ­do!";
 	}
 	header("Location:vendas_orc.php");
 	exit;

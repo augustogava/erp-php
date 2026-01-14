@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 include("seguranca.php");
 if(empty($acao)) $acao="entrar";
@@ -6,7 +6,8 @@ if(empty($acao)) $acao="entrar";
 <html>
 <head>
 <title>CyberManager</title>
-<meta http-equiv="Content-Type" content="text/html; UTF-8">
+<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="style.css" rel="stylesheet" type="text/css">
 <script src="scripts.js"></script>
 <script src="mascaras.js"></script>
@@ -48,7 +49,7 @@ function MM_openBrWindow(theURL,winName,features) { //v2.0
   <tr>
     <td align="left" valign="top"><img src="imagens/dot.gif" width="28" height="8"></td>
   </tr>
-  <? if($acao=="entrar"){ ?>
+  <?php if($acao=="entrar"){ ?>
   <tr>
     <td align="left" valign="top"><form name="form2" method="post" action="">
       <table width="240" border="0" cellpadding="0" cellspacing="1" bgcolor="#003366">
@@ -65,7 +66,7 @@ function MM_openBrWindow(theURL,winName,features) { //v2.0
       </table>
     </form></td>
   </tr>
-  <? }else{ ?>
+  <?php }else{ ?>
   <tr>
     <td align="left" valign="top"><form name="form1" method="post" action="nf_sql.php" onSubmit="return verifica(this);">
       <table width="592" border="0" cellspacing="0" cellpadding="0">
@@ -95,8 +96,8 @@ function MM_openBrWindow(theURL,winName,features) { //v2.0
           <td>&nbsp;</td>
           <td>Natureza</td>
           <td width="7">&nbsp;</td>
-          <td width="81"><input name="cliente" type="hidden" id="cliente" value="<? print $cliente; ?>">
-            <input name="cliente_tipo" type="hidden" id="cliente_tipo" value="<? print $cliente_tipo; ?>">
+          <td width="81"><input name="cliente" type="hidden" id="cliente" value="<?php print $cliente; ?>">
+            <input name="cliente_tipo" type="hidden" id="cliente_tipo" value="<?php print $cliente_tipo; ?>">
             <input name="es" type="hidden" id="es" value="S">            </td>
           <td width="53"><input name="acao" type="hidden" id="acao" value="nfs"></td>
           <td width="11">&nbsp;</td>
@@ -105,12 +106,12 @@ function MM_openBrWindow(theURL,winName,features) { //v2.0
         </tr>
         <tr class="textobold">
           <td colspan="3"><select name="operacao" class="formularioselect" id="operacao">
-            <?
+            <?php
 				$sqlo=mysql_query("SELECT * FROM opertab WHERE tipo='S' ORDER BY nome ASC");
 				while($reso=mysql_fetch_array($sqlo)){
 				?>
-            <option value="<? print $reso["id"]; ?>"><? print $reso["nome"]; ?></option>
-            <?
+            <option value="<?php print $reso["id"]; ?>"><?php print $reso["nome"]; ?></option>
+            <?php
 				}
 				?>
           </select></td>
@@ -137,7 +138,7 @@ function MM_openBrWindow(theURL,winName,features) { //v2.0
             </tr>
           </table></td>
           </tr>
-        <? if($qtdp!=0){ ?>
+        <?php if($qtdp!=0){ ?>
 		<tr class="textobold">
           <td width="100">PRODUTOS</td>
           <td width="6">&nbsp;</td>
@@ -168,28 +169,28 @@ function MM_openBrWindow(theURL,winName,features) { //v2.0
               <td width="38">Base</td>
               <td width="38">IR</td>
               </tr>
-            <? for ($i=1;$i<=$qtdp;$i++){ ?>
+            <?php for ($i=1;$i<=$qtdp;$i++){ ?>
 			<tr bgcolor="#FFFFFF" class="textobold">
-              <td><input name="prodserv[]" type="text" class="formularioselectsemborda" id="prodserv<? print $i; ?>" onKeyPress="return validanum(this, event)" size="1" maxlength="6" readonly></td>
-              <td width="14"><a href="#"><img src="imagens/icon_14_search.gif" width="14" height="14" border="0" onClick="return abre('nf_prodserv.php?line=<? print $i; ?>&abre=S','busca','width=320,height=300,scrollbars=1');"></a></td>
-              <td width="103"><input name="pdescricao[]" type="text" class="formularioselectsemborda" id="pdescricao<? print $i; ?>" size="1" maxlength="100"></td>
-              <td width="33"><input name="punidade[]" type="text" class="formularioselectsemborda" id="punidade<? print $i; ?>" size="1" maxlength="5"></td>
-              <td width="56"><input name="pclafis[]" type="text" class="formularioselectsemborda" id="pclafis<? print $i; ?>" size="1" maxlength="10"></td>
-              <td width="51"><input name="psitri[]" type="text" class="formularioselectsemborda" id="psitri<? print $i; ?>" size="1" maxlength="5"></td>
-              <td width="41"><input name="pqtd[]" type="text" class="formularioselectsemborda" id="pqtd<? print $i; ?>" onKeyDown="formataMoeda(this,retornaKeyCode(event))" onKeyUp="formataMoeda(this,retornaKeyCode(event))" value="0,00" size="1"></td>
-              <td width="48"><input name="punitario[]" type="text" class="formularioselectsemborda" id="unitario<? print $i; ?>" onKeyDown="formataMoeda(this,retornaKeyCode(event))" onKeyUp="formataMoeda(this,retornaKeyCode(event))" value="0,00" size="1"></td>
-              <td width="38"><input name="picms[]" type="text" class="formularioselectsemborda" id="picms<? print $i; ?>" onKeyDown="formataMoeda(this,retornaKeyCode(event))" onKeyUp="formataMoeda(this,retornaKeyCode(event))" value="0,00" size="1"></td>
-              <td width="34"><input name="pipi[]" type="text" class="formularioselectsemborda" id="pipi<? print $i; ?>" onKeyDown="formataMoeda(this,retornaKeyCode(event))" onKeyUp="formataMoeda(this,retornaKeyCode(event))" value="0,00" size="1"></td>
-              <td width="62"><input name="picmss[]" type="text" class="formularioselectsemborda" id="picmss<? print $i; ?>" onKeyDown="formataMoeda(this,retornaKeyCode(event))" onKeyUp="formataMoeda(this,retornaKeyCode(event))" value="0,00" size="1"></td>
-              <td width="38"><input name="pbase[]" type="text" class="formularioselectsemborda" id="pbase<? print $i; ?>" onKeyDown="formataMoeda(this,retornaKeyCode(event))" onKeyUp="formataMoeda(this,retornaKeyCode(event))" value="0,00" size="1"></td>
-              <td width="38"><input name="pir[]" type="text" class="formularioselectsemborda" id="pir<? print $i; ?>" onKeyDown="formataMoeda(this,retornaKeyCode(event))" onKeyUp="formataMoeda(this,retornaKeyCode(event))" value="0,00" size="1"></td>
+              <td><input name="prodserv[]" type="text" class="formularioselectsemborda" id="prodserv<?php print $i; ?>" onKeyPress="return validanum(this, event)" size="1" maxlength="6" readonly></td>
+              <td width="14"><a href="#"><img src="imagens/icon_14_search.gif" width="14" height="14" border="0" onClick="return abre('nf_prodserv.php?line=<?php print $i; ?>&abre=S','busca','width=320,height=300,scrollbars=1');"></a></td>
+              <td width="103"><input name="pdescricao[]" type="text" class="formularioselectsemborda" id="pdescricao<?php print $i; ?>" size="1" maxlength="100"></td>
+              <td width="33"><input name="punidade[]" type="text" class="formularioselectsemborda" id="punidade<?php print $i; ?>" size="1" maxlength="5"></td>
+              <td width="56"><input name="pclafis[]" type="text" class="formularioselectsemborda" id="pclafis<?php print $i; ?>" size="1" maxlength="10"></td>
+              <td width="51"><input name="psitri[]" type="text" class="formularioselectsemborda" id="psitri<?php print $i; ?>" size="1" maxlength="5"></td>
+              <td width="41"><input name="pqtd[]" type="text" class="formularioselectsemborda" id="pqtd<?php print $i; ?>" onKeyDown="formataMoeda(this,retornaKeyCode(event))" onKeyUp="formataMoeda(this,retornaKeyCode(event))" value="0,00" size="1"></td>
+              <td width="48"><input name="punitario[]" type="text" class="formularioselectsemborda" id="unitario<?php print $i; ?>" onKeyDown="formataMoeda(this,retornaKeyCode(event))" onKeyUp="formataMoeda(this,retornaKeyCode(event))" value="0,00" size="1"></td>
+              <td width="38"><input name="picms[]" type="text" class="formularioselectsemborda" id="picms<?php print $i; ?>" onKeyDown="formataMoeda(this,retornaKeyCode(event))" onKeyUp="formataMoeda(this,retornaKeyCode(event))" value="0,00" size="1"></td>
+              <td width="34"><input name="pipi[]" type="text" class="formularioselectsemborda" id="pipi<?php print $i; ?>" onKeyDown="formataMoeda(this,retornaKeyCode(event))" onKeyUp="formataMoeda(this,retornaKeyCode(event))" value="0,00" size="1"></td>
+              <td width="62"><input name="picmss[]" type="text" class="formularioselectsemborda" id="picmss<?php print $i; ?>" onKeyDown="formataMoeda(this,retornaKeyCode(event))" onKeyUp="formataMoeda(this,retornaKeyCode(event))" value="0,00" size="1"></td>
+              <td width="38"><input name="pbase[]" type="text" class="formularioselectsemborda" id="pbase<?php print $i; ?>" onKeyDown="formataMoeda(this,retornaKeyCode(event))" onKeyUp="formataMoeda(this,retornaKeyCode(event))" value="0,00" size="1"></td>
+              <td width="38"><input name="pir[]" type="text" class="formularioselectsemborda" id="pir<?php print $i; ?>" onKeyDown="formataMoeda(this,retornaKeyCode(event))" onKeyUp="formataMoeda(this,retornaKeyCode(event))" value="0,00" size="1"></td>
           </tr>
-		  <? } ?>
+		  <?php } ?>
 			<tr bgcolor="#FFFFFF" class="textobold">
 			  <td colspan="13" align="center" class="texto">obs: caso n&atilde;o seja selecionado o cod do produto ele n&atilde;o ser&aacute; inclu&iacute;do na nota fiscal </td>
 			  </tr>
           </table></td>
-          </tr><? } ?>
+          </tr><?php } ?>
         <tr class="textobold">
           <td width="100">SERVI&Ccedil;OS</td>
           <td width="6">&nbsp;</td>
@@ -314,33 +315,33 @@ function MM_openBrWindow(theURL,winName,features) { //v2.0
               <td>&nbsp;</td>
               <td><font face="Verdana, Arial, Helvetica, sans-serif" size="1" color="#000066">
                 <select name="placauf" class="formularioselect" id="UF">
-                  <option value="AC"<? if($estado=="AC") print "selected"; ?>>AC</option>
-                  <option value="AL"<? if($estado=="AL") print "selected"; ?>>AL</option>
-                  <option value="AM"<? if($estado=="AM") print "selected"; ?>>AM</option>
-                  <option value="AP"<? if($estado=="AP") print "selected"; ?>>AP</option>
-                  <option value="BA"<? if($estado=="BA") print "selected"; ?>>BA</option>
-                  <option value="CE"<? if($estado=="CE") print "selected"; ?>>CE</option>
-                  <option value="DF"<? if($estado=="DF") print "selected"; ?>>DF</option>
-                  <option value="ES"<? if($estado=="ES") print "selected"; ?>>ES</option>
-                  <option value="GO"<? if($estado=="GO") print "selected"; ?>>GO</option>
-                  <option value="MA"<? if($estado=="MA") print "selected"; ?>>MA</option>
-                  <option value="MG"<? if($estado=="MG") print "selected"; ?>>MG</option>
-                  <option value="MS"<? if($estado=="MS") print "selected"; ?>>MS</option>
-                  <option value="MT"<? if($estado=="MT") print "selected"; ?>>MT</option>
-                  <option value="PA"<? if($estado=="PA") print "selected"; ?>>PA</option>
-                  <option value="PB"<? if($estado=="PB") print "selected"; ?>>PB</option>
-                  <option value="PE"<? if($estado=="PE") print "selected"; ?>>PE</option>
-                  <option value="PI"<? if($estado=="PI") print "selected"; ?>>PI</option>
-                  <option value="PR"<? if($estado=="PR") print "selected"; ?>>PR</option>
-                  <option value="RJ"<? if($estado=="RJ") print "selected"; ?>>RJ</option>
-                  <option value="RN"<? if($estado=="RN") print "selected"; ?>>RN</option>
-                  <option value="RO"<? if($estado=="RO") print "selected"; ?>>RO</option>
-                  <option value="RR"<? if($estado=="RR") print "selected"; ?>>RR</option>
-                  <option value="RS"<? if($estado=="RS") print "selected"; ?>>RS</option>
-                  <option value="SC"<? if($estado=="SC") print "selected"; ?>>SC</option>
-                  <option value="SE"<? if($estado=="SE") print "selected"; ?>>SE</option>
-                  <option value="SP"<? if($estado=="SP" or empty($estado)) print "selected"; ?>>SP</option>
-                  <option value="TO"<? if($estado=="TO") print "selected"; ?>>TO</option>
+                  <option value="AC"<?php if($estado=="AC") print "selected"; ?>>AC</option>
+                  <option value="AL"<?php if($estado=="AL") print "selected"; ?>>AL</option>
+                  <option value="AM"<?php if($estado=="AM") print "selected"; ?>>AM</option>
+                  <option value="AP"<?php if($estado=="AP") print "selected"; ?>>AP</option>
+                  <option value="BA"<?php if($estado=="BA") print "selected"; ?>>BA</option>
+                  <option value="CE"<?php if($estado=="CE") print "selected"; ?>>CE</option>
+                  <option value="DF"<?php if($estado=="DF") print "selected"; ?>>DF</option>
+                  <option value="ES"<?php if($estado=="ES") print "selected"; ?>>ES</option>
+                  <option value="GO"<?php if($estado=="GO") print "selected"; ?>>GO</option>
+                  <option value="MA"<?php if($estado=="MA") print "selected"; ?>>MA</option>
+                  <option value="MG"<?php if($estado=="MG") print "selected"; ?>>MG</option>
+                  <option value="MS"<?php if($estado=="MS") print "selected"; ?>>MS</option>
+                  <option value="MT"<?php if($estado=="MT") print "selected"; ?>>MT</option>
+                  <option value="PA"<?php if($estado=="PA") print "selected"; ?>>PA</option>
+                  <option value="PB"<?php if($estado=="PB") print "selected"; ?>>PB</option>
+                  <option value="PE"<?php if($estado=="PE") print "selected"; ?>>PE</option>
+                  <option value="PI"<?php if($estado=="PI") print "selected"; ?>>PI</option>
+                  <option value="PR"<?php if($estado=="PR") print "selected"; ?>>PR</option>
+                  <option value="RJ"<?php if($estado=="RJ") print "selected"; ?>>RJ</option>
+                  <option value="RN"<?php if($estado=="RN") print "selected"; ?>>RN</option>
+                  <option value="RO"<?php if($estado=="RO") print "selected"; ?>>RO</option>
+                  <option value="RR"<?php if($estado=="RR") print "selected"; ?>>RR</option>
+                  <option value="RS"<?php if($estado=="RS") print "selected"; ?>>RS</option>
+                  <option value="SC"<?php if($estado=="SC") print "selected"; ?>>SC</option>
+                  <option value="SE"<?php if($estado=="SE") print "selected"; ?>>SE</option>
+                  <option value="SP"<?php if($estado=="SP" or empty($estado)) print "selected"; ?>>SP</option>
+                  <option value="TO"<?php if($estado=="TO") print "selected"; ?>>TO</option>
                 </select>
               </font></td>
               <td>&nbsp;</td>
@@ -367,33 +368,33 @@ function MM_openBrWindow(theURL,winName,features) { //v2.0
               <td>&nbsp;</td>
               <td><font face="Verdana, Arial, Helvetica, sans-serif" size="1" color="#000066">
                 <select name="tuf" class="formularioselect" id="tuf">
-                  <option value="AC"<? if($estado=="AC") print "selected"; ?>>AC</option>
-                  <option value="AL"<? if($estado=="AL") print "selected"; ?>>AL</option>
-                  <option value="AM"<? if($estado=="AM") print "selected"; ?>>AM</option>
-                  <option value="AP"<? if($estado=="AP") print "selected"; ?>>AP</option>
-                  <option value="BA"<? if($estado=="BA") print "selected"; ?>>BA</option>
-                  <option value="CE"<? if($estado=="CE") print "selected"; ?>>CE</option>
-                  <option value="DF"<? if($estado=="DF") print "selected"; ?>>DF</option>
-                  <option value="ES"<? if($estado=="ES") print "selected"; ?>>ES</option>
-                  <option value="GO"<? if($estado=="GO") print "selected"; ?>>GO</option>
-                  <option value="MA"<? if($estado=="MA") print "selected"; ?>>MA</option>
-                  <option value="MG"<? if($estado=="MG") print "selected"; ?>>MG</option>
-                  <option value="MS"<? if($estado=="MS") print "selected"; ?>>MS</option>
-                  <option value="MT"<? if($estado=="MT") print "selected"; ?>>MT</option>
-                  <option value="PA"<? if($estado=="PA") print "selected"; ?>>PA</option>
-                  <option value="PB"<? if($estado=="PB") print "selected"; ?>>PB</option>
-                  <option value="PE"<? if($estado=="PE") print "selected"; ?>>PE</option>
-                  <option value="PI"<? if($estado=="PI") print "selected"; ?>>PI</option>
-                  <option value="PR"<? if($estado=="PR") print "selected"; ?>>PR</option>
-                  <option value="RJ"<? if($estado=="RJ") print "selected"; ?>>RJ</option>
-                  <option value="RN"<? if($estado=="RN") print "selected"; ?>>RN</option>
-                  <option value="RO"<? if($estado=="RO") print "selected"; ?>>RO</option>
-                  <option value="RR"<? if($estado=="RR") print "selected"; ?>>RR</option>
-                  <option value="RS"<? if($estado=="RS") print "selected"; ?>>RS</option>
-                  <option value="SC"<? if($estado=="SC") print "selected"; ?>>SC</option>
-                  <option value="SE"<? if($estado=="SE") print "selected"; ?>>SE</option>
-                  <option value="SP"<? if($estado=="SP" or empty($estado)) print "selected"; ?>>SP</option>
-                  <option value="TO"<? if($estado=="TO") print "selected"; ?>>TO</option>
+                  <option value="AC"<?php if($estado=="AC") print "selected"; ?>>AC</option>
+                  <option value="AL"<?php if($estado=="AL") print "selected"; ?>>AL</option>
+                  <option value="AM"<?php if($estado=="AM") print "selected"; ?>>AM</option>
+                  <option value="AP"<?php if($estado=="AP") print "selected"; ?>>AP</option>
+                  <option value="BA"<?php if($estado=="BA") print "selected"; ?>>BA</option>
+                  <option value="CE"<?php if($estado=="CE") print "selected"; ?>>CE</option>
+                  <option value="DF"<?php if($estado=="DF") print "selected"; ?>>DF</option>
+                  <option value="ES"<?php if($estado=="ES") print "selected"; ?>>ES</option>
+                  <option value="GO"<?php if($estado=="GO") print "selected"; ?>>GO</option>
+                  <option value="MA"<?php if($estado=="MA") print "selected"; ?>>MA</option>
+                  <option value="MG"<?php if($estado=="MG") print "selected"; ?>>MG</option>
+                  <option value="MS"<?php if($estado=="MS") print "selected"; ?>>MS</option>
+                  <option value="MT"<?php if($estado=="MT") print "selected"; ?>>MT</option>
+                  <option value="PA"<?php if($estado=="PA") print "selected"; ?>>PA</option>
+                  <option value="PB"<?php if($estado=="PB") print "selected"; ?>>PB</option>
+                  <option value="PE"<?php if($estado=="PE") print "selected"; ?>>PE</option>
+                  <option value="PI"<?php if($estado=="PI") print "selected"; ?>>PI</option>
+                  <option value="PR"<?php if($estado=="PR") print "selected"; ?>>PR</option>
+                  <option value="RJ"<?php if($estado=="RJ") print "selected"; ?>>RJ</option>
+                  <option value="RN"<?php if($estado=="RN") print "selected"; ?>>RN</option>
+                  <option value="RO"<?php if($estado=="RO") print "selected"; ?>>RO</option>
+                  <option value="RR"<?php if($estado=="RR") print "selected"; ?>>RR</option>
+                  <option value="RS"<?php if($estado=="RS") print "selected"; ?>>RS</option>
+                  <option value="SC"<?php if($estado=="SC") print "selected"; ?>>SC</option>
+                  <option value="SE"<?php if($estado=="SE") print "selected"; ?>>SE</option>
+                  <option value="SP"<?php if($estado=="SP" or empty($estado)) print "selected"; ?>>SP</option>
+                  <option value="TO"<?php if($estado=="TO") print "selected"; ?>>TO</option>
                 </select>
               </font></td>
               </tr>
@@ -458,39 +459,39 @@ function MM_openBrWindow(theURL,winName,features) { //v2.0
             </tr>
             <tr class="textobold">
               <td width="124"><select name="parcelamento" class="formularioselect" id="select">
-                <?
+                <?php
 				$sql=mysql_query("SELECT * FROM parcelamentos ORDER BY descricao ASC");
 				while($res=mysql_fetch_array($sql)){
 				?>
-                <option value="<? print $res["id"]; ?>" <? if($parcelamento==$res["id"]) print "selected"; ?>><? print $res["descricao"]; ?></option>
-                <? } ?>
+                <option value="<?php print $res["id"]; ?>" <?php if($parcelamento==$res["id"]) print "selected"; ?>><?php print $res["descricao"]; ?></option>
+                <?php } ?>
               </select></td>
               <td width="11">&nbsp;</td>
               <td><select name="conta" class="formularioselect" id="select2">
-                <?
+                <?php
 				$sql=mysql_query("SELECT * FROM pcontas WHERE idpai!=0 ORDER BY descricao ASC");
 				while($res=mysql_fetch_array($sql)){
 				?>
-                <option value="<? print $res["id"]; ?>" <? if($conta==$res["id"]) print "selected"; ?>><? print $res["descricao"]; ?></option>
-                <? } ?>
+                <option value="<?php print $res["id"]; ?>" <?php if($conta==$res["id"]) print "selected"; ?>><?php print $res["descricao"]; ?></option>
+                <?php } ?>
               </select></td>
               <td width="10">&nbsp;</td>
               <td><select name="categoria" class="formularioselect" id="select3">
-                <?
+                <?php
 				$sql=mysql_query("SELECT * FROM categorias ORDER BY nome ASC");
 				while($res=mysql_fetch_array($sql)){
 				?>
-                <option value="<? print $res["id"]; ?>" <? if($categoria==$res["id"]) print "selected"; ?>><? print $res["nome"]; ?></option>
-                <? } ?>
+                <option value="<?php print $res["id"]; ?>" <?php if($categoria==$res["id"]) print "selected"; ?>><?php print $res["nome"]; ?></option>
+                <?php } ?>
               </select></td>
               <td width="12">&nbsp;</td>
               <td><select name="banco" class="formularioselect" id="banco">
-                <?
+                <?php
 				$sqlo=mysql_query("SELECT * FROM bancos ORDER BY apelido ASC");
 				while($reso=mysql_fetch_array($sqlo)){
 				?>
-                <option value="<? print $reso["id"]; ?>"><? print $reso["apelido"]; ?></option>
-                <?
+                <option value="<?php print $reso["id"]; ?>"><?php print $reso["apelido"]; ?></option>
+                <?php
 				}
 				?>
               </select></td>
@@ -498,13 +499,13 @@ function MM_openBrWindow(theURL,winName,features) { //v2.0
           </table></td>
         </tr>
         <tr class="textobold">
-          <td colspan="11" align="center"><input name="fluxo" type="checkbox" id="fluxo" value="N" <? if($fluxo=="S") print "checked"; ?>>
+          <td colspan="11" align="center"><input name="fluxo" type="checkbox" id="fluxo" value="N" <?php if($fluxo=="S") print "checked"; ?>>
 N&atilde;o incluir no fluxo de caixa
-<input name="cartorio" type="checkbox" id="cartorio" value="S" <? if($cartorio=="S") print "checked"; ?>>
+<input name="cartorio" type="checkbox" id="cartorio" value="S" <?php if($cartorio=="S") print "checked"; ?>>
 Em cart&oacute;rio
-<input name="cobranca" type="checkbox" id="cobranca" value="S" <? if($cobranca=="S") print "checked"; ?>>
+<input name="cobranca" type="checkbox" id="cobranca" value="S" <?php if($cobranca=="S") print "checked"; ?>>
 Em cobran&ccedil;a
-<input name="demonstrativo" type="checkbox" id="demonstrativo" value="S" <? if($demonstrativo=="S") print "checked"; ?>>
+<input name="demonstrativo" type="checkbox" id="demonstrativo" value="S" <?php if($demonstrativo=="S") print "checked"; ?>>
 N&atilde;o entra na demonstra&ccedil;&atilde;o</td>
         </tr>
         <tr class="textobold">
@@ -517,8 +518,8 @@ N&atilde;o entra na demonstra&ccedil;&atilde;o</td>
       </table>
     </form></td>
   </tr>
-  <? } ?>
+  <?php } ?>
 </table>
 </body>
 </html>
-<? include("mensagem.php"); ?>
+<?php include("mensagem.php"); ?>

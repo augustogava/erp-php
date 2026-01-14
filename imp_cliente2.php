@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 $arquivo=file("clientes.txt");
 foreach($arquivo as $linha){
@@ -31,10 +31,10 @@ foreach($arquivo as $linha){
 	}else{
 		$porte="3";
 	}
-		mysql_query("INSERT INTO clientes (nome,porte_fun,ramo,endereco,complemento,bairro,cep,estado,cidade,ddd,ddd2,fone,fone2,cnpj,origem,status,origem_cad) VALUES('$nome','$porte','$ramo','$endereco','$pt[5]','$pt[6]','$pt[7]','$estado','$pt[8]','$pt[10]','$pt[12]','$pt[11]','$pt[13]','$pt[0]','mkr','P','bd')") or die("INSERT INTO clientes (nome,porte_fun,ramo,endereco,complemento,bairro,cep,estado,cidade,ddd,ddd2,fone,fone2,cnpj,origem,status,origem_cad) VALUES('$nome','$porte','$ramo','$endereco','$pt[5]','$pt[6]','$pt[7]','$estado','$pt[8]','$pt[10]','$pt[12]','$pt[11]','$pt[13]','$pt[0]','mkr','P','bd')");
+		mysql_query("INSERT INTO clientes (nome,porte_fun,ramo,endereco,complemento,bairro,cep,estado,cidade,ddd,ddd2,fone,fone2,cnpj,origem,status,origem_cad) VALUES('$nome','$porte','$ramo','$endereco','$pt[5]','$pt[6]','$pt[7]','$estado','$pt[8]','$pt[10]','$pt[12]','$pt[11]','$pt[13]','$pt[0]','mkr','P','bd')") or erp_db_fail();
 		//acao
 		$sql=mysql_query("SELECT MAX(id) as id FROM clientes");
 		$res=mysql_fetch_array($sql);
-		mysql_query("INSERT INTO crm_acaor (acao,cliente) VALUES('19','$res[id]')") or die("INSERT INTO crm_acaor (acao,cliente) VALUES('19','$res[id]')");	
+		mysql_query("INSERT INTO crm_acaor (acao,cliente) VALUES('19','$res[id]')") or erp_db_fail();	
 }
 ?>

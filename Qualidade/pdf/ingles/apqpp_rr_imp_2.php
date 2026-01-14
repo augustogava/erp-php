@@ -1,6 +1,6 @@
 <?php
 $npc=$_SESSION["npc"];
-$sql=mysql_query("SELECT *,apqp_pc.nome AS nome, clientes.fantasia AS nomecli FROM apqp_pc,clientes WHERE apqp_pc.id='$pc' AND apqp_pc.cliente=clientes.id") or die("nao");
+$sql=mysql_query("SELECT *,apqp_pc.nome AS nome, clientes.fantasia AS nomecli FROM apqp_pc,clientes WHERE apqp_pc.id='$pc' AND apqp_pc.cliente=clientes.id") or erp_db_fail();
 $res=mysql_fetch_array($sql);
 if(!mysql_num_rows($sql)) exit;
 $sql=mysql_query("SELECT * FROM empresa");

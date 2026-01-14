@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 if(empty($acao)) exit;
 $acao=verifi($permi,$acao);
@@ -10,10 +10,10 @@ if(!empty($acao)){
 if($acao=="incluir"){
 	$sql=mysql_query("INSERT INTO categorias (nome) VALUES ('$nome')");
 	if($sql){
-		$_SESSION["mensagem"]="Categoria incluída com sucesso!";
+		$_SESSION["mensagem"]="Categoria incluÃ­da com sucesso!";
 		$acao="entrar";
 	}else{
-		$_SESSION["mensagem"]="A Categoria não pôde ser incluída!";
+		$_SESSION["mensagem"]="A Categoria nÃ£o pÃ´de ser incluÃ­da!";
 		$acao="inc";
 	}
 }elseif($acao=="alterar"){
@@ -22,7 +22,7 @@ if($acao=="incluir"){
 		$_SESSION["mensagem"]="Categoria alterada com sucesso!";
 		$acao="entrar";
 	}else{
-		$_SESSION["mensagem"]="A Categoria não pôde ser alterada!";
+		$_SESSION["mensagem"]="A Categoria nÃ£o pÃ´de ser alterada!";
 		$acao="alt";
 	}
 }elseif($acao=="exc"){
@@ -31,12 +31,12 @@ if($acao=="incluir"){
 		 if(!mysql_num_rows($sql)){
 			$sql=mysql_query("DELETE FROM categorias WHERE id='$id'");
 			if($sql){
-				$_SESSION["mensagem"]="Categoria excluída com sucesso!";
+				$_SESSION["mensagem"]="Categoria excluÃ­da com sucesso!";
 			}else{
-				$_SESSION["mensagem"]="A Categoria não pôde ser excluída!";
+				$_SESSION["mensagem"]="A Categoria nÃ£o pÃ´de ser excluÃ­da!";
 			}	
 		 }else{
-		 	$_SESSION["mensagem"]="Categoria Não pode ser excluída pois existem produtos cadastrados!";
+		 	$_SESSION["mensagem"]="Categoria NÃ£o pode ser excluÃ­da pois existem produtos cadastrados!";
 		 }
 	}
 	$acao="entrar";

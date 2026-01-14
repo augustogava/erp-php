@@ -1,14 +1,14 @@
-<?
+<?php
 include("conecta.php");
 if(empty($acao)) exit;
 if($acao=="incluir"){
 	$valor=valor2banco($valor);
 	$sql=mysql_query("INSERT INTO tip_material (nome,valorm) VALUES ('$nome','$valor')");
 	if($sql){
-		$_SESSION["mensagem"]="Material Incluído com sucesso!";
+		$_SESSION["mensagem"]="Material IncluÃ­do com sucesso!";
 		$acao="entrar";
 	}else{
-		$_SESSION["mensagem"]="O Material não pôde ser incluído!";
+		$_SESSION["mensagem"]="O Material nÃ£o pÃ´de ser incluÃ­do!";
 		$acao="inc";
 	}
 }elseif($acao=="alterar"){
@@ -18,16 +18,16 @@ if($acao=="incluir"){
 		$_SESSION["mensagem"]="Material alterado com sucesso!";
 		$acao="entrar";
 	}else{
-		$_SESSION["mensagem"]="O Material não pôde ser alterado!";
+		$_SESSION["mensagem"]="O Material nÃ£o pÃ´de ser alterado!";
 		$acao="alt";
 	}
 }elseif($acao=="exc"){
 	if(!empty($id)){
 		$sql=mysql_query("DELETE FROM tip_material WHERE id='$id'");
 		if($sql){
-			$_SESSION["mensagem"]="Material excluído com sucesso!";
+			$_SESSION["mensagem"]="Material excluÃ­do com sucesso!";
 		}else{
-			$_SESSION["mensagem"]="O Material não pôde ser excluído!";
+			$_SESSION["mensagem"]="O Material nÃ£o pÃ´de ser excluÃ­do!";
 		}		
 	}
 	$acao="entrar";

@@ -1,19 +1,19 @@
-<?
+<?php
 include("conecta.php");
 if(empty($acao)) exit;
 $acao=verifi($permi,$acao);
 if(!empty($acao)){
-	$loc="Tab. Operações";
+	$loc="Tab. OperaÃ§Ãµes";
 	$pagina=$_SERVER['SCRIPT_FILENAME'];
 	include("log.php");
 }s
 if($acao=="incluir"){
 	$sql=mysql_query("INSERT INTO pcontas (descricao,codigo,tipo) VALUES ('$descricao','$codigo','$tipo')");
 	if($sql){
-		$_SESSION["mensagem"]="Conta incluída com sucesso!";
+		$_SESSION["mensagem"]="Conta incluÃ­da com sucesso!";
 		$acao="plano";
 	}else{
-		$_SESSION["mensagem"]="A conta não pôde ser incluída!";
+		$_SESSION["mensagem"]="A conta nÃ£o pÃ´de ser incluÃ­da!";
 		$acao="inc";
 	}
 }elseif($acao=="alterar"){
@@ -22,7 +22,7 @@ if($acao=="incluir"){
 		$_SESSION["mensagem"]="Conta alterada com sucesso!";
 		$acao="plano";
 	}else{
-		$_SESSION["mensagem"]="A conta não pôde ser alterada!";
+		$_SESSION["mensagem"]="A conta nÃ£o pÃ´de ser alterada!";
 		$acao="alt";
 	}
 }elseif($acao=="exc"){
@@ -30,9 +30,9 @@ if($acao=="incluir"){
 		$sql=mysql_query("DELETE FROM pcontas WHERE idpai='$id'");
 		$sql=mysql_query("DELETE FROM pcontas WHERE id='$id'");
 		if($sql){
-			$_SESSION["mensagem"]="Conta excluída com sucesso!";
+			$_SESSION["mensagem"]="Conta excluÃ­da com sucesso!";
 		}else{
-			$_SESSION["mensagem"]="A conta não pôde ser excluída!";
+			$_SESSION["mensagem"]="A conta nÃ£o pÃ´de ser excluÃ­da!";
 		}		
 	}
 	$acao="plano";

@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 include("seguranca.php");
 
@@ -6,7 +6,8 @@ include("seguranca.php");
 <html>
 <head>
 <title>CyberManager</title>
-<meta http-equiv="Content-Type" content="text/html; UTF-8">
+<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="style.css" rel="stylesheet" type="text/css">
 <script src="scripts.js"></script>
 <script src="mascaras.js"></script>
@@ -24,17 +25,17 @@ include("seguranca.php");
     <td align="left" valign="top">
 	
 	<table width="100%" border="0" cellpadding="3" cellspacing="1" bgcolor="#999999">
-	<? 
+	<?php 
 	$sql=mysql_query("SELECT * FROM vendas WHERE cliente='$cli' ORDER By id DESC");
 	if(!mysql_num_rows($sql)){
 	?>
 	   <tr bgcolor="#FFFFFF">
         <td colspan="5" align="center" class="textopretobold">NENHUM DADO ENCONTRADO </td>
         </tr>
-	<? }else{ ?>
+	<?php }else{ ?>
       
 
-   <? 
+   <?php 
    while($res=mysql_fetch_array($sql)){
    	$sql2=mysql_query("SELECT * FROM e_compra WHERE pedido='$res[id]' ORDER By id DESC");
 	$res2=mysql_fetch_array($sql2);
@@ -43,13 +44,13 @@ include("seguranca.php");
 		$situ="Aberto";
 		break;
 		case "E":
-		$situ="Aguardando Aprovação Financeira";
+		$situ="Aguardando AprovaÃ§Ã£o Financeira";
 		break;
 		case "B":
-		$situ="Em Produção";
+		$situ="Em ProduÃ§Ã£o";
 		break;
 		case "P":
-		$situ="Em Separação";
+		$situ="Em SeparaÃ§Ã£o";
 		break;
 		case "F":
 		$situ="Aguardando NF";
@@ -62,16 +63,16 @@ include("seguranca.php");
 		break;
 }
  ?>
-<a href="vendas.php?acao=alt&id=<?= $res["id"]; ?>" target="_parent">
+<a href="vendas.php?acao=alt&id=<?php echo  $res["id"]; ?>" target="_parent">
       <tr bgcolor="#FFFFFF" class="textopreto" onMouseover="changeto('#CCCCCC')" onMouseout="changeback('#FFFFFF')">
-       <td width="94" height="18" align="center"><? print banco2data($res["emissao"]); ?></td>
-        <td width="59" align="center"><? print $res["id"]; ?></td>
-        <td width="507"><? $sql2=mysql_query("SELECT * FROM clientes WHERE id='$res[vendedor]'"); $res2=mysql_fetch_array($sql2); print substr($res2["nome"],0,25)."..."; ?></td>
-        <td width="119" align="center"><? $sql2=mysql_query("SELECT SUM(qtd*unitario)-SUM((qtd*unitario)*desconto/100 ) as total FROM vendas_list WHERE venda='$res[id]'"); $res2=mysql_fetch_array($sql2); print banco2valor($res2["total"]); ?></td>
-        <td width="190" align="center"><? print $situ; ?></td>
+       <td width="94" height="18" align="center"><?php print banco2data($res["emissao"]); ?></td>
+        <td width="59" align="center"><?php print $res["id"]; ?></td>
+        <td width="507"><?php $sql2=mysql_query("SELECT * FROM clientes WHERE id='$res[vendedor]'"); $res2=mysql_fetch_array($sql2); print substr($res2["nome"],0,25)."..."; ?></td>
+        <td width="119" align="center"><?php $sql2=mysql_query("SELECT SUM(qtd*unitario)-SUM((qtd*unitario)*desconto/100 ) as total FROM vendas_list WHERE venda='$res[id]'"); $res2=mysql_fetch_array($sql2); print banco2valor($res2["total"]); ?></td>
+        <td width="190" align="center"><?php print $situ; ?></td>
     </tr>
 	</a>	
-	<? } } ?>
+	<?php } } ?>
     </table>
 	
 	
@@ -81,4 +82,4 @@ include("seguranca.php");
 </body>
 </html>
 <script language="javascript" src="tooltip.js"></script>
-<? include("mensagem.php"); ?>
+<?php include("mensagem.php"); ?>

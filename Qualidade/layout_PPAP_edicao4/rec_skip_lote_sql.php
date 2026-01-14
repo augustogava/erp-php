@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 if(empty($acao)) exit;
 if(!empty($acao)){
@@ -10,7 +10,7 @@ if($acao=="incluir"){
 
 	$sqlskip=mysql_query("SELECT * FROM skip_lote WHERE fornecedor='$idfornecedor' AND item='$iditem'");
 	if(mysql_num_rows($sqlskip)){
-		$_SESSION["mensagem"]="Já existe este ítem cadastrado para o Fornecedor selecionado acima! Selecione outro ítem ou escolha outro Fornecedor para selecionar este ítem!";
+		$_SESSION["mensagem"]="JÃ¡ existe este Ã­tem cadastrado para o Fornecedor selecionado acima! Selecione outro Ã­tem ou escolha outro Fornecedor para selecionar este Ã­tem!";
 		header("Location:rec_skip_lote.php?acao=inc&id=$id&fornecedor=$fornecedor&idfornecedor=$idfornecedor&sit=$sit&skip_lote=$skip_lote&tempo_limite=$tempo_limite&ref_forn=$ref_forn&papp=$papp&data2=$data2&validade=$validade&status=$status&atualiza=$atualiza&notifica=$notifica&norma=$norma&plano=$plano&nivel=$nivel&nqa=$nqa");	
 		exit;		
 	}
@@ -23,11 +23,11 @@ if($acao=="incluir"){
 	// cria followup caso inclua
 		$sql_emp=mysql_query("SELECT fantasia FROM empresa");
 		$res_emp=mysql_fetch_array($sql_emp);
-		mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Inclusão do cadastro do Skip Lote.','O usuário $quem1 incluiu o cadastro do Skip Lote.','$user')");
+		mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','InclusÃ£o do cadastro do Skip Lote.','O usuÃ¡rio $quem1 incluiu o cadastro do Skip Lote.','$user')");
 	//	
-		$_SESSION["mensagem"]="Skip lote incluído com sucesso!";
+		$_SESSION["mensagem"]="Skip lote incluÃ­do com sucesso!";
 	} else {
-		$_SESSION["mensagem"]="Skip lote não pôde ser incluído!";
+		$_SESSION["mensagem"]="Skip lote nÃ£o pÃ´de ser incluÃ­do!";
 	}
 
 }elseif($acao=="alterar"){
@@ -38,11 +38,11 @@ if($acao=="incluir"){
 		// cria followup caso altere
 			$sql_emp=mysql_query("SELECT fantasia FROM empresa");
 			$res_emp=mysql_fetch_array($sql_emp);
-			mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Alteração do cadastro do Skip Lote.','O usuário $quem1 alterou o cadastro do Skip Lote $skip.','$user')");
+			mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','AlteraÃ§Ã£o do cadastro do Skip Lote.','O usuÃ¡rio $quem1 alterou o cadastro do Skip Lote $skip.','$user')");
 		//	
 			$_SESSION["mensagem"]="Skip lote alterado com sucesso!";
 		}else{
-			$_SESSION["mensagem"]="Skip lote não pôde ser alterado!";
+			$_SESSION["mensagem"]="Skip lote nÃ£o pÃ´de ser alterado!";
 		}
 }elseif($acao=="exc"){
 //	$sql2=mysql_query("SELECT * FROM skip_lote WHERE id='$id'");
@@ -50,13 +50,13 @@ if($acao=="incluir"){
 	// cria followup caso delete
 		$sql_emp=mysql_query("SELECT fantasia FROM empresa");
 		$res_emp=mysql_fetch_array($sql_emp);
-		mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Exclusão do cadastro do Skip Lote.','O usuário $quem1 excluiu o cadastro do Skip Lote .','$user')");//$res2[pegar]
+		mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','ExclusÃ£o do cadastro do Skip Lote.','O usuÃ¡rio $quem1 excluiu o cadastro do Skip Lote .','$user')");//$res2[pegar]
 	//	
 	$sql=mysql_query("DELETE FROM skip_lote WHERE id='$id'");
 	if($sql){
-		$_SESSION["mensagem"]="Skip lote excluído com sucesso!";
+		$_SESSION["mensagem"]="Skip lote excluÃ­do com sucesso!";
 	}else{
-		$_SESSION["mensagem"]="Skip lote não pôde ser excluído!";
+		$_SESSION["mensagem"]="Skip lote nÃ£o pÃ´de ser excluÃ­do!";
 	}
 }
 header("Location:rec_skip_lote.php?acao=entrar&id=$id");

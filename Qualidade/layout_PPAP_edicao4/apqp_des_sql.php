@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 include("seguranca.php");
 $apqp=new set_apqp;
@@ -30,7 +30,7 @@ if($acao=="inc"){
 			$erros=0;
 			if($_FILES["arquivo"]["size"] > 1048576){
 				$erros++;
-				$_SESSION["mensagem"].="\\nO desenho deve ter no máximo 1Mb";
+				$_SESSION["mensagem"].="\\nO desenho deve ter no mÃ¡ximo 1Mb";
 			}
 			if($erros==0){
 				$nomeray=explode(".",$nome);
@@ -43,7 +43,7 @@ if($acao=="inc"){
 				$upa=copy($_FILES["arquivo"]["tmp_name"], $arquivo);
 				if(!$upa){
 					$pau=true;
-					$_SESSION["mensagem"].="O desenho não pôde ser carregado";
+					$_SESSION["mensagem"].="O desenho nÃ£o pÃ´de ser carregado";
 				}else{
 					$sql=mysql_query("UPDATE apqp_des SET original='$nome',atual='$nome2' WHERE id='$id'");
 				}
@@ -54,15 +54,15 @@ if($acao=="inc"){
 		if($pau){
 			$comp="&acao=alt";
 		}else{
-			$_SESSION["mensagem"]="Desenho incluído com sucesso";
-			// cria followup caso inclua um desenho na peça
+			$_SESSION["mensagem"]="Desenho incluÃ­do com sucesso";
+			// cria followup caso inclua um desenho na peÃ§a
 				$sql_emp=mysql_query("SELECT fantasia FROM empresa");
 				$res_emp=mysql_fetch_array($sql_emp);
-				mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Inclusão de Desenho na peça $npc.','O usuário $quem1 incluiu um desenho $nome na peça $npc.','$user')");
+				mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','InclusÃ£o de Desenho na peÃ§a $npc.','O usuÃ¡rio $quem1 incluiu um desenho $nome na peÃ§a $npc.','$user')");
 			//
 		}
 	}else{
-		$_SESSION["mensagem"]="O desenho não pôde ser incluído";
+		$_SESSION["mensagem"]="O desenho nÃ£o pÃ´de ser incluÃ­do";
 		$comp="&acao=inc";
 	}
 }elseif($acao=="alt"){
@@ -74,7 +74,7 @@ if($acao=="inc"){
 			$erros=0;
 			if($_FILES["arquivo"]["size"] > 1048576){
 				$erros++;
-				$_SESSION["mensagem"].="\\nO desenho deve ter no máximo 1Mb";
+				$_SESSION["mensagem"].="\\nO desenho deve ter no mÃ¡ximo 1Mb";
 			}
 			if($erros==0){
 				$nomeray=explode(".",$nome);
@@ -87,7 +87,7 @@ if($acao=="inc"){
 				$upa=copy($_FILES["arquivo"]["tmp_name"], $arquivo);
 				if(!$upa){
 					$pau=true;
-					$_SESSION["mensagem"].="O desenho não pôde ser carregado";
+					$_SESSION["mensagem"].="O desenho nÃ£o pÃ´de ser carregado";
 				}else{
 					$sql=mysql_query("UPDATE apqp_des SET original='$nome',atual='$nome2' WHERE id='$id'");
 				}
@@ -97,15 +97,15 @@ if($acao=="inc"){
 		}
 		if(!$pau){
 			$_SESSION["mensagem"]="Desenho alterado com sucesso";
-			// cria followup caso alterar um desenho da peça
+			// cria followup caso alterar um desenho da peÃ§a
 				$sql_emp=mysql_query("SELECT fantasia FROM empresa");
 				$res_emp=mysql_fetch_array($sql_emp);
-				mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Alteração de Desenho da peça $npc.','O usuário $quem1 alterou o Desenho $descr da peça $npc.','$user')");
+				mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','AlteraÃ§Ã£o de Desenho da peÃ§a $npc.','O usuÃ¡rio $quem1 alterou o Desenho $descr da peÃ§a $npc.','$user')");
 			//				
 			$comp="&acao=entrar";
 		}
 	}else{
-		$_SESSION["mensagem"]="O desenho não pôde ser alterado";
+		$_SESSION["mensagem"]="O desenho nÃ£o pÃ´de ser alterado";
 	}
 	if(empty($comp)) $comp="&acao=alt";
 }elseif($acao=="exc"){
@@ -117,16 +117,16 @@ if($acao=="inc"){
 			unlink($arquivo);
 		}
 	}
-	// cria followup caso exclua um desenho da peça
+	// cria followup caso exclua um desenho da peÃ§a
 		$sql_emp=mysql_query("SELECT fantasia FROM empresa");
 		$res_emp=mysql_fetch_array($sql_emp);
-		mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Exclusão de Desenho da peça $npc.','O usuário $quem1 excluiu o Desenho $res[descr] da peça $npc.','$user')");
+		mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','ExclusÃ£o de Desenho da peÃ§a $npc.','O usuÃ¡rio $quem1 excluiu o Desenho $res[descr] da peÃ§a $npc.','$user')");
 	//				
 	$sql=mysql_query("DELETE FROM apqp_des WHERE id='$id'");
 	if($sql){
-		$_SESSION["mensagem"]="Desenho excluído com sucesso";
+		$_SESSION["mensagem"]="Desenho excluÃ­do com sucesso";
 	}else{
-		$_SESSION["mensagem"]="O desenho não pôde ser excluído";
+		$_SESSION["mensagem"]="O desenho nÃ£o pÃ´de ser excluÃ­do";
 	}
 }
 header("Location:apqp_des.php?id=$id$comp");

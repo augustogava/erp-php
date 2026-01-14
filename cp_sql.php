@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 if(empty($acao)) header("Location:cp.php");
 $acao=verifi($permi,$acao);
@@ -132,10 +132,10 @@ if($acao=="inc"){
 			}
 		}
 		//duplicatas fim
-		$_SESSION["mensagem"]="Conta incluÌda com sucesso";
+		$_SESSION["mensagem"]="Conta inclu√≠da com sucesso";
 		header("Location:cp.php?acao=alt&id=$conta");		
 	}else{
-		$_SESSION["mensagem"]="A conta n„o pÙde ser incluÌda";
+		$_SESSION["mensagem"]="A conta n√£o p√¥de ser inclu√≠da";
 		header("Location:cp.php");
 	}
 }elseif($acao=="alt"){
@@ -242,10 +242,10 @@ if($acao=="inc"){
 			//duplicatas fim
 			$_SESSION["mensagem"]="Conta alterada com sucesso";		
 		}else{
-			$_SESSION["mensagem"]="A conta n„o pÙde ser alterada";
+			$_SESSION["mensagem"]="A conta n√£o p√¥de ser alterada";
 		}
 	}else{
-		$_SESSION["mensagem"]="A conta n„o pÙde ser alterada";
+		$_SESSION["mensagem"]="A conta n√£o p√¥de ser alterada";
 	}
 	header("Location:cp.php?acao=alt&id=$id");
 }elseif($acao=="desf"){
@@ -262,7 +262,7 @@ if($acao=="inc"){
 			//movimentacao bancaria
 			$_SESSION["mensagem"]="Pagamento desfeito com sucesso!";
 		}else{
-			$_SESSION["mensagem"]="O pagamento n„o pÙde ser desfeito";
+			$_SESSION["mensagem"]="O pagamento n√£o p√¥de ser desfeito";
 		}
 		header("Location:cp.php?acao=alt&id=$ct");
 	}else{
@@ -274,7 +274,7 @@ if($acao=="inc"){
 		if($sql){
 			$_SESSION["mensagem"]="Conta cancelada com sucesso!";
 		}else{
-			$_SESSION["mensagem"]="A conta n„o pÙde ser cancelada";
+			$_SESSION["mensagem"]="A conta n√£o p√¥de ser cancelada";
 		}
 		header("Location:cp.php?acao=alt&id=$id");		
 	}else{
@@ -307,10 +307,10 @@ if($acao=="inc"){
 			//movimentacao bancaria
 			$_SESSION["mensagem"]="Pagamento confirmado";
 		}else{
-			$_SESSION["mensagem"]="Pagamento n„o confirmado";
+			$_SESSION["mensagem"]="Pagamento n√£o confirmado";
 		}		
 	}else{
-		$_SESSION["mensagem"]="Pagamento n„o confirmado";
+		$_SESSION["mensagem"]="Pagamento n√£o confirmado";
 	}
 	print "<script>opener.location='cp_aberto.php'; window.close();</script>";
 }elseif($acao=="ven"){
@@ -339,7 +339,7 @@ if($acao=="inc"){
 		}
 		$_SESSION["mensagem"]="Datas alteradas com sucesso";
 	}else{ 
-		$_SESSION["mensagem"]="As datas n„o puderam ser alteradas\nVerifique e tente novamente";
+		$_SESSION["mensagem"]="As datas n√£o puderam ser alteradas\nVerifique e tente novamente";
 	}
 	header("Location:cp.php?acao=alt&id=$id");
 	//ALTERA DATAS DE VENCIMENTO

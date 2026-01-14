@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 include("seguranca.php");
 if(!empty($acao)){
@@ -15,26 +15,26 @@ $val3=valor2banco($temp);
 $val4=valor2banco2($umidade);
 $val5=valor2banco($custo);
 if($acao=="incluir"){
-	$sql=mysql_query("INSERT INTO metrologia_cad (metr_tipi,metr_func_codi,metr_cad_seto,metr_cad_peri,metr_cad_vali,metr_cad_marc,metr_cad_mode,metr_cad_nser,metr_cad_emit,metr_fabr,metr_cust,metr_cad_tecr,metr_cad_enge,metr_cad_ende,metr_cad_os,metr_cad_ie,metr_cad_temp,metr_cad_umur,metr_inst,metr_loca,metr_esca1,metr_esca2,metr_rev,metr_unid,metr_dese,metr_tena,metr_usoi,metr_pote,metr_prec,metr_leit,metr_cad_obsl,metr_stat_a,metr_stat_e) VALUES ('$tip_inst','$usuario','$setor','$periodo','$validade','$marca','$modelo','$numserie','$data3','$fabricante','$val5','$tecnico','$eng','$end','$os','$ie','$val3','$val4','$instrucao','$localizacao','$val','$val2','$revisao','$unid_med','$desenho','$tensao','$data2','$potencia','$precisao','$leitura','$obs','Aguardando Aprovação','Aguardando Aprovação')") or die ("O Instrumento não pôde ser incluído!");
+	$sql=mysql_query("INSERT INTO metrologia_cad (metr_tipi,metr_func_codi,metr_cad_seto,metr_cad_peri,metr_cad_vali,metr_cad_marc,metr_cad_mode,metr_cad_nser,metr_cad_emit,metr_fabr,metr_cust,metr_cad_tecr,metr_cad_enge,metr_cad_ende,metr_cad_os,metr_cad_ie,metr_cad_temp,metr_cad_umur,metr_inst,metr_loca,metr_esca1,metr_esca2,metr_rev,metr_unid,metr_dese,metr_tena,metr_usoi,metr_pote,metr_prec,metr_leit,metr_cad_obsl,metr_stat_a,metr_stat_e) VALUES ('$tip_inst','$usuario','$setor','$periodo','$validade','$marca','$modelo','$numserie','$data3','$fabricante','$val5','$tecnico','$eng','$end','$os','$ie','$val3','$val4','$instrucao','$localizacao','$val','$val2','$revisao','$unid_med','$desenho','$tensao','$data2','$potencia','$precisao','$leitura','$obs','Aguardando AprovaÃ§Ã£o','Aguardando AprovaÃ§Ã£o')") or erp_db_fail();
 	if($sql){
-		$_SESSION["mensagem"]="Instrumento incluído com sucesso! Lembre-se de verificar a condição do instrumento na opção Alterar.";
+		$_SESSION["mensagem"]="Instrumento incluÃ­do com sucesso! Lembre-se de verificar a condiÃ§Ã£o do instrumento na opÃ§Ã£o Alterar.";
 		header("Location:metr_cali_hist.php");
 		exit;
 	}else{
-		$_SESSION["mensagem"]="O Instrumento não pôde ser incluído!";
+		$_SESSION["mensagem"]="O Instrumento nÃ£o pÃ´de ser incluÃ­do!";
 	}
 }
 
 if($acao=="alterar"){
 	$data4=data2banco (date ('d/m/Y', mktime (0, 0, 0, date('m'), date('d')+$res9['metr_cad_vali'], date('Y'))));
 
-$sql=mysql_query("UPDATE metrologia_cad SET metr_tipi='$tip_inst', metr_func_codi='$usuario', metr_cad_seto='$setor', metr_cad_peri='$periodo', metr_cad_vali='$validade', metr_cad_marc='$marca', metr_cad_mode='$modelo', metr_cad_nser='$numserie', metr_cad_emit='$data3', metr_fabr='$fabricante', metr_cust='$val5', metr_cad_tecr='$tecnico', metr_cad_enge='$eng', metr_cad_ende='$end', metr_cad_os='$os', metr_cad_ie='$ie', metr_cad_temp='$val3', metr_cad_umur='$val4', metr_esca1='$val', metr_esca2='$val2', metr_rev='$revisao', metr_unid='$unid_med', metr_inst='$instrucao', metr_loca='$localizacao', metr_dese='$desenho', metr_tena='$tensao', metr_usoi='$data2', metr_pote='$potencia', metr_prec='$precisao', metr_leit='$leitura', metr_cad_obsl='$obs' WHERE metr_cad_id='$id'") or die ("ALTERAR MORREU"); //, metr_condrec='$cond_rec'
+$sql=mysql_query("UPDATE metrologia_cad SET metr_tipi='$tip_inst', metr_func_codi='$usuario', metr_cad_seto='$setor', metr_cad_peri='$periodo', metr_cad_vali='$validade', metr_cad_marc='$marca', metr_cad_mode='$modelo', metr_cad_nser='$numserie', metr_cad_emit='$data3', metr_fabr='$fabricante', metr_cust='$val5', metr_cad_tecr='$tecnico', metr_cad_enge='$eng', metr_cad_ende='$end', metr_cad_os='$os', metr_cad_ie='$ie', metr_cad_temp='$val3', metr_cad_umur='$val4', metr_esca1='$val', metr_esca2='$val2', metr_rev='$revisao', metr_unid='$unid_med', metr_inst='$instrucao', metr_loca='$localizacao', metr_dese='$desenho', metr_tena='$tensao', metr_usoi='$data2', metr_pote='$potencia', metr_prec='$precisao', metr_leit='$leitura', metr_cad_obsl='$obs' WHERE metr_cad_id='$id'") or erp_db_fail(); //, metr_condrec='$cond_rec'
 		if($sql){
 			$_SESSION["mensagem"]="Instrumento foi alterado com sucesso!";
 			header("Location:metr_cali_hist.php");
 			exit;		
 		}else {
-			$_SESSION["mensagem"]="O Instrumento não pôde ser alterado!";
+			$_SESSION["mensagem"]="O Instrumento nÃ£o pÃ´de ser alterado!";
 			header("Location:metr_cali_hist.php");
 			exit;		
 		}
@@ -55,15 +55,15 @@ $data4=data2banco (date ('d/m/Y', mktime (0, 0, 0, date('m'), date('d')+$res9['m
 		if(empty($cond_rec)){
 		$cond_rec="Conforme";
 		}
-		$sql=mysql_query("UPDATE metrologia_cad SET metr_tipi='$tip_inst', metr_func_codi='$usuario', metr_cad_seto='$setor', metr_cad_peri='$periodo', metr_cad_vali='$validade', metr_cad_marc='$marca', metr_cad_mode='$modelo', metr_cad_nser='$numserie', metr_cad_emit='$data3', metr_fabr='$fabricante', metr_cust='$val5', metr_cad_tecr='$tecnico', metr_cad_enge='$eng', metr_cad_ende='$end', metr_cad_os='$os', metr_cad_ie='$ie', metr_cad_temp='$val3', metr_cad_umur='$val4', metr_esca1='$val', metr_esca2='$val2', metr_rev='$revisao', metr_unid='$unid_med', metr_inst='$instrucao', metr_loca='$localizacao', metr_dese='$desenho', metr_tena='$tensao', metr_usoi='$data2', metr_pote='$potencia', metr_prec='$precisao', metr_leit='$leitura', metr_cad_obsl='$obs', metr_condrec='$cond_rec' WHERE metr_cad_id='$id'") or die ("APROVAR MORREU");
+		$sql=mysql_query("UPDATE metrologia_cad SET metr_tipi='$tip_inst', metr_func_codi='$usuario', metr_cad_seto='$setor', metr_cad_peri='$periodo', metr_cad_vali='$validade', metr_cad_marc='$marca', metr_cad_mode='$modelo', metr_cad_nser='$numserie', metr_cad_emit='$data3', metr_fabr='$fabricante', metr_cust='$val5', metr_cad_tecr='$tecnico', metr_cad_enge='$eng', metr_cad_ende='$end', metr_cad_os='$os', metr_cad_ie='$ie', metr_cad_temp='$val3', metr_cad_umur='$val4', metr_esca1='$val', metr_esca2='$val2', metr_rev='$revisao', metr_unid='$unid_med', metr_inst='$instrucao', metr_loca='$localizacao', metr_dese='$desenho', metr_tena='$tensao', metr_usoi='$data2', metr_pote='$potencia', metr_prec='$precisao', metr_leit='$leitura', metr_cad_obsl='$obs', metr_condrec='$cond_rec' WHERE metr_cad_id='$id'") or erp_db_fail();
 
 		if($sql){
-			$_SESSION["mensagem"]="O Instrumento está Conforme!";
+			$_SESSION["mensagem"]="O Instrumento estÃ¡ Conforme!";
 			header("Location:metr_cali_inc.php?acao=alt&id=$id");
 //			header("Location:metr_cali_inc.php?acao=$acao&id=$id");
 			exit;		
 		}else {
-			$_SESSION["mensagem"]="A avaliação do Instrumento não pôde ser incluída!";
+			$_SESSION["mensagem"]="A avaliaÃ§Ã£o do Instrumento nÃ£o pÃ´de ser incluÃ­da!";
 		}
 	}
 }
@@ -79,13 +79,13 @@ $data4=data2banco (date ('d/m/Y', mktime (0, 0, 0, date('m'), date('d')+$res9['m
 		if(!empty($cond_rec)){
 		$cond_rec="";
 		}
-		$sql=mysql_query("UPDATE metrologia_cad SET metr_tipi='$tip_inst', metr_func_codi='$usuario', metr_cad_seto='$setor', metr_cad_peri='$periodo', metr_cad_vali='$validade', metr_cad_marc='$marca', metr_cad_mode='$modelo', metr_cad_nser='$numserie', metr_cad_emit='$data3', metr_fabr='$fabricante', metr_cust='$val5', metr_cad_tecr='$tecnico', metr_cad_enge='$eng', metr_cad_ende='$end', metr_cad_os='$os', metr_cad_ie='$ie', metr_cad_temp='$val3', metr_cad_umur='$val4', metr_esca1='$val', metr_esca2='$val2', metr_rev='$revisao', metr_unid='$unid_med', metr_inst='$instrucao', metr_loca='$localizacao', metr_dese='$desenho', metr_tena='$tensao', metr_usoi='$data2', metr_pote='$potencia', metr_prec='$precisao', metr_leit='$leitura', metr_cad_obsl='$obs', metr_condrec='$cond_rec' WHERE metr_cad_id='$id'") or die ("LIMPAR MORREU");
+		$sql=mysql_query("UPDATE metrologia_cad SET metr_tipi='$tip_inst', metr_func_codi='$usuario', metr_cad_seto='$setor', metr_cad_peri='$periodo', metr_cad_vali='$validade', metr_cad_marc='$marca', metr_cad_mode='$modelo', metr_cad_nser='$numserie', metr_cad_emit='$data3', metr_fabr='$fabricante', metr_cust='$val5', metr_cad_tecr='$tecnico', metr_cad_enge='$eng', metr_cad_ende='$end', metr_cad_os='$os', metr_cad_ie='$ie', metr_cad_temp='$val3', metr_cad_umur='$val4', metr_esca1='$val', metr_esca2='$val2', metr_rev='$revisao', metr_unid='$unid_med', metr_inst='$instrucao', metr_loca='$localizacao', metr_dese='$desenho', metr_tena='$tensao', metr_usoi='$data2', metr_pote='$potencia', metr_prec='$precisao', metr_leit='$leitura', metr_cad_obsl='$obs', metr_condrec='$cond_rec' WHERE metr_cad_id='$id'") or erp_db_fail();
 		if ($sql){
-			$_SESSION["mensagem"]="Aprovação excluída com sucesso!";
+			$_SESSION["mensagem"]="AprovaÃ§Ã£o excluÃ­da com sucesso!";
 			header("Location:metr_cali_inc.php?acao=alt&id=$id");
 			exit;
 		}else{
-			$_SESSION["mensagem"]="O Aprovação não pôde ser excluída!";
+			$_SESSION["mensagem"]="O AprovaÃ§Ã£o nÃ£o pÃ´de ser excluÃ­da!";
 		}
 	}
 }
@@ -122,7 +122,7 @@ function verifica(cad){
 		return false;
 	}
 	if(cad.usuario.value==''){
-		alert('Selecione o Nome do Usuário');
+		alert('Selecione o Nome do UsuÃ¡rio');
 		return false;
 	}
 	if(cad.setor.value==''){
@@ -131,7 +131,7 @@ function verifica(cad){
 		return false;
 	}
 	if(cad.periodo.value==''){
-		alert('Preencha o Período');
+		alert('Preencha o PerÃ­odo');
 		cad.periodo.focus();
 		return false;
 	}
@@ -151,12 +151,12 @@ function verifica(cad){
 		return false;
 	}
 	if(cad.numserie.value==''){
-		alert('Preencha o Número de Série');
+		alert('Preencha o NÃºmero de SÃ©rie');
 		cad.numserie.focus();
 		return false;
 	}
 	if(cad.emitido.value==''){
-		alert('Preencha a Data de Emissão');
+		alert('Preencha a Data de EmissÃ£o');
 		cad.emitido.focus();
 		return false;
 	}
@@ -171,7 +171,7 @@ function verifica(cad){
 		return false;
 	}
 	if(cad.tecnico.value==''){
-		alert('Preencha o Técnico');
+		alert('Preencha o TÃ©cnico');
 		cad.tecnico.focus();
 		return false;
 	}
@@ -181,7 +181,7 @@ function verifica(cad){
 		return false;
 	}
 	if(cad.end.value==''){
-		alert('Preencha o Endereço');
+		alert('Preencha o EndereÃ§o');
 		cad.end.focus();
 		return false;
 	}
@@ -206,12 +206,12 @@ function verifica(cad){
 		return false;
 	}
 	if(cad.instrucao.value==''){
-		alert('Preencha a Instrução');
+		alert('Preencha a InstruÃ§Ã£o');
 		cad.instrucao.focus();
 		return false;
 	}
 	if(cad.localizacao.value==''){
-		alert('Preencha a Localização');
+		alert('Preencha a LocalizaÃ§Ã£o');
 		cad.locarizacao.focus();
 		return false;
 	}
@@ -226,7 +226,7 @@ function verifica(cad){
 		return false;
 	}
 	if(cad.revisao.value==''){
-		alert('Preencha a Revisão');
+		alert('Preencha a RevisÃ£o');
 		cad.revisao.focus();
 		return false;
 	}
@@ -236,12 +236,12 @@ function verifica(cad){
 		return false;
 	}
 	if(cad.desenho.value==''){
-		alert('Preencha o número do Desenho');
+		alert('Preencha o nÃºmero do Desenho');
 		cad.desenho.focus();
 		return false;
 	}
 	if(cad.tensao.value==''){
-		alert('Preencha a Tensão de Alinhamento');
+		alert('Preencha a TensÃ£o de Alinhamento');
 		cad.tensao.focus();
 		return false;
 	}
@@ -251,12 +251,12 @@ function verifica(cad){
 		return false;
 	}
 	if(cad.potencia.value==''){
-		alert('Preencha a Potência');
+		alert('Preencha a PotÃªncia');
 		cad.potencia.focus();
 		return false;
 	}
 	if(cad.precisao.value==''){
-		alert('Preencha a Precisão');
+		alert('Preencha a PrecisÃ£o');
 		cad.precisao.focus();
 		return false;
 	}
@@ -301,20 +301,20 @@ function MM_openBrWindow(theURL,winName,features) { //v2.0
             <tr>
               <td width="41%"><select name="tip_inst" class="textopreto" id="tip_inst">
                 <option>Selecione</option>
-                <? $sql3=mysql_query("SELECT * FROM ins_medicao ORDER BY tipo");
+                <?php $sql3=mysql_query("SELECT * FROM ins_medicao ORDER BY tipo");
 			  while($res3=mysql_fetch_array($sql3)){
 			  ?>
-                <option value="<? print $res3["id"];?>" <? if($res3["id"]==$res9["metr_tipi"]){ print "selected"; } ?>><? print $res3["tipo"]; ?></option>
-                <? } ?>
+                <option value="<?php print $res3["id"];?>" <?php if($res3["id"]==$res9["metr_tipi"]){ print "selected"; } ?>><?php print $res3["tipo"]; ?></option>
+                <?php } ?>
               </select></td>
               <td width="26%" class="textobold"><div align="left">Usu&aacute;rio:</div></td>
               <td width="33%" class="textobold"><select name="usuario" class="textopreto" id="usuario">
                 <option>Selecione</option>
-                <? $sql4=mysql_query("SELECT * FROM funcionarios ORDER BY nome");
+                <?php $sql4=mysql_query("SELECT * FROM funcionarios ORDER BY nome");
 			  while($res4=mysql_fetch_array($sql4)){
 			  ?>
-                <option value="<? print $res4["id"];?>" <? if($res4["id"]==$res9["metr_func_codi"]){ print "selected"; } ?>><? print $res4["nome"]; ?> </option>
-                <? } ?>
+                <option value="<?php print $res4["id"];?>" <?php if($res4["id"]==$res9["metr_func_codi"]){ print "selected"; } ?>><?php print $res4["nome"]; ?> </option>
+                <?php } ?>
               </select></td>
             </tr>
           </table></td>
@@ -325,29 +325,29 @@ function MM_openBrWindow(theURL,winName,features) { //v2.0
               <tr>
                 <td width="43%"><select name="setor" class="textopreto" id="setor">
                   <option>Selecione</option>
-                  <? 
+                  <?php 
 				  	 $sql5=mysql_query("SELECT * FROM maodeobra_setor ORDER BY sigla");
 				     while($res5=mysql_fetch_array($sql5)){
 			  	  ?>
-                  <option value="<? print $res5["id"];?>" <? if($res5["id"]==$res9["metr_cad_seto"]){ print "selected"; } ?>> <? print $res5["sigla"]; ?></option>
-                  	<? } ?>
+                  <option value="<?php print $res5["id"];?>" <?php if($res5["id"]==$res9["metr_cad_seto"]){ print "selected"; } ?>> <?php print $res5["sigla"]; ?></option>
+                  	<?php } ?>
                 </select></td>
                 <td width="28%" class="textobold"><div align="left">Per&iacute;odo:</div></td>
-                <td width="29%" class="textobold"><input name="periodo" type="text" class="formulario" id="periodo" size="30" maxlength="10" value="<?= $res9["metr_cad_peri"];?>"></td>
+                <td width="29%" class="textobold"><input name="periodo" type="text" class="formulario" id="periodo" size="30" maxlength="10" value="<?php echo  $res9["metr_cad_peri"];?>"></td>
                 </tr>
           </table></td>
         </tr>
         <tr>
           <td class="textobold">Validade:</td>
-	          <td class="textobold"><input name="validade" type="text" class="formulario" id="validade" size="15" maxlength="10" value="<?= $res9["metr_cad_vali"];?>"></td>
+	          <td class="textobold"><input name="validade" type="text" class="formulario" id="validade" size="15" maxlength="10" value="<?php echo  $res9["metr_cad_vali"];?>"></td>
         </tr>
         <tr>
           <td class="textobold">Marca:</td>
           <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
             <tr>
-              <td width="43%"><input name="marca" type="text" class="formulario" id="marca" size="15" maxlength="15" value="<?= $res9["metr_cad_marc"];?>"></td>
+              <td width="43%"><input name="marca" type="text" class="formulario" id="marca" size="15" maxlength="15" value="<?php echo  $res9["metr_cad_marc"];?>"></td>
               <td width="28%" class="textobold">Modelo:</td>
-              <td width="29%"><input name="modelo" type="text" class="formulario" id="modelo" size="30" maxlength="20" value="<?= $res9["metr_cad_mode"];?>"></td>
+              <td width="29%"><input name="modelo" type="text" class="formulario" id="modelo" size="30" maxlength="20" value="<?php echo  $res9["metr_cad_mode"];?>"></td>
             </tr>
           </table></td>
           </tr>
@@ -356,58 +356,58 @@ function MM_openBrWindow(theURL,winName,features) { //v2.0
           <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
             <tr>
               <td width="41%"><span class="textobold">
-                <input name="numserie" type="text" class="formulario" id="numserie" size="15" maxlength="10" onKeyPress="return validanum(this, event)" value="<?= $res9["metr_cad_nser"];?>">
+                <input name="numserie" type="text" class="formulario" id="numserie" size="15" maxlength="10" onKeyPress="return validanum(this, event)" value="<?php echo  $res9["metr_cad_nser"];?>">
               </span></td>
               <td width="26%" class="textobold">Emitido em: </td>
               <td width="33%"><span class="textobold">
-                <input name="emitido" type="text" class="formulario" id="emitido" size="10" maxlength="10" onKeyPress="return validanum(this, event)" onKeyUp="mdata(this)" value="<?= banco2data($res9["metr_cad_emit"]);?>">&nbsp;<a href="#" class="" onClick="window.open('agenda_pop.php?window_position=metr_cali_inc_1','','scrollbars=no,width=155,height=138');"><img src="imagens/icon14_cal.gif" width="14" height="14" border="0"></a>
+                <input name="emitido" type="text" class="formulario" id="emitido" size="10" maxlength="10" onKeyPress="return validanum(this, event)" onKeyUp="mdata(this)" value="<?php echo  banco2data($res9["metr_cad_emit"]);?>">&nbsp;<a href="#" class="" onClick="window.open('agenda_pop.php?window_position=metr_cali_inc_1','','scrollbars=no,width=155,height=138');"><img src="imagens/icon14_cal.gif" width="14" height="14" border="0"></a>
               </span></td>
             </tr>
           </table></td>
           </tr>
         <tr>
           <td class="textobold">Fabricante:</td>
-          <td><input name="fabricante" type="text" class="formulario" id="fabricante" size="50" maxlength="50" value="<?= $res9["metr_fabr"];?>"></td>
+          <td><input name="fabricante" type="text" class="formulario" id="fabricante" size="50" maxlength="50" value="<?php echo  $res9["metr_fabr"];?>"></td>
         </tr>
         <tr>
           <td class="textobold">Custo R$: </td>
-          <td><input name="custo" type="text" class="formulario" id="custo" size="15" maxlength="15" onKeyDown="formataMoeda(this,retornaKeyCode(event))" onKeyUp="formataMoeda(this,retornaKeyCode(event))" value="<?= banco2valor($res9["metr_cust"]);?>"></td>
+          <td><input name="custo" type="text" class="formulario" id="custo" size="15" maxlength="15" onKeyDown="formataMoeda(this,retornaKeyCode(event))" onKeyUp="formataMoeda(this,retornaKeyCode(event))" value="<?php echo  banco2valor($res9["metr_cust"]);?>"></td>
         </tr>
         <tr>
           <td class="textobold">T&eacute;cnico:</td>
-          <td><input name="tecnico" type="text" class="formulario" id="tecnico" size="50" maxlength="50" value="<?= $res9["metr_cad_tecr"];?>"></td>
+          <td><input name="tecnico" type="text" class="formulario" id="tecnico" size="50" maxlength="50" value="<?php echo  $res9["metr_cad_tecr"];?>"></td>
         </tr>
         <tr>
           <td class="textobold">Engenheiro:</td>
-          <td><input name="eng" type="text" class="formulario" id="eng" size="50" maxlength="50" value="<?= $res9["metr_cad_enge"];?>"></td>
+          <td><input name="eng" type="text" class="formulario" id="eng" size="50" maxlength="50" value="<?php echo  $res9["metr_cad_enge"];?>"></td>
           </tr>
         <tr>
           <td class="textobold">Endere&ccedil;o:</td>
-          <td><input name="end" type="text" class="formulario" id="end" size="50" maxlength="50" value="<?= $res9["metr_cad_ende"];?>"></td>
+          <td><input name="end" type="text" class="formulario" id="end" size="50" maxlength="50" value="<?php echo  $res9["metr_cad_ende"];?>"></td>
           </tr>
         <tr>
           <td class="textobold">OS:</td>
           <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
             <tr class="textobold">
-              <td width="16%"><input name="os" type="text" class="formulario" id="os" size="5" maxlength="5" onKeyPress="return validanum(this, event)" value="<?= $res9["metr_cad_os"];?>">                </td>
+              <td width="16%"><input name="os" type="text" class="formulario" id="os" size="5" maxlength="5" onKeyPress="return validanum(this, event)" value="<?php echo  $res9["metr_cad_os"];?>">                </td>
               <td width="4%">I/E:</td>
-              <td width="16%"><input name="ie" type="text" class="formulario" id="ie" size="5" maxlength="5" onKeyPress="return validanum(this, event)" value="<?= $res9["metr_cad_ie"];?>"></td>
+              <td width="16%"><input name="ie" type="text" class="formulario" id="ie" size="5" maxlength="5" onKeyPress="return validanum(this, event)" value="<?php echo  $res9["metr_cad_ie"];?>"></td>
               <td width="19%">Temperatura &ordm;C: </td>
-              <td width="17%"><input name="temp" type="text" class="formulario" id="temp" size="7" maxlength="10" onKeyDown="formataMoeda(this,retornaKeyCode(event))" onKeyUp="formataMoeda(this,retornaKeyCode(event))" value="<? print banco2valor($res9["metr_cad_temp"]);?>"></td>
+              <td width="17%"><input name="temp" type="text" class="formulario" id="temp" size="7" maxlength="10" onKeyDown="formataMoeda(this,retornaKeyCode(event))" onKeyUp="formataMoeda(this,retornaKeyCode(event))" value="<?php print banco2valor($res9["metr_cad_temp"]);?>"></td>
               <td width="18%">Umidade UR %: </td>
-              <td width="10%"><input name="umidade" type="text" class="formulario" id="umidade" size="7" maxlength="10" onKeyDown="formataMoeda3(this,retornaKeyCode(event))" onKeyUp="formataMoeda3(this,retornaKeyCode(event))" value="<? print banco2valor2($res9["metr_cad_umur"]);?>"></td>
+              <td width="10%"><input name="umidade" type="text" class="formulario" id="umidade" size="7" maxlength="10" onKeyDown="formataMoeda3(this,retornaKeyCode(event))" onKeyUp="formataMoeda3(this,retornaKeyCode(event))" value="<?php print banco2valor2($res9["metr_cad_umur"]);?>"></td>
             </tr>
           </table></td>
           </tr>
         <tr>
           <td class="textobold">Instru&ccedil;&atilde;o:</td>
-          <td><input name="instrucao" type="text" class="formularioselect" id="instrucao" size="90" maxlength="90" value="<?= $res9["metr_inst"];?>"></td>
+          <td><input name="instrucao" type="text" class="formularioselect" id="instrucao" size="90" maxlength="90" value="<?php echo  $res9["metr_inst"];?>"></td>
         </tr>
         <tr>
           <td class="textobold">Localiza&ccedil;&atilde;o:</td>
           <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
             <tr class="textobold">
-              <td width="29%"><input name="localizacao" type="text" class="formulario" id="localizacao" size="30" maxlength="30" value="<?= $res9["metr_loca"];?>"></td>
+              <td width="29%"><input name="localizacao" type="text" class="formulario" id="localizacao" size="30" maxlength="30" value="<?php echo  $res9["metr_loca"];?>"></td>
               </tr>
           </table></td>
         </tr>
@@ -415,19 +415,19 @@ function MM_openBrWindow(theURL,winName,features) { //v2.0
           <td class="textobold">Escala 1:</td>
           <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
             <tr>
-              <td width="17%" class="textobold"><input name="escala1" type="text" class="formulario" id="escala1" size="10" maxlength="15" onKeyDown="formataMoeda3(this,retornaKeyCode(event))" onKeyUp="formataMoeda3(this,retornaKeyCode(event))" value="<?= $res9["metr_esca1"];?>"></td>
+              <td width="17%" class="textobold"><input name="escala1" type="text" class="formulario" id="escala1" size="10" maxlength="15" onKeyDown="formataMoeda3(this,retornaKeyCode(event))" onKeyUp="formataMoeda3(this,retornaKeyCode(event))" value="<?php echo  $res9["metr_esca1"];?>"></td>
               <td width="11%" class="textobold">Escala 2:</td>
-              <td width="17%" class="textobold"><input name="escala2" type="text" class="formulario" id="escala2" size="10" maxlength="15" onKeyDown="formataMoeda3(this,retornaKeyCode(event))" onKeyUp="formataMoeda3(this,retornaKeyCode(event))" value="<?= $res9["metr_esca2"];?>"></td>
+              <td width="17%" class="textobold"><input name="escala2" type="text" class="formulario" id="escala2" size="10" maxlength="15" onKeyDown="formataMoeda3(this,retornaKeyCode(event))" onKeyUp="formataMoeda3(this,retornaKeyCode(event))" value="<?php echo  $res9["metr_esca2"];?>"></td>
               <td width="10%" class="textobold">Revis&atilde;o:</td>
-              <td width="13%" class="textobold"><input name="revisao" type="text" class="formulario" id="revisao" size="5" maxlength="5" onKeyPress="return validanum(this, event)" value="<?= $res9["metr_rev"];?>"></td>
+              <td width="13%" class="textobold"><input name="revisao" type="text" class="formulario" id="revisao" size="5" maxlength="5" onKeyPress="return validanum(this, event)" value="<?php echo  $res9["metr_rev"];?>"></td>
               <td width="16%" class="textobold">Unid. Medida: </td>
               <td width="16%" class="textobold"><select name="unid_med" class="textopreto" id="unid_med">
                 <option>Selecione</option>
-                <? $sql8=mysql_query("SELECT * FROM unidades ORDER BY apelido");
+                <?php $sql8=mysql_query("SELECT * FROM unidades ORDER BY apelido");
 			  while($res8=mysql_fetch_array($sql8)){
 			  ?>
-                <option value="<? print $res8["id"];?>" <? if($res8["id"]==$res9["metr_unid"]){ print "selected"; } ?>> <? print $res8["apelido"]; ?></option>
-                <? } ?>
+                <option value="<?php print $res8["id"];?>" <?php if($res8["id"]==$res9["metr_unid"]){ print "selected"; } ?>> <?php print $res8["apelido"]; ?></option>
+                <?php } ?>
               </select>            </tr>
           </table></td>
         </tr>
@@ -435,9 +435,9 @@ function MM_openBrWindow(theURL,winName,features) { //v2.0
           <td class="textobold">Desenho:</td>
           <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
             <tr class="textobold">
-              <td width="43%"><input name="desenho" type="text" class="formulario" id="desenho" size="30" maxlength="30" value="<?= $res9["metr_dese"];?>"></td>
+              <td width="43%"><input name="desenho" type="text" class="formulario" id="desenho" size="30" maxlength="30" value="<?php echo  $res9["metr_dese"];?>"></td>
               <td width="28%">Tens&atilde;o Alinh.: </td>
-              <td width="29%"><input name="tensao" type="text" class="formulario" id="tensao" size="30" maxlength="30" value="<?= $res9["metr_tena"];?>"></td>
+              <td width="29%"><input name="tensao" type="text" class="formulario" id="tensao" size="30" maxlength="30" value="<?php echo  $res9["metr_tena"];?>"></td>
             </tr>
           </table></td>
         </tr>
@@ -445,9 +445,9 @@ function MM_openBrWindow(theURL,winName,features) { //v2.0
           <td class="textobold">Data uso inicial: </td>
           <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
             <tr class="textobold">
-              <td width="43%"><input name="data_usoi" type="text" class="formulario" id="data_usoi" size="10" maxlength="10" onKeyPress="return validanum(this, event)" onKeyUp="mdata(this)" value="<?= banco2data($res9["metr_usoi"]);?>">&nbsp;<a href="#" class="" onClick="window.open('agenda_pop.php?window_position=metr_cali_inc_2','','scrollbars=no,width=155,height=138');"><img src="imagens/icon14_cal.gif" width="14" height="14" border="0"></a></td>
+              <td width="43%"><input name="data_usoi" type="text" class="formulario" id="data_usoi" size="10" maxlength="10" onKeyPress="return validanum(this, event)" onKeyUp="mdata(this)" value="<?php echo  banco2data($res9["metr_usoi"]);?>">&nbsp;<a href="#" class="" onClick="window.open('agenda_pop.php?window_position=metr_cali_inc_2','','scrollbars=no,width=155,height=138');"><img src="imagens/icon14_cal.gif" width="14" height="14" border="0"></a></td>
               <td width="28%">Pot&ecirc;ncia:</td>
-              <td width="29%"><input name="potencia" type="text" class="formulario" id="potencia" size="30" maxlength="30" value="<?= $res9["metr_pote"];?>"></td>
+              <td width="29%"><input name="potencia" type="text" class="formulario" id="potencia" size="30" maxlength="30" value="<?php echo  $res9["metr_pote"];?>"></td>
             </tr>
           </table></td>
         </tr>
@@ -455,44 +455,44 @@ function MM_openBrWindow(theURL,winName,features) { //v2.0
           <td class="textobold">Precis&atilde;o</td>
           <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
             <tr>
-              <td width="43%" class="textobold"><input name="precisao" type="text" class="formulario" id="precisao" size="30" maxlength="30" value="<?= $res9["metr_prec"];?>"></td>
+              <td width="43%" class="textobold"><input name="precisao" type="text" class="formulario" id="precisao" size="30" maxlength="30" value="<?php echo  $res9["metr_prec"];?>"></td>
               <td width="28%" class="textobold">Leitura:</td>
-              <td width="29%" class="textobold"><input name="leitura" type="text" class="formulario" id="leitura" size="30" maxlength="30" value="<?= $res9["metr_leit"];?>"></td>
+              <td width="29%" class="textobold"><input name="leitura" type="text" class="formulario" id="leitura" size="30" maxlength="30" value="<?php echo  $res9["metr_leit"];?>"></td>
             </tr>
           </table></td>
         </tr>
         <tr>
           <td class="textobold">Obs Lin.:</td>
-          <td class="textobold"><textarea name="obs" rows="4" wrap="VIRTUAL" class="formularioselect" id="obs" onFocus="enterativa=0;" onBlur="enterativa=1;" value=""><? print $res9["metr_cad_obsl"];?></textarea></td>
+          <td class="textobold"><textarea name="obs" rows="4" wrap="VIRTUAL" class="formularioselect" id="obs" onFocus="enterativa=0;" onBlur="enterativa=1;" value=""><?php print $res9["metr_cad_obsl"];?></textarea></td>
           </tr>
         <tr>
           <td colspan="2" class="textobold"><table width="100%" border="0" cellspacing="0" cellpadding="0">
             <tr>
               <td width="29%" class="textobold">Condi&ccedil;&atilde;o do Recebimento: </td>
-              <td width="47%"><input name="cond_rec" type="text" class="formulario" id="cond_rec" size="50" maxlength="50" value="<?= $res9["metr_condrec"];?>"></td>
-              <td width="12%"><? 
+              <td width="47%"><input name="cond_rec" type="text" class="formulario" id="cond_rec" size="50" maxlength="50" value="<?php echo  $res9["metr_condrec"];?>"></td>
+              <td width="12%"><?php 
 			  if(empty($res9["metr_condrec"])){
-					$java_apr="if(confirm('A condição do recebimento do Instrumento está comforme?')) {form1.acao.value='aprovar';form1.submit();}else{ return false; }";
+					$java_apr="if(confirm('A condiÃ§Ã£o do recebimento do Instrumento estÃ¡ comforme?')) {form1.acao.value='aprovar';form1.submit();}else{ return false; }";
 				  }
 			  else{
 					$java_apr="window.alert('Clique em Limpar primeiro');return false;";
 				  }		
 			  
 			  if(!empty($res9["metr_condrec"])){
-					$java_limp="if(confirm('Você deseja realmente excluir a Condição de Recebimento?')) { form1.acao.value='limpar';form1.submit();}else{ return false; }";
+					$java_limp="if(confirm('VocÃª deseja realmente excluir a CondiÃ§Ã£o de Recebimento?')) { form1.acao.value='limpar';form1.submit();}else{ return false; }";
 				}
 			  else{
-					$java_limp="window.alert('É necessário que a Conformidade do Instrumento esteja aprovada para que possa ser excluída.');return false;";
+					$java_limp="window.alert('Ã‰ necessÃ¡rio que a Conformidade do Instrumento esteja aprovada para que possa ser excluÃ­da.');return false;";
 			  }		
 
 			  ?>
-				  <? if (!($acao=="vis")){?>
+				  <?php if (!($acao=="vis")){?>
 				  <label>
-				  <input name="botao_apr" type="submit" class="microtxt" id="botao_apr" value="Aprovar" onClick="<?= $java_apr; ?>" <? if ($acao=="inc"){?> disabled <? } ?>>
+				  <input name="botao_apr" type="submit" class="microtxt" id="botao_apr" value="Aprovar" onClick="<?php echo  $java_apr; ?>" <?php if ($acao=="inc"){?> disabled <?php } ?>>
 				  </label></td>
               <td width="12%">
-			  <input name="limpar" type="submit" class="microtxt" id="limpar" onClick="<?= $java_limp; ?>" value="Limpar" <? if ($acao=="inc"){?> disabled <? } ?> >
-			  <? } ?></td>
+			  <input name="limpar" type="submit" class="microtxt" id="limpar" onClick="<?php echo  $java_limp; ?>" value="Limpar" <?php if ($acao=="inc"){?> disabled <?php } ?> >
+			  <?php } ?></td>
                 </tr>
           </table></td>
         </tr>
@@ -504,20 +504,20 @@ function MM_openBrWindow(theURL,winName,features) { //v2.0
             <input name="button12" type="button" class="microtxt" value="Voltar" onClick="window.location='metr_cali_hist.php';">
             &nbsp;&nbsp;&nbsp;&nbsp;
 			
-			<? if (!($acao=="vis")){
+			<?php if (!($acao=="vis")){
 				
 				if (($acao=="alt") || ($acao=="aprovar")){ ?>
 				<input name="Alterar" type="submit" class="microtxt" value="Alterar">
-				<? } ?>
+				<?php } ?>
 			
-				<? if($acao=="inc"){ ?> 
+				<?php if($acao=="inc"){ ?> 
 				<input name="Incluir" type="submit" class="microtxt" id="Incluir" value="Incluir">
-				<? } ?>
+				<?php } ?>
 				
-		<? } ?>
-            <input type="hidden" name="acao" id="acao2"	value="<? if($acao=="alt"){ print "alterar"; } else if($acao=="inc"){ print "incluir"; } else if($acao=="limp"){ print "limpar"; } else { print "visualizar"; }?>">
-            <input type="hidden" name="id" value= <? print $id;?>>
-			<? 
+		<?php } ?>
+            <input type="hidden" name="acao" id="acao2"	value="<?php if($acao=="alt"){ print "alterar"; } else if($acao=="inc"){ print "incluir"; } else if($acao=="limp"){ print "limpar"; } else { print "visualizar"; }?>">
+            <input type="hidden" name="id" value= <?php print $id;?>>
+			<?php 
 			mysql_query("UPDATE metrologia_cad SET metr_tipi_apelido='$res2[tipo]', metr_tipi_nome='$res2[descricao]', metr_func_nome='$res10[nome]', metr_seto_sigla='$res6[sigla]', metr_unid_nome='$res7[apelido]' WHERE metr_cad_id='$id'");
 			?></td>
           </tr>
@@ -528,4 +528,4 @@ function MM_openBrWindow(theURL,winName,features) { //v2.0
 <blockquote>&nbsp;</blockquote>
 </body>
 </html>
-<? include("mensagem.php"); ?>
+<?php include("mensagem.php"); ?>

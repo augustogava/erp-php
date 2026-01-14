@@ -1,4 +1,4 @@
-]<?
+]<?php
 include("conecta.php");
 include("seguranca.php");
 $bd=new set_bd;
@@ -15,7 +15,8 @@ $res=mysql_fetch_array($sql);
 <html>
 <head>
 <title>CyberManager</title>
-<meta http-equiv="Content-Type" content="text/html; UTF-8">
+<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="style.css" rel="stylesheet" type="text/css">
 <script src="scripts.js"></script>
 <script src="mascaras.js"></script>
@@ -41,19 +42,19 @@ $res=mysql_fetch_array($sql);
                 <td class="menu">Endere&ccedil;o Entrega</td>
               </tr>
               <tr>
-                <td><strong>Endere&ccedil;o:</strong> <? print $res["endereco"]." ".$res["numero"]; ?></td>
+                <td><strong>Endere&ccedil;o:</strong> <?php print $res["endereco"]." ".$res["numero"]; ?></td>
               </tr>
               <tr>
-                <td><strong>Bairro:</strong> <? print $res["bairro"]; ?></td>
+                <td><strong>Bairro:</strong> <?php print $res["bairro"]; ?></td>
               </tr>
               <tr>
-                <td><strong>CEP:</strong> <? print $res["cep"]; ?></td>
+                <td><strong>CEP:</strong> <?php print $res["cep"]; ?></td>
               </tr>
               <tr>
-                <td><strong>Cidade:</strong> <? print $res["cidade"]; ?></td>
+                <td><strong>Cidade:</strong> <?php print $res["cidade"]; ?></td>
               </tr>
               <tr>
-                <td><strong>Estado:</strong> <? $bd->pega_nome_bd("estado","nome",$res["estado"]);  ?></td>
+                <td><strong>Estado:</strong> <?php $bd->pega_nome_bd("estado","nome",$res["estado"]);  ?></td>
               </tr>
               <tr>
                 <td>&nbsp;</td>
@@ -66,19 +67,19 @@ $res=mysql_fetch_array($sql);
                 <td class="menu">Endere&ccedil;o Instala&ccedil;&atilde;o</td>
               </tr>
               <tr>
-                <td><strong>Endere&ccedil;o:</strong> <? print $res["endereco_ins"]; ?></td>
+                <td><strong>Endere&ccedil;o:</strong> <?php print $res["endereco_ins"]; ?></td>
               </tr>
               <tr>
-                <td><strong>Bairro:</strong> <? print $res["bairro_ins"]; ?></td>
+                <td><strong>Bairro:</strong> <?php print $res["bairro_ins"]; ?></td>
               </tr>
               <tr>
-                <td><strong>CEP:</strong> <? print $res["cep_ins"]; ?></td>
+                <td><strong>CEP:</strong> <?php print $res["cep_ins"]; ?></td>
               </tr>
               <tr>
-                <td><strong>Cidade:</strong> <? print $res["cidade_ins"]; ?></td>
+                <td><strong>Cidade:</strong> <?php print $res["cidade_ins"]; ?></td>
               </tr>
               <tr>
-                <td><strong>Estado:</strong> <? $bd->pega_nome_bd("estado","nome",$res["estado_ins"]); ?></td>
+                <td><strong>Estado:</strong> <?php $bd->pega_nome_bd("estado","nome",$res["estado_ins"]); ?></td>
               </tr>
             </table></td>
           </tr>
@@ -89,14 +90,14 @@ $res=mysql_fetch_array($sql);
             <td width="639" align="left" bgcolor="#FFFFFF">
 			
 			<table width="600" border="0" cellpadding="0" cellspacing="1" bgcolor="#003366" class="texto">
-			<?
+			<?php
 			$sql=mysql_query("SELECT * FROM e_compra WHERE cliente='$cli' ORDER By id DESC");
 			if(!mysql_num_rows($sql)){
 			?>
 				 <tr bgcolor="#FFFFFF" class="texto">
                     <td colspan="8" align="center" class="textobold">NENHUM PEDIDO</td>
                   </tr>
-			<? }else{ ?>	  
+			<?php }else{ ?>	  
                   <tr class="textoboldbranco">
                     <td width="40" align="center" class="menuesq">Pedido</td>
                     <td width="70" align="center" class="menuesq"><strong>Data</strong></td>
@@ -107,7 +108,7 @@ $res=mysql_fetch_array($sql);
                     <td width="72" align="left" class="menuesq">Data Nf </td>
                     <td width="75" align="left" class="menuesq"><strong>Nota Fiscal </strong></td>
                   </tr>
-				<? 
+				<?php 
 				while($res=mysql_fetch_array($sql)){
 					$sqlp=mysql_query("SELECT * FROM prodserv_sep WHERE compra='$res[id]'");
 					$resp=mysql_fetch_array($sqlp);
@@ -130,7 +131,7 @@ $res=mysql_fetch_array($sql);
 								$st="Coletado";
 								break;
 							case "4":
-								$st="Em Separação";
+								$st="Em SeparaÃ§Ã£o";
 								break;
 							case "5":
 								$st="Em Produ&ccedil;&atilde;o";
@@ -150,16 +151,16 @@ $res=mysql_fetch_array($sql);
 						}
 				 ?>
                   <tr bgcolor="#FFFFFF" class="texto" onMouseover="changeto('#CCCCCC')" onMouseout="changeback('#FFFFFF')">
-                    <td align="center"><span class="texto_preto"><? print $res["pedido"] ?></span></td>
-                    <td align="center">&nbsp;<? print banco2data($resp["emissao"]); ?></td>
-                    <td align="center"><span class="texto_preto"><? print $st; ?></span></td>
-                    <td align="center"><span class="texto_preto"><? print banco2data($resp["previsao"]); ?> </span></td>
-                    <td align="left" > &nbsp;<span class="texto_preto"><? $bd->pega_nome_bd("transportadora","nome",$res2["transportadora"],$idc="id"); ?></span></td>
-                    <td align="center"><span class="texto_preto"><? print $resp["coleta"]; ?></span></td>
-                    <td align="left" ><span class="texto_preto"><? print banco2data($res3["emissao"]); ?></span></td>
-                    <td align="left" >&nbsp;<span class="texto_preto"><? print $res3["numero"]; ?></span>&nbsp;</td>
+                    <td align="center"><span class="texto_preto"><?php print $res["pedido"] ?></span></td>
+                    <td align="center">&nbsp;<?php print banco2data($resp["emissao"]); ?></td>
+                    <td align="center"><span class="texto_preto"><?php print $st; ?></span></td>
+                    <td align="center"><span class="texto_preto"><?php print banco2data($resp["previsao"]); ?> </span></td>
+                    <td align="left" > &nbsp;<span class="texto_preto"><?php $bd->pega_nome_bd("transportadora","nome",$res2["transportadora"],$idc="id"); ?></span></td>
+                    <td align="center"><span class="texto_preto"><?php print $resp["coleta"]; ?></span></td>
+                    <td align="left" ><span class="texto_preto"><?php print banco2data($res3["emissao"]); ?></span></td>
+                    <td align="left" >&nbsp;<span class="texto_preto"><?php print $res3["numero"]; ?></span>&nbsp;</td>
                   </tr>
-				  <? } } } ?>
+				  <?php } } } ?>
               </table>			    </td>
           </tr>
         </table>
@@ -171,4 +172,4 @@ $res=mysql_fetch_array($sql);
 </table>
 </body>
 </html>
-<? include("mensagem.php"); ?>
+<?php include("mensagem.php"); ?>

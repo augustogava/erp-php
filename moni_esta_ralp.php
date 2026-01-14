@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 include("seguranca.php");
 
@@ -13,7 +13,8 @@ if(!empty($acao)){
 <html>
 <head>
 <title>CyberManager</title>
-<meta http-equiv="Content-Type" content="text/html; UTF-8">
+<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="style.css" rel="stylesheet" type="text/css">
 <script src="scripts.js"></script>
 <script src="mascaras.js"></script>
@@ -55,11 +56,11 @@ if(!empty($acao)){
                         <label>
                         <select name="pagina" class="textobold" id="pagina">
                           <option value="">Selecione</option>
-						    <? $sql=mysql_query("SELECT DISTINCT (pagina) AS pagina, local FROM log ORDER BY local");
+						    <?php $sql=mysql_query("SELECT DISTINCT (pagina) AS pagina, local FROM log ORDER BY local");
 							   while($res=mysql_fetch_array($sql)){ 
 							?>				  
-					    <option value= <? print $res[pagina];?> > <?  print $res[local]; ?></option> 
-						<? } ?>
+					    <option value= <?php print $res[pagina];?> > <?php  print $res[local]; ?></option> 
+						<?php } ?>
                         </select>
                         </label>
                         <br>
@@ -95,10 +96,10 @@ if(!empty($acao)){
         </tr>
       </table></td> 
   </tr>
-  <? if($wpaginar){ ?>
-<? } ?>
+  <?php if($wpaginar){ ?>
+<?php } ?>
 </table>
 </body>
 </html>
 
-<? include("mensagem.php"); ?>
+<?php include("mensagem.php"); ?>

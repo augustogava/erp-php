@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 
 if($acao=="ir"){

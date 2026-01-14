@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 if(empty($acao)) header("Location:bancos.php");
 $acao=verifi($permi,$acao);
@@ -18,10 +18,10 @@ if($acao=="inc"){
 		$id=$res["id"];
 		$hist="Abertura da conta $apelido $agencia-$conta";
 		$sql=mysql_query("INSERT INTO bancos_lan (bco,data,hist,val_ent,val_sai,operacao,documento,saldo_ant) VALUES ('$id',NOW(),'$hist','$inicial','0','2','','0')");
-		$_SESSION["mensagem"]="Banco incluído com sucesso";
+		$_SESSION["mensagem"]="Banco incluÃ­do com sucesso";
 		header("Location:bancos.php?acao=alt&id=$id");	
 	}else{
-		$_SESSION["mensagem"]="O banco não pôde ser incluído";
+		$_SESSION["mensagem"]="O banco nÃ£o pÃ´de ser incluÃ­do";
 		header("Location:bancos.php?acao=inc");
 	}
 }elseif($acao=="alt"){
@@ -31,16 +31,16 @@ if($acao=="inc"){
 	if($sql){
 		$_SESSION["mensagem"]="Banco alterado com sucesso";
 	}else{
-		$_SESSION["mensagem"]="O banco não pôde ser alterado";
+		$_SESSION["mensagem"]="O banco nÃ£o pÃ´de ser alterado";
 	}
 	header("Location:bancos.php?acao=alt&id=$id");
 }elseif($acao=="exc"){
 	$sql=mysql_query("DELETE FROM bancos WHERE id='$id'");
-	//excluir lançamentos
+	//excluir lanÃ§amentos
 	if($sql){
-		$_SESSION["mensagem"]="Banco excluído com sucesso";
+		$_SESSION["mensagem"]="Banco excluÃ­do com sucesso";
 	}else{
-		$_SESSION["mensagem"]="O banco não pôde ser excluído";
+		$_SESSION["mensagem"]="O banco nÃ£o pÃ´de ser excluÃ­do";
 	}
 	header("Location:bancos.php");
 }elseif($acao=="lanc"){
@@ -61,14 +61,14 @@ if($acao=="inc"){
 		if($sql){
 			$saldo=$saldo_ant-$val_sai+$val_ent;
 			$sql=mysql_query("UPDATE bancos SET saldo='$saldo' WHERE id='$bco'");
-			$_SESSION["mensagem"]="Lançamento efetuado com sucesso";
+			$_SESSION["mensagem"]="LanÃ§amento efetuado com sucesso";
 			header("Location:bancos_lan.php?setbco=$bco");
 			exit;
 		}else{
-			$_SESSION["mensagem"]="O lançamento não pôde ser efetuado";
+			$_SESSION["mensagem"]="O lanÃ§amento nÃ£o pÃ´de ser efetuado";
 		}
 	}else{
-		$_SESSION["mensagem"]="O lançamento não pôde ser efetuado";
+		$_SESSION["mensagem"]="O lanÃ§amento nÃ£o pÃ´de ser efetuado";
 	}
 	header("Location:bancos.php");
 }

@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 $apqp=new set_apqp;
 $acao=verifi($permi,$acao);
@@ -15,7 +15,7 @@ $res_emp=mysql_fetch_array($sql_emp);
 //
 
 if(!empty($acao)){
-	$loc="APQP - Sum·rio e AprovaÁ„o";
+	$loc="APQP - Sum√°rio e Aprova√ß√£o";
 	$pagina=$_SERVER['SCRIPT_FILENAME'];
 	include("log.php");
 }
@@ -36,50 +36,50 @@ if($acao=="s1"){
 
 	$data=data2banco($data);
 	$pca_dt=data2banco($pca_dt);
-	$sql=mysql_query("UPDATE apqp_sum SET data='$data',ppk_req='$ppk_req',ppk_ace='$ppk_ace',ppk_pen='$ppk_pen',pca='$pca',pca_dt='$pca_dt',dim_amo='$dim_amo',dim_car='$dim_car',dim_ace='$dim_ace',dim_pen='$dim_pen',vis_amo='$vis_amo',vis_car='$vis_car',vis_ace='$vis_ace',vis_pen='$vis_pen',lab_amo='$lab_amo',lab_car='$lab_car',lab_ace='$lab_ace',lab_pen='$lab_pen',des_amo='$des_amo',des_car='$des_car',des_ace='$des_ace',des_pen='$des_pen' WHERE peca='$pc'") or die("Nao foii1");
+	$sql=mysql_query("UPDATE apqp_sum SET data='$data',ppk_req='$ppk_req',ppk_ace='$ppk_ace',ppk_pen='$ppk_pen',pca='$pca',pca_dt='$pca_dt',dim_amo='$dim_amo',dim_car='$dim_car',dim_ace='$dim_ace',dim_pen='$dim_pen',vis_amo='$vis_amo',vis_car='$vis_car',vis_ace='$vis_ace',vis_pen='$vis_pen',lab_amo='$lab_amo',lab_car='$lab_car',lab_ace='$lab_ace',lab_pen='$lab_pen',des_amo='$des_amo',des_car='$des_car',des_ace='$des_ace',des_pen='$des_pen' WHERE peca='$pc'") or erp_db_fail();
 	if($sql){
-		$_SESSION["mensagem"]="AlteraÁıes salvas com sucesso";
-		// cria followup caso salve o conteudo do Sum·rio de AprovaÁ„o
-			mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Salvando alteraÁıes do Sum·rio de AprovaÁ„o da peÁa $npc.','O usu·rio $quem salvou as alteraÁıes do Sum·rio de AprovaÁ„o da peÁa $npc.','$user')");
+		$_SESSION["mensagem"]="Altera√ß√µes salvas com sucesso";
+		// cria followup caso salve o conteudo do Sum√°rio de Aprova√ß√£o
+			mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Salvando altera√ß√µes do Sum√°rio de Aprova√ß√£o da pe√ßa $npc.','O usu√°rio $quem salvou as altera√ß√µes do Sum√°rio de Aprova√ß√£o da pe√ßa $npc.','$user')");
 		//	
 	}else{
-		$_SESSION["mensagem"]="As alteraÁıes n„o puderam ser salvas";
+		$_SESSION["mensagem"]="As altera√ß√µes n√£o puderam ser salvas";
 	}	
 	header("location:apqp_sum1.php");
 }elseif($acao=="s2"){
 	$sql=mysql_query("UPDATE apqp_sum SET care_req='$care_req',care_ace='$care_ace',care_pen='$care_pen',instm_req='$instm_req',instm_ace='$instm_ace',instm_pen='$instm_pen',folha_req='$folha_req',folha_ace='$folha_ace',folha_pen='$folha_pen',instv_req='$instv_req',instv_ace='$instv_ace',instv_pen='$instv_pen',apro_req='$apro_req',apro_ace='$apro_ace',apro_pen='$apro_pen',teste_req='$teste_req',teste_ace='$teste_ace',teste_pen='$teste_pen' WHERE peca='$pc'");
 	if($sql){
-		$_SESSION["mensagem"]="AlteraÁıes salvas com sucesso";
-		// cria followup caso salve o conteudo do Sum·rio de AprovaÁ„o
-			mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Salvando alteraÁıes do Sum·rio de AprovaÁ„o da peÁa $npc.','O usu·rio $quem salvou as alteraÁıes do Sum·rio de AprovaÁ„o da peÁa $npc.','$user')");
+		$_SESSION["mensagem"]="Altera√ß√µes salvas com sucesso";
+		// cria followup caso salve o conteudo do Sum√°rio de Aprova√ß√£o
+			mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Salvando altera√ß√µes do Sum√°rio de Aprova√ß√£o da pe√ßa $npc.','O usu√°rio $quem salvou as altera√ß√µes do Sum√°rio de Aprova√ß√£o da pe√ßa $npc.','$user')");
 		//	
 	}else{
-		$_SESSION["mensagem"]="As alteraÁıes n„o puderam ser salvas";
+		$_SESSION["mensagem"]="As altera√ß√µes n√£o puderam ser salvas";
 	}
 	header("location:apqp_sum2.php");
 }elseif($acao=="s3"){
 	$sql=mysql_query("UPDATE apqp_sum SET plano='$plano' WHERE peca='$pc'");
 	if($sql){
-		$_SESSION["mensagem"]="AlteraÁıes salvas com sucesso";
-		// cria followup caso salve o conteudo do Sum·rio de AprovaÁ„o
-			mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Salvando alteraÁıes do Sum·rio de AprovaÁ„o da peÁa $npc.','O usu·rio $quem salvou as alteraÁıes do Sum·rio de AprovaÁ„o da peÁa $npc.','$user')");
+		$_SESSION["mensagem"]="Altera√ß√µes salvas com sucesso";
+		// cria followup caso salve o conteudo do Sum√°rio de Aprova√ß√£o
+			mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Salvando altera√ß√µes do Sum√°rio de Aprova√ß√£o da pe√ßa $npc.','O usu√°rio $quem salvou as altera√ß√µes do Sum√°rio de Aprova√ß√£o da pe√ßa $npc.','$user')");
 		//	
 	}else{
-		$_SESSION["mensagem"]="As alteraÁıes n„o puderam ser salvas";
+		$_SESSION["mensagem"]="As altera√ß√µes n√£o puderam ser salvas";
 	}
 	header("location:apqp_sum3.php");
 }elseif($acao=="s4"){
 	if(isset($ap1) or isset($ap2) or isset($ap3) or isset($ap4) or isset($ap5) or isset($ap6)){
-		$sql=mysql_query("SELECT * FROM apqp_cron WHERE perc='100' AND peca='$pc' AND ativ='Certificado de Submiss„o'");
+		$sql=mysql_query("SELECT * FROM apqp_cron WHERE perc='100' AND peca='$pc' AND ativ='Certificado de Submiss√£o'");
 		if(!mysql_num_rows($sql)){
-			$_SESSION["mensagem"]="N„o pode ser aprovado pois existem relatÛrios anteriores abertos!!";
+			$_SESSION["mensagem"]="N√£o pode ser aprovado pois existem relat√≥rios anteriores abertos!!";
 			header("Location:apqp_sum4.php");
 			exit;
 		}
 	}
 	if(isset($ap1)){
 		//finalizar tarefa!!! - - - - - - - 
-		$apqp->agenda("Sumario de AprovaÁ„o do APQP (ValidaÁ„o final)");
+		$apqp->agenda("Sumario de Aprova√ß√£o do APQP (Valida√ß√£o final)");
 		// - - - - - - - -  - - - - - - - - 
 		if(empty($tap11)){
 		$tap11=$quem;
@@ -87,17 +87,17 @@ if($acao=="s1"){
 		$sql=mysql_query("SELECT * FROM apqp_sum WHERE ap1='' AND dap1='0000-00-00' AND peca='$pc'");
 		if(mysql_num_rows($sql)){
 			$sql=mysql_query("UPDATE apqp_sum SET ap1='$tap11', dap1=NOW() WHERE peca='$pc'");
-			$sql=mysql_query("UPDATE apqp_cron SET resp='$tap11', fim=NOW(), perc='100' WHERE peca='$pc' AND (ativ='Sum·rio e AprovaÁ„o do APQP' or ativ='Sumario de AprovaÁ„o do APQP (ValidaÁ„o final)')") or die("Nao foi");
-			$_SESSION["mensagem"]="AprovaÁ„o concluÌda com sucesso";
-			// cria followup caso aprove o Sum·rio de AprovaÁ„o
-				mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','AprovaÁ„o do Sum·rio de AprovaÁ„o da peÁa $npc.','O usu·rio $quem aprovou o Sum·rio de AprovaÁ„o da peÁa $npc.','$user')");
+			$sql=mysql_query("UPDATE apqp_cron SET resp='$tap11', fim=NOW(), perc='100' WHERE peca='$pc' AND (ativ='Sum√°rio e Aprova√ß√£o do APQP' or ativ='Sumario de Aprova√ß√£o do APQP (Valida√ß√£o final)')") or erp_db_fail();
+			$_SESSION["mensagem"]="Aprova√ß√£o conclu√≠da com sucesso";
+			// cria followup caso aprove o Sum√°rio de Aprova√ß√£o
+				mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Aprova√ß√£o do Sum√°rio de Aprova√ß√£o da pe√ßa $npc.','O usu√°rio $quem aprovou o Sum√°rio de Aprova√ß√£o da pe√ßa $npc.','$user')");
 			//				
 		}else{
-			$_SESSION["mensagem"]="Esta posiÁ„o j· est· ocupada";
+			$_SESSION["mensagem"]="Esta posi√ß√£o j√° est√° ocupada";
 		}
 	}elseif(isset($ap2)){
 		//finalizar tarefa!!! - - - - - - - 
-		$apqp->agenda("Sumario de AprovaÁ„o do APQP (ValidaÁ„o final)");
+		$apqp->agenda("Sumario de Aprova√ß√£o do APQP (Valida√ß√£o final)");
 		// - - - - - - - -  - - - - - - - - 
 		$sql=mysql_query("SELECT * FROM apqp_sum WHERE ap2='' AND dap2='0000-00-00' AND peca='$pc'");
 		if(empty($tap12)){
@@ -105,17 +105,17 @@ if($acao=="s1"){
 		}
 		if(mysql_num_rows($sql)){
 			$sql=mysql_query("UPDATE apqp_sum SET ap2='$tap12', dap2=NOW() WHERE peca='$pc'");
-			$sql=mysql_query("UPDATE apqp_cron SET resp='$tap12', fim=NOW(), perc='100' WHERE peca='$pc' AND (ativ='Sum·rio e AprovaÁ„o do APQP' or ativ='Sumario de AprovaÁ„o do APQP (ValidaÁ„o final)')");
-			$_SESSION["mensagem"]="AprovaÁ„o concluÌda com sucesso";
-			// cria followup caso aprove o Sum·rio de AprovaÁ„o
-				mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','AprovaÁ„o do Sum·rio de AprovaÁ„o da peÁa $npc.','O usu·rio $quem aprovou o Sum·rio de AprovaÁ„o da peÁa $npc.','$user')");
+			$sql=mysql_query("UPDATE apqp_cron SET resp='$tap12', fim=NOW(), perc='100' WHERE peca='$pc' AND (ativ='Sum√°rio e Aprova√ß√£o do APQP' or ativ='Sumario de Aprova√ß√£o do APQP (Valida√ß√£o final)')");
+			$_SESSION["mensagem"]="Aprova√ß√£o conclu√≠da com sucesso";
+			// cria followup caso aprove o Sum√°rio de Aprova√ß√£o
+				mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Aprova√ß√£o do Sum√°rio de Aprova√ß√£o da pe√ßa $npc.','O usu√°rio $quem aprovou o Sum√°rio de Aprova√ß√£o da pe√ßa $npc.','$user')");
 			//				
 		}else{
-			$_SESSION["mensagem"]="Esta posiÁ„o j· est· ocupada";
+			$_SESSION["mensagem"]="Esta posi√ß√£o j√° est√° ocupada";
 		}
 	}elseif(isset($ap3)){
 		//finalizar tarefa!!! - - - - - - - 
-		$apqp->agenda("Sumario de AprovaÁ„o do APQP (ValidaÁ„o final)");
+		$apqp->agenda("Sumario de Aprova√ß√£o do APQP (Valida√ß√£o final)");
 		// - - - - - - - -  - - - - - - - - 
 		$sql=mysql_query("SELECT * FROM apqp_sum WHERE ap3='' AND dap3='0000-00-00' AND peca='$pc'");
 		if(empty($tap13)){
@@ -123,17 +123,17 @@ if($acao=="s1"){
 		}
 		if(mysql_num_rows($sql)){
 			$sql=mysql_query("UPDATE apqp_sum SET ap3='$tap13', dap3=NOW() WHERE peca='$pc'");
-			$sql=mysql_query("UPDATE apqp_cron SET resp='$tap13', fim=NOW(), perc='100' WHERE peca='$pc' AND (ativ='Sum·rio e AprovaÁ„o do APQP' or ativ='Sumario de AprovaÁ„o do APQP (ValidaÁ„o final)')");
-			$_SESSION["mensagem"]="AprovaÁ„o concluÌda com sucesso";
-			// cria followup caso aprove o Sum·rio de AprovaÁ„o
-				mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','AprovaÁ„o do Sum·rio de AprovaÁ„o da peÁa $npc.','O usu·rio $quem aprovou o Sum·rio de AprovaÁ„o da peÁa $npc.','$user')");
+			$sql=mysql_query("UPDATE apqp_cron SET resp='$tap13', fim=NOW(), perc='100' WHERE peca='$pc' AND (ativ='Sum√°rio e Aprova√ß√£o do APQP' or ativ='Sumario de Aprova√ß√£o do APQP (Valida√ß√£o final)')");
+			$_SESSION["mensagem"]="Aprova√ß√£o conclu√≠da com sucesso";
+			// cria followup caso aprove o Sum√°rio de Aprova√ß√£o
+				mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Aprova√ß√£o do Sum√°rio de Aprova√ß√£o da pe√ßa $npc.','O usu√°rio $quem aprovou o Sum√°rio de Aprova√ß√£o da pe√ßa $npc.','$user')");
 			//				
 		}else{
-			$_SESSION["mensagem"]="Esta posiÁ„o j· est· ocupada";
+			$_SESSION["mensagem"]="Esta posi√ß√£o j√° est√° ocupada";
 		}
 	}elseif(isset($ap4)){
 		//finalizar tarefa!!! - - - - - - - 
-		$apqp->agenda("Sumario de AprovaÁ„o do APQP (ValidaÁ„o final)");
+		$apqp->agenda("Sumario de Aprova√ß√£o do APQP (Valida√ß√£o final)");
 		// - - - - - - - -  - - - - - - - - 
 		if(empty($tap14)){
 		$tap14=$quem;
@@ -141,17 +141,17 @@ if($acao=="s1"){
 		$sql=mysql_query("SELECT * FROM apqp_sum WHERE ap4='' AND dap4='0000-00-00' AND peca='$pc'");
 		if(mysql_num_rows($sql)){
 			$sql=mysql_query("UPDATE apqp_sum SET ap4='$tap14', dap4=NOW() WHERE peca='$pc'");
-			$sql=mysql_query("UPDATE apqp_cron SET resp='$tap14', fim=NOW(), perc='100' WHERE peca='$pc' AND (ativ='Sum·rio e AprovaÁ„o do APQP' or ativ='Sumario de AprovaÁ„o do APQP (ValidaÁ„o final)')");
-			$_SESSION["mensagem"]="AprovaÁ„o concluÌda com sucesso";
-			// cria followup caso aprove o Sum·rio de AprovaÁ„o
-				mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','AprovaÁ„o do Sum·rio de AprovaÁ„o da peÁa $npc.','O usu·rio $quem aprovou o Sum·rio de AprovaÁ„o da peÁa $npc.','$user')");
+			$sql=mysql_query("UPDATE apqp_cron SET resp='$tap14', fim=NOW(), perc='100' WHERE peca='$pc' AND (ativ='Sum√°rio e Aprova√ß√£o do APQP' or ativ='Sumario de Aprova√ß√£o do APQP (Valida√ß√£o final)')");
+			$_SESSION["mensagem"]="Aprova√ß√£o conclu√≠da com sucesso";
+			// cria followup caso aprove o Sum√°rio de Aprova√ß√£o
+				mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Aprova√ß√£o do Sum√°rio de Aprova√ß√£o da pe√ßa $npc.','O usu√°rio $quem aprovou o Sum√°rio de Aprova√ß√£o da pe√ßa $npc.','$user')");
 			//				
 		}else{
-			$_SESSION["mensagem"]="Esta posiÁ„o j· est· ocupada";
+			$_SESSION["mensagem"]="Esta posi√ß√£o j√° est√° ocupada";
 		}
 	}elseif(isset($ap5)){
 		//finalizar tarefa!!! - - - - - - - 
-		$apqp->agenda("Sumario de AprovaÁ„o do APQP (ValidaÁ„o final)");
+		$apqp->agenda("Sumario de Aprova√ß√£o do APQP (Valida√ß√£o final)");
 		// - - - - - - - -  - - - - - - - - 
 		if(empty($tap15)){
 		$tap15=$quem;
@@ -159,17 +159,17 @@ if($acao=="s1"){
 		$sql=mysql_query("SELECT * FROM apqp_sum WHERE ap5='' AND dap5='0000-00-00' AND peca='$pc'");
 		if(mysql_num_rows($sql)){
 			$sql=mysql_query("UPDATE apqp_sum SET ap5='$tap15', dap5=NOW() WHERE peca='$pc'");
-			$sql=mysql_query("UPDATE apqp_cron SET resp='$tap15', fim=NOW(), perc='100' WHERE peca='$pc' AND (ativ='Sum·rio e AprovaÁ„o do APQP' or ativ='Sumario de AprovaÁ„o do APQP (ValidaÁ„o final)')");
-			$_SESSION["mensagem"]="AprovaÁ„o concluÌda com sucesso";
-			// cria followup caso aprove o Sum·rio de AprovaÁ„o
-				mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','AprovaÁ„o do Sum·rio de AprovaÁ„o da peÁa $npc.','O usu·rio $quem aprovou o Sum·rio de AprovaÁ„o da peÁa $npc.','$user')");
+			$sql=mysql_query("UPDATE apqp_cron SET resp='$tap15', fim=NOW(), perc='100' WHERE peca='$pc' AND (ativ='Sum√°rio e Aprova√ß√£o do APQP' or ativ='Sumario de Aprova√ß√£o do APQP (Valida√ß√£o final)')");
+			$_SESSION["mensagem"]="Aprova√ß√£o conclu√≠da com sucesso";
+			// cria followup caso aprove o Sum√°rio de Aprova√ß√£o
+				mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Aprova√ß√£o do Sum√°rio de Aprova√ß√£o da pe√ßa $npc.','O usu√°rio $quem aprovou o Sum√°rio de Aprova√ß√£o da pe√ßa $npc.','$user')");
 			//				
 		}else{
-			$_SESSION["mensagem"]="Esta posiÁ„o j· est· ocupada";
+			$_SESSION["mensagem"]="Esta posi√ß√£o j√° est√° ocupada";
 		}
 	}elseif(isset($ap6)){
 		//finalizar tarefa!!! - - - - - - - 
-		$apqp->agenda("Sumario de AprovaÁ„o do APQP (ValidaÁ„o final)");
+		$apqp->agenda("Sumario de Aprova√ß√£o do APQP (Valida√ß√£o final)");
 		// - - - - - - - -  - - - - - - - - 
 		if(empty($tap16)){
 		$tap16=$quem;
@@ -177,12 +177,12 @@ if($acao=="s1"){
 		$sql=mysql_query("SELECT * FROM apqp_sum WHERE ap6='' AND dap6='0000-00-00' AND peca='$pc'");
 		if(mysql_num_rows($sql)){
 			$sql=mysql_query("UPDATE apqp_sum SET ap6='$tap16', dap6=NOW() WHERE peca='$pc'");
-			$_SESSION["mensagem"]="AprovaÁ„o concluÌda com sucesso";
-			// cria followup caso aprove o Sum·rio de AprovaÁ„o
-				mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','AprovaÁ„o do Sum·rio de AprovaÁ„o da peÁa $npc.','O usu·rio $quem aprovou o Sum·rio de AprovaÁ„o da peÁa $npc.','$user')");
+			$_SESSION["mensagem"]="Aprova√ß√£o conclu√≠da com sucesso";
+			// cria followup caso aprove o Sum√°rio de Aprova√ß√£o
+				mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Aprova√ß√£o do Sum√°rio de Aprova√ß√£o da pe√ßa $npc.','O usu√°rio $quem aprovou o Sum√°rio de Aprova√ß√£o da pe√ßa $npc.','$user')");
 			//				
 		}else{
-			$_SESSION["mensagem"]="Esta posiÁ„o j· est· ocupada";
+			$_SESSION["mensagem"]="Esta posi√ß√£o j√° est√° ocupada";
 		}
 	}else if(isset($hp)){
 		$dap1=data2banco($dap1);
@@ -198,53 +198,53 @@ if($acao=="s1"){
 			$sql=mysql_query("UPDATE apqp_sum SET ap4='$tap14', dap4='$dap4' WHERE peca='$pc'");
 			$sql=mysql_query("UPDATE apqp_sum SET ap5='$tap15', dap5='$dap5' WHERE peca='$pc'");
 			$sql=mysql_query("UPDATE apqp_sum SET ap6='$tap16', dap6='$dap6' WHERE peca='$pc'");
-			$sql=mysql_query("UPDATE apqp_cron SET resp='$tap1', fim=NOW(), perc='95' WHERE peca='$pc' AND (ativ='Sum·rio e AprovaÁ„o do APQP' or ativ='Sumario de AprovaÁ„o do APQP (ValidaÁ„o final)')");
-	$_SESSION["mensagem"]="AlteraÁıes salvas com sucesso";
-	// cria followup caso salve o conteudo do Sum·rio de AprovaÁ„o
-		mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Salvando alteraÁıes do Sum·rio de AprovaÁ„o da peÁa $npc.','O usu·rio $quem salvou as alteraÁıes do Sum·rio de AprovaÁ„o da peÁa $npc.','$user')");
+			$sql=mysql_query("UPDATE apqp_cron SET resp='$tap1', fim=NOW(), perc='95' WHERE peca='$pc' AND (ativ='Sum√°rio e Aprova√ß√£o do APQP' or ativ='Sumario de Aprova√ß√£o do APQP (Valida√ß√£o final)')");
+	$_SESSION["mensagem"]="Altera√ß√µes salvas com sucesso";
+	// cria followup caso salve o conteudo do Sum√°rio de Aprova√ß√£o
+		mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Salvando altera√ß√µes do Sum√°rio de Aprova√ß√£o da pe√ßa $npc.','O usu√°rio $quem salvou as altera√ß√µes do Sum√°rio de Aprova√ß√£o da pe√ßa $npc.','$user')");
 	//	
 		
 	}elseif(isset($lap1)){
 		$sql=mysql_query("UPDATE apqp_sum SET ap1='', dap1='0000-00-00' WHERE peca='$pc'");
-		$sql=mysql_query("UPDATE apqp_cron SET resp='', fim='', perc='95' WHERE peca='$pc' AND (ativ='Sum·rio e AprovaÁ„o do APQP' or ativ='Sumario de AprovaÁ„o do APQP (ValidaÁ„o final)')");
-		$_SESSION["mensagem"]="AprovaÁ„o excluÌda com sucesso";
-		// cria followup caso remove a aprovaÁ„o do Sum·rio de AprovaÁ„o
-			mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Removendo aprovaÁ„o do Sum·rio de AprovaÁ„o da peÁa $npc.','O usu·rio $quem removeu a aprovaÁ„o do Sum·rio de AprovaÁ„o da peÁa $npc.','$user')");
+		$sql=mysql_query("UPDATE apqp_cron SET resp='', fim='', perc='95' WHERE peca='$pc' AND (ativ='Sum√°rio e Aprova√ß√£o do APQP' or ativ='Sumario de Aprova√ß√£o do APQP (Valida√ß√£o final)')");
+		$_SESSION["mensagem"]="Aprova√ß√£o exclu√≠da com sucesso";
+		// cria followup caso remove a aprova√ß√£o do Sum√°rio de Aprova√ß√£o
+			mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Removendo aprova√ß√£o do Sum√°rio de Aprova√ß√£o da pe√ßa $npc.','O usu√°rio $quem removeu a aprova√ß√£o do Sum√°rio de Aprova√ß√£o da pe√ßa $npc.','$user')");
 		//	
 	}elseif(isset($lap2)){
 		$sql=mysql_query("UPDATE apqp_sum SET ap2='', dap2='0000-00-00' WHERE peca='$pc'");
-		$sql=mysql_query("UPDATE apqp_cron SET resp='', fim='', perc='95' WHERE peca='$pc' AND (ativ='Sum·rio e AprovaÁ„o do APQP' or ativ='Sumario de AprovaÁ„o do APQP (ValidaÁ„o final)')");
-		$_SESSION["mensagem"]="AprovaÁ„o excluÌda com sucesso";
-		// cria followup caso remove a aprovaÁ„o do Sum·rio de AprovaÁ„o
-			mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Removendo aprovaÁ„o do Sum·rio de AprovaÁ„o da peÁa $npc.','O usu·rio $quem removeu a aprovaÁ„o do Sum·rio de AprovaÁ„o da peÁa $npc.','$user')");
+		$sql=mysql_query("UPDATE apqp_cron SET resp='', fim='', perc='95' WHERE peca='$pc' AND (ativ='Sum√°rio e Aprova√ß√£o do APQP' or ativ='Sumario de Aprova√ß√£o do APQP (Valida√ß√£o final)')");
+		$_SESSION["mensagem"]="Aprova√ß√£o exclu√≠da com sucesso";
+		// cria followup caso remove a aprova√ß√£o do Sum√°rio de Aprova√ß√£o
+			mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Removendo aprova√ß√£o do Sum√°rio de Aprova√ß√£o da pe√ßa $npc.','O usu√°rio $quem removeu a aprova√ß√£o do Sum√°rio de Aprova√ß√£o da pe√ßa $npc.','$user')");
 		//	
 	}elseif(isset($lap3)){
 		$sql=mysql_query("UPDATE apqp_sum SET ap3='', dap3='0000-00-00' WHERE peca='$pc'");
-		$sql=mysql_query("UPDATE apqp_cron SET resp='', fim='', perc='95' WHERE peca='$pc' AND (ativ='Sum·rio e AprovaÁ„o do APQP' or ativ='Sumario de AprovaÁ„o do APQP (ValidaÁ„o final)')");
-		$_SESSION["mensagem"]="AprovaÁ„o excluÌda com sucesso";
-		// cria followup caso remove a aprovaÁ„o do Sum·rio de AprovaÁ„o
-			mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Removendo aprovaÁ„o do Sum·rio de AprovaÁ„o da peÁa $npc.','O usu·rio $quem removeu a aprovaÁ„o do Sum·rio de AprovaÁ„o da peÁa $npc.','$user')");
+		$sql=mysql_query("UPDATE apqp_cron SET resp='', fim='', perc='95' WHERE peca='$pc' AND (ativ='Sum√°rio e Aprova√ß√£o do APQP' or ativ='Sumario de Aprova√ß√£o do APQP (Valida√ß√£o final)')");
+		$_SESSION["mensagem"]="Aprova√ß√£o exclu√≠da com sucesso";
+		// cria followup caso remove a aprova√ß√£o do Sum√°rio de Aprova√ß√£o
+			mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Removendo aprova√ß√£o do Sum√°rio de Aprova√ß√£o da pe√ßa $npc.','O usu√°rio $quem removeu a aprova√ß√£o do Sum√°rio de Aprova√ß√£o da pe√ßa $npc.','$user')");
 		//	
 	}elseif(isset($lap4)){
 		$sql=mysql_query("UPDATE apqp_sum SET ap4='', dap4='0000-00-00' WHERE peca='$pc'");
-		$sql=mysql_query("UPDATE apqp_cron SET resp='', fim='', perc='95' WHERE peca='$pc' AND (ativ='Sum·rio e AprovaÁ„o do APQP' or ativ='Sumario de AprovaÁ„o do APQP (ValidaÁ„o final)')");
-		$_SESSION["mensagem"]="AprovaÁ„o excluÌda com sucesso";
-		// cria followup caso remove a aprovaÁ„o do Sum·rio de AprovaÁ„o
-			mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Removendo aprovaÁ„o do Sum·rio de AprovaÁ„o da peÁa $npc.','O usu·rio $quem removeu a aprovaÁ„o do Sum·rio de AprovaÁ„o da peÁa $npc.','$user')");
+		$sql=mysql_query("UPDATE apqp_cron SET resp='', fim='', perc='95' WHERE peca='$pc' AND (ativ='Sum√°rio e Aprova√ß√£o do APQP' or ativ='Sumario de Aprova√ß√£o do APQP (Valida√ß√£o final)')");
+		$_SESSION["mensagem"]="Aprova√ß√£o exclu√≠da com sucesso";
+		// cria followup caso remove a aprova√ß√£o do Sum√°rio de Aprova√ß√£o
+			mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Removendo aprova√ß√£o do Sum√°rio de Aprova√ß√£o da pe√ßa $npc.','O usu√°rio $quem removeu a aprova√ß√£o do Sum√°rio de Aprova√ß√£o da pe√ßa $npc.','$user')");
 		//	
 	}elseif(isset($lap5)){
 		$sql=mysql_query("UPDATE apqp_sum SET ap5='', dap5='0000-00-00' WHERE peca='$pc'");
-		$sql=mysql_query("UPDATE apqp_cron SET resp='', fim='', perc='95' WHERE peca='$pc' AND (ativ='Sum·rio e AprovaÁ„o do APQP' or ativ='Sumario de AprovaÁ„o do APQP (ValidaÁ„o final)')");
-		$_SESSION["mensagem"]="AprovaÁ„o excluÌda com sucesso";
-		// cria followup caso remove a aprovaÁ„o do Sum·rio de AprovaÁ„o
-			mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Removendo aprovaÁ„o do Sum·rio de AprovaÁ„o da peÁa $npc.','O usu·rio $quem removeu a aprovaÁ„o do Sum·rio de AprovaÁ„o da peÁa $npc.','$user')");
+		$sql=mysql_query("UPDATE apqp_cron SET resp='', fim='', perc='95' WHERE peca='$pc' AND (ativ='Sum√°rio e Aprova√ß√£o do APQP' or ativ='Sumario de Aprova√ß√£o do APQP (Valida√ß√£o final)')");
+		$_SESSION["mensagem"]="Aprova√ß√£o exclu√≠da com sucesso";
+		// cria followup caso remove a aprova√ß√£o do Sum√°rio de Aprova√ß√£o
+			mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Removendo aprova√ß√£o do Sum√°rio de Aprova√ß√£o da pe√ßa $npc.','O usu√°rio $quem removeu a aprova√ß√£o do Sum√°rio de Aprova√ß√£o da pe√ßa $npc.','$user')");
 		//	
 	}elseif(isset($lap6)){
 		$sql=mysql_query("UPDATE apqp_sum SET ap6='', dap6='0000-00-00' WHERE peca='$pc'");
-		$sql=mysql_query("UPDATE apqp_cron SET resp='', fim='', perc='95' WHERE peca='$pc' AND (ativ='Sum·rio e AprovaÁ„o do APQP' or ativ='Sumario de AprovaÁ„o do APQP (ValidaÁ„o final)')");
-		$_SESSION["mensagem"]="AprovaÁ„o excluÌda com sucesso";
-		// cria followup caso remove a aprovaÁ„o do Sum·rio de AprovaÁ„o
-			mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Removendo aprovaÁ„o do Sum·rio de AprovaÁ„o da peÁa $npc.','O usu·rio $quem removeu a aprovaÁ„o do Sum·rio de AprovaÁ„o da peÁa $npc.','$user')");
+		$sql=mysql_query("UPDATE apqp_cron SET resp='', fim='', perc='95' WHERE peca='$pc' AND (ativ='Sum√°rio e Aprova√ß√£o do APQP' or ativ='Sumario de Aprova√ß√£o do APQP (Valida√ß√£o final)')");
+		$_SESSION["mensagem"]="Aprova√ß√£o exclu√≠da com sucesso";
+		// cria followup caso remove a aprova√ß√£o do Sum√°rio de Aprova√ß√£o
+			mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Removendo aprova√ß√£o do Sum√°rio de Aprova√ß√£o da pe√ßa $npc.','O usu√°rio $quem removeu a aprova√ß√£o do Sum√°rio de Aprova√ß√£o da pe√ßa $npc.','$user')");
 		//	
 	}
 	header("location:apqp_sum4.php");

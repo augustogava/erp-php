@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 
 $sql=mysql_query("SELECT * FROM compras_requisicao WHERE id='$id'");
@@ -7,7 +7,8 @@ $res=mysql_fetch_array($sql);
 <html>
 <head>
 <title>Proposta</title>
-<meta http-equiv="Content-Type" content="text/html; UTF-8">
+<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="style.css" rel="stylesheet" type="text/css">
 <script>
 <!--
@@ -53,15 +54,15 @@ body {
         
         <tr>
           <td class="textobold">&nbsp;N&uacute;mero:</td>
-          <td class="texto"><?= completa($res["id"],8); ?></td>
+          <td class="texto"><?php echo  completa($res["id"],8); ?></td>
         </tr>
         <tr>
           <td class="textobold">&nbsp;Data:</td>
-          <td class="texto"><? print banco2data($res["data"]); ?></td>
+          <td class="texto"><?php print banco2data($res["data"]); ?></td>
         </tr>
         <tr>
           <td width="57" class="textobold">&nbsp;Resp.:</td>
-          <td width="343" class="texto"><?= $res["responsavel"]; ?></td>
+          <td width="343" class="texto"><?php echo  $res["responsavel"]; ?></td>
         </tr>
         <tr align="center">
           <td colspan="2" class="textobold"><img src="imagens/dot.gif" width="20" height="5"></td>
@@ -78,7 +79,7 @@ body {
                       <td width="152">Motivo</td>
                       <td width="84">Solicitante</td>
                     </tr>
-                    <?
+                    <?php
 $sql=mysql_query("SELECT * FROM compras_requisicao_list  WHERE requisicao='$id'");
 if(mysql_num_rows($sql)){
 	while($resl=mysql_fetch_array($sql)){
@@ -89,23 +90,23 @@ if(mysql_num_rows($sql)){
 		}
 ?>
                     <tr bgcolor="#FFFFFF">
-                      <td width="28"><? if(!empty($resl["qtde"])){ print banco2valor($resl["qtde"]); }else{ print banco2valor($resl["qtd"]); }  ?></td>
-                      <td><?= $resl["unidade"]; ?></td>
-                      <td><?= $resl["prod"]; ?></td>
-                      <input name="prodserv[<?= $resl["id"]; ?>]" type="hidden" id="prodserv<?= $resl["id"]; ?>" value="<?= $resl["produto"] ?>">
-                      <td width="63"><?= banco2valor($resl["valor"]); ?></td>
-                      <td width="152"><select name="motivo[<?= $resl["id"]; ?>]" class="formularioselect" id="motivo<?= $resl["id"]; ?>">
-                          <option value="" <? if(empty($resl["operacao"])) print "selected"; ?>>Selecione</option>
-                          <option value="acerto" <? if($resl["motivo"]=="acerto") print "selected"; ?>>Acerto Estoque</option>
-                          <option value="Producao" <? if($resl["motivo"]=="producao") print "selected"; ?>>Produ&ccedil;&atilde;o</option>
-                          <option value="manutencao" <? if($resl["motivo"]=="manutencao") print "selected"; ?>>Manuten&ccedil;&atilde;o</option>
-                          <option value="amostra" <? if($resl["motivo"]=="amostra") print "selected"; ?>>Amostra</option>
-                          <option value="transf_int" <? if($resl["motivo"]=="transf_int") print "selected"; ?>>Transforma&ccedil;&atilde;o Interna</option>
-                          <option value="transf_ext" <? if($resl["motivo"]=="transf_ext") print "selected"; ?>>Transforma&ccedil;&atilde;o Externa</option>
+                      <td width="28"><?php if(!empty($resl["qtde"])){ print banco2valor($resl["qtde"]); }else{ print banco2valor($resl["qtd"]); }  ?></td>
+                      <td><?php echo  $resl["unidade"]; ?></td>
+                      <td><?php echo  $resl["prod"]; ?></td>
+                      <input name="prodserv[<?php echo  $resl["id"]; ?>]" type="hidden" id="prodserv<?php echo  $resl["id"]; ?>" value="<?php echo  $resl["produto"] ?>">
+                      <td width="63"><?php echo  banco2valor($resl["valor"]); ?></td>
+                      <td width="152"><select name="motivo[<?php echo  $resl["id"]; ?>]" class="formularioselect" id="motivo<?php echo  $resl["id"]; ?>">
+                          <option value="" <?php if(empty($resl["operacao"])) print "selected"; ?>>Selecione</option>
+                          <option value="acerto" <?php if($resl["motivo"]=="acerto") print "selected"; ?>>Acerto Estoque</option>
+                          <option value="Producao" <?php if($resl["motivo"]=="producao") print "selected"; ?>>Produ&ccedil;&atilde;o</option>
+                          <option value="manutencao" <?php if($resl["motivo"]=="manutencao") print "selected"; ?>>Manuten&ccedil;&atilde;o</option>
+                          <option value="amostra" <?php if($resl["motivo"]=="amostra") print "selected"; ?>>Amostra</option>
+                          <option value="transf_int" <?php if($resl["motivo"]=="transf_int") print "selected"; ?>>Transforma&ccedil;&atilde;o Interna</option>
+                          <option value="transf_ext" <?php if($resl["motivo"]=="transf_ext") print "selected"; ?>>Transforma&ccedil;&atilde;o Externa</option>
                       </select></td>
-                      <td width="84"><?= $resl["solicitante"]; ?></td>
+                      <td width="84"><?php echo  $resl["solicitante"]; ?></td>
                     </tr>
-                    <?
+                    <?php
 	}
 }
 ?>

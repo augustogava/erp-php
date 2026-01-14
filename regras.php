@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 include("seguranca.php");
 $acao=verifi($permi,$acao);
@@ -26,7 +26,7 @@ if($acao=="alterar"){
 		header("location:mkr_conf.php");
 		exit;
 	}else{
-		$_SESSION["mensagem"]="Não pôde ser alterado!";
+		$_SESSION["mensagem"]="NÃ£o pÃ´de ser alterado!";
 		header("location:mkr_conf.php");
 		exit;
 	}
@@ -38,7 +38,8 @@ if($acao=="alterar"){
 <html>
 <head>
 <title>CyberManager</title>
-<meta http-equiv="Content-Type" content="text/html; UTF-8">
+<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="style.css" rel="stylesheet" type="text/css">
 <script src="scripts.js"></script>
 <script src="mascaras.js"></script>
@@ -67,21 +68,21 @@ if($acao=="alterar"){
       </tr>
     </table></td>
   </tr>
-        <? if($acao=="entrar"){ ?>
+        <?php if($acao=="entrar"){ ?>
 		<tr> 
           <td><form name="form1" method="post" action="">
             <table width="60%" border="0" cellpadding="0" cellspacing="0" class="textobold">
               <tr>
                 <td valign="top">Estados Isentos </td>
-                <td><? $valo=explode(",",$res["estados"]); ?><select name="estados[]" size="5" multiple class="formularioselect" id="estados">
-				<? 
+                <td><?php $valo=explode(",",$res["estados"]); ?><select name="estados[]" size="5" multiple class="formularioselect" id="estados">
+				<?php 
 				
 				
 				$sql2=mysql_query("SELECT * FROM estado ORDER By nome ASC");
 				while($res2=mysql_fetch_array($sql2)){
 				?>
-				<option value="<?= $res2["id"]; ?>" <? if(in_array($res2["id"],$valo)){ print "selected"; } ?>><?= $res2["nome"]; ?></option>
-				<?
+				<option value="<?php echo  $res2["id"]; ?>" <?php if(in_array($res2["id"],$valo)){ print "selected"; } ?>><?php echo  $res2["nome"]; ?></option>
+				<?php
 				}
 				?>
                 </select>
@@ -90,7 +91,7 @@ if($acao=="alterar"){
               <tr>
                 <td valign="top">Cidades Isentas </td>
                 <td><select name="cidades[]" size="25" multiple class="formularioselect" id="ciaddes">
-                  <? 
+                  <?php 
 				$val1=explode(",",$res["cidades"]);
 				
 				$sql2=mysql_query("SELECT * FROM cidade ORDER By estado ASC,nome ASC");
@@ -98,15 +99,15 @@ if($acao=="alterar"){
 					$sql3=mysql_query("SELECT * FROM estado WHERE id='$res2[estado]'");
 					$res3=mysql_fetch_array($sql3);
 				?>
-				<option value="<?= $res2["id"]; ?>" <? if(in_array($res2["id"],$val1)){ print "selected"; } ?>><?= $res3["nome"]; ?> - <?= $res2["nome"]; ?></option>
-				<?
+				<option value="<?php echo  $res2["id"]; ?>" <?php if(in_array($res2["id"],$val1)){ print "selected"; } ?>><?php echo  $res3["nome"]; ?> - <?php echo  $res2["nome"]; ?></option>
+				<?php
 				}
 				?>
                                                 </select></td>
               </tr>
               <tr>
                 <td width="27%">M&iacute;nimo</td>
-                <td width="73%"><input name="minimo" type="text" class="formularioselect" id="minimo" onKeyDown="formataMoeda(this,retornaKeyCode(event))" onKeyUp="formataMoeda(this,retornaKeyCode(event))" value="<?= banco2valor($res["minimo"]); ?>"></td>
+                <td width="73%"><input name="minimo" type="text" class="formularioselect" id="minimo" onKeyDown="formataMoeda(this,retornaKeyCode(event))" onKeyUp="formataMoeda(this,retornaKeyCode(event))" value="<?php echo  banco2valor($res["minimo"]); ?>"></td>
               </tr>
               <tr>
                 <td colspan="2" align="center"><input name="acao" type="hidden" id="acao" value="alterar">
@@ -116,12 +117,12 @@ if($acao=="alterar"){
                     </form>
           </td>
         </tr>
-		<? }elseif($acao=="inc" or $acao=="alt"){ ?>
+		<?php }elseif($acao=="inc" or $acao=="alt"){ ?>
         
-		<? } ?>
+		<?php } ?>
       </table></td>
   </tr>
 </table>
 </body>
 </html>
-<? include("mensagem.php"); ?>
+<?php include("mensagem.php"); ?>

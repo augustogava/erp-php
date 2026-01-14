@@ -102,8 +102,8 @@ if($acao=="incluir"){
 <html lang="pt-BR">
 <head>
 <title>Romaneio - ERP System</title>
-<meta charset="ISO-8859-1">
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <link href="style.css" rel="stylesheet" type="text/css">
@@ -173,7 +173,7 @@ function MM_openBrWindow(theURL,winName,features) {
                     <td><strong>#<?php echo $res["id"]; ?></strong></td>
                     <td><?php echo banco2data($res["data"]); ?></td>
                     <td class="erp-text-center">
-                        <a href="#" onclick="MM_openBrWindow('romaneio_vis.php?id=<?=$res["id"]?>','','scrollbars=yes,width=700,height=500');" class="erp-table-action" title="Imprimir">
+                        <a href="#" onclick="MM_openBrWindow('romaneio_vis.php?id=<?php echo $res["id"]?>','','scrollbars=yes,width=700,height=500');" class="erp-table-action" title="Imprimir">
                             <i class="fas fa-print"></i>
                         </a>
                     </td>
@@ -242,7 +242,7 @@ function MM_openBrWindow(theURL,winName,features) {
                         <td><?php echo banco2data($res["previsao"]); ?></td>
                         <td><?php echo $st; ?></td>
                         <td class="erp-text-center">
-                            <input type="checkbox" name="sel[]" value="<?=$res["id"]?>">
+                            <input type="checkbox" name="sel[]" value="<?php echo $res["id"]?>">
                         </td>
                     </tr>
                 <?php

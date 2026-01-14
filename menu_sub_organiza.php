@@ -1,4 +1,4 @@
-<? 
+<?php 
 include("conecta.php");
 include("seguranca.php");
 if(empty($acao)) $acao="entrar";
@@ -7,7 +7,7 @@ if($acao=="ok"){
 		$id=$submenus[$i];
 		$sql=mysql_query("UPDATE submenus set posicao='$i' WHERE id='$id'");
 	}
-	$_SESSION["mensagem"]="Posições Alteradas";
+	$_SESSION["mensagem"]="PosiÃ§Ãµes Alteradas";
 	$acao="entrar";
 }
 ?>
@@ -15,7 +15,8 @@ if($acao=="ok"){
 <HEAD>
 <TITLE>Organiza Submenus</TITLE>
 <link href="style.css" rel="stylesheet" type="text/css">
-<meta http-equiv="Content-Type" content="text/html; UTF-8"><meta name="webmaster" content="Christian Paul Pach">
+<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="webmaster" content="Christian Paul Pach">
 <script>
 <!--
 function Moveup(dbox) {
@@ -74,19 +75,19 @@ function MM_openBrWindow(theURL,winName,features) { //v2.0
           <td align="center" bgcolor="#003366" class="textoboldbranco">Organiza 
             Submenu</td>
         </tr>
-        <? if($acao=="entrar"){ ?>
+        <?php if($acao=="entrar"){ ?>
         <tr> 
           <td bgcolor="#FFFFFF"> <form name="form2" method="post" action="">
               <table width="400" border="0" align="center" cellpadding="0" cellspacing="0">
                 <tr> 
                   <td width="136" align="right" class="textobold">MENU&nbsp;&nbsp;</td>
                   <td width="264"><select name="menu" class="formulario" id="menu">
-                      <? 
+                      <?php 
 				$sql=mysql_query("SELECT * FROM menus ORDER BY texto ASC");
 				while($res=mysql_fetch_array($sql)){
 				?>
-                      <option value="<? print $res["id"]; ?>"><? print $res["texto"]; ?></option>
-                      <? } ?>
+                      <option value="<?php print $res["id"]; ?>"><?php print $res["texto"]; ?></option>
+                      <?php } ?>
                     </select> 
                     <input name="Submit" type="submit" class="formulario" value="Continua"> 
                     <input name="acao" type="hidden" id="acao" value="organizar"></td>
@@ -94,9 +95,9 @@ function MM_openBrWindow(theURL,winName,features) { //v2.0
               </table>
             </form></td>
         </tr>
-        <? }elseif($acao=="organizar"){ ?>
+        <?php }elseif($acao=="organizar"){ ?>
         <tr> 
-          <?
+          <?php
   $sql=mysql_query("SELECT * FROM submenus WHERE menu='$menu' ORDER BY posicao ASC");
   while($res=mysql_fetch_array($sql)){
   	$texto=$res["texto"];
@@ -116,7 +117,7 @@ function MM_openBrWindow(theURL,winName,features) { //v2.0
               <table width="400" border="0" align="center" cellpadding="5" cellspacing="0">
                 <tr> 
                   <td width="147"><select name="submenus" size="10" multiple class="formulario" id="select">
-                      <? print $ops; ?> 
+                      <?php print $ops; ?> 
                     </select> </td>
                   <td width="133"><table width="100%" border="0" cellspacing="0" cellpadding="0">
                       <tr> 
@@ -134,12 +135,12 @@ function MM_openBrWindow(theURL,winName,features) { //v2.0
               </table>
             </form></td>
         </tr>
-        <? } ?>
+        <?php } ?>
       </table></td>
   </tr>
 </table>
 </BODY>
 </HTML>
-<?
+<?php
 include("mensagem.php");
 ?>

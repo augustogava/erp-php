@@ -1,10 +1,10 @@
-<?
+<?php
 include("conecta.php");
 include("seguranca.php");
 if(empty($acao)) $acao="entrar";
 $pc=$_SESSION["mpc"];
 $npc=$_SESSION["npc"];
-//VerificaÁ„o
+//Verifica√ß√£o
 $_SESSION["modulo"]="granel";
 $sqlm=mysql_query("SELECT * FROM online WHERE user<>'$iduser' and peca='$pc' and modulo='granel'");
 if(mysql_num_rows($sqlm)){
@@ -14,7 +14,7 @@ if(mysql_num_rows($sqlm)){
 	}else{
 		$sql2=mysql_query("SELECT * FROM clientes WHERE id='$resm[user]'"); $res2=mysql_fetch_array($sql2);
 	}
-	$_SESSION["mensagem"]="O usuario $res2[nome] est· alterando este mÛdulo!";
+	$_SESSION["mensagem"]="O usuario $res2[nome] est√° alterando este m√≥dulo!";
 	header("Location:apqp_menu.php");
 	exit;
 }
@@ -56,7 +56,7 @@ function abrir(url,id){
 	return true;
 }
 function salvar(url,id){
-	window.open('apqp_impressao.php?acao=salvar&local='+ url +'&pc='+ <?=$pc?> + '');
+	window.open('apqp_impressao.php?acao=salvar&local='+ url +'&pc='+ <?php echo $pc?> + '');
 	return true;
 }
 
@@ -76,8 +76,8 @@ function MM_openBrWindow(theURL,winName,features) { //v2.0
   <tr>
     <td align="left" valign="top" class="chamadas"><table width="590" border="0" cellpadding="0" cellspacing="0" class="texto">
       <tr>
-        <td width="27" align="center"><div align="left"><a href="#" onClick="MM_openBrWindow('help/mini_checklist_material.html','','width=680,height=501,left=300,top=50')"><img src="imagens/icon14_ahn.gif" width="14" height="14" border="0" onMouseOver="this.T_STICKY=true; this.T_TITLE='Checklist Material a Granel '; this.T_DELAY=10; this.T_WIDTH=225;  return escape('Os campos ser„o preenchidos automaticamente com o nome de quem est· acessando o CYBERMananger juntamente com a respectiva data.<br>Nota: Para remover uma aprovaÁ„o o usu·rio deve clicar no bot„o Limpar<br>Enviar por e-mail - clique no primeiro Ìcone e selecione o destinat·rio o e-mail È preenchido automaticamente e depois clique no Ìcone enviar, se quiser imprimir clique no Ìcone imprimir ao lado.')"></a></div></td>
-        <td width="563" align="right"><div align="left" class="textobold style1 style1 style1 style1 style1 style1 style1 style1">APQP - Checklist Material a Granel &nbsp;<? print $npc; ?></div></td>
+        <td width="27" align="center"><div align="left"><a href="#" onClick="MM_openBrWindow('help/mini_checklist_material.html','','width=680,height=501,left=300,top=50')"><img src="imagens/icon14_ahn.gif" width="14" height="14" border="0" onMouseOver="this.T_STICKY=true; this.T_TITLE='Checklist Material a Granel '; this.T_DELAY=10; this.T_WIDTH=225;  return escape('Os campos ser√£o preenchidos automaticamente com o nome de quem est√° acessando o CYBERMananger juntamente com a respectiva data.<br>Nota: Para remover uma aprova√ß√£o o usu√°rio deve clicar no bot√£o Limpar<br>Enviar por e-mail - clique no primeiro √≠cone e selecione o destinat√°rio o e-mail √© preenchido automaticamente e depois clique no √≠cone enviar, se quiser imprimir clique no √≠cone imprimir ao lado.')"></a></div></td>
+        <td width="563" align="right"><div align="left" class="textobold style1 style1 style1 style1 style1 style1 style1 style1">APQP - Checklist Material a Granel &nbsp;<?php print $npc; ?></div></td>
       </tr>
       <tr>
         <td align="center">&nbsp;</td>
@@ -104,10 +104,10 @@ function MM_openBrWindow(theURL,winName,features) { //v2.0
               <td><table width="100%" border="0" cellspacing="0" cellpadding="3">
                 <tr>
                   <td width="84" align="center" class="textobold">Aprovado por: </td>
-                  <td width="210"><input name="tap1" type="text" class="formularioselect" id="tap1" value="<?= $res["ap1"]; ?>"></td>
+                  <td width="210"><input name="tap1" type="text" class="formularioselect" id="tap1" value="<?php echo  $res["ap1"]; ?>"></td>
                   <td width="51" align="center" class="textobold">Data:</td>
-                  <td width="66"><input name="dap1" type="text" class="formularioselect" id="dap1" onKeyPress="return validanum(this, event)" onKeyUp="mdata(this)" value="<?= banco2data($res["dap1"]); ?>" size="7" maxlength="10" readonly=""></td>
-				   <? 
+                  <td width="66"><input name="dap1" type="text" class="formularioselect" id="dap1" onKeyPress="return validanum(this, event)" onKeyUp="mdata(this)" value="<?php echo  banco2data($res["dap1"]); ?>" size="7" maxlength="10" readonly=""></td>
+				   <?php 
 				  if(empty($res["ap1"])){
 				  	$javas="if(confirm('Deseja Aprovar esse Checklist?')){ form1.acao.value='g2';form1.submit();}else{ return false; } ";
 				  }else{
@@ -115,7 +115,7 @@ function MM_openBrWindow(theURL,winName,features) { //v2.0
 				  }
 				  ?>
                   <td width="131" align="center">
-                        <input name="ap1" type="submit" class="microtxt" id="ap1" value="aprovar" onClick="<?= $javas; ?>">
+                        <input name="ap1" type="submit" class="microtxt" id="ap1" value="aprovar" onClick="<?php echo  $javas; ?>">
                       &nbsp;
 					      <input name="lap1" type="submit" class="microtxt" id="lap1" value="limpar" onClick="if(confirm('Deseja Aprovar esse Checklist?')){form1.acao.value='g2';form1.submit();}else{ return false; }"></td>
                 </tr>
@@ -124,10 +124,10 @@ function MM_openBrWindow(theURL,winName,features) { //v2.0
                 </tr>
                 <tr>
                   <td align="center" class="textobold">Aprovado por: </td>
-                  <td><input name="tap12" type="text" class="formularioselect" id="tap12" value="<?= $res["ap2"]; ?>"></td>
+                  <td><input name="tap12" type="text" class="formularioselect" id="tap12" value="<?php echo  $res["ap2"]; ?>"></td>
                   <td align="center" class="textobold">Data:</td>
-                  <td><input name="dap2" type="text" class="formularioselect" id="dap2" onKeyPress="return validanum(this, event)" onKeyUp="mdata(this)" value="<?= banco2data($res["dap2"]); ?>" size="7" maxlength="10" readonly=""></td>
-				  <? 
+                  <td><input name="dap2" type="text" class="formularioselect" id="dap2" onKeyPress="return validanum(this, event)" onKeyUp="mdata(this)" value="<?php echo  banco2data($res["dap2"]); ?>" size="7" maxlength="10" readonly=""></td>
+				  <?php 
 				  if(empty($res["ap2"])){
 				  	$javas="if(confirm('Deseja Aprovar esse Checklist?')){ form1.acao.value='g2';form1.submit();}else{ return false; } ";
 				  }else{
@@ -135,7 +135,7 @@ function MM_openBrWindow(theURL,winName,features) { //v2.0
 				  }
 				  ?>
                   <td align="center"><div align="center">
-                        <input name="ap2" type="submit" class="microtxt" id="ap2" value="aprovar" onClick="<?= $javas; ?>">
+                        <input name="ap2" type="submit" class="microtxt" id="ap2" value="aprovar" onClick="<?php echo  $javas; ?>">
                       &nbsp;
 					    <input name="lap2" type="submit" class="microtxt" id="lap2" value="limpar" onClick="if(confirm('Deseja Aprovar esse Checklist?')){form1.acao.value='g2';form1.submit();}else{ return false; }">
                   </div></td>
@@ -145,10 +145,10 @@ function MM_openBrWindow(theURL,winName,features) { //v2.0
                 </tr>
                 <tr>
                   <td align="center" class="textobold">Aprovado por: </td>
-                  <td><input name="tap13" type="text" class="formularioselect" id="tap13" value="<?= $res["ap3"]; ?>"></td>
+                  <td><input name="tap13" type="text" class="formularioselect" id="tap13" value="<?php echo  $res["ap3"]; ?>"></td>
                   <td align="center" class="textobold">Data:</td>
-                  <td><input name="dap3" type="text" class="formularioselect" id="dap3" onKeyPress="return validanum(this, event)" onKeyUp="mdata(this)" value="<?= banco2data($res["dap3"]); ?>" size="7" maxlength="10" readonly=""></td>
-				 <? 
+                  <td><input name="dap3" type="text" class="formularioselect" id="dap3" onKeyPress="return validanum(this, event)" onKeyUp="mdata(this)" value="<?php echo  banco2data($res["dap3"]); ?>" size="7" maxlength="10" readonly=""></td>
+				 <?php 
 				  if(empty($res["ap3"])){
 				  	$javas="if(confirm('Deseja Aprovar esse Checklist?')){ form1.acao.value='g2';form1.submit();}else{ return false; } ";
 				  }else{
@@ -156,13 +156,13 @@ function MM_openBrWindow(theURL,winName,features) { //v2.0
 				  }
 				  ?>
                   <td align="center"><div align="center">
-                        <input name="ap3" type="submit" class="microtxt" id="ap3" value="aprovar" onClick="<?= $javas; ?>">
+                        <input name="ap3" type="submit" class="microtxt" id="ap3" value="aprovar" onClick="<?php echo  $javas; ?>">
                       &nbsp;
 					    <input name="lap3" type="submit" class="microtxt" id="lap3" value="limpar" onClick="if(confirm('Deseja Aprovar esse Checklist?')){form1.acao.value='g2';form1.submit();}else{ return false; }">
                   </div></td>
                 </tr>
                 <input name="acao2" type="hidden" id="acao2" value="v4">
-              </table><? if($aprov=="N") print "<script>bloke();</script>"; ?></td>
+              </table><?php if($aprov=="N") print "<script>bloke();</script>"; ?></td>
             </tr>
             <tr class="textobold">
               <td>&nbsp;</td>
@@ -172,21 +172,21 @@ function MM_openBrWindow(theURL,winName,features) { //v2.0
          
                 <table width="601" border="0" align="center" cellpadding="3" cellspacing="0" class="texto">
                   <tr>
-				  <? if($_SESSION["e_mail"]=="S"){ ?>
+				  <?php if($_SESSION["e_mail"]=="S"){ ?>
                     <td width="16%" align="left" class="textobold">&nbsp;Enviar e-mail: </td>
                     <td width="56%"><input name="email" type="text" class="formularioselect" id="email3" value="Digite o e-mail aqui"></td> 
-					<? if(in_array("U",$emailt)){ ?>
-                    <td width="3%"><div align="center"><a href="#" onClick="return abre('busca_email2.php','a','width=320,height=380,scrollbars=1');"><img src="imagens/icon14_pessoas.gif" alt="Buscar Email de Funcion·rios" width="14" height="14" border="0"></a></div></td>
-					<? } if(in_array("G",$emailt)){ ?>
+					<?php if(in_array("U",$emailt)){ ?>
+                    <td width="3%"><div align="center"><a href="#" onClick="return abre('busca_email2.php','a','width=320,height=380,scrollbars=1');"><img src="imagens/icon14_pessoas.gif" alt="Buscar Email de Funcion√°rios" width="14" height="14" border="0"></a></div></td>
+					<?php } if(in_array("G",$emailt)){ ?>
                     <td width="8%"><div align="center"><a href="#" onClick="return abre('busca_email_grupo.php','a','width=320,height=380,scrollbars=1');"><input name="grupo" type="hidden" id="grupo">
                 <input name="grupo_nome" type="hidden" id="grupo_nome"><img src="imagens/icon14_grupo.gif" alt="Buscar Grupo de Emails" width="26" height="13" border="0"></a></div></td>
-				 <? } if(in_array("C",$emailt)){ ?>
+				 <?php } if(in_array("C",$emailt)){ ?>
                     <td width="4%"><div align="center"><a href="#" onClick="return abre('busca_email.php','a','width=320,height=380,scrollbars=1');"></a><a href="#" onClick="return abre('busca_email.php','a','width=320,height=300,scrollbars=1');"><img src="imagens/icon_cli.gif" alt="Buscar Emails de Clientes" width="18" height="18" border="0"></a></div></td>
-				<? } ?>
-                    <td width="9%"><div align="center"><? if($_SESSION["login_funcionario"]=="S"){ ?><a href="#" onClick="vailogo1('email','<?= $pc; ?>');"><img src="imagens/icon14_mail.gif" alt="Enviar Email" width="16" height="10" border="0"></a><? } ?></div></td>
-					<? } if($_SESSION["i_mp"]=="S"){ ?>
+				<?php } ?>
+                    <td width="9%"><div align="center"><?php if($_SESSION["login_funcionario"]=="S"){ ?><a href="#" onClick="vailogo1('email','<?php echo  $pc; ?>');"><img src="imagens/icon14_mail.gif" alt="Enviar Email" width="16" height="10" border="0"></a><?php } ?></div></td>
+					<?php } if($_SESSION["i_mp"]=="S"){ ?>
                     <td width="4%"><div align="center"><a href="#" onClick="vailogo('imp');"><img src="imagens/icon14_imp.gif" alt="Imprimir" width="15" height="15" border="0"></a></div></td>
-					<? } ?>
+					<?php } ?>
                   </tr>
                   <tr>
                     <td colspan="7" align="left" class="textobold"><img src="imagens/spacer.gif" width="46" height="5"></td>
@@ -199,7 +199,7 @@ function MM_openBrWindow(theURL,winName,features) { //v2.0
             </tr>
             <tr>
               <td align="center"><input name="button122" type="button" class="microtxt" value="Voltar" onClick="window.location='apqp_granelt.php';">&nbsp;
-				<input name="acao2" type="button" class="microtxt" value="Salvar em Disco" onClick="salvar('granel','<?=$res["id"];?>')">&nbsp;
+				<input name="acao2" type="button" class="microtxt" value="Salvar em Disco" onClick="salvar('granel','<?php echo $res["id"];?>')">&nbsp;
                 <input name="acao" type="hidden" id="acao" value="1">                <a href="#" onClick="return abre('busca_email.php','a','width=320,height=300,scrollbars=1');">
                 <input name="local" type="hidden" id="local" value="granel">
                 </a></td>
@@ -213,4 +213,4 @@ function MM_openBrWindow(theURL,winName,features) { //v2.0
 </body>
 </html>
 <script language="javascript" src="tooltip.js"></script>
-<? include("mensagem.php"); ?>
+<?php include("mensagem.php"); ?>

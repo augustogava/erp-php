@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 include("seguranca.php");
 if(empty($wsit)) $wsit="N";
@@ -41,7 +41,8 @@ $hj=mktime(0,0,0,date("n"),date("d"),date("Y"));
 <html>
 <head>
 <title>CyberManager</title>
-<meta http-equiv="Content-Type" content="text/html; UTF-8">
+<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="style.css" rel="stylesheet" type="text/css">
 <script src="scripts.js"></script>
 <script src="mascaras.js"></script>
@@ -82,17 +83,17 @@ function MM_openBrWindow(theURL,winName,features) { //v2.0
           <td width="20" align="center">&nbsp;</td>
           <td width="20" align="center">&nbsp;</td>
         </tr>
-        <?
+        <?php
 		if(mysql_num_rows($sql)==0){
 		?>
         <tr bgcolor="#FFFFFF" class="texto"> 
           <td colspan="6" align="center">NENHUMA CONTA A RECEBER</td>
         </tr>
-        <?
+        <?php
 		}else{
 			while($res=mysql_fetch_array($sql)){
 				if($res["pago"]=="S"){
-					$wconf="return mensagem('Este recebimento já foi efetuado');";
+					$wconf="return mensagem('Este recebimento jÃ¡ foi efetuado');";
 				}else{
 					$wconf="return abre('cr_conf.php?id=$res[item]','','width=305,height=190,scrollbars=0');";
 				}
@@ -114,14 +115,14 @@ function MM_openBrWindow(theURL,winName,features) { //v2.0
 				$resn=mysql_fetch_array($sqln);
 		?>
         <tr bgcolor="#FFFFFF" class="texto" onMouseover="changeto('#CCCCCC')" onMouseout="changeback('#FFFFFF')"> 
-          <td width="80" align="center"><? print banco2data($res["emissao"]); ?></td>
-          <td width="80" align="center"><font color="<? if(mktime(0,0,0,$m,$d,$a)<$hj) print "#ff0000"; ?>"><? print banco2data($res["vencimento"]); ?></font></td>
-          <td width="70" align="right"><? print banco2valor($res["valor"]); ?>&nbsp;</td>
-          <td>&nbsp;<? print $resn["nome"]; ?></td>
-          <td width="20" align="center"><a href="cr.php?acao=alt&id=<? print $res["conta"]; ?>"><img src="imagens/icon14_visualizar.gif" alt="Detalhes" width="14" height="14" border="0"></a></td>
-          <td width="20" align="center"><a href="#" onClick="<? print $wconf; ?>"><img src="imagens/icon_14_check.gif" alt="Confirmar o recebimento" width="14" height="14" border="0"></a></td>
+          <td width="80" align="center"><?php print banco2data($res["emissao"]); ?></td>
+          <td width="80" align="center"><font color="<?php if(mktime(0,0,0,$m,$d,$a)<$hj) print "#ff0000"; ?>"><?php print banco2data($res["vencimento"]); ?></font></td>
+          <td width="70" align="right"><?php print banco2valor($res["valor"]); ?>&nbsp;</td>
+          <td>&nbsp;<?php print $resn["nome"]; ?></td>
+          <td width="20" align="center"><a href="cr.php?acao=alt&id=<?php print $res["conta"]; ?>"><img src="imagens/icon14_visualizar.gif" alt="Detalhes" width="14" height="14" border="0"></a></td>
+          <td width="20" align="center"><a href="#" onClick="<?php print $wconf; ?>"><img src="imagens/icon_14_check.gif" alt="Confirmar o recebimento" width="14" height="14" border="0"></a></td>
         </tr>
-        <?
+        <?php
 			}
 		}
 		?>
@@ -133,8 +134,8 @@ function MM_openBrWindow(theURL,winName,features) { //v2.0
           <td><img src="imagens/dot.gif" width="50" height="5"></td>
         </tr>
         <tr> 
-          <td class="textobold">Documentos vencidos&nbsp; <input name="textfield2" type="text" class="formulario" value="<? print banco2valor($vencidos); ?>" size="15" readonly> 
-            &nbsp;&nbsp;Total a receber&nbsp; <input name="textfield" type="text" class="formulario" value="<? print banco2valor($total); ?>" size="15" readonly>
+          <td class="textobold">Documentos vencidos&nbsp; <input name="textfield2" type="text" class="formulario" value="<?php print banco2valor($vencidos); ?>" size="15" readonly> 
+            &nbsp;&nbsp;Total a receber&nbsp; <input name="textfield" type="text" class="formulario" value="<?php print banco2valor($total); ?>" size="15" readonly>
           </td>
         </tr>
       </table></td>
@@ -142,4 +143,4 @@ function MM_openBrWindow(theURL,winName,features) { //v2.0
 </table>
 </body>
 </html>
-<? include("mensagem.php"); ?>
+<?php include("mensagem.php"); ?>

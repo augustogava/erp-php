@@ -66,7 +66,8 @@ setTimeout("statuss()", 1);
 <html>
 <head>
 <title>Cyber Manager 3.0</title>
-<meta http-equiv="Content-Type" content="text/html; UTF-8">
+<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="style.css" rel="stylesheet" type="text/css">
 <style type="text/css">
 <!--
@@ -137,9 +138,9 @@ a:active {
         <tr> 
           <td height="20" colspan="2" background="imagens/rodape.gif" bgcolor="#FFFFFF"><table width="770" border="0" cellpadding="0" cellspacing="0">
               <tr> 
-                <td width="291" class="rodape">&nbsp;&nbsp;<? print $_SESSION["login_nome"]; ?> 
-                  - <? print $_SESSION["login_cargo"]; ?></td>
-                <td width="177" align="center" class="rodape"><? print $_SESSION["login_nivel_nome"]; ?></td>
+                <td width="291" class="rodape">&nbsp;&nbsp;<?php print $_SESSION["login_nome"]; ?> 
+                  - <?php print $_SESSION["login_cargo"]; ?></td>
+                <td width="177" align="center" class="rodape"><?php print $_SESSION["login_nivel_nome"]; ?></td>
                 <td width="201" align="right" class="rodape">Online a:</td>
                 <td width="101" align="center" valign="middle"> <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,29,0" width="101" height="18">
                     <param name="movie" value="swf/contador.swf">

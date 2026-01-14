@@ -1,13 +1,13 @@
-<?
+<?php
 include("conecta.php");
 if(empty($acao)) exit;
 if($acao=="incluir"){
 	$sql=mysql_query("INSERT INTO pcontas (idpai,descricao,codigo,tipo) VALUES ('$idpai','$descricao','$codigo','$tipo')");
 	if($sql){
-		$_SESSION["mensagem"]="Subconta incluída com sucesso!";
+		$_SESSION["mensagem"]="Subconta incluÃ­da com sucesso!";
 		$acao="plano";
 	}else{
-		$_SESSION["mensagem"]="A subconta não pôde ser incluída!";
+		$_SESSION["mensagem"]="A subconta nÃ£o pÃ´de ser incluÃ­da!";
 		$acao="inc";
 	}
 }elseif($acao=="alterar"){
@@ -16,16 +16,16 @@ if($acao=="incluir"){
 		$_SESSION["mensagem"]="Subconta alterada com sucesso!";
 		$acao="plano";
 	}else{
-		$_SESSION["mensagem"]="A subconta não pôde ser alterada!";
+		$_SESSION["mensagem"]="A subconta nÃ£o pÃ´de ser alterada!";
 		$acao="alt";
 	}
 }elseif($acao=="exc"){
 	if(!empty($id)){
 		$sql=mysql_query("DELETE FROM pcontas WHERE id='$id'");
 		if($sql){
-			$_SESSION["mensagem"]="Subconta excluída com sucesso!";
+			$_SESSION["mensagem"]="Subconta excluÃ­da com sucesso!";
 		}else{
-			$_SESSION["mensagem"]="A subconta não pôde ser excluída!";
+			$_SESSION["mensagem"]="A subconta nÃ£o pÃ´de ser excluÃ­da!";
 		}		
 	}
 	$acao="plano";

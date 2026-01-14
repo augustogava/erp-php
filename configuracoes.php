@@ -29,6 +29,18 @@ $caminho=preg_replace("/\\\\/","/",__FILE__);
 $caminho = dirname($caminho);
 $permi=$_SESSION["permissao"];
 $patch=$caminho;
+
+/**
+ * Centralized DB failure handler.
+ * Avoids leaking raw SQL errors to users while still logging for debugging.
+ */
+function erp_db_fail(string $userMessage = "Erro no banco de dados. Tente novamente ou contate o administrador."): void {
+	$err = function_exists('mysql_error') ? mysql_error() : '';
+	if (!empty($err)) {
+		error_log("DB_ERROR: " . $err);
+	}
+	die($userMessage);
+}
 function cortinas($largura,$altura){
 	$tri=$largura;
 	$qtdpe=ceil(($largura * 100) / 15.3);
@@ -222,7 +234,7 @@ $resultado2=11-$soma;
 }
 if ($resultado2==$Numero[11])
 {
-return 1; //echo "<h1>CPF V�lido</h1>";
+return 1; //echo "<h1>CPF Válido</h1>";
 }
 else
 {
@@ -235,7 +247,7 @@ return 0;
 }
 }
 }
-//Fun��o que calcula CNPJ
+//Função que calcula CNPJ
 
   function CalculaCNPJ($CampoNumero)
   {
@@ -341,21 +353,21 @@ function verifi($valor,$ac){
 		if($valor=="4" or $valor=="2"){
 			$acao=$ac;
 		}else{
-			print "<script>window.alert('Voc� n�o tem permiss�o para isso, entre em contato com administrador');window.location='javascript:history.go(-1)';</script>";
+			print "<script>window.alert('Você não tem permissão para isso, entre em contato com administrador');window.location='javascript:history.go(-1)';</script>";
 			$acao="";
 		}
 	}else if($ac=="incluir" or $ac=="inc" or $ac=="ordeminc"){
 		if($valor=="4" or $valor=="3"){
 			$acao=$ac;
 		}else{
-			print "<script>window.alert('Voc� n�o tem permiss�o para isso, entre em contato com administrador');window.location='javascript:history.go(-1)';</script>";
+			print "<script>window.alert('Você não tem permissão para isso, entre em contato com administrador');window.location='javascript:history.go(-1)';</script>";
 			$acao="";
 		}
 	}else if($ac=="alterar" or $ac=="v1" or $ac=="v2" or $ac=="v3" or $ac=="v4" or $ac=="rr2" or $ac=="rr3" or $ac=="cap2" or $ac=="cap3" or $ac=="s1" or $ac=="s2" or $ac=="s3" or $ac=="s4" or $ac=="i0" or $ac=="i1" or $ac=="altp" or $ac=="g2" or $ac=="venda" or $ac=="custo" or $ac=="ordemcan" or $ac=="ordemalt" or $ac=="ecom" or $ac=="ordemver" or $ac=="em" or $ac=="sm" or $ac=="ee" or $ac=="es"){
 		if($valor=="4" or $valor=="3"){
 			$acao=$ac;
 		}else{
-			print "<script>window.alert('Voc� n�o tem permiss�o para isso, entre em contato com administrador');window.location='javascript:history.go(-1)';</script>";
+			print "<script>window.alert('Você não tem permissão para isso, entre em contato com administrador');window.location='javascript:history.go(-1)';</script>";
 			$acao="";
 		}
 	}else{
@@ -418,9 +430,9 @@ function email($demail,$denome,$paramail,$paranome,$wassunto,$wmsg){
 	if(empty($denome)) $denome=$demail;
 	if(empty($paranome)) $paranome=$paramail;
 	if($wonline){
-		mail("$paranome<$paramail>",$wassunto,$wmsg,"From: $denome<$demail>\nContent-type: text/html\n");
+		mail("$paranome<$paramail>",$wassunto,$wmsg,"From: $denome<$demail>\nContent-Type: text/html; charset=UTF-8\n");
 	}else{
-		mail($paramail,$wassunto,$wmsg,"From: $demail\nContent-type: text/html\n");
+		mail($paramail,$wassunto,$wmsg,"From: $demail\nContent-Type: text/html; charset=UTF-8\n");
 	}
 }
 function extensao($warq){
@@ -444,7 +456,7 @@ function bytes($bt){
 //classe OOP para bancos
 class bd_c {
 /*
- 	  $bd->list_add("id","C�digo"); 
+ 	  $bd->list_add("id","Código"); 
 	  $bd->list_add("pentacode","PentaCode");
   	  $bd->list_add("nome","Nome");
 	  $bd->list_add("marca","Marca");
@@ -465,7 +477,7 @@ class bd_c {
 			$respdb=mysql_fetch_array($sqlpdb);
 			print $respdb["$campo"];
 		}else{
-			print "N�o Localizado";
+			print "Não Localizado";
 		}
 	}
 	function pega_ultimo_bd($tabela,$campo){
@@ -483,7 +495,7 @@ class bd_c {
 			$respdb=mysql_fetch_array($sqlpdb);
 			return $respdb["$campo"];
 		}else{
-			return "N�o Localizado";
+			return "Não Localizado";
 		}
 	}
 	//	$bd->list_bd("ope_setor","SETOR");

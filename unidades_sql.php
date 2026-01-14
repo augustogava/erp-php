@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 if(empty($acao)) exit;
 $acao=verifi($permi,$acao);
@@ -10,10 +10,10 @@ if(!empty($acao)){
 if($acao=="incluir"){
 	$sql=mysql_query("INSERT INTO unidades (nome,apelido) VALUES ('$nome','$apelido')");
 	if($sql){
-		$_SESSION["mensagem"]="Unidade incluída com sucesso!";
+		$_SESSION["mensagem"]="Unidade incluÃ­da com sucesso!";
 		$acao="entrar";
 	}else{
-		$_SESSION["mensagem"]="A unidade não pôde ser incluída!";
+		$_SESSION["mensagem"]="A unidade nÃ£o pÃ´de ser incluÃ­da!";
 		$acao="inc";
 	}
 }elseif($acao=="alterar"){
@@ -22,16 +22,16 @@ if($acao=="incluir"){
 		$_SESSION["mensagem"]="Unidade alterada com sucesso!";
 		$acao="entrar";
 	}else{
-		$_SESSION["mensagem"]="A unidade não pôde ser alterada!";
+		$_SESSION["mensagem"]="A unidade nÃ£o pÃ´de ser alterada!";
 		$acao="alt";
 	}
 }elseif($acao=="exc"){
 	if(!empty($id)){
 		$sql=mysql_query("DELETE FROM unidades WHERE id='$id'");
 		if($sql){
-			$_SESSION["mensagem"]="Unidade excluída com sucesso!";
+			$_SESSION["mensagem"]="Unidade excluÃ­da com sucesso!";
 		}else{
-			$_SESSION["mensagem"]="A unidade não pôde ser excluída!";
+			$_SESSION["mensagem"]="A unidade nÃ£o pÃ´de ser excluÃ­da!";
 		}		
 	}
 	$acao="entrar";

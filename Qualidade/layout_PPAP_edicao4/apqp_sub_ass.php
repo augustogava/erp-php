@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 if($abre=="S"){
 	$_SESSION["vendas_prodserv_line"]=$line;
@@ -46,7 +46,7 @@ if (parseInt(navigator.appVersion) >= 4) window.moveTo((screen.width/2)-(windowW
 	    </tr>
 		  <tr bgcolor="#FFFFFF" class="texto">
             <td>&nbsp;Digital</td>
-		    <td align="center"><a href="#" onClick="<? if($res2["assinatura"]!="0"){ print "return seleciona('D');"; }else{ print "window.alert('Sua assinatura não esta cadastrada, favor verificar com o administrador do sistema para cadastrar a mesma ou usar outro modo de assinatura. (ex: Manual ou eletrônica)');"; } ?>"><img src="imagens/icon_14_use.gif" alt="Selecionar" width="14" height="14" border="0"></a></td>
+		    <td align="center"><a href="#" onClick="<?php if($res2["assinatura"]!="0"){ print "return seleciona('D');"; }else{ print "window.alert('Sua assinatura nÃ£o esta cadastrada, favor verificar com o administrador do sistema para cadastrar a mesma ou usar outro modo de assinatura. (ex: Manual ou eletrÃ´nica)');"; } ?>"><img src="imagens/icon_14_use.gif" alt="Selecionar" width="14" height="14" border="0"></a></td>
 	    </tr>
 		  <tr bgcolor="#FFFFFF" class="texto">
             <td>&nbsp;El&ecirc;tronica</td>

@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 include("seguranca.php");
 $apqp=new set_apqp;
@@ -40,7 +40,7 @@ function abrir(url,id){
 	return true;
 }
 function salvar(url,id){
-	window.open('apqp_impressao.php?acao=salvar&local='+ url +'&pc='+ <?=$pc?> + '');
+	window.open('apqp_impressao.php?acao=salvar&local='+ url +'&pc='+ <?php echo $pc?> + '');
 	return true;
 }
 function MM_openBrWindow(theURL,winName,features) { //v2.0
@@ -59,7 +59,7 @@ function MM_openBrWindow(theURL,winName,features) { //v2.0
 <table width="590" border="0" cellpadding="0" cellspacing="0" class="texto">
       <tr>
         <td width="27" align="center"><div align="left"><a href="#" onClick="MM_openBrWindow('help/mini_viabilidade.html','','width=680,height=501,left=300,top=50')"><img src="imagens/icon14_ahn.gif" width="14" height="14" border="0" onMouseOver="this.T_STICKY=true; this.T_TITLE='Comprometimento de viabilidade '; this.T_DELAY=10; this.T_WIDTH=225;  return escape('Avaliar a viabilidade do projeto proposto pode ser fabricado, montado, testado, embalado e expedido no prazo e na quantidade requerida. ')"></a><span class="impTextoBold">&nbsp;</span></div></td>
-        <td width="563" align="right"><div align="left" class="textobold style1 style1 style1 style1 style1 style1 style1 style1">APQP - Aprovação Interina <? print $npc; ?></div></td>
+        <td width="563" align="right"><div align="left" class="textobold style1 style1 style1 style1 style1 style1 style1 style1">APQP - AprovaÃ§Ã£o Interina <?php print $npc; ?></div></td>
       </tr>
       <tr>
         <td align="center">&nbsp;</td>
@@ -74,13 +74,13 @@ function MM_openBrWindow(theURL,winName,features) { //v2.0
         <td align="left" valign="top"><table width="594" height="25" border="1" cellpadding="0" cellspacing="0" bordercolor="#FFFFFF">
             <tr>
 			<a href="apqp_apro_int1.php">
-              <td width="146" align="center" bordercolor="#CCCCCC" bgcolor="#FFFFFF" class="textobold" onMouseOver="this.style.backgroundColor='#006699';this.style.color='#FFFFFF';" onMouseOut="this.style.backgroundColor='#FFFFFF';this.style.color='#003366';">Informações da peça</td>
+              <td width="146" align="center" bordercolor="#CCCCCC" bgcolor="#FFFFFF" class="textobold" onMouseOver="this.style.backgroundColor='#006699';this.style.color='#FFFFFF';" onMouseOut="this.style.backgroundColor='#FFFFFF';this.style.color='#003366';">InformaÃ§Ãµes da peÃ§a</td>
               </a><a href="apqp_apro_int2.php">
-              <td width="146" align="center" bordercolor="#CCCCCC" bgcolor="#FFFFFF" class="textobold" onMouseOver="this.style.backgroundColor='#006699';this.style.color='#FFFFFF';" onMouseOut="this.style.backgroundColor='#FFFFFF';this.style.color='#003366';">Classificação</td>
+              <td width="146" align="center" bordercolor="#CCCCCC" bgcolor="#FFFFFF" class="textobold" onMouseOver="this.style.backgroundColor='#006699';this.style.color='#FFFFFF';" onMouseOut="this.style.backgroundColor='#FFFFFF';this.style.color='#003366';">ClassificaÃ§Ã£o</td>
               </a> <a href="apqp_apro_int3.php">
-              <td width="146" align="center" bordercolor="#CCCCCC" bgcolor="#FFFFFF" class="textobold" onMouseOver="this.style.backgroundColor='#006699';this.style.color='#FFFFFF';" onMouseOut="this.style.backgroundColor='#FFFFFF';this.style.color='#003366';">Questões</td>
+              <td width="146" align="center" bordercolor="#CCCCCC" bgcolor="#FFFFFF" class="textobold" onMouseOver="this.style.backgroundColor='#006699';this.style.color='#FFFFFF';" onMouseOut="this.style.backgroundColor='#FFFFFF';this.style.color='#003366';">QuestÃµes</td>
               </a> 
-              <td width="146" align="center" bordercolor="#CCCCCC" bgcolor="#FFFFFF" class="textoboldbranco" >Aprovação</td>
+              <td width="146" align="center" bordercolor="#CCCCCC" bgcolor="#FFFFFF" class="textoboldbranco" >AprovaÃ§Ã£o</td>
              </tr>
         </table></td>
       </tr>
@@ -98,33 +98,33 @@ function MM_openBrWindow(theURL,winName,features) { //v2.0
                           <td colspan="6"><img src="imagens/dot.gif" width="50" height="2"></td>
                           </tr>
                         <tr>
-						<? 
+						<?php 
 				  if(empty($res["quem"])){
 				  	$javas="if(confirm('Deseja Aprovar Interina?')){form1.acao.value='v4';form1.submit();}else{ return false; }";
 				  }else{
 				  $javas="window.alert('Clique em Limpar primeiro');return false;";
 				  }
 				  ?>
-                          <td width="22%"><input name="ap1" type="submit" class="microtxt" id="ap1" onClick="<?= $javas; ?>" value="Aprovar">
+                          <td width="22%"><input name="ap1" type="submit" class="microtxt" id="ap1" onClick="<?php echo  $javas; ?>" value="Aprovar">
                             <input name="lap1" type="submit" class="microtxt" id="lap1" onClick="if(confirm('Deseja Limpar?')){form1.acao.value='v4';form1.submit();}else{ return false; }" value="Limpar"></td>
                           <td width="16%" align="right"><strong>Aprovador Por</strong> </td>
-                          <td colspan="4"><input name="tap1" type="text" class="formularioselect" id="tap1" value="<?= $res["quem"]; ?>"></td>
+                          <td colspan="4"><input name="tap1" type="text" class="formularioselect" id="tap1" value="<?php echo  $res["quem"]; ?>"></td>
                         </tr>
                         <tr>
                           <td align="right"><strong>Cargo</strong></td>
-                          <td align="right"><input name="cargo" type="text" class="formulario" id="cargo" size="17" value="<?= $res["cargo"]; ?>"></td>
+                          <td align="right"><input name="cargo" type="text" class="formulario" id="cargo" size="17" value="<?php echo  $res["cargo"]; ?>"></td>
                           <td width="17%" align="right"><strong>Departamento</strong></td>
-                          <td colspan="3"><input name="departamento" type="text" class="formularioselect" id="departamento" value="<?= $res["departamento"]; ?>"></td>
+                          <td colspan="3"><input name="departamento" type="text" class="formularioselect" id="departamento" value="<?php echo  $res["departamento"]; ?>"></td>
                         </tr>
                         <tr>
                           <td align="right"><strong>Tel</strong> </td>
-                          <td align="right"><input name="tel" type="text" class="formulario" id="tel" size="17" value="<?= $res["tel"]; ?>"></td>
+                          <td align="right"><input name="tel" type="text" class="formulario" id="tel" size="17" value="<?php echo  $res["tel"]; ?>"></td>
                           <td align="right"><strong>Fax</strong></td>
-                          <td width="19%"><input name="fax2" type="text" class="formulario" id="fax2" size="20" value="<?= $res["fax"]; ?>"></td>
+                          <td width="19%"><input name="fax2" type="text" class="formulario" id="fax2" size="20" value="<?php echo  $res["fax"]; ?>"></td>
                           <td width="10%" align="right"><strong>Data</strong></td>
-                          <td width="16%"><input name="dtquem" type="text" class="formularioselect" id="dtquem" value="<?= banco2data($res["dtquem"]); ?>" size="13" onKeyPress="return validanum(this, event)" onKeyUp="mdata(this)"></td>
+                          <td width="16%"><input name="dtquem" type="text" class="formularioselect" id="dtquem" value="<?php echo  banco2data($res["dtquem"]); ?>" size="13" onKeyPress="return validanum(this, event)" onKeyUp="mdata(this)"></td>
                         </tr>
-                      </table><? if($aprov=="N") print "<script>bloke();</script>"; ?></td>
+                      </table><?php if($aprov=="N") print "<script>bloke();</script>"; ?></td>
                     </tr>
                     <tr>
                       <td><img src="imagens/dot.gif" width="50" height="5"></td>
@@ -139,27 +139,27 @@ function MM_openBrWindow(theURL,winName,features) { //v2.0
                       <td><table width="100%" border="0" cellpadding="3" cellspacing="0" class="texto">
                         <tr>
                           <td width="39%" align="right"><strong>Gerente da Eng. da Qualidade - Forn. </strong></td>
-                          <td width="39%"><input name="apro_eng" type="text" class="formularioselect" id="apro_eng" value="<?= $res["apro_eng"];  ?>"></td>
+                          <td width="39%"><input name="apro_eng" type="text" class="formularioselect" id="apro_eng" value="<?php echo  $res["apro_eng"];  ?>"></td>
                           <td width="9%" align="right"><strong>Data</strong></td>
-                          <td width="13%"><input name="data_eng" type="text" class="formulario" id="data_eng" value="<?= banco2data($res["data_eng"]);  ?>" size="12" onKeyPress="return validanum(this, event)" onKeyUp="mdata(this)"></td>
+                          <td width="13%"><input name="data_eng" type="text" class="formulario" id="data_eng" value="<?php echo  banco2data($res["data_eng"]);  ?>" size="12" onKeyPress="return validanum(this, event)" onKeyUp="mdata(this)"></td>
                         </tr>
                         <tr>
                           <td align="right"><strong>Gerente de Compras - Dsenv. Produto</strong></td>
-                          <td><input name="apro_com" type="text" class="formularioselect" id="apro_com" value="<?= $res["apro_com"];  ?>"></td>
+                          <td><input name="apro_com" type="text" class="formularioselect" id="apro_com" value="<?php echo  $res["apro_com"];  ?>"></td>
                           <td align="right"><strong>Data</strong></td>
-                          <td><input name="data_com" type="text" class="formulario" id="data_com" value="<?= banco2data($res["data_com"]);  ?>" size="12" onKeyPress="return validanum(this, event)" onKeyUp="mdata(this)"></td>
+                          <td><input name="data_com" type="text" class="formulario" id="data_com" value="<?php echo  banco2data($res["data_com"]);  ?>" size="12" onKeyPress="return validanum(this, event)" onKeyUp="mdata(this)"></td>
                         </tr>
                         <tr>
                           <td align="right"><strong>Gerente da Eng. de Produto da &Aacute;rea</strong></td>
-                          <td><input name="apro_engprod" type="text" class="formularioselect" id="apro_engprod" value="<?= $res["apro_engprod"];  ?>"></td>
+                          <td><input name="apro_engprod" type="text" class="formularioselect" id="apro_engprod" value="<?php echo  $res["apro_engprod"];  ?>"></td>
                           <td align="right"><strong>Data</strong></td>
-                          <td><input name="data_engprod" type="text" class="formulario" id="data_engprod" value="<?= banco2data($res["data_engprod"]);  ?>" size="12" onKeyPress="return validanum(this, event)" onKeyUp="mdata(this)"></td>
+                          <td><input name="data_engprod" type="text" class="formulario" id="data_engprod" value="<?php echo  banco2data($res["data_engprod"]);  ?>" size="12" onKeyPress="return validanum(this, event)" onKeyUp="mdata(this)"></td>
                         </tr>
                         <tr>
                           <td align="right"><strong>Coordenador do Projeto</strong></td>
-                          <td><input name="apro_coor" type="text" class="formularioselect" id="apro_coor" value="<?= $res["apro_coor"];  ?>"></td>
+                          <td><input name="apro_coor" type="text" class="formularioselect" id="apro_coor" value="<?php echo  $res["apro_coor"];  ?>"></td>
                           <td align="right"><strong>Data</strong></td>
-                          <td><input name="data_coor" type="text" class="formulario" id="data_coor" value="<?= banco2data($res["data_coor"]);  ?>" size="12" onKeyPress="return validanum(this, event)" onKeyUp="mdata(this)"></td>
+                          <td><input name="data_coor" type="text" class="formulario" id="data_coor" value="<?php echo  banco2data($res["data_coor"]);  ?>" size="12" onKeyPress="return validanum(this, event)" onKeyUp="mdata(this)"></td>
                         </tr>
                       </table></td>
                     </tr>
@@ -173,21 +173,21 @@ function MM_openBrWindow(theURL,winName,features) { //v2.0
 					    
 					    <table width="601" border="0" align="center" cellpadding="3" cellspacing="0" class="texto">
                   <tr>
-				  <? if($_SESSION["e_mail"]=="S"){ ?>
+				  <?php if($_SESSION["e_mail"]=="S"){ ?>
                     <td width="16%" align="left" class="textobold">&nbsp;Enviar e-mail: </td>
                     <td width="56%"><input name="email" type="text" class="formularioselect" id="email3" value="Digite o e-mail aqui"></td> 
-					<? if(in_array("U",$emailt)){ ?>
-                    <td width="3%"><div align="center"><a href="#" onClick="return abre('busca_email2.php','a','width=320,height=380,scrollbars=1');"><img src="imagens/icon14_pessoas.gif" alt="Buscar Email de Funcionários" width="14" height="14" border="0"></a></div></td>
-					<? } if(in_array("G",$emailt)){ ?>
+					<?php if(in_array("U",$emailt)){ ?>
+                    <td width="3%"><div align="center"><a href="#" onClick="return abre('busca_email2.php','a','width=320,height=380,scrollbars=1');"><img src="imagens/icon14_pessoas.gif" alt="Buscar Email de FuncionÃ¡rios" width="14" height="14" border="0"></a></div></td>
+					<?php } if(in_array("G",$emailt)){ ?>
                     <td width="8%"><div align="center"><a href="#" onClick="return abre('busca_email_grupo.php','a','width=320,height=380,scrollbars=1');"><input name="grupo" type="hidden" id="grupo">
                 <input name="grupo_nome" type="hidden" id="grupo_nome"><img src="imagens/icon14_grupo.gif" alt="Buscar Grupo de Emails" width="26" height="13" border="0"></a></div></td>
-				 <? } if(in_array("C",$emailt)){ ?>
+				 <?php } if(in_array("C",$emailt)){ ?>
                     <td width="4%"><div align="center"><a href="#" onClick="return abre('busca_email.php','a','width=320,height=380,scrollbars=1');"></a><a href="#" onClick="return abre('busca_email.php','a','width=320,height=300,scrollbars=1');"><img src="imagens/icon_cli.gif" alt="Buscar Emails de Clientes" width="18" height="18" border="0"></a></div></td>
-				<? } ?>
-                    <td width="9%"><div align="center"><? if($_SESSION["login_funcionario"]=="S"){ ?><a href="#" onClick="vailogo1('email','<?= $pc; ?>');"><img src="imagens/icon14_mail.gif" alt="Enviar Email" width="16" height="10" border="0"></a><? } ?></div></td>
-					<? } if($_SESSION["i_mp"]=="S"){ ?>
+				<?php } ?>
+                    <td width="9%"><div align="center"><?php if($_SESSION["login_funcionario"]=="S"){ ?><a href="#" onClick="vailogo1('email','<?php echo  $pc; ?>');"><img src="imagens/icon14_mail.gif" alt="Enviar Email" width="16" height="10" border="0"></a><?php } ?></div></td>
+					<?php } if($_SESSION["i_mp"]=="S"){ ?>
                     <td width="4%"><div align="center"><a href="#" onClick="vailogo('imp');"><img src="imagens/icon14_imp.gif" alt="Imprimir" width="15" height="15" border="0"></a></div></td>
-					<? } ?>
+					<?php } ?>
                   </tr>
                   <tr>
                     <td colspan="7" align="left" class="textobold"><img src="imagens/spacer.gif" width="46" height="5"></td>
@@ -195,11 +195,11 @@ function MM_openBrWindow(theURL,winName,features) { //v2.0
                 </table>
 					<input name="button122" type="button" class="microtxt" value="Voltar" onClick="window.location='apqp_menu.php';">
 					&nbsp;
-                    <input name="acao2" type="button" class="microtxt" value="Salvar em Disco" onClick="salvar('interina','<?=$res["id"];?>')">
+                    <input name="acao2" type="button" class="microtxt" value="Salvar em Disco" onClick="salvar('interina','<?php echo $res["id"];?>')">
 					&nbsp;
                     <input name="button12222" type="button" class="microtxt" value="Salvar" onClick="form1.acao.value='v4';form1.submit();">
 				&nbsp;&nbsp;
-<?
+<?php
 $apqp->agenda_p("Interina");
 ?>
                     <input name="acao" type="hidden" id="acao" value="1">
@@ -219,4 +219,4 @@ $apqp->agenda_p("Interina");
 </body>
 </html>
 <script language="javascript" src="tooltip.js"></script>
-<? include("mensagem.php"); ?>
+<?php include("mensagem.php"); ?>

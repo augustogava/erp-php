@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 if(empty($_SESSION["login_nome"]) or empty($_SESSION["login_nivel"])){
 	print "<script>top.window.close();</script>";
@@ -10,15 +10,15 @@ if($acao=="ok"){
 		$erros=0;
 		if($_FILES["img"]["type"]!="image/pjpeg"){
 			$erros++;
-			$_SESSION["mensagem"]="A imagem deve ter extens„o .jpg ou .jpeg";
+			$_SESSION["mensagem"]="A imagem deve ter extens√£o .jpg ou .jpeg";
 		}
 		if($_FILES["img"]["size"] > 51200){
 			$erros++;
-			$_SESSION["mensagem"].="\\nA imagem deve ter atÈ 50Kb";			
+			$_SESSION["mensagem"].="\\nA imagem deve ter at√© 50Kb";			
 		}
 		if(file_exists("$patch/imagebank/$nome")){
 			$erros++;
-			$_SESSION["mensagem"].="\\nJ· existe uma imagem no banco com este nome";
+			$_SESSION["mensagem"].="\\nJ√° existe uma imagem no banco com este nome";
 		}
 		if($erros==0){
 			$arquivo="$patch/imagebank/$nome";
@@ -27,9 +27,9 @@ if($acao=="ok"){
 			}
 			$upa=copy($_FILES["img"]["tmp_name"], $arquivo);
 			if($upa){
-				$_SESSION["mensagem"]="Imagem incluÌda com sucesso";
+				$_SESSION["mensagem"]="Imagem inclu√≠da com sucesso";
 			}else{
-				$_SESSION["mensagem"]="A imagem n„o pÙde ser carregada\\nVerifique e tente novamente";
+				$_SESSION["mensagem"]="A imagem n√£o p√¥de ser carregada\\nVerifique e tente novamente";
 				header("Location:imagebank2.php");
 				exit;
 			}
@@ -45,7 +45,8 @@ if($acao=="ok"){
 <html>
 <head>
 <title>Banco de Imagens</title>
-<meta http-equiv="Content-Type" content="text/html; UTF-8">
+<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="style.css" rel="stylesheet" type="text/css">
 <script>
 function verifica(cad){
@@ -80,4 +81,4 @@ function verifica(cad){
     </form>
 </body>
 </html>
-<? include("mensagem.php"); ?>
+<?php include("mensagem.php"); ?>

@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 $hj=date("Y-m-d");
 $acao=verifi($permi,$acao);
@@ -17,7 +17,7 @@ if($acao=="alt"){
 				$sql=mysql_query("UPDATE vendas SET faturado=1 WHERE id='$ids'");
 					$sql=mysql_query("SELECT * FROM vendas WHERE id='$ids' AND cr=0");
 					if(!mysql_num_rows($sql)){
-						$_SESSION["mensagem"]="Não foi possivel gerar o Contas a Receber\\nVerifique se o mesmo não foi gerado anteriormente";
+						$_SESSION["mensagem"]="NÃ£o foi possivel gerar o Contas a Receber\\nVerifique se o mesmo nÃ£o foi gerado anteriormente";
 					}else{
 						$res=mysql_fetch_array($sql);
 						$_SESSION["cliente"]=$res["cliente"];

@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 include("seguranca.php");
 if(!empty($acao)){
@@ -26,14 +26,14 @@ if($acao=="incluir"){
 	$hj=date("Y-m-d");
 	$sql=mysql_query("INSERT INTO clientes (loja,transportadora,nome,fantasia,status,tipo,endereco,bairro,cep,cidade,estado,fone,fax,contato,departamento,cnpj,cpf,ie,im,vendedor,comissao,regiao,contabil,banco1,banco2,banco3,banco4,banco5,email,site,grupo,porte,ramo,complemento,ddd,dddf,origem_cad,data) VALUES ('$loja','$transportadora','$nome','$fantasia','$status','$tipo','$endereco','$bairro','$cep','$cidade','$estado','$fone','$fax','$contato','$departamento','$cnpj','$cpf','$ie','$im','$vendedor','$comissao','$regiao','$contabil','$banco1','$banco2','$banco3','$banco4','$banco5','$email','$site','$grupo','$porte','$ramo','$complemento','$ddd','$dddf','$origem','$hj')");
 	if($sql){
-		$_SESSION["mensagem"]="Cadastro geral concluÌdo!";
+		$_SESSION["mensagem"]="Cadastro geral conclu√≠do!";
 		$sql=mysql_query("select max(id)as maxid from clientes");
 		$res=mysql_fetch_array($sql);
 		$id=$res["maxid"];
 		header("Location:clientes_cobranca.php?id=$id&acao=inc&bcod=$bcod&bnome=$bnome");
 		exit;
 	}else{
-		$_SESSION["mensagem"]="O cadastro geral n„o pÙde ser concluÌdo!";
+		$_SESSION["mensagem"]="O cadastro geral n√£o p√¥de ser conclu√≠do!";
 		$comissao=banco2valor($comissao);		
 		$acao="inc";
 	}	
@@ -62,7 +62,7 @@ if($acao=="incluir"){
 		header("Location:clientes.php?bcod=$bcod&bnome=$bnome");
 		exit;		
 	}else{
-		$_SESSION["mensagem"]="O cadastro geral n„o pÙde ser alterado!";
+		$_SESSION["mensagem"]="O cadastro geral n√£o p√¥de ser alterado!";
 		$comissao=banco2valor($comissao);				
 		$acao="alt";
 	}
@@ -129,7 +129,8 @@ if($acao=="alt"){
 <html>
 <head>
 <title>CyberManager</title>
-<meta http-equiv="Content-Type" content="text/html; UTF-8">
+<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="style.css" rel="stylesheet" type="text/css">
 <script src="mascaras.js"></script>
 <script src="scripts.js"></script>
@@ -149,7 +150,7 @@ function verifica(cad){
 		return false;
 	}
 	if(cad.endereco.value==''){
-		alert('Preencha o EndereÁo');
+		alert('Preencha o Endere√ßo');
 		cad.endereco.focus();
 		return false;
 	}
@@ -196,7 +197,7 @@ function verifica(cad){
 		return false;
 	}else{
 		if(!verifica_email(cad.email.value)){
-			alert('Email Inv·lido');
+			alert('Email Inv√°lido');
 			cad.email.focus();
 			return false;
 		}
@@ -231,27 +232,27 @@ function verifica(cad){
           </tr>
           <tr class="textobold">
             <td width="109">&nbsp;Nome:</td>
-            <td width="393"><input name="nome" type="text" class="formulario" id="nome" value="<? print $nome; ?>" size="50" maxlength="100" /></td>
+            <td width="393"><input name="nome" type="text" class="formulario" id="nome" value="<?php print $nome; ?>" size="50" maxlength="100" /></td>
           </tr>
           <tr class="textobold">
             <td>&nbsp;Fantasia:</td>
-            <td><input name="fantasia" type="text" class="formulario" id="fantasia" value="<? print $fantasia; ?>" size="50" maxlength="30" /></td>
+            <td><input name="fantasia" type="text" class="formulario" id="fantasia" value="<?php print $fantasia; ?>" size="50" maxlength="30" /></td>
           </tr>
           <tr class="textobold">
             <td>&nbsp;Loja:</td>
-            <td><input name="loja" type="text" class="formulario" id="loja" value="<? print $loja; ?>" size="20" maxlength="20" /></td>
+            <td><input name="loja" type="text" class="formulario" id="loja" value="<?php print $loja; ?>" size="20" maxlength="20" /></td>
           </tr>
           <tr class="textobold">
             <td>&nbsp;Transportadora:</td>
             <td><select name="transportadora" class="textobold" id="select2">
               <option selected="selected">Selecione</option>
-              <? $sql=mysql_query("select * from transportadora Order By nome ASC");
+              <?php $sql=mysql_query("select * from transportadora Order By nome ASC");
 			while($res=mysql_fetch_array($sql)){
 			 ?>
-              <option value="<?= $res["id"]; ?>" <? if($transportadora==$res["id"]){ print "selected"; } ?>>
-              <?= $res["nome"]; ?>
+              <option value="<?php echo  $res["id"]; ?>" <?php if($transportadora==$res["id"]){ print "selected"; } ?>>
+              <?php echo  $res["nome"]; ?>
               </option>
-              <? } ?>
+              <?php } ?>
             </select></td>
           </tr>
           <tr class="textobold">
@@ -263,55 +264,55 @@ function verifica(cad){
             <td>&nbsp;Porte:</td>
             <td><select name="porte" class="textobold" id="porte">
               <option selected="selected">Selecione</option>
-              <option value="pequeno" <? if($porte=="pequeno"){ print "selected"; } ?>>Pequeno</option>
-              <option value="media" <? if($porte=="media"){ print "selected"; } ?>>Media</option>
-              <option value="grande" <? if($porte=="grande"){ print "selected"; } ?>>Grande</option>
+              <option value="pequeno" <?php if($porte=="pequeno"){ print "selected"; } ?>>Pequeno</option>
+              <option value="media" <?php if($porte=="media"){ print "selected"; } ?>>Media</option>
+              <option value="grande" <?php if($porte=="grande"){ print "selected"; } ?>>Grande</option>
             </select>            </td>
           </tr>
           <tr class="textobold">
             <td>&nbsp;Ramo Atividade: </td>
             <td><select name="ramo" class="textobold" id="select3">
               <option selected="selected">Selecione</option>
-              <? $sql=mysql_query("select * from ramo");
+              <?php $sql=mysql_query("select * from ramo");
 			while($res=mysql_fetch_array($sql)){
 			 ?>
-              <option value="<?= $res["id"]; ?>" <? if($ramo==$res["id"]){ print "selected"; } ?>>
-                <?= $res["nome"]; ?>
+              <option value="<?php echo  $res["id"]; ?>" <?php if($ramo==$res["id"]){ print "selected"; } ?>>
+                <?php echo  $res["nome"]; ?>
                 </option>
-              <? } ?>
+              <?php } ?>
             </select></td>
           </tr>
           
           
           <tr class="textobold">
             <td>&nbsp;Endere&ccedil;o:</td>
-            <td><input name="endereco" type="text" class="formulario" id="endereco" value="<? print $endereco; ?>" size="50" maxlength="100" /></td>
+            <td><input name="endereco" type="text" class="formulario" id="endereco" value="<?php print $endereco; ?>" size="50" maxlength="100" /></td>
           </tr>
           <tr class="textobold">
             <td>&nbsp;Complemento:</td>
-            <td><input name="complemento" type="text" class="formulario" id="complemento" value="<? print $complemento; ?>" size="10" maxlength="30" /></td>
+            <td><input name="complemento" type="text" class="formulario" id="complemento" value="<?php print $complemento; ?>" size="10" maxlength="30" /></td>
           </tr>
           <tr class="textobold">
             <td>&nbsp;Bairro:</td>
-            <td><input name="bairro" type="text" class="formulario" id="bairro" value="<? print $bairro; ?>" size="50" maxlength="30" /></td>
+            <td><input name="bairro" type="text" class="formulario" id="bairro" value="<?php print $bairro; ?>" size="50" maxlength="30" /></td>
           </tr>
           <tr class="textobold">
             <td>&nbsp;CEP: </td>
-            <td><input name="cep" type="text" class="formulario" id="cep" value="<? print $cep; ?>" size="10" maxlength="9" onKeyPress="return validanum(this, event)" onKeyUp="mcep(this)" /></td>
+            <td><input name="cep" type="text" class="formulario" id="cep" value="<?php print $cep; ?>" size="10" maxlength="9" onKeyPress="return validanum(this, event)" onKeyUp="mcep(this)" /></td>
           </tr>
           <tr class="textobold">
             <td>&nbsp;Estado:</td>
             <td><span class="texto">
               <select name="estado" id="estado" onChange="javascript:Atualiza('atualiza.php?pr=c',this.value);" class="formulario">
                 <option>Selecione</option>   
-                <?
-	$sql2=mysql_query("SELECT * FROM estado") or die("nao foi");
+                <?php
+	$sql2=mysql_query("SELECT * FROM estado") or erp_db_fail();
 	while($res2=mysql_fetch_array($sql2)){
 	?>
-                <option value="<?= $res2["id"]; ?>" <? if($res2["id"]==$estado){ print "selected"; } ?>>
-                <?= $res2["nome"]; ?>
+                <option value="<?php echo  $res2["id"]; ?>" <?php if($res2["id"]==$estado){ print "selected"; } ?>>
+                <?php echo  $res2["nome"]; ?>
                 </option>
-                <? } ?>
+                <?php } ?>
               </select>
             </span></td>
           </tr>
@@ -322,56 +323,56 @@ function verifica(cad){
           </tr>
           <tr class="textobold">
             <td>&nbsp;Tel:</td>
-            <td><input name="ddd" type="text" class="formulario" id="ddd" value="<? print $ddd; ?>" size="2" maxlength="15" onKeyPress="return validanum(this, event)" />
-            <input name="fone" type="text" class="formulario" id="fone" value="<? print $fone; ?>" size="20" maxlength="15" onKeyPress="return validanum(this, event)" /></td>
+            <td><input name="ddd" type="text" class="formulario" id="ddd" value="<?php print $ddd; ?>" size="2" maxlength="15" onKeyPress="return validanum(this, event)" />
+            <input name="fone" type="text" class="formulario" id="fone" value="<?php print $fone; ?>" size="20" maxlength="15" onKeyPress="return validanum(this, event)" /></td>
           </tr>
           
           <tr class="textobold">
             <td>&nbsp;Fax:</td>
-            <td><input name="dddf" type="text" class="formulario" id="dddf" value="<? print $dddf; ?>" size="2" maxlength="15" onKeyPress="return validanum(this, event)" />
-            <input name="fax" type="text" class="formulario" id="fax" value="<? print $fax; ?>" size="20" maxlength="15" onKeyPress="return validanum(this, event)" /></td>
+            <td><input name="dddf" type="text" class="formulario" id="dddf" value="<?php print $dddf; ?>" size="2" maxlength="15" onKeyPress="return validanum(this, event)" />
+            <input name="fax" type="text" class="formulario" id="fax" value="<?php print $fax; ?>" size="20" maxlength="15" onKeyPress="return validanum(this, event)" /></td>
           </tr>
           <tr class="textobold">
             <td>&nbsp;Contato:</td>
-            <td><input name="contato" type="text" class="formulario" id="contato" value="<? print $contato; ?>" size="50" maxlength="50" />
-                <? if($acao=="alt"){ ?>
-              &nbsp;&nbsp;<a href="cliente_contatos.php?cli=<? print $id; ?>" class="textobold">outros 
+            <td><input name="contato" type="text" class="formulario" id="contato" value="<?php print $contato; ?>" size="50" maxlength="50" />
+                <?php if($acao=="alt"){ ?>
+              &nbsp;&nbsp;<a href="cliente_contatos.php?cli=<?php print $id; ?>" class="textobold">outros 
                 contatos</a>
-              <? } ?></td>
+              <?php } ?></td>
           </tr>
           <tr class="textobold">
             <td>&nbsp;Departamento:</td>
-            <td><input name="departamento" type="text" class="formulario" id="departamento" value="<? print $departamento; ?>" size="50" maxlength="30" /></td>
+            <td><input name="departamento" type="text" class="formulario" id="departamento" value="<?php print $departamento; ?>" size="50" maxlength="30" /></td>
           </tr>
           <tr class="textobold">
             <td>&nbsp;CPF</td>
-            <td><input name="cpf" type="text" class="formulario" id="cpf" value="<? print $cpf; ?>" size="20" maxlength="16" onKeyPress="return validanum(this, event)" onKeyUp="mcpf(this)" /></td>
+            <td><input name="cpf" type="text" class="formulario" id="cpf" value="<?php print $cpf; ?>" size="20" maxlength="16" onKeyPress="return validanum(this, event)" onKeyUp="mcpf(this)" /></td>
           </tr>
           <tr class="textobold">
             <td>&nbsp;CNPJ</td>
-            <td><input name="cnpj" type="text" class="formulario" id="cnpj" value="<? print $cnpj; ?>" size="20" maxlength="20" onKeyPress="return validanum(this, event)" onKeyUp="mcgc(this)" /></td>
+            <td><input name="cnpj" type="text" class="formulario" id="cnpj" value="<?php print $cnpj; ?>" size="20" maxlength="20" onKeyPress="return validanum(this, event)" onKeyUp="mcgc(this)" /></td>
           </tr>
           <tr class="textobold">
             <td>&nbsp;Ins. Estadual:</td>
-            <td><input name="ie" type="text" class="formulario" id="ie" value="<? print $ie; ?>" size="20" maxlength="30" /></td>
+            <td><input name="ie" type="text" class="formulario" id="ie" value="<?php print $ie; ?>" size="20" maxlength="30" /></td>
           </tr>
           <tr class="textobold">
             <td>&nbsp;Ins. Municipal:</td>
-            <td><input name="im" type="text" class="formulario" id="im" value="<? print $im; ?>" size="20" maxlength="30" /></td>
+            <td><input name="im" type="text" class="formulario" id="im" value="<?php print $im; ?>" size="20" maxlength="30" /></td>
           </tr>
           <tr class="textobold">
             <td>&nbsp;Vendedor:</td>
             <td><select name="vendedor" class="formularioselect" id="select">
               <option value="0" selected>Selecione</option>
-              <?
+              <?php
 $sqlv=mysql_query("SELECT c.fantasia,c.id FROM clientes AS c, cliente_login AS cl, niveis AS n WHERE cl.nivel=n.id AND n.vendedor=1 AND cl.cliente=c.id ORDER BY c.fantasia ASC");
 if(mysql_num_rows($sqlv)){
 	while($resv=mysql_fetch_array($sqlv)){
 ?>
-              <option value="<?= $resv["id"]; ?>" <? if($resv["id"]==$res["vendedor"]) print "selected"; ?>>
-              <?= $resv["fantasia"]; ?>
+              <option value="<?php echo  $resv["id"]; ?>" <?php if($resv["id"]==$res["vendedor"]) print "selected"; ?>>
+              <?php echo  $resv["fantasia"]; ?>
               </option>
-              <?
+              <?php
 	}
 }
 ?>
@@ -380,26 +381,26 @@ if(mysql_num_rows($sqlv)){
           
           <tr class="textobold">
             <td>&nbsp;Email:</td>
-            <td><input name="email" type="text" class="formulario" id="email" value="<? print $email; ?>" size="50" maxlength="50" /></td>
+            <td><input name="email" type="text" class="formulario" id="email" value="<?php print $email; ?>" size="50" maxlength="50" /></td>
           </tr>
           <tr class="textobold">
             <td>&nbsp;Site:</td>
-            <td><input name="site" type="text" class="formulario" id="site" value="<? print $site; ?>" size="50" maxlength="50" />
-              <input name="id" type="hidden" id="id" value="<? print $id; ?>" />
-              <input name="acao" type="hidden" id="acao" value="<? if($acao=="inc"){ print "incluir"; }else{ print "alterar"; } ?>" /></td>
+            <td><input name="site" type="text" class="formulario" id="site" value="<?php print $site; ?>" size="50" maxlength="50" />
+              <input name="id" type="hidden" id="id" value="<?php print $id; ?>" />
+              <input name="acao" type="hidden" id="acao" value="<?php if($acao=="inc"){ print "incluir"; }else{ print "alterar"; } ?>" /></td>
           </tr>
           <tr class="textobold">
             <td>&nbsp;Origem:</td>
             <td><select name="origem" class="textobold" id="origem">
                 <option selected="selected">Selecione</option>
-                <option value="Receptivo" <? if($origem=="receptivo"){ print "selected"; } ?>>Receptivo</option>
-                <option value="bd" <? if($origem=="bd"){ print "selected"; } ?>>BD Externo</option>
-                <option value="Representante" <? if($origem=="representante"){ print "selected"; } ?>>Representante</option>
+                <option value="Receptivo" <?php if($origem=="receptivo"){ print "selected"; } ?>>Receptivo</option>
+                <option value="bd" <?php if($origem=="bd"){ print "selected"; } ?>>BD Externo</option>
+                <option value="Representante" <?php if($origem=="representante"){ print "selected"; } ?>>Representante</option>
               </select>            </td>
           </tr>
           <tr class="textobold">
             <td align="left">&nbsp;Situa&ccedil;&atilde;o:</td>
-            <td align="left"><?= $sit; ?></td>
+            <td align="left"><?php echo  $sit; ?></td>
           </tr>
           <tr class="textobold">
             <td colspan="2" align="center">
@@ -410,17 +411,17 @@ if(mysql_num_rows($sqlv)){
           </tr>
         </table>
       </form>
-	  <? if($acao=="alt"){ ?>
+	  <?php if($acao=="alt"){ ?>
 	  <script>
-		setTimeout('javascript:Atualiza(\'atualiza.php?pr=c\',<?= $estado; ?>);',500);
-		setTimeout('document.form1.cidade.value=<?= $cidade; ?>',1000);
-		setTimeout('document.form1.aba.value=<?= $grupo; ?>',1500);
+		setTimeout('javascript:Atualiza(\'atualiza.php?pr=c\',<?php echo  $estado; ?>);',500);
+		setTimeout('document.form1.cidade.value=<?php echo  $cidade; ?>',1000);
+		setTimeout('document.form1.aba.value=<?php echo  $grupo; ?>',1500);
 		
 		</script>
-	  <? } ?>
+	  <?php } ?>
     </td>
   </tr>
 </table>
 </body>
 </html>
-<? include("mensagem.php"); ?>
+<?php include("mensagem.php"); ?>

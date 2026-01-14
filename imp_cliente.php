@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 include("seguranca.php");
 
@@ -61,11 +61,11 @@ if($acao=="importar" && isset($_FILES["arquivo"])){
 			}
 		}else{
 			$erros++;
-			$log_erros[] = "Linha ".($num_linha+1).": Ja¡ existe - ".$nome;
+			$log_erros[] = "Linha ".($num_linha+1).": Ja existe - ".$nome;
 		}
 	}
 	
-	$_SESSION["mensagem"] = "Importacao conclua­da! $importados clientes importados, $erros erros.";
+	$_SESSION["mensagem"] = "Importacao concluida! $importados clientes importados, $erros erros.";
 	$_SESSION["log_erros"] = $log_erros;
 	header("Location:imp_cliente.php");
 	exit;
@@ -75,8 +75,8 @@ if($acao=="importar" && isset($_FILES["arquivo"])){
 <html lang="pt-BR">
 <head>
 <title>Importar Clientes - ERP System</title>
-<meta charset="ISO-8859-1">
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <link href="style.css" rel="stylesheet" type="text/css">
@@ -90,24 +90,24 @@ if($acao=="importar" && isset($_FILES["arquivo"])){
 <div class="erp-container-fluid">
     <div class="erp-card">
         <div class="erp-card-header">
-            <h1 class="erp-card-title">ð¥ Importar Clientes</h1>
+            <h1 class="erp-card-title"><i class="fas fa-file-import"></i> Importar Clientes</h1>
             <div>
                 <a href="clientes.php" class="erp-btn erp-btn-outline">
-                    â Voltar
+                    <i class="fas fa-arrow-left"></i> Voltar
                 </a>
             </div>
         </div>
     </div>
     
     <?php if(isset($_SESSION["mensagem"])): ?>
-    <div class="erp-alert erp-alert-<?=strpos($_SESSION["mensagem"],'conclua­da')!==false||strpos($_SESSION["mensagem"],'sucesso')!==false?'success':'danger'?>">
+    <div class="erp-alert erp-alert-<?php echo strpos($_SESSION["mensagem"],'concluida')!==false||strpos($_SESSION["mensagem"],'sucesso')!==false?'success':'danger'?>">
         <?php echo $_SESSION["mensagem"]; unset($_SESSION["mensagem"]); ?>
     </div>
     <?php endif; ?>
     
     <?php if(isset($_SESSION["log_erros"]) && count($_SESSION["log_erros"]) > 0): ?>
     <div class="erp-card">
-        <h3 style="margin-bottom:16px;font-size:18px;color:#dc3545;">â ï¸ Log de Erros</h3>
+        <h3 style="margin-bottom:16px;font-size:18px;color:#dc3545;"><i class="fas fa-triangle-exclamation"></i> Log de Erros</h3>
         <div style="max-height:300px;overflow-y:auto;background:#fff;padding:12px;border:1px solid #dee2e6;border-radius:8px;">
             <?php 
             foreach($_SESSION["log_erros"] as $erro){
@@ -122,7 +122,7 @@ if($acao=="importar" && isset($_FILES["arquivo"])){
     <div class="erp-row">
         <div class="erp-col">
             <div class="erp-card">
-                <h3 style="margin-bottom:16px;font-size:18px;color:#2c3e50;">ð Upload do Arquivo</h3>
+                <h3 style="margin-bottom:16px;font-size:18px;color:#2c3e50;"><i class="fas fa-upload"></i> Upload do Arquivo</h3>
                 
                 <form method="post" action="imp_cliente.php" enctype="multipart/form-data">
                     <input type="hidden" name="acao" value="importar">
@@ -133,11 +133,11 @@ if($acao=="importar" && isset($_FILES["arquivo"])){
                     </div>
                     
                     <div class="erp-alert erp-alert-warning" style="margin-bottom:16px;">
-                        <strong>â ï¸ Atencao:</strong> Certifique-se de que o arquivo esta¡ no formato correto antes de importar.
+                        <strong><i class="fas fa-triangle-exclamation"></i> Atencao:</strong> Certifique-se de que o arquivo esta no formato correto antes de importar.
                     </div>
                     
                     <button type="submit" class="erp-btn erp-btn-success" style="width:100%;">
-                        ð¥ Importar Clientes
+                        <i class="fas fa-file-import"></i> Importar Clientes
                     </button>
                 </form>
             </div>
@@ -145,7 +145,7 @@ if($acao=="importar" && isset($_FILES["arquivo"])){
         
         <div class="erp-col">
             <div class="erp-card">
-                <h3 style="margin-bottom:16px;font-size:18px;color:#2c3e50;">ð Formato do Arquivo</h3>
+                <h3 style="margin-bottom:16px;font-size:18px;color:#2c3e50;"><i class="fas fa-list"></i> Formato do Arquivo</h3>
                 
                 <p style="color:#6c757d;margin-bottom:16px;">
                     O arquivo deve conter os dados separados por ponto e va­rgula (;) na seguinte ordem:
@@ -171,7 +171,7 @@ if($acao=="importar" && isset($_FILES["arquivo"])){
                 </div>
                 
                 <div class="erp-alert erp-alert-info">
-                    <strong>ð¡ Exemplo de linha:</strong><br>
+                    <strong><i class="fas fa-lightbulb"></i> Exemplo de linha:</strong><br>
                     <code style="font-size:12px;">Empresa ABC;ABC Ltda;Coma©rcio;Matriz;01;1133334444;1122223333;1144445555;Ma©dio;Rua Exemplo 123;Centro;01234-567;Sao Paulo;SP</code>
                 </div>
             </div>
@@ -179,26 +179,26 @@ if($acao=="importar" && isset($_FILES["arquivo"])){
     </div>
     
     <div class="erp-card">
-        <h3 style="margin-bottom:16px;font-size:18px;color:#2c3e50;">â¹ï¸ Regras de Importacao</h3>
+        <h3 style="margin-bottom:16px;font-size:18px;color:#2c3e50;"><i class="fas fa-circle-info"></i> Regras de Importacao</h3>
         
         <div class="erp-row">
             <div class="erp-col">
                 <div style="padding:12px;background:#d4edda;border-radius:8px;border-left:4px solid #28a745;">
-                    <strong style="color:#155724;">â Sera¡ importado:</strong>
+                    <strong style="color:#155724;"><i class="fas fa-check"></i> Sera importado:</strong>
                     <ul style="margin:8px 0 0 20px;color:#155724;">
                         <li>Clientes novos (nome nao cadastrado)</li>
-                        <li>CEP aºnico para cada cliente</li>
-                        <li>Dados completos e va¡lidos</li>
+                        <li>CEP unico para cada cliente</li>
+                        <li>Dados completos e validos</li>
                     </ul>
                 </div>
             </div>
             
             <div class="erp-col">
                 <div style="padding:12px;background:#fff3cd;border-radius:8px;border-left:4px solid #ffc107;">
-                    <strong style="color:#856404;">â Sera¡ ignorado:</strong>
+                    <strong style="color:#856404;"><i class="fas fa-xmark"></i> Sera ignorado:</strong>
                     <ul style="margin:8px 0 0 20px;color:#856404;">
                         <li>Clientes duplicados (mesmo nome)</li>
-                        <li>CEP ja¡ cadastrado para o mesmo cliente</li>
+                        <li>CEP ja cadastrado para o mesmo cliente</li>
                         <li>Linhas com dados incompletos</li>
                     </ul>
                 </div>
@@ -207,6 +207,6 @@ if($acao=="importar" && isset($_FILES["arquivo"])){
     </div>
 </div>
 
-<? include("mensagem.php"); ?>
+<?php include("mensagem.php"); ?>
 </body>
 </html>

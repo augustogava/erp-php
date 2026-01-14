@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 if(empty($acao)) exit;
 $acao=verifi($permi,$acao);
@@ -10,10 +10,10 @@ if(!empty($acao)){
 if($acao=="exc"){
 	$sql=mysql_query("DELETE FROM feriados WHERE id='$id'");
 	if($sql){
-		$_SESSION["mensagem"]="Feriado excluído com sucesso!";
+		$_SESSION["mensagem"]="Feriado excluÃ­do com sucesso!";
 		$acao="entrar";
 	}else{
-		$_SESSION["mensagem"]="O feriado não pôde ser excluído!";
+		$_SESSION["mensagem"]="O feriado nÃ£o pÃ´de ser excluÃ­do!";
 		$acao="data";
 	}
 }elseif($acao=="alt"){
@@ -24,7 +24,7 @@ if($acao=="exc"){
 	if($sql){
 		$_SESSION["mensagem"]="Feriado alterado com sucesso!";
 	}else{
-		$_SESSION["mensagem"]="O feriado não pôde ser alterado!";
+		$_SESSION["mensagem"]="O feriado nÃ£o pÃ´de ser alterado!";
 	}
 	$acao="data";
 }elseif($acao=="inc"){
@@ -33,9 +33,9 @@ if($acao=="exc"){
 	$dia=data2banco($dia);
 	$sql=mysql_query("INSERT INTO feriados (dia,diames,descricao,anual) VALUES ('$dia','$diames','$descricao','$anual')");
 	if($sql){
-		$_SESSION["mensagem"]="Feriado incluído com sucesso!";
+		$_SESSION["mensagem"]="Feriado incluÃ­do com sucesso!";
 	}else{
-		$_SESSION["mensagem"]="O feriado não pôde ser incluído!";
+		$_SESSION["mensagem"]="O feriado nÃ£o pÃ´de ser incluÃ­do!";
 	}
 	$acao="data";	
 }

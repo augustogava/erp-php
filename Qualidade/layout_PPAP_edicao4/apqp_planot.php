@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 include("seguranca.php");
 if($_GET["muda"]){
@@ -11,36 +11,36 @@ $npc=$_SESSION["npc"];
 
 $sql=mysql_query("SELECT * FROM apqp_plano WHERE peca='$pc' and fase='$fase'");
 if(!mysql_num_rows($sql)){
-	$_SESSION["mensagem"]="Preencha o cabeçalho";
+	$_SESSION["mensagem"]="Preencha o cabeÃ§alho";
 	print "<script>window.location='apqp_planoc.php?fase=$fase';</script>";
 	exit;
 }else{
 	$res=mysql_fetch_array($sql);
-	$sqlb=mysql_query("SELECT * FROM apqp_cron WHERE perc='100' AND peca='$pc' AND ativ='Certificado de Submissão'");
+	$sqlb=mysql_query("SELECT * FROM apqp_cron WHERE perc='100' AND peca='$pc' AND ativ='Certificado de SubmissÃ£o'");
 	if(!mysql_num_rows($sqlb)){
 		$sqlb=mysql_query("SELECT * FROM apqp_cron WHERE perc='100' AND peca='$pc' AND ativ='Plano de Controle'");
 		if(mysql_num_rows($sqlb)){
 			$sqlb=mysql_query("SELECT * FROM apqp_cron WHERE perc='100' AND peca='$pc' AND ativ='Estudos de R&R'");
 			if(!mysql_num_rows($sqlb)){
-				$btnsalva="if (confirm('Documento Aprovado! Caso queira alterá-lo será removida a aprovação')){ lista.frmcar.submit(); return false; } return false;";
-				$btnsalva2="if (confirm('Documento Aprovado! Caso queira alterá-lo será removida a aprovação')){ fnlinha(); return false; } return false;";
-				$btnsalva3="if (confirm('Documento Aprovado! Caso queira alterá-lo será removida a aprovação')){ if(confirm('Deseja excluir as linhas?')) { lista.frmcar.delsel.value=1; lista.frmcar.submit(); } return false; } return false;";
-				$btnsalva4="if (confirm('Documento Aprovado! Caso queira alterá-lo será removida a aprovação')){ return abre('apqp_plano_pop.php?pc=$pc&fase=$fase','selimagem','width=625,height=130,scrollbars=yes'); } return false;";
+				$btnsalva="if (confirm('Documento Aprovado! Caso queira alterÃ¡-lo serÃ¡ removida a aprovaÃ§Ã£o')){ lista.frmcar.submit(); return false; } return false;";
+				$btnsalva2="if (confirm('Documento Aprovado! Caso queira alterÃ¡-lo serÃ¡ removida a aprovaÃ§Ã£o')){ fnlinha(); return false; } return false;";
+				$btnsalva3="if (confirm('Documento Aprovado! Caso queira alterÃ¡-lo serÃ¡ removida a aprovaÃ§Ã£o')){ if(confirm('Deseja excluir as linhas?')) { lista.frmcar.delsel.value=1; lista.frmcar.submit(); } return false; } return false;";
+				$btnsalva4="if (confirm('Documento Aprovado! Caso queira alterÃ¡-lo serÃ¡ removida a aprovaÃ§Ã£o')){ return abre('apqp_plano_pop.php?pc=$pc&fase=$fase','selimagem','width=625,height=130,scrollbars=yes'); } return false;";
 			}else{
-				$btnsalva="if (confirm('Caso queira editar este documento terá que revisar todos os documentos a frente e aprová-los novamente!?')){ lista.frmcar.submit(); return false;  } return false;";
-				$btnsalva2="if (confirm('Caso queira editar este documento terá que revisar todos os documentos a frente e aprová-los novamente!?')){ fnlinha(); return false;  } return false;";
-				$btnsalva3="if (confirm('Caso queira editar este documento terá que revisar todos os documentos a frente e aprová-los novamente!?')){ if(confirm('Deseja excluir as linhas?')) { lista.frmcar.delsel.value=1; lista.frmcar.submit(); } return false;  } return false;";
-				$btnsalva4="if (confirm('Caso queira editar este documento terá que revisar todos os documentos a frente e aprová-los novamente!?')){ return abre('apqp_plano_pop.php?pc=$pc&fase=$fase','selimagem','width=625,height=130,scrollbars=yes');  } return false;";	}
+				$btnsalva="if (confirm('Caso queira editar este documento terÃ¡ que revisar todos os documentos a frente e aprovÃ¡-los novamente!?')){ lista.frmcar.submit(); return false;  } return false;";
+				$btnsalva2="if (confirm('Caso queira editar este documento terÃ¡ que revisar todos os documentos a frente e aprovÃ¡-los novamente!?')){ fnlinha(); return false;  } return false;";
+				$btnsalva3="if (confirm('Caso queira editar este documento terÃ¡ que revisar todos os documentos a frente e aprovÃ¡-los novamente!?')){ if(confirm('Deseja excluir as linhas?')) { lista.frmcar.delsel.value=1; lista.frmcar.submit(); } return false;  } return false;";
+				$btnsalva4="if (confirm('Caso queira editar este documento terÃ¡ que revisar todos os documentos a frente e aprovÃ¡-los novamente!?')){ return abre('apqp_plano_pop.php?pc=$pc&fase=$fase','selimagem','width=625,height=130,scrollbars=yes');  } return false;";	}
 		}else{
 			$btnsalva="lista.frmcar.submit(); return false;";
 			$btnsalva2="fnlinha(); return false;";
 			$btnsalva3="if(confirm('Deseja excluir as linhas?')) { lista.frmcar.delsel.value=1; lista.frmcar.submit(); } return false;";		$btnsalva4="return abre('apqp_plano_pop.php?pc=$pc&fase=$fase','selimagem','width=625,height=130,scrollbars=yes');";
 		}
 	}else{
-		$btnsalva="if(confirm('O Certificado de submissão já esta aprovado, caso queira remover a aprovação deste Estudo será removida a aprovação de todos os relatórios. Deseja remover?')){ if(confirm('Você tem certeza que deseja remover a aprovação? Terá que aprovar todos os relatórios novamente.')){ form1.acao.value='altc'; form1.submit(); return false; }else{ return false; } }else{ return false; }";
-		$btnsalva2="if(confirm('O Certificado de submissão já esta aprovado, caso queira remover a aprovação deste Estudo será removida a aprovação de todos os relatórios. Deseja remover?')){ if(confirm('Você tem certeza que deseja remover a aprovação? Terá que aprovar todos os relatórios novamente.')){ fnlinha(); return false; }else{ return false; } }else{ return false; }";
-		$btnsalva3="if(confirm('O Certificado de submissão já esta aprovado, caso queira remover a aprovação deste Estudo será removida a aprovação de todos os relatórios. Deseja remover?')){ if(confirm('Você tem certeza que deseja remover a aprovação? Terá que aprovar todos os relatórios novamente.')){ if(confirm('Deseja excluir as linhas?')) { lista.frmcar.delsel.value=1; lista.frmcar.submit(); } return false; }else{ return false; } }else{ return false; }";
-		$btnsalva4="if(confirm('O Certificado de submissão já esta aprovado, caso queira remover a aprovação deste Estudo será removida a aprovação de todos os relatórios. Deseja remover?')){ if(confirm('Você tem certeza que deseja remover a aprovação? Terá que aprovar todos os relatórios novamente.')){ return abre('apqp_plano_pop.php?pc=$pc&fase=$fase','selimagem','width=625,height=130,scrollbars=yes'); }else{ return false; } }else{ return false; }";
+		$btnsalva="if(confirm('O Certificado de submissÃ£o jÃ¡ esta aprovado, caso queira remover a aprovaÃ§Ã£o deste Estudo serÃ¡ removida a aprovaÃ§Ã£o de todos os relatÃ³rios. Deseja remover?')){ if(confirm('VocÃª tem certeza que deseja remover a aprovaÃ§Ã£o? TerÃ¡ que aprovar todos os relatÃ³rios novamente.')){ form1.acao.value='altc'; form1.submit(); return false; }else{ return false; } }else{ return false; }";
+		$btnsalva2="if(confirm('O Certificado de submissÃ£o jÃ¡ esta aprovado, caso queira remover a aprovaÃ§Ã£o deste Estudo serÃ¡ removida a aprovaÃ§Ã£o de todos os relatÃ³rios. Deseja remover?')){ if(confirm('VocÃª tem certeza que deseja remover a aprovaÃ§Ã£o? TerÃ¡ que aprovar todos os relatÃ³rios novamente.')){ fnlinha(); return false; }else{ return false; } }else{ return false; }";
+		$btnsalva3="if(confirm('O Certificado de submissÃ£o jÃ¡ esta aprovado, caso queira remover a aprovaÃ§Ã£o deste Estudo serÃ¡ removida a aprovaÃ§Ã£o de todos os relatÃ³rios. Deseja remover?')){ if(confirm('VocÃª tem certeza que deseja remover a aprovaÃ§Ã£o? TerÃ¡ que aprovar todos os relatÃ³rios novamente.')){ if(confirm('Deseja excluir as linhas?')) { lista.frmcar.delsel.value=1; lista.frmcar.submit(); } return false; }else{ return false; } }else{ return false; }";
+		$btnsalva4="if(confirm('O Certificado de submissÃ£o jÃ¡ esta aprovado, caso queira remover a aprovaÃ§Ã£o deste Estudo serÃ¡ removida a aprovaÃ§Ã£o de todos os relatÃ³rios. Deseja remover?')){ if(confirm('VocÃª tem certeza que deseja remover a aprovaÃ§Ã£o? TerÃ¡ que aprovar todos os relatÃ³rios novamente.')){ return abre('apqp_plano_pop.php?pc=$pc&fase=$fase','selimagem','width=625,height=130,scrollbars=yes'); }else{ return false; } }else{ return false; }";
 	}
 }
 ?>
@@ -65,7 +65,7 @@ function abrir(url,id){
 	return true;
 }
 function salvar(url,id){
-	window.open('apqp_impressao.php?acao=salvar&local='+ url +'&pc='+ <?=$pc?> + '');
+	window.open('apqp_impressao.php?acao=salvar&local='+ url +'&pc='+ <?php echo $pc?> + '');
 	return true;
 }
 
@@ -82,12 +82,12 @@ function fnlinha(){
 		lista.frmcar.wcar.value=wcar[wcar.selectedIndex].value;
 		lista.frmcar.submit();
 	}else{
-		alert('Esta característica já foi selecionada');
+		alert('Esta caracterÃ­stica jÃ¡ foi selecionada');
 	}
 }
 function mselop(){
 	if(wop[wop.selectedIndex].value==0){
-		alert('Selecione uma operação');
+		alert('Selecione uma operaÃ§Ã£o');
 		wop.focus();
 	}else{
 		window.location='apqp_planot.php?muda=S&wop='+wop[wop.selectedIndex].value+'&fase='+lista.frmcar.fase.value;
@@ -110,8 +110,8 @@ function MM_openBrWindow(theURL,winName,features) { //v2.0
   <tr>
     <td align="left" valign="top" class="chamadas"><table width="100%" border="0" cellpadding="0" cellspacing="0" class="texto">
       <tr>
-        <td width="27" align="center"><div align="left"><a href="#" onClick="MM_openBrWindow('help/mini_plano_controle.html','','width=680,height=501,left=300,top=50')"><img src="imagens/icon14_ahn.gif" width="14" height="14" border="0" onMouseOver="this.T_STICKY=true; this.T_TITLE='Plano de Controle'; this.T_DELAY=10; this.T_WIDTH=225;  return escape('<strong>Característica do produto - </strong>características ou propriedades de uma peça<br><strong>Característica do Processo - </strong>variáveis do processo que tem uma relação de causa-efeito com a característica do produto. <br><strong>S - </strong>Símbolo<br><strong>Especificação do produto/processo - </strong>Recomendações obtidas dos documentos de engenharia.<br><strong>Técnicas de Avaliação de Medição - </strong>Sistema de medição utilizado. <br><strong>Tamanho da Amostra/Freqüência - </strong>Quantidade e freqüência de amostra.<br><strong>Método de Controle - </strong>Breve descrição de como a operação é controlada<br><strong>Plano de Reação - </strong>Especifica as ações corretivas necessárias.')"></a><span class="impTextoBold">&nbsp;</span></div></td>
-        <td width="563" align="right"><div align="left" class="textobold style1 style1 style1 style1 style1 style1 style1 style1">APQP - Plano de Controle &nbsp;<? print $npc; print $res["id"]; ?></div></td>
+        <td width="27" align="center"><div align="left"><a href="#" onClick="MM_openBrWindow('help/mini_plano_controle.html','','width=680,height=501,left=300,top=50')"><img src="imagens/icon14_ahn.gif" width="14" height="14" border="0" onMouseOver="this.T_STICKY=true; this.T_TITLE='Plano de Controle'; this.T_DELAY=10; this.T_WIDTH=225;  return escape('<strong>CaracterÃ­stica do produto - </strong>caracterÃ­sticas ou propriedades de uma peÃ§a<br><strong>CaracterÃ­stica do Processo - </strong>variÃ¡veis do processo que tem uma relaÃ§Ã£o de causa-efeito com a caracterÃ­stica do produto. <br><strong>S - </strong>SÃ­mbolo<br><strong>EspecificaÃ§Ã£o do produto/processo - </strong>RecomendaÃ§Ãµes obtidas dos documentos de engenharia.<br><strong>TÃ©cnicas de AvaliaÃ§Ã£o de MediÃ§Ã£o - </strong>Sistema de mediÃ§Ã£o utilizado. <br><strong>Tamanho da Amostra/FreqÃ¼Ãªncia - </strong>Quantidade e freqÃ¼Ãªncia de amostra.<br><strong>MÃ©todo de Controle - </strong>Breve descriÃ§Ã£o de como a operaÃ§Ã£o Ã© controlada<br><strong>Plano de ReaÃ§Ã£o - </strong>Especifica as aÃ§Ãµes corretivas necessÃ¡rias.')"></a><span class="impTextoBold">&nbsp;</span></div></td>
+        <td width="563" align="right"><div align="left" class="textobold style1 style1 style1 style1 style1 style1 style1 style1">APQP - Plano de Controle &nbsp;<?php print $npc; print $res["id"]; ?></div></td>
       </tr>
       <tr>
         <td align="center">&nbsp;</td>
@@ -140,55 +140,55 @@ function MM_openBrWindow(theURL,winName,features) { //v2.0
                   <td width="85" class="textobold">Opera&ccedil;&atilde;o:</td>
                   <td width="403"><select name="wop" class="formularioselect" onChange="mselop();">
                       <option value="0">Selecione uma opera&ccedil;&atilde;o</option>
-                      <?
+                      <?php
 $ops=mysql_query("SELECT * FROM apqp_op WHERE peca='$pc' ORDER BY numero ASC");
 if(mysql_num_rows($ops)){
 	while($rops=mysql_fetch_array($ops)){
 ?>
-                      <option value="<?= $rops["id"]; ?>" <? if($rops["id"]==$wop) print "selected"; ?>>
-                      <?= htmlspecialchars($rops["numero"], ENT_QUOTES); ?>
+                      <option value="<?php echo  $rops["id"]; ?>" <?php if($rops["id"]==$wop) print "selected"; ?>>
+                      <?php echo  htmlspecialchars($rops["numero"], ENT_QUOTES); ?>
               -
-              <?= htmlspecialchars($rops["descricao"], ENT_QUOTES); ?>
+              <?php echo  htmlspecialchars($rops["descricao"], ENT_QUOTES); ?>
                       </option>
-                      <?
+                      <?php
 	}
 }
 ?>
                   </select></td>
                   <td width="91">&nbsp;</td>
                 </tr>
-                <? if($wop){ ?>
+                <?php if($wop){ ?>
                 <tr>
                   <td class="textobold">Caracter&iacute;stica: </td>
-                  <td><select name="wcar" class="formularioselect" id="wcar" onChange="<?= $btnsalva2; ?>">
+                  <td><select name="wcar" class="formularioselect" id="wcar" onChange="<?php echo  $btnsalva2; ?>">
 				  <option value="">Selecione</option>
-                      <?
+                      <?php
 $cars=mysql_query("SELECT * FROM apqp_car WHERE peca='$pc' AND pc='S' ORDER BY tipo ASC,numero ASC");
 if(mysql_num_rows($cars)){
 	while($rcars=mysql_fetch_array($cars)){
 ?>
-                      <option value="<?= $rcars["id"]; ?>">
-                      <?= $rcars["numero"]; ?>
+                      <option value="<?php echo  $rcars["id"]; ?>">
+                      <?php echo  $rcars["numero"]; ?>
               -
-              <?= htmlspecialchars($rcars["espec"], ENT_QUOTES); ?>
+              <?php echo  htmlspecialchars($rcars["espec"], ENT_QUOTES); ?>
               -
-              <?= htmlspecialchars($rcars["tipo"], ENT_QUOTES); ?>
+              <?php echo  htmlspecialchars($rcars["tipo"], ENT_QUOTES); ?>
                       </option>
-                      <?
+                      <?php
 	}
 }
 ?>
                   </select></td>
                   <td >&nbsp;</td>
                 </tr>
-                <? } ?>
+                <?php } ?>
             </table></td>
           </tr>
           <tr>
             <td>&nbsp;</td>
           </tr>
           <tr>
-            <td><iframe name="lista" id="lista" src="apqp_planot2.php?fase=<?= $fase; ?>" width="100%" height="350" frameborder="0" scrolling="yes"></iframe></td>
+            <td><iframe name="lista" id="lista" src="apqp_planot2.php?fase=<?php echo  $fase; ?>" width="100%" height="350" frameborder="0" scrolling="yes"></iframe></td>
           </tr>
         </table></td>
       </tr>
@@ -203,21 +203,21 @@ if(mysql_num_rows($cars)){
     <form name="form1" method="post" action="apqp_plano_sql.php">
                 <table width="601" border="0" align="center" cellpadding="3" cellspacing="0" class="texto">
                   <tr>
-				  <? if($_SESSION["e_mail"]=="S"){ ?>
+				  <?php if($_SESSION["e_mail"]=="S"){ ?>
                     <td width="16%" align="left" class="textobold">&nbsp;Enviar e-mail: </td>
                     <td width="56%"><input name="email" type="text" class="formularioselect" id="email3" value="Digite o e-mail aqui"></td> 
-					<? if(in_array("U",$emailt)){ ?>
-                    <td width="3%"><div align="center"><a href="#" onClick="return abre('busca_email2.php','a','width=320,height=380,scrollbars=1');"><img src="imagens/icon14_pessoas.gif" alt="Buscar Email de Funcionários" width="14" height="14" border="0"></a></div></td>
-					<? } if(in_array("G",$emailt)){ ?>
+					<?php if(in_array("U",$emailt)){ ?>
+                    <td width="3%"><div align="center"><a href="#" onClick="return abre('busca_email2.php','a','width=320,height=380,scrollbars=1');"><img src="imagens/icon14_pessoas.gif" alt="Buscar Email de FuncionÃ¡rios" width="14" height="14" border="0"></a></div></td>
+					<?php } if(in_array("G",$emailt)){ ?>
                     <td width="8%"><div align="center"><a href="#" onClick="return abre('busca_email_grupo.php','a','width=320,height=380,scrollbars=1');"><input name="grupo" type="hidden" id="grupo">
                 <input name="grupo_nome" type="hidden" id="grupo_nome"><img src="imagens/icon14_grupo.gif" alt="Buscar Grupo de Emails" width="26" height="13" border="0"></a></div></td>
-				 <? } if(in_array("C",$emailt)){ ?>
+				 <?php } if(in_array("C",$emailt)){ ?>
                     <td width="4%"><div align="center"><a href="#" onClick="return abre('busca_email.php','a','width=320,height=380,scrollbars=1');"></a><a href="#" onClick="return abre('busca_email.php','a','width=320,height=300,scrollbars=1');"><img src="imagens/icon_cli.gif" alt="Buscar Emails de Clientes" width="18" height="18" border="0"></a></div></td>
-				<? } ?>
-                    <td width="9%"><div align="center"><? if($_SESSION["login_funcionario"]=="S"){ ?><a href="#" onClick="vailogo1('email','<?= $pc; ?>');"><img src="imagens/icon14_mail.gif" alt="Enviar Email" width="16" height="10" border="0"></a><? } ?></div></td>
-					<? } if($_SESSION["i_mp"]=="S"){ ?>
+				<?php } ?>
+                    <td width="9%"><div align="center"><?php if($_SESSION["login_funcionario"]=="S"){ ?><a href="#" onClick="vailogo1('email','<?php echo  $pc; ?>');"><img src="imagens/icon14_mail.gif" alt="Enviar Email" width="16" height="10" border="0"></a><?php } ?></div></td>
+					<?php } if($_SESSION["i_mp"]=="S"){ ?>
                     <td width="4%"><div align="center"><a href="#" onClick="vailogo('imp');"><img src="imagens/icon14_imp.gif" alt="Imprimir" width="15" height="15" border="0"></a></div></td>
-					<? } ?>
+					<?php } ?>
                   </tr>
                   <tr>
                     <td colspan="7" align="left" class="textobold"><img src="imagens/spacer.gif" width="46" height="5"></td>
@@ -229,13 +229,13 @@ if(mysql_num_rows($cars)){
         <td><div align="center">
           <input name="button122" type="button" class="microtxt" value="Voltar" onClick="window.location='apqp_menu.php';">
 &nbsp;
-<input name="button1" type="button" class="microtxt" value="Importar" onClick="<?= $btnsalva4; ?>">
+<input name="button1" type="button" class="microtxt" value="Importar" onClick="<?php echo  $btnsalva4; ?>">
 &nbsp;
-<input name="acao1" type="button" class="microtxt" value="Salvar em Disco" onClick="salvar('controle','<?=$res["id"];?>')">
+<input name="acao1" type="button" class="microtxt" value="Salvar em Disco" onClick="salvar('controle','<?php echo $res["id"];?>')">
 &nbsp;
-<input name="button12222" type="button" class="microtxt" value="Salvar" onClick="<?= $btnsalva; ?>">
+<input name="button12222" type="button" class="microtxt" value="Salvar" onClick="<?php echo  $btnsalva; ?>">
 &nbsp;
-<input name="button122222" type="button" class="microtxt" value="Excluir Linha" onClick="<?= $btnsalva3; ?>">
+<input name="button122222" type="button" class="microtxt" value="Excluir Linha" onClick="<?php echo  $btnsalva3; ?>">
 &nbsp;
 <input name="acao" type="hidden" id="acao" value="1">
   <a href="#" onClick="return abre('busca_email.php','a','width=320,height=300,scrollbars=1');">
@@ -253,4 +253,4 @@ if(mysql_num_rows($cars)){
 </body>
 </html>
 <script language="javascript" src="tooltip.js"></script>
-<? include("mensagem.php"); ?>
+<?php include("mensagem.php"); ?>

@@ -19,6 +19,21 @@ Este documento detalha o plano completo de migração do Sistema ERP da versão 
 
 ---
 
+## 🧭 Versão alvo, versão “mais recente” e recomendação
+
+### **Qual é a versão “mais recente” do PHP?**
+
+O “latest” muda com o tempo. **Antes de iniciar o rollout**, confirme a versão estável em `php.net`.
+
+### **Recomendação para este ERP**
+
+- **Alvo recomendado (produção)**: **PHP 8.2** (equilíbrio entre maturidade e compatibilidade).
+- **Alvo alternativo**: **PHP 8.3+** (se o ecossistema/servidor já estiver validado).
+
+> **Nota importante**: esta migração **não é um “version bump”**. Para este codebase, é uma **refatoração controlada**, principalmente por causa de `mysql_*`, variáveis implícitas e segurança.
+
+---
+
 ## 🔍 Análise do Sistema Atual
 
 ### Estatísticas do Codebase
@@ -30,7 +45,8 @@ Este documento detalha o plano completo de migração do Sistema ERP da versão 
 | **Uso de $_REQUEST/$_POST/$_GET** | 2,234 ocorrências em 530 arquivos | Médio |
 | **Uso de extract()** | 1 ocorrência | Baixo |
 | **Uso de `or die()`** | 300 ocorrências em 80 arquivos | Médio |
-| **Short PHP tags `<?`** | 0 ocorrências | ✅ OK |
+| **Short PHP tags `<?`** | **presentes** (centenas de ocorrências em centenas de arquivos) | **ALTO** |
+| **Mojibake/encoding quebrado** (ex.: `Funciona¡rios`, `C�digo`, `â`) | presente (não-uniforme) | **ALTO** |
 
 ### Problemas Críticos Identificados
 
@@ -55,6 +71,22 @@ foreach($_REQUEST as $name=>$valor){
 ```php
 mysql_query(...) or die("Erro"); // ← Não recomendado em produção
 ```
+
+#### 4. **ALTO: Short open tags**
+
+Mesmo que hoje funcione (por configuração de servidor), em PHP moderno isso costuma estar **desativado por padrão**.
+
+**Obrigatório**: substituir `<?`/`<?=` por `<?php`/`<?php echo ... ?>`.
+
+#### 5. **ALTO: Codificação / charset inconsistente**
+
+O sistema hoje mistura **ISO-8859-1**, trechos em **UTF-8** e textos corrompidos (mojibake). Isso quebra UI, validações e exportações.
+
+**Padrão correto (recomendado e adotado neste plano):**
+- **HTML/HTTP:** `UTF-8`
+- **MySQL/MariaDB:** `utf8mb4` + `utf8mb4_unicode_ci`
+
+> **Por que**: no MySQL, `utf8` **não é UTF-8 completo** (é 3-byte). O correto é `utf8mb4` (UTF-8 completo).
 
 ---
 
@@ -169,7 +201,13 @@ tar -czf ${BACKUP_DIR}/files.tar.gz ./
 ### 2.1 Criar Camada de Abstração de Banco de Dados
 
 #### Objetivo
-Criar uma camada que substitui todas as funções `mysql_*` por `mysqli_*` de forma transparente.
+
+**End-state recomendado:** **PDO + prepared statements** (segurança e compatibilidade).
+
+Para reduzir risco, você pode usar uma camada temporária para “rodar primeiro e refatorar depois”, mas:
+
+- **Não existe “patch” real para `mysql_*`** no PHP 8+: o caminho é **migrar o acesso ao banco**.
+- Qualquer shim “mysql_compat” deve ser tratado como **temporário** e removido na fase de hardening.
 
 #### Implementação
 
@@ -211,7 +249,7 @@ class Database {
             );
         }
         
-        mysqli_set_charset($this->connection, 'latin1');
+        mysqli_set_charset($this->connection, 'utf8mb4');
     }
     
     public static function getInstance($host = null, $user = null, $password = null, $database = null) {
@@ -374,7 +412,36 @@ if (!function_exists('mysql_free_result')) {
 }
 ```
 
-### 2.2 Atualizar conecta.php
+### 2.2 Atualizar `conecta.php`
+
+#### Opção recomendada (PDO + utf8mb4)
+
+```php
+<?php
+declare(strict_types=1);
+
+require_once(__DIR__ . "/configuracoes.php");
+
+try {
+    $pdo = new PDO(
+        "mysql:host={$host};dbname={$bd};charset=utf8mb4",
+        $user,
+        $pwd,
+        [
+            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+            PDO::ATTR_EMULATE_PREPARES => false,
+        ]
+    );
+} catch (Throwable $e) {
+    error_log("Database connection error: " . $e->getMessage());
+    die("Erro de conexao com o banco de dados. Contate o administrador do sistema.");
+}
+```
+
+#### Opção temporária (apenas para transição)
+
+Você pode manter `mysqli`/camadas de compatibilidade **apenas** para destravar o primeiro boot no PHP 8.2 — mas **a meta final** deve ser PDO.
 
 **Arquivo:** `conecta.php` (Versão Intermediária)
 
@@ -393,7 +460,7 @@ if(!$cnx) {
     die("Erro de conexao com o banco de dados. Verifique as configuracoes.");
 }
 
-@mysqli_set_charset($cnx, 'latin1');
+@mysqli_set_charset($cnx, 'utf8mb4');
 
 // IMPORTANTE: Substituir este bloco por validação específica
 // Este é o maior problema de segurança do sistema
@@ -494,6 +561,49 @@ class Input {
         return mysqli_real_escape_string(self::$db, $value);
     }
 }
+```
+
+---
+
+## 🔤 Migração de encoding (padrão: UTF-8/utf8mb4)
+
+### Por que isso é obrigatório no seu caso
+
+Você já tem sinais claros de corrupção (`Funciona¡rios`, `C�digo`, `â`, etc.). Isso normalmente vem de **texto UTF-8 sendo interpretado como ISO-8859-1**, ou o inverso.
+
+### Plano prático
+
+- **Arquivos**: converter `.php`, `.js`, `.css` para **UTF-8 sem BOM**.
+- **HTML**: padronizar **exatamente**:
+  - `<meta charset="UTF-8">`
+  - `<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">` (se usado; evite duplicidade conflitante)
+- **PHP (HTTP header)**: para páginas HTML, antes de qualquer output:
+  - `header('Content-Type: text/html; charset=UTF-8');`
+- **Banco (MySQL/MariaDB)**:
+  - `CHARACTER SET utf8mb4`
+  - `COLLATE utf8mb4_unicode_ci`
+  - Conexão PHP → DB usando `utf8mb4`:
+    - `mysqli_set_charset($conn, 'utf8mb4');`
+    - **PDO DSN**: `charset=utf8mb4`
+
+---
+
+## 🔎 Substituições comuns (exemplos)
+
+### `mysql_num_rows()` → PDO
+
+**Antes**
+
+```php
+if (mysql_num_rows($sql) == 0) { ... }
+```
+
+**Depois (PDO)**
+
+```php
+$stmt = $pdo->prepare("SELECT ... WHERE ...");
+$stmt->execute([...]);
+if ($stmt->rowCount() === 0) { ... }
 ```
 
 ---
@@ -721,7 +831,7 @@ $db = Database::getInstance();
 $result = $db->query("SELECT * FROM tabela");
 
 while($res = $db->fetchArray($result)){
-    echo htmlspecialchars($res["campo"] ?? '', ENT_QUOTES, 'ISO-8859-1');
+    echo htmlspecialchars($res["campo"] ?? '', ENT_QUOTES, 'UTF-8');
 }
 ?>
 ```

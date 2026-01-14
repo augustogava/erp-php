@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 //include("seguranca.php");
 
@@ -17,7 +17,8 @@ $acao="alt";
 <html>
 <head>
 <title>CyberManager</title>
-<meta http-equiv="Content-Type" content="text/html; UTF-8">
+<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="style.css" rel="stylesheet" type="text/css">
 <script src="scripts.js"></script>
 <script src="mascaras.js"></script>
@@ -55,12 +56,12 @@ $acao="alt";
           <td align="left"> <strong>&nbsp;Material:</strong></td>
           <td align="left"><select name="material" class="texto" id="material">
               <option value="-1" selected>Todos os materiais</option>
-              <? 
+              <?php 
 			$sqlmaterial=mysql_query("SELECT * FROM material ");
 				while($resmaterial=mysql_fetch_array($sqlmaterial)){
 			?>
-              <option value="<? print $resmaterial["id"]; ?>"><? print $resmaterial["nome"];?></option>
-              <? } ?>
+              <option value="<?php print $resmaterial["id"]; ?>"><?php print $resmaterial["nome"];?></option>
+              <?php } ?>
           </select></td>
         </tr>
         <tr class="textobold">
@@ -87,23 +88,23 @@ $acao="alt";
           <td width="60" align="center">Cod.</td>
           <td width="120" align="center">Posi&ccedil;&atilde;o</td>
           </tr>
-        <?
+        <?php
 			  $sql=mysql_query("SELECT * FROM prodserv $busca ORDER BY posicao ASC");
 			  if(mysql_num_rows($sql)==0){
 			  ?>
         <tr bgcolor="#FFFFFF"> 
           <td colspan="3" align="center" class="textobold">NENHUM PRODUTO ENCONTRADO</td>
         </tr>
-        <?
+        <?php
 			  }else{
 			  	while($res=mysql_fetch_array($sql)){
 			  ?>
         <tr bgcolor="#FFFFFF" class="texto" onMouseover="changeto('#CCCCCC')" onMouseout="changeback('#FFFFFF')"> 
-          <td height="20" class="texto">&nbsp;<? print $res["nome"]; ?></td>
-          <td width="60" align="center" class="texto">&nbsp;<? print $res["codprod"]; ?></td>
-          <td align="center"><input name="posicao[<? print $res["id"]; ?>]" type="text" class="texto" id="posicao<? print $res["id"]; ?>" onKeyPress="return validanum(this, event)" value="<? print $res["posicao"]; ?>" maxlength="7"></td>
+          <td height="20" class="texto">&nbsp;<?php print $res["nome"]; ?></td>
+          <td width="60" align="center" class="texto">&nbsp;<?php print $res["codprod"]; ?></td>
+          <td align="center"><input name="posicao[<?php print $res["id"]; ?>]" type="text" class="texto" id="posicao<?php print $res["id"]; ?>" onKeyPress="return validanum(this, event)" value="<?php print $res["posicao"]; ?>" maxlength="7"></td>
           </tr>
-        <? } } ?>
+        <?php } } ?>
       </table>
       <table width="400" border="0" cellspacing="0" cellpadding="0">
         <tr>
@@ -123,4 +124,4 @@ $acao="alt";
 </table>
 </body>
 </html>
-<? include("mensagem.php"); ?>
+<?php include("mensagem.php"); ?>

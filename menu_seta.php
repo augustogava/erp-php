@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 //include("seguranca.php");
 if(empty($acao)) $acao="entrar";
@@ -17,9 +17,9 @@ if($acao=="marcar"){
 	}
 	$sql=mysql_query("UPDATE niveis SET menus='$wmenu',submenus='$wsubmenu' WHERE id='$nivel'");
 	if($sql){
-		$_SESSION["mensagem"]="Restrições setadas com sucesso";
+		$_SESSION["mensagem"]="RestriÃ§Ãµes setadas com sucesso";
 	}else{
-		$_SESSION["mensagem"]="As restrições não puderam ser setadas";
+		$_SESSION["mensagem"]="As restriÃ§Ãµes nÃ£o puderam ser setadas";
 	}
 	$acao="entrar";
 }
@@ -27,7 +27,8 @@ if($acao=="marcar"){
 <html>
 <head>
 <title>CyberManager</title>
-<meta http-equiv="Content-Type" content="text/html; UTF-8">
+<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="style.css" rel="stylesheet" type="text/css">
 <script src="scripts.js"></script>
 <script>
@@ -35,7 +36,7 @@ if($acao=="marcar"){
 
 function verifica(cad){
 	if(cad.nivel[cad.nivel.selectedIndex].value==''){
-		alert('Selecione um nível');
+		alert('Selecione um nÃ­vel');
 		return false;
 	}
 	return true;
@@ -62,7 +63,7 @@ function verifica(cad){
       </tr>
     </table></td>
   </tr>
-  <? if($acao=="entrar"){ ?>
+  <?php if($acao=="entrar"){ ?>
   <tr> 
     <td align="left" valign="top"><form name="form1" method="post" action="" onSubmit="return verifica(this)">
         <table width="350" border="0" cellspacing="0" cellpadding="0">
@@ -73,12 +74,12 @@ function verifica(cad){
           <tr> 
             <td width="255"><select name="nivel" class="formularioselect" id="nivel">
                 <option value="" selected>Selecione</option>
-				<? 
+				<?php 
 				$sql=mysql_query("SELECT * FROM niveis ORDER BY nome ASC");
 				while($res=mysql_fetch_array($sql)){
 				?>
-				<option value="<? print $res["id"]; ?>"><? print $res["nome"]; ?></option>
-				<? } ?>
+				<option value="<?php print $res["id"]; ?>"><?php print $res["nome"]; ?></option>
+				<?php } ?>
               </select></td>
             <td width="95" align="center"><input name="imageField" type="image" src="imagens/c_continuar.gif" border="0">
               <input name="acao" type="hidden" id="acao" value="cont"></td>
@@ -86,7 +87,7 @@ function verifica(cad){
         </table>
       </form></td>
   </tr>
-  <? }elseif($acao=="cont"){ ?>
+  <?php }elseif($acao=="cont"){ ?>
   <tr>
     <td align="left" valign="top"><form name="form2" method="post" action="">
         <table width="350" border="0" cellspacing="0" cellpadding="0">
@@ -96,7 +97,7 @@ function verifica(cad){
           </tr>
           <tr>
             <td class="texto">
-			<?
+			<?php
 			$sql=mysql_query("SELECT * FROM niveis WHERE id='$nivel'");
 			$res=mysql_fetch_array($sql);
 			$wmenus=explode(",",$res["menus"]);
@@ -105,16 +106,16 @@ function verifica(cad){
 			while($res=mysql_fetch_array($sql)){
 				$menu=$res["id"];
 			?><img src="imagens/folder.gif" width="20" height="20">
-              <input type="checkbox" name="menu[]" value="<? print $res["id"]; ?>" <? if(in_array($res["id"],$wmenus))print "checked"; ?>>
-              <? print $res["texto"];?><br>
-			  <?
+              <input type="checkbox" name="menu[]" value="<?php print $res["id"]; ?>" <?php if(in_array($res["id"],$wmenus))print "checked"; ?>>
+              <?php print $res["texto"];?><br>
+			  <?php
 			  $sql2=mysql_query("SELECT * FROM submenus WHERE menu='$menu' ORDER BY posicao ASC");
 			  while($res2=mysql_fetch_array($sql2)){
 			  ?>
               <img src="imagens/dot.gif" width="20" height="6"> <img src="imagens/folder.gif" width="20" height="20">
-              <input type="checkbox" name="submenu[]" value="<? print $res2["id"]; ?>" <? if(in_array($res2["id"],$wsubmenus))print "checked"; ?>>
-              <? print $res2["texto"]; ?><br>
-		    <? } } ?>			</td>
+              <input type="checkbox" name="submenu[]" value="<?php print $res2["id"]; ?>" <?php if(in_array($res2["id"],$wsubmenus))print "checked"; ?>>
+              <?php print $res2["texto"]; ?><br>
+		    <?php } } ?>			</td>
           </tr>
           <tr>
             <td align="center">
@@ -123,12 +124,12 @@ function verifica(cad){
               <input name="Submit2" type="submit" class="microtxt" value="Continuar">
               
               <input name="acao" type="hidden" id="acao" value="marcar">
-            <input name="nivel" type="hidden" id="nivel" value="<? print $nivel; ?>"></td></tr>
+            <input name="nivel" type="hidden" id="nivel" value="<?php print $nivel; ?>"></td></tr>
         </table>
       </form></td>
   </tr>
-  <? } ?>
+  <?php } ?>
 </table>
 </body>
 </html>
-<? include("mensagem.php"); ?>
+<?php include("mensagem.php"); ?>

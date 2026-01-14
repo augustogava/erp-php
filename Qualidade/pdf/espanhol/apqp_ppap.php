@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 include("seguranca.php");
 
@@ -12,7 +12,7 @@ include("seguranca.php");
 <script>
 function valida(){
 	if(form1.pc.value=="0"){
-		alert("Selecione Uma PeÁa!!!");
+		alert("Selecione Uma Pe√ßa!!!");
 		form1.pc.focus();
 		return false
 	}
@@ -60,12 +60,12 @@ function veri(){
         <td height="328" class="textoboldbranco"><form name="form1" method="post" action="apqp_ppap_sql.php" onSubmit="return valida(this)">
           <div align="center">
 		  <select name="pc">
-		  	<option value="0">Selecione um peÁa</option>
-		  	<?
+		  	<option value="0">Selecione um pe√ßa</option>
+		  	<?php
 		  	$sql=mysql_query("select * from apqp_pc order by nome asc");
 			while($rec=mysql_fetch_array($sql)){?>
-				<option value="<?=$rec["id"]?>"><?=$rec["numero"]." - ".$rec["nome"];?></option>
-			<?
+				<option value="<?php echo $rec["id"]?>"><?php echo $rec["numero"]." - ".$rec["nome"];?></option>
+			<?php
 			}?>
 		  </select>
 		    </div>
@@ -120,7 +120,7 @@ function veri(){
               <td class="textobold">&nbsp;Aprova&ccedil;&atilde;o de Apar&ecirc;ncia</td>
               <td align="center">&nbsp;</td>
               <td align="center" bordercolor="#003366"><input name="nome[4]" type="checkbox" id="nome4" value="submissao"  onClick="veri();"></td>
-              <td bordercolor="#003366" class="textobold">&nbsp;Certificado de Submiss„o </td>
+              <td bordercolor="#003366" class="textobold">&nbsp;Certificado de Submiss√£o </td>
               <td align="center" bordercolor="#003366">&nbsp;</td>
               <td bordercolor="#003366" class="textobold">&nbsp;</td>
             </tr>
@@ -174,4 +174,4 @@ function veri(){
 </table>
 </body>
 </html>
-<? include("mensagem.php"); ?>
+<?php include("mensagem.php"); ?>

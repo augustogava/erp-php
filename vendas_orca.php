@@ -1,9 +1,9 @@
-<?
+<?php
 include("conecta.php");
 include("seguranca.php");
 $acao=verifi($permi,$acao);
 if(!empty($acao)){
-	$loc="Vendas Orçamento";
+	$loc="Vendas OrÃ§amento";
 	$pagina=$_SERVER['SCRIPT_FILENAME'];
 	include("log.php");
 }
@@ -43,7 +43,7 @@ if($acao=="entrar"){
 	
 	switch($mot){
 		case 1:
-			$motivo="Concorrência";
+			$motivo="ConcorrÃªncia";
 			break;
 		case 2:
 			$motivo="Investimento futuro";
@@ -60,7 +60,7 @@ if($acao=="entrar"){
 	}
 	$sql=mysql_query("UPDATE vendas_orc SET sit='2',motivo='$mot' WHERE id='$id'");
 	if($sql){
-		$_SESSION["mensagem"]="Orçamento cancelada com sucesso!";
+		$_SESSION["mensagem"]="OrÃ§amento cancelada com sucesso!";
 		header("location:vendas_orca.php");
 		exit;
 	}
@@ -69,7 +69,8 @@ if($acao=="entrar"){
 <html>
 <head>
 <title>CyberManager</title>
-<meta http-equiv="Content-Type" content="text/html; UTF-8">
+<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="style.css" rel="stylesheet" type="text/css">
 <script src="scripts.js"></script>
 <script src="mascaras.js"></script>
@@ -78,7 +79,7 @@ if($acao=="entrar"){
 function verificabusca(cad){
 	if(cad.emissao.value!=''){
 		if(!verifica_data(cad.emissao.value)){
-			alert('Data de emissão incorreta');
+			alert('Data de emissÃ£o incorreta');
 			cad.emissao.focus();
 			return false;
 		}
@@ -126,7 +127,7 @@ function verifica(cad){
   <tr>
     <td colspan="2" align="left" valign="top"><img src="imagens/dot.gif" width="20" height="5"></td>
   </tr>
-<?
+<?php
 if($acao=="entrar"){
 ?>
   <tr>
@@ -137,9 +138,9 @@ if($acao=="entrar"){
         </tr>
         <tr class="textobold">
           <td width="63">&nbsp;Per&iacute;odo:</td>
-          <td width="211"><input name="bde" type="text" class="formulario" id="bde2" onKeyPress="return validanum(this, event)" onKeyUp="mdata(this)" value="<?= $bde; ?>" size="7" maxlength="10">
+          <td width="211"><input name="bde" type="text" class="formulario" id="bde2" onKeyPress="return validanum(this, event)" onKeyUp="mdata(this)" value="<?php echo  $bde; ?>" size="7" maxlength="10">
 &nbsp;&agrave;&nbsp;
-      <input name="bate" type="text" class="formulario" id="bate2" onKeyPress="return validanum(this, event)" onKeyUp="mdata(this)" value="<?= $bate; ?>" size="7" maxlength="10">
+      <input name="bate" type="text" class="formulario" id="bate2" onKeyPress="return validanum(this, event)" onKeyUp="mdata(this)" value="<?php echo  $bate; ?>" size="7" maxlength="10">
 &nbsp;
 <input name="Submit2" type="submit" class="microtxt" value="Buscar">
 <input name="buscar" type="hidden" id="buscar" value="true"></td>
@@ -150,12 +151,12 @@ if($acao=="entrar"){
   <tr>
     <td colspan="2" align="left" valign="top"><table width="594" border="0" cellspacing="0" cellpadding="0">
       <tr>
-        <td align="center" class="textobold"><a href="vendas_orca_sql.php?acao=inc" class="textobold">novo orçamento </a></td>
+        <td align="center" class="textobold"><a href="vendas_orca_sql.php?acao=inc" class="textobold">novo orÃ§amento </a></td>
       </tr>
     </table>
     <table width="611" border="0" cellpadding="0" cellspacing="1" bgcolor="#003366">
 
-<?
+<?php
 $sqlc=mysql_query("SELECT distinct(vendas_orc.vendedor),clientes.nome as nome FROM vendas_orc,clientes WHERE vendas_orc.vendedor=clientes.id AND vendas_orc.sit='0'");
 if(!mysql_num_rows($sqlc)){
 
@@ -163,7 +164,7 @@ if(!mysql_num_rows($sqlc)){
 <tr class="textoboldbranco">
         <td colspan="6" align="center">Nada encontrado </td>
         </tr>
-<?
+<?php
 }else{
 	while($resc=mysql_fetch_array($sqlc)){
 		$sql=mysql_query("SELECT vendas_orc.*,clientes.nome FROM vendas_orc,clientes $busca AND vendas_orc.vendedor='$resc[vendedor]' AND vendas_orc.sit='0' AND vendas_orc.vendedor=clientes.id  ORDER BY vendas_orc.emissao ASC");
@@ -171,23 +172,23 @@ if(!mysql_num_rows($sqlc)){
 	}else{
 ?>
       <tr class="textoboldbranco">
-        <td colspan="6" align="left">&nbsp;<?= $resc["nome"]; ?></td>
+        <td colspan="6" align="left">&nbsp;<?php echo  $resc["nome"]; ?></td>
         </tr>
       
-<?
+<?php
  		while($res=mysql_fetch_array($sql)){
 			$vendedor[$resc["nome"]]+=$res["valor"];
 ?>
       <tr bgcolor="#FFFFFF" class="texto" onMouseover="changeto('#CCCCCC')" onMouseout="changeback('#FFFFFF')">
-        <td width="64" align="center"><?= $res["id"]; ?></td>
-        <td width="326">&nbsp;<?= $res["nome"]; ?></td>
-        <td width="76" align="right"><?= banco2valor($res["valor"]); ?>&nbsp;</td>
-        <?  if(empty($res["sit"])){ $java2="window.location='$_SERVER[PHP_SELF]?acao=alt&id=$res[id]';"; }else{ $java2="window.alert('Proposta já virou venda!');"; } ?>
-        <td width="17" align="center"><a href="#" onClick="<?= $java2; ?>"><img src="imagens/icon14_alterar.gif" alt="Alterar" width="14" height="14" border="0"></a></td>
-        <td width="16" align="center"><a href="#" onMouseOver="this.T_STICKY=true; this.T_TITLE='Qual o Motivo do cancelamento?'; this.T_DELAY=10; this.T_WIDTH=225;  return escape('<a href=vendas_orca.php?acao=canc&id=<?= $res[id]; ?>&mot=1&cliente=<?= $res[cliente]; ?>&vendedor=<?= $resc[vendedor]; ?>>Concorrência</a> <br> <a href=vendas_orcaa.php?acao=canc&id=<?= $res[id]; ?>&mot=2&cliente=<?= $res[cliente]; ?>&vendedor=<?= $resc[vendedor]; ?>>Investimento futuro <br> <a href=vendas_orca.php?acao=canc&id=<?= $res[id]; ?>&mot=3&cliente=<?= $res[cliente]; ?>&vendedor=<?= $resc[vendedor]; ?>>Prazo <br> <a href=vendas_orca.php?acao=canc&id=<?= $res[id]; ?>&mot=4&cliente=<?= $res[cliente]; ?>&vendedor=<?= $resc[vendedor]; ?>>Qualidade <br> <a href=vendas_orca.php?acao=canc&id=<?= $res[id]; ?>&mot=5&cliente=<?= $res[cliente]; ?>&vendedor=<?= $resc[vendedor]; ?>>Outros')"><img src="imagens/icon14_cancelar3.gif" alt="Cancelar Proposta" width="16" height="16" border="0"></a></td>
-        <td width="16" align="center"><a href="#" onClick="pergunta('Deseja excluir este orçamento?','vendas_orca_sql.php?id=<?= $res["id"]; ?>&acao=exc');"><img src="imagens/icon14_lixeira.gif" alt="Excluir" width="14" height="14" border="0"></a></td>
+        <td width="64" align="center"><?php echo  $res["id"]; ?></td>
+        <td width="326">&nbsp;<?php echo  $res["nome"]; ?></td>
+        <td width="76" align="right"><?php echo  banco2valor($res["valor"]); ?>&nbsp;</td>
+        <?php  if(empty($res["sit"])){ $java2="window.location='$_SERVER[PHP_SELF]?acao=alt&id=$res[id]';"; }else{ $java2="window.alert('Proposta jÃ¡ virou venda!');"; } ?>
+        <td width="17" align="center"><a href="#" onClick="<?php echo  $java2; ?>"><img src="imagens/icon14_alterar.gif" alt="Alterar" width="14" height="14" border="0"></a></td>
+        <td width="16" align="center"><a href="#" onMouseOver="this.T_STICKY=true; this.T_TITLE='Qual o Motivo do cancelamento?'; this.T_DELAY=10; this.T_WIDTH=225;  return escape('<a href=vendas_orca.php?acao=canc&id=<?php echo  $res[id]; ?>&mot=1&cliente=<?php echo  $res[cliente]; ?>&vendedor=<?php echo  $resc[vendedor]; ?>>ConcorrÃªncia</a> <br> <a href=vendas_orcaa.php?acao=canc&id=<?php echo  $res[id]; ?>&mot=2&cliente=<?php echo  $res[cliente]; ?>&vendedor=<?php echo  $resc[vendedor]; ?>>Investimento futuro <br> <a href=vendas_orca.php?acao=canc&id=<?php echo  $res[id]; ?>&mot=3&cliente=<?php echo  $res[cliente]; ?>&vendedor=<?php echo  $resc[vendedor]; ?>>Prazo <br> <a href=vendas_orca.php?acao=canc&id=<?php echo  $res[id]; ?>&mot=4&cliente=<?php echo  $res[cliente]; ?>&vendedor=<?php echo  $resc[vendedor]; ?>>Qualidade <br> <a href=vendas_orca.php?acao=canc&id=<?php echo  $res[id]; ?>&mot=5&cliente=<?php echo  $res[cliente]; ?>&vendedor=<?php echo  $resc[vendedor]; ?>>Outros')"><img src="imagens/icon14_cancelar3.gif" alt="Cancelar Proposta" width="16" height="16" border="0"></a></td>
+        <td width="16" align="center"><a href="#" onClick="pergunta('Deseja excluir este orÃ§amento?','vendas_orca_sql.php?id=<?php echo  $res["id"]; ?>&acao=exc');"><img src="imagens/icon14_lixeira.gif" alt="Excluir" width="14" height="14" border="0"></a></td>
       </tr>
-<?
+<?php
 		}
 	}
 }
@@ -195,30 +196,30 @@ if(!mysql_num_rows($sqlc)){
 ?>
     </table>
     <br>    
-<? if(isset($vendedor)){ ?>
+<?php if(isset($vendedor)){ ?>
 <table width="270" border="0" align="right" cellpadding="0" cellspacing="1" bgcolor="#003366" class="texto">
   <tr bgcolor="#003366" class="textoboldbranco">
     <td width="188">Vendedor</td>
     <td width="79" align="right">Valor</td>
   </tr>
-<? foreach($vendedor as $key=>$valor){ ?>
+<?php foreach($vendedor as $key=>$valor){ ?>
   <tr bgcolor="#FFFFFF">
-    <td width="188"><?= print "$key"; ?></td>
-    <td width="79" align="right">&nbsp;<? print banco2valor($vendedor[$key]); ?></td>
+    <td width="188"><?php echo  print "$key"; ?></td>
+    <td width="79" align="right">&nbsp;<?php print banco2valor($vendedor[$key]); ?></td>
   </tr>
-<? } ?>
+<?php } ?>
 </table>
-<? } ?></td>
+<?php } ?></td>
   </tr>
   <tr>
     <td colspan="2"><img src="imagens/dot.gif" width="20" height="8"></td>
   </tr>
-<?
+<?php
 }elseif($acao=="alt"){
 ?>
 <form name="form1" method="post" action="vendas_orca_sql.php" onSubmit="return verifica(this);">
   <tr>
-    <td colspan="2" align="left" valign="top" bgcolor="#003366" class="textoboldbranco">&nbsp;<? if($acao=="alt"){ print "Alterar"; }else{ print "Incluir"; } ?> orçamento </td>
+    <td colspan="2" align="left" valign="top" bgcolor="#003366" class="textoboldbranco">&nbsp;<?php if($acao=="alt"){ print "Alterar"; }else{ print "Incluir"; } ?> orÃ§amento </td>
   </tr>
   <tr>
     <td colspan="2" align="left" valign="top"><table width="100%" border="0" cellspacing="0" cellpadding="0">
@@ -233,25 +234,25 @@ if(!mysql_num_rows($sqlc)){
           <tr>
             <td><select name="acaom" class="formularioselect" id="acaom">
                 <option value="" >Selecione</option>
-                <?
+                <?php
 				$query="SELECT * FROM crm_acao $query ORDER BY data DESC";
 				$sql=mysql_query($query);
 				while($res1=mysql_fetch_array($sql)){
 				?>
-                <option value="<? print $res1["id"]; ?>" <? if($res["acao"]==$res1["id"]) print "selected"; ?>><? print banco2data($res1["data"])." - ".$res1["nome"]; ?></option>
-                <? } ?>
+                <option value="<?php print $res1["id"]; ?>" <?php if($res["acao"]==$res1["id"]) print "selected"; ?>><?php print banco2data($res1["data"])." - ".$res1["nome"]; ?></option>
+                <?php } ?>
             </select></td>
             <td><select name="vendedor" class="formularioselect" id="vendedor">
               <option value="" selected>Selecione</option>
-              <?
+              <?php
 $sqlv=mysql_query("SELECT c.fantasia,c.id FROM clientes AS c, cliente_login AS cl, niveis AS n WHERE cl.nivel=n.id AND n.vendedor=1 AND cl.cliente=c.id ORDER BY c.fantasia ASC");
 if(mysql_num_rows($sqlv)){
 	while($resv=mysql_fetch_array($sqlv)){
 ?>
-              <option value="<?= $resv["id"]; ?>" <? if($resv["id"]==$res["vendedor"]) print "selected"; ?>>
-              <?= $resv["fantasia"]; ?>
+              <option value="<?php echo  $resv["id"]; ?>" <?php if($resv["id"]==$res["vendedor"]) print "selected"; ?>>
+              <?php echo  $resv["fantasia"]; ?>
               </option>
-              <?
+              <?php
 	}
 }
 ?>
@@ -261,7 +262,7 @@ if(mysql_num_rows($sqlv)){
           </td>
         </tr>
       <tr class="textobold">
-        <td><input name="cod" type="text" class="formularioselect" id="cod" value="<? if(empty($res["cod"])){ print "$id/".date("Y"); }else{ print $res["cod"]; } ?>" size="10" maxlength="10" readonly=""></td>
+        <td><input name="cod" type="text" class="formularioselect" id="cod" value="<?php if(empty($res["cod"])){ print "$id/".date("Y"); }else{ print $res["cod"]; } ?>" size="10" maxlength="10" readonly=""></td>
         <td>&nbsp;</td>
         </tr>
       <tr class="textobold">
@@ -275,7 +276,7 @@ if(mysql_num_rows($sqlv)){
         <td width="27">&nbsp;</td>
         </tr>
       <tr>
-        <td colspan="7"><input name="cliente" type="text" class="formularioselect" id="cliente" value="<? print $res["cliente"]; ?>"></td>
+        <td colspan="7"><input name="cliente" type="text" class="formularioselect" id="cliente" value="<?php print $res["cliente"]; ?>"></td>
         <td align="center"><a href="#" onClick="return abre('vendas_cliorc.php','a','width=320,height=380,scrollbars=1');"></a></td>
         </tr>
       <tr class="textobold">
@@ -289,11 +290,11 @@ if(mysql_num_rows($sqlv)){
         <td>&nbsp;</td>
       </tr>
       <tr class="textobold">
-        <td><input name="telefone" type="text" class="formularioselect" id="telefone" value="<? print $res["telefone"]; ?>"></td>
+        <td><input name="telefone" type="text" class="formularioselect" id="telefone" value="<?php print $res["telefone"]; ?>"></td>
         <td>&nbsp;</td>
-        <td><input name="email" type="text" class="formularioselect" id="email" value="<? print $res["email"]; ?>"></td>
+        <td><input name="email" type="text" class="formularioselect" id="email" value="<?php print $res["email"]; ?>"></td>
         <td>&nbsp;</td>
-        <td><input name="emissao" type="text" class="formularioselect" id="emissao" onKeyPress="return validanum(this, event)" onKeyUp="mdata(this)" value="<? print banco2data($res["emissao"]); ?>" size="10" maxlength="10"></td>
+        <td><input name="emissao" type="text" class="formularioselect" id="emissao" onKeyPress="return validanum(this, event)" onKeyUp="mdata(this)" value="<?php print banco2data($res["emissao"]); ?>" size="10" maxlength="10"></td>
         <td>&nbsp;</td>
         <td>&nbsp;</td>
         <td>&nbsp;</td>
@@ -320,7 +321,7 @@ if(mysql_num_rows($sqlv)){
             <td width="50">Desc % </td>
             <td width="47">Total</td>
             </tr>
-<?
+<?php
 $sql=mysql_query("SELECT * FROM vendas_orc_list WHERE orcamento='$id'");
 if(!mysql_num_rows($sql)){
 	$sql=mysql_query("INSERT INTO vendas_orc_list (orcamento) VALUES ('$id')");
@@ -345,20 +346,20 @@ if(mysql_num_rows($sql)){
 		$tots=$prods-$descs;
 ?>
 		  <tr bgcolor="#FFFFFF">
-            <td align="center"><input name="del[<?= $resl["id"]; ?>]" type="checkbox" id="del<?= $resl["id"]; ?>" value="<?= $resl["id"]; ?>"></td>
-			<input name="material[<?= $resl["id"]; ?>]" type="hidden" id="material<?= $resl["id"]; ?>" value="<?= $res["contato"]; ?>">
-            <td width="35"><input name="qtd[<?= $resl["id"]; ?>]" type="text" class="formularioselect" id="qtd<?= $resl["id"]; ?>" onKeyDown="formataMoeda(this,retornaKeyCode(event))" onKeyUp="formataMoeda(this,retornaKeyCode(event))" value="<?= banco2valor($resl["qtd"]); ?>" size="1"></td>
-            <td width="48"><input name="largura[<?= $resl["id"]; ?>]2" type="text" class="formularioselect" id="largura<?= $resl["id"]; ?>" onKeyDown="formataMoeda(this,retornaKeyCode(event))" onKeyUp="formataMoeda(this,retornaKeyCode(event))"  value="<?= banco2valor($resl["largura"]); ?>" size="1"></td>
-            <td width="37"><input name="altura[<?= $resl["id"]; ?>]" type="text" class="formularioselect" id="altura<?= $resl["id"]; ?>" onKeyDown="formataMoeda(this,retornaKeyCode(event))" onKeyUp="formataMoeda(this,retornaKeyCode(event))"  value="<?= banco2valor($resl["altura"]); ?>" size="1"></td>
-            <td><input name="descricao[<?= $resl["id"]; ?>]" type="text" class="formularioselect" id="descricao<?= $resl["id"]; ?>" size="1" readonly="" value="<?= $resl["prod"]." - $resm[apelido]"; ?>" onMouseOver="this.T_TITLE='Foto'; this.T_DELAY=10; this.T_WIDTH=70;  return escape('<img src=<? if(!empty($resp["foto"])){ ?>foto/gd.php?img=<? print $resp["foto"]; ?>&wid=60<? }else{ print "imagens/semFoto.jpg"; }; ?>>')"></td>
-            <td align="center"><a href="#" onClick="abrenovo('<?= $resl["id"]; ?>',form1.altura<?= $resl["id"]; ?>.value,form1.largura<?= $resl["id"]; ?>.value);"><img src="imagens/icon_14_search.gif" width="14" height="14" border="0"></a></td>
-            <td width="142"><input name="local[<?= $resl["id"]; ?>]2" type="text" class="formularioselect" id="local[<?= $resl["id"]; ?>]" size="1" value="<?= $resl["local"]; ?>"></td>
-            <input name="prodserv[<?= $resl["id"]; ?>]" type="hidden" id="prodserv<?= $resl["id"]; ?>" value="<?= $resl["produto"] ?>">
-            <td width="55"><input name="unitario[<?= $resl["id"]; ?>]" type="text" class="formularioselect" id="unitario<?= $resl["id"]; ?>" onKeyDown="formataMoeda(this,retornaKeyCode(event))" onKeyUp="formataMoeda(this,retornaKeyCode(event))" value="<?= banco2valor($resl["unitario"]); ?>" size="1"></td>
-            <td width="50"><input name="desconto[<?= $resl["id"]; ?>]" type="text" class="formularioselect" id="desconto<?= $resl["id"]; ?>" onKeyDown="formataMoeda(this,retornaKeyCode(event))" onKeyUp="formataMoeda(this,retornaKeyCode(event))" value="<?= banco2valor($resl["desconto"]); ?>" size="1"></td>
-            <td width="47"><input name="total[<?= $resl["id"]; ?>]" type="text" class="formularioselect" id="total<?= $resl["id"]; ?>" onKeyDown="formataMoeda(this,retornaKeyCode(event))" onKeyUp="formataMoeda(this,retornaKeyCode(event))" value="<?= banco2valor(($resl["qtd"]*$resl["unitario"])-($resl["qtd"]*$resl["unitario"]*$resl["desconto"])/100); ?>" size="1" readonly=""></td>
+            <td align="center"><input name="del[<?php echo  $resl["id"]; ?>]" type="checkbox" id="del<?php echo  $resl["id"]; ?>" value="<?php echo  $resl["id"]; ?>"></td>
+			<input name="material[<?php echo  $resl["id"]; ?>]" type="hidden" id="material<?php echo  $resl["id"]; ?>" value="<?php echo  $res["contato"]; ?>">
+            <td width="35"><input name="qtd[<?php echo  $resl["id"]; ?>]" type="text" class="formularioselect" id="qtd<?php echo  $resl["id"]; ?>" onKeyDown="formataMoeda(this,retornaKeyCode(event))" onKeyUp="formataMoeda(this,retornaKeyCode(event))" value="<?php echo  banco2valor($resl["qtd"]); ?>" size="1"></td>
+            <td width="48"><input name="largura[<?php echo  $resl["id"]; ?>]2" type="text" class="formularioselect" id="largura<?php echo  $resl["id"]; ?>" onKeyDown="formataMoeda(this,retornaKeyCode(event))" onKeyUp="formataMoeda(this,retornaKeyCode(event))"  value="<?php echo  banco2valor($resl["largura"]); ?>" size="1"></td>
+            <td width="37"><input name="altura[<?php echo  $resl["id"]; ?>]" type="text" class="formularioselect" id="altura<?php echo  $resl["id"]; ?>" onKeyDown="formataMoeda(this,retornaKeyCode(event))" onKeyUp="formataMoeda(this,retornaKeyCode(event))"  value="<?php echo  banco2valor($resl["altura"]); ?>" size="1"></td>
+            <td><input name="descricao[<?php echo  $resl["id"]; ?>]" type="text" class="formularioselect" id="descricao<?php echo  $resl["id"]; ?>" size="1" readonly="" value="<?php echo  $resl["prod"]." - $resm[apelido]"; ?>" onMouseOver="this.T_TITLE='Foto'; this.T_DELAY=10; this.T_WIDTH=70;  return escape('<img src=<?php if(!empty($resp["foto"])){ ?>foto/gd.php?img=<?php print $resp["foto"]; ?>&wid=60<?php }else{ print "imagens/semFoto.jpg"; }; ?>>')"></td>
+            <td align="center"><a href="#" onClick="abrenovo('<?php echo  $resl["id"]; ?>',form1.altura<?php echo  $resl["id"]; ?>.value,form1.largura<?php echo  $resl["id"]; ?>.value);"><img src="imagens/icon_14_search.gif" width="14" height="14" border="0"></a></td>
+            <td width="142"><input name="local[<?php echo  $resl["id"]; ?>]2" type="text" class="formularioselect" id="local[<?php echo  $resl["id"]; ?>]" size="1" value="<?php echo  $resl["local"]; ?>"></td>
+            <input name="prodserv[<?php echo  $resl["id"]; ?>]" type="hidden" id="prodserv<?php echo  $resl["id"]; ?>" value="<?php echo  $resl["produto"] ?>">
+            <td width="55"><input name="unitario[<?php echo  $resl["id"]; ?>]" type="text" class="formularioselect" id="unitario<?php echo  $resl["id"]; ?>" onKeyDown="formataMoeda(this,retornaKeyCode(event))" onKeyUp="formataMoeda(this,retornaKeyCode(event))" value="<?php echo  banco2valor($resl["unitario"]); ?>" size="1"></td>
+            <td width="50"><input name="desconto[<?php echo  $resl["id"]; ?>]" type="text" class="formularioselect" id="desconto<?php echo  $resl["id"]; ?>" onKeyDown="formataMoeda(this,retornaKeyCode(event))" onKeyUp="formataMoeda(this,retornaKeyCode(event))" value="<?php echo  banco2valor($resl["desconto"]); ?>" size="1"></td>
+            <td width="47"><input name="total[<?php echo  $resl["id"]; ?>]" type="text" class="formularioselect" id="total<?php echo  $resl["id"]; ?>" onKeyDown="formataMoeda(this,retornaKeyCode(event))" onKeyUp="formataMoeda(this,retornaKeyCode(event))" value="<?php echo  banco2valor(($resl["qtd"]*$resl["unitario"])-($resl["qtd"]*$resl["unitario"]*$resl["desconto"])/100); ?>" size="1" readonly=""></td>
             </tr>
-<?
+<?php
 	}
 }
 ?>
@@ -380,9 +381,9 @@ if(mysql_num_rows($sql)){
           <td width="120">Total</td>
         </tr>
         <tr align="center" bgcolor="#FFFFFF" class="textobold">
-          <td width="120"><?= banco2valor($prods); ?></td>
-          <td width="120"><?= banco2valor($descs); ?></td>
-          <td width="120"><?= banco2valor($tots); ?></td>
+          <td width="120"><?php echo  banco2valor($prods); ?></td>
+          <td width="120"><?php echo  banco2valor($descs); ?></td>
+          <td width="120"><?php echo  banco2valor($tots); ?></td>
         </tr>
         </table></td>
   </tr>
@@ -397,28 +398,28 @@ if(mysql_num_rows($sql)){
     <td colspan="2" align="center" valign="top"><span class="textobold">
       <input name="Submit223" type="button" class="microtxt" value="voltar" onClick="window.location='vendas_orca.php'">
       &nbsp;&nbsp;&nbsp;
-      <input name="Submit22322" type="button" class="microtxt" value="Cancelar" onMouseOver="this.T_STICKY=true; this.T_TITLE='Qual o Motivo do cancelamento?'; this.T_DELAY=10; this.T_WIDTH=225;  return escape('<a href=vendas_orca.php?acao=canc&id=<?= $res[id]; ?>&mot=1&cliente=<?= $res[cliente]; ?>&vendedor=<?= $resc[vendedor]; ?>>Concorrência</a> <br> <a href=vendas_orca.php?acao=canc&id=<?= $res[id]; ?>&mot=2&cliente=<?= $res[cliente]; ?>&vendedor=<?= $resc[vendedor]; ?>>Investimento futuro <br> <a href=vendas_orca.php?acao=canc&id=<?= $res[id]; ?>&mot=3&cliente=<?= $res[cliente]; ?>&vendedor=<?= $resc[vendedor]; ?>>Prazo <br> <a href=vendas_orca.php?acao=canc&id=<?= $res[id]; ?>&mot=4&cliente=<?= $res[cliente]; ?>&vendedor=<?= $resc[vendedor]; ?>>Qualidade <br> <a href=vendas_orca.php?acao=canc&id=<?= $res[id]; ?>&mot=5&cliente=<?= $res[cliente]; ?>&vendedor=<?= $resc[vendedor]; ?>>Outros')">
+      <input name="Submit22322" type="button" class="microtxt" value="Cancelar" onMouseOver="this.T_STICKY=true; this.T_TITLE='Qual o Motivo do cancelamento?'; this.T_DELAY=10; this.T_WIDTH=225;  return escape('<a href=vendas_orca.php?acao=canc&id=<?php echo  $res[id]; ?>&mot=1&cliente=<?php echo  $res[cliente]; ?>&vendedor=<?php echo  $resc[vendedor]; ?>>ConcorrÃªncia</a> <br> <a href=vendas_orca.php?acao=canc&id=<?php echo  $res[id]; ?>&mot=2&cliente=<?php echo  $res[cliente]; ?>&vendedor=<?php echo  $resc[vendedor]; ?>>Investimento futuro <br> <a href=vendas_orca.php?acao=canc&id=<?php echo  $res[id]; ?>&mot=3&cliente=<?php echo  $res[cliente]; ?>&vendedor=<?php echo  $resc[vendedor]; ?>>Prazo <br> <a href=vendas_orca.php?acao=canc&id=<?php echo  $res[id]; ?>&mot=4&cliente=<?php echo  $res[cliente]; ?>&vendedor=<?php echo  $resc[vendedor]; ?>>Qualidade <br> <a href=vendas_orca.php?acao=canc&id=<?php echo  $res[id]; ?>&mot=5&cliente=<?php echo  $res[cliente]; ?>&vendedor=<?php echo  $resc[vendedor]; ?>>Outros')">
   &nbsp;&nbsp;&nbsp;
       <input name="Submit22222" type="submit" class="microtxt" value="Adicionar Linhas" onClick="form1.maisum.value='1';">
    &nbsp;&nbsp;&nbsp;       
       <input name="Submit2222" type="submit" class="microtxt" value="Excluir Linhas" onClick="form1.delsel.value='1';">
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
    
-        <input name="Submit222" type="button" class="microtxt" value="Gerar Proposta" onClick="return pergunta('Deseja gerar a proposta?','vendas_orca_sql.php?acao=gvenda&id=<?= $id; ?>');">
+        <input name="Submit222" type="button" class="microtxt" value="Gerar Proposta" onClick="return pergunta('Deseja gerar a proposta?','vendas_orca_sql.php?acao=gvenda&id=<?php echo  $id; ?>');">
        &nbsp;&nbsp;&nbsp;
         <input name="Submit22" type="submit" class="microtxt" value="Continuar" onClick="form1.continuar.value='1';">
         <input name="acao" type="hidden" id="acao" value="alt">
         <input name="maisum" type="hidden" id="maisum">
         <input name="delsel" type="hidden" id="delsel">
 		<input name="continuar" type="hidden" id="continuar">
-        <input name="id" type="hidden" id="id" value="<?= $id; ?>">
+        <input name="id" type="hidden" id="id" value="<?php echo  $id; ?>">
 </span></td>
   </tr>
   </form>
- <? } ?>
+ <?php } ?>
 </table>
 
 </body>
 </html>
-<? include("mensagem.php"); ?>
+<?php include("mensagem.php"); ?>
 <script language="javascript" src="tooltip.js"></script>

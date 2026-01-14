@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 include("seguranca.php");
 $sql=mysql_query("SELECT prodserv_ordem.prodserv,prodserv_ordem.qtd,prodserv_ordem.data,prodserv.nome,unidades.apelido FROM prodserv,prodserv_ordem,unidades WHERE prodserv.unidade=unidades.id AND prodserv_ordem.id='$id' AND prodserv_ordem.prodserv=prodserv.id");
@@ -13,7 +13,8 @@ $unidade=$res["apelido"];
 <html>
 <head>
 <title>CyberManager</title>
-<meta http-equiv="Content-Type" content="text/html; UTF-8">
+<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="style.css" rel="stylesheet" type="text/css">
 <script src="scripts.js"></script>
 </head>
@@ -41,15 +42,15 @@ $unidade=$res["apelido"];
         </tr>
       <tr>
         <td width="103" bgcolor="#003366" class="textoboldbranco">&nbsp;Produto</td>
-        <td width="297" bgcolor="#CCCCCC" class="texto">&nbsp;<? print $nome; ?></td>
+        <td width="297" bgcolor="#CCCCCC" class="texto">&nbsp;<?php print $nome; ?></td>
       </tr>
       <tr>
         <td bgcolor="#003366" class="textoboldbranco">&nbsp;Quantidade</td>
-        <td bgcolor="#CCCCCC" class="texto">&nbsp;<? print banco2valor($qtd)." $unidade"; ?></td>
+        <td bgcolor="#CCCCCC" class="texto">&nbsp;<?php print banco2valor($qtd)." $unidade"; ?></td>
       </tr>
       <tr>
         <td bgcolor="#003366" class="textoboldbranco">&nbsp;Data de emiss&atilde;o</td>
-        <td bgcolor="#CCCCCC" class="texto">&nbsp;<? print $data; ?></td>
+        <td bgcolor="#CCCCCC" class="texto">&nbsp;<?php print $data; ?></td>
       </tr>
     </table></td>
   </tr>
@@ -61,18 +62,18 @@ $unidade=$res["apelido"];
       <tr>
         <td colspan="4" align="center" bgcolor="#003366" class="textoboldbranco">COMPOSI&Ccedil;&Atilde;O DO PRODUTO</td>
         </tr>
-<?
+<?php
 $sql=mysql_query("SELECT prodserv.nome,(prodserv_item.qtd*$qtd) AS qtd,unidades.apelido FROM prodserv_item,prodserv,unidades WHERE prodserv_item.prodserv='$prodserv' AND prodserv_item.item=prodserv.id AND prodserv.unidade=unidades.id ORDER BY prodserv.nome ASC");
 if(mysql_num_rows($sql)){
 	while($res=mysql_fetch_array($sql)){
 ?>
       <tr>
         <td width="85" bgcolor="#003366" class="textoboldbranco">&nbsp;Produto</td>
-        <td width="363" bgcolor="#CCCCCC" class="texto">&nbsp;<? print $res["nome"]; ?></td>
+        <td width="363" bgcolor="#CCCCCC" class="texto">&nbsp;<?php print $res["nome"]; ?></td>
         <td width="38" align="center" bgcolor="#003366" class="textoboldbranco">&nbsp;Qtd</td>
-        <td width="103" align="right" bgcolor="#CCCCCC" class="texto"><? print banco2valor($res["qtd"])." $res[apelido]"; ?>&nbsp; </td>
+        <td width="103" align="right" bgcolor="#CCCCCC" class="texto"><?php print banco2valor($res["qtd"])." $res[apelido]"; ?>&nbsp; </td>
       </tr>
-<?
+<?php
 	}
 }
 ?>
@@ -87,4 +88,4 @@ if(mysql_num_rows($sql)){
 </table>
 </body>
 </html>
-<? include("mensagem.php"); ?>
+<?php include("mensagem.php"); ?>

@@ -1,9 +1,9 @@
-<?
+<?php
 include("conecta.php");
 include("seguranca.php");
 $acao=verifi($permi,$acao);
 if(!empty($acao)){
-	$loc="Tab. OperaÁıes";
+	$loc="Tab. Opera√ß√µes";
 	$pagina=$_SERVER['SCRIPT_FILENAME'];
 	include("log.php");
 }
@@ -16,7 +16,8 @@ if($acao=="alt"){
 <html>
 <head>
 <title>CyberManager</title>
-<meta http-equiv="Content-Type" content="text/html; UTF-8">
+<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="style.css" rel="stylesheet" type="text/css">
 <script src="scripts.js"></script>
 <script>
@@ -32,7 +33,7 @@ function verifica(cad){
 </head>
 <body background="imagens/mdagua.gif" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" onLoad="enterativa=1;"onkeypress="return ent()">
 <table width="594" border="0" cellpadding="0" cellspacing="0">
-<? if($acao=="entrar"){ ?>
+<?php if($acao=="entrar"){ ?>
 <tr>
 		  <td><table width="590" border="0" cellpadding="0" cellspacing="0" class="texto">
       <tr>
@@ -49,7 +50,7 @@ function verifica(cad){
     <td align="left" valign="top"><table width="350" border="0" cellspacing="0" cellpadding="0">
         <tr> 
           <td><div align="center"><a href="opertab.php?acao=inc" class="textobold">Incluir 
-              uma OperaÁ„o </a></div></td>
+              uma Opera√ß√£o </a></div></td>
         </tr>
       </table>
       <table width="350" border="0" cellpadding="0" cellspacing="1" bgcolor="#003366">
@@ -60,53 +61,53 @@ function verifica(cad){
           <td width="18">&nbsp;</td>
           <td width="25">&nbsp;</td>
         </tr>
-        <?
+        <?php
 			  $sql=mysql_query("SELECT * FROM opertab ORDER BY tipo ASC,nome ASC");
 			  if(mysql_num_rows($sql)==0){
 			  ?>
         <tr bgcolor="#FFFFFF"> 
-          <td colspan="5" align="center" class="textobold">NENHUMA OPERA«√O CADASTRADA </td>
+          <td colspan="5" align="center" class="textobold">NENHUMA OPERA√á√ÉO CADASTRADA </td>
         </tr>
-        <?
+        <?php
 			  }else{
 			  	while($res=mysql_fetch_array($sql)){
 			  ?>
         <tr bgcolor="#FFFFFF" class="texto" onMouseover="changeto('#CCCCCC')" onMouseout="changeback('#FFFFFF')"> 
-          <td>&nbsp;<? print $res["codigo"]; ?></td>
-          <td><? print $res["nome"]; ?></td>
-          <td width="58" align="center">&nbsp;<? print $res["tipo"]; ?></td>
-          <td width="18" align="center"><a href="opertab.php?acao=alt&id=<? print $res["id"]; ?>"><img src="imagens/icon14_alterar.gif" alt="Alterar" width="14" height="14" border="0"></a></td>
-          <td width="25" align="center"><a href="#" onClick="return pergunta('Deseja excluir esta OperaÁ„o?','opertab_sql.php?acao=exc&id=<? print $res["id"]; ?>')"><img src="imagens/icon14_lixeira.gif" alt="Excluir" width="14" height="14" border="0"></a></td>
+          <td>&nbsp;<?php print $res["codigo"]; ?></td>
+          <td><?php print $res["nome"]; ?></td>
+          <td width="58" align="center">&nbsp;<?php print $res["tipo"]; ?></td>
+          <td width="18" align="center"><a href="opertab.php?acao=alt&id=<?php print $res["id"]; ?>"><img src="imagens/icon14_alterar.gif" alt="Alterar" width="14" height="14" border="0"></a></td>
+          <td width="25" align="center"><a href="#" onClick="return pergunta('Deseja excluir esta Opera√ß√£o?','opertab_sql.php?acao=exc&id=<?php print $res["id"]; ?>')"><img src="imagens/icon14_lixeira.gif" alt="Excluir" width="14" height="14" border="0"></a></td>
         </tr>
-        <?
+        <?php
 			  	}
 			  }
 			  ?>
       </table></td>
   </tr>
-  <? }else{ ?>
+  <?php }else{ ?>
   <tr>
     <td align="left" valign="top"><form name="form1" method="post" action="opertab_sql.php" onSubmit="return verifica(this);">
         <table width="300" border="0" cellpadding="0" cellspacing="0">
           <tr bgcolor="#003366"> 
             <td colspan="2" align="center" class="textoboldbranco"> 
-              <? if($acao=="inc"){ print"Incluir OperaÁ„o"; }else{ print"Alterar OperaÁ„o";} ?>
+              <?php if($acao=="inc"){ print"Incluir Opera√ß√£o"; }else{ print"Alterar Opera√ß√£o";} ?>
             </td>
           </tr>
           <tr>
             <td class="textobold">C&oacute;digo</td>
-            <td class="textobold"><input name="codigo" type="text" class="formularioselect" id="nome" value="<? print $res["codigo"]; ?>" size="45" maxlength="50"></td>
+            <td class="textobold"><input name="codigo" type="text" class="formularioselect" id="nome" value="<?php print $res["codigo"]; ?>" size="45" maxlength="50"></td>
           </tr>
           <tr> 
             <td width="58" class="textobold">&nbsp;Nome</td>
-            <td width="342" class="textobold"><input name="nome" type="text" class="formularioselect" id="nome2" value="<? print $res["nome"]; ?>" size="45" maxlength="50"></td>
+            <td width="342" class="textobold"><input name="nome" type="text" class="formularioselect" id="nome2" value="<?php print $res["nome"]; ?>" size="45" maxlength="50"></td>
           </tr>
           <tr>
             <td class="textobold">&nbsp;Tipo</td>
             <td class="textobold">
-			<input name="tipo" type="radio" value="E" <? if($res["tipo"]=="E" or empty($res["tipo"])) print "checked"; ?>>
+			<input name="tipo" type="radio" value="E" <?php if($res["tipo"]=="E" or empty($res["tipo"])) print "checked"; ?>>
               entrada
-              <input name="tipo" type="radio" value="S" <? if($res["tipo"]=="S") print "checked"; ?>>
+              <input name="tipo" type="radio" value="S" <?php if($res["tipo"]=="S") print "checked"; ?>>
               sa&iacute;da</td>
           </tr>
           <tr align="center"> 
@@ -114,16 +115,16 @@ function verifica(cad){
               <input name="Submit22" type="button" class="microtxt" value="voltar" onClick="window.location='opertab.php'">
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           <input name="Submit2" type="submit" class="microtxt" value="Continuar">
-          <input name="acao" type="hidden" id="acao" value="<? if($acao=="alt"){ print "alterar"; }else{ print "incluir"; } ?>"> 
-            <input name="id" type="hidden" id="id3" value="<? print $id; ?>"></td>
+          <input name="acao" type="hidden" id="acao" value="<?php if($acao=="alt"){ print "alterar"; }else{ print "incluir"; } ?>"> 
+            <input name="id" type="hidden" id="id3" value="<?php print $id; ?>"></td>
           </tr>
         </table>
       </form>
       
     </td>
-	<? } ?>
+	<?php } ?>
   </tr>
 </table>
 </body>
 </html>
-<? include("mensagem.php"); ?>
+<?php include("mensagem.php"); ?>

@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 if(empty($acao)) exit;
 $acao=verifi($permi,$acao);
@@ -8,12 +8,12 @@ if(!empty($acao)){
 	include("log.php");
 }
 if($acao=="incluir"){
-	$sql=mysql_query("INSERT INTO empresa (apelido_fat,nome,cnpj,ie,contato,tel,end_fat,bairro_fat,cidade_fat,estado_fat,cep_fat,apelido_ent1,end_1,bairro_1,cidade_1,estado_1,cep_1,apelido_ent2,end_2,bairro_2,cidade_2,estado_2,cep_2,apelido_ent3,end_3,bairro_3,cidade_3,estado_3,cep_3,apelido_ent4,end_4,bairro_4,cidade_4,estado_4,cep_4) VALUES ('$apelido_fat','$nome','$cnpj','$ie','$contato','$tel','$end_fat','$bairro_fat','$cidade_fat','$estado_fat','$cep_fat','$apelido_ent1','$end_1','$bairro_1','$cidade_1','$estado_1','$cep_1','$apelido_ent2','$end_2','$bairro_2','$cidade_2','$estado_2','$cep_2','$apelido_ent3','$end_3','$bairro_3','$cidade_3','$estado_3','$cep_3','$apelido_ent4','$end_4','$bairro_4','$cidade_4','$estado_4','$cep_4')") or die("Nao foi");
+	$sql=mysql_query("INSERT INTO empresa (apelido_fat,nome,cnpj,ie,contato,tel,end_fat,bairro_fat,cidade_fat,estado_fat,cep_fat,apelido_ent1,end_1,bairro_1,cidade_1,estado_1,cep_1,apelido_ent2,end_2,bairro_2,cidade_2,estado_2,cep_2,apelido_ent3,end_3,bairro_3,cidade_3,estado_3,cep_3,apelido_ent4,end_4,bairro_4,cidade_4,estado_4,cep_4) VALUES ('$apelido_fat','$nome','$cnpj','$ie','$contato','$tel','$end_fat','$bairro_fat','$cidade_fat','$estado_fat','$cep_fat','$apelido_ent1','$end_1','$bairro_1','$cidade_1','$estado_1','$cep_1','$apelido_ent2','$end_2','$bairro_2','$cidade_2','$estado_2','$cep_2','$apelido_ent3','$end_3','$bairro_3','$cidade_3','$estado_3','$cep_3','$apelido_ent4','$end_4','$bairro_4','$cidade_4','$estado_4','$cep_4')") or erp_db_fail();
 	if($sql){
-		$_SESSION["mensagem"]="Empresa incluída com sucesso!";
+		$_SESSION["mensagem"]="Empresa incluÃ­da com sucesso!";
 		$acao="entrar";
 	}else{
-		$_SESSION["mensagem"]="A empresa não pôde ser incluída!";
+		$_SESSION["mensagem"]="A empresa nÃ£o pÃ´de ser incluÃ­da!";
 		$acao="inc";
 	}
 }elseif($acao=="alterar"){
@@ -22,16 +22,16 @@ if($acao=="incluir"){
 		$_SESSION["mensagem"]="Empresa alterada com sucesso!";
 		$acao="entrar";
 	}else{
-		$_SESSION["mensagem"]="A Empresa não pôde ser alterada!";
+		$_SESSION["mensagem"]="A Empresa nÃ£o pÃ´de ser alterada!";
 		$acao="alt";
 	}
 }elseif($acao=="exc"){
 	if(!empty($id)){
 		$sql=mysql_query("DELETE FROM empresa WHERE id='$id'");
 		if($sql){
-			$_SESSION["mensagem"]="Empresa excluída com sucesso!";
+			$_SESSION["mensagem"]="Empresa excluÃ­da com sucesso!";
 		}else{
-			$_SESSION["mensagem"]="A Empresa não pôde ser excluída!";
+			$_SESSION["mensagem"]="A Empresa nÃ£o pÃ´de ser excluÃ­da!";
 		}		
 	}
 	$acao="entrar";

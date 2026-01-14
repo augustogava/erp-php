@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 include("seguranca.php");
 
@@ -13,7 +13,8 @@ if(!empty($acao)){
 <html>
 <head>
 <title>CyberManager</title>
-<meta http-equiv="Content-Type" content="text/html; UTF-8">
+<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="style.css" rel="stylesheet" type="text/css">
 <script src="scripts.js"></script>
 <script src="mascaras.js"></script>
@@ -52,10 +53,10 @@ if(!empty($acao)){
                       <td><label>
                         <select name="acao2" class="textobold">
                           <option value="">Selecione</option>
-                          <option value="17">Acessar p·gina</option>
+                          <option value="17">Acessar p√°gina</option>
 						  <option value="3">Alterar</option>
                           <option value="6">Aprovar</option>
-						  <option value="21">Agrupar orÁamentos</option>
+						  <option value="21">Agrupar or√ßamentos</option>
 						  <option value="10">Bloq acesso externo</option>
 						  <option value="22">Bloq acesso interno</option>
 						  <option value="13">Buscar</option>
@@ -71,7 +72,7 @@ if(!empty($acao)){
                           <option value="5">Imprimir</option>
 				          <option value="1">Incluir</option>
 				          <option value="20">Mudar acesso externo</option>
-						  <option value="9">Permiss„o de menu</option>
+						  <option value="9">Permiss√£o de menu</option>
                           <option value="4">Salvar</option>
 						  <option value="12">Visualizar</option>
 			            </select>
@@ -107,10 +108,10 @@ if(!empty($acao)){
         </tr>
       </table></td> 
   </tr>
-  <? if($wpaginar){ ?>
-<? } ?>
+  <?php if($wpaginar){ ?>
+<?php } ?>
 </table>
 </body>
 </html>
 
-<? include("mensagem.php"); ?>
+<?php include("mensagem.php"); ?>

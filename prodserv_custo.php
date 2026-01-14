@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 include("seguranca.php");
 $sql=mysql_query("SELECT prodserv.nome,prodserv.apelido,prodserv.class,unidades.nome AS unidade FROM prodserv,unidades WHERE prodserv.id='$id' AND prodserv.unidade=unidades.id");
@@ -30,7 +30,8 @@ if(mysql_num_rows($sql2)){
 <html>
 <head>
 <title>CyberManager</title>
-<meta http-equiv="Content-Type" content="text/html; UTF-8">
+<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="style.css" rel="stylesheet" type="text/css">
 <script src="scripts.js"></script>
 <script src="mascaras.js"></script>
@@ -106,13 +107,13 @@ function ccusto(frm){
         </tr>
         <tr bgcolor="#CCCCCC">
           <td width="52" class="textobold">&nbsp;Produto:</td>
-          <td colspan="3" class="texto">&nbsp;<? print $nome; ?></td>
+          <td colspan="3" class="texto">&nbsp;<?php print $nome; ?></td>
         </tr>
         <tr bgcolor="#CCCCCC">
           <td class="textobold">&nbsp;Apelido:</td>
-          <td width="271" class="texto">&nbsp;<? print $apelido; ?></td>
+          <td width="271" class="texto">&nbsp;<?php print $apelido; ?></td>
           <td width="59" align="center" class="textobold">Unidade:</td>
-          <td width="118" class="texto"><span class="texto">&nbsp;<? print $unidade; ?></span></td>
+          <td width="118" class="texto"><span class="texto">&nbsp;<?php print $unidade; ?></span></td>
         </tr>
         <tr>
           <td class="textobold"><img src="imagens/dot.gif" width="20" height="8"></td>
@@ -122,36 +123,36 @@ function ccusto(frm){
         </tr>
         <tr>
           <td class="textobold">&nbsp;ICMS</td>
-          <td colspan="3" class="textobold"><input name="icms" type="text" class="formulario" id="icms" value="<? print banco2valor($res["icms"]); ?>" size="15" onKeyDown="formataMoeda(this,retornaKeyCode(event))" onKeyUp="formataMoeda(this,retornaKeyCode(event))" onBlur="ccusto(this.form);">
+          <td colspan="3" class="textobold"><input name="icms" type="text" class="formulario" id="icms" value="<?php print banco2valor($res["icms"]); ?>" size="15" onKeyDown="formataMoeda(this,retornaKeyCode(event))" onKeyUp="formataMoeda(this,retornaKeyCode(event))" onBlur="ccusto(this.form);">
             &nbsp;
-            <input name="icmsv" type="checkbox" id="icmsv" value="S" <? if($res["icmsv"]=="S") print "checked"; ?> onClick="ccusto(this.form);">
+            <input name="icmsv" type="checkbox" id="icmsv" value="S" <?php if($res["icmsv"]=="S") print "checked"; ?> onClick="ccusto(this.form);">
 &nbsp;em % &nbsp;
-<input name="icmstv" type="checkbox" id="icmstv" value="S" <? if($res["icmstv"]=="S") print "checked"; ?>  onClick="ccusto(this.form);"> 
+<input name="icmstv" type="checkbox" id="icmstv" value="S" <?php if($res["icmstv"]=="S") print "checked"; ?>  onClick="ccusto(this.form);"> 
 Tributado na venda</td>
           </tr>
         <tr>
           <td class="textobold">&nbsp;IPI</td>
-          <td colspan="3" class="textobold"><input name="ipi" type="text" class="formulario" id="ipi" value="<? print banco2valor($res["ipi"]); ?>" size="15" onKeyDown="formataMoeda(this,retornaKeyCode(event))" onKeyUp="formataMoeda(this,retornaKeyCode(event))" onBlur="ccusto(this.form);">
+          <td colspan="3" class="textobold"><input name="ipi" type="text" class="formulario" id="ipi" value="<?php print banco2valor($res["ipi"]); ?>" size="15" onKeyDown="formataMoeda(this,retornaKeyCode(event))" onKeyUp="formataMoeda(this,retornaKeyCode(event))" onBlur="ccusto(this.form);">
 &nbsp;
-    <input name="ipiv" type="checkbox" id="ipiv" value="S" <? if($res["ipiv"]=="S") print "checked"; ?> onClick="ccusto(this.form);">
+    <input name="ipiv" type="checkbox" id="ipiv" value="S" <?php if($res["ipiv"]=="S") print "checked"; ?> onClick="ccusto(this.form);">
 &nbsp;em % &nbsp;
-    <input name="ipitv" type="checkbox" id="ipitv" value="S" <? if($res["ipitv"]=="S") print "checked"; ?> onClick="ccusto(this.form);">
+    <input name="ipitv" type="checkbox" id="ipitv" value="S" <?php if($res["ipitv"]=="S") print "checked"; ?> onClick="ccusto(this.form);">
     Tributado na venda</td>
         </tr>
         <tr>
           <td colspan="4" class="textobold"><table width="500" border="0" cellspacing="0" cellpadding="0">
             <tr>
               <td width="52" class="textobold">&nbsp;Frete</td>
-              <td width="448" class="textobold"><input name="frete" type="text" class="formulario" id="frete" value="<? print banco2valor($res["frete"]); ?>" size="15" onKeyDown="formataMoeda(this,retornaKeyCode(event))" onKeyUp="formataMoeda(this,retornaKeyCode(event))" onBlur="ccusto(this.form);">
+              <td width="448" class="textobold"><input name="frete" type="text" class="formulario" id="frete" value="<?php print banco2valor($res["frete"]); ?>" size="15" onKeyDown="formataMoeda(this,retornaKeyCode(event))" onKeyUp="formataMoeda(this,retornaKeyCode(event))" onBlur="ccusto(this.form);">
 &nbsp;
-<input name="fretev" type="checkbox" id="fretev" value="S" <? if($res["fretev"]=="S") print "checked"; ?> onClick="ccusto(this.form);">
+<input name="fretev" type="checkbox" id="fretev" value="S" <?php if($res["fretev"]=="S") print "checked"; ?> onClick="ccusto(this.form);">
 &nbsp;em %</td>
             </tr>
             <tr>
               <td class="textobold">&nbsp;Seguro</td>
-              <td class="textobold"><input name="seguro" type="text" class="formulario" id="seguro" value="<? print banco2valor($res["seguro"]); ?>" size="15" onKeyDown="formataMoeda(this,retornaKeyCode(event))" onKeyUp="formataMoeda(this,retornaKeyCode(event))" onBlur="ccusto(this.form);">
+              <td class="textobold"><input name="seguro" type="text" class="formulario" id="seguro" value="<?php print banco2valor($res["seguro"]); ?>" size="15" onKeyDown="formataMoeda(this,retornaKeyCode(event))" onKeyUp="formataMoeda(this,retornaKeyCode(event))" onBlur="ccusto(this.form);">
 &nbsp;
-<input name="segurov" type="checkbox" id="segurov" value="S" <? if($res["segurov"]=="S") print "checked"; ?> onClick="ccusto(this.form);">
+<input name="segurov" type="checkbox" id="segurov" value="S" <?php if($res["segurov"]=="S") print "checked"; ?> onClick="ccusto(this.form);">
 &nbsp;em %</td>
             </tr>
           </table></td>
@@ -160,22 +161,22 @@ Tributado na venda</td>
           <td colspan="4" class="textobold"><table width="500" border="0" cellspacing="1" cellpadding="0">
             <tr class="textobold">
               <td width="134" bgcolor="#003366" class="textoboldbranco">&nbsp;Imposto de Importa&ccedil;&atilde;o </td>
-              <td width="97"><input name="ii" type="text" class="formulario" id="ii" value="<? print banco2valor($res["ii"]); ?>" size="10" onKeyDown="formataMoeda(this,retornaKeyCode(event))" onKeyUp="formataMoeda(this,retornaKeyCode(event))" <? if($class=="I") print "readonly"; ?> onBlur="ccusto(this.form);">
+              <td width="97"><input name="ii" type="text" class="formulario" id="ii" value="<?php print banco2valor($res["ii"]); ?>" size="10" onKeyDown="formataMoeda(this,retornaKeyCode(event))" onKeyUp="formataMoeda(this,retornaKeyCode(event))" <?php if($class=="I") print "readonly"; ?> onBlur="ccusto(this.form);">
                 %</td>
               <td width="153" bgcolor="#003366" class="textoboldbranco">&nbsp;&nbsp;Despesas da Importa&ccedil;&atilde;o </td>
-              <td width="116"><input name="di" type="text" class="formularioselect" id="di" value="<? print banco2valor($res["di"]); ?>" size="10" onKeyDown="formataMoeda(this,retornaKeyCode(event))" onKeyUp="formataMoeda(this,retornaKeyCode(event))" <? if($class=="I") print "readonly"; ?> onBlur="ccusto(this.form);"></td>
+              <td width="116"><input name="di" type="text" class="formularioselect" id="di" value="<?php print banco2valor($res["di"]); ?>" size="10" onKeyDown="formataMoeda(this,retornaKeyCode(event))" onKeyUp="formataMoeda(this,retornaKeyCode(event))" <?php if($class=="I") print "readonly"; ?> onBlur="ccusto(this.form);"></td>
             </tr>
             <tr class="textobold">
               <td bgcolor="#003366" class="textoboldbranco">&nbsp;Valor da Compra </td>
-              <td><input name="valor" type="text" class="formularioselect" id="valor" value="<? print banco2valor($res["valor"]); ?>" size="10" onKeyDown="formataMoeda(this,retornaKeyCode(event))" onKeyUp="formataMoeda(this,retornaKeyCode(event))" onBlur="ccusto(this.form);"></td>
+              <td><input name="valor" type="text" class="formularioselect" id="valor" value="<?php print banco2valor($res["valor"]); ?>" size="10" onKeyDown="formataMoeda(this,retornaKeyCode(event))" onKeyUp="formataMoeda(this,retornaKeyCode(event))" onBlur="ccusto(this.form);"></td>
               <td bgcolor="#003366" class="textoboldbranco">&nbsp;&nbsp;Quantidade</td>
-              <td><input name="qtd" type="text" class="formularioselect" id="qtd" value="<? print banco2valor($res["qtd"]); ?>" size="10" onKeyDown="formataMoeda(this,retornaKeyCode(event))" onKeyUp="formataMoeda(this,retornaKeyCode(event))" onBlur="ccusto(this.form);"></td>
+              <td><input name="qtd" type="text" class="formularioselect" id="qtd" value="<?php print banco2valor($res["qtd"]); ?>" size="10" onKeyDown="formataMoeda(this,retornaKeyCode(event))" onKeyUp="formataMoeda(this,retornaKeyCode(event))" onBlur="ccusto(this.form);"></td>
             </tr>
             <tr class="textobold">
               <td bgcolor="#003366" class="textoboldbranco">&nbsp;Valor Rateado </td>
-              <td><input name="rateado" type="text" class="formularioselect" id="rateado" value="<? print banco2valor($res["rateado"]); ?>" size="10" onKeyDown="formataMoeda(this,retornaKeyCode(event))" onKeyUp="formataMoeda(this,retornaKeyCode(event))" readonly onBlur="ccusto(this.form);"></td>
+              <td><input name="rateado" type="text" class="formularioselect" id="rateado" value="<?php print banco2valor($res["rateado"]); ?>" size="10" onKeyDown="formataMoeda(this,retornaKeyCode(event))" onKeyUp="formataMoeda(this,retornaKeyCode(event))" readonly onBlur="ccusto(this.form);"></td>
               <td bgcolor="#003366" class="textoboldbranco">&nbsp;&nbsp;Custo de aquisi&ccedil;&atilde;o </td>
-              <td><input name="custo" type="text" class="formularioselect" id="custo" value="<? print banco2valor($res["custo"]); ?>" size="10" onKeyDown="formataMoeda(this,retornaKeyCode(event))" onKeyUp="formataMoeda(this,retornaKeyCode(event))" readonly onBlur="ccusto(this.form);"></td>
+              <td><input name="custo" type="text" class="formularioselect" id="custo" value="<?php print banco2valor($res["custo"]); ?>" size="10" onKeyDown="formataMoeda(this,retornaKeyCode(event))" onKeyUp="formataMoeda(this,retornaKeyCode(event))" readonly onBlur="ccusto(this.form);"></td>
             </tr>
           </table></td>
           </tr>
@@ -188,7 +189,7 @@ Tributado na venda</td>
        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <input name="Submit2" type="submit" class="microtxt" value="Continuar">
             <input name="acao" type="hidden" id="acao2" value="custo">
-            <input name="id" type="hidden" id="id" value="<? print $id; ?>"></td>
+            <input name="id" type="hidden" id="id" value="<?php print $id; ?>"></td>
         </tr>
       </table>
     </form></td>
@@ -196,4 +197,4 @@ Tributado na venda</td>
 </table>
 </body>
 </html>
-<? include("mensagem.php"); ?>
+<?php include("mensagem.php"); ?>

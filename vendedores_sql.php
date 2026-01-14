@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 include("seguranca.php");
 $acao=verifi($permi,$acao);
@@ -13,12 +13,12 @@ if(isset($vendedores)){
 		$sql=mysql_query("UPDATE niveis SET vendedor=1 WHERE id='$ven'");
 	}
 	if($sql){
-		$_SESSION["mensagem"]="Alteração concluída com sucesso";
+		$_SESSION["mensagem"]="AlteraÃ§Ã£o concluÃ­da com sucesso";
 	}else{
-		$_SESSION["mensagem"]="Não foi possível realizar a alteração";
+		$_SESSION["mensagem"]="NÃ£o foi possÃ­vel realizar a alteraÃ§Ã£o";
 	}
 }else{
-	$_SESSION["mensagem"]="Selecione pelo menos um nível";
+	$_SESSION["mensagem"]="Selecione pelo menos um nÃ­vel";
 }
 header("Location:vendedores.php");
 ?>

@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 include("seguranca.php");
 if(empty($acao)) exit;
@@ -22,7 +22,7 @@ if($acao=="incluir"){
 		header("Location:funcionarios.php?bcod=$bcod&bnome=$bnome");
 		exit;		
 	}else{
-		$_SESSION["mensagem"]="O cadastro geral não pôde ser alterado!";
+		$_SESSION["mensagem"]="O cadastro geral nÃ£o pÃ´de ser alterado!";
 		$nascimento=banco2data($nascimento);
 		$admissao=banco2data($admissao);				
 		$acao="alt";

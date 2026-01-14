@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 include("seguranca.php");
 $acao=verifi($permi,$acao);
@@ -15,10 +15,10 @@ if($acao=="incluir"){
 	
 	$sql=mysql_query("INSERT INTO cep (tipo,estado,valor,peso_in,peso_fi,prazo) VALUES ('$tipo','$estado','$valor','$peso_in','$peso_fi','$prazo')");
 	if($sql){
-		$_SESSION["mensagem"]="Incluído com sucesso!";
+		$_SESSION["mensagem"]="IncluÃ­do com sucesso!";
 		$acao="entrar";
 	}else{
-		$_SESSION["mensagem"]="Não pôde ser incluído!";
+		$_SESSION["mensagem"]="NÃ£o pÃ´de ser incluÃ­do!";
 		$acao="inc";
 	}
 }elseif($acao=="alterar"){
@@ -31,16 +31,16 @@ if($acao=="incluir"){
 		$_SESSION["mensagem"]="Alterado com sucesso!";
 		$acao="entrar";
 	}else{
-		$_SESSION["mensagem"]="Não pôde ser alterado!";
+		$_SESSION["mensagem"]="NÃ£o pÃ´de ser alterado!";
 		$acao="alt";
 	}
 }elseif($acao=="exc"){
 	if(!empty($id)){
 		$sql=mysql_query("DELETE FROM cep WHERE id='$id'");
 		if($sql){
-			$_SESSION["mensagem"]="Excluído com sucesso!";
+			$_SESSION["mensagem"]="ExcluÃ­do com sucesso!";
 		}else{
-			$_SESSION["mensagem"]="Não pôde ser excluído!";
+			$_SESSION["mensagem"]="NÃ£o pÃ´de ser excluÃ­do!";
 		}		
 	}
 	$acao="entrar";
@@ -49,7 +49,8 @@ if($acao=="incluir"){
 <html>
 <head>
 <title>CyberManager</title>
-<meta http-equiv="Content-Type" content="text/html; UTF-8">
+<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="style.css" rel="stylesheet" type="text/css">
 <script src="scripts.js"></script>
 <script src="mascaras.js"></script>
@@ -71,7 +72,7 @@ if($acao=="incluir"){
 	    </tr>
   <tr> 
     <td><table width="594" border="0" cellspacing="0" cellpadding="0">
-        <? if($acao=="entrar"){ ?>
+        <?php if($acao=="entrar"){ ?>
 		<tr> 
           <td><table width="400" border="0" cellspacing="0" cellpadding="0">
               <tr>
@@ -87,7 +88,7 @@ if($acao=="incluir"){
                 <td width="20">&nbsp;</td>
                 <td width="25">&nbsp;</td>
               </tr>
-              <?
+              <?php
 			  $sql=mysql_query("SELECT * FROM cep ORDER BY tipo ASC,estado ASC");
 			  if(mysql_num_rows($sql)==0){
 			  ?>
@@ -95,26 +96,26 @@ if($acao=="incluir"){
                 <td colspan="6" align="center" class="textobold">NENHUM 
                   CADASTRADO </td>
               </tr>
-			  <?
+			  <?php
 			  }else{
 			  	while($res=mysql_fetch_array($sql)){
 			  ?>
               <tr bgcolor="#FFFFFF" class="texto" onMouseover="changeto('#CCCCCC')" onMouseout="changeback('#FFFFFF')">
-                <td><? print $res["tipo"]; ?></td> 
-                <td>&nbsp;<? $sql2=mysql_query("SELECT * FROM estado WHERE id='$res[estado]'"); $res2=mysql_fetch_array($sql2); print $res2["nome"]; ?></td>
-                <td><? print banco2valor($res["valor"]); ?></td>
-                <td><? print banco2valor($res["peso_in"])." - ".banco2valor($res["peso_fi"]); ?></td>
-                <td width="20" align="center"><a href="cep.php?acao=alt&id=<? print $res["id"]; ?>"><img src="imagens/icon14_alterar.gif" alt="Alterar" width="14" height="14" border="0"></a></td>
-                <td width="25" align="center"><a href="#" onClick="return pergunta('Deseja excluir este perfil?','cep.php?acao=exc&id=<? print $res["id"]; ?>')"><img src="imagens/icon14_lixeira.gif" alt="Excluir" width="14" height="14" border="0"></a></td>
+                <td><?php print $res["tipo"]; ?></td> 
+                <td>&nbsp;<?php $sql2=mysql_query("SELECT * FROM estado WHERE id='$res[estado]'"); $res2=mysql_fetch_array($sql2); print $res2["nome"]; ?></td>
+                <td><?php print banco2valor($res["valor"]); ?></td>
+                <td><?php print banco2valor($res["peso_in"])." - ".banco2valor($res["peso_fi"]); ?></td>
+                <td width="20" align="center"><a href="cep.php?acao=alt&id=<?php print $res["id"]; ?>"><img src="imagens/icon14_alterar.gif" alt="Alterar" width="14" height="14" border="0"></a></td>
+                <td width="25" align="center"><a href="#" onClick="return pergunta('Deseja excluir este perfil?','cep.php?acao=exc&id=<?php print $res["id"]; ?>')"><img src="imagens/icon14_lixeira.gif" alt="Excluir" width="14" height="14" border="0"></a></td>
               </tr>
-			  <?
+			  <?php
 			  	}
 			  }
 			  ?>
             </table>
           </td>
         </tr>
-		<? }elseif($acao=="inc" or $acao=="alt"){
+		<?php }elseif($acao=="inc" or $acao=="alt"){
 				$sql=mysql_query("SELECT * FROM cep WHERE id='$id'");
 				$res=mysql_fetch_array($sql);
 		 ?>
@@ -123,13 +124,13 @@ if($acao=="incluir"){
               <table width="300" border="0" cellpadding="0" cellspacing="0">
                 <tr bgcolor="#003366"> 
                   <td colspan="2" align="center" class="textoboldbranco"> 
-                    <? if($acao=="inc"){ print"Incluir"; }else{ print"Alterar";} ?>                  </td>
+                    <?php if($acao=="inc"){ print"Incluir"; }else{ print"Alterar";} ?>                  </td>
                 </tr>
                 <tr>
                   <td valign="middle" class="textobold">&nbsp;Tipo</td>
-                  <td class="textobold"><input name="tipo" type="radio" value="sedex" <? if($res["tipo"]=="sedex"){ print "checked"; } ?>>
+                  <td class="textobold"><input name="tipo" type="radio" value="sedex" <?php if($res["tipo"]=="sedex"){ print "checked"; } ?>>
                     Sedex 
-                    <input name="tipo" type="radio" value="pac" <? if($res["tipo"]=="pac"){ print "checked"; } ?>>
+                    <input name="tipo" type="radio" value="pac" <?php if($res["tipo"]=="pac"){ print "checked"; } ?>>
                     PAC</td>
                 </tr>
                 <tr>
@@ -137,35 +138,35 @@ if($acao=="incluir"){
                   <td class="textobold"><span class="texto">
                     <select name="estado" id="estado"  class="formulario">
                       <option>Selecione</option>
-                      <?
-	$sql2=mysql_query("SELECT * FROM estado") or die("nao foi");
+                      <?php
+	$sql2=mysql_query("SELECT * FROM estado") or erp_db_fail();
 	while($res2=mysql_fetch_array($sql2)){
 	?>
-                      <option value="<?= $res2["id"]; ?>" <? if($res["estado"]==$res2["id"]){ print "selected"; } ?>>
-                      <?= $res2["nome"]; ?>
+                      <option value="<?php echo  $res2["id"]; ?>" <?php if($res["estado"]==$res2["id"]){ print "selected"; } ?>>
+                      <?php echo  $res2["nome"]; ?>
                       </option>
-                      <? } ?>
+                      <?php } ?>
                     </select>
                   </span></td>
                 </tr>
                 <tr>
                   <td valign="middle" class="textobold">Prazo:</td>
-                  <td class="textobold"><input name="prazo" type="text" class="formulario" id="prazo" value="<? print $res["prazo"]; ?>" size="5" maxlength="3"> 
+                  <td class="textobold"><input name="prazo" type="text" class="formulario" id="prazo" value="<?php print $res["prazo"]; ?>" size="5" maxlength="3"> 
                   Dias </td>
                 </tr>
                 <tr>
                   <td valign="middle" class="textobold">&nbsp;Valor</td>
-                  <td class="textobold"><input name="valor" type="text" class="formulario" id="valor" value="<? print banco2valor($res["valor"]); ?>" size="10" onKeyDown="formataMoeda(this,retornaKeyCode(event))" onKeyUp="formataMoeda(this,retornaKeyCode(event))"></td>
+                  <td class="textobold"><input name="valor" type="text" class="formulario" id="valor" value="<?php print banco2valor($res["valor"]); ?>" size="10" onKeyDown="formataMoeda(this,retornaKeyCode(event))" onKeyUp="formataMoeda(this,retornaKeyCode(event))"></td>
                 </tr>
                 
                 
                 <tr>
                   <td width="73" class="textobold">&nbsp;Peso Ini. </td>
-                  <td width="227" class="textobold"><input name="peso_in" type="text" class="formulario" id="peso_in" value="<? print banco2valor($res["peso_in"]); ?>" size="10" onKeyDown="formataMoeda(this,retornaKeyCode(event))" onKeyUp="formataMoeda(this,retornaKeyCode(event))"></td>
+                  <td width="227" class="textobold"><input name="peso_in" type="text" class="formulario" id="peso_in" value="<?php print banco2valor($res["peso_in"]); ?>" size="10" onKeyDown="formataMoeda(this,retornaKeyCode(event))" onKeyUp="formataMoeda(this,retornaKeyCode(event))"></td>
                 </tr>
                 <tr>
                   <td class="textobold"> &nbsp;Peso Fin. </td>
-                  <td class="textobold"><input name="peso_fi" type="text" class="formulario" id="peso_fi" value="<? print banco2valor($res["peso_fi"]); ?>" size="10" onKeyDown="formataMoeda(this,retornaKeyCode(event))" onKeyUp="formataMoeda(this,retornaKeyCode(event))"></td>
+                  <td class="textobold"><input name="peso_fi" type="text" class="formulario" id="peso_fi" value="<?php print banco2valor($res["peso_fi"]); ?>" size="10" onKeyDown="formataMoeda(this,retornaKeyCode(event))" onKeyUp="formataMoeda(this,retornaKeyCode(event))"></td>
                 </tr>
                 
                 <tr align="center"> 
@@ -173,16 +174,16 @@ if($acao=="incluir"){
                     <input name="Submit22" type="button" class="microtxt" value="voltar" onClick="window.location='cep.php?acao=entrar'">
                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                   <input name="Submit2" type="submit" class="microtxt" value="Continuar">
-                  <input name="acao" type="hidden" id="acao2" value="<? if($acao=="alt"){ print "alterar"; }else{ print "incluir"; } ?>">
-                  <input name="id" type="hidden" id="id" value="<?= $id; ?>"></td>
+                  <input name="acao" type="hidden" id="acao2" value="<?php if($acao=="alt"){ print "alterar"; }else{ print "incluir"; } ?>">
+                  <input name="id" type="hidden" id="id" value="<?php echo  $id; ?>"></td>
                 </tr>
               </table>
             </form></td>
         </tr>
-		<? } ?>
+		<?php } ?>
       </table></td>
   </tr>
 </table>
 </body>
 </html>
-<? include("mensagem.php"); ?>
+<?php include("mensagem.php"); ?>

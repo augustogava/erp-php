@@ -1,4 +1,4 @@
-<?
+<?php
 $sqlas=mysql_query("SELECT * FROM empresa");
 $resas=mysql_fetch_array($sqlas);.
 $_SESSION["data_i"]=$resas["data"];

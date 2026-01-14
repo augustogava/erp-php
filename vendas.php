@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 include("seguranca.php");
 $acao=verifi($permi,$acao);
@@ -84,13 +84,13 @@ if($acao=="exc"){
                 <div class="erp-col">
                     <div class="erp-form-group">
                         <label class="erp-form-label">Data Inicial</label>
-                        <input name="bde" type="text" class="erp-form-control" value="<?=$bde?>" maxlength="10" onKeyPress="return validanum(this, event)" onKeyUp="mdata(this)">
+                        <input name="bde" type="text" class="erp-form-control" value="<?php echo $bde?>" maxlength="10" onKeyPress="return validanum(this, event)" onKeyUp="mdata(this)">
                     </div>
                 </div>
                 <div class="erp-col">
                     <div class="erp-form-group">
                         <label class="erp-form-label">Data Final</label>
-                        <input name="bate" type="text" class="erp-form-control" value="<?=$bate?>" maxlength="10" onKeyPress="return validanum(this, event)" onKeyUp="mdata(this)">
+                        <input name="bate" type="text" class="erp-form-control" value="<?php echo $bate?>" maxlength="10" onKeyPress="return validanum(this, event)" onKeyUp="mdata(this)">
                     </div>
                 </div>
                 <div class="erp-col">
@@ -113,17 +113,17 @@ if($acao=="exc"){
                         <label class="erp-form-label">Status</label>
                         <select name="status" class="erp-form-control">
                             <option value="">Todos</option>
-                            <option value="1" <?=$status=="1"?"selected":""?>>Pendente</option>
-                            <option value="2" <?=$status=="2"?"selected":""?>>Em Producao</option>
-                            <option value="3" <?=$status=="3"?"selected":""?>>Faturado</option>
-                            <option value="4" <?=$status=="4"?"selected":""?>>Cancelado</option>
+                            <option value="1" <?php echo $status=="1"?"selected":""?>>Pendente</option>
+                            <option value="2" <?php echo $status=="2"?"selected":""?>>Em Producao</option>
+                            <option value="3" <?php echo $status=="3"?"selected":""?>>Faturado</option>
+                            <option value="4" <?php echo $status=="4"?"selected":""?>>Cancelado</option>
                         </select>
                     </div>
                 </div>
                 <div class="erp-col" style="flex:0.5;">
                     <div class="erp-form-group">
                         <label class="erp-form-label">Nr Pedido</label>
-                        <input name="proposta" type="text" class="erp-form-control" value="<?=$proposta?>">
+                        <input name="proposta" type="text" class="erp-form-control" value="<?php echo $proposta?>">
                     </div>
                 </div>
                 <div class="erp-col" style="flex:0 0 auto;display:flex;align-items:flex-end;">
@@ -177,32 +177,32 @@ if($acao=="exc"){
                     }
                     ?>
                     <tr>
-                        <td><strong>#<?=$res["id"]?></strong></td>
-                        <td><?=banco2data($res["emissao"])?></td>
+                        <td><strong>#<?php echo $res["id"]?></strong></td>
+                        <td><?php echo banco2data($res["emissao"])?></td>
                         <td>
-                            <div style="font-weight:600;"><?=$res["fantasia"]?></div>
+                            <div style="font-weight:600;"><?php echo $res["fantasia"]?></div>
                         </td>
-                        <td><?=$res["vendedor_nome"]?></td>
-                        <td class="erp-text-right"><strong>R$ <?=$valor_total?></strong></td>
+                        <td><?php echo $res["vendedor_nome"]?></td>
+                        <td class="erp-text-right"><strong>R$ <?php echo $valor_total?></strong></td>
                         <td>
-                            <span class="erp-badge erp-badge-<?=$status_class?>"><?=$status_text?></span>
+                            <span class="erp-badge erp-badge-<?php echo $status_class?>"><?php echo $status_text?></span>
                         </td>
                         <td>
                             <div class="erp-table-actions" style="justify-content:center;">
-                                <a href="vendas_sql.php?acao=alt&id=<?=$res["id"]?>" class="erp-table-action" title="Editar">
+                                <a href="vendas_sql.php?acao=alt&id=<?php echo $res["id"]?>" class="erp-table-action" title="Editar">
                                     <i class="fas fa-edit"></i>
                                 </a>
-                                <a href="vendas_prodserv.php?vendas=<?=$res["id"]?>" class="erp-table-action" title="Produtos">
+                                <a href="vendas_prodserv.php?vendas=<?php echo $res["id"]?>" class="erp-table-action" title="Produtos">
                                     <i class="fas fa-clipboard-list"></i>
                                 </a>
-                                <a href="vendas_fat.php?id=<?=$res["id"]?>" class="erp-table-action" title="Faturar">
+                                <a href="vendas_fat.php?id=<?php echo $res["id"]?>" class="erp-table-action" title="Faturar">
                                     <i class="fas fa-dollar-sign"></i>
                                 </a>
-                                <a href="#" onclick="window.open('vendas_sql.php?acao=imp&id=<?=$res["id"]?>','','width=800,height=600');" class="erp-table-action" title="Imprimir">
+                                <a href="#" onclick="window.open('vendas_sql.php?acao=imp&id=<?php echo $res["id"]?>','','width=800,height=600');" class="erp-table-action" title="Imprimir">
                                     <i class="fas fa-print"></i>
                                 </a>
                                 <?php if($nivel=="1"): ?>
-                                <a href="#" onclick="return pergunta('Confirma exclusao?','vendas.php?acao=exc&id=<?=$res["id"]?>');" class="erp-table-action" title="Excluir" style="color:#e74c3c;">
+                                <a href="#" onclick="return pergunta('Confirma exclusao?','vendas.php?acao=exc&id=<?php echo $res["id"]?>');" class="erp-table-action" title="Excluir" style="color:#e74c3c;">
                                     <i class="fas fa-trash"></i>
                                 </a>
                                 <?php endif; ?>
@@ -214,7 +214,7 @@ if($acao=="exc"){
                 ?>
                 <tr style="background:#f8f9fa;font-weight:600;">
                     <td colspan="4" class="erp-text-right">TOTAL GERAL:</td>
-                    <td class="erp-text-right" style="color:#27AE60;font-size:16px;">R$ <?=banco2valor($total_geral)?></td>
+                    <td class="erp-text-right" style="color:#27AE60;font-size:16px;">R$ <?php echo banco2valor($total_geral)?></td>
                     <td colspan="2"></td>
                 </tr>
                 <?php
@@ -225,6 +225,6 @@ if($acao=="exc"){
     </div>
 </div>
 
-<? include("mensagem.php"); ?>
+<?php include("mensagem.php"); ?>
 </body>
 </html>

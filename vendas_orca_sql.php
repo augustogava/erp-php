@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 if(empty($acao)) exit;
 $acao=verifi($permi,$acao);
@@ -18,7 +18,7 @@ if($acao=="inc"){
 	$hj=date("Y-m-d");
 	$hora=hora();
 	
-	$sql=mysql_query("UPDATE vendas_orc SET sit='1' WHERE id='$id'") or die("erro");
+	$sql=mysql_query("UPDATE vendas_orc SET sit='1' WHERE id='$id'") or erp_db_fail();
 	$sql=mysql_query("SELECT * FROM vendas_orc WHERE id='$id'");
 	$res=mysql_fetch_array($sql);
 	//INSERIR CLIENTE pois nao existe!
@@ -32,7 +32,7 @@ if($acao=="inc"){
 	$sql=mysql_query("INSERT INTO vendas_orcamento (acao,emissao,vendedor,cod) VALUES ('$res[acao]','$hj','$res[vendedor]','$res[cod]')");
 	$max=mysql_query("SELECT MAX(id) as id from vendas_orcamento"); $rmax=mysql_fetch_array($max);
 		//followup
-	$sql=mysql_query("INSERT INTO followup (cliente,tipo,data,hora,titulo,descricao,contato,vendedor) VALUES ('$cli','3','$hj','$hora','followup','Orçamento foi fechada e gerada a proposta Nº: $venda','$contato','$rmax[id]')");
+	$sql=mysql_query("INSERT INTO followup (cliente,tipo,data,hora,titulo,descricao,contato,vendedor) VALUES ('$cli','3','$hj','$hora','followup','OrÃ§amento foi fechada e gerada a proposta NÂº: $venda','$contato','$rmax[id]')");
 
 	$venda=$rmax["id"];
 	$sql=mysql_query("SELECT * FROM vendas_orc_list WHERE orcamento='$id'");
@@ -42,7 +42,7 @@ if($acao=="inc"){
 		}
 	}	
 	header("Location:vendas_orc.php?acao=alt&id=$venda");
-	$_SESSION["mensagem"]="Orçamento Fechado com sucesso!";
+	$_SESSION["mensagem"]="OrÃ§amento Fechado com sucesso!";
 	exit;
 }elseif($acao=="alt"){
 	$emissao=data2banco($emissao);
@@ -63,9 +63,9 @@ if($acao=="inc"){
 	}
 	$sql=mysql_query("UPDATE vendas_orc SET valor='$valor2' WHERE id='$id'");
 	if($sql){
-		$_SESSION["mensagem"]="Orçamento alterado com sucesso!";
+		$_SESSION["mensagem"]="OrÃ§amento alterado com sucesso!";
 	}else{
-		$_SESSION["mensagem"]="Orçamento não pôde ser alterado!";
+		$_SESSION["mensagem"]="OrÃ§amento nÃ£o pÃ´de ser alterado!";
 	}
 	if($maisum){
 		$sql=mysql_query("INSERT INTO vendas_orc_list (orcamento) VALUES ('$id')");
@@ -85,9 +85,9 @@ if($acao=="inc"){
 	$sql=mysql_query("DELETE FROM vendas_orc WHERE id='$id'");
 	if($sql){
 		$sql=mysql_query("DELETE FROM vendas_orc_list WHERE orcamento='$id'");
-		$_SESSION["mensagem"]="Orçamento excluído com sucesso!";
+		$_SESSION["mensagem"]="OrÃ§amento excluÃ­do com sucesso!";
 	}else{
-		$_SESSION["mensagem"]="Orçamento não pôde ser excluído!";
+		$_SESSION["mensagem"]="OrÃ§amento nÃ£o pÃ´de ser excluÃ­do!";
 	}
 	header("Location:vendas_orca.php");
 	exit;

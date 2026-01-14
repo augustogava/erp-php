@@ -36,6 +36,7 @@ if($acao=="alt"){
 <head>
 <title>Requisicoes de Compra - ERP System</title>
 <meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <link href="style.css" rel="stylesheet" type="text/css">
@@ -95,13 +96,13 @@ function abrenovo(codal,alt,lar){
                 <div class="erp-col">
                     <div class="erp-form-group">
                         <label class="erp-form-label">Data Inicial</label>
-                        <input name="bde" type="text" class="erp-form-control" value="<?=$bde?>" maxlength="10" onKeyPress="return validanum(this, event)" onKeyUp="mdata(this)">
+                        <input name="bde" type="text" class="erp-form-control" value="<?php echo $bde?>" maxlength="10" onKeyPress="return validanum(this, event)" onKeyUp="mdata(this)">
                     </div>
                 </div>
                 <div class="erp-col">
                     <div class="erp-form-group">
                         <label class="erp-form-label">Data Final</label>
-                        <input name="bate" type="text" class="erp-form-control" value="<?=$bate?>" maxlength="10" onKeyPress="return validanum(this, event)" onKeyUp="mdata(this)">
+                        <input name="bate" type="text" class="erp-form-control" value="<?php echo $bate?>" maxlength="10" onKeyPress="return validanum(this, event)" onKeyUp="mdata(this)">
                     </div>
                 </div>
                 <div class="erp-col" style="flex:0.5;">
@@ -157,25 +158,25 @@ if(mysql_num_rows($sql)==0){
         $status_text = ($res["fechar"]==1) ? "Fechado" : "Aberto";
 ?>
                 <tr>
-                    <td><strong>#<?=completa($res["id"],8)?></strong></td>
-                    <td><?=banco2data($res["data"])?></td>
-                    <td class="erp-text-right"><strong>R$ <?=banco2valor($res2["tot"])?></strong></td>
-                    <td><?=$res["responsavel"]?></td>
-                    <td><span class="erp-badge erp-badge-<?=$status_class?>"><?=$status_text?></span></td>
+                    <td><strong>#<?php echo completa($res["id"],8)?></strong></td>
+                    <td><?php echo banco2data($res["data"])?></td>
+                    <td class="erp-text-right"><strong>R$ <?php echo banco2valor($res2["tot"])?></strong></td>
+                    <td><?php echo $res["responsavel"]?></td>
+                    <td><span class="erp-badge erp-badge-<?php echo $status_class?>"><?php echo $status_text?></span></td>
                     <td>
                         <div class="erp-table-actions" style="justify-content:center;">
-                            <a href="#" onclick="window.open('compras_req_imp.php?id=<?=$res["id"]?>','','scrollbars=yes,width=730,height=500');" class="erp-table-action" title="Imprimir">
+                            <a href="#" onclick="window.open('compras_req_imp.php?id=<?php echo $res["id"]?>','','scrollbars=yes,width=730,height=500');" class="erp-table-action" title="Imprimir">
                                 <i class="fas fa-print"></i>
                             </a>
-                            <a href="<?=$_SERVER['PHP_SELF']?>?acao=alt&id=<?=$res["id"]?>" class="erp-table-action" title="Editar">
+                            <a href="<?php echo $_SERVER['PHP_SELF']?>?acao=alt&id=<?php echo $res["id"]?>" class="erp-table-action" title="Editar">
                                 <i class="fas fa-edit"></i>
                             </a>
 <?php if($res["fechar"]!=1){ ?>
-                            <a href="compras_req_sql.php?acao=fechar&id=<?=$res["id"]?>" class="erp-table-action" title="Fechar">
+                            <a href="compras_req_sql.php?acao=fechar&id=<?php echo $res["id"]?>" class="erp-table-action" title="Fechar">
                                 <i class="fas fa-check-circle"></i>
                             </a>
 <?php } ?>
-                            <a href="#" onclick="return pergunta('Deseja excluir esta Requisicao?','compras_req_sql.php?acao=exc&id=<?=$res["id"]?>')" class="erp-table-action" title="Excluir" style="color:#e74c3c;">
+                            <a href="#" onclick="return pergunta('Deseja excluir esta Requisicao?','compras_req_sql.php?acao=exc&id=<?php echo $res["id"]?>')" class="erp-table-action" title="Excluir" style="color:#e74c3c;">
                                 <i class="fas fa-trash"></i>
                             </a>
                         </div>
@@ -209,13 +210,13 @@ foreach($tota as $key=>$valor){
     $tot += $valor;
 ?>
                     <tr>
-                        <td><?=$key?></td>
-                        <td class="erp-text-right">R$ <?=banco2valor($valor)?></td>
+                        <td><?php echo $key?></td>
+                        <td class="erp-text-right">R$ <?php echo banco2valor($valor)?></td>
                     </tr>
 <?php } ?>
                     <tr style="background:#f8f9fa;font-weight:600;">
                         <td>TOTAL GERAL</td>
-                        <td class="erp-text-right" style="color:#27AE60;">R$ <?=banco2valor($tot)?></td>
+                        <td class="erp-text-right" style="color:#27AE60;">R$ <?php echo banco2valor($tot)?></td>
                     </tr>
                 </tbody>
             </table>
@@ -234,19 +235,19 @@ foreach($tota as $key=>$valor){
                     <div class="erp-col" style="flex:0 0 150px;">
                         <div class="erp-form-group">
                             <label class="erp-form-label">Numero</label>
-                            <input type="text" class="erp-form-control" value="<?=completa($res["id"],8)?>" readonly>
+                            <input type="text" class="erp-form-control" value="<?php echo completa($res["id"],8)?>" readonly>
                         </div>
                     </div>
                     <div class="erp-col" style="flex:0 0 150px;">
                         <div class="erp-form-group">
                             <label class="erp-form-label">Data</label>
-                            <input name="data" type="text" class="erp-form-control" value="<?=banco2data($res["data"])?>" maxlength="10" onKeyPress="return validanum(this, event)" onKeyUp="mdata(this)">
+                            <input name="data" type="text" class="erp-form-control" value="<?php echo banco2data($res["data"])?>" maxlength="10" onKeyPress="return validanum(this, event)" onKeyUp="mdata(this)">
                         </div>
                     </div>
                     <div class="erp-col">
                         <div class="erp-form-group">
                             <label class="erp-form-label">Responsavel</label>
-                            <input type="text" class="erp-form-control" value="<?=$res["responsavel"]?>" readonly>
+                            <input type="text" class="erp-form-control" value="<?php echo $res["responsavel"]?>" readonly>
                         </div>
                     </div>
                 </div>
@@ -284,16 +285,16 @@ if(mysql_num_rows($sql)){
         }
 ?>
                             <tr>
-                                <td><input name="del[<?=$resl["id"]?>]" type="checkbox" value="<?=$resl["id"]?>"></td>
-                                <td><input name="qtd[<?=$resl["id"]?>]" type="text" class="erp-form-control" style="width:100%;" onKeyDown="formataMoeda(this,retornaKeyCode(event))" onKeyUp="formataMoeda(this,retornaKeyCode(event))" value="<?php if(!empty($resl["qtde"])){ echo banco2valor($resl["qtde"]); }else{ echo banco2valor($resl["qtd"]); } ?>"></td>
-                                <td><input name="unidade[<?=$resl["id"]?>]" type="text" class="erp-form-control" style="width:100%;" value="<?=$resl["unidade"]?>"></td>
-                                <td><input name="descricao[<?=$resl["id"]?>]" type="text" class="erp-form-control" style="width:100%;" readonly value="<?=$resl["prod"]?>"></td>
-                                <td><a href="#" onclick="abrenovo('<?=$resl["id"]?>','','');"><i class="fas fa-search"></i></a>
-                                    <input name="prodserv[<?=$resl["id"]?>]" type="hidden" value="<?=$resl["produto"]?>">
+                                <td><input name="del[<?php echo $resl["id"]?>]" type="checkbox" value="<?php echo $resl["id"]?>"></td>
+                                <td><input name="qtd[<?php echo $resl["id"]?>]" type="text" class="erp-form-control" style="width:100%;" onKeyDown="formataMoeda(this,retornaKeyCode(event))" onKeyUp="formataMoeda(this,retornaKeyCode(event))" value="<?php if(!empty($resl["qtde"])){ echo banco2valor($resl["qtde"]); }else{ echo banco2valor($resl["qtd"]); } ?>"></td>
+                                <td><input name="unidade[<?php echo $resl["id"]?>]" type="text" class="erp-form-control" style="width:100%;" value="<?php echo $resl["unidade"]?>"></td>
+                                <td><input name="descricao[<?php echo $resl["id"]?>]" type="text" class="erp-form-control" style="width:100%;" readonly value="<?php echo $resl["prod"]?>"></td>
+                                <td><a href="#" onclick="abrenovo('<?php echo $resl["id"]?>','','');"><i class="fas fa-search"></i></a>
+                                    <input name="prodserv[<?php echo $resl["id"]?>]" type="hidden" value="<?php echo $resl["produto"]?>">
                                 </td>
-                                <td><input name="unitario[<?=$resl["id"]?>]" type="text" class="erp-form-control" style="width:100%;" onKeyDown="formataMoeda(this,retornaKeyCode(event))" onKeyUp="formataMoeda(this,retornaKeyCode(event))" value="<?=banco2valor($resl["valor"])?>"></td>
+                                <td><input name="unitario[<?php echo $resl["id"]?>]" type="text" class="erp-form-control" style="width:100%;" onKeyDown="formataMoeda(this,retornaKeyCode(event))" onKeyUp="formataMoeda(this,retornaKeyCode(event))" value="<?php echo banco2valor($resl["valor"])?>"></td>
                                 <td>
-                                    <select name="motivo[<?=$resl["id"]?>]" class="erp-form-control" style="width:100%;">
+                                    <select name="motivo[<?php echo $resl["id"]?>]" class="erp-form-control" style="width:100%;">
                                         <option value="" <?php if(empty($resl["motivo"])) echo "selected"; ?>>Selecione</option>
                                         <option value="acerto" <?php if($resl["motivo"]=="acerto") echo "selected"; ?>>Acerto Estoque</option>
                                         <option value="producao" <?php if($resl["motivo"]=="producao") echo "selected"; ?>>Producao</option>
@@ -303,7 +304,7 @@ if(mysql_num_rows($sql)){
                                         <option value="transf_ext" <?php if($resl["motivo"]=="transf_ext") echo "selected"; ?>>Transformacao Externa</option>
                                     </select>
                                 </td>
-                                <td><input name="solicitante[<?=$resl["id"]?>]" type="text" class="erp-form-control" style="width:100%;" value="<?=$resl["solicitante"]?>"></td>
+                                <td><input name="solicitante[<?php echo $resl["id"]?>]" type="text" class="erp-form-control" style="width:100%;" value="<?php echo $resl["solicitante"]?>"></td>
                             </tr>
 <?php
     }
@@ -341,7 +342,7 @@ if(mysql_num_rows($sql)){
                 </div>
 
                 <input name="acao" type="hidden" value="alt">
-                <input name="id" type="hidden" value="<?=$id?>">
+                <input name="id" type="hidden" value="<?php echo $id?>">
                 <input name="maisum" type="hidden">
                 <input name="delsel" type="hidden">
             </form>

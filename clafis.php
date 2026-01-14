@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 include("seguranca.php");
 $acao=verifi($permi,$acao);
@@ -16,14 +16,15 @@ if($acao=="alt"){
 <html>
 <head>
 <title>CyberManager</title>
-<meta http-equiv="Content-Type" content="text/html; UTF-8">
+<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="style.css" rel="stylesheet" type="text/css">
 <script src="scripts.js"></script>
 <script>
 <!--
 function verifica(cad){
 	if(cad.nome.value==''){
-		alert('Informe a classificação');
+		alert('Informe a classificaÃ§Ã£o');
 		cad.nome.focus();
 		return false;
 	}
@@ -60,73 +61,73 @@ function MM_openBrWindow(theURL,winName,features) { //v2.0
       </tr>
     </table></td>
   </tr>
-<? if($acao=="entrar"){ ?>
+<?php if($acao=="entrar"){ ?>
   <tr> 
     <td align="left" valign="top"><table width="300" border="0" cellspacing="0" cellpadding="0">
         <tr> 
           <td><div align="center"><a href="clafis.php?acao=inc" class="textobold">Incluir 
-              uma Classificação </a></div></td>
+              uma ClassificaÃ§Ã£o </a></div></td>
         </tr>
       </table>
       <table width="300" border="0" cellpadding="0" cellspacing="1" bgcolor="#003366">
         <tr class="textoboldbranco"> 
-          <td width="210"> &nbsp;&nbsp;Classificação</td>
+          <td width="210"> &nbsp;&nbsp;ClassificaÃ§Ã£o</td>
           <td width="50">&nbsp;Apelido</td>
           <td width="16">&nbsp;</td>
           <td width="19">&nbsp;</td>
         </tr>
-        <?
+        <?php
 			  $sql=mysql_query("SELECT * FROM clafis ORDER BY nome ASC");
 			  if(mysql_num_rows($sql)==0){
 			  ?>
         <tr bgcolor="#FFFFFF"> 
           <td colspan="4" align="center" class="textobold">NENHUMA CLASSIFICA&Ccedil;&Atilde;O CADASTRADA </td>
         </tr>
-        <?
+        <?php
 			  }else{
 			  	while($res=mysql_fetch_array($sql)){
 			  ?>
         <tr bgcolor="#FFFFFF" class="texto" onMouseover="changeto('#CCCCCC')" onMouseout="changeback('#FFFFFF')"> 
-          <td>&nbsp;<? print $res["nome"]; ?></td>
-          <td width="50">&nbsp;<? print $res["apelido"]; ?></td>
-          <td width="16" align="center"><a href="clafis.php?acao=alt&id=<? print $res["id"]; ?>"><img src="imagens/icon14_alterar.gif" alt="Alterar" width="14" height="14" border="0"></a></td>
-          <td width="19" align="center"><a href="#" onClick="return pergunta('Deseja excluir esta Classificação?','clafis_sql.php?acao=exc&id=<? print $res["id"]; ?>')"><img src="imagens/icon14_lixeira.gif" alt="Excluir" width="14" height="14" border="0"></a></td>
+          <td>&nbsp;<?php print $res["nome"]; ?></td>
+          <td width="50">&nbsp;<?php print $res["apelido"]; ?></td>
+          <td width="16" align="center"><a href="clafis.php?acao=alt&id=<?php print $res["id"]; ?>"><img src="imagens/icon14_alterar.gif" alt="Alterar" width="14" height="14" border="0"></a></td>
+          <td width="19" align="center"><a href="#" onClick="return pergunta('Deseja excluir esta ClassificaÃ§Ã£o?','clafis_sql.php?acao=exc&id=<?php print $res["id"]; ?>')"><img src="imagens/icon14_lixeira.gif" alt="Excluir" width="14" height="14" border="0"></a></td>
         </tr>
-        <?
+        <?php
 			  	}
 			  }
 			  ?>
       </table></td>
   </tr>
-  <? }else{ ?>
+  <?php }else{ ?>
   <tr>
     <td align="left" valign="top"><form name="form1" method="post" action="clafis_sql.php" onSubmit="return verifica(this);">
         <table width="300" border="0" cellpadding="0" cellspacing="0">
           <tr bgcolor="#003366"> 
             <td colspan="2" align="center" class="textoboldbranco"> 
-              <? if($acao=="inc"){ print"Incluir Classificação"; }else{ print"Alterar Classificação";} ?>            </td>
+              <?php if($acao=="inc"){ print"Incluir ClassificaÃ§Ã£o"; }else{ print"Alterar ClassificaÃ§Ã£o";} ?>            </td>
           </tr>
           <tr> 
             <td width="39" class="textobold">&nbsp;Nome</td>
-            <td width="258" class="textobold"><input name="nome" type="text" class="formularioselect" id="nome2" value="<? print $res["nome"]; ?>" size="45" maxlength="50"></td>
+            <td width="258" class="textobold"><input name="nome" type="text" class="formularioselect" id="nome2" value="<?php print $res["nome"]; ?>" size="45" maxlength="50"></td>
           </tr>
           <tr>
             <td class="textobold">&nbsp;Apelido</td>
-            <td class="textobold"><input name="apelido" type="text" class="formulario" id="nome2" value="<? print $res["apelido"]; ?>" size="20" maxlength="20"></td>
+            <td class="textobold"><input name="apelido" type="text" class="formulario" id="nome2" value="<?php print $res["apelido"]; ?>" size="20" maxlength="20"></td>
           </tr>
           <tr align="center"> 
             <td colspan="2" class="textobold">
               <input name="Submit222" type="button" class="microtxt" value="voltar" onClick="window.location='clafis.php'">
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <input name="Submit2" type="submit" class="microtxt" value="Continuar">
-              <input name="acao" type="hidden" id="acao" value="<? if($acao=="alt"){ print "alterar"; }else{ print "incluir"; } ?>"> 
-            <input name="id" type="hidden" id="id3" value="<? print $id; ?>"></td>
+              <input name="acao" type="hidden" id="acao" value="<?php if($acao=="alt"){ print "alterar"; }else{ print "incluir"; } ?>"> 
+            <input name="id" type="hidden" id="id3" value="<?php print $id; ?>"></td>
           </tr>
         </table>
       </form>    </td>
-	<? } ?>
+	<?php } ?>
   </tr>
 </table>
 </body>
 </html>
-<? include("mensagem.php"); ?>
+<?php include("mensagem.php"); ?>

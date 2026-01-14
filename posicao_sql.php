@@ -1,9 +1,9 @@
-<?
+<?php
 include("conecta.php");
 if(empty($acao)) exit;
 $acao=verifi($permi,$acao);
 if(!empty($acao)){
-	$loc="Posições";
+	$loc="PosiÃ§Ãµes";
 	$pagina=$_SERVER['SCRIPT_FILENAME'];
 	include("log.php");
 }
@@ -18,10 +18,10 @@ $acao="alt";
 		$sql=mysql_query("UPDATE prodserv SET posicao='$posicao1' WHERE id='$val'");
 	}
 	if($sql){
-		$_SESSION["mensagem"]="Posições alteradas com sucesso!";
+		$_SESSION["mensagem"]="PosiÃ§Ãµes alteradas com sucesso!";
 		$acao="entrar";
 	}else{
-		$_SESSION["mensagem"]="As Posições não pôdem ser alterada!";
+		$_SESSION["mensagem"]="As PosiÃ§Ãµes nÃ£o pÃ´dem ser alterada!";
 		$acao="alt";
 	}
 header("Location:posicao.php?acao=$acao&id=$id");

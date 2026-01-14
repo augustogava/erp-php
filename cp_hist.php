@@ -2,7 +2,8 @@
 <html>
 <head>
 <title>Untitled Document</title>
-<meta http-equiv="Content-Type" content="text/html; UTF-8">
+<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <style type="text/css">
 <!--
 body {
@@ -23,7 +24,7 @@ body {
   </tr>
   <tr>
     <td class="texto">
-<? 
+<?php 
 include("conecta.php");
 $sql=mysql_query("SELECT * FROM cp_itens WHERE id='$id'");
 $res=mysql_fetch_array($sql);

@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 include("seguranca.php");
 unset($_SESSION["ps"]);
@@ -20,7 +20,8 @@ if(!empty($nome)){
 <html>
 <head>
 <title>CyberManager</title>
-<meta http-equiv="Content-Type" content="text/html; UTF-8">
+<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="style.css" rel="stylesheet" type="text/css">
 <script src="scripts.js"></script>
 <script src="mascaras.js"></script>
@@ -48,7 +49,7 @@ function libe(){
 		
 function verifica(cad){
 	if(cad.codprod.value==''){
-		alert('Informe o Código do produto');
+		alert('Informe o CÃ³digo do produto');
 		cad.codprod.focus();
 		return false;
 	}
@@ -85,7 +86,7 @@ function verifica(cad){
       </tr>
     </table></td>
   </tr>
-<? if($acao=="entrar"){ ?>
+<?php if($acao=="entrar"){ ?>
   <tr>
     <td align="left" valign="top"><form name="form1" method="get" action="">
       <table width="500" border="0" align="center" cellpadding="0" cellspacing="0">
@@ -95,8 +96,8 @@ function verifica(cad){
         <tr class="textobold">
           <td>&nbsp;Categoria:</td>
           <td><select name="cat" class="formularioselect" id="cat">
-            <option value="0" <? if($res["idpai"]==0) print "selected"; ?>>Raiz</option>
-            <?
+            <option value="0" <?php if($res["idpai"]==0) print "selected"; ?>>Raiz</option>
+            <?php
 function no($idpai,$wcat){
 	$sql=mysql_query("SELECT * FROM prodserv_cat WHERE idpai='$idpai' ORDER BY texto ASC");
 	if(mysql_num_rows($sql)!=0){
@@ -138,7 +139,7 @@ no(0,$cat);
       </table>
   </form>  </tr>
   <tr> 
-    <td align="left" valign="top"><? if($buscar=="true"){ ?>
+    <td align="left" valign="top"><?php if($buscar=="true"){ ?>
 
       <table width="580" border="0" cellpadding="0" cellspacing="1" bgcolor="#003366">
 
@@ -151,7 +152,7 @@ no(0,$cat);
           <td width="46" align="center">Pre&ccedil;o</td>
           <td width="48" align="center">Prazo</td>
         </tr>
-        <?
+        <?php
 			  $sql=mysql_query("SELECT * FROM prodserv $where ORDER BY nome ASC");
 			//  print "SELECT * FROM prodserv $where ORDER BY nome ASC";
 			  if(mysql_num_rows($sql)==0){
@@ -159,33 +160,33 @@ no(0,$cat);
         <tr bgcolor="#FFFFFF"> 
           <td colspan="6" align="center" class="textobold">NENHUM PRODUTO / SERVI&Ccedil;O&nbsp;CADASTRADO</td>
         </tr>
-        <?
+        <?php
 			  }else{
 			  	while($res=mysql_fetch_array($sql)){
 					$sql1=mysql_query("SELECT SUM(qtde-qtds) AS qtdt, SUM(qtde-qtdd) AS qtdd FROM prodserv_est WHERE prodserv='$res[id]'"); $res1=mysql_fetch_array($sql1);
 			  ?>
-			  <a href="prodserv.php?acao=alt&id=<? print $res["id"]; ?>&cat=<?= $cat; ?>&nome=<?= $nome; ?>">
+			  <a href="prodserv.php?acao=alt&id=<?php print $res["id"]; ?>&cat=<?php echo  $cat; ?>&nome=<?php echo  $nome; ?>">
         <tr bgcolor="#FFFFFF" class="texto" onMouseover="changeto('#CCCCCC')" onMouseout="changeback('#FFFFFF')" style="cursor:hand"> 
-          <td width="74">&nbsp;<? print $res["codprod"]; ?></td>
-          <td width="287"><div onMouseOver="this.T_TITLE='Foto'; this.T_DELAY=10; this.T_WIDTH=70;  return escape('<img src=<? if(!empty($res["foto"])){ ?>foto/gd.php?img=<? print $res["foto"]; ?>&wid=60<? }else{ print "imagens/semFoto.jpg"; }; ?>>')"><? print $res["nome"]; ?></div></td>
-          <td width="59">&nbsp;<? print $res1["qtdt"]; ?></td>
-          <td width="59" align="left"><? print $res1["qtdd"]; ?></td>
-          <td width="46" align="left"><? print banco2valor($res["pv"]); ?></td>
-          <td width="48" align="left"><? print $res["prazo_entrega"]; ?> Dias </td>
+          <td width="74">&nbsp;<?php print $res["codprod"]; ?></td>
+          <td width="287"><div onMouseOver="this.T_TITLE='Foto'; this.T_DELAY=10; this.T_WIDTH=70;  return escape('<img src=<?php if(!empty($res["foto"])){ ?>foto/gd.php?img=<?php print $res["foto"]; ?>&wid=60<?php }else{ print "imagens/semFoto.jpg"; }; ?>>')"><?php print $res["nome"]; ?></div></td>
+          <td width="59">&nbsp;<?php print $res1["qtdt"]; ?></td>
+          <td width="59" align="left"><?php print $res1["qtdd"]; ?></td>
+          <td width="46" align="left"><?php print banco2valor($res["pv"]); ?></td>
+          <td width="48" align="left"><?php print $res["prazo_entrega"]; ?> Dias </td>
         </tr>
 		</a>
-        <?
+        <?php
 			  	}
 			  }
 			
 			  ?>
       </table><br>
-      <?  } ?>
-<? } ?></tr>
+      <?php  } ?>
+<?php } ?></tr>
 </td>
 </table>
 
 </body>
 </html>
-<? include("mensagem.php"); ?>
+<?php include("mensagem.php"); ?>
 <script language="javascript" src="tooltip.js"></script>

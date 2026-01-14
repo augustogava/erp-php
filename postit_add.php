@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 include("seguranca.php");
 if(empty($acao)) $acao="entrar";
@@ -28,7 +28,7 @@ if($acao=="res"){
 		header("Location:corpo.php");
 		exit;
 	}else{
-		$_SESSION["mensagem"]="O seu Post-It não pôde ser enviado!";
+		$_SESSION["mensagem"]="O seu Post-It nÃ£o pÃ´de ser enviado!";
 	}
 	$acao="entrar";		
 }
@@ -36,17 +36,18 @@ if($acao=="res"){
 <html>
 <head>
 <title>CyberManager</title>
-<meta http-equiv="Content-Type" content="text/html; UTF-8">
+<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="style.css" rel="stylesheet" type="text/css">
 <script src="scripts.js"></script>
 <script>
 function verifica(cad){
 	if(cad.quem[cad.quem.selectedIndex].value=='' && cad.todos.checked==false){
-		alert('Informe para quem é o Post-It');
+		alert('Informe para quem Ã© o Post-It');
 		return false;
 	}
 	if(cad.titulo.value==''){
-		alert('Digite um Título');
+		alert('Digite um TÃ­tulo');
 		cad.titulo.focus();
 		return false;
 	}	
@@ -71,16 +72,16 @@ function verifica(cad){
             <td width="72" class="textobold">Para:</td>
             <td width="225" class="textobold"> 
               <select name="quem" class="formularioselect" id="select">
-                <option value="" <? if(empty($denum)) print "selected"; ?>>Selecione</option>
-                <?
+                <option value="" <?php if(empty($denum)) print "selected"; ?>>Selecione</option>
+                <?php
 							$sql=mysql_query("SELECT clientes.id AS cliente,clientes.nome AS nome FROM clientes,cliente_login,niveis WHERE clientes.id=cliente_login.cliente AND cliente_login.nivel=niveis.id AND niveis.tipo='F' ORDER BY clientes.nome ASC");
 							while($res=mysql_fetch_array($sql)){
 								$nome=$res["nome"];
 						   	    $ray=explode(" ",$nome);
  	                            $nome=$ray[0];
 							?>
-                <option value="<? print $res["cliente"]; ?>"<? if($denum==$res["cliente"]) print "selected"; ?>><? print($nome); ?></option>
-                <? } ?>
+                <option value="<?php print $res["cliente"]; ?>"<?php if($denum==$res["cliente"]) print "selected"; ?>><?php print($nome); ?></option>
+                <?php } ?>
               </select>
             </td>
           </tr>
@@ -93,12 +94,12 @@ function verifica(cad){
           <tr class="texto"> 
             <td class="textobold">T&iacute;tulo:</td>
             <td> 
-              <input name="titulo" type="text" class="formularioselect" id="titulo" value="<? print $titulo; ?>" size="43"></td>
+              <input name="titulo" type="text" class="formularioselect" id="titulo" value="<?php print $titulo; ?>" size="43"></td>
           </tr>
           <tr class="texto"> 
             <td class="textobold">Mensagem:</td>
             <td> 
-              <textarea name="msg" cols="45" rows="6" wrap="VIRTUAL" class="formularioselect" id="msg" onFocus="enterativa=0;" onBlur="enterativa=1;"><? print $msg; ?></textarea></td>
+              <textarea name="msg" cols="45" rows="6" wrap="VIRTUAL" class="formularioselect" id="msg" onFocus="enterativa=0;" onBlur="enterativa=1;"><?php print $msg; ?></textarea></td>
           </tr>
           <tr class="texto"> 
             <td colspan="2" align="center"><input name="Submit2" type="submit" class="microtxt" value="Enviar">
@@ -111,4 +112,4 @@ function verifica(cad){
 </table>
 </body>
 </html>
-<? include("mensagem.php"); ?>
+<?php include("mensagem.php"); ?>

@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 $apqp=new set_apqp;
 $acao=verifi($permi,$acao);
@@ -21,7 +21,7 @@ if(isset($_GET["id"])){
 }
 $quem=$_SESSION["login_nome"];
 if(!empty($acao)){
-	$loc="APQP - Instrução Operador";
+	$loc="APQP - InstruÃ§Ã£o Operador";
 	$pagina=$_SERVER['SCRIPT_FILENAME'];
 	include("log.php");
 }
@@ -45,25 +45,25 @@ if($acao=="i0"){
 	$rev_data=data2banco($rev_data);
 	$sql=mysql_query("UPDATE apqp_inst SET nome='$nome',numero='$numero',prep='$prep',prep_data='$prep_data',obs='$obs',rev='$rev',rev_data='$rev_data',rev_alt='$rev_alt' WHERE id='$id'");
 	if($sql){
-		$_SESSION["mensagem"]="Alterações salvas com sucesso";
-		// cria followup caso salve o conteudo da Instrução do Operador
-			mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Salvando alterações da Instrução do Operador da peça $npc.','O usuário $quem salvou as alterações da Instrução do Operador da peça $npc.','$user')");
+		$_SESSION["mensagem"]="AlteraÃ§Ãµes salvas com sucesso";
+		// cria followup caso salve o conteudo da InstruÃ§Ã£o do Operador
+			mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Salvando alteraÃ§Ãµes da InstruÃ§Ã£o do Operador da peÃ§a $npc.','O usuÃ¡rio $quem salvou as alteraÃ§Ãµes da InstruÃ§Ã£o do Operador da peÃ§a $npc.','$user')");
 		//			
 	}else{
-		$_SESSION["mensagem"]="As alterações não puderam ser salvas";
+		$_SESSION["mensagem"]="As alteraÃ§Ãµes nÃ£o puderam ser salvas";
 	}
 	if(isset($ap)){
 		//finalizar tarefa!!! - - - - - - - 
-		$apqp->agenda("Instruções do Operador");
+		$apqp->agenda("InstruÃ§Ãµes do Operador");
 		// - - - - - - - -  - - - - - - - - 
 		$sql=mysql_query("UPDATE apqp_inst SET quem='$quem',dtquem=NOW(),sit='S' WHERE id='$id'");
-		// cria followup caso aprove a Instrução do Operador
-			$sql_sal=mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Aprovação da Instrução do Operador da peça $npc.','O usuário $quem aprovou a Instrução do Operador da peça $npc.','$user')");
+		// cria followup caso aprove a InstruÃ§Ã£o do Operador
+			$sql_sal=mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','AprovaÃ§Ã£o da InstruÃ§Ã£o do Operador da peÃ§a $npc.','O usuÃ¡rio $quem aprovou a InstruÃ§Ã£o do Operador da peÃ§a $npc.','$user')");
 		//			
 	}elseif(isset($lap)){
 		$sql=mysql_query("UPDATE apqp_inst SET quem='',dtquem='0000-00-00',sit='N' WHERE id='$id'");
-		// cria followup caso limpe a aprovação da Instrução do Operador
-			$sql_sal=mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Removendo a aprovação da Instrução do Operador da peça $npc.','O usuário $quem removeu a aprovação da Instrução do Operador da peça $npc.','$user')");
+		// cria followup caso limpe a aprovaÃ§Ã£o da InstruÃ§Ã£o do Operador
+			$sql_sal=mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Removendo a aprovaÃ§Ã£o da InstruÃ§Ã£o do Operador da peÃ§a $npc.','O usuÃ¡rio $quem removeu a aprovaÃ§Ã£o da InstruÃ§Ã£o do Operador da peÃ§a $npc.','$user')");
 		//			
 	}
 	$gt="i1";
@@ -74,20 +74,20 @@ if($acao=="i0"){
 		if (file_exists($arquivo)) { 
 			unlink($arquivo);
 		}
-		$_SESSION["mensagem"]="Alterações salvas com sucesso";
-		// cria followup caso salve o conteudo da Instrução do Operador
-			$sql_sal=mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Salvando alterações da Instrução do Operador da peça $npc.','O usuário $quem salvou as alterações da Instrução do Operador da peça $npc.','$user')");
+		$_SESSION["mensagem"]="AlteraÃ§Ãµes salvas com sucesso";
+		// cria followup caso salve o conteudo da InstruÃ§Ã£o do Operador
+			$sql_sal=mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Salvando alteraÃ§Ãµes da InstruÃ§Ã£o do Operador da peÃ§a $npc.','O usuÃ¡rio $quem salvou as alteraÃ§Ãµes da InstruÃ§Ã£o do Operador da peÃ§a $npc.','$user')");
 		//			
 	}else{
 		if(!empty($_FILES["arquivo"]["name"])){
 			$erros=0;
 			if($_FILES["arquivo"]["type"]!="image/pjpeg"){
 				$erros++;
-				$_SESSION["mensagem"].="\\nA imagem deve ter extensão .jpg ou .jpeg";
+				$_SESSION["mensagem"].="\\nA imagem deve ter extensÃ£o .jpg ou .jpeg";
 			}
 			if($_FILES["arquivo"]["size"] > 1048576){
 				$erros++;
-				$_SESSION["mensagem"].="\\nA imagem deve ter no máximo 1Mb";
+				$_SESSION["mensagem"].="\\nA imagem deve ter no mÃ¡ximo 1Mb";
 			}
 			if($erros==0){
 				$arquivo="$patch/apqp_inst/$id.jpg";
@@ -97,16 +97,16 @@ if($acao=="i0"){
 				$upa=copy($_FILES["arquivo"]["tmp_name"], $arquivo);
 				if(!$upa){
 					$pau=true;
-					$_SESSION["mensagem"].="\\nA imagem não pôde ser carregada";
+					$_SESSION["mensagem"].="\\nA imagem nÃ£o pÃ´de ser carregada";
 				}else{
 					$sql=mysql_query("UPDATE apqp_inst SET desenho='S' WHERE id='$id'");
-					$_SESSION["mensagem"]="Alterações salvas com sucesso";
+					$_SESSION["mensagem"]="AlteraÃ§Ãµes salvas com sucesso";
 				}
 			}else{
 				$pau=true;
 			}
 			if($pau){
-				$_SESSION["mensagem"]="As alteraçoes não puderam ser realizadas".$_SESSION["mensagem"];
+				$_SESSION["mensagem"]="As alteraÃ§oes nÃ£o puderam ser realizadas".$_SESSION["mensagem"];
 			}
 		}
 	}
@@ -118,12 +118,12 @@ if($acao=="i0"){
 			$sql=mysql_query("UPDATE apqp_instp SET tipo='".$tipo[$linha]."', texto='".$texto[$linha]."' WHERE id='$linha'");
 		}
 		if($sql){
-			$_SESSION["mensagem"]="Alterações salvas com sucesso";
-		// cria followup caso salve o conteudo da Instrução do Operador
-			$sql_sal=mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Salvando alterações da Instrução do Operador da peça $npc.','O usuário $quem salvou as alterações da Instrução do Operador da peça $npc.','$user')");
+			$_SESSION["mensagem"]="AlteraÃ§Ãµes salvas com sucesso";
+		// cria followup caso salve o conteudo da InstruÃ§Ã£o do Operador
+			$sql_sal=mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Salvando alteraÃ§Ãµes da InstruÃ§Ã£o do Operador da peÃ§a $npc.','O usuÃ¡rio $quem salvou as alteraÃ§Ãµes da InstruÃ§Ã£o do Operador da peÃ§a $npc.','$user')");
 		//			
 		}else{
-			$_SESSION["mensagem"]="As alterações não puderam ser salvas";
+			$_SESSION["mensagem"]="As alteraÃ§Ãµes nÃ£o puderam ser salvas";
 		}
 	}
 	if($maisum==1){
@@ -135,7 +135,7 @@ if($acao=="i0"){
 			foreach($del AS $linha){
 				$sql=mysql_query("DELETE FROM apqp_instp WHERE id='$linha'");
 			}
-			$_SESSION["mensagem"]="Linhas excluídas com sucesso";
+			$_SESSION["mensagem"]="Linhas excluÃ­das com sucesso";
 		}else{
 			$_SESSION["mensagem"]="Selecione as linhas que deseja excluir";
 		}
@@ -146,12 +146,12 @@ if($acao=="i0"){
 	$sql=mysql_query("DELETE FROM apqp_instp WHERE inst='$id'");
 	$sql=mysql_query("DELETE FROM apqp_inst WHERE id='$id'");
 	if($sql){
-		$_SESSION["mensagem"]="Instrução excluída com sucesso";
-		// cria followup caso exclua a Instrução do Operador
-			$sql_sal=mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Exclusão da Instrução do Operador da peça $npc.','O usuário $quem excluiu as alterações da Instrução do Operador da peça $npc.','$user')");
+		$_SESSION["mensagem"]="InstruÃ§Ã£o excluÃ­da com sucesso";
+		// cria followup caso exclua a InstruÃ§Ã£o do Operador
+			$sql_sal=mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','ExclusÃ£o da InstruÃ§Ã£o do Operador da peÃ§a $npc.','O usuÃ¡rio $quem excluiu as alteraÃ§Ãµes da InstruÃ§Ã£o do Operador da peÃ§a $npc.','$user')");
 		//			
 	}else{
-		$_SESSION["mensagem"]="A instrução não pôde ser excluída";
+		$_SESSION["mensagem"]="A instruÃ§Ã£o nÃ£o pÃ´de ser excluÃ­da";
 	}
 	$gt="i";
 }elseif($acao=="altc"){
@@ -161,12 +161,12 @@ if($acao=="i0"){
 			$sql=mysql_query("UPDATE apqp_instc SET tecnicas='".$tecnicas[$linha]."', tamanho='".$tamanho[$linha]."', freq='".$freq[$linha]."', metodo='".$metodo[$linha]."', reacao='".$reacao[$linha]."' WHERE id='$linha'");
 		}
 		if($sql){
-			$_SESSION["mensagem"]="Alterações salvas com sucesso";
-		// cria followup caso salve o conteudo da Instrução do Operador
-			$sql_sal=mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Salvando alterações da Instrução do Operador da peça $npc.','O usuário $quem salvou as alterações da Instrução do Operador da peça $npc.','$user')");
+			$_SESSION["mensagem"]="AlteraÃ§Ãµes salvas com sucesso";
+		// cria followup caso salve o conteudo da InstruÃ§Ã£o do Operador
+			$sql_sal=mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Salvando alteraÃ§Ãµes da InstruÃ§Ã£o do Operador da peÃ§a $npc.','O usuÃ¡rio $quem salvou as alteraÃ§Ãµes da InstruÃ§Ã£o do Operador da peÃ§a $npc.','$user')");
 		//			
 		}else{
-			$_SESSION["mensagem"]="As alterações não puderam ser salvas";
+			$_SESSION["mensagem"]="As alteraÃ§Ãµes nÃ£o puderam ser salvas";
 		}
 	}
 	if($maisum==1){
@@ -178,7 +178,7 @@ if($acao=="i0"){
 			foreach($del AS $linha){
 				$sql=mysql_query("DELETE FROM apqp_instc WHERE id='$linha'");
 			}
-			$_SESSION["mensagem"]="Linhas excluídas com sucesso";
+			$_SESSION["mensagem"]="Linhas excluÃ­das com sucesso";
 		}else{
 			$_SESSION["mensagem"]="Selecione as linhas que deseja excluir";
 		}

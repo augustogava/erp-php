@@ -1,9 +1,9 @@
-<?
+<?php
 include("conecta.php");
 if(empty($acao)) exit;
 $acao=verifi($permi,$acao);
 if(!empty($acao)){
-	$loc="Fixação";
+	$loc="FixaÃ§Ã£o";
 	$pagina=$_SERVER['SCRIPT_FILENAME'];
 	include("log.php");
 }
@@ -11,29 +11,29 @@ if($acao=="incluir"){
 	$valor=valor2banco($valor);
 	$sql=mysql_query("INSERT INTO fixacao (nome,valor) VALUES ('$nome','$valor')");
 	if($sql){
-		$_SESSION["mensagem"]="Modo de fixação Incluído com sucesso!";
+		$_SESSION["mensagem"]="Modo de fixaÃ§Ã£o IncluÃ­do com sucesso!";
 		$acao="entrar";
 	}else{
-		$_SESSION["mensagem"]="O Modo de fixação não pôde ser incluído!";
+		$_SESSION["mensagem"]="O Modo de fixaÃ§Ã£o nÃ£o pÃ´de ser incluÃ­do!";
 		$acao="inc";
 	}
 }elseif($acao=="alterar"){
 	$valor=valor2banco($valor);
 	$sql=mysql_query("UPDATE fixacao SET nome='$nome', valor='$valor' WHERE id='$id'");
 	if($sql){
-		$_SESSION["mensagem"]="Modo de fixação alterado com sucesso!";
+		$_SESSION["mensagem"]="Modo de fixaÃ§Ã£o alterado com sucesso!";
 		$acao="entrar";
 	}else{
-		$_SESSION["mensagem"]="O Modo de fixação não pôde ser alterado!";
+		$_SESSION["mensagem"]="O Modo de fixaÃ§Ã£o nÃ£o pÃ´de ser alterado!";
 		$acao="alt";
 	}
 }elseif($acao=="exc"){
 	if(!empty($id)){
 		$sql=mysql_query("DELETE FROM fixacao WHERE id='$id'");
 		if($sql){
-			$_SESSION["mensagem"]="Modo de fixação excluído com sucesso!";
+			$_SESSION["mensagem"]="Modo de fixaÃ§Ã£o excluÃ­do com sucesso!";
 		}else{
-			$_SESSION["mensagem"]="O Modo de fixação não pôde ser excluído!";
+			$_SESSION["mensagem"]="O Modo de fixaÃ§Ã£o nÃ£o pÃ´de ser excluÃ­do!";
 		}		
 	}
 	$acao="entrar";

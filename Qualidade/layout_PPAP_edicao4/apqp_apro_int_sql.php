@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 $apqp=new set_apqp;
 $acao=verifi($permi,$acao);
@@ -14,8 +14,8 @@ $hora=hora();
 $sql_emp=mysql_query("SELECT fantasia FROM empresa");
 $res_emp=mysql_fetch_array($sql_emp);
 //
-// cria followup caso salve o conteudo da Aprovação Interina
-$sql_save=mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Salvando alterações da Aprovação Interina da peça $npc.','O usuário $quem salvou as alterações da Aprovação Interina da peça $npc.','$user')");
+// cria followup caso salve o conteudo da AprovaÃ§Ã£o Interina
+$sql_save=mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Salvando alteraÃ§Ãµes da AprovaÃ§Ã£o Interina da peÃ§a $npc.','O usuÃ¡rio $quem salvou as alteraÃ§Ãµes da AprovaÃ§Ã£o Interina da peÃ§a $npc.','$user')");
 //	
 
 if(!empty($acao)){
@@ -42,29 +42,29 @@ if($acao=="v1"){
 	$data=data2banco($data);
 	$sql=mysql_query("UPDATE apqp_interina SET ate='$ate',reesubmissao='$reesubmissao',ra='$ra',data='$data',ewo='$ewo',amo_adicionais='$amo_adicionais',amo_numero='$amo_numero',pkg='$pkg',eqf='$eqf' WHERE peca='$pc'");
 	if($sql){
-		$_SESSION["mensagem"]="Alterações salvas com sucesso";
+		$_SESSION["mensagem"]="AlteraÃ§Ãµes salvas com sucesso";
 		$sql_save;
 	}else{
-		$_SESSION["mensagem"]="As alterações não puderam ser salvas";
+		$_SESSION["mensagem"]="As alteraÃ§Ãµes nÃ£o puderam ser salvas";
 	}	
 	header("location:apqp_apro_int1.php");
 }elseif($acao=="v2"){
 	$sql=mysql_query("UPDATE apqp_interina SET classe='$classe',dim='$dim',apa='$apa',lab='$lab',pro='$pro',eng='$eng' WHERE peca='$pc'");
 	if($sql){
-		$_SESSION["mensagem"]="Alterações salvas com sucesso";
+		$_SESSION["mensagem"]="AlteraÃ§Ãµes salvas com sucesso";
 		$sql_save;
 	}else{
-		$_SESSION["mensagem"]="As alterações não puderam ser salvas";
+		$_SESSION["mensagem"]="As alteraÃ§Ãµes nÃ£o puderam ser salvas";
 	}
 	header("location:apqp_apro_int2.php");
 }elseif($acao=="v3"){
 
 	$sql=mysql_query("UPDATE apqp_interina SET resumo='$resumo',assunto='$assunto',problemas1='$problemas1',problemas2='$problemas2',plano1='$plano1',plano2='$plano2' WHERE peca='$pc'");
 	if($sql){
-		$_SESSION["mensagem"]="Alterações salvas com sucesso";
+		$_SESSION["mensagem"]="AlteraÃ§Ãµes salvas com sucesso";
 		$sql_save;
 	}else{
-		$_SESSION["mensagem"]="As alterações não puderam ser salvas";
+		$_SESSION["mensagem"]="As alteraÃ§Ãµes nÃ£o puderam ser salvas";
 	}
 	header("location:apqp_apro_int3.php");
 }elseif($acao=="v4"){
@@ -82,20 +82,20 @@ if($acao=="v1"){
 			}
 			$sql=mysql_query("UPDATE apqp_interina SET quem='$tap1',cargo='$cargo',departamento='$departamento',tel='$tel',fax='$fax2',dtquem=NOW() WHERE peca='$pc'");
 			$sql=mysql_query("UPDATE apqp_cron SET resp='$tap1', fim=NOW(), perc='100' WHERE peca='$pc' AND ativ='Interina'");
-			$_SESSION["mensagem"]="Aprovação concluída com sucesso";
-			// cria followup caso aprove a Aprovação Interina
-				mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Aprovação da Aprovação Interina da peça $npc.','O usuário $quem aprovou a Aprovação Interina da peça $npc.','$user')");
+			$_SESSION["mensagem"]="AprovaÃ§Ã£o concluÃ­da com sucesso";
+			// cria followup caso aprove a AprovaÃ§Ã£o Interina
+				mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','AprovaÃ§Ã£o da AprovaÃ§Ã£o Interina da peÃ§a $npc.','O usuÃ¡rio $quem aprovou a AprovaÃ§Ã£o Interina da peÃ§a $npc.','$user')");
 			//					
 	}elseif(isset($lap1)){
 		$sql=mysql_query("UPDATE apqp_interina SET quem='', dtquem='0000-00-00' WHERE peca='$pc'");
 		$sql=mysql_query("UPDATE apqp_cron SET resp='', fim='', perc='95' WHERE peca='$pc' AND ativ='Interina'");
-		$_SESSION["mensagem"]="Aprovação excluída com sucesso";
-		// cria followup caso remove a aprovação da Aprovação Interina
-			mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Removendo aprovação da Aprovação Interina da peça $npc.','O usuário $quem removeu a aprovação da Aprovação Interina da peça $npc.','$user')");
+		$_SESSION["mensagem"]="AprovaÃ§Ã£o excluÃ­da com sucesso";
+		// cria followup caso remove a aprovaÃ§Ã£o da AprovaÃ§Ã£o Interina
+			mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Removendo aprovaÃ§Ã£o da AprovaÃ§Ã£o Interina da peÃ§a $npc.','O usuÃ¡rio $quem removeu a aprovaÃ§Ã£o da AprovaÃ§Ã£o Interina da peÃ§a $npc.','$user')");
 		//	
 	}else{
-	$sql=mysql_query("UPDATE apqp_cron SET resp='', fim='', perc='95' WHERE peca='$pc' AND ativ='Interina'") or die("nn");
-	$sql=mysql_query("UPDATE apqp_interina SET cargo='$cargo',departamento='$departamento',tel='$tel',fax='$fax2',apro_eng='$apro_eng',apro_com='$apro_com',apro_engprod='$apro_engprod',apro_coor='$apro_coor',data_eng='$data_eng',data_com='$data_com',data_engprod='$data_engprod',data_coor='$data_coor' WHERE peca='$pc'") or die("nao");
+	$sql=mysql_query("UPDATE apqp_cron SET resp='', fim='', perc='95' WHERE peca='$pc' AND ativ='Interina'") or erp_db_fail();
+	$sql=mysql_query("UPDATE apqp_interina SET cargo='$cargo',departamento='$departamento',tel='$tel',fax='$fax2',apro_eng='$apro_eng',apro_com='$apro_com',apro_engprod='$apro_engprod',apro_coor='$apro_coor',data_eng='$data_eng',data_com='$data_com',data_engprod='$data_engprod',data_coor='$data_coor' WHERE peca='$pc'") or erp_db_fail();
 	$sql_save;
 	}
 	header("location:apqp_apro_int4.php");

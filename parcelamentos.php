@@ -16,6 +16,7 @@ if($acao=="alt"){
 <head>
 <title>Parcelamentos - ERP System</title>
 <meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <link href="style.css" rel="stylesheet" type="text/css">
@@ -167,13 +168,13 @@ if(mysql_num_rows($sql)==0){
     while($res=mysql_fetch_array($sql)){
 ?>
                 <tr>
-                    <td><strong><?=$res["descricao"]?></strong></td>
+                    <td><strong><?php echo $res["descricao"]?></strong></td>
                     <td>
                         <div class="erp-table-actions" style="justify-content:center;">
-                            <a href="parcelamentos.php?acao=alt&id=<?=$res["id"]?>" class="erp-table-action" title="Editar">
+                            <a href="parcelamentos.php?acao=alt&id=<?php echo $res["id"]?>" class="erp-table-action" title="Editar">
                                 <i class="fas fa-edit"></i>
                             </a>
-                            <a href="#" onclick="return pergunta('Deseja excluir esta forma de pagamento?','parcelamentos_sql.php?acao=exc&id=<?=$res["id"]?>')" class="erp-table-action" title="Excluir" style="color:#e74c3c;">
+                            <a href="#" onclick="return pergunta('Deseja excluir esta forma de pagamento?','parcelamentos_sql.php?acao=exc&id=<?php echo $res["id"]?>')" class="erp-table-action" title="Excluir" style="color:#e74c3c;">
                                 <i class="fas fa-trash"></i>
                             </a>
                         </div>
@@ -198,7 +199,7 @@ if(mysql_num_rows($sql)==0){
                     <div class="erp-col">
                         <div class="erp-form-group">
                             <label class="erp-form-label">Descricao</label>
-                            <input name="descricao" type="text" class="erp-form-control" value="<?=$res["descricao"]?>" maxlength="50">
+                            <input name="descricao" type="text" class="erp-form-control" value="<?php echo $res["descricao"]?>" maxlength="50">
                         </div>
                     </div>
                 </div>
@@ -225,13 +226,13 @@ if(mysql_num_rows($sql)==0){
                         <div class="erp-col" style="flex:0 0 120px;">
                             <div class="erp-form-group">
                                 <label class="erp-form-label">Parcelas</label>
-                                <input name="parcelas" type="text" class="erp-form-control" value="<?=$res["parcelas"]?>" maxlength="3" onKeyPress="return validanum(this, event)">
+                                <input name="parcelas" type="text" class="erp-form-control" value="<?php echo $res["parcelas"]?>" maxlength="3" onKeyPress="return validanum(this, event)">
                             </div>
                         </div>
                         <div class="erp-col" style="flex:0 0 150px;">
                             <div class="erp-form-group">
                                 <label class="erp-form-label">Intervalo (dias)</label>
-                                <input name="intervalo" type="text" class="erp-form-control" value="<?=$res["intervalo"]?>" maxlength="3" onKeyPress="return validanum(this, event)">
+                                <input name="intervalo" type="text" class="erp-form-control" value="<?php echo $res["intervalo"]?>" maxlength="3" onKeyPress="return validanum(this, event)">
                             </div>
                         </div>
                     </div>
@@ -248,7 +249,7 @@ if(mysql_num_rows($sql)==0){
                         <div class="erp-col">
                             <div class="erp-form-group">
                                 <label class="erp-form-label">Intervalos (Ex: 10,21,42)</label>
-                                <input name="alts" type="text" class="erp-form-control" value="<?=$res["alts"]?>">
+                                <input name="alts" type="text" class="erp-form-control" value="<?php echo $res["alts"]?>">
                             </div>
                         </div>
                     </div>
@@ -265,7 +266,7 @@ if(mysql_num_rows($sql)==0){
                         <div class="erp-col" style="flex:0 0 150px;">
                             <div class="erp-form-group">
                                 <label class="erp-form-label">% Entrada</label>
-                                <input name="ent_perc" type="text" class="erp-form-control" value="<?=banco2valor($res["ent_perc"])?>" onKeyDown="formataMoeda(this,retornaKeyCode(event))" onKeyUp="formataMoeda(this,retornaKeyCode(event))">
+                                <input name="ent_perc" type="text" class="erp-form-control" value="<?php echo banco2valor($res["ent_perc"])?>" onKeyDown="formataMoeda(this,retornaKeyCode(event))" onKeyUp="formataMoeda(this,retornaKeyCode(event))">
                             </div>
                         </div>
                     </div>
@@ -298,7 +299,7 @@ if(mysql_num_rows($sql)==0){
                         <div class="erp-col" style="flex:0 0 150px;">
                             <div class="erp-form-group">
                                 <label class="erp-form-label">Carencia (dias)</label>
-                                <input name="carencia" type="text" class="erp-form-control" value="<?=$res["carencia"]?>" maxlength="3" onKeyPress="return validanum(this, event)">
+                                <input name="carencia" type="text" class="erp-form-control" value="<?php echo $res["carencia"]?>" maxlength="3" onKeyPress="return validanum(this, event)">
                             </div>
                         </div>
                     </div>
@@ -313,8 +314,8 @@ if(mysql_num_rows($sql)==0){
                     </button>
                 </div>
 
-                <input name="acao" type="hidden" value="<?=$acao?>">
-                <input name="id" type="hidden" value="<?=$id?>">
+                <input name="acao" type="hidden" value="<?php echo $acao?>">
+                <input name="id" type="hidden" value="<?php echo $id?>">
             </form>
         </div>
     </div>

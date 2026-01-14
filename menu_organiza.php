@@ -1,4 +1,4 @@
-<? 
+<?php 
 include("conecta.php");
 include("seguranca.php");
 if($acao=="ok"){
@@ -6,7 +6,7 @@ if($acao=="ok"){
 		$id=$menus[$i];
 		$sql=mysql_query("UPDATE menus set posicao='$i' WHERE id='$id'");
 	}
-	$_SESSION["mensagem"]="Posições Alteradas";
+	$_SESSION["mensagem"]="PosiÃ§Ãµes Alteradas";
 	$acao="entrar";
 }
 ?>
@@ -14,7 +14,8 @@ if($acao=="ok"){
 <HEAD>
 <TITLE>Organiza Menus</TITLE>
 <link href="style.css" rel="stylesheet" type="text/css">
-<meta http-equiv="Content-Type" content="text/html; UTF-8"><meta name="webmaster" content="Christian Paul Pach">
+<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="webmaster" content="Christian Paul Pach">
 <script>
 <!--
 function Moveup(dbox) {
@@ -74,7 +75,7 @@ function MM_openBrWindow(theURL,winName,features) { //v2.0
             Menu</td>
         </tr>
         <tr> 
-          <?
+          <?php
   $sql=mysql_query("SELECT * FROM menus ORDER BY posicao ASC");
   while($res=mysql_fetch_array($sql)){
   	$texto=$res["texto"];
@@ -94,7 +95,7 @@ function MM_openBrWindow(theURL,winName,features) { //v2.0
               <table width="300" border="0" align="center" cellpadding="5" cellspacing="0">
                 <tr> 
                   <td width="147"><select name="menus" size="10" multiple class="formulario" id="select">
-                      <? print $ops; ?> 
+                      <?php print $ops; ?> 
                     </select> </td>
                   <td width="133"><table width="100%" border="0" cellspacing="0" cellpadding="0">
                       <tr> 
@@ -117,6 +118,6 @@ function MM_openBrWindow(theURL,winName,features) { //v2.0
 </table>
 </BODY>
 </HTML>
-<?
+<?php
 include("mensagem.php");
 ?>

@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 $popup=true;
 include("seguranca.php");
@@ -15,7 +15,7 @@ if(!empty($bdesc)&&!empty($bcod)){
 ?>
 <html>
 <head>
-<title>Órgão Calibrador</title>
+<title>Ã“rgÃ£o Calibrador</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <link href="style.css" rel="stylesheet" type="text/css">
 <script src="scripts.js"></script>
@@ -66,14 +66,14 @@ function fec(){
     <td width="105">C&oacute;d. Laborat&oacute;rio </td>
     <td width="380">Nome Laborat&oacute;rio </td>
   </tr>
-	<?
+	<?php
 	$sql=mysql_query("SELECT * FROM metrologia_lab $cond ORDER BY metr_lab_fant ASC");
 	if(mysql_num_rows($sql)==0){
 	?>
   <tr bgcolor="#FFFFFF">
     <td colspan="2" align="center" class="textopretobold">NENHUM &Oacute;RG&Atilde;O CADASTRADO</td>
   </tr>
-	<?
+	<?php
 	}else{
 		//BLOCO PAGINACAO
 		$results_tot=mysql_num_rows($sql); //total de registros encontrados
@@ -109,17 +109,17 @@ function fec(){
 	  	while($res=mysql_fetch_array($sql)){
 			$reg_final++; // PAGINACAO conta quantos registros imprimiu
 	?>
-  <tr bgcolor="#FFFFFF" class="textopreto" onMouseover="changeto('#CCCCCC')" onMouseout="changeback('#FFFFFF')"><a href="#" onClick="return marca('<?= $res["metr_lab_id"];?>','<?= $res["metr_lab_fant"]; ?>');">
-    <td>&nbsp;<?=$res["metr_lab_codi"];?></td>
-    <td><?= $res["metr_lab_fant"];?></td>
+  <tr bgcolor="#FFFFFF" class="textopreto" onMouseover="changeto('#CCCCCC')" onMouseout="changeback('#FFFFFF')"><a href="#" onClick="return marca('<?php echo  $res["metr_lab_id"];?>','<?php echo  $res["metr_lab_fant"]; ?>');">
+    <td>&nbsp;<?php echo $res["metr_lab_codi"];?></td>
+    <td><?php echo  $res["metr_lab_fant"];?></td>
     </a>  </tr>
-	<?
+	<?php
 		}
 	}
 	?>
 </table>
 
-<? if($wpaginar){ ?>
+<?php if($wpaginar){ ?>
 <table width="500" border="0" align="center" cellpadding="0" cellspacing="0">
             <tr>
               <td><img src="imagens/dot.gif" width="20" height="8"></td>
@@ -129,19 +129,19 @@ function fec(){
                 <table width="1%" border="0" cellspacing="0" cellpadding="0">
                   <tr valign="top">
                     <td align="right">
-                      <? 
+                      <?php 
 				$antz=false;
 				if($wp>1){
 					$antz=true;
 				?>
-                      <a href="<? print "metr_medg_orgc.php?wp=$pg_anterior&bdesc=$bdesc&bcod=$bcod"; ?>" class="texto">
-                      <? } ?>
+                      <a href="<?php print "metr_medg_orgc.php?wp=$pg_anterior&bdesc=$bdesc&bcod=$bcod"; ?>" class="texto">
+                      <?php } ?>
                       <img src="imagens/pag_f.gif" border="0">
-                      <? if($antz){ ?>
+                      <?php if($antz){ ?>
                       <br>
             Anterior</a>
-                      <? } ?>                    </td>
-                    <?
+                      <?php } ?>                    </td>
+                    <?php
 				$link_impressos=0;
 				if ($temp > $wpaginacao){
 		    	    $n_start  = $temp - ceil($wpaginacao/2);
@@ -155,30 +155,30 @@ function fec(){
 					$link_impressos++;
 				?>
                     <td align="center">
-                      <? if($pg_atual != $link_impressos){ ?>
-                      <a href="<? print "metr_medg_orgc.php?wp=$link_impressos&bdesc=$bdesc&bcod=$bcod"; ?>" class="texto">
-                      <? } ?>
-                      <img src="imagens/pag_e<? if($pg_atual==$link_impressos) { print "2"; }else{ print ""; } ?>.gif" border="0"><br>
-                      <? if($pg_atual==$link_impressos){ print "<span class=\"textobold\">$link_impressos</span>"; }else{ print $link_impressos; }?>
-                      <? if($pg_atual != $link_impressos){ ?>
+                      <?php if($pg_atual != $link_impressos){ ?>
+                      <a href="<?php print "metr_medg_orgc.php?wp=$link_impressos&bdesc=$bdesc&bcod=$bcod"; ?>" class="texto">
+                      <?php } ?>
+                      <img src="imagens/pag_e<?php if($pg_atual==$link_impressos) { print "2"; }else{ print ""; } ?>.gif" border="0"><br>
+                      <?php if($pg_atual==$link_impressos){ print "<span class=\"textobold\">$link_impressos</span>"; }else{ print $link_impressos; }?>
+                      <?php if($pg_atual != $link_impressos){ ?>
                       </a>
-                      <? } ?></td>
-                    <?
+                      <?php } ?></td>
+                    <?php
 				}
 				?>
                     <td>
-                      <? if($reg_final<$results_tot){ ?>
-                      <a href="<? print "metr_medg_orgc.php?wp=$pg_proxima&bdesc=$bdesc&bcod=$bcod"; ?>" class="texto">
-                      <? } ?>
+                      <?php if($reg_final<$results_tot){ ?>
+                      <a href="<?php print "metr_medg_orgc.php?wp=$pg_proxima&bdesc=$bdesc&bcod=$bcod"; ?>" class="texto">
+                      <?php } ?>
                       <img src="imagens/pag_der.gif" border="0">
-                      <? if($reg_final<$results_tot){ ?>
+                      <?php if($reg_final<$results_tot){ ?>
                       <br>
             Pr&oacute;ximo</a>
-                      <? } ?>                    </td>
+                      <?php } ?>                    </td>
                   </tr>
               </table></td>
             </tr>
-</table>            <? } ?>
+</table>            <?php } ?>
 </body>
 </html>
-<? include("mensagem.php"); ?>
+<?php include("mensagem.php"); ?>

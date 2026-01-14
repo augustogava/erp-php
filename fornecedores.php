@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 include("seguranca.php");
 $nivel=$_SESSION["login_nivel"];
@@ -35,8 +35,8 @@ if($acao=="exc"){
 <html lang="pt-BR">
 <head>
 <title>Fornecedores - ERP System</title>
-<meta charset="ISO-8859-1">
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <link href="style.css" rel="stylesheet" type="text/css">
@@ -112,27 +112,27 @@ if($acao=="exc"){
                 while($res=mysql_fetch_array($sql)){
                     ?>
                     <tr>
-                        <td><strong><?=$res["id"]?></strong></td>
+                        <td><strong><?php echo $res["id"]?></strong></td>
                         <td>
-                            <div style="font-weight:600;"><?=$res["fantasia"]?></div>
+                            <div style="font-weight:600;"><?php echo $res["fantasia"]?></div>
                             <?php if(!empty($res["nome"]) && $res["nome"] != $res["fantasia"]): ?>
-                            <div style="font-size:12px;color:#6c757d;"><?=$res["nome"]?></div>
+                            <div style="font-size:12px;color:#6c757d;"><?php echo $res["nome"]?></div>
                             <?php endif; ?>
                         </td>
-                        <td><?=$res["fone1"]?></td>
-                        <td><?=$res["cidade"]?></td>
+                        <td><?php echo $res["fone1"]?></td>
+                        <td><?php echo $res["cidade"]?></td>
                         <td>
                             <div class="erp-table-actions" style="justify-content:center;">
-                                <a href="fornecedores_geral.php?acao=alt&id=<?=$res["id"]?>&bcod=<?=$bcod?>&bnome=<?=$bnome?>" class="erp-table-action" title="Editar">
+                                <a href="fornecedores_geral.php?acao=alt&id=<?php echo $res["id"]?>&bcod=<?php echo $bcod?>&bnome=<?php echo $bnome?>" class="erp-table-action" title="Editar">
                                     <i class="fas fa-edit"></i>
                                 </a>
-                                <a href="fornecedores_financeiro.php?id=<?=$res["id"]?>&bcod=<?=$bcod?>&bnome=<?=$bnome?>" class="erp-table-action" title="Financeiro">
+                                <a href="fornecedores_financeiro.php?id=<?php echo $res["id"]?>&bcod=<?php echo $bcod?>&bnome=<?php echo $bnome?>" class="erp-table-action" title="Financeiro">
                                     <i class="fas fa-dollar-sign"></i>
                                 </a>
-                                <a href="fornecedores_site_list.php?id=<?=$res["id"]?>" class="erp-table-action" title="Website">
+                                <a href="fornecedores_site_list.php?id=<?php echo $res["id"]?>" class="erp-table-action" title="Website">
                                     <i class="fas fa-globe"></i>
                                 </a>
-                                <a href="#" onclick="return pergunta('Confirma exclusao?','fornecedores.php?acao=exc&id=<?=$res["id"]?>');" class="erp-table-action" title="Excluir" style="color:#e74c3c;">
+                                <a href="#" onclick="return pergunta('Confirma exclusao?','fornecedores.php?acao=exc&id=<?php echo $res["id"]?>');" class="erp-table-action" title="Excluir" style="color:#e74c3c;">
                                     <i class="fas fa-trash"></i>
                                 </a>
                             </div>
@@ -147,6 +147,6 @@ if($acao=="exc"){
     </div>
 </div>
 
-<? include("mensagem.php"); ?>
+<?php include("mensagem.php"); ?>
 </body>
 </html>

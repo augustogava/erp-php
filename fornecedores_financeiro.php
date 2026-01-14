@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 include("seguranca.php");
 $acao=verifi($permi,$acao);
@@ -49,7 +49,7 @@ if($acao=="alt"){
 		header("Location:fornecedores.php?bcod=$bcod&bnome=$bnome");
 		exit;				
 	}else{
-		$_SESSION["mensagem"]="O cadastro financeiro não pôde ser alterado!";
+		$_SESSION["mensagem"]="O cadastro financeiro nÃ£o pÃ´de ser alterado!";
 		$compra_mai=baco2valor($compra_mai);
 		$atraso_med=baco2valor($atraso_med);
 		$atraso_mai=baco2valor($atraso_mai);
@@ -69,11 +69,11 @@ if($acao=="alt"){
 	$compra_ult=data2banco($compra_ult);	
 	$sql=mysql_query("INSERT INTO fornecedor_financeiro (fornecedor,risco,cond,compra_mai,atraso_med,atraso_mai,compra_num,compra_pri,compra_ult,dupl_saldo,natureza,saldo_moe,agencia,conta,tipo,iss) VALUES ('$id','$risco','$cond','$compra_mai','$atraso_med','$atraso_mai','$compra_num','$compra_pri','$compra_ult','$dupl_saldo','$natureza','$saldo_moe','$agencia','$conta','$tipo','$iss')");
 	if($sql){
-		$_SESSION["mensagem"]="Cadastro financeiro concluído!";
+		$_SESSION["mensagem"]="Cadastro financeiro concluÃ­do!";
 		//header("Location:clientes_login.php?id=$id&acao=inc&bcod=$bcod&bnome=$bnome");
 		//exit;				
 	}else{
-		$_SESSION["mensagem"]="O cadastro financeiro não pôde ser concluído!";
+		$_SESSION["mensagem"]="O cadastro financeiro nÃ£o pÃ´de ser concluÃ­do!";
 		$compra_mai=baco2valor($compra_mai);
 		$atraso_med=baco2valor($atraso_med);
 		$atraso_mai=baco2valor($atraso_mai);
@@ -88,7 +88,8 @@ if($acao=="alt"){
 <html>
 <head>
 <title>CyberManager</title>
-<meta http-equiv="Content-Type" content="text/html; UTF-8">
+<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="style.css" rel="stylesheet" type="text/css">
 <script src="mascaras.js"></script>
 <script src="scripts.js"></script>
@@ -129,100 +130,100 @@ function MM_openBrWindow(theURL,winName,features) { //v2.0
           <tr class="textobold"> 
             <td width="94">&nbsp;Risco:</td>
             <td width="353">
-<input name="risco" type="text" class="formulario" id="risco" value="<? print $risco; ?>" size="3" maxlength="1"></td>
+<input name="risco" type="text" class="formulario" id="risco" value="<?php print $risco; ?>" size="3" maxlength="1"></td>
           </tr>
           <tr class="textobold"> 
             <td>&nbsp;Cond. Pagto:</td>
             <td>
-<input name="cond" type="text" class="formulario" id="cond" value="<? print $cond; ?>" size="30" maxlength="20"></td>
+<input name="cond" type="text" class="formulario" id="cond" value="<?php print $cond; ?>" size="30" maxlength="20"></td>
           </tr>
           <tr class="textobold"> 
             <td>&nbsp;Maior Compra:</td>
             <td>
-<input name="compra_mai" type="text" class="formulario" id="compra_mai" value="<? print $compra_mai; ?>" size="10" onKeyDown="formataMoeda(this,retornaKeyCode(event))" onKeyUp="formataMoeda(this,retornaKeyCode(event))"></td>
+<input name="compra_mai" type="text" class="formulario" id="compra_mai" value="<?php print $compra_mai; ?>" size="10" onKeyDown="formataMoeda(this,retornaKeyCode(event))" onKeyUp="formataMoeda(this,retornaKeyCode(event))"></td>
           </tr>
           <tr class="textobold"> 
             <td>&nbsp;M&eacute;dia Atraso:</td>
             <td>
-<input name="atraso_med" type="text" class="formulario" id="atraso_med" value="<? print $atraso_med; ?>" size="10" onKeyDown="formataMoeda(this,retornaKeyCode(event))" onKeyUp="formataMoeda(this,retornaKeyCode(event))"></td>
+<input name="atraso_med" type="text" class="formulario" id="atraso_med" value="<?php print $atraso_med; ?>" size="10" onKeyDown="formataMoeda(this,retornaKeyCode(event))" onKeyUp="formataMoeda(this,retornaKeyCode(event))"></td>
           </tr>
           <tr class="textobold"> 
             <td>&nbsp;Maior Atraso:</td>
             <td>
-<input name="atraso_mai" type="text" class="formulario" id="atraso_mai" value="<? print $atraso_mai; ?>" size="10" onKeyDown="formataMoeda(this,retornaKeyCode(event))" onKeyUp="formataMoeda(this,retornaKeyCode(event))"></td>
+<input name="atraso_mai" type="text" class="formulario" id="atraso_mai" value="<?php print $atraso_mai; ?>" size="10" onKeyDown="formataMoeda(this,retornaKeyCode(event))" onKeyUp="formataMoeda(this,retornaKeyCode(event))"></td>
           </tr>
           <tr class="textobold"> 
             <td>&nbsp;N&ordm; de Compras:</td>
             <td>
-<input name="compra_num" type="text" class="formulario" id="compra_num" value="<? print $compra_num; ?>" size="10" onKeyPress="return validanum(this, event)"></td>
+<input name="compra_num" type="text" class="formulario" id="compra_num" value="<?php print $compra_num; ?>" size="10" onKeyPress="return validanum(this, event)"></td>
           </tr>
           <tr class="textobold"> 
             <td>&nbsp;1&ordf; Compra:</td>
             <td>
-<input name="compra_pri" type="text" class="formulario" id="compra_pri" onKeyPress="return validanum(this, event)" onKeyUp="mdata(this)" value="<? print $compra_pri; ?>" size="10" maxlength="10"></td>
+<input name="compra_pri" type="text" class="formulario" id="compra_pri" onKeyPress="return validanum(this, event)" onKeyUp="mdata(this)" value="<?php print $compra_pri; ?>" size="10" maxlength="10"></td>
           </tr>
           <tr class="textobold"> 
             <td>&nbsp;&Uacute;ltima Compra:</td>
             <td>
-<input name="compra_ult" type="text" class="formulario" id="compra_ult" value="<? print $compra_ult; ?>" size="10" maxlength="10" onKeyPress="return validanum(this, event)" onKeyUp="mdata(this)"></td>
+<input name="compra_ult" type="text" class="formulario" id="compra_ult" value="<?php print $compra_ult; ?>" size="10" maxlength="10" onKeyPress="return validanum(this, event)" onKeyUp="mdata(this)"></td>
           </tr>
           <tr class="textobold"> 
             <td>&nbsp;Sld. de Dupl.:</td>
             <td>
-<input name="dupl_saldo" type="text" class="formulario" id="dupl_saldo" value="<? print $dupl_saldo; ?>" size="10" onKeyDown="formataMoeda(this,retornaKeyCode(event))" onKeyUp="formataMoeda(this,retornaKeyCode(event))"></td>
+<input name="dupl_saldo" type="text" class="formulario" id="dupl_saldo" value="<?php print $dupl_saldo; ?>" size="10" onKeyDown="formataMoeda(this,retornaKeyCode(event))" onKeyUp="formataMoeda(this,retornaKeyCode(event))"></td>
           </tr>
           <tr class="textobold"> 
             <td>&nbsp;Natureza:</td>
             <td>
-<input name="natureza" type="text" class="formulario" id="natureza" value="<? print $natureza; ?>" size="10" onKeyPress="return validanum(this, event)"></td>
+<input name="natureza" type="text" class="formulario" id="natureza" value="<?php print $natureza; ?>" size="10" onKeyPress="return validanum(this, event)"></td>
           </tr>
           <tr class="textobold"> 
             <td>&nbsp;Sld. Moe. Forte:</td>
             <td>
-<input name="saldo_moe" type="text" class="formulario" id="saldo_moe" value="<? print $saldo_moe; ?>" size="10" onKeyDown="formataMoeda(this,retornaKeyCode(event))" onKeyUp="formataMoeda(this,retornaKeyCode(event))"></td>
+<input name="saldo_moe" type="text" class="formulario" id="saldo_moe" value="<?php print $saldo_moe; ?>" size="10" onKeyDown="formataMoeda(this,retornaKeyCode(event))" onKeyUp="formataMoeda(this,retornaKeyCode(event))"></td>
           </tr>
           <tr class="textobold"> 
             <td>&nbsp;Agencia:</td>
             <td>
-<input name="agencia" type="text" class="formulario" id="agencia" value="<? print $agencia; ?>" size="20" maxlength="10"></td>
+<input name="agencia" type="text" class="formulario" id="agencia" value="<?php print $agencia; ?>" size="20" maxlength="10"></td>
           </tr>
           <tr class="textobold"> 
             <td>&nbsp;Conta:</td>
             <td>
-<input name="conta" type="text" class="formulario" id="conta" value="<? print $conta; ?>" size="20" maxlength="10"></td>
+<input name="conta" type="text" class="formulario" id="conta" value="<?php print $conta; ?>" size="20" maxlength="10"></td>
           </tr>
           <tr class="textobold"> 
             <td>&nbsp;Tipo:</td>
             <td>
-<input name="tipo" type="text" class="formulario" id="tipo" value="<? print $tipo; ?>" size="20" maxlength="20"> 
+<input name="tipo" type="text" class="formulario" id="tipo" value="<?php print $tipo; ?>" size="20" maxlength="20"> 
               <font face="Verdana, Arial, Helvetica, sans-serif" size="1" color="#000066"> 
-              <input name="acao" type="hidden" id="acao" value="<? if($acao=="inc"){ print "incluir"; }else{ print "alterar"; } ?>">
-              <input name="id" type="hidden" id="id" value="<? print $id; ?>">
+              <input name="acao" type="hidden" id="acao" value="<?php if($acao=="inc"){ print "incluir"; }else{ print "alterar"; } ?>">
+              <input name="id" type="hidden" id="id" value="<?php print $id; ?>">
               </font></td>
           </tr>
           <tr class="textobold"> 
             <td>&nbsp;ISS:</td>
             <td>&nbsp; 
-              <input name="iss" type="radio" value="S" <? if($iss=="S" or empty($status)) print "checked"; ?>>
+              <input name="iss" type="radio" value="S" <?php if($iss=="S" or empty($status)) print "checked"; ?>>
               Sim 
-              <input name="iss" type="radio" value="N" <? if($iss=="N") print "checked"; ?>>
+              <input name="iss" type="radio" value="N" <?php if($iss=="N") print "checked"; ?>>
               N&atilde;o</td>
           </tr>
           <tr class="textobold"> 
             <td colspan="2" align="center"> 
-              <? if($acao=="alt"){ ?>
+              <?php if($acao=="alt"){ ?>
             
-              <input name="Submit22" type="button" class="microtxt" value="voltar" onClick="window.location='fornecedores.php<? if(!empty($bcod) or !empty($bnome)) print "?webmst=cpp"; if(!empty($bcod)) print "&bcod=$bcod"; if(!empty($bnome)) print "&bnome=$bnome";?>'">
+              <input name="Submit22" type="button" class="microtxt" value="voltar" onClick="window.location='fornecedores.php<?php if(!empty($bcod) or !empty($bnome)) print "?webmst=cpp"; if(!empty($bcod)) print "&bcod=$bcod"; if(!empty($bnome)) print "&bnome=$bnome";?>'">
          
               <img src="imagens/dot.gif" width="50" height="5"> 
-              <? } ?>
+              <?php } ?>
               <input name="Submit2" type="submit" class="microtxt" value="Continuar"></td>
           </tr>
         </table>
       </form></td>
   </tr>
 </table>
-  
+Â  
 </body>
 </html>
-<? include("mensagem.php"); ?>
+<?php include("mensagem.php"); ?>

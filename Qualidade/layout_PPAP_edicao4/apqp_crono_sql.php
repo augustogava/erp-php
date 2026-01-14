@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 include("seguranca.php");
 $apqp=new set_apqp;
@@ -17,10 +17,10 @@ if(!empty($acao)){
 //$obs=htmlspecialchars($obs);
 if($acao=="imp" or $acao=="email"){
 		if($acao=="imp"){
-		// cria followup caso faÁa impress„o do cronograma
+		// cria followup caso fa√ßa impress√£o do cronograma
 			$sql_emp=mysql_query("SELECT fantasia FROM empresa");
 			$res_emp=mysql_fetch_array($sql_emp);
-			mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Impress„o do Cronograma.','O usu·rio $quem1 efetuou a impress„o do Cronograma da peÁa $npc.','$user_apro')");
+			mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Impress√£o do Cronograma.','O usu√°rio $quem1 efetuou a impress√£o do Cronograma da pe√ßa $npc.','$user_apro')");
 		//
 		}
 	header("Location:apqp_impressao.php?acao=$acao&local=$local&email=$email&pc=$pc");
@@ -29,7 +29,7 @@ if($acao=="imp" or $acao=="email"){
 		//verificar Cliente
 		$apqp->cliente_apro("apqp_crono.php");
 		// - - - - - - - -  -
-	///Tirar AprovaÁıesss pra frente
+	///Tirar Aprova√ß√µesss pra frente
 	$passa="S";
 	$sql=mysql_query("SELECT * FROM apqp_pc WHERE crono_apro='S' AND id='$pc'");
 	if(mysql_num_rows($sql)){
@@ -58,15 +58,15 @@ if($acao=="imp" or $acao=="email"){
 				//Viabilidade
 				$sqlv=mysql_query("UPDATE apqp_viabilidade SET ap1='',ap2='',ap3='',ap4='',ap5='',ap6='', dt1='0000-00-00',dt2='0000-00-00',dt3='0000-00-00',dt4='0000-00-00',dt5='0000-00-00',dt6='0000-00-00' WHERE peca='$pc'");
 				$passa="N";
-				$sql=mysql_query("DELETE FROM agenda WHERE pc='$pc'") or die("nao exc");
+				$sql=mysql_query("DELETE FROM agenda WHERE pc='$pc'") or erp_db_fail();
 	}
 
 if($acao=="inc"){
 
-	// cria followup caso faÁa inclus„o de uma nova atividade no cronograma
+	// cria followup caso fa√ßa inclus√£o de uma nova atividade no cronograma
 	$sql_emp=mysql_query("SELECT fantasia FROM empresa");
 	$res_emp=mysql_fetch_array($sql_emp);
-	mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Inclus„o de uma nova atividade no Cronograma.','O usu·rio $quem1 incluiu uma nova atividade no Cronograma da peÁa $npc.','$user_apro')");
+	mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Inclus√£o de uma nova atividade no Cronograma.','O usu√°rio $quem1 incluiu uma nova atividade no Cronograma da pe√ßa $npc.','$user_apro')");
 	//
 
 	$ini=data2banco($ini);
@@ -95,17 +95,17 @@ if($acao=="inc"){
 	$pos++;
 	$sql=mysql_query("INSERT INTO apqp_cron (peca,ativ,ini,prazo,fim,perc,obs,pos) VALUES ('$pc','$ativ','$ini','$prazo','$fim','$perc','$obs','$pos')");
 	if($sql){
-		$_SESSION["mensagem"]="Atividade incluÌda com sucesso";
+		$_SESSION["mensagem"]="Atividade inclu√≠da com sucesso";
 	}else{
-		$_SESSION["mensagem"]="A atividade n„o pÙde ser incluÌda";
+		$_SESSION["mensagem"]="A atividade n√£o p√¥de ser inclu√≠da";
 		$comp="?acao=inc";
 	}
 }elseif($acao=="alt"){
 
-	// cria followup caso faÁa alteraÁ„o no cronograma
+	// cria followup caso fa√ßa altera√ß√£o no cronograma
 	$sql_emp=mysql_query("SELECT fantasia FROM empresa");
 	$res_emp=mysql_fetch_array($sql_emp);
-	mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','AlteraÁ„o do Cronograma.','O usu·rio $quem1 alterou o Cronograma da peÁa $npc.','$user_apro')");
+	mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Altera√ß√£o do Cronograma.','O usu√°rio $quem1 alterou o Cronograma da pe√ßa $npc.','$user_apro')");
 	//
 
 	if(isset($ap)){
@@ -119,10 +119,10 @@ if($acao=="inc"){
 		}
 		reset($ids);
 		
-		// cria followup de aprovaÁ„o fora do looping
+		// cria followup de aprova√ß√£o fora do looping
 		$sql_emp=mysql_query("SELECT fantasia FROM empresa");
 		$res_emp=mysql_fetch_array($sql_emp);
-		mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Agendamento de compromisso $npc.','O usu·rio $quem1 aprovou o Cronograma da peÁa $npc.','$user_apro')");
+		mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Agendamento de compromisso $npc.','O usu√°rio $quem1 aprovou o Cronograma da pe√ßa $npc.','$user_apro')");
 		//
 		
 		while (list($key, $val) = each($ids)) {  
@@ -135,21 +135,21 @@ if($acao=="inc"){
 			$prazo1=data2banco($prazo[$val]);
 			$fim1=data2banco($fim[$val]);
 			if(!empty($responsavel1)){
-				//envia agenda ao respons·vel pelo estudo
+				//envia agenda ao respons√°vel pelo estudo
 				$inicio=banco2data($ini1);
 				$fim=banco2data($prazo1);
-				mysql_query("INSERT INTO agenda (pc,estudo,nome,texto,titulo,data,hora,user_apro,reagendada) VALUES ('$pc','$ativ1','$responsavel1','$responsavel1, vocÍ È respons·vel pela execuÁ„o do estudo $ativ1 que tem inÌcio no dia $inicio com data de tÈrmino prevista para $fim.','$ativ1 - $npc','$hj','$hora', '$user_apro','S')");
+				mysql_query("INSERT INTO agenda (pc,estudo,nome,texto,titulo,data,hora,user_apro,reagendada) VALUES ('$pc','$ativ1','$responsavel1','$responsavel1, voc√™ √© respons√°vel pela execu√ß√£o do estudo $ativ1 que tem in√≠cio no dia $inicio com data de t√©rmino prevista para $fim.','$ativ1 - $npc','$hj','$hora', '$user_apro','S')");
 				
 				mysql_query("UPDATE apqp_cron SET responsavel='$responsavel1' WHERE id='$val'");
 				//
 
-				// cria followup de cada usu·rio respons·vel pela atividade
+				// cria followup de cada usu√°rio respons√°vel pela atividade
 				$sql_emp=mysql_query("SELECT fantasia FROM empresa");
 				$res_emp=mysql_fetch_array($sql_emp);
-				mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Agendamento de compromisso $npc.','O usu·rio $responsavel1 È respons·vel pela execuÁ„o do estudo $ativ1 da peÁa $npc que tem inÌcio no dia $inicio com data de tÈrmino prevista para $fim.','$user_apro')");
+				mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Agendamento de compromisso $npc.','O usu√°rio $responsavel1 √© respons√°vel pela execu√ß√£o do estudo $ativ1 da pe√ßa $npc que tem in√≠cio no dia $inicio com data de t√©rmino prevista para $fim.','$user_apro')");
 				//
 								
-				// envia e-mail ao respons·vel pela atividade
+				// envia e-mail ao respons√°vel pela atividade
 				$sql3=mysql_query("SELECT id FROM funcionarios WHERE nome='$responsavel1'");	
 				$res3=mysql_fetch_array($sql3);
 				$sql4=mysql_query("SELECT * FROM funcionarios WHERE id='$res3[id]'");	
@@ -158,7 +158,7 @@ if($acao=="inc"){
 				$res5=mysql_fetch_array($sql5);
 				$sql6=mysql_query("SELECT * FROM funcionarios WHERE id='$res5[id]'");	
 				$res6=mysql_fetch_array($sql6);
-				$mensagem="$responsavel1, vocÍ È respons·vel pela execuÁ„o da atividade $ativ1 que tem inÌcio no dia $inicio com data de tÈrmino prevista para $fim.";
+				$mensagem="$responsavel1, voc√™ √© respons√°vel pela execu√ß√£o da atividade $ativ1 que tem in√≠cio no dia $inicio com data de t√©rmino prevista para $fim.";
 				$from="From: $quem1<$res6[email]>";
 				mail($res4["email"],"$ativ1 - $npc'",$mensagem,$from);
 				//
@@ -169,13 +169,13 @@ if($acao=="inc"){
 		header("Location:apqp_crono.php$comp");
 		exit;
 	}elseif(isset($lap)){
-		mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Removendo a aprovaÁ„o do Cronograma da peÁa $npc.','O usu·rio $quem removeu a aprovaÁ„o da peÁa $npc devido a remoÁ„o da aprovaÁ„o do Cronograma','$user')");
-		$apqp->set_email("RemoÁ„o da aprovaÁ„o da peÁa $npc.","O usu·rio $quem removeu a aprovaÁ„o da peÁa $this->npc devido a remoÁ„o da aprovaÁ„o do Cronograma");
+		mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Removendo a aprova√ß√£o do Cronograma da pe√ßa $npc.','O usu√°rio $quem removeu a aprova√ß√£o da pe√ßa $npc devido a remo√ß√£o da aprova√ß√£o do Cronograma','$user')");
+		$apqp->set_email("Remo√ß√£o da aprova√ß√£o da pe√ßa $npc.","O usu√°rio $quem removeu a aprova√ß√£o da pe√ßa $this->npc devido a remo√ß√£o da aprova√ß√£o do Cronograma");
 		$apqp->email();
 
-		$sql=mysql_query("DELETE FROM agenda WHERE pc='$pc'") or die("nao exc");
-		$sql=mysql_query("UPDATE apqp_pc SET crono_apro='N', crono_quem='', crono_dtquem='0000-00-00' WHERE id='$pc'") or die("eRRO");
-		$_SESSION["mensagem"]="AprovaÁ„o excluÌda com sucesso!";
+		$sql=mysql_query("DELETE FROM agenda WHERE pc='$pc'") or erp_db_fail();
+		$sql=mysql_query("UPDATE apqp_pc SET crono_apro='N', crono_quem='', crono_dtquem='0000-00-00' WHERE id='$pc'") or erp_db_fail();
+		$_SESSION["mensagem"]="Aprova√ß√£o exclu√≠da com sucesso!";
 		header("Location:apqp_crono.php$comp");
 		exit;
 	}
@@ -211,7 +211,7 @@ if($acao=="inc"){
 		if($sql) $count2++;
 	}
 /*
-	// Tirar AprovaÁıes
+	// Tirar Aprova√ß√µes
 	$sql=mysql_query("SELECT * FROM apqp_pc WHERE crono_apro='S' AND id='$pc'");
 	if(mysql_num_rows($sql)){
 			$sqlba=mysql_query("SELECT * FROM apqp_cron WHERE perc='100' AND peca='$pc'");
@@ -245,28 +245,28 @@ if($acao=="inc"){
 	if(count($ativ)==$count2){
 		$_SESSION["mensagem"]="Cronograma alterado com sucesso";
 	}else{
-		$_SESSION["mensagem"]="O cronograma n„o pÙde ser alterado";
+		$_SESSION["mensagem"]="O cronograma n√£o p√¥de ser alterado";
 		$comp="?acao=alt";
 	}
 }elseif($acao=="exc"){
 	$sql=mysql_query("DELETE FROM apqp_cron WHERE id='$id'");
 	if($sql){
-		$_SESSION["mensagem"]="Atividade excluÌda com sucesso";
+		$_SESSION["mensagem"]="Atividade exclu√≠da com sucesso";
 	}else{
-		$_SESSION["mensagem"]="A atividade n„o pÙde ser excluÌda";
+		$_SESSION["mensagem"]="A atividade n√£o p√¥de ser exclu√≠da";
 	}
 	// cria followup caso exclua o cronograma
 	$sql_emp=mysql_query("SELECT fantasia FROM empresa");
 	$res_emp=mysql_fetch_array($sql_emp);
-	mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Exclus„o do Cronograma.','O usu·rio $quem1 excluiu a atividade do Cronograma da peÁa $npc.','$user_apro')");
+	mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Exclus√£o do Cronograma.','O usu√°rio $quem1 excluiu a atividade do Cronograma da pe√ßa $npc.','$user_apro')");
 	//
 }
 /*if($acao=="salvar"){
-	// cria followup caso salve o relatÛrio do cronograma em disco
+	// cria followup caso salve o relat√≥rio do cronograma em disco
 	$sql_emp=mysql_query("SELECT fantasia FROM empresa");
 	$res_emp=mysql_fetch_array($sql_emp);
-	mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao) VALUES ('$res_emp[fantasia]','$hj','$hora','Salvar relatÛrio do Cronograma em disco.','O usu·rio $quem1 salvou o Cronograma da peÁa $npc em disco.')");
-	print "INSERT INTO followup (empresa,data,hora,titulo,descricao) VALUES ('$res_emp[fantasia]','$hj','$hora','Salvar relatÛrio do Cronograma em disco.','O usu·rio $quem1 salvou o Cronograma da peÁa $npc em disco.')";
+	mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao) VALUES ('$res_emp[fantasia]','$hj','$hora','Salvar relat√≥rio do Cronograma em disco.','O usu√°rio $quem1 salvou o Cronograma da pe√ßa $npc em disco.')");
+	print "INSERT INTO followup (empresa,data,hora,titulo,descricao) VALUES ('$res_emp[fantasia]','$hj','$hora','Salvar relat√≥rio do Cronograma em disco.','O usu√°rio $quem1 salvou o Cronograma da pe√ßa $npc em disco.')";
 	//
 }*/
 

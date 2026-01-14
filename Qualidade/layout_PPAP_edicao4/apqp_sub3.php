@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 include("seguranca.php");
 if(empty($acao)) $acao="entrar";
@@ -13,11 +13,11 @@ if(mysql_num_rows($sql)){
 	header("location:apqp_sub1.php");
 	exit;
 }
-		$sqlb=mysql_query("SELECT * FROM apqp_cron WHERE perc='100' AND peca='$pc' AND ativ='Certificado de Submissão'");
+		$sqlb=mysql_query("SELECT * FROM apqp_cron WHERE perc='100' AND peca='$pc' AND ativ='Certificado de SubmissÃ£o'");
 		if(!mysql_num_rows($sqlb)){
 			$btnsalva="form1.acao.value='s3'; form1.submit(); return false;";
 		}else{
-			$btnsalva="if(confirm('O Certificado de submissão já esta aprovado, caso queira remover a aprovação deste Estudo será removida a aprovação de todos os relatórios. Deseja remover?')){ if(confirm('Você tem certeza que deseja remover a aprovação? Terá que aprovar todos os relatórios novamente.')){ form1.acao.value='s3'; form1.submit(); }else{ return false; } }else{ return false; }";
+			$btnsalva="if(confirm('O Certificado de submissÃ£o jÃ¡ esta aprovado, caso queira remover a aprovaÃ§Ã£o deste Estudo serÃ¡ removida a aprovaÃ§Ã£o de todos os relatÃ³rios. Deseja remover?')){ if(confirm('VocÃª tem certeza que deseja remover a aprovaÃ§Ã£o? TerÃ¡ que aprovar todos os relatÃ³rios novamente.')){ form1.acao.value='s3'; form1.submit(); }else{ return false; } }else{ return false; }";
 		}
 ?>
 <html>
@@ -31,7 +31,7 @@ if(mysql_num_rows($sql)){
 <!--
 
 function habilita(){
-<? if($resc["tag"]=="S"){ ?>
+<?php if($resc["tag"]=="S"){ ?>
 	document.all.nivel41.style.background="white";
 	document.form1.nivel41.disabled=false;
 	document.all.nivel42.style.background="white";
@@ -70,11 +70,11 @@ function habilita(){
 	document.form1.nivel418.disabled=false;
 	document.all.nivel419.style.background="white";
 	document.form1.nivel419.disabled=false;
-	 <? } ?>
+	 <?php } ?>
 	
 }
 function inicia(){
-<? if($resc["tag"]=="S"){ ?>
+<?php if($resc["tag"]=="S"){ ?>
 	document.all.nivel41.style.background="silver";
 	document.form1.nivel41.disabled=true;
 	document.all.nivel42.style.background="silver";
@@ -113,7 +113,7 @@ function inicia(){
 	document.form1.nivel418.disabled=true;
 	document.all.nivel419.style.background="silver";
 	document.form1.nivel419.disabled=true;
-	 <? } ?>
+	 <?php } ?>
 }
 
 function vailogo(type){
@@ -129,7 +129,7 @@ function abrir(url,id){
 	return true;
 }
 function salvar(url,id){
-	window.open('apqp_impressao.php?acao=salvar&local='+ url +'&pc='+ <?=$pc?> + '');
+	window.open('apqp_impressao.php?acao=salvar&local='+ url +'&pc='+ <?php echo $pc?> + '');
 	return true;
 }
 function MM_openBrWindow(theURL,winName,features) { //v2.0
@@ -149,7 +149,7 @@ function MM_openBrWindow(theURL,winName,features) { //v2.0
     <td align="left" valign="top" class="chamadas"><table width="590" border="0" cellpadding="0" cellspacing="0" class="texto">
       <tr>
         <td width="27" align="center"><div align="left"><a href="#" onClick="MM_openBrWindow('help/mini_certf_submi.html','','width=680,height=501,left=300,top=50')"><img src="imagens/icon14_ahn.gif" width="14" height="14" border="0" onMouseOver="this.T_STICKY=true; this.T_TITLE='Certificado de Submiss&atilde;o'; this.T_DELAY=10; this.T_WIDTH=225;  return escape('O Certificado de Submiss&atilde;o deve ser preenchido conforme o Manual do PPAP da AIAG - Terceira Edi&ccedil;&atilde;o. Utilize as abas da parte superior da tela para navegar entre os diversos t&oacute;picos do certificado de submiss&atilde;o.')"></a><span class="impTextoBold"></span></div></td>
-        <td width="563" align="right"><div align="left" class="textobold style1 style1 style1 style1 style1 style1 style1 style1">APQP - Certificado de submiss&atilde;o <? print $npc; ?></div></td>
+        <td width="563" align="right"><div align="left" class="textobold style1 style1 style1 style1 style1 style1 style1 style1">APQP - Certificado de submiss&atilde;o <?php print $npc; ?></div></td>
       </tr>
       <tr>
         <td align="center">&nbsp;</td>
@@ -184,7 +184,7 @@ function MM_openBrWindow(theURL,winName,features) { //v2.0
         <form name="form1" method="post" action="apqp_sub_sql.php">
           <td bgcolor="#FFFFFF"><table width="600" border="0" cellspacing="0" cellpadding="3">
             <tr>
-              <td class="chamadas"><input name="nivel" type="radio" value="1" <? if($res["nivel"]=="1") print "checked"; ?> onClick="inicia();">
+              <td class="chamadas"><input name="nivel" type="radio" value="1" <?php if($res["nivel"]=="1") print "checked"; ?> onClick="inicia();">
     N&iacute;vel 1 -</td>
               <td class="textobold">Certificado apenas (e para itens designados de apar&ecirc;ncia, um Relat&oacute;rio de Aprova&ccedil;&atilde;o de Apar&ecirc;ncia) submetido ao cliente </td>
             </tr>
@@ -192,7 +192,7 @@ function MM_openBrWindow(theURL,winName,features) { //v2.0
               <td colspan="2" class="chamadas"><img src="imagens/dot.gif" width="50" height="12"></td>
               </tr>
             <tr>
-              <td class="chamadas"><input name="nivel" type="radio" value="2" <? if($res["nivel"]=="2") print "checked"; ?> onClick="inicia();">
+              <td class="chamadas"><input name="nivel" type="radio" value="2" <?php if($res["nivel"]=="2") print "checked"; ?> onClick="inicia();">
     N&iacute;vel 2 -</td>
               <td class="textobold">Certificado com amostras do produto e dados limitados de suporte submetidos ao cliente </td>
             </tr>
@@ -200,7 +200,7 @@ function MM_openBrWindow(theURL,winName,features) { //v2.0
               <td colspan="2" class="chamadas"><img src="imagens/dot.gif" width="50" height="12"></td>
             </tr>
             <tr>
-              <td class="chamadas"><input name="nivel" type="radio" value="3" <? if($res["nivel"]=="3") print "checked"; ?> onClick="inicia();">
+              <td class="chamadas"><input name="nivel" type="radio" value="3" <?php if($res["nivel"]=="3") print "checked"; ?> onClick="inicia();">
     N&iacute;vel 3 -</td>
               <td class="textobold">Certificado com amostras do produto e todos os dados de suporte submetidos ao cliente </td>
             </tr>
@@ -208,12 +208,12 @@ function MM_openBrWindow(theURL,winName,features) { //v2.0
               <td colspan="2" class="chamadas"><img src="imagens/dot.gif" width="50" height="12"></td>
             </tr>
             <tr>
-              <td rowspan="2" class="chamadas"><input name="nivel" type="radio" value="4" <? if($res["nivel"]=="4") print "checked"; ?> onClick="habilita();">
+              <td rowspan="2" class="chamadas"><input name="nivel" type="radio" value="4" <?php if($res["nivel"]=="4") print "checked"; ?> onClick="habilita();">
     N&iacute;vel 4 -</td>
               <td class="textobold">Certificado e outros requisitos conforme definido pelo cliente </td>
             </tr>
             <tr class="textobold">
-			<? if($resc["tag"]=="S"){ ?>
+			<?php if($resc["tag"]=="S"){ ?>
               <td class="chamadas">
 			  
 			  <table width="450" border="0" cellpadding="0" cellspacing="0" class="textopreto">
@@ -238,65 +238,65 @@ function MM_openBrWindow(theURL,winName,features) { //v2.0
                   <td width="23" align="center">18</td>
                   <td width="23" align="center">19</td>
                 </tr>
-				<? $ar=explode(",",$res["nivel4"]); ?>
+				<?php $ar=explode(",",$res["nivel4"]); ?>
                 <tr>
-                  <td align="center"><input name="nivel4[]" type="checkbox" id="nivel41" value="1" <? if(in_array("1",$ar)){ print "checked"; } ?>></td>
-                  <td align="center"><input name="nivel4[]" type="checkbox" id="nivel42" value="2" <? if(in_array("2",$ar)){ print "checked"; } ?>></td>
-                  <td align="center"><input name="nivel4[]" type="checkbox" id="nivel43" value="3" <? if(in_array("3",$ar)){ print "checked"; } ?>></td>
-                  <td align="center"><input name="nivel4[]" type="checkbox" id="nivel44" value="4" <? if(in_array("4",$ar)){ print "checked"; } ?>></td>
-                  <td align="center"><input name="nivel4[]" type="checkbox" id="nivel45" value="5" <? if(in_array("5",$ar)){ print "checked"; } ?>></td>
-                  <td align="center"><input name="nivel4[]" type="checkbox" id="nivel46" value="6" <? if(in_array("6",$ar)){ print "checked"; } ?>></td>
-                  <td align="center"><input name="nivel4[]" type="checkbox" id="nivel47" value="7" <? if(in_array("7",$ar)){ print "checked"; } ?>></td>
-                  <td align="center"><input name="nivel4[]" type="checkbox" id="nivel48" value="8" <? if(in_array("8",$ar)){ print "checked"; } ?>></td>
-                  <td align="center"><input name="nivel4[]" type="checkbox" id="nivel49" value="9" <? if(in_array("9",$ar)){ print "checked"; } ?>></td>
-                  <td align="center"><input name="nivel4[]" type="checkbox" id="nivel410" value="10" <? if(in_array("10",$ar)){ print "checked"; } ?>></td>
-                  <td align="center"><input name="nivel4[]" type="checkbox" id="nivel411" value="11" <? if(in_array("11",$ar)){ print "checked"; } ?>></td>
-                  <td align="center"><input name="nivel4[]" type="checkbox" id="nivel412" value="12" <? if(in_array("12",$ar)){ print "checked"; } ?>></td>
-                  <td align="center"><input name="nivel4[]" type="checkbox" id="nivel413" value="13" <? if(in_array("13",$ar)){ print "checked"; } ?>></td>
-                  <td align="center"><input name="nivel4[]" type="checkbox" id="nivel414" value="14" <? if(in_array("14",$ar)){ print "checked"; } ?>></td>
-                  <td align="center"><input name="nivel4[]" type="checkbox" id="nivel415" value="15" <? if(in_array("15",$ar)){ print "checked"; } ?>></td>
-                  <td align="center"><input name="nivel4[]" type="checkbox" id="nivel416" value="16" <? if(in_array("16",$ar)){ print "checked"; } ?>></td>
-                  <td align="center"><input name="nivel4[]" type="checkbox" id="nivel417" value="17" <? if(in_array("17",$ar)){ print "checked"; } ?>></td>
-                  <td align="center"><input name="nivel4[]" type="checkbox" id="nivel418" value="18" <? if(in_array("18",$ar)){ print "checked"; } ?>></td>
-                  <td align="center"><input name="nivel4[]" type="checkbox" id="nivel419" value="19" <? if(in_array("19",$ar)){ print "checked"; } ?>></td>
+                  <td align="center"><input name="nivel4[]" type="checkbox" id="nivel41" value="1" <?php if(in_array("1",$ar)){ print "checked"; } ?>></td>
+                  <td align="center"><input name="nivel4[]" type="checkbox" id="nivel42" value="2" <?php if(in_array("2",$ar)){ print "checked"; } ?>></td>
+                  <td align="center"><input name="nivel4[]" type="checkbox" id="nivel43" value="3" <?php if(in_array("3",$ar)){ print "checked"; } ?>></td>
+                  <td align="center"><input name="nivel4[]" type="checkbox" id="nivel44" value="4" <?php if(in_array("4",$ar)){ print "checked"; } ?>></td>
+                  <td align="center"><input name="nivel4[]" type="checkbox" id="nivel45" value="5" <?php if(in_array("5",$ar)){ print "checked"; } ?>></td>
+                  <td align="center"><input name="nivel4[]" type="checkbox" id="nivel46" value="6" <?php if(in_array("6",$ar)){ print "checked"; } ?>></td>
+                  <td align="center"><input name="nivel4[]" type="checkbox" id="nivel47" value="7" <?php if(in_array("7",$ar)){ print "checked"; } ?>></td>
+                  <td align="center"><input name="nivel4[]" type="checkbox" id="nivel48" value="8" <?php if(in_array("8",$ar)){ print "checked"; } ?>></td>
+                  <td align="center"><input name="nivel4[]" type="checkbox" id="nivel49" value="9" <?php if(in_array("9",$ar)){ print "checked"; } ?>></td>
+                  <td align="center"><input name="nivel4[]" type="checkbox" id="nivel410" value="10" <?php if(in_array("10",$ar)){ print "checked"; } ?>></td>
+                  <td align="center"><input name="nivel4[]" type="checkbox" id="nivel411" value="11" <?php if(in_array("11",$ar)){ print "checked"; } ?>></td>
+                  <td align="center"><input name="nivel4[]" type="checkbox" id="nivel412" value="12" <?php if(in_array("12",$ar)){ print "checked"; } ?>></td>
+                  <td align="center"><input name="nivel4[]" type="checkbox" id="nivel413" value="13" <?php if(in_array("13",$ar)){ print "checked"; } ?>></td>
+                  <td align="center"><input name="nivel4[]" type="checkbox" id="nivel414" value="14" <?php if(in_array("14",$ar)){ print "checked"; } ?>></td>
+                  <td align="center"><input name="nivel4[]" type="checkbox" id="nivel415" value="15" <?php if(in_array("15",$ar)){ print "checked"; } ?>></td>
+                  <td align="center"><input name="nivel4[]" type="checkbox" id="nivel416" value="16" <?php if(in_array("16",$ar)){ print "checked"; } ?>></td>
+                  <td align="center"><input name="nivel4[]" type="checkbox" id="nivel417" value="17" <?php if(in_array("17",$ar)){ print "checked"; } ?>></td>
+                  <td align="center"><input name="nivel4[]" type="checkbox" id="nivel418" value="18" <?php if(in_array("18",$ar)){ print "checked"; } ?>></td>
+                  <td align="center"><input name="nivel4[]" type="checkbox" id="nivel419" value="19" <?php if(in_array("19",$ar)){ print "checked"; } ?>></td>
                 </tr>
               </table>
 			 
 			  </td>
-			   <? } ?>
+			   <?php } ?>
             </tr>
             <tr class="textobold">
               <td colspan="2" class="chamadas"><img src="imagens/dot.gif" width="50" height="12"></td>
             </tr>
             <tr>
-              <td width="124" class="chamadas"><input name="nivel" type="radio" value="5" <? if($res["nivel"]=="5") print "checked"; ?> onClick="inicia();">
+              <td width="124" class="chamadas"><input name="nivel" type="radio" value="5" <?php if($res["nivel"]=="5") print "checked"; ?> onClick="inicia();">
               N&iacute;vel 5 -</td>
               <td width="471" class="textobold">Certificado com amostras do produto e todos os dados de suporte verificados na localidade de manufatura do fornecedor </td>
             </tr>
 			<script>inicia();</script>
-			<? if($res["nivel"]=="4"){ ?>
+			<?php if($res["nivel"]=="4"){ ?>
 			<script>habilita();</script>
-			<? } ?>
+			<?php } ?>
             <tr>
               <td colspan="2"><img src="imagens/dot.gif" width="50" height="5">
                 
                 <table width="601" border="0" align="center" cellpadding="3" cellspacing="0" class="texto">
                   <tr>
-				  <? if($_SESSION["e_mail"]=="S"){ ?>
+				  <?php if($_SESSION["e_mail"]=="S"){ ?>
                     <td width="16%" align="left" class="textobold">&nbsp;Enviar e-mail: </td>
                     <td width="56%"><input name="email" type="text" class="formularioselect" id="email3" value="Digite o e-mail aqui"></td> 
-					<? if(in_array("U",$emailt)){ ?>
-                    <td width="3%"><div align="center"><a href="#" onClick="return abre('busca_email2.php','a','width=320,height=380,scrollbars=1');"><img src="imagens/icon14_pessoas.gif" alt="Buscar Email de Funcionários" width="14" height="14" border="0"></a></div></td>
-					<? } if(in_array("G",$emailt)){ ?>
+					<?php if(in_array("U",$emailt)){ ?>
+                    <td width="3%"><div align="center"><a href="#" onClick="return abre('busca_email2.php','a','width=320,height=380,scrollbars=1');"><img src="imagens/icon14_pessoas.gif" alt="Buscar Email de FuncionÃ¡rios" width="14" height="14" border="0"></a></div></td>
+					<?php } if(in_array("G",$emailt)){ ?>
                     <td width="8%"><div align="center"><a href="#" onClick="return abre('busca_email_grupo.php','a','width=320,height=380,scrollbars=1');"><input name="grupo" type="hidden" id="grupo">
                 <input name="grupo_nome" type="hidden" id="grupo_nome"><img src="imagens/icon14_grupo.gif" alt="Buscar Grupo de Emails" width="26" height="13" border="0"></a></div></td>
-				 <? } if(in_array("C",$emailt)){ ?>
+				 <?php } if(in_array("C",$emailt)){ ?>
                     <td width="4%"><div align="center"><a href="#" onClick="return abre('busca_email.php','a','width=320,height=380,scrollbars=1');"></a><a href="#" onClick="return abre('busca_email.php','a','width=320,height=300,scrollbars=1');"><img src="imagens/icon_cli.gif" alt="Buscar Emails de Clientes" width="18" height="18" border="0"></a></div></td>
-				<? } ?>
-                    <td width="9%"><div align="center"><? if($_SESSION["login_funcionario"]=="S"){ ?><a href="#" onClick="vailogo1('email','<?= $pc; ?>');"><img src="imagens/icon14_mail.gif" alt="Enviar Email" width="16" height="10" border="0"></a><? } ?></div></td>
-					<? } if($_SESSION["i_mp"]=="S"){ ?>
+				<?php } ?>
+                    <td width="9%"><div align="center"><?php if($_SESSION["login_funcionario"]=="S"){ ?><a href="#" onClick="vailogo1('email','<?php echo  $pc; ?>');"><img src="imagens/icon14_mail.gif" alt="Enviar Email" width="16" height="10" border="0"></a><?php } ?></div></td>
+					<?php } if($_SESSION["i_mp"]=="S"){ ?>
                     <td width="4%"><div align="center"><a href="#" onClick="vailogo('imp');"><img src="imagens/icon14_imp.gif" alt="Imprimir" width="15" height="15" border="0"></a></div></td>
-					<? } ?>
+					<?php } ?>
                   </tr>
                   <tr>
                     <td colspan="7" align="left" class="textobold"><img src="imagens/spacer.gif" width="46" height="5"></td>
@@ -307,9 +307,9 @@ function MM_openBrWindow(theURL,winName,features) { //v2.0
             <tr>
               <td colspan="2" align="center"><input name="button122" type="button" class="microtxt" value="Voltar" onClick="window.location='apqp_menu.php';">
 &nbsp;
-<input name="acao2" type="button" class="microtxt" value="Salvar em Disco" onClick="salvar('submissao','<?=$res["id"];?>')">
+<input name="acao2" type="button" class="microtxt" value="Salvar em Disco" onClick="salvar('submissao','<?php echo $res["id"];?>')">
 &nbsp;
-<input name="button12222" type="button" class="microtxt" value="Salvar" onClick="<?= $btnsalva; ?>">
+<input name="button12222" type="button" class="microtxt" value="Salvar" onClick="<?php echo  $btnsalva; ?>">
 
                   <input name="acao" type="hidden" id="acao" value="1">
                   <a href="#" onClick="return abre('busca_email.php','a','width=320,height=300,scrollbars=1');">
@@ -325,4 +325,4 @@ function MM_openBrWindow(theURL,winName,features) { //v2.0
 </body>
 </html>
 <script language="javascript" src="tooltip.js"></script>
-<? include("mensagem.php"); ?>
+<?php include("mensagem.php"); ?>

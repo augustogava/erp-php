@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 if(empty($btipo)) $btipo="clientes";
 if(empty($acao)) $acao="entrar";
@@ -6,7 +6,8 @@ if(empty($acao)) $acao="entrar";
 <html>
 <head>
 <title>CyberManager</title>
-<meta http-equiv="Content-Type" content="text/html; UTF-8">
+<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="style.css" rel="stylesheet" type="text/css">
 <script>
 function seleciona(nome,id){
@@ -20,7 +21,7 @@ if (parseInt(navigator.appVersion) >= 4) window.moveTo((screen.width/2)-(windowW
 </script>
 </head>
 <body background="imagens/mdagua2.gif" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
-<? if($acao=="entrar"){ ?>
+<?php if($acao=="entrar"){ ?>
 <table width="300" border="0" cellspacing="0" cellpadding="0">
   <tr> 
     <td align="center"><br>
@@ -31,14 +32,14 @@ if (parseInt(navigator.appVersion) >= 4) window.moveTo((screen.width/2)-(windowW
           <td width="277">&nbsp;Nome</td>
           <td width="20" align="center">&nbsp;</td>
         </tr>
-		<?
+		<?php
 		$sql=mysql_query("SELECT * FROM clientes ORDER BY nome ASC");
 		if(mysql_num_rows($sql)==0){
 		?>
         <tr bgcolor="#FFFFFF" class="texto"> 
           <td colspan="2" align="center">NENHUM REGISTRO ENCONTRADO</td>
         </tr>
-        <?
+        <?php
 		}else{
 			//BLOCO PAGINACAO
 			$results_tot=mysql_num_rows($sql); //total de registros encontrados
@@ -75,35 +76,35 @@ if (parseInt(navigator.appVersion) >= 4) window.moveTo((screen.width/2)-(windowW
 				$reg_final++; // PAGINACAO conta quantos registros imprimiu
 		?>
 		<tr bgcolor="#FFFFFF" class="texto"> 
-          <td>&nbsp;<? print $res["nome"]; ?></td>
-          <td width="20" align="center"><a href="vendas_cliorc2.php?acao=esco&cli=<?= $res["id"]; ?>"><img src="imagens/icon_14_use.gif" alt="Selecionar" width="14" height="14" border="0"></a></td>
+          <td>&nbsp;<?php print $res["nome"]; ?></td>
+          <td width="20" align="center"><a href="vendas_cliorc2.php?acao=esco&cli=<?php echo  $res["id"]; ?>"><img src="imagens/icon_14_use.gif" alt="Selecionar" width="14" height="14" border="0"></a></td>
         </tr>
-		<?
+		<?php
 			}
 		}
 		?>
       </table></td>
   </tr>
   <tr>
-    <td align="center">      <? if($wpaginar) { ?>
+    <td align="center">      <?php if($wpaginar) { ?>
       <table width="300" border="0" cellspacing="0" cellpadding="0">
         <tr> 
           <td align="center"><table width="1%" border="0" cellspacing="0" cellpadding="0">
               <tr valign="top"> 
                 <td align="right"> 
-                  <? 
+                  <?php 
 				$antz=false;
 				if($wp>1){
 					$antz=true;
 				?>
-                  <a href="<? print $_SERVER['PHP_SELF']."?wp=$pg_anterior&bcli=$bcli&btipo=$btipo"; ?>" class="paginacao2"> 
-                  <? } ?>
+                  <a href="<?php print $_SERVER['PHP_SELF']."?wp=$pg_anterior&bcli=$bcli&btipo=$btipo"; ?>" class="paginacao2"> 
+                  <?php } ?>
                   <img src="imagens/pag_f.gif" border="0"> 
-                  <? if($antz){ ?>
+                  <?php if($antz){ ?>
                   <br>
                   Anterior</a> 
-                <? } ?>                </td>
-                <?
+                <?php } ?>                </td>
+                <?php
 				$link_impressos=0;
 				if ($temp > $wpaginacao){
 		    	    $n_start  = $temp - ceil($wpaginacao/2);
@@ -117,40 +118,40 @@ if (parseInt(navigator.appVersion) >= 4) window.moveTo((screen.width/2)-(windowW
 					$link_impressos++;
 				?>
                 <td align="center"> 
-                  <? if($pg_atual != $link_impressos){ ?>
-                  <a href="<? print $_SERVER['PHP_SELF']."?wp=$link_impressos&bcli=$bcli&btipo=$btipo"; ?>" class="paginacao"> 
-                  <? } ?>
-                  <img src="imagens/pag_e<? if($pg_atual==$link_impressos) print "2"; ?>.gif"  border="0"><br>
-                  <? if($pg_atual==$link_impressos){ print "<span class=\"paginacao2\">$link_impressos</span>"; }else{ print $link_impressos; }?>
-                  <? if($pg_atual != $link_impressos){ ?>
+                  <?php if($pg_atual != $link_impressos){ ?>
+                  <a href="<?php print $_SERVER['PHP_SELF']."?wp=$link_impressos&bcli=$bcli&btipo=$btipo"; ?>" class="paginacao"> 
+                  <?php } ?>
+                  <img src="imagens/pag_e<?php if($pg_atual==$link_impressos) print "2"; ?>.gif"  border="0"><br>
+                  <?php if($pg_atual==$link_impressos){ print "<span class=\"paginacao2\">$link_impressos</span>"; }else{ print $link_impressos; }?>
+                  <?php if($pg_atual != $link_impressos){ ?>
                   </a> 
-                  <? } ?>
+                  <?php } ?>
                 </td>
-                <?
+                <?php
 				}
 				?>
                 <td> 
-                  <? if($reg_final<$results_tot){ ?>
-                  <a href="<? print $_SERVER['PHP_SELF']."?wp=$pg_proxima&bcli=$bcli&btipo=$btipo"; ?>" class="paginacao2"> 
-                  <? } ?>
+                  <?php if($reg_final<$results_tot){ ?>
+                  <a href="<?php print $_SERVER['PHP_SELF']."?wp=$pg_proxima&bcli=$bcli&btipo=$btipo"; ?>" class="paginacao2"> 
+                  <?php } ?>
                   <img src="imagens/pag_der.gif" border="0"> 
-                  <? if($reg_final<$results_tot){ ?>
+                  <?php if($reg_final<$results_tot){ ?>
                   <br>
-                  Próximo</a> 
-                <? } ?>                </td>
+                  PrÃ³ximo</a> 
+                <?php } ?>                </td>
               </tr>
             </table></td>
         </tr>
       </table>
-      <? } ?></td>
+      <?php } ?></td>
   </tr>
 </table>
-<? }else if($acao=="esco"){ ?>
+<?php }else if($acao=="esco"){ ?>
 
 <table width="300" border="0" cellspacing="0" cellpadding="0">
   <tr>
     <td align="center"><br>
-      <a href="cliente_contatos.php?acao=inc&cli=<? print $cli; ?>&pag=pro" class="textobold"><span class="texto">Incluir Contato </span></a></td>
+      <a href="cliente_contatos.php?acao=inc&cli=<?php print $cli; ?>&pag=pro" class="textobold"><span class="texto">Incluir Contato </span></a></td>
   </tr>
   <tr>
     <td><table width="300" border="0" cellpadding="0" cellspacing="1" bgcolor="#003366">
@@ -158,14 +159,14 @@ if (parseInt(navigator.appVersion) >= 4) window.moveTo((screen.width/2)-(windowW
         <td width="277">&nbsp;Contatos</td>
         <td width="20" align="center">&nbsp;</td>
       </tr>
-      <?
+      <?php
 		$sql=mysql_query("SELECT * FROM cliente_contato WHERE cliente='$cli' ORDER BY nome ASC");
 		if(mysql_num_rows($sql)==0){
 		?>
       <tr bgcolor="#FFFFFF" class="texto">
         <td colspan="2" align="center">NENHUM REGISTRO ENCONTRADO</td>
       </tr>
-      <?
+      <?php
 		}else{
 			//BLOCO PAGINACAO
 			$results_tot=mysql_num_rows($sql); //total de registros encontrados
@@ -202,35 +203,35 @@ if (parseInt(navigator.appVersion) >= 4) window.moveTo((screen.width/2)-(windowW
 				$reg_final++; // PAGINACAO conta quantos registros imprimiu
 		?>
       <tr bgcolor="#FFFFFF" class="texto">
-        <td>&nbsp;<a href="cliente_contatos.php?acao=alt&id=<? print $res["id"]; ?>&cli=<? print $cli; ?>&pag=pro"><? print $res["nome"]; ?></a></td>
-        <td width="20" align="center"><a href="#" onClick="return seleciona('<? print $res["nome"]; ?>','<? print $res["id"]; ?>');"><img src="imagens/icon_14_use.gif" alt="Selecionar" width="14" height="14" border="0"></a></td>
+        <td>&nbsp;<a href="cliente_contatos.php?acao=alt&id=<?php print $res["id"]; ?>&cli=<?php print $cli; ?>&pag=pro"><?php print $res["nome"]; ?></a></td>
+        <td width="20" align="center"><a href="#" onClick="return seleciona('<?php print $res["nome"]; ?>','<?php print $res["id"]; ?>');"><img src="imagens/icon_14_use.gif" alt="Selecionar" width="14" height="14" border="0"></a></td>
       </tr>
-      <?
+      <?php
 			}
 		}
 		?>
     </table></td>
   </tr>
   <tr>
-    <td align="center"><? if($wpaginar) { ?>
+    <td align="center"><?php if($wpaginar) { ?>
         <table width="300" border="0" cellspacing="0" cellpadding="0">
           <tr>
             <td align="center"><table width="1%" border="0" cellspacing="0" cellpadding="0">
                 <tr valign="top">
-                  <td align="right"><? 
+                  <td align="right"><?php 
 				$antz=false;
 				if($wp>1){
 					$antz=true;
 				?>
-                      <a href="<? print $_SERVER['PHP_SELF']."?wp=$pg_anterior&bcli=$bcli&btipo=$btipo"; ?>" class="paginacao2">
-                      <? } ?>
+                      <a href="<?php print $_SERVER['PHP_SELF']."?wp=$pg_anterior&bcli=$bcli&btipo=$btipo"; ?>" class="paginacao2">
+                      <?php } ?>
                       <img src="imagens/pag_f.gif" border="0">
-                      <? if($antz){ ?>
+                      <?php if($antz){ ?>
                       <br>
                         Anterior</a>
-                      <? } ?>
+                      <?php } ?>
                   </td>
-                  <?
+                  <?php
 				$link_impressos=0;
 				if ($temp > $wpaginacao){
 		    	    $n_start  = $temp - ceil($wpaginacao/2);
@@ -243,34 +244,34 @@ if (parseInt(navigator.appVersion) >= 4) window.moveTo((screen.width/2)-(windowW
 				while(($link_impressos<$n_paginas) and ($link_impressos<$wpaginacao)){
 					$link_impressos++;
 				?>
-                  <td align="center"><? if($pg_atual != $link_impressos){ ?>
-                      <a href="<? print $_SERVER['PHP_SELF']."?wp=$link_impressos&bcli=$bcli&btipo=$btipo"; ?>" class="paginacao">
-                      <? } ?>
-                      <img src="imagens/pag_e<? if($pg_atual==$link_impressos) print "2"; ?>.gif"  border="0"><br>
-                      <? if($pg_atual==$link_impressos){ print "<span class=\"paginacao2\">$link_impressos</span>"; }else{ print $link_impressos; }?>
-                      <? if($pg_atual != $link_impressos){ ?>
+                  <td align="center"><?php if($pg_atual != $link_impressos){ ?>
+                      <a href="<?php print $_SERVER['PHP_SELF']."?wp=$link_impressos&bcli=$bcli&btipo=$btipo"; ?>" class="paginacao">
+                      <?php } ?>
+                      <img src="imagens/pag_e<?php if($pg_atual==$link_impressos) print "2"; ?>.gif"  border="0"><br>
+                      <?php if($pg_atual==$link_impressos){ print "<span class=\"paginacao2\">$link_impressos</span>"; }else{ print $link_impressos; }?>
+                      <?php if($pg_atual != $link_impressos){ ?>
                       </a>
-                      <? } ?>
+                      <?php } ?>
                   </td>
-                  <?
+                  <?php
 				}
 				?>
-                  <td><? if($reg_final<$results_tot){ ?>
-                      <a href="<? print $_SERVER['PHP_SELF']."?wp=$pg_proxima&bcli=$bcli&btipo=$btipo"; ?>" class="paginacao2">
-                      <? } ?>
+                  <td><?php if($reg_final<$results_tot){ ?>
+                      <a href="<?php print $_SERVER['PHP_SELF']."?wp=$pg_proxima&bcli=$bcli&btipo=$btipo"; ?>" class="paginacao2">
+                      <?php } ?>
                       <img src="imagens/pag_der.gif" border="0">
-                      <? if($reg_final<$results_tot){ ?>
+                      <?php if($reg_final<$results_tot){ ?>
                       <br>
                         Pr&oacute;ximo</a>
-                      <? } ?>
+                      <?php } ?>
                   </td>
                 </tr>
             </table></td>
           </tr>
         </table>
-      <? } ?></td>
+      <?php } ?></td>
   </tr>
 </table>
-<? } ?>
+<?php } ?>
 </body>
 </html>

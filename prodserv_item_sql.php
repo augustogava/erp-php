@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 if(empty($acao)) exit;
 $acao=verifi($permi,$acao);
@@ -12,10 +12,10 @@ if($acao=="incluir"){
 	$val=valor2banco($val);
 	$sql=mysql_query("INSERT INTO prodserv_item (prodserv,item,qtd,fixo,val) VALUES ('$ps','$item','$qtd','$fixo','$val')");
 	if($sql){
-		$_SESSION["mensagem"]="Item incluído com sucesso!";
+		$_SESSION["mensagem"]="Item incluÃ­do com sucesso!";
 		$acao="entrar";
 	}else{
-		$_SESSION["mensagem"]="O item não pôde ser incluído!";
+		$_SESSION["mensagem"]="O item nÃ£o pÃ´de ser incluÃ­do!";
 		$acao="inc";
 	}
 }elseif($acao=="alterar"){
@@ -26,16 +26,16 @@ if($acao=="incluir"){
 		$_SESSION["mensagem"]="Item alterado com sucesso!";
 		$acao="entrar";
 	}else{
-		$_SESSION["mensagem"]="O item não pôde ser alterado!";
+		$_SESSION["mensagem"]="O item nÃ£o pÃ´de ser alterado!";
 		$acao="alt";
 	}
 }elseif($acao=="exc"){
 	if(!empty($id)){
 		$sql=mysql_query("DELETE FROM prodserv_item WHERE id='$id'");
 		if($sql){
-			$_SESSION["mensagem"]="Item excluído com sucesso!";
+			$_SESSION["mensagem"]="Item excluÃ­do com sucesso!";
 		}else{
-			$_SESSION["mensagem"]="O item não pôde ser excluído!";
+			$_SESSION["mensagem"]="O item nÃ£o pÃ´de ser excluÃ­do!";
 		}		
 	}
 	$acao="entrar";

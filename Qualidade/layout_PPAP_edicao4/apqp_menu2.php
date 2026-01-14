@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 include("seguranca.php");
 if($menu=="S"){
@@ -14,7 +14,7 @@ $pc=$_SESSION["mpc"];
 $npc=$_SESSION["npc"];
 if(empty($pc)) header("Location:apqp_pc.php");
 if($acao=="exc"){
-	$sql=mysql_query("DELETE FROM apqp_pc WHERE id='$id'") or die("nao foi");
+	$sql=mysql_query("DELETE FROM apqp_pc WHERE id='$id'") or erp_db_fail();
 	$_SESSION["mensagem"]="Exluido com sucesso!";
 	header("Location:apqp_pc.php");
 	exit;
@@ -63,7 +63,7 @@ function some(num){
 <table width="590" border="0" cellpadding="0" cellspacing="0" class="texto">
       <tr>
         <td width="27" align="center"><div align="left"><img src="imagens/icon14_ahn.gif" width="14" height="14"><span class="impTextoBold">&nbsp;</span></div></td>
-        <td width="563" align="right"><div align="left" class="textobold style1 style1 style1 style1 style1 style1 style1 style1">APQP - Documenta&ccedil;&atilde;o <? print $npc; ?></div></td>
+        <td width="563" align="right"><div align="left" class="textobold style1 style1 style1 style1 style1 style1 style1 style1">APQP - Documenta&ccedil;&atilde;o <?php print $npc; ?></div></td>
       </tr>
       <tr>
         <td align="center">&nbsp;</td>
@@ -88,7 +88,7 @@ function some(num){
                 <tr align="center">
                   <td width="118"><a href="apqp_crono.php"><img src="imagens/apqp_crono.gif" alt="Cronograma" width="32" height="32" border="0"></a></td>
                   <td width="118"><a href="apqp_doc.php"><img src="imagens/apqp_docu.gif" alt="Documentos" width="32" height="32" border="0"></a></td>
-                  <td width="118"><?
+                  <td width="118"><?php
 			$sql=mysql_query("select * from apqp_cron WHERE peca='$pc' AND ativ='Desenho (Se aplic&aacute;vel)' AND responsavel<>''");
 			if(mysql_num_rows($sql)){
 				$link="<a href=\"apqp_des.php\">";
@@ -96,9 +96,9 @@ function some(num){
 				$link="<a href=\"#\" onclick=\"window.alert('Documento bloqueado! Pois n&atilde;o faz parte do Cronograma.')\">";
 			}
 			?>
-                      <?= $link; ?>
+                      <?php echo  $link; ?>
                     <img src="imagens/apqp_desen.gif" alt="Desenhos" width="32" height="32" border="0"></a> </td>
-                  <td width="118"><?
+                  <td width="118"><?php
 			$sql=mysql_query("select * from apqp_cron WHERE peca='$pc' AND ativ='FMEA de Projeto (Se aplic&aacute;vel)' AND responsavel<>''");
 			if(mysql_num_rows($sql)){
 				$link="<a href=\"apqp_fmeaprojc.php\">";
@@ -106,9 +106,9 @@ function some(num){
 				$link="<a href=\"#\" onclick=\"window.alert('Documento bloqueado! Pois n&atilde;o faz parte do Cronograma.')\">";
 			}
 			?>
-                      <?= $link; ?>
+                      <?php echo  $link; ?>
                     <img src="imagens/apqp_fmeaproj.gif" alt="Fmea Proj." width="32" height="32" border="0"></a></td>
-                  <td width="118"><?
+                  <td width="118"><?php
 			$sql=mysql_query("select * from apqp_cron WHERE peca='$pc' AND ativ='Viabilidade' AND responsavel<>''");
 			if(mysql_num_rows($sql)){
 				$link="<a href=\"apqp_viabilidade1.php\">";
@@ -116,13 +116,13 @@ function some(num){
 				$link="<a href=\"#\" onclick=\"window.alert('Documento bloqueado! Pois n&atilde;o faz parte do Cronograma.')\">";
 			}
 			?>
-                      <?= $link; ?>
+                      <?php echo  $link; ?>
                     <img src="imagens/apqp_viab.gif" alt="Viabilidade" width="32" height="32" border="0"></a></td>
                 </tr>
                 <tr align="center" class="textobold">
                   <td width="118"><a href="apqp_crono.php" class="textobold">Cronograma</a></td>
                   <td width="118"><a href="apqp_doc.php" class="textobold">Documentos</a></td>
-                  <td width="118"><?
+                  <td width="118"><?php
 			$sql=mysql_query("select * from apqp_cron WHERE peca='$pc' AND ativ='Desenho (Se aplic&aacute;vel)' AND responsavel<>''");
 			if(mysql_num_rows($sql)){
 				$link="<a href=\"apqp_des.php\" class=\"textobold\">";
@@ -130,9 +130,9 @@ function some(num){
 				$link="<a href=\"#\" onclick=\"window.alert('Documento bloqueado! Pois n&atilde;o faz parte do Cronograma.')\" class=\"textobold\">";
 			}
 			?>
-                      <?= $link; ?>
+                      <?php echo  $link; ?>
                     Desenhos</a></td>
-                  <td width="118"><?
+                  <td width="118"><?php
 			$sql=mysql_query("select * from apqp_cron WHERE peca='$pc' AND ativ='FMEA de Projeto (Se aplic&aacute;vel)' AND responsavel<>''");
 			if(mysql_num_rows($sql)){
 				$link="<a href=\"apqp_fmeaprojc.php\" class=\"textobold\">";
@@ -140,9 +140,9 @@ function some(num){
 				$link="<a href=\"#\" onclick=\"window.alert('Documento bloqueado! Pois n&atilde;o faz parte do Cronograma.')\" class=\"textobold\">";
 			}
 			?>
-                      <?= $link; ?>
+                      <?php echo  $link; ?>
                     FMEA de Projeto</a> </td>
-                  <td width="118"><?
+                  <td width="118"><?php
 			$sql=mysql_query("select * from apqp_cron WHERE peca='$pc' AND ativ='Viabilidade' AND responsavel<>''");
 			if(mysql_num_rows($sql)){
 				$link="<a href=\"apqp_viabilidade1.php\" class=\"textobold\">";
@@ -150,11 +150,11 @@ function some(num){
 				$link="<a href=\"#\" onclick=\"window.alert('Documento bloqueado! Pois n&atilde;o faz parte do Cronograma.')\" class=\"textobold\">";
 			}
 			?>
-                      <?= $link; ?>
+                      <?php echo  $link; ?>
                     Viabilidade</a></td>
                 </tr>
                 <tr align="center">
-                  <td width="118"><?
+                  <td width="118"><?php
 			$sql=mysql_query("select * from apqp_cron WHERE peca='$pc' AND ativ='Diagrama de Fluxo' AND responsavel<>''");
 			if(mysql_num_rows($sql)){
 				$link="<a href=\"apqp_fluxo.php\">";
@@ -162,9 +162,9 @@ function some(num){
 				$link="<a href=\"#\" onclick=\"window.alert('Documento bloqueado! Pois n&atilde;o faz parte do Cronograma.')\">";
 			}
 			?>
-                      <?= $link; ?>
+                      <?php echo  $link; ?>
                     <img src="imagens/apqp_fluxo.gif" alt="Fluxo" width="32" height="32" border="0"></a></td>
-                  <td width="118"><?
+                  <td width="118"><?php
 			$sql=mysql_query("select * from apqp_cron WHERE peca='$pc' AND ativ='FMEA de Processo' AND responsavel<>''");
 			if(mysql_num_rows($sql)){
 				$link="<a href=\"apqp_fmeaprocc.php\">";
@@ -172,9 +172,9 @@ function some(num){
 				$link="<a href=\"#\" onclick=\"window.alert('Documento bloqueado! Pois n&atilde;o faz parte do Cronograma.')\">";
 			}
 			?>
-                      <?= $link; ?>
+                      <?php echo  $link; ?>
                     <img src="imagens/apqp_fmeaproc.gif" alt="Fmea Proc." width="32" height="32" border="0"></a></td>
-                  <td width="118"><?
+                  <td width="118"><?php
 			$sql=mysql_query("select * from apqp_cron WHERE peca='$pc' AND ativ='Plano de Controle' AND responsavel<>''");
 			if(mysql_num_rows($sql)){
 				$link="<a href=\"apqp_planoc.php\">";
@@ -182,9 +182,9 @@ function some(num){
 				$link="<a href=\"#\" onclick=\"window.alert('Documento bloqueado! Pois n&atilde;o faz parte do Cronograma.')\">";
 			}
 			?>
-                      <?= $link; ?>
+                      <?php echo  $link; ?>
                     <img src="imagens/apqp_plano.gif" alt="Plano Controle" width="32" height="32" border="0"></a></td>
-                  <td width="118"><?
+                  <td width="118"><?php
 			$sql=mysql_query("select * from apqp_cron WHERE peca='$pc' AND ativ='Instru&ccedil;&otilde;es do Operador' AND responsavel<>''");
 			if(mysql_num_rows($sql)){
 				$link="<a href=\"apqp_inst.php\">";
@@ -192,9 +192,9 @@ function some(num){
 				$link="<a href=\"#\" onclick=\"window.alert('Documento bloqueado! Pois n&atilde;o faz parte do Cronograma.')\">";
 			}
 			?>
-                      <?= $link; ?>
+                      <?php echo  $link; ?>
                     <img src="imagens/apqp_instru.gif" alt="Int. Operador" width="32" height="32" border="0"></a></td>
-                  <td width="118"><?
+                  <td width="118"><?php
 			$sql=mysql_query("select * from apqp_cron WHERE peca='$pc' AND ativ='Estudos de R&R' AND responsavel<>''");
 			if(mysql_num_rows($sql)){
 				$link="<a href=\"apqp_rr.php\">";
@@ -202,11 +202,11 @@ function some(num){
 				$link="<a href=\"#\" onclick=\"window.alert('Documento bloqueado! Pois n&atilde;o faz parte do Cronograma.')\">";
 			}
 			?>
-                      <?= $link; ?>
+                      <?php echo  $link; ?>
                     <img src="imagens/apqp_rr.gif" alt="R&amp;R" width="32" height="32" border="0"></a></td>
                 </tr>
                 <tr align="center" class="textobold">
-                  <td width="118"><?
+                  <td width="118"><?php
 			$sql=mysql_query("select * from apqp_cron WHERE peca='$pc' AND ativ='Diagrama de Fluxo' AND responsavel<>''");
 			if(mysql_num_rows($sql)){
 				$link="<a href=\"apqp_fluxo.php\" class=\"textobold\">";
@@ -214,9 +214,9 @@ function some(num){
 				$link="<a href=\"#\" onclick=\"window.alert('Documento bloqueado! Pois n&atilde;o faz parte do Cronograma.')\" class=\"textobold\">";
 			}
 			?>
-                      <?= $link; ?>
+                      <?php echo  $link; ?>
                     Diagrama de Fluxo</a> </td>
-                  <td width="118"><?
+                  <td width="118"><?php
 			$sql=mysql_query("select * from apqp_cron WHERE peca='$pc' AND ativ='FMEA de Processo' AND responsavel<>''");
 			if(mysql_num_rows($sql)){
 				$link="<a href=\"apqp_fmeaprocc.php\" class=\"textobold\">";
@@ -224,9 +224,9 @@ function some(num){
 				$link="<a href=\"#\" onclick=\"window.alert('Documento bloqueado! Pois n&atilde;o faz parte do Cronograma.')\" class=\"textobold\">";
 			}
 			?>
-                      <?= $link; ?>
+                      <?php echo  $link; ?>
                     FMEA de Processo</a> </td>
-                  <td width="118"><?
+                  <td width="118"><?php
 			$sql=mysql_query("select * from apqp_cron WHERE peca='$pc' AND ativ='Plano de Controle' AND responsavel<>''");
 			if(mysql_num_rows($sql)){
 				$link="<a href=\"apqp_planoc.php\" class=\"textobold\">";
@@ -234,9 +234,9 @@ function some(num){
 				$link="<a href=\"#\" onclick=\"window.alert('Documento bloqueado! Pois n&atilde;o faz parte do Cronograma.')\" class=\"textobold\">";
 			}
 			?>
-                      <?= $link; ?>
+                      <?php echo  $link; ?>
                     Plano de Controle</a> </td>
-                  <td width="118"><?
+                  <td width="118"><?php
 			$sql=mysql_query("select * from apqp_cron WHERE peca='$pc' AND ativ='Instru&ccedil;&otilde;es do Operador' AND responsavel<>''");
 			if(mysql_num_rows($sql)){
 				$link="<a href=\"apqp_inst.php\" class=\"textobold\">";
@@ -244,9 +244,9 @@ function some(num){
 				$link="<a href=\"#\" onclick=\"window.alert('Documento bloqueado! Pois n&atilde;o faz parte do Cronograma.')\" class=\"textobold\">";
 			}
 			?>
-                      <?= $link; ?>
+                      <?php echo  $link; ?>
                     Instru&ccedil;&otilde;es do Operador </a></td>
-                  <td width="118"><?
+                  <td width="118"><?php
 			$sql=mysql_query("select * from apqp_cron WHERE peca='$pc' AND ativ='Estudos de R&R' AND responsavel<>''");
 			if(mysql_num_rows($sql)){
 				$link="<a href=\"apqp_rr.php\" class=\"textobold\">";
@@ -254,11 +254,11 @@ function some(num){
 				$link="<a href=\"#\" onclick=\"window.alert('Documento bloqueado! Pois n&atilde;o faz parte do Cronograma.')\" class=\"textobold\">";
 			}
 			?>
-                      <?= $link; ?>
+                      <?php echo  $link; ?>
                     Estudos da R&amp;R</a> </td>
                 </tr>
                 <tr align="center">
-                  <td width="118"><?
+                  <td width="118"><?php
 			$sql=mysql_query("select * from apqp_cron WHERE peca='$pc' AND ativ='Estudos de Capabilidade' AND responsavel<>''");
 			if(mysql_num_rows($sql)){
 				$link="<a href=\"apqp_cap.php\">";
@@ -266,9 +266,9 @@ function some(num){
 				$link="<a href=\"#\" onclick=\"window.alert('Documento bloqueado! Pois n&atilde;o faz parte do Cronograma.')\">";
 			}
 			?>
-                      <?= $link; ?>
+                      <?php echo  $link; ?>
                     <img src="imagens/apqp_capa.gif" alt="Capabilidade" width="32" height="32" border="0"></a></td>
-                  <td width="118"><?
+                  <td width="118"><?php
 			$sql=mysql_query("select * from apqp_cron WHERE peca='$pc' AND ativ='Ensaio Dimensional' AND responsavel<>''");
 			if(mysql_num_rows($sql)){
 				$link="<a href=\"apqp_endi.php\">";
@@ -276,9 +276,9 @@ function some(num){
 				$link="<a href=\"#\" onclick=\"window.alert('Documento bloqueado! Pois n&atilde;o faz parte do Cronograma.')\">";
 			}
 			?>
-                      <?= $link; ?>
+                      <?php echo  $link; ?>
                     <img src="imagens/apqp_dimen.gif" alt="Dimensional" width="32" height="32" border="0"></a></td>
-                  <td width="118"><?
+                  <td width="118"><?php
 			$sql=mysql_query("select * from apqp_cron WHERE peca='$pc' AND ativ='Ensaio Material' AND responsavel<>''");
 			if(mysql_num_rows($sql)){
 				$link="<a href=\"apqp_enma.php\">";
@@ -286,9 +286,9 @@ function some(num){
 				$link="<a href=\"#\" onclick=\"window.alert('Documento bloqueado! Pois n&atilde;o faz parte do Cronograma.')\">";
 			}
 			?>
-                      <?= $link; ?>
+                      <?php echo  $link; ?>
                     <img src="imagens/apqp_material.gif" alt="Material" width="32" height="32" border="0"></a></td>
-                  <td width="118"><?
+                  <td width="118"><?php
 			$sql=mysql_query("select * from apqp_cron WHERE peca='$pc' AND ativ='Ensaio Desempenho' AND responsavel<>''");
 			if(mysql_num_rows($sql)){
 				$link="<a href=\"apqp_ende.php\">";
@@ -296,9 +296,9 @@ function some(num){
 				$link="<a href=\"#\" onclick=\"window.alert('Documento bloqueado! Pois n&atilde;o faz parte do Cronograma.')\">";
 			}
 			?>
-                      <?= $link; ?>
+                      <?php echo  $link; ?>
                     <img src="imagens/apqp_desem.gif" alt="Desempenho" width="32" height="32" border="0"></a></td>
-                  <td width="118"><?
+                  <td width="118"><?php
 			$sql=mysql_query("select * from apqp_cron WHERE peca='$pc' AND ativ='Relat&oacute;rio de Aprova&ccedil;&atilde;o de Apar&ecirc;ncia (Se aplic&aacute;vel)' AND responsavel<>''");
 			if(mysql_num_rows($sql)){
 				$link="<a href=\"apqp_aproc.php\">";
@@ -306,11 +306,11 @@ function some(num){
 				$link="<a href=\"#\" onclick=\"window.alert('Documento bloqueado! Pois n&atilde;o faz parte do Cronograma.')\">";
 			}
 			?>
-                      <?= $link; ?>
+                      <?php echo  $link; ?>
                     <img src="imagens/apqp_apar.gif" alt="Apar&ecirc;ncia" width="32" height="32" border="0"></a></td>
                 </tr>
                 <tr align="center" class="textobold">
-                  <td width="118"><?
+                  <td width="118"><?php
 			$sql=mysql_query("select * from apqp_cron WHERE peca='$pc' AND ativ='Estudos de Capabilidade' AND responsavel<>''");
 			if(mysql_num_rows($sql)){
 				$link="<a href=\"apqp_cap.php\" class=\"textobold\">";
@@ -318,9 +318,9 @@ function some(num){
 				$link="<a href=\"#\" onclick=\"window.alert('Documento bloqueado! Pois n&atilde;o faz parte do Cronograma.')\" class=\"textobold\">";
 			}
 			?>
-                      <?= $link; ?>
+                      <?php echo  $link; ?>
                     Estudos de Capabilidade </a></td>
-                  <td width="118"><?
+                  <td width="118"><?php
 			$sql=mysql_query("select * from apqp_cron WHERE peca='$pc' AND ativ='Ensaio Dimensional' AND responsavel<>''");
 			if(mysql_num_rows($sql)){
 				$link="<a href=\"apqp_endi.php\" class=\"textobold\">";
@@ -328,9 +328,9 @@ function some(num){
 				$link="<a href=\"#\" onclick=\"window.alert('Documento bloqueado! Pois n&atilde;o faz parte do Cronograma.')\" class=\"textobold\">";
 			}
 			?>
-                      <?= $link; ?>
+                      <?php echo  $link; ?>
                     Ensaio Dimensional</a> </td>
-                  <td width="118"><?
+                  <td width="118"><?php
 			$sql=mysql_query("select * from apqp_cron WHERE peca='$pc' AND ativ='Ensaio Material' AND responsavel<>''");
 			if(mysql_num_rows($sql)){
 				$link="<a href=\"apqp_enma.php\" class=\"textobold\">";
@@ -338,9 +338,9 @@ function some(num){
 				$link="<a href=\"#\" onclick=\"window.alert('Documento bloqueado! Pois n&atilde;o faz parte do Cronograma.')\" class=\"textobold\">";
 			}
 			?>
-                      <?= $link; ?>
+                      <?php echo  $link; ?>
                     Ensaio Material</a></td>
-                  <td width="118"><?
+                  <td width="118"><?php
 			$sql=mysql_query("select * from apqp_cron WHERE peca='$pc' AND ativ='Ensaio Desempenho' AND responsavel<>''");
 			if(mysql_num_rows($sql)){
 				$link="<a href=\"apqp_ende.php\" class=\"textobold\">";
@@ -348,9 +348,9 @@ function some(num){
 				$link="<a href=\"#\" onclick=\"window.alert('Documento bloqueado! Pois n&atilde;o faz parte do Cronograma.')\" class=\"textobold\">";
 			}
 			?>
-                      <?= $link; ?>
+                      <?php echo  $link; ?>
                     Ensaio Desempenho</a> </td>
-                  <td width="118"><?
+                  <td width="118"><?php
 			$sql=mysql_query("select * from apqp_cron WHERE peca='$pc' AND ativ='Relat&oacute;rio de Aprova&ccedil;&atilde;o de Apar&ecirc;ncia (Se aplic&aacute;vel)' AND responsavel<>''");
 			if(mysql_num_rows($sql)){
 				$link="<a href=\"apqp_aproc.php\" class=\"textobold\">";
@@ -358,11 +358,11 @@ function some(num){
 				$link="<a href=\"#\" onclick=\"window.alert('Documento bloqueado! Pois n&atilde;o faz parte do Cronograma.')\" class=\"textobold\">";
 			}
 			?>
-                      <?= $link; ?>
+                      <?php echo  $link; ?>
                     Aprova&ccedil;&atilde;o de Apar&ecirc;ncia </a></td>
                 </tr>
                 <tr align="center">
-                  <td width="118"><?
+                  <td width="118"><?php
 			$sql=mysql_query("select * from apqp_cron WHERE peca='$pc' AND ativ='Certificado de Submiss&atilde;o' AND responsavel<>''");
 			if(mysql_num_rows($sql)){
 				$link="<a href=\"apqp_sub1.php\">";
@@ -370,9 +370,9 @@ function some(num){
 				$link="<a href=\"#\" onclick=\"window.alert('Documento bloqueado! Pois n&atilde;o faz parte do Cronograma.')\">";
 			}
 			?>
-                      <?= $link; ?>
+                      <?php echo  $link; ?>
                     <img src="imagens/apqp_subm.gif" alt="Submiss&atilde;o" width="32" height="32" border="0"></a></td>
-                  <td width="118"><?
+                  <td width="118"><?php
 			$sql=mysql_query("select * from apqp_cron WHERE peca='$pc' AND ativ='Sumario de Aprova&ccedil;&atilde;o do APQP (Valida&ccedil;&atilde;o final)' AND responsavel<>''");
 			if(mysql_num_rows($sql)){
 				$link="<a href=\"apqp_sum1.php\">";
@@ -380,11 +380,11 @@ function some(num){
 				$link="<a href=\"#\" onclick=\"window.alert('Documento bloqueado! Pois n&atilde;o faz parte do Cronograma.')\">";
 			}
 			?>
-                      <?= $link; ?>
+                      <?php echo  $link; ?>
                     <img src="imagens/apqp_sumapro.gif" alt="Aprova&ccedil;&atilde;o" width="32" height="32" border="0"></a></td>
                   <td width="118"><a href="apqp_granelt.php"><img src="imagens/apqp_check.gif" alt="Checklist Granel" width="32" height="32" border="0"></a></td>
                   <td width="118"><a href="apqp_chk.php"><img src="imagens/apqp_checkapqp.gif" alt="Checklist APQP" width="32" height="32" border="0"></a></td>
-                  <td width="118"><?
+                  <td width="118"><?php
 			$sql=mysql_query("select * from apqp_cron WHERE peca='$pc' AND ativ='Interina' AND responsavel<>''");
 			if(mysql_num_rows($sql)){
 				$link="<a href=\"apqp_apro_int1.php\">";
@@ -392,11 +392,11 @@ function some(num){
 				$link="<a href=\"#\" onclick=\"window.alert('Documento bloqueado! Pois n&atilde;o faz parte do Cronograma.')\">";
 			}
 			?>
-                      <?= $link; ?>
+                      <?php echo  $link; ?>
                     <img src="imagens/logo.png" alt="Aprov. Interina" width="44" height="32" border="0"></a></td>
                 </tr>
                 <tr align="center" class="textobold">
-                  <td width="118"><?
+                  <td width="118"><?php
 			$sql=mysql_query("select * from apqp_cron WHERE peca='$pc' AND ativ='Certificado de Submiss&atilde;o' AND responsavel<>''");
 			if(mysql_num_rows($sql)){
 				$link="<a href=\"apqp_sub1.php\" class=\"textobold\">";
@@ -404,9 +404,9 @@ function some(num){
 				$link="<a href=\"#\" onclick=\"window.alert('Documento bloqueado! Pois n&atilde;o faz parte do Cronograma.')\" class=\"textobold\">";
 			}
 			?>
-                      <?= $link; ?>
+                      <?php echo  $link; ?>
                     Certifica&ccedil;&atilde;o de Submiss&atilde;o </a></td>
-                  <td width="118"><?
+                  <td width="118"><?php
 			$sql=mysql_query("select * from apqp_cron WHERE peca='$pc' AND ativ='Sumario de Aprova&ccedil;&atilde;o do APQP (Valida&ccedil;&atilde;o final)' AND responsavel<>''");
 			if(mysql_num_rows($sql)){
 				$link="<a href=\"apqp_sum1.php\" class=\"textobold\">";
@@ -414,11 +414,11 @@ function some(num){
 				$link="<a href=\"#\" onclick=\"window.alert('Documento bloqueado! Pois n&atilde;o faz parte do Cronograma.')\" class=\"textobold\">";
 			}
 			?>
-                      <?= $link; ?>
+                      <?php echo  $link; ?>
                     Sum&aacute;rio e Aprova&ccedil;&atilde;o do APQP</a> </td>
                   <td width="118"><a href="apqp_granelt.php" class="textobold">Checklist Material a Granel</a></td>
                   <td width="118"><a href="apqp_chk.php" class="textobold">Checklist APQP</a> </td>
-                  <td width="118"><?
+                  <td width="118"><?php
 			$sql=mysql_query("select * from apqp_cron WHERE peca='$pc' AND ativ='Interina' AND responsavel<>''");
 			if(mysql_num_rows($sql)){
 				$link="<a href=\"apqp_apro_int1.php\" class=\"textobold\">";
@@ -426,7 +426,7 @@ function some(num){
 				$link="<a href=\"#\" onclick=\"window.alert('Documento bloqueado! Pois n&atilde;o faz parte do Cronograma.')\" class=\"textobold\">";
 			}
 			?>
-                      <?= $link; ?>
+                      <?php echo  $link; ?>
                     Aprova&ccedil;&atilde;o Interina</a></td>
                 </tr>
               </table></td>
@@ -449,4 +449,4 @@ function some(num){
 <p>&nbsp;</p>
 </body>
 </html>
-<? include("mensagem.php"); ?>
+<?php include("mensagem.php"); ?>

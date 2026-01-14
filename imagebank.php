@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 if(empty($_SESSION["login_nome"]) or empty($_SESSION["login_nivel"])){
 	print "<script>top.window.close();</script>";
@@ -27,7 +27,7 @@ function varre($dir,$filtro=".jpg;.jpeg"){
         $arr_ext = explode(";",$filtro);
         foreach($arr_ext as $ext) {
             $extpos = (strtolower(substr($arq,strlen($arq)-strlen($ext)))) == strtolower($ext);
-            if ($extpos == strlen($arq) and is_file($arq)){ // Verifica se o arquivo é igual ao filtro
+            if ($extpos == strlen($arq) and is_file($arq)){ // Verifica se o arquivo Ã© igual ao filtro
 				$arquivos[$ar]["id"]=$ar;
 				$arquivos[$ar]["url"]="http://".$uri.$arq;
 				$arquivos[$ar]["arquivo"]=$arq;
@@ -45,7 +45,8 @@ $arqs=$_SESSION["arqlist"];
 <html>
 <head>
 <title>Banco de Imagens</title>
-<meta http-equiv="Content-Type" content="text/html; UTF-8">
+<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="style.css" rel="stylesheet" type="text/css">
 <script src="scripts.js"></script>
 <script language="JavaScript">
@@ -72,13 +73,13 @@ function editimg(imgSrc){
     <td width="20" align="center">&nbsp;</td>
     <td width="20" align="center">&nbsp;</td>
   </tr>
-  <?
+  <?php
 if(count($arqs)==0){
 ?>
   <tr bgcolor="#FFFFFF"> 
     <td colspan="4" align="center" class="textobold">NENHUMA IMAGEM ENCONTRADA</td>
   </tr>
-  <?
+  <?php
 	}else{
 		//BLOCO PAGINACAO
 		$wpaginacao=10;
@@ -126,19 +127,19 @@ if(count($arqs)==0){
 			$reg_final++; // PAGINACAO conta quantos registros imprimiu
 	?>
   <tr bgcolor="#FFFFFF"> 
-    <td width="50" align="center"><a href="#" onClick="return abre('imagebank/foto.php?img=<? print $imagem; ?>','foto','width=10,height=10');"><img src="imagebank/gd.php?img=<? print $imagem; ?>&wid=50" alt="Clique para ampliar" border="0" align="absmiddle"></a></td>
-    <td width="0" class="texto">&nbsp;<? print $url; ?></td>
-    <td width="20" align="center"><a href="#" onClick="return editimg('<? print $url; ?>');"><img src="imagens/icon_14img.gif" alt="Selecionar imagem" width="14" height="14" border="0"></a></td>
-    <td width="20" align="center"><a href="#" onClick="return pergunta('Deseja excluir esta imagem?','imagebank/bank.php?id=<? print $id; ?>&acao=exc&wp=<? print $wp; ?>');"><img src="imagens/icon14_lixeira.gif" width="14" height="14" border="0"></a></td>
+    <td width="50" align="center"><a href="#" onClick="return abre('imagebank/foto.php?img=<?php print $imagem; ?>','foto','width=10,height=10');"><img src="imagebank/gd.php?img=<?php print $imagem; ?>&wid=50" alt="Clique para ampliar" border="0" align="absmiddle"></a></td>
+    <td width="0" class="texto">&nbsp;<?php print $url; ?></td>
+    <td width="20" align="center"><a href="#" onClick="return editimg('<?php print $url; ?>');"><img src="imagens/icon_14img.gif" alt="Selecionar imagem" width="14" height="14" border="0"></a></td>
+    <td width="20" align="center"><a href="#" onClick="return pergunta('Deseja excluir esta imagem?','imagebank/bank.php?id=<?php print $id; ?>&acao=exc&wp=<?php print $wp; ?>');"><img src="imagens/icon14_lixeira.gif" width="14" height="14" border="0"></a></td>
   </tr>
-  <?
+  <?php
 		}
 	}
 	?>
 </table>
             </table></td>
         </tr>
-		<? if($wpaginar){ ?>
+		<?php if($wpaginar){ ?>
         <tr>
           <td><table width="500" border="0" align="center" cellpadding="0" cellspacing="0">
       <tr>
@@ -148,20 +149,20 @@ if(count($arqs)==0){
         <td align="center"> <table width="1%" border="0" cellspacing="0" cellpadding="0">
             <tr valign="top"> 
               <td align="right"> 
-                <? 
+                <?php 
 				$antz=false;
 				if($wp>1){
 					$antz=true;
 				?>
-                <a href="<? print "imagebank.php?wp=$pg_anterior"; ?>" class="texto"> 
-                <? } ?>
+                <a href="<?php print "imagebank.php?wp=$pg_anterior"; ?>" class="texto"> 
+                <?php } ?>
                 <img src="imagens/pag_1.gif" width="26" height="13" border="0"> 
-                <? if($antz){ ?>
+                <?php if($antz){ ?>
                 <br>
                 Anterior</a> 
-                <? } ?>
+                <?php } ?>
               </td>
-              <?
+              <?php
 				$link_impressos=0;
 				if ($temp > $wpaginacao){
 		    	    $n_start  = $temp - ceil($wpaginacao/2);
@@ -175,33 +176,33 @@ if(count($arqs)==0){
 					$link_impressos++;
 				?>
               <td align="center"> 
-                <? if($pg_atual != $link_impressos){ ?>
-                <a href="<? print "imagebank.php?wp=$link_impressos"; ?>" class="texto"> 
-                <? } ?>
-                <img src="imagens/pag_<? if($pg_atual==$link_impressos) { print "3"; }else{ print "2"; } ?>.gif" border="0"><br>
-                <? if($pg_atual==$link_impressos){ print "<span class=\"textobold\">$link_impressos</span>"; }else{ print $link_impressos; }?>
-                <? if($pg_atual != $link_impressos){ ?>
+                <?php if($pg_atual != $link_impressos){ ?>
+                <a href="<?php print "imagebank.php?wp=$link_impressos"; ?>" class="texto"> 
+                <?php } ?>
+                <img src="imagens/pag_<?php if($pg_atual==$link_impressos) { print "3"; }else{ print "2"; } ?>.gif" border="0"><br>
+                <?php if($pg_atual==$link_impressos){ print "<span class=\"textobold\">$link_impressos</span>"; }else{ print $link_impressos; }?>
+                <?php if($pg_atual != $link_impressos){ ?>
                 </a> 
-                <? } ?>
+                <?php } ?>
               </td>
-              <?
+              <?php
 				}
 				?>
               <td> 
-                <? if($reg_final<$results_tot){ ?>
-                <a href="<? print "imagebank.php?wp=$pg_proxima"; ?>" class="texto"> 
-                <? } ?>
+                <?php if($reg_final<$results_tot){ ?>
+                <a href="<?php print "imagebank.php?wp=$pg_proxima"; ?>" class="texto"> 
+                <?php } ?>
                 <img src="imagens/pag_4.gif" width="34" height="15" border="0"> 
-                <? if($reg_final<$results_tot){ ?>
+                <?php if($reg_final<$results_tot){ ?>
                 <br>
-                Próximo</a> 
-                <? } ?>
+                PrÃ³ximo</a> 
+                <?php } ?>
               </td>
             </tr>
           </table></td>
       </tr>
     </table>
-			<? } ?>
+			<?php } ?>
 </body>
 </html>
-<? include("mensagem.php"); ?>
+<?php include("mensagem.php"); ?>

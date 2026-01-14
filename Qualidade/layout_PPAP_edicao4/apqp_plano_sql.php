@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 $apqp=new set_apqp;
 $acao=verifi($permi,$acao);
@@ -34,7 +34,7 @@ if($acao=="email"){
 $sql_apro=mysql_query("SELECT * FROM apqp_plano WHERE peca='$pc' AND fase='$fase' AND (apro1='$quem' OR apro2='$quem' OR apro3='$quem' OR apro4='$quem' OR quem='$quem')");
 $res_apro=mysql_num_rows($sql_apro);
 
-///Tirar AprovaÁıesss
+///Tirar Aprova√ß√µesss
 		//verificar Cliente
 		$apqp->cliente_apro("apqp_planoc.php");
 		// - - - - - - - -  -
@@ -80,17 +80,17 @@ if($acao=="altc"){
 	}
 	$sql=mysql_query("UPDATE apqp_plano SET contato='$contato', equipe='$equipe', ini='$ini', rev='$rev', numero='$numero', quem='$quem1', dtquem='$dtquem', apro1='$apro1', apro1_data='$apro1_data', apro2='$apro2', apro2_data='$apro2_data', apro3='$apro3', apro3_data='$apro3_data', apro4='$apro4', apro4_data='$apro4_data' WHERE peca='$pc' AND fase='$fase'");
 	if($sql){
-		$_SESSION["mensagem"]="AlteraÁıes salvas com sucesso";
+		$_SESSION["mensagem"]="Altera√ß√µes salvas com sucesso";
 		// cria followup caso salve o conteudo do Plano de controle
-			$sql_sal=mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Salvando alteraÁıes do Plano de Controle da peÁa $npc.','O usu·rio $quem salvou as alteraÁıes do Plano de Controle da peÁa $npc.','$user')");
+			$sql_sal=mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Salvando altera√ß√µes do Plano de Controle da pe√ßa $npc.','O usu√°rio $quem salvou as altera√ß√µes do Plano de Controle da pe√ßa $npc.','$user')");
 		//	
 	}else{
-		$_SESSION["mensagem"]="As alteraÁıes n„o puderam ser salvas";
+		$_SESSION["mensagem"]="As altera√ß√µes n√£o puderam ser salvas";
 	}
 
 	if(isset($ap)){
 			if($res_apro>0){
-				$_SESSION["mensagem"]="O Sistema n„o permite que um mesmo usu·rio aprove duas vezes o mesmo Estudo.";
+				$_SESSION["mensagem"]="O Sistema n√£o permite que um mesmo usu√°rio aprove duas vezes o mesmo Estudo.";
 				header("location:apqp_planoc.php?fase=$fase");
 				exit;
 			}
@@ -99,7 +99,7 @@ if($acao=="altc"){
 		}
 		$sql2=mysql_query("SELECT * FROM apqp_cron WHERE perc='100' AND peca='$pc' AND ativ='FMEA de Processo'");
 		if(!mysql_num_rows($sql2)){
-			$_SESSION["mensagem"]="N„o pode ser aprovado pois existem relatÛrios anteriores abertos!!";
+			$_SESSION["mensagem"]="N√£o pode ser aprovado pois existem relat√≥rios anteriores abertos!!";
 			header("Location:apqp_planoc.php?fase=$fase");
 			exit;
 		}
@@ -110,7 +110,7 @@ if($acao=="altc"){
 			mysql_query("UPDATE apqp_plano SET sit='S', quem='$quem1', dtquem=NOW(), contato='$contato', equipe='$equipe', ini='$ini', rev='$rev', numero='$numero' WHERE peca='$pc' AND fase='$fase'");
 			$_SESSION["mensagem"]="Aprovado com Sucesso!";
 			// cria followup caso aprove o conteudo do Plano de controle
-				mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','AprovaÁ„o do Plano de Controle da peÁa $npc.','O usu·rio $quem aprovou o Plano de Controle da peÁa $npc.','$user')");
+				mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Aprova√ß√£o do Plano de Controle da pe√ßa $npc.','O usu√°rio $quem aprovou o Plano de Controle da pe√ßa $npc.','$user')");
 			//	
 			header("Location:apqp_planoc.php?fase=$fase");
 			exit;
@@ -124,39 +124,39 @@ if($acao=="altc"){
 			$res_pla3=mysql_fetch_array($sql_pla3);
 			if( (empty($res_pla1["quem"]))&&(empty($res_pla2["quem"]))&&(empty($res_pla3["quem"])) ){	
 				mysql_query("UPDATE apqp_cron SET perc='95',resp='',fim='' WHERE peca='$pc' AND ativ='Plano de Controle'");
-				// tira o status de "aguardando disposiÁ„o do cliente"
+				// tira o status de "aguardando disposi√ß√£o do cliente"
 				$sql_status=mysql_query("SELECT status FROM apqp_pc WHERE id='$pc'");
 				$res_status=mysql_fetch_array($sql_status);
 				if($res_status["status"]=="2"){
 					mysql_query("UPDATE apqp_pc SET status='1' WHERE id='$pc'");
-					// cria followup caso remova a aprovaÁ„o do do Plano de controle e mude o status
-						mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Removendo a aprovaÁ„o do Plano de Controle da peÁa $npc.','O usu·rio $quem removeu a aprovaÁ„o da peÁa $npc devido a remoÁ„o da aprovaÁ„o do Estudo Plano de Controle.','$user')");
+					// cria followup caso remova a aprova√ß√£o do do Plano de controle e mude o status
+						mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Removendo a aprova√ß√£o do Plano de Controle da pe√ßa $npc.','O usu√°rio $quem removeu a aprova√ß√£o da pe√ßa $npc devido a remo√ß√£o da aprova√ß√£o do Estudo Plano de Controle.','$user')");
 					// MANDAR EMAIL
-					$apqp->set_email("RemoÁ„o da aprovaÁ„o da peÁa $npc.","O usu·rio $quem removeu a aprovaÁ„o da peÁa $this->npc devido a remoÁ„o da aprovaÁ„o do Estudo Plano de Controle.");
+					$apqp->set_email("Remo√ß√£o da aprova√ß√£o da pe√ßa $npc.","O usu√°rio $quem removeu a aprova√ß√£o da pe√ßa $this->npc devido a remo√ß√£o da aprova√ß√£o do Estudo Plano de Controle.");
 					$apqp->email();
 					//
 				}else{
-					// cria followup caso remova a aprovaÁ„o do Plano de controle
-					mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Removendo a aprovaÁ„o do Plano de Controle da peÁa $npc.','O usu·rio $quem removeu a aprovaÁ„o do Plano de Controle da peÁa $npc.','$user')");
+					// cria followup caso remova a aprova√ß√£o do Plano de controle
+					mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Removendo a aprova√ß√£o do Plano de Controle da pe√ßa $npc.','O usu√°rio $quem removeu a aprova√ß√£o do Plano de Controle da pe√ßa $npc.','$user')");
 					//	
 				}
 			}	
-		$_SESSION["mensagem"]="AprovaÁ„o excluÌda com sucesso!";
+		$_SESSION["mensagem"]="Aprova√ß√£o exclu√≠da com sucesso!";
 		header("Location:apqp_planoc.php?fase=$fase");
 		exit;
 	
 	}else if(isset($ap1)){
 				if($res_apro>0){
-				$_SESSION["mensagem"]="O Sistema n„o permite que um mesmo usu·rio aprove duas vezes o mesmo Estudo.";
+				$_SESSION["mensagem"]="O Sistema n√£o permite que um mesmo usu√°rio aprove duas vezes o mesmo Estudo.";
 				header("location:apqp_planoc.php?fase=$fase");
 				exit;
 			}
 		if(empty($apro1)){
 		$apro1=$quem;
 		}
-		$sql_sub=mysql_query("SELECT * FROM apqp_cron WHERE perc='100' AND peca='$pc' AND ativ='Certificado de Submiss„o'");
+		$sql_sub=mysql_query("SELECT * FROM apqp_cron WHERE perc='100' AND peca='$pc' AND ativ='Certificado de Submiss√£o'");
 		if(!mysql_num_rows($sql_sub)){
-			$_SESSION["mensagem"]="N„o pode ser alterado pois Certificado de Submiss„o deve ser aprovado pelo fornecedor primeiro!!";
+			$_SESSION["mensagem"]="N√£o pode ser alterado pois Certificado de Submiss√£o deve ser aprovado pelo fornecedor primeiro!!";
 			header("Location:apqp_planoc.php?fase=$fase");
 			exit;
 		}
@@ -164,25 +164,25 @@ if($acao=="altc"){
 		if($sql_ap1){
 			$_SESSION["mensagem"]="Aprovado com Sucesso!";
 			// cria followup caso aprove o conteudo do Plano de controle
-				mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','AprovaÁ„o do Plano de Controle da peÁa $npc.','O usu·rio $quem aprovou o Plano de Controle da peÁa $npc.','$user')");
+				mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Aprova√ß√£o do Plano de Controle da pe√ßa $npc.','O usu√°rio $quem aprovou o Plano de Controle da pe√ßa $npc.','$user')");
 			//	
 		}else{
-			$_SESSION["mensagem"]="AprovaÁ„o n„o concluÌda!";
+			$_SESSION["mensagem"]="Aprova√ß√£o n√£o conclu√≠da!";
 		}
 			header("Location:apqp_planoc.php?fase=$fase");
 			exit;
 	}else if(isset($ap2)){ 
 				if($res_apro>0){
-				$_SESSION["mensagem"]="O Sistema n„o permite que um mesmo usu·rio aprove duas vezes o mesmo Estudo.";
+				$_SESSION["mensagem"]="O Sistema n√£o permite que um mesmo usu√°rio aprove duas vezes o mesmo Estudo.";
 				header("location:apqp_planoc.php?fase=$fase");
 				exit;
 			}
 		if(empty($apro2)){
 		$apro2=$quem;
 		}
-		$sql_sub=mysql_query("SELECT * FROM apqp_cron WHERE perc='100' AND peca='$pc' AND ativ='Certificado de Submiss„o'");
+		$sql_sub=mysql_query("SELECT * FROM apqp_cron WHERE perc='100' AND peca='$pc' AND ativ='Certificado de Submiss√£o'");
 		if(!mysql_num_rows($sql_sub)){
-			$_SESSION["mensagem"]="N„o pode ser alterado pois Certificado de Submiss„o deve ser aprovado pelo fornecedor primeiro!!";
+			$_SESSION["mensagem"]="N√£o pode ser alterado pois Certificado de Submiss√£o deve ser aprovado pelo fornecedor primeiro!!";
 			header("Location:apqp_planoc.php?fase=$fase");
 			exit;
 		}
@@ -190,16 +190,16 @@ if($acao=="altc"){
 		if($sql_ap2){
 			$_SESSION["mensagem"]="Aprovado com Sucesso!";
 			// cria followup caso aprove o conteudo do Plano de controle
-				mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','AprovaÁ„o do Plano de Controle da peÁa $npc.','O usu·rio $quem aprovou o Plano de Controle da peÁa $npc.','$user')");
+				mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Aprova√ß√£o do Plano de Controle da pe√ßa $npc.','O usu√°rio $quem aprovou o Plano de Controle da pe√ßa $npc.','$user')");
 			//	
 		} else {
-			$_SESSION["mensagem"]="AprovaÁ„o n„o concluÌda!";
+			$_SESSION["mensagem"]="Aprova√ß√£o n√£o conclu√≠da!";
 		}
 			header("Location:apqp_planoc.php?fase=$fase");
 			exit;
 	}else if(isset($ap3)){
 			if($res_apro>0){
-				$_SESSION["mensagem"]="O Sistema n„o permite que um mesmo usu·rio aprove duas vezes o mesmo Estudo.";
+				$_SESSION["mensagem"]="O Sistema n√£o permite que um mesmo usu√°rio aprove duas vezes o mesmo Estudo.";
 				header("location:apqp_planoc.php?fase=$fase");
 				exit;
 			}
@@ -208,7 +208,7 @@ if($acao=="altc"){
 		}
 		$sql2=mysql_query("SELECT * FROM apqp_cron WHERE perc='100' AND peca='$pc' AND ativ='FMEA de Processo'");
 		if(!mysql_num_rows($sql2)){
-			$_SESSION["mensagem"]="N„o pode ser aprovado pois existem relatÛrios anteriores abertos!!";
+			$_SESSION["mensagem"]="N√£o pode ser aprovado pois existem relat√≥rios anteriores abertos!!";
 			header("Location:apqp_planoc.php?fase=$fase");
 			exit;
 		}
@@ -222,7 +222,7 @@ if($acao=="altc"){
 		}
 			$_SESSION["mensagem"]="Aprovado com Sucesso!";
 			// cria followup caso aprove o conteudo do Plano de controle
-				mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','AprovaÁ„o do Plano de Controle da peÁa $npc.','O usu·rio $quem aprovou o Plano de Controle da peÁa $npc.','$user')");
+				mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Aprova√ß√£o do Plano de Controle da pe√ßa $npc.','O usu√°rio $quem aprovou o Plano de Controle da pe√ßa $npc.','$user')");
 			//	
 			header("Location:apqp_planoc.php?fase=$fase");
 			exit;
@@ -236,27 +236,27 @@ if($acao=="altc"){
 			$res_pla3=mysql_fetch_array($sql_pla3);
 			if( (empty($res_pla1["quem"]))&&(empty($res_pla2["quem"]))&&(empty($res_pla3["quem"])) ){	
 				mysql_query("UPDATE apqp_cron SET perc='95',resp='',fim='' WHERE peca='$pc' AND ativ='Plano de Controle'");
-				// tira o status de "aguardando disposiÁ„o do cliente"
+				// tira o status de "aguardando disposi√ß√£o do cliente"
 				$sql_status=mysql_query("SELECT status FROM apqp_pc WHERE id='$pc'");
 				$res_status=mysql_fetch_array($sql_status);
 
 				if($res_status["status"]=="2"){
 					mysql_query("UPDATE apqp_pc SET status='1' WHERE id='$pc'");
-					// cria followup caso remova a aprovaÁ„o do do Plano de controle e mude o status
-						mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Removendo a aprovaÁ„o do Plano de Controle da peÁa $npc.','O usu·rio $quem removeu a aprovaÁ„o da peÁa $npc devido a remoÁ„o da aprovaÁ„o do Estudo Plano de Controle.','$user')");	
+					// cria followup caso remova a aprova√ß√£o do do Plano de controle e mude o status
+						mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Removendo a aprova√ß√£o do Plano de Controle da pe√ßa $npc.','O usu√°rio $quem removeu a aprova√ß√£o da pe√ßa $npc devido a remo√ß√£o da aprova√ß√£o do Estudo Plano de Controle.','$user')");	
 					// MANDAR EMAIL
-					$apqp->set_email("RemoÁ„o da aprovaÁ„o da peÁa $npc.","O usu·rio $quem removeu a aprovaÁ„o da peÁa $this->npc devido a remoÁ„o da aprovaÁ„o do Estudo Plano de Controle.");
+					$apqp->set_email("Remo√ß√£o da aprova√ß√£o da pe√ßa $npc.","O usu√°rio $quem removeu a aprova√ß√£o da pe√ßa $this->npc devido a remo√ß√£o da aprova√ß√£o do Estudo Plano de Controle.");
 					$apqp->email();
 					//
 				} else {
-					// cria followup caso remova a aprovaÁ„o do Plano de controle
-					mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Removendo a aprovaÁ„o do Plano de Controle da peÁa $npc.','O usu·rio $quem removeu a aprovaÁ„o do Plano de Controle da peÁa $npc.','$user')");
+					// cria followup caso remova a aprova√ß√£o do Plano de controle
+					mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Removendo a aprova√ß√£o do Plano de Controle da pe√ßa $npc.','O usu√°rio $quem removeu a aprova√ß√£o do Plano de Controle da pe√ßa $npc.','$user')");
 					//	
 				}
 			}	
-			$_SESSION["mensagem"]="AprovaÁ„o excluÌda com sucesso!";
-			// cria followup caso remova a aprovaÁ„o do do Plano de controle
-				mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Removendo a aprovaÁ„o do Plano de Controle da peÁa $npc.','O usu·rio $quem removeu a aprovaÁ„o do Plano de Controle da peÁa $npc.','$user')");
+			$_SESSION["mensagem"]="Aprova√ß√£o exclu√≠da com sucesso!";
+			// cria followup caso remova a aprova√ß√£o do do Plano de controle
+				mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Removendo a aprova√ß√£o do Plano de Controle da pe√ßa $npc.','O usu√°rio $quem removeu a aprova√ß√£o do Plano de Controle da pe√ßa $npc.','$user')");
 			//	
 			header("Location:apqp_planoc.php?fase=$fase");
 			exit;
@@ -265,7 +265,7 @@ if($acao=="altc"){
 
 	else if(isset($ap4)){
 			if($res_apro>0){
-				$_SESSION["mensagem"]="O Sistema n„o permite que um mesmo usu·rio aprove duas vezes o mesmo Estudo.";
+				$_SESSION["mensagem"]="O Sistema n√£o permite que um mesmo usu√°rio aprove duas vezes o mesmo Estudo.";
 				header("location:apqp_planoc.php?fase=$fase");
 				exit;
 			}
@@ -274,7 +274,7 @@ if($acao=="altc"){
 		}
 		$sql2=mysql_query("SELECT * FROM apqp_cron WHERE perc='100' AND peca='$pc' AND ativ='FMEA de Processo'");
 		if(!mysql_num_rows($sql2)){
-			$_SESSION["mensagem"]="N„o pode ser aprovado pois existem relatÛrios anteriores abertos!!";
+			$_SESSION["mensagem"]="N√£o pode ser aprovado pois existem relat√≥rios anteriores abertos!!";
 			header("Location:apqp_planoc.php?fase=$fase");
 			exit;
 		}
@@ -289,7 +289,7 @@ if($acao=="altc"){
 
 			$_SESSION["mensagem"]="Aprovado com Sucesso!";
 			// cria followup caso aprove o conteudo do Plano de controle
-				mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','AprovaÁ„o do Plano de Controle da peÁa $npc.','O usu·rio $quem aprovou o Plano de Controle da peÁa $npc.','$user')");
+				mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Aprova√ß√£o do Plano de Controle da pe√ßa $npc.','O usu√°rio $quem aprovou o Plano de Controle da pe√ßa $npc.','$user')");
 			//	
 			header("Location:apqp_planoc.php?fase=$fase");
 			exit;
@@ -303,28 +303,28 @@ if($acao=="altc"){
 			$res_pla3=mysql_fetch_array($sql_pla3);
 			if( (empty($res_pla1["quem"]))&&(empty($res_pla2["quem"]))&&(empty($res_pla3["quem"])) ){	
 				mysql_query("UPDATE apqp_cron SET perc='95',resp='',fim='' WHERE peca='$pc' AND ativ='Plano de Controle'");
-				// tira o status de "aguardando disposiÁ„o do cliente"
+				// tira o status de "aguardando disposi√ß√£o do cliente"
 				$sql_status=mysql_query("SELECT status FROM apqp_pc WHERE id='$pc'");
 				$res_status=mysql_fetch_array($sql_status);
 
 				if($res_status["status"]=="2"){
 					mysql_query("UPDATE apqp_pc SET status='1' WHERE id='$pc'");
-					// cria followup caso remova a aprovaÁ„o do do Plano de controle e mude o status
-						mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Removendo a aprovaÁ„o do Plano de Controle da peÁa $npc.','O usu·rio $quem removeu a aprovaÁ„o da peÁa $npc devido a remoÁ„o da aprovaÁ„o do Estudo Plano de Controle.','$user')");
+					// cria followup caso remova a aprova√ß√£o do do Plano de controle e mude o status
+						mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Removendo a aprova√ß√£o do Plano de Controle da pe√ßa $npc.','O usu√°rio $quem removeu a aprova√ß√£o da pe√ßa $npc devido a remo√ß√£o da aprova√ß√£o do Estudo Plano de Controle.','$user')");
 					// MANDAR EMAIL
-					$apqp->set_email("RemoÁ„o da aprovaÁ„o da peÁa $npc.","O usu·rio $quem removeu a aprovaÁ„o da peÁa $this->npc devido a remoÁ„o da aprovaÁ„o do Estudo Plano de Controle.");
+					$apqp->set_email("Remo√ß√£o da aprova√ß√£o da pe√ßa $npc.","O usu√°rio $quem removeu a aprova√ß√£o da pe√ßa $this->npc devido a remo√ß√£o da aprova√ß√£o do Estudo Plano de Controle.");
 					$apqp->email();
 					//
 				} else {
 				
-					// cria followup caso remova a aprovaÁ„o do Plano de controle
-					mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Removendo a aprovaÁ„o do Plano de Controle da peÁa $npc.','O usu·rio $quem removeu a aprovaÁ„o do Plano de Controle da peÁa $npc.','$user')");
+					// cria followup caso remova a aprova√ß√£o do Plano de controle
+					mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Removendo a aprova√ß√£o do Plano de Controle da pe√ßa $npc.','O usu√°rio $quem removeu a aprova√ß√£o do Plano de Controle da pe√ßa $npc.','$user')");
 					//	
 				}
 			}	
-			$_SESSION["mensagem"]="AprovaÁ„o excluÌda com sucesso!";
-			// cria followup caso remova a aprovaÁ„o do Plano de controle
-				mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Removendo a aprovaÁ„o do Plano de Controle da peÁa $npc.','O usu·rio $quem removeu a aprovaÁ„o do Plano de Controle da peÁa $npc.','$user')");
+			$_SESSION["mensagem"]="Aprova√ß√£o exclu√≠da com sucesso!";
+			// cria followup caso remova a aprova√ß√£o do Plano de controle
+				mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Removendo a aprova√ß√£o do Plano de Controle da pe√ßa $npc.','O usu√°rio $quem removeu a aprova√ß√£o do Plano de Controle da pe√ßa $npc.','$user')");
 			//	
 			header("Location:apqp_planoc.php?fase=$fase");
 			exit;
@@ -339,12 +339,12 @@ if($acao=="altc"){
 			$sql=mysql_query("UPDATE apqp_planoi SET tecnicas='".$tecnicas[$linha]."', tamanho='".$tamanho[$linha]."', freq='".$freq[$linha]."', metodo='".$metodo[$linha]."', reacao='".$reacao[$linha]."' WHERE id='$linha'");
 		}
 		if($sql){
-			$_SESSION["mensagem"]="AlteraÁıes salvas com sucesso";
+			$_SESSION["mensagem"]="Altera√ß√µes salvas com sucesso";
 			// cria followup caso aprove o conteudo do Plano de controle
-				$sql_ap=mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','AprovaÁ„o do Plano de Controle da peÁa $npc.','O usu·rio $quem aprovou o Plano de Controle da peÁa $npc.','$user')");
+				$sql_ap=mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Aprova√ß√£o do Plano de Controle da pe√ßa $npc.','O usu√°rio $quem aprovou o Plano de Controle da pe√ßa $npc.','$user')");
 			//	
 		}else{
-			$_SESSION["mensagem"]="As alteraÁıes n„o puderam ser salvas";
+			$_SESSION["mensagem"]="As altera√ß√µes n√£o puderam ser salvas";
 		}
 	}
 	if($maisum==1){
@@ -361,7 +361,7 @@ if($acao=="altc"){
 			foreach($del AS $linha){
 				$sql=mysql_query("DELETE FROM apqp_planoi WHERE id='$linha'");
 			}
-			$_SESSION["mensagem"]="Linhas excluÌdas com sucesso";
+			$_SESSION["mensagem"]="Linhas exclu√≠das com sucesso";
 		}else{
 			$_SESSION["mensagem"]="Selecione as linhas que deseja excluir";
 		}

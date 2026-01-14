@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 include("seguranca.php");
 $bd=new set_bd;
@@ -14,8 +14,8 @@ if($acao=="email"){
 	foreach($arq as $line){
 		$msg.=$line;
 	}
-	//ConfiguraÁıes Email
-	$from="From: E-sinalizaÁ„o<esinalizacao@esinalizacao.com.br>\nContent-type: text/html\n";
+	//Configura√ß√µes Email
+	$from="From: E-sinaliza√ß√£o<esinalizacao@esinalizacao.com.br>\nContent-type: text/html\n";
 	$titulo="$nome";
 	//Mandar Email
 	$sql=mysql_query("SELECT clientes.* FROM clientes,crm_acaor WHERE crm_acaor.acao='$id' AND crm_acaor.cliente=clientes.id");
@@ -23,7 +23,7 @@ if($acao=="email"){
 	$ee=0;
 	while($res=mysql_fetch_array($sql)){
 		//FollowUp
-		mysql_query("INSERT INTO followup (cliente,data,hora,titulo,descricao,tipo) VALUES('$res[id]','$data','$hora','AÁ„o Marketing','Foi enviado a seguinte AÁ„o de Marketing para este cliente: $nome','3')");
+		mysql_query("INSERT INTO followup (cliente,data,hora,titulo,descricao,tipo) VALUES('$res[id]','$data','$hora','A√ß√£o Marketing','Foi enviado a seguinte A√ß√£o de Marketing para este cliente: $nome','3')");
 		//print "$res[email],$titulo,$msg,$from";
 		if(mail($res["email"],$titulo,$msg,$from)) $i++;
 		print "$i - $res[email]<br>";

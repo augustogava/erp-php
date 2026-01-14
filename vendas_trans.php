@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 if($buscar){
 	unset($wp);
@@ -8,10 +8,10 @@ if($acao=="incluir"){
 	$sql=mysql_query("INSERT INTO transportadora (cod_transport,nome,razao,cnpj,ie,endereco,complemento,cep,bairro,cidade,uf,contato,telefone,fax,celular,email,contato2,fax2,tel2,celular2,email2,site,coleta,end_entrega,bairro_entrega,cid_entrega,est_entrega,reg_atuante,est_atuante,temp_col) VALUES ('$cod_transport','$nome','$razao','$cnpj','$ie','$endereco','$complemento','$cep','$bairro','$cidade','$uf','$contato','$telefone','$fax','$celular','$email','$contato2','$fax2','$tel2','$celular2','$email2','$site','$coleta','$end_entrega','$bairro_entrega','$cid_entrega','$est_entrega','$reg_atuante','$est_atuante','$temp_col')");
 	
 	if($sql){
-		$_SESSION["mensagem"]="Transportadora incluída com sucesso!";
+		$_SESSION["mensagem"]="Transportadora incluÃ­da com sucesso!";
 		$acao="entrar";
 	}else{
-		$_SESSION["mensagem"]="A Transportadora não pôde ser incluída!";
+		$_SESSION["mensagem"]="A Transportadora nÃ£o pÃ´de ser incluÃ­da!";
 		$acao="inc";
 	}
 }
@@ -22,7 +22,8 @@ if(!empty($bcli)){
 <html>
 <head>
 <title>CyberManager</title>
-<meta http-equiv="Content-Type" content="text/html; UTF-8">
+<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="style.css" rel="stylesheet" type="text/css">
 <script src="scripts.js"></script>
 <script src="mascaras.js"></script>
@@ -38,7 +39,7 @@ if (parseInt(navigator.appVersion) >= 4) window.moveTo((screen.width/2)-(windowW
 </script>
 </head>
 <body background="imagens/mdagua.gif" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
-<?
+<?php
 if($acao=="entrar"){
 ?>
 <table width="300" border="0" cellspacing="0" cellpadding="0">
@@ -67,14 +68,14 @@ if($acao=="entrar"){
             <td width="277">&nbsp;Transportadora</td>
             <td width="20" align="center">&nbsp;</td>
           </tr>
-		<?
+		<?php
 		$sql=mysql_query("SELECT * FROM transportadora $busca ORDER BY nome ASC");
 		if(mysql_num_rows($sql)==0){
 		?>
           <tr bgcolor="#FFFFFF" class="texto"> 
             <td colspan="2" align="center">NENHUMA TRANSPORTADORA ENCONTRADA</td>
           </tr>
-          <?
+          <?php
 		}else{
 			//BLOCO PAGINACAO
 			$results_tot=mysql_num_rows($sql); //total de registros encontrados
@@ -112,34 +113,34 @@ if($acao=="entrar"){
 				$resnome=str_replace("'","",$res["nome"]);
 		?>
 		  <tr bgcolor="#FFFFFF" class="texto"> 
-            <td>&nbsp;<? print $res["nome"]; ?></td>
-            <td width="20" align="center"><a href="#" onClick="return seleciona('<? print $res["id"]; ?>','<? print $res["nome"]; ?>');"><img src="imagens/icon_14_use.gif" alt="Selecionar" width="14" height="14" border="0"></a></td>
+            <td>&nbsp;<?php print $res["nome"]; ?></td>
+            <td width="20" align="center"><a href="#" onClick="return seleciona('<?php print $res["id"]; ?>','<?php print $res["nome"]; ?>');"><img src="imagens/icon_14_use.gif" alt="Selecionar" width="14" height="14" border="0"></a></td>
           </tr>
-		  <?
+		  <?php
 			}
 		}
 		?>
     </table></td></tr>
   <tr>
-    <td align="center">      <? if($wpaginar) { ?>
+    <td align="center">      <?php if($wpaginar) { ?>
       <table width="300" border="0" cellspacing="0" cellpadding="0">
         <tr> 
           <td align="center"><table width="1%" border="0" cellspacing="0" cellpadding="0">
               <tr valign="top"> 
                 <td align="right"> 
-                  <? 
+                  <?php 
 				$antz=false;
 				if($wp>1){
 					$antz=true;
 				?>
-                  <a href="<? print "vendas_trans.php?wp=$pg_anterior&bcli=$bcli"; ?>" class="paginacao2"> 
-                  <? } ?>
+                  <a href="<?php print "vendas_trans.php?wp=$pg_anterior&bcli=$bcli"; ?>" class="paginacao2"> 
+                  <?php } ?>
                   <img src="imagens/pag_f.gif" border="0"> 
-                  <? if($antz){ ?>
+                  <?php if($antz){ ?>
                   <br>
                   Anterior</a> 
-                <? } ?>                </td>
-                <?
+                <?php } ?>                </td>
+                <?php
 				$link_impressos=0;
 				if ($temp > $wpaginacao){
 		    	    $n_start  = $temp - ceil($wpaginacao/2);
@@ -153,35 +154,35 @@ if($acao=="entrar"){
 					$link_impressos++;
 				?>
                 <td align="center"> 
-                  <? if($pg_atual != $link_impressos){ ?>
-                  <a href="<? print "vendas_trans.php?wp=$link_impressos&bcli=$bcli"; ?>" class="paginacao"> 
-                  <? } ?>
-                  <img src="imagens/pag_e<? if($pg_atual==$link_impressos) print "2"; ?>.gif" border="0"><br>
-                  <? if($pg_atual==$link_impressos){ print "<span class=\"paginacao2\">$link_impressos</span>"; }else{ print $link_impressos; }?>
-                  <? if($pg_atual != $link_impressos){ ?>
+                  <?php if($pg_atual != $link_impressos){ ?>
+                  <a href="<?php print "vendas_trans.php?wp=$link_impressos&bcli=$bcli"; ?>" class="paginacao"> 
+                  <?php } ?>
+                  <img src="imagens/pag_e<?php if($pg_atual==$link_impressos) print "2"; ?>.gif" border="0"><br>
+                  <?php if($pg_atual==$link_impressos){ print "<span class=\"paginacao2\">$link_impressos</span>"; }else{ print $link_impressos; }?>
+                  <?php if($pg_atual != $link_impressos){ ?>
                   </a> 
-                  <? } ?>
+                  <?php } ?>
                 </td>
-                <?
+                <?php
 				}
 				?>
                 <td> 
-                  <? if($reg_final<$results_tot){ ?>
-                  <a href="<? print "vendas_trans.php?wp=$pg_proxima&bcli=$bcli"; ?>" class="paginacao2"> 
-                  <? } ?>
+                  <?php if($reg_final<$results_tot){ ?>
+                  <a href="<?php print "vendas_trans.php?wp=$pg_proxima&bcli=$bcli"; ?>" class="paginacao2"> 
+                  <?php } ?>
                   <img src="imagens/pag_der.gif" border="0"> 
-                  <? if($reg_final<$results_tot){ ?>
+                  <?php if($reg_final<$results_tot){ ?>
                   <br>
-                  Próximo</a> 
-                <? } ?>                </td>
+                  PrÃ³ximo</a> 
+                <?php } ?>                </td>
               </tr>
             </table></td>
         </tr>
       </table>
-      <? } ?></td>
+      <?php } ?></td>
   </tr>
 </table>
-<? }else{ ?>
+<?php }else{ ?>
 <form action="" method="post" name="form1" onSubmit="return verifica(form1);">
         <table width="300" border="0" cellpadding="0" cellspacing="0">
           <tr bgcolor="#003366">
@@ -190,81 +191,81 @@ if($acao=="entrar"){
           </tr>
           <tr>
             <td align="left" bgcolor="#FFFFFF" class="textobold">&nbsp;Cod. Interno</td>
-            <td class="textobold"><input name="cod_transport" type="text" class="formularioselect" id="cod_transport" value="<? print $res["id"]; ?>" size="45" maxlength="50" readonly=""></td>
+            <td class="textobold"><input name="cod_transport" type="text" class="formularioselect" id="cod_transport" value="<?php print $res["id"]; ?>" size="45" maxlength="50" readonly=""></td>
           </tr>
           <tr>
             <td width="107" align="left" bgcolor="#FFFFFF" class="textobold">&nbsp;Fantasia:</td>
-            <td width="293" class="textobold"><input name="nome" type="text" class="formularioselect" value="<? print $res["nome"]; ?>" size="45" maxlength="50"></td>
+            <td width="293" class="textobold"><input name="nome" type="text" class="formularioselect" value="<?php print $res["nome"]; ?>" size="45" maxlength="50"></td>
           </tr>
           <tr>
             <td align="left" bgcolor="#FFFFFF" class="textobold">&nbsp;Raz&atilde;o Social: </td>
-            <td class="textobold"><input name="razao" type="text" class="formularioselect" id="nome3" value="<? print $res["razao"]; ?>" size="45" maxlength="50"></td>
+            <td class="textobold"><input name="razao" type="text" class="formularioselect" id="nome3" value="<?php print $res["razao"]; ?>" size="45" maxlength="50"></td>
           </tr>
           <tr>
             <td align="left" bgcolor="#FFFFFF" class="textobold">&nbsp;CNPJ:</td>
-            <td class="textobold"><input name="cnpj" type="text" class="formularioselect" id="nome4" value="<? print $res["cnpj"]; ?>" size="45" maxlength="20" onKeyPress="return validanum(this, event)" onKeyUp="mcgc(this)"></td>
+            <td class="textobold"><input name="cnpj" type="text" class="formularioselect" id="nome4" value="<?php print $res["cnpj"]; ?>" size="45" maxlength="20" onKeyPress="return validanum(this, event)" onKeyUp="mcgc(this)"></td>
           </tr>
           <tr align="center">
             <td align="left" bgcolor="#FFFFFF" class="textobold">&nbsp;IE:</td>
-            <td class="textobold"><input name="ie" type="text" class="formularioselect" id="nome5" value="<? print $res["ie"]; ?>" size="45" maxlength="50"></td>
+            <td class="textobold"><input name="ie" type="text" class="formularioselect" id="nome5" value="<?php print $res["ie"]; ?>" size="45" maxlength="50"></td>
           </tr>
           <tr align="center">
             <td align="left" bgcolor="#FFFFFF" class="textobold">&nbsp;Endere&ccedil;o:</td>
-            <td class="textobold"><input name="endereco" type="text" class="formularioselect" id="nome6" value="<? print $res["endereco"]; ?>" size="45" maxlength="50"></td>
+            <td class="textobold"><input name="endereco" type="text" class="formularioselect" id="nome6" value="<?php print $res["endereco"]; ?>" size="45" maxlength="50"></td>
           </tr>
           <tr align="center">
             <td align="left" bgcolor="#FFFFFF" class="textobold">&nbsp;Complemento</td>
-            <td class="textobold"><input name="complemento" type="text" class="formularioselect" id="complemento" value="<? print $res["complemento"]; ?>" size="45" maxlength="50"></td>
+            <td class="textobold"><input name="complemento" type="text" class="formularioselect" id="complemento" value="<?php print $res["complemento"]; ?>" size="45" maxlength="50"></td>
           </tr>
           <tr align="center">
             <td align="left" bgcolor="#FFFFFF" class="textobold">&nbsp;CEP:</td>
-            <td class="textobold"><input name="cep" type="text" class="formularioselect" id="nome7" value="<? print $res["cep"]; ?>" size="45" maxlength="50"></td>
+            <td class="textobold"><input name="cep" type="text" class="formularioselect" id="nome7" value="<?php print $res["cep"]; ?>" size="45" maxlength="50"></td>
           </tr>
           <tr align="center">
             <td align="left" bgcolor="#FFFFFF" class="textobold">&nbsp;Bairro:</td>
-            <td class="textobold"><input name="bairro" type="text" class="formularioselect" id="nome8" value="<? print $res["bairro"]; ?>" size="45" maxlength="50"></td>
+            <td class="textobold"><input name="bairro" type="text" class="formularioselect" id="nome8" value="<?php print $res["bairro"]; ?>" size="45" maxlength="50"></td>
           </tr>
           <tr align="center">
             <td align="left" bgcolor="#FFFFFF" class="textobold">&nbsp;UF:</td>
             <td align="left" class="textobold"><span class="texto">
               <select name="uf" id="uf"  class="formulario">
                 <option>Selecione</option>
-                <?
-	$sql2=mysql_query("SELECT * FROM estado") or die("nao foi");
+                <?php
+	$sql2=mysql_query("SELECT * FROM estado") or erp_db_fail();
 	while($res2=mysql_fetch_array($sql2)){
 	?>
-                <option value="<?= $res2["id"]; ?>" <? if($res2["id"]==$res["uf"]){ print "selected"; } ?>>
-                <?= $res2["nome"]; ?>
+                <option value="<?php echo  $res2["id"]; ?>" <?php if($res2["id"]==$res["uf"]){ print "selected"; } ?>>
+                <?php echo  $res2["nome"]; ?>
                 </option>
-                <? } ?>
+                <?php } ?>
               </select>
             </span></td>
           </tr>
           <tr align="center">
             <td align="left" bgcolor="#FFFFFF" class="textobold">&nbsp;Cidade:</td>
-            <td align="left" class="textobold"><input name="cidade" type="text" class="formulario" id="cidade" value="<? print $cidade; ?>" size="50" maxlength="30">          </tr>
+            <td align="left" class="textobold"><input name="cidade" type="text" class="formulario" id="cidade" value="<?php print $cidade; ?>" size="50" maxlength="30">          </tr>
           <tr align="center">
             <td align="left" bgcolor="#FFFFFF" class="textoboldwhite">
               <p class="textobold">&nbsp;Telefone 1 :</p></td>
-            <td align="left" class="textobold"><input name="telefone" type="text" class="formularioselect" id="nome11" value="<? print $res["telefone"]; ?>" size="45" maxlength="50"></td>
+            <td align="left" class="textobold"><input name="telefone" type="text" class="formularioselect" id="nome11" value="<?php print $res["telefone"]; ?>" size="45" maxlength="50"></td>
           </tr>
           <tr align="center">
             <td align="left" bgcolor="#FFFFFF" class="textobold">&nbsp;Regi&atilde;o atuante:</td>
-            <td align="left" class="textobold"><input name="reg_atuante" type="text" class="formularioselect" id="reg_atuante" value="<? print $res["reg_atuante"]; ?>" size="45" maxlength="50"></td>
+            <td align="left" class="textobold"><input name="reg_atuante" type="text" class="formularioselect" id="reg_atuante" value="<?php print $res["reg_atuante"]; ?>" size="45" maxlength="50"></td>
           </tr>
           <tr align="center">
             <td align="left" bgcolor="#FFFFFF" class="textobold">&nbsp;Estados atuantes: </td>
             <td align="left" class="textobold"><span class="texto"><font face="Verdana, Arial, Helvetica, sans-serif" size="1" color="#000066">
               <select name="est_atuante" id="select2" class="formulario">
                 <option>Selecione</option>
-                <?
-	$sql2=mysql_query("SELECT * FROM estado") or die("nao foi");
+                <?php
+	$sql2=mysql_query("SELECT * FROM estado") or erp_db_fail();
 	while($res2=mysql_fetch_array($sql2)){
 	?>
-                <option value="<?= $res2["id"]; ?>" <? if($res2["id"]==$res["est_atuante"]){ print "selected"; } ?>>
-                <?= $res2["nome"]; ?>
+                <option value="<?php echo  $res2["id"]; ?>" <?php if($res2["id"]==$res["est_atuante"]){ print "selected"; } ?>>
+                <?php echo  $res2["nome"]; ?>
                 </option>
-                <? } ?>
+                <?php } ?>
               </select>
             </font></span></td>
           </tr>
@@ -273,10 +274,10 @@ if($acao=="entrar"){
               <input name="Submit22" type="button" class="microtxt" value="voltar" onClick="window.location='transp_incluir.php'">
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               <input name="Submit2" type="submit" class="microtxt" value="Continuar">
-              <input name="acao" type="hidden" id="acao" value="<? if($acao=="alt"){ print "alt"; }else{ print "incluir"; } ?>"></td>
+              <input name="acao" type="hidden" id="acao" value="<?php if($acao=="alt"){ print "alt"; }else{ print "incluir"; } ?>"></td>
           </tr>
         </table>
 </form>
-<? } ?>
+<?php } ?>
 </body>
 </html>

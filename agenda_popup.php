@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 $sql=mysql_query("SELECT * FROM agenda WHERE numero='$cpm'");
 $res=mysql_fetch_array($sql);
@@ -14,7 +14,8 @@ $texto=eregi_replace("\n","<br>",$texto);
 <html>
 <head>
 <title>Compromissos</title>
-<meta http-equiv="Content-Type" content="text/html; UTF-8">
+<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="style.css" rel="stylesheet" type="text/css">
 <script language="JavaScript">
 windowWidth=350;
@@ -34,25 +35,25 @@ function imprimir(botao){
 <table width="300" border="1" align="center" cellpadding="0" cellspacing="0" bordercolor="#999999">
   <tr> 
     <td bgcolor="#CCCCCC" class="celula1pix"><span class="textobold">Agendado 
-      para:</span><span class="texto"> <? print($nome); ?></span></td>
+      para:</span><span class="texto"> <?php print($nome); ?></span></td>
   </tr>
   <tr> 
-    <td bgcolor="#CCCCCC"><span class="textobold">Data:</span> <span class="texto"><? print($data); ?></span></td>
+    <td bgcolor="#CCCCCC"><span class="textobold">Data:</span> <span class="texto"><?php print($data); ?></span></td>
   </tr>
   <tr> 
-    <td bgcolor="#CCCCCC"><span class="textobold">Hora:</span> <span class="texto"><? print($hora); ?></span></td>
+    <td bgcolor="#CCCCCC"><span class="textobold">Hora:</span> <span class="texto"><?php print($hora); ?></span></td>
   </tr>
   <tr> 
     <td bgcolor="#CCCCCC" class="textobold">Compromisso</td>
   </tr>
   <tr> 
-    <td bgcolor="#CCCCCC" class="texto"><? print($titulo); ?></td>
+    <td bgcolor="#CCCCCC" class="texto"><?php print($titulo); ?></td>
   </tr>
   <tr> 
     <td bgcolor="#CCCCCC" class="textobold">Descri&ccedil;&atilde;o</td>
   </tr>
   <tr> 
-    <td bgcolor="#CCCCCC" class="texto"><? print($texto); ?></td>
+    <td bgcolor="#CCCCCC" class="texto"><?php print($texto); ?></td>
   </tr>
 </table>
 <div align="center">

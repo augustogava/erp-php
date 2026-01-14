@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 include("seguranca.php");
 $acao=verifi($permi,$acao);
@@ -11,10 +11,10 @@ if(empty($acao)) $acao="entrar";
 if($acao=="incluir"){
 	$sql=mysql_query("INSERT INTO cliente_contato (cliente,nome,email,fone1,fone2,fax,ramal1,ramal2,ramal3,cargo,celular,autonomia,atuacao) VALUES ('$cli','$nome','$email','$fone1','$fone2','$fax','$ramal1','$ramal2','$ramal3','$cargo','$celular','$autonomia','$atuacao')");
 	if($sql){
-		$_SESSION["mensagem"]="Contato incluÌdo com sucesso!";
+		$_SESSION["mensagem"]="Contato inclu√≠do com sucesso!";
 		$acao="entrar";
 	}else{
-		$_SESSION["mensagem"]="O contato n„o pÙde ser incluÌdo!";
+		$_SESSION["mensagem"]="O contato n√£o p√¥de ser inclu√≠do!";
 		$acao="inc";
 	}
 	if($pag=="pro"){
@@ -29,16 +29,16 @@ if($acao=="incluir"){
 		}	
 		$acao="entrar";
 	}else{
-		$_SESSION["mensagem"]="O contato n„o pÙde ser alterado!";
+		$_SESSION["mensagem"]="O contato n√£o p√¥de ser alterado!";
 		$acao="alt";
 	}
 }elseif($acao=="exc"){
 	if(!empty($id)){
 		$sql=mysql_query("DELETE FROM cliente_contato WHERE id='$id'");
 		if($sql){
-			$_SESSION["mensagem"]="Contato excluÌdo com sucesso!";
+			$_SESSION["mensagem"]="Contato exclu√≠do com sucesso!";
 		}else{
-			$_SESSION["mensagem"]="O contato n„o pÙde ser excluÌdo!";
+			$_SESSION["mensagem"]="O contato n√£o p√¥de ser exclu√≠do!";
 		}		
 	}
 	$acao="entrar";
@@ -47,7 +47,8 @@ if($acao=="incluir"){
 <html>
 <head>
 <title>CyberManager</title>
-<meta http-equiv="Content-Type" content="text/html; UTF-8">
+<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="style.css" rel="stylesheet" type="text/css">
 <script src="scripts.js"></script>
 <script>
@@ -60,7 +61,7 @@ function verifica(cad){
 		return false;
 	}
 	if(!verifica_email(cad.email.value)){
-		alert('Email Inv·lido');
+		alert('Email Inv√°lido');
 		cad.email.focus();
 		return false;
 	}
@@ -91,11 +92,11 @@ function verifica(cad){
       </tr>
     </table></td>
   </tr>
-        <? if($acao=="entrar"){ ?>
+        <?php if($acao=="entrar"){ ?>
         <tr> 
           <td><table width="500" border="0" cellspacing="0" cellpadding="0">
               <tr> 
-                <td><div align="center"><a href="cliente_contatos.php?acao=inc&cli=<? print $cli; ?>" class="textobold">Incluir 
+                <td><div align="center"><a href="cliente_contatos.php?acao=inc&cli=<?php print $cli; ?>" class="textobold">Incluir 
                     um Contato</a> </div></td>
               </tr>
             </table>
@@ -107,7 +108,7 @@ function verifica(cad){
                 <td width="15">&nbsp;</td>
                 <td width="19">&nbsp;</td>
               </tr>
-              <?
+              <?php
 			  $sql=mysql_query("SELECT * FROM cliente_contato WHERE cliente='$cli' ORDER BY nome ASC");
 			  if(mysql_num_rows($sql)==0){
 			  ?>
@@ -115,18 +116,18 @@ function verifica(cad){
                 <td colspan="5" align="center" class="textobold">NENHUM CONTATO 
                   CADASTRADO </td>
               </tr>
-              <?
+              <?php
 			  }else{
 			  	while($res=mysql_fetch_array($sql)){
 			  ?>
               <tr bgcolor="#FFFFFF" class="texto" onMouseover="changeto('#CCCCCC')" onMouseout="changeback('#FFFFFF')"> 
-                <td>&nbsp;<? print $res["nome"]; ?></td>
-                <td><? print $res["fone1"]; ?></td>
-                <td><? print $res["cargo"]; ?></td>
-                <td width="15" align="center"><a href="cliente_contatos.php?acao=alt&id=<? print $res["id"]; ?>&cli=<? print $cli; ?>"><img src="imagens/icon14_alterar.gif" alt="Alterar" width="14" height="14" border="0"></a></td>
-                <td width="19" align="center"><a href="#" onClick="return pergunta('Deseja excluir este contato?','cliente_contatos.php?acao=exc&id=<? print $res["id"]; ?>&cli=<? print $cli; ?>')"><img src="imagens/icon14_lixeira.gif" alt="Excluir" width="14" height="14" border="0"></a></td>
+                <td>&nbsp;<?php print $res["nome"]; ?></td>
+                <td><?php print $res["fone1"]; ?></td>
+                <td><?php print $res["cargo"]; ?></td>
+                <td width="15" align="center"><a href="cliente_contatos.php?acao=alt&id=<?php print $res["id"]; ?>&cli=<?php print $cli; ?>"><img src="imagens/icon14_alterar.gif" alt="Alterar" width="14" height="14" border="0"></a></td>
+                <td width="19" align="center"><a href="#" onClick="return pergunta('Deseja excluir este contato?','cliente_contatos.php?acao=exc&id=<?php print $res["id"]; ?>&cli=<?php print $cli; ?>')"><img src="imagens/icon14_lixeira.gif" alt="Excluir" width="14" height="14" border="0"></a></td>
               </tr>
-              <?
+              <?php
 			  	}
 			  }
 			  ?>
@@ -139,58 +140,58 @@ function verifica(cad){
               </tr>
             </table></td>
         </tr>
-        <? }elseif($acao=="inc" or $acao=="alt"){ ?>
+        <?php }elseif($acao=="inc" or $acao=="alt"){ ?>
 
         <tr> 
           <td><form name="form1" method="post" action="" onSubmit="return verifica(this)">
               <table width="348" border="0" cellpadding="0" cellspacing="0">
                 <tr bgcolor="#003366"> 
                   <td colspan="4" align="center" class="textoboldbranco"> 
-                    <? if($acao=="inc"){ print"Incluir Contato"; }else{ print"Alterar Contato";} ?>                  </td>
+                    <?php if($acao=="inc"){ print"Incluir Contato"; }else{ print"Alterar Contato";} ?>                  </td>
                 </tr>
-                <? if($acao=="alt"){
+                <?php if($acao=="alt"){
 				$sql=mysql_query("SELECT * FROM cliente_contato WHERE id='$id'");
 				$res=mysql_fetch_array($sql);
 				} ?>
                 <tr> 
                   <td width="62" class="textobold">&nbsp;Nome</td>
-                  <td width="164" class="textobold"><input name="nome" type="text" class="formularioselect" id="nome" value="<? print $res["nome"]; ?>" size="30" maxlength="50"></td>
+                  <td width="164" class="textobold"><input name="nome" type="text" class="formularioselect" id="nome" value="<?php print $res["nome"]; ?>" size="30" maxlength="50"></td>
                   <td width="52" class="textobold">&nbsp;</td>
                   <td width="70" class="textobold">&nbsp;</td>
                 </tr>
                 <tr>
                   <td class="textobold">&nbsp;Cargo</td>
-                  <td class="textobold"><input name="cargo" type="text" class="formularioselect" id="cargo" value="<? print $res["cargo"]; ?>" size="30" maxlength="50"></td>
+                  <td class="textobold"><input name="cargo" type="text" class="formularioselect" id="cargo" value="<?php print $res["cargo"]; ?>" size="30" maxlength="50"></td>
                   <td class="textobold">&nbsp;</td>
                   <td class="textobold">&nbsp;</td>
                 </tr>
                 <tr>
                   <td class="textobold">&nbsp;Telefone 1</td>
-                  <td class="textobold"><input name="fone1" type="text" class="formularioselect" id="fone1" value="<? print $res["fone1"]; ?>" size="30" maxlength="50"></td>
+                  <td class="textobold"><input name="fone1" type="text" class="formularioselect" id="fone1" value="<?php print $res["fone1"]; ?>" size="30" maxlength="50"></td>
                   <td class="textobold">&nbsp;Ramal</td>
-                  <td class="textobold"><input name="ramal1" type="text" class="formularioselect" id="ramal1" value="<? print $res["ramal1"]; ?>" size="10" maxlength="50"></td>
+                  <td class="textobold"><input name="ramal1" type="text" class="formularioselect" id="ramal1" value="<?php print $res["ramal1"]; ?>" size="10" maxlength="50"></td>
                 </tr>
                 <tr>
                   <td class="textobold">&nbsp;Telefone 2</td>
-                  <td class="textobold"><input name="fone2" type="text" class="formularioselect" id="fone2" value="<? print $res["fone2"]; ?>" size="30" maxlength="50"></td>
+                  <td class="textobold"><input name="fone2" type="text" class="formularioselect" id="fone2" value="<?php print $res["fone2"]; ?>" size="30" maxlength="50"></td>
                   <td class="textobold">&nbsp;Ramal</td>
-                  <td class="textobold"><input name="ramal2" type="text" class="formularioselect" id="ramal2" value="<? print $res["ramal2"]; ?>" size="10" maxlength="50"></td>
+                  <td class="textobold"><input name="ramal2" type="text" class="formularioselect" id="ramal2" value="<?php print $res["ramal2"]; ?>" size="10" maxlength="50"></td>
                 </tr>
                 <tr>
                   <td class="textobold"> &nbsp;Fax</td>
-                  <td class="textobold"><input name="fax" type="text" class="formularioselect" id="fax" value="<? print $res["fax"]; ?>" size="30" maxlength="50"></td>
+                  <td class="textobold"><input name="fax" type="text" class="formularioselect" id="fax" value="<?php print $res["fax"]; ?>" size="30" maxlength="50"></td>
                   <td class="textobold">&nbsp;Ramal</td>
-                  <td class="textobold"><input name="ramal3" type="text" class="formularioselect" id="ramal3" value="<? print $res["ramal3"]; ?>" size="10" maxlength="50"></td>
+                  <td class="textobold"><input name="ramal3" type="text" class="formularioselect" id="ramal3" value="<?php print $res["ramal3"]; ?>" size="10" maxlength="50"></td>
                 </tr>
                 <tr>
                   <td class="textobold">&nbsp;Celular</td>
-                  <td class="textobold"><input name="celular" type="text" class="formularioselect" id="celular" value="<? print $res["celular"]; ?>" size="30" maxlength="50"></td>
+                  <td class="textobold"><input name="celular" type="text" class="formularioselect" id="celular" value="<?php print $res["celular"]; ?>" size="30" maxlength="50"></td>
                   <td class="textobold">&nbsp;</td>
                   <td class="textobold">&nbsp;</td>
                 </tr>
                 <tr>
                   <td class="textobold">&nbsp;Email</td>
-                  <td class="textobold"><input name="email" type="text" class="formularioselect" id="email" value="<? print $res["email"]; ?>" size="30" maxlength="50"></td>
+                  <td class="textobold"><input name="email" type="text" class="formularioselect" id="email" value="<?php print $res["email"]; ?>" size="30" maxlength="50"></td>
                   <td class="textobold">&nbsp;</td>
                   <td class="textobold">&nbsp;</td>
                 </tr>
@@ -198,8 +199,8 @@ function verifica(cad){
                   <td class="textobold">&nbsp;Autonomia </td>
                   <td class="textobold"><select name="autonomia" id="linha">
                       <option selected="">Selecione</option>
-                      <option value="decisor" <? if($res["autonomia"]=="decisor"){ print "selected"; } ?>>Decisor</option>
-                      <option value="influenciador" <? if($res["autonomia"]=="influenciador"){ print "selected"; } ?>>Influenciador</option>
+                      <option value="decisor" <?php if($res["autonomia"]=="decisor"){ print "selected"; } ?>>Decisor</option>
+                      <option value="influenciador" <?php if($res["autonomia"]=="influenciador"){ print "selected"; } ?>>Influenciador</option>
                     </select>                  </td>
                   <td class="textobold">&nbsp;</td>
                   <td class="textobold">&nbsp;</td>
@@ -208,9 +209,9 @@ function verifica(cad){
                   <td class="textobold">&nbsp;Atua&ccedil;&atilde;o </td>
                   <td class="textobold"><select name="atuacao" id="linha">
                       <option selected="selected">Selecione</option>
-                      <option value="equipamentos" <? if($res["atuacao"]=="equipamentos"){ print "selected"; } ?>>Equipamentos</option>
-                      <option value="pdv" <? if($res["atuacao"]=="pdv"){ print "selected"; } ?>>PDV+</option>
-					  <option value="geral" <? if($res["atuacao"]=="geral"){ print "selected"; } ?>>Geral</option>
+                      <option value="equipamentos" <?php if($res["atuacao"]=="equipamentos"){ print "selected"; } ?>>Equipamentos</option>
+                      <option value="pdv" <?php if($res["atuacao"]=="pdv"){ print "selected"; } ?>>PDV+</option>
+					  <option value="geral" <?php if($res["atuacao"]=="geral"){ print "selected"; } ?>>Geral</option>
                     </select>                  </td>
                   <td class="textobold">&nbsp;</td>
                   <td class="textobold">&nbsp;</td>
@@ -218,21 +219,21 @@ function verifica(cad){
                 
                 <tr align="center"> 
                   <td colspan="4" class="textobold">
-                    <input name="Submit222" type="button" class="microtxt" value="voltar" onClick="window.location='cliente_contatos.php?cli=<? print $cli; ?>'">
+                    <input name="Submit222" type="button" class="microtxt" value="voltar" onClick="window.location='cliente_contatos.php?cli=<?php print $cli; ?>'">
                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                   <input name="Submit2" type="submit" class="microtxt" value="Continuar">
-                  <input name="acao" type="hidden" id="acao2" value="<? if($acao=="alt"){ print "alterar"; }else{ print "incluir"; } ?>"> 
-                    <input name="id" type="hidden" id="id3" value="<? print $id; ?>">
-                  <input name="cli" type="hidden" id="cli" value="<? print $cli; ?>">
-                  <input name="pag" type="hidden" id="cli2" value="<? print $pag; ?>"></td>
+                  <input name="acao" type="hidden" id="acao2" value="<?php if($acao=="alt"){ print "alterar"; }else{ print "incluir"; } ?>"> 
+                    <input name="id" type="hidden" id="id3" value="<?php print $id; ?>">
+                  <input name="cli" type="hidden" id="cli" value="<?php print $cli; ?>">
+                  <input name="pag" type="hidden" id="cli2" value="<?php print $pag; ?>"></td>
                 </tr>
               </table>
             </form></td>
         </tr>
-        <? } ?>
+        <?php } ?>
       </table></td>
   </tr>
 </table>
 </body>
 </html>
-<? include("mensagem.php"); ?>
+<?php include("mensagem.php"); ?>

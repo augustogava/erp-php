@@ -1,8 +1,8 @@
-<?
+<?php
 include("conecta.php");
 include("seguranca.php");
 if(!empty($acao)){
-	$loc="Recebimento - Não Conformidades";
+	$loc="Recebimento - NÃ£o Conformidades";
 	$pagina=$_SERVER['SCRIPT_FILENAME'];
 	include("log.php");
 }
@@ -80,7 +80,7 @@ $sql=mysql_query("DELETE FROM conformidades WHERE id='$id'");
                 <td width="33" align="center">&nbsp;</td>
                 <td width="24" align="center">&nbsp;</td>
               </tr>
-              <?
+              <?php
 			  $sql=mysql_query("SELECT * FROM conformidades $cond ORDER BY id DESC");
 			  if(mysql_num_rows($sql)==0){
 			  ?>
@@ -88,7 +88,7 @@ $sql=mysql_query("DELETE FROM conformidades WHERE id='$id'");
                 <td colspan="4" align="center" class="textopretobold">NENHUMA N&Atilde;O-CONFORMIDADE 
                   ENCONTRADA</td>
               </tr>
-              <?
+              <?php
 			  }else{
 			  	//BLOCO PAGINACAO
 				$results_tot=mysql_num_rows($sql); //total de registros encontrados
@@ -124,32 +124,32 @@ $sql=mysql_query("DELETE FROM conformidades WHERE id='$id'");
 			  	while($res=mysql_fetch_array($sql)){
 			  ?>
               <tr bgcolor="#FFFFFF" class="textopreto" onMouseover="changeto('#CCCCCC')" onMouseout="changeback('#FFFFFF')"> 
-                <td align="left"><? print $res["cod"]; ?></td>
-                <td>&nbsp;<? print $res["descricao"]; ?></td>
-                <td align="center"><a href="rec_conformidades_geral.php?acao=alt&id=<? print $res["id"]; print "&bdescr=$bdescr&bcod=$bcod";?>"><img src="imagens/icon14_alterar.gif" alt="Entrega" width="14" height="14" border="0"></a></td>
-                <td align="center"><a href="#" onClick="return pergunta('Deseja excluir esta conformidade?','rec_conformidades.php?acao=exc&id=<? print $res["id"]; ?>')"><img src="imagens/icon14_lixeira.gif" alt="Excluir" width="14" height="14" border="0"></a></td>
+                <td align="left"><?php print $res["cod"]; ?></td>
+                <td>&nbsp;<?php print $res["descricao"]; ?></td>
+                <td align="center"><a href="rec_conformidades_geral.php?acao=alt&id=<?php print $res["id"]; print "&bdescr=$bdescr&bcod=$bcod";?>"><img src="imagens/icon14_alterar.gif" alt="Entrega" width="14" height="14" border="0"></a></td>
+                <td align="center"><a href="#" onClick="return pergunta('Deseja excluir esta conformidade?','rec_conformidades.php?acao=exc&id=<?php print $res["id"]; ?>')"><img src="imagens/icon14_lixeira.gif" alt="Excluir" width="14" height="14" border="0"></a></td>
               </tr>
-              <?
+              <?php
 			  	}
 			  }
 			  ?>
             </table>
-		  <? if($wpaginar){ ?>
+		  <?php if($wpaginar){ ?>
           <br><table width="1%" border="0" align="center" cellpadding="0" cellspacing="0">
             <tr valign="top">
-              <td align="right"><? 
+              <td align="right"><?php 
 				$antz=false;
 				if($wp>1){
 					$antz=true;
 				?>
-                  <a href="<? print "rec_conformidades.php?wp=$pg_anterior&bdescr=$bdescr&bcod=$bcod"; ?>" class="paginacao2">
-                  <? } ?>
+                  <a href="<?php print "rec_conformidades.php?wp=$pg_anterior&bdescr=$bdescr&bcod=$bcod"; ?>" class="paginacao2">
+                  <?php } ?>
                   <img src="imagens/pag_f.gif" width="27" height="14" border="0">
-                  <? if($antz){ ?>
+                  <?php if($antz){ ?>
                   <br>
                     Anterior</a>
-                  <? } ?>              </td>
-              <?
+                  <?php } ?>              </td>
+              <?php
 				$link_impressos=0;
 				if ($temp > $wpaginacao){
 		    	    $n_start  = $temp - ceil($wpaginacao/2);
@@ -162,28 +162,28 @@ $sql=mysql_query("DELETE FROM conformidades WHERE id='$id'");
 				while(($link_impressos<$n_paginas) and ($link_impressos<$wpaginacao)){
 					$link_impressos++;
 				?>
-              <td align="center"><? if($pg_atual != $link_impressos){ ?>
-                  <a href="<? print "rec_conformidades.php?wp=$link_impressos&bdescr=$bdescr&bcod=$bcod"; ?>" class="paginacao">
-                  <? } ?>
-                  <img src="imagens/pag_e<? if($pg_atual==$link_impressos) print "2"; ?>.gif" width="10" height="14" border="0"><br>
-                  <? if($pg_atual==$link_impressos){ print "<span class=\"paginacao2\">$link_impressos</span>"; }else{ print $link_impressos; }?>
-                  <? if($pg_atual != $link_impressos){ ?>
+              <td align="center"><?php if($pg_atual != $link_impressos){ ?>
+                  <a href="<?php print "rec_conformidades.php?wp=$link_impressos&bdescr=$bdescr&bcod=$bcod"; ?>" class="paginacao">
+                  <?php } ?>
+                  <img src="imagens/pag_e<?php if($pg_atual==$link_impressos) print "2"; ?>.gif" width="10" height="14" border="0"><br>
+                  <?php if($pg_atual==$link_impressos){ print "<span class=\"paginacao2\">$link_impressos</span>"; }else{ print $link_impressos; }?>
+                  <?php if($pg_atual != $link_impressos){ ?>
                   </a>
-                  <? } ?>              </td>
-              <?
+                  <?php } ?>              </td>
+              <?php
 				}
 				?>
-              <td><? if($reg_final<$results_tot){ ?>
-                  <a href="<? print "rec_conformidades.php?wp=$pg_proxima&bdescr=$bdescr&bcod=$bcod"; ?>" class="paginacao2">
-                  <? } ?>
+              <td><?php if($reg_final<$results_tot){ ?>
+                  <a href="<?php print "rec_conformidades.php?wp=$pg_proxima&bdescr=$bdescr&bcod=$bcod"; ?>" class="paginacao2">
+                  <?php } ?>
                   <img src="imagens/pag_der.gif" width="26" height="14" border="0">
-                  <? if($reg_final<$results_tot){ ?>
+                  <?php if($reg_final<$results_tot){ ?>
                   <br>
                     Pr&oacute;ximo</a>
-                  <? } ?>              </td>
+                  <?php } ?>              </td>
             </tr>
           </table>
-          <? } ?>
+          <?php } ?>
           <div align="center"><br>
             <input name="Voltar" type="submit" class="microtxt" id="Voltar" onClick="window.location='mana_rece.php';" value="Voltar">
               </p>
@@ -194,4 +194,4 @@ $sql=mysql_query("DELETE FROM conformidades WHERE id='$id'");
 </table>
 </body>
 </html>
-<? include("mensagem.php"); ?>
+<?php include("mensagem.php"); ?>

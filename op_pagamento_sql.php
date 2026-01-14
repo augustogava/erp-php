@@ -1,13 +1,13 @@
-<?
+<?php
 include("conecta.php");
 if(empty($acao)) exit;
 if($acao=="exc"){
 	if(!empty($id)){
 		$sql=mysql_query("DELETE FROM op_pagamento WHERE id='$id'");
 		if($sql){
-			$_SESSION["mensagem"]="Opção Pagamento excluído com sucesso!";
+			$_SESSION["mensagem"]="OpÃ§Ã£o Pagamento excluÃ­do com sucesso!";
 		}else{
-			$_SESSION["mensagem"]="A opçao não pôde ser excluído!";
+			$_SESSION["mensagem"]="A opÃ§ao nÃ£o pÃ´de ser excluÃ­do!";
 		}
 	}
 	$acao="entrar";
@@ -15,10 +15,10 @@ if($acao=="exc"){
 	$desconto=valor2banco($desconto);
 	$sql=mysql_query("INSERT INTO op_pagamento (nome,parcelamento,operador,desconto) VALUES('$nome','$parcelamento','$op','$desconto')");
 	if($sql){
-		$_SESSION["mensagem"]="Opção pagamento incluído com sucesso!";
+		$_SESSION["mensagem"]="OpÃ§Ã£o pagamento incluÃ­do com sucesso!";
 		$acao="entrar";
 	}else{
-		$_SESSION["mensagem"]="A opçao não pôde ser incluído!";
+		$_SESSION["mensagem"]="A opÃ§ao nÃ£o pÃ´de ser incluÃ­do!";
 		$acao="inc";
 	}
 }else if($acao=="alt"){
@@ -26,10 +26,10 @@ if($acao=="exc"){
 		$desconto=valor2banco($desconto);
 		$sql=mysql_query("UPDATE op_pagamento SET nome='$nome',parcelamento='$parcelamento',desconto='$desconto',operador='$op' WHERE id='$id'");
 		if($sql){
-			$_SESSION["mensagem"]="Opção pagamento alterado com sucesso!";
+			$_SESSION["mensagem"]="OpÃ§Ã£o pagamento alterado com sucesso!";
 			$acao="entrar";
 		}else{
-			$_SESSION["mensagem"]="A opção não pôde ser alterado!";
+			$_SESSION["mensagem"]="A opÃ§Ã£o nÃ£o pÃ´de ser alterado!";
 			$acao="alt";
 		}
 	}else{

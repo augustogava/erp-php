@@ -47,8 +47,8 @@ if($acao=="alt"){
 <html lang="pt-BR">
 <head>
 <title>Separacao - ERP System</title>
-<meta charset="ISO-8859-1">
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <link href="style.css" rel="stylesheet" type="text/css">
@@ -194,14 +194,14 @@ function MM_openBrWindow(theURL,winName,features) {
                     <td><span class="erp-badge erp-badge-<?php echo $st_class; ?>"><?php echo $st; ?></span></td>
                     <td>
                         <div class="erp-table-actions" style="justify-content:center;">
-                            <a href="#" onclick="MM_openBrWindow('prodserv_sep_vis.php?id=<?=$res["id"]?>','','scrollbars=yes,width=700,height=500');" class="erp-table-action" title="Imprimir">
+                            <a href="#" onclick="MM_openBrWindow('prodserv_sep_vis.php?id=<?php echo $res["id"]?>','','scrollbars=yes,width=700,height=500');" class="erp-table-action" title="Imprimir">
                                 <i class="fas fa-print"></i>
                             </a>
-                            <a href="prodserv_sep.php?acao=alt&id=<?=$res["id"]?>&pedido=<?=$res["pedido"]?>&cp=<?=$res["compra"]?>" class="erp-table-action" title="Alterar">
+                            <a href="prodserv_sep.php?acao=alt&id=<?php echo $res["id"]?>&pedido=<?php echo $res["pedido"]?>&cp=<?php echo $res["compra"]?>" class="erp-table-action" title="Alterar">
                                 <i class="fas fa-edit"></i>
                             </a>
                             <?php if($res["status"]=="7" or $res["status"]=="9" or $res["status"]=="3" or $res["status"]=="8"){ ?>
-                            <a href="prodserv_sep_sql.php?acao=baixa&id=<?=$res["id"]?>&pedido=<?=$res["pedido"]?>&cp=<?=$res["compra"]?>" class="erp-table-action" title="Baixar" style="color:#27ae60;">
+                            <a href="prodserv_sep_sql.php?acao=baixa&id=<?php echo $res["id"]?>&pedido=<?php echo $res["pedido"]?>&cp=<?php echo $res["compra"]?>" class="erp-table-action" title="Baixar" style="color:#27ae60;">
                                 <i class="fas fa-check-circle"></i>
                             </a>
                             <?php } ?>

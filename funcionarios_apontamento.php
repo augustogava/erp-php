@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 include("seguranca.php");
 if(empty($acao)) $acao="alt";
@@ -12,7 +12,7 @@ if($acao=="alterar"){
 		header("Location:funcionarios.php?bcod=$bcod&bnome=$bnome");
 		exit;		
 	}else{
-		$_SESSION["mensagem"]="O cadastro de apontamento não pôde ser alterado!";
+		$_SESSION["mensagem"]="O cadastro de apontamento nao pode ser alterado!";
 		$adicional_not=banco2valor($adicional_not);
 		$hora_ativ=banco2valor($hora_ativ);
 		$hora_aula=banco2valor($hora_aula);				
@@ -41,146 +41,225 @@ if($acao=="alterar"){
 	$fantasia=$res["fantasia"];
 }
 ?>
-<html>
+<!DOCTYPE html>
+<html lang="pt-BR">
 <head>
-<title>CyberManager</title>
-<meta http-equiv="Content-Type" content="text/html; UTF-8">
+<title>Funcionarios - Apontamento</title>
+<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <link href="style.css" rel="stylesheet" type="text/css">
+<link href="components.css" rel="stylesheet" type="text/css">
+<link href="layout-fixes.css" rel="stylesheet" type="text/css">
+<script src="mascaras.js"></script>
+<script src="scripts.js"></script>
 <script>
 function verifica(cad){
 	return true;
 }
 </script>
-<script src="mascaras.js"></script>
-<script src="scripts.js"></script>
 </head>
-<body  leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" onLoad="enterativa=1;"onkeypress="return ent()">
-<table width="594" border="0" cellpadding="0" cellspacing="0">
-  <tr> 
-    <td><form name="form1" method="post" action="" onSubmit="return verifica(this)">
-        <table width="450" border="0" cellpadding="0" cellspacing="0">
-          <tr> 
-            <td colspan="2" align="center" bgcolor="#003366" class="textoboldbranco">Cadastro 
-              de Funcion&aacute;rios - Apontamento</td>
-          </tr>
-          <tr class="textobold"> 
-            <td width="109">Nome:</td>
-            <td width="341"><? print $fantasia; ?></td>
-          </tr>
-          <tr class="textobold"> 
-            <td>Tipo Sal&aacute;rio:</td>
-            <td> 
-              <input name="salario_tipo" type="text" class="formulario" id="salario_tipo" value="<? print $salario_tipo; ?>" size="20" maxlength="20"></td>
-          </tr>
-          <tr class="textobold"> 
-            <td>Base de Horas:</td>
-            <td>
-<input name="horas" type="text" class="formulario" id="horas" onKeyPress="return validanum(this, event)" value="<? print $horas; ?>" size="5" maxlength="4"></td>
-          </tr>
-          <tr class="textobold"> 
-            <td>Adicional Noturno:</td>
-            <td>
-<input name="adicional_not" type="text" class="formulario" id="adicional_not" value="<? print $adicional_not; ?>" size="10" onKeyDown="formataMoeda(this,retornaKeyCode(event))" onKeyUp="formataMoeda(this,retornaKeyCode(event))"></td>
-          </tr>
-          <tr class="textobold"> 
-            <td>Horas Desc. Falta:</td>
-            <td>
-<input name="horas_falta" type="text" class="formulario" id="horas_falta" value="<? print $horas_falta; ?>" size="10" onKeyPress="return validanum(this, event)" onKeyUp="mhora(this)"></td>
-          </tr>
-          <tr class="textobold"> 
-            <td>Horas Extra:</td>
-            <td>&nbsp; 
-              <input name="extra" type="radio" value="S" <? if($extra=="S" or empty($extra)) print "checked"; ?>>
-              Sim 
-              <input name="extra" type="radio" value="N" <? if($extra=="N") print "checked"; ?>>
-              N&atilde;o </td>
-          </tr>
-          <tr class="textobold"> 
-            <td>Conj. de Op&ccedil;&otilde;es:</td>
-            <td> 
-              <input name="conjunto_op" type="text" class="formulario" id="conjunto_op" value="<? print $conjunto_op; ?>" size="20" maxlength="20"></td>
-          </tr>
-          <tr class="textobold"> 
-            <td>Toler&acirc;ncia Atrasos:</td>
-            <td> 
-              <input name="tolerancia_atraso" type="text" class="formulario" id="tolerancia_atraso" value="<? print $tolerancia_atraso; ?>" size="20" maxlength="20"></td>
-          </tr>
-          <tr class="textobold"> 
-            <td>Toler&acirc;ncia Extra:</td>
-            <td> 
-              <input name="tolerancia_extra" type="text" class="formulario" id="tolerancia_extra" value="<? print $tolerancia_extra; ?>" size="20" maxlength="20"></td>
-          </tr>
-          <tr class="textobold"> 
-            <td>Hor&aacute;rio Principal:</td>
-            <td> 
-              <input name="horario_princ" type="text" class="formulario" id="horario_princ" value="<? print $horario_princ; ?>" size="20" maxlength="20"></td>
-          </tr>
-          <tr class="textobold"> 
-            <td>Escala de Folga:</td>
-            <td> 
-              <input name="escala_folga" type="text" class="formulario" id="escala_folga" value="<? print $escala_folga; ?>" size="20" maxlength="20"></td>
-          </tr>
-          <tr class="textobold"> 
-            <td>Conj. de Eventos:</td>
-            <td> 
-              <input name="conjunto_eve" type="text" class="formulario" id="conjunto_eve" value="<? print $conjunto_eve; ?>" size="20" maxlength="20"></td>
-          </tr>
-          <tr class="textobold"> 
-            <td>Banco de Horas:</td>
-            <td>&nbsp; 
-              <input name="banco_horas" type="radio" value="S" <? if($banco_horas=="S" or empty($banco_horas)) print "checked"; ?>>
-              Sim 
-              <input name="banco_horas" type="radio" value="N" <? if($banco_horas=="N") print "checked"; ?>>
-              N&atilde;o </td>
-          </tr>
-          <tr class="textobold"> 
-            <td>Respons&aacute;vel:</td>
-            <td> 
-              <input name="responsavel" type="text" class="formularioselect" id="responsavel" value="<? print $responsavel; ?>" size="63" maxlength="50"></td>
-          </tr>
-          <tr class="textobold"> 
-            <td>Folga por Escala:</td>
-            <td>&nbsp; 
-              <input name="folga_escala" type="radio" value="S" <? if($folga_escala=="S" or empty($folga_escala)) print "checked"; ?>>
-              Sim 
-              <input name="folga_escala" type="radio" value="N" <? if($folga_escala=="N") print "checked"; ?>>
-              N&atilde;o </td>
-          </tr>
-          <tr class="textobold"> 
-            <td>% Hora Atividade:</td>
-            <td>
-<input name="hora_ativ" type="text" class="formulario" id="hora_ativ" value="<? print $hora_ativ; ?>" size="10" onKeyDown="formataMoeda(this,retornaKeyCode(event))" onKeyUp="formataMoeda(this,retornaKeyCode(event))"></td>
-          </tr>
-          <tr class="textobold"> 
-            <td>Apontamento Aut.:</td>
-            <td>&nbsp; 
-              <input name="apontamento_aut" type="radio" value="S" <? if($apontamento_aut=="S" or empty($apontamento_aut)) print "checked"; ?>>
-              Sim 
-              <input name="apontamento_aut" type="radio" value="N" <? if($apontamento_aut=="N") print "checked"; ?>>
-              N&atilde;o </td>
-          </tr>
-          <tr class="textobold"> 
-            <td>% DSR Hora Aula:</td>
-            <td>
-<input name="hora_aula" type="text" class="formulario" id="hora_aula" value="<? print $hora_aula; ?>" size="10" onKeyDown="formataMoeda(this,retornaKeyCode(event))" onKeyUp="formataMoeda(this,retornaKeyCode(event))"> 
-              <input name="id" type="hidden" id="id3" value="<? print $id; ?>"> 
-              <input name="acao" type="hidden" id="acao" value="<? if($acao=="inc"){ print "incluir"; }else{ print "alterar"; } ?>"></td>
-          </tr>
-          <tr class="textobold"> 
-            <td colspan="2" align="center"> 
-              <? if($acao=="alt"){ ?>
-              
-              <input name="Submit22" type="button" class="microtxt" value="voltar" onClick="window.location='funcionarios.php<? if(!empty($bcod) or!empty($bnome)) print "?webmst=cpp"; if(!empty($bcod)) print "&bcod=$bcod"; if(!empty($bnome)) print "&bnome=$bnome";?>'">
-           
-              <img src="imagens/dot.gif" width="50" height="5"> 
-              <? } ?>
-              <input name="Submit2" type="submit" class="microtxt" value="Continuar"></td>
-          </tr>
-        </table>
-      </form></td>
-  </tr>
-</table>
-&nbsp; 
+
+<body style="background:#f8f9fa;padding:24px;" onLoad="enterativa=1;" onkeypress="return ent()">
+
+<div class="erp-container-fluid">
+    <div class="erp-card">
+        <div class="erp-card-header">
+            <h1 class="erp-card-title"><i class="fas fa-clock"></i> Funcionarios - Apontamento</h1>
+            <div>
+                <a href="funcionarios.php?bcod=<?php echo $bcod?>&bnome=<?php echo $bnome?>" class="erp-btn erp-btn-outline">
+                    <i class="fas fa-arrow-left"></i> Voltar
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <?php if(isset($_SESSION["mensagem"])): ?>
+    <div class="erp-alert erp-alert-<?php echo strpos($_SESSION["mensagem"],'alterado')!==false||strpos($_SESSION["mensagem"],'sucesso')!==false?'success':'danger'?>">
+        <?php echo $_SESSION["mensagem"]; unset($_SESSION["mensagem"]); ?>
+    </div>
+    <?php endif; ?>
+
+    <form name="form1" method="post" action="" onSubmit="return verifica(this)">
+        <input name="id" type="hidden" value="<?php print $id; ?>">
+        <input name="bcod" type="hidden" value="<?php print $bcod; ?>">
+        <input name="bnome" type="hidden" value="<?php print $bnome; ?>">
+        <input name="acao" type="hidden" value="<?php if($acao=="inc"){ print "incluir"; }else{ print "alterar"; } ?>">
+
+        <div class="erp-card">
+            <h3 style="margin-bottom:20px;font-size:18px;color:#2c3e50;"><i class="fas fa-user"></i> Dados</h3>
+
+            <div class="erp-row">
+                <div class="erp-col" style="flex:2;">
+                    <div class="erp-form-group">
+                        <label class="erp-form-label">Nome</label>
+                        <input type="text" class="erp-form-control" value="<?php print $fantasia; ?>" disabled>
+                    </div>
+                </div>
+                <div class="erp-col">
+                    <div class="erp-form-group">
+                        <label class="erp-form-label">Tipo Salario</label>
+                        <input name="salario_tipo" type="text" class="erp-form-control" id="salario_tipo" value="<?php print $salario_tipo; ?>" maxlength="20">
+                    </div>
+                </div>
+                <div class="erp-col">
+                    <div class="erp-form-group">
+                        <label class="erp-form-label">Base de Horas</label>
+                        <input name="horas" type="text" class="erp-form-control" id="horas" onKeyPress="return validanum(this, event)" value="<?php print $horas; ?>" maxlength="4">
+                    </div>
+                </div>
+            </div>
+
+            <div class="erp-row">
+                <div class="erp-col">
+                    <div class="erp-form-group">
+                        <label class="erp-form-label">Adicional Noturno</label>
+                        <input name="adicional_not" type="text" class="erp-form-control" id="adicional_not" value="<?php print $adicional_not; ?>" onKeyDown="formataMoeda(this,retornaKeyCode(event))" onKeyUp="formataMoeda(this,retornaKeyCode(event))">
+                    </div>
+                </div>
+                <div class="erp-col">
+                    <div class="erp-form-group">
+                        <label class="erp-form-label">Horas Desc. Falta</label>
+                        <input name="horas_falta" type="text" class="erp-form-control" id="horas_falta" value="<?php print $horas_falta; ?>" onKeyPress="return validanum(this, event)" onKeyUp="mhora(this)">
+                    </div>
+                </div>
+                <div class="erp-col">
+                    <div class="erp-form-group">
+                        <label class="erp-form-label">Horas Extra</label>
+                        <div style="display:flex;gap:16px;align-items:center;height:42px;">
+                            <label style="display:flex;gap:8px;align-items:center;margin:0;">
+                                <input name="extra" type="radio" value="S" <?php if($extra=="S" or empty($extra)) print "checked"; ?>>
+                                <span>Sim</span>
+                            </label>
+                            <label style="display:flex;gap:8px;align-items:center;margin:0;">
+                                <input name="extra" type="radio" value="N" <?php if($extra=="N") print "checked"; ?>>
+                                <span>Nao</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="erp-row">
+                <div class="erp-col">
+                    <div class="erp-form-group">
+                        <label class="erp-form-label">Conj. de Opcoes</label>
+                        <input name="conjunto_op" type="text" class="erp-form-control" id="conjunto_op" value="<?php print $conjunto_op; ?>" maxlength="20">
+                    </div>
+                </div>
+                <div class="erp-col">
+                    <div class="erp-form-group">
+                        <label class="erp-form-label">Tolerancia Atrasos</label>
+                        <input name="tolerancia_atraso" type="text" class="erp-form-control" id="tolerancia_atraso" value="<?php print $tolerancia_atraso; ?>" maxlength="20">
+                    </div>
+                </div>
+                <div class="erp-col">
+                    <div class="erp-form-group">
+                        <label class="erp-form-label">Tolerancia Extra</label>
+                        <input name="tolerancia_extra" type="text" class="erp-form-control" id="tolerancia_extra" value="<?php print $tolerancia_extra; ?>" maxlength="20">
+                    </div>
+                </div>
+            </div>
+
+            <div class="erp-row">
+                <div class="erp-col">
+                    <div class="erp-form-group">
+                        <label class="erp-form-label">Horario Principal</label>
+                        <input name="horario_princ" type="text" class="erp-form-control" id="horario_princ" value="<?php print $horario_princ; ?>" maxlength="20">
+                    </div>
+                </div>
+                <div class="erp-col">
+                    <div class="erp-form-group">
+                        <label class="erp-form-label">Escala de Folga</label>
+                        <input name="escala_folga" type="text" class="erp-form-control" id="escala_folga" value="<?php print $escala_folga; ?>" maxlength="20">
+                    </div>
+                </div>
+                <div class="erp-col">
+                    <div class="erp-form-group">
+                        <label class="erp-form-label">Conj. de Eventos</label>
+                        <input name="conjunto_eve" type="text" class="erp-form-control" id="conjunto_eve" value="<?php print $conjunto_eve; ?>" maxlength="20">
+                    </div>
+                </div>
+            </div>
+
+            <div class="erp-row">
+                <div class="erp-col">
+                    <div class="erp-form-group">
+                        <label class="erp-form-label">Banco de Horas</label>
+                        <div style="display:flex;gap:16px;align-items:center;height:42px;">
+                            <label style="display:flex;gap:8px;align-items:center;margin:0;">
+                                <input name="banco_horas" type="radio" value="S" <?php if($banco_horas=="S" or empty($banco_horas)) print "checked"; ?>>
+                                <span>Sim</span>
+                            </label>
+                            <label style="display:flex;gap:8px;align-items:center;margin:0;">
+                                <input name="banco_horas" type="radio" value="N" <?php if($banco_horas=="N") print "checked"; ?>>
+                                <span>Nao</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="erp-col" style="flex:2;">
+                    <div class="erp-form-group">
+                        <label class="erp-form-label">Responsavel</label>
+                        <input name="responsavel" type="text" class="erp-form-control" id="responsavel" value="<?php print $responsavel; ?>" maxlength="50">
+                    </div>
+                </div>
+                <div class="erp-col">
+                    <div class="erp-form-group">
+                        <label class="erp-form-label">Folga por Escala</label>
+                        <div style="display:flex;gap:16px;align-items:center;height:42px;">
+                            <label style="display:flex;gap:8px;align-items:center;margin:0;">
+                                <input name="folga_escala" type="radio" value="S" <?php if($folga_escala=="S" or empty($folga_escala)) print "checked"; ?>>
+                                <span>Sim</span>
+                            </label>
+                            <label style="display:flex;gap:8px;align-items:center;margin:0;">
+                                <input name="folga_escala" type="radio" value="N" <?php if($folga_escala=="N") print "checked"; ?>>
+                                <span>Nao</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="erp-row">
+                <div class="erp-col">
+                    <div class="erp-form-group">
+                        <label class="erp-form-label">% Hora Atividade</label>
+                        <input name="hora_ativ" type="text" class="erp-form-control" id="hora_ativ" value="<?php print $hora_ativ; ?>" onKeyDown="formataMoeda(this,retornaKeyCode(event))" onKeyUp="formataMoeda(this,retornaKeyCode(event))">
+                    </div>
+                </div>
+                <div class="erp-col">
+                    <div class="erp-form-group">
+                        <label class="erp-form-label">Apontamento Aut.</label>
+                        <div style="display:flex;gap:16px;align-items:center;height:42px;">
+                            <label style="display:flex;gap:8px;align-items:center;margin:0;">
+                                <input name="apontamento_aut" type="radio" value="S" <?php if($apontamento_aut=="S" or empty($apontamento_aut)) print "checked"; ?>>
+                                <span>Sim</span>
+                            </label>
+                            <label style="display:flex;gap:8px;align-items:center;margin:0;">
+                                <input name="apontamento_aut" type="radio" value="N" <?php if($apontamento_aut=="N") print "checked"; ?>>
+                                <span>Nao</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="erp-col">
+                    <div class="erp-form-group">
+                        <label class="erp-form-label">% DSR Hora Aula</label>
+                        <input name="hora_aula" type="text" class="erp-form-control" id="hora_aula" value="<?php print $hora_aula; ?>" onKeyDown="formataMoeda(this,retornaKeyCode(event))" onKeyUp="formataMoeda(this,retornaKeyCode(event))">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div style="display:flex;gap:12px;justify-content:flex-end;margin-top:24px;">
+            <a href="funcionarios.php?bcod=<?php echo $bcod?>&bnome=<?php echo $bnome?>" class="erp-btn erp-btn-secondary">Cancelar</a>
+            <button type="submit" class="erp-btn erp-btn-success">Continuar</button>
+        </div>
+    </form>
+</div>
+
+<?php include("mensagem.php"); ?>
 </body>
 </html>
-<? include("mensagem.php"); ?>

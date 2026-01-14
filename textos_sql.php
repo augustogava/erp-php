@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 if(empty($acao)) exit;
 if($acao=="incluir"){
@@ -7,10 +7,10 @@ if($acao=="incluir"){
 //----------
 	$sql=mysql_query("INSERT INTO textos (placa,codigo,texto) VALUES ('$placa','$res[apelido]','$texto')");
 	if($sql){
-		$_SESSION["mensagem"]="Texto Incluído com sucesso!";
+		$_SESSION["mensagem"]="Texto IncluÃ­do com sucesso!";
 		$acao="entrar";
 	}else{
-		$_SESSION["mensagem"]="O Texto não pôde ser incluído!";
+		$_SESSION["mensagem"]="O Texto nÃ£o pÃ´de ser incluÃ­do!";
 		$acao="inc";
 	}
 }elseif($acao=="alterar"){
@@ -22,16 +22,16 @@ if($acao=="incluir"){
 		$_SESSION["mensagem"]="Texto alterado com sucesso!";
 		$acao="entrar";
 	}else{
-		$_SESSION["mensagem"]="O texto não pôde ser alterado!";
+		$_SESSION["mensagem"]="O texto nÃ£o pÃ´de ser alterado!";
 		$acao="alt";
 	}
 }elseif($acao=="exc"){
 	if(!empty($id)){
 		$sql=mysql_query("DELETE FROM textos WHERE id='$id'");
 		if($sql){
-			$_SESSION["mensagem"]="Texto excluído com sucesso!";
+			$_SESSION["mensagem"]="Texto excluÃ­do com sucesso!";
 		}else{
-			$_SESSION["mensagem"]="O texto não pôde ser excluído!";
+			$_SESSION["mensagem"]="O texto nÃ£o pÃ´de ser excluÃ­do!";
 		}		
 	}
 	$acao="entrar";

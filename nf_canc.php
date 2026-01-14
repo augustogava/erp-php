@@ -1,17 +1,17 @@
-<?
+<?php
 include("conecta.php");
 if($acao=="cance"){
 	mysql_query("UPDATE nf SET motivo='$motivo',vias='$vias',responsavel='$responsavel',data_can=NOW(),vis='N' WHERE id='$id'");
 	//$sql=mysql_query("DELETE FROM e_compra WHERE id='$compra'");
 		//$sql=mysql_query("DELETE FROM vendas WHERE id='$pedido'");
-					$sql2=mysql_query("SELECT * FROM vendas_list WHERE venda='$pedido'") or die("Naun foi");
+					$sql2=mysql_query("SELECT * FROM vendas_list WHERE venda='$pedido'") or erp_db_fail();
 						while($res=mysql_fetch_array($sql2)){
 							$sql=mysql_query("INSERT INTO prodserv_est (prodserv,data,qtde,valor,origem,tipomov) VALUES('$res[produto]','$hj','$res[qtd]','$res[unitario]','2','5')");
 						}
 		if($sql){
 			$_SESSION["mensagem"]="Cancelado Com sucesso!";
 		}else{
-			$_SESSION["mensagem"]="Não pode ser cancelado!";
+			$_SESSION["mensagem"]="NÃ£o pode ser cancelado!";
 		}
 		print "<script>window.close();</script>";
 }
@@ -19,7 +19,8 @@ if($acao=="cance"){
 <html>
 <head>
 <title>CyberManager</title>
-<meta http-equiv="Content-Type" content="text/html; UTF-8">
+<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="style.css" rel="stylesheet" type="text/css">
 <script src="scripts.js"></script>
 <script src="mascaras.js"></script>
@@ -65,9 +66,9 @@ if (parseInt(navigator.appVersion) >= 4) window.moveTo((screen.width/2)-(windowW
           <td align="left"><input name="ok" type="text" class="formulario" id="ok" size="10"></td>
         </tr>
         <tr>
-          <td colspan="2" align="center"><input name="id" type="hidden" id="id" value="<? print $id; ?>">
-            <input name="pedido" type="hidden" id="pedido" value="<? print $pedido; ?>">
-            <input name="cp" type="hidden" id="cp" value="<? print $cp; ?>">
+          <td colspan="2" align="center"><input name="id" type="hidden" id="id" value="<?php print $id; ?>">
+            <input name="pedido" type="hidden" id="pedido" value="<?php print $pedido; ?>">
+            <input name="cp" type="hidden" id="cp" value="<?php print $cp; ?>">
             <input name="acao" type="hidden" id="acao" value="cance">
             <input name="Submit" type="submit" class="microtxt" id="envia" value="Enviar"></td>
           </tr>

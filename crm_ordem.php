@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 include("seguranca.php");
 
@@ -13,7 +13,8 @@ if(empty($acao)) $acao="entrar";
 <html>
 <head>
 <title>CyberManager</title>
-<meta http-equiv="Content-Type" content="text/html; UTF-8">
+<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="style.css" rel="stylesheet" type="text/css">
 <script src="scripts.js"></script>
 <script src="mascaras.js"></script>
@@ -33,7 +34,7 @@ if(empty($acao)) $acao="entrar";
       </tr>
     </table>
     <table width="592" border="0" cellpadding="0" cellspacing="1" bgcolor="#003366">
-<?
+<?php
 			$sql=mysql_query("SELECT * FROM prodserv_ordem WHERE cliente='$cli'"); 
 			if(!mysql_num_rows($sql)){
 			
@@ -42,7 +43,7 @@ if(empty($acao)) $acao="entrar";
 		    <tr class="textoboldbranco">
         <td colspan="5" align="center">N&atilde;o Existe nenhuma ordem de produ&ccedil;&atilde;o </td>
         </tr>
-	  <? }else{ ?>
+	  <?php }else{ ?>
       <tr class="textoboldbranco">
         <td width="55" align="left">&nbsp;&nbsp;Compra</td>
         <td width="50" align="left">Pedido</td>
@@ -50,7 +51,7 @@ if(empty($acao)) $acao="entrar";
         <td width="49" align="center">&nbsp;Qtd</td>
         <td width="21" align="center">&nbsp;</td>
         </tr>
-	  <?
+	  <?php
 	  
 	  while($res=mysql_fetch_array($sql)){
 	  $reg_final++; // PAGINACAO conta quantos registros imprimiu
@@ -59,17 +60,17 @@ if(empty($acao)) $acao="entrar";
 		if($res["sit"]=="A"){
 			$walt="prodserv_ordem.php?acao=baixa&id=$res[idd]&ped=$res[pedido]";
 		}else{
-			$walt="#\" onclick=\"return mensagem('Esta Ordem de Produção já foi finalizada');";
+			$walt="#\" onclick=\"return mensagem('Esta Ordem de ProduÃ§Ã£o jÃ¡ foi finalizada');";
 		}
 		?>
       <tr bgcolor="#FFFFFF" class="texto">
-        <td align="left"><? print $res["compra"]; ?></td>
-        <td align="left"><? print $res["pedido"]; ?></td>
-        <td width="368">&nbsp;<? print $res2["nome"]; ?></td>
-        <td align="center"><? print banco2valor($res["qtd"]); ?></td>
-        <td width="21" align="center"><a href="#" onClick="window.open('prodserv_ordem_imp.php?id=<? print $res["id"]; ?>','','scrollbars=yes,width=700,height=500');"><img src="imagens/icon14_imp.gif" alt="Visualizar" width="15" height="15" border="0"></a></td>
+        <td align="left"><?php print $res["compra"]; ?></td>
+        <td align="left"><?php print $res["pedido"]; ?></td>
+        <td width="368">&nbsp;<?php print $res2["nome"]; ?></td>
+        <td align="center"><?php print banco2valor($res["qtd"]); ?></td>
+        <td width="21" align="center"><a href="#" onClick="window.open('prodserv_ordem_imp.php?id=<?php print $res["id"]; ?>','','scrollbars=yes,width=700,height=500');"><img src="imagens/icon14_imp.gif" alt="Visualizar" width="15" height="15" border="0"></a></td>
         </tr>
-      <? } } ?>
+      <?php } } ?>
 </table>
       
     <br>
@@ -78,4 +79,4 @@ if(empty($acao)) $acao="entrar";
 </table>
 </body>
 </html>
-<? include("mensagem.php"); ?>
+<?php include("mensagem.php"); ?>

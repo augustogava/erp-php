@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 $popup=true;
 include("seguranca.php");
@@ -63,14 +63,14 @@ if (parseInt(navigator.appVersion) >= 4) window.moveTo((screen.width/2)-(windowW
         <tr class="textoboldbranco"> 
           <td width="277">&nbsp;Cliente</td>
         </tr>
-		<?
+		<?php
 		$sql=mysql_query("SELECT * FROM $btipo $busca ORDER BY nome ASC");
 		if(mysql_num_rows($sql)==0){
 		?>
         <tr bgcolor="#FFFFFF" class="texto"> 
           <td align="center" class="textopreto">NENHUM REGISTRO ENCONTRADO</td>
         </tr>
-        <?
+        <?php
 		}else{
 			//BLOCO PAGINACAO
 			$results_tot=mysql_num_rows($sql); //total de registros encontrados
@@ -106,35 +106,35 @@ if (parseInt(navigator.appVersion) >= 4) window.moveTo((screen.width/2)-(windowW
 			while($res=mysql_fetch_array($sql)){
 				$reg_final++; // PAGINACAO conta quantos registros imprimiu
 		?>
-		<tr bgcolor="#FFFFFF" class="textopreto" onMouseover="changeto('#CCCCCC')" onMouseout="changeback('#FFFFFF')"> <a href="#" onClick="return seleciona('<? print $res["nome"]; ?>','<? print $res["id"]; ?>');">
-          <td>&nbsp;<? print $res["nome"]; ?></td>
+		<tr bgcolor="#FFFFFF" class="textopreto" onMouseover="changeto('#CCCCCC')" onMouseout="changeback('#FFFFFF')"> <a href="#" onClick="return seleciona('<?php print $res["nome"]; ?>','<?php print $res["id"]; ?>');">
+          <td>&nbsp;<?php print $res["nome"]; ?></td>
           </a>        </tr>
-		<?
+		<?php
 			}
 		}
 		?>
       </table></td>
   </tr>
   <tr>
-    <td align="center">      <? if($wpaginar) { ?>
+    <td align="center">      <?php if($wpaginar) { ?>
       <table width="300" border="0" cellspacing="0" cellpadding="0">
         <tr> 
           <td align="center"><table width="1%" border="0" cellspacing="0" cellpadding="0">
               <tr valign="top"> 
                 <td align="right"> 
-                  <? 
+                  <?php 
 				$antz=false;
 				if($wp>1){
 					$antz=true;
 				?>
-                  <a href="<? print "apqp_pccli.php?wp=$pg_anterior&bcli=$bcli&bcod=$bcod"; ?>" class="paginacao2"> 
-                  <? } ?>
+                  <a href="<?php print "apqp_pccli.php?wp=$pg_anterior&bcli=$bcli&bcod=$bcod"; ?>" class="paginacao2"> 
+                  <?php } ?>
                   <img src="imagens/pag_f.gif" border="0"> 
-                  <? if($antz){ ?>
+                  <?php if($antz){ ?>
                   <br>
                   Anterior</a> 
-                <? } ?>                </td>
-                <?
+                <?php } ?>                </td>
+                <?php
 				$link_impressos=0;
 				if ($temp > $wpaginacao){
 		    	    $n_start  = $temp - ceil($wpaginacao/2);
@@ -148,31 +148,31 @@ if (parseInt(navigator.appVersion) >= 4) window.moveTo((screen.width/2)-(windowW
 					$link_impressos++;
 				?>
                 <td align="center"> 
-                  <? if($pg_atual != $link_impressos){ ?>
-                  <a href="<? print "apqp_pccli.php?wp=$link_impressos&bcli=$bcli&bcod=$bcod"; ?>" class="paginacao"> 
-                  <? } ?>
-                  <img src="imagens/pag_e<? if($pg_atual==$link_impressos) print "2"; ?>.gif" border="0"><br>
-                  <? if($pg_atual==$link_impressos){ print "<span class=\"paginacao2\">$link_impressos</span>"; }else{ print $link_impressos; }?>
-                  <? if($pg_atual != $link_impressos){ ?>
+                  <?php if($pg_atual != $link_impressos){ ?>
+                  <a href="<?php print "apqp_pccli.php?wp=$link_impressos&bcli=$bcli&bcod=$bcod"; ?>" class="paginacao"> 
+                  <?php } ?>
+                  <img src="imagens/pag_e<?php if($pg_atual==$link_impressos) print "2"; ?>.gif" border="0"><br>
+                  <?php if($pg_atual==$link_impressos){ print "<span class=\"paginacao2\">$link_impressos</span>"; }else{ print $link_impressos; }?>
+                  <?php if($pg_atual != $link_impressos){ ?>
                   </a> 
-                <? } ?>                </td>
-                <?
+                <?php } ?>                </td>
+                <?php
 				}
 				?>
                 <td> 
-                  <? if($reg_final<$results_tot){ ?>
-                  <a href="<? print "apqp_pccli.php?wp=$pg_proxima&bcli=$bcli&bcod=$bcod"; ?>" class="paginacao2"> 
-                  <? } ?>
+                  <?php if($reg_final<$results_tot){ ?>
+                  <a href="<?php print "apqp_pccli.php?wp=$pg_proxima&bcli=$bcli&bcod=$bcod"; ?>" class="paginacao2"> 
+                  <?php } ?>
                   <img src="imagens/pag_der.gif" border="0"> 
-                  <? if($reg_final<$results_tot){ ?>
+                  <?php if($reg_final<$results_tot){ ?>
                   <br>
-                  Próximo</a> 
-                <? } ?>                </td>
+                  PrÃ³ximo</a> 
+                <?php } ?>                </td>
               </tr>
             </table></td>
         </tr>
       </table>
-      <? } ?></td>
+      <?php } ?></td>
   </tr>
 </table>
 </body>

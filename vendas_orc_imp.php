@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 
 $sql=mysql_query("SELECT * FROM vendas_orcamento WHERE id='$id'");
@@ -11,7 +11,8 @@ $res4=mysql_fetch_array($sql4);
 <html>
 <head>
 <title>Proposta</title>
-<meta http-equiv="Content-Type" content="text/html; UTF-8">
+<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="style.css" rel="stylesheet" type="text/css">
 <script>
 <!--
@@ -54,13 +55,13 @@ body {
     <td class="textoboldbranco"><table width="600" border="0" align="center" cellpadding="3" cellspacing="0">
       <tr class="texto">
         <td width="36%" height="23" align="left"><span class="style4"><strong>N&ordm; Proposta:</strong>
-            <?= $res["cod"]; ?>
+            <?php echo  $res["cod"]; ?>
         </span></td>
         <td width="40%"><span class="style4"><strong>Data Proposta : </strong>
-            <?= banco2data($res["emissao"]); ?>
+            <?php echo  banco2data($res["emissao"]); ?>
         </span></td>
         <td width="24%"><span class="style4"><strong>Validade:
-           </strong>  <?= "10 Dias"; ?>
+           </strong>  <?php echo  "10 Dias"; ?>
        </span></td>
       </tr>
     </table></td>
@@ -71,17 +72,17 @@ body {
       
       <tr>
         <td width="152"><strong>Raz&atilde;o Social :</strong></td>
-        <td colspan="2"><? print $res3["nome"]; ?></td>
+        <td colspan="2"><?php print $res3["nome"]; ?></td>
         </tr>
       <tr>
         <td><strong>Contato:</strong></td>
-        <td><? print $res4["nome"]; ?></td>
+        <td><?php print $res4["nome"]; ?></td>
         <td>&nbsp;</td>
       </tr>
       <tr>
         <td><strong>Tel. do contato: </strong></td>
-        <td width="129"><? print $res3["ddd"]." - ".$res3["fone"]; ?></td>
-        <td width="197"><strong>Fax: </strong><? print $res3["dddf"]." - ".$res3["fax"]; ?></td>
+        <td width="129"><?php print $res3["ddd"]." - ".$res3["fone"]; ?></td>
+        <td width="197"><strong>Fax: </strong><?php print $res3["dddf"]." - ".$res3["fax"]; ?></td>
         </tr>
       
       <tr>
@@ -94,7 +95,7 @@ body {
   <tr>
     <td align="right">&nbsp;</td>
   </tr>
-  <?
+  <?php
   /*
   $sqla=mysql_query("SELECT v.* FROM vendas_orcamento_list as v,prodserv as p WHERE v.orcamento='$id' and v.produto=p.id AND p.tipo<>'SM' order by p.codprod ASC"); 
   if(mysql_num_rows($sqla)){
@@ -102,7 +103,7 @@ body {
   ?>
   <tr align="left">
     <td>
-<? 
+<?php 
 $sql2=mysql_query("SELECT v.* FROM vendas_orcamento_list as v,prodserv as p WHERE v.orcamento='$id' and v.produto=p.id AND p.tipo<>'SM' AND p.tipo<>'PL' order by p.codprod ASC"); 
   while($res2=mysql_fetch_array($sql2)){ 
 		$sql3=mysql_query("SELECT * FROM prodserv WHERE id='$res2[produto]'"); 
@@ -125,31 +126,31 @@ $sql2=mysql_query("SELECT v.* FROM vendas_orcamento_list as v,prodserv as p WHER
         <td width="57" align="center">Total</td>
         </tr>
       <tr bgcolor="#FFFFFF" class="texto">
-        <td align="left">&nbsp;<? print $res2["qtd"]; ?></td>
-        <td align="left">&nbsp;<? print $res4["apelido"]; ?></td>
-        <td>&nbsp;<? print $res3["embalagem"]; ?></td>
+        <td align="left">&nbsp;<?php print $res2["qtd"]; ?></td>
+        <td align="left">&nbsp;<?php print $res4["apelido"]; ?></td>
+        <td>&nbsp;<?php print $res3["embalagem"]; ?></td>
         <td><table width="94%" border="0" cellspacing="00">
           <tr>
-            <td width="12%" align="center"><img src=<? if(!empty($res3["foto"])){ ?>foto/gd.php?img=<? print $res3["foto"]; ?>&wid=90<? }else{ print "imagens/semFoto.jpg"; }; ?>></td>
-            <td class="texto"><? print $res3["nome"]; ?></td>
+            <td width="12%" align="center"><img src=<?php if(!empty($res3["foto"])){ ?>foto/gd.php?img=<?php print $res3["foto"]; ?>&wid=90<?php }else{ print "imagens/semFoto.jpg"; }; ?>></td>
+            <td class="texto"><?php print $res3["nome"]; ?></td>
           </tr>
         </table>          </td>
-        <td align="center" bgcolor="#FFFFFF"> &nbsp;<? print banco2valor($res2["unitario"]); ?></td>
-        <td align="center" bgcolor="#FFFFFF">&nbsp;<?= banco2valor(($res2["qtd"]*$res2["unitario"])-($res2["qtd"]*$res2["unitario"]*$res2["desconto"]/100)); ?></td>
+        <td align="center" bgcolor="#FFFFFF"> &nbsp;<?php print banco2valor($res2["unitario"]); ?></td>
+        <td align="center" bgcolor="#FFFFFF">&nbsp;<?php echo  banco2valor(($res2["qtd"]*$res2["unitario"])-($res2["qtd"]*$res2["unitario"]*$res2["desconto"]/100)); ?></td>
         </tr>
       <tr bgcolor="#FFFFFF" class="texto">
-        <td colspan="6" align="left">&nbsp;<? print $res3["espec"]; ?></td>
+        <td colspan="6" align="left">&nbsp;<?php print $res3["espec"]; ?></td>
         </tr>
     </table>
 <br>
-<? } ?></td>
+<?php } ?></td>
   </tr>
-  <? 
+  <?php 
   // }else{ 
   ?>
   <tr align="center">
     <td align="left">
-	<? 
+	<?php 
 	$sqlp=mysql_query("SELECT vendas_orcamento_list.*, COUNT(*) AS tot FROM vendas_orcamento_list,vendas_orcamento,prodserv WHERE vendas_orcamento_list.produto=prodserv.id AND (prodserv.tipo='SM' OR prodserv.tipo='PL') AND vendas_orcamento_list.orcamento=vendas_orcamento.id AND vendas_orcamento_list.orcamento='$id' GROUP BY produto ORDER BY tot DESC");
 	while($resp=mysql_fetch_array($sqlp)){
 		if($resp["tot"]<=1){
@@ -173,28 +174,28 @@ $sql2=mysql_query("SELECT v.* FROM vendas_orcamento_list as v,prodserv as p WHER
 				<td width="67" align="center">Total</td>
 			  </tr>
 			  <tr bgcolor="#FFFFFF" class="texto">
-				<td align="left">&nbsp;<? print $resp["qtd"]; ?></td>
-				<td align="center"><? print banco2valor($resp["largura"]); ?></td>
-				<td align="center"><? print banco2valor($resp["altura"]); ?></td>
-				<td align="left">&nbsp;<? print $res4["apelido"]; ?></td>
-				<td><? print $res3["nome"]; ?></td>
-				<td><? print $resp["local"]; ?></td>
-				<td align="center" bgcolor="#FFFFFF">&nbsp;<? print banco2valor($resp["unitario"]); ?></td>
+				<td align="left">&nbsp;<?php print $resp["qtd"]; ?></td>
+				<td align="center"><?php print banco2valor($resp["largura"]); ?></td>
+				<td align="center"><?php print banco2valor($resp["altura"]); ?></td>
+				<td align="left">&nbsp;<?php print $res4["apelido"]; ?></td>
+				<td><?php print $res3["nome"]; ?></td>
+				<td><?php print $resp["local"]; ?></td>
+				<td align="center" bgcolor="#FFFFFF">&nbsp;<?php print banco2valor($resp["unitario"]); ?></td>
 				<td align="center" bgcolor="#FFFFFF">&nbsp;
-					<?= banco2valor(($resp["qtd"]*$resp["unitario"])-($resp["qtd"]*$resp["unitario"]*$resp["desconto"]/100)); ?></td>
+					<?php echo  banco2valor(($resp["qtd"]*$resp["unitario"])-($resp["qtd"]*$resp["unitario"]*$resp["desconto"]/100)); ?></td>
 			  </tr>
 			  <tr bgcolor="#FFFFFF" class="texto">
 				<td colspan="8" align="left">&nbsp;
 				  <table width="100%" border="0" cellspacing="00">
 					<tr>
-					  <td width="12%" align="center"><img src=<? if(!empty($res3["foto"])){ ?>foto/gd.php?img=<? print $res3["foto"]; ?>&wid=50<? }else{ print "imagens/semFoto.jpg"; }; ?>></td>
-					  <td width="88%" class="texto"><? print $res3["espec"]; ?></td>
+					  <td width="12%" align="center"><img src=<?php if(!empty($res3["foto"])){ ?>foto/gd.php?img=<?php print $res3["foto"]; ?>&wid=50<?php }else{ print "imagens/semFoto.jpg"; }; ?>></td>
+					  <td width="88%" class="texto"><?php print $res3["espec"]; ?></td>
 					</tr>
 				  </table>				  </td>
 			  </tr>
 	  </table>
 			<br>
-		<? }else{  ?>
+		<?php }else{  ?>
 		<table width="100%" border="1" cellpadding="0" cellspacing="0" bordercolor="#000000" bgcolor="#003366">
 			  <tr class="textoboldbranco">
 				<td width="42" align="left">Qtd</td>
@@ -206,7 +207,7 @@ $sql2=mysql_query("SELECT v.* FROM vendas_orcamento_list as v,prodserv as p WHER
 				<td width="64" align="center">Unit</td>
 				<td width="67" align="center">Total</td>
 			  </tr>
-			  <?
+			  <?php
 			  $sqll=mysql_query("SELECT vendas_orcamento_list.* FROM vendas_orcamento_list,vendas_orcamento WHERE vendas_orcamento_list.produto='$resp[produto]' AND vendas_orcamento_list.orcamento=vendas_orcamento.id AND vendas_orcamento.id='$id'");
 			  while($resl=mysql_fetch_array($sqll)){
 				$sql3=mysql_query("SELECT * FROM prodserv WHERE id='$resl[produto]'"); 
@@ -218,36 +219,36 @@ $sql2=mysql_query("SELECT v.* FROM vendas_orcamento_list as v,prodserv as p WHER
 						$descs+=$resl["qtd"]*$resl["unitario"]*$resl["desconto"]/100;
 			?>
 			  <tr bgcolor="#FFFFFF" class="texto">
-				<td align="left">&nbsp;<? print $resl["qtd"]; ?></td>
-				<td align="center"><? print banco2valor($resl["largura"]); ?></td>
-				<td align="center"><? print banco2valor($resl["altura"]); ?></td>
-				<td align="left">&nbsp;<? print $res4["apelido"]; ?></td>
-				<td><? print $res3["nome"]; ?></td>
-				<td><? print $resl["local"]; ?></td>
-				<td align="center" bgcolor="#FFFFFF">&nbsp;<? print banco2valor($resl["unitario"]); ?></td>
+				<td align="left">&nbsp;<?php print $resl["qtd"]; ?></td>
+				<td align="center"><?php print banco2valor($resl["largura"]); ?></td>
+				<td align="center"><?php print banco2valor($resl["altura"]); ?></td>
+				<td align="left">&nbsp;<?php print $res4["apelido"]; ?></td>
+				<td><?php print $res3["nome"]; ?></td>
+				<td><?php print $resl["local"]; ?></td>
+				<td align="center" bgcolor="#FFFFFF">&nbsp;<?php print banco2valor($resl["unitario"]); ?></td>
 				<td align="center" bgcolor="#FFFFFF">&nbsp;
-					<?= banco2valor(($resl["qtd"]*$resl["unitario"])-($resl["qtd"]*$resl["unitario"]*$resl["desconto"]/100)); ?></td>
+					<?php echo  banco2valor(($resl["qtd"]*$resl["unitario"])-($resl["qtd"]*$resl["unitario"]*$resl["desconto"]/100)); ?></td>
 			  </tr>
-			  <? } ?>
+			  <?php } ?>
 			  
 			  
 			  <tr bgcolor="#FFFFFF" class="texto">
 				<td colspan="8" align="left">&nbsp;
 				  <table width="100%" border="0" cellspacing="00">
 					<tr>
-					  <td width="12%" align="center"><img src=<? if(!empty($res3["foto"])){ ?>foto/gd.php?img=<? print $res3["foto"]; ?>&wid=50<? }else{ print "imagens/semFoto.jpg"; }; ?>></td>
-					  <td width="88%" class="texto"><? print $res3["espec"]; ?></td>
+					  <td width="12%" align="center"><img src=<?php if(!empty($res3["foto"])){ ?>foto/gd.php?img=<?php print $res3["foto"]; ?>&wid=50<?php }else{ print "imagens/semFoto.jpg"; }; ?>></td>
+					  <td width="88%" class="texto"><?php print $res3["espec"]; ?></td>
 					</tr>
 				  </table>			    </td>
 			  </tr>
 	  </table>
 			<br>
-		 <? }
+		 <?php }
 		 }
 		   ?>
 	</td>
   </tr>
-  <? 
+  <?php 
   //}
     ?>
   <tr align="center">
@@ -257,20 +258,20 @@ $sql2=mysql_query("SELECT v.* FROM vendas_orcamento_list as v,prodserv as p WHER
     <td align="right"><table width="300" border="0" cellpadding="0" cellspacing="1" bgcolor="#003366">
       <tr align="center" class="textoboldbranco">
         <td width="120">Produtos</td>
-         <? if($res["frete"]=="3" or $res["frete"]=="4"){ ?><td width="120">Frete</td><? } ?>
-        <? if(!empty($descs)){ ?> <td width="120">Descontos</td><? } ?>
+         <?php if($res["frete"]=="3" or $res["frete"]=="4"){ ?><td width="120">Frete</td><?php } ?>
+        <?php if(!empty($descs)){ ?> <td width="120">Descontos</td><?php } ?>
         <td width="120">Total</td>
       </tr>
       <tr align="center" bgcolor="#FFFFFF" class="textobold">
-        <td width="120"><?= banco2valor($prods); ?></td>
-        <? if($res["frete"]=="3" or $res["frete"]=="4"){ ?> <td width="120"><? print banco2valor($res["frete_val"]); $tot+=$res["frete_val"];  ?></td>
-        <? } ?>
-        <? if(!empty($descs)){ ?>  <td width="120"><?= banco2valor($descs); ?></td><? } ?>
-        <td width="120"><?= banco2valor($tot-$descs); ?></td>
+        <td width="120"><?php echo  banco2valor($prods); ?></td>
+        <?php if($res["frete"]=="3" or $res["frete"]=="4"){ ?> <td width="120"><?php print banco2valor($res["frete_val"]); $tot+=$res["frete_val"];  ?></td>
+        <?php } ?>
+        <?php if(!empty($descs)){ ?>  <td width="120"><?php echo  banco2valor($descs); ?></td><?php } ?>
+        <td width="120"><?php echo  banco2valor($tot-$descs); ?></td>
       </tr>
     </table></td>
   </tr>
-<? $fat=mysql_query("SELECT * FROM empresa WHERE id='$res[faturamento]'"); $fatr=mysql_fetch_array($fat); ?>
+<?php $fat=mysql_query("SELECT * FROM empresa WHERE id='$res[faturamento]'"); $fatr=mysql_fetch_array($fat); ?>
   <tr align="center">
     <td align="left">&nbsp;</td>
   </tr>
@@ -288,7 +289,7 @@ $sql2=mysql_query("SELECT v.* FROM vendas_orcamento_list as v,prodserv as p WHER
     <td><table width="100%" border="0" cellpadding="3" cellspacing="0" class="texto">
       <tr>
         <td width="116"><strong> Prazo de Pagamento: </strong> </td>
-        <td width="194"><? $sql2=mysql_query("SELECT * FROM parcelamentos WHERE id='$res[p_pag]'"); $res2=mysql_fetch_array($sql2); print $res2["descricao"]; ?></td>
+        <td width="194"><?php $sql2=mysql_query("SELECT * FROM parcelamentos WHERE id='$res[p_pag]'"); $res2=mysql_fetch_array($sql2); print $res2["descricao"]; ?></td>
         <td width="322" rowspan="5" align="center" valign="top"><table width="85%" border="1" cellpadding="0" cellspacing="0" bordercolor="#003063">
           <tr>
             <td><table width="100%" border="0" cellpadding="0" cellspacing="0">
@@ -314,15 +315,15 @@ $sql2=mysql_query("SELECT v.* FROM vendas_orcamento_list as v,prodserv as p WHER
       </tr>
       <tr>
         <td><strong>Instala&ccedil;&atilde;o</strong> : </td>
-        <td><? if($res["instalacao"]=="1"){ print "Por conta do Cliente"; }else{ print "Por conta da MKR"; } ?></td>
+        <td><?php if($res["instalacao"]=="1"){ print "Por conta do Cliente"; }else{ print "Por conta da MKR"; } ?></td>
         </tr>
       <tr>
         <td><strong>Disponibilidade: </strong><img src="../layout/layout_menu/spacer.gif" width="1" height="5"></td>
-        <td><? if($res["p_entrega"]=="1"){ print "3 Dias uteis"; }else if($res["p_entrega"]=="2"){ print "7 Dias uteis"; }else if($res["p_entrega"]=="3"){ print "15 Dias uteis"; }else if($res["p_entrega"]=="5"){ print "5 Dias uteis"; }else{ print "30 Dias uteis"; } ?></td>
+        <td><?php if($res["p_entrega"]=="1"){ print "3 Dias uteis"; }else if($res["p_entrega"]=="2"){ print "7 Dias uteis"; }else if($res["p_entrega"]=="3"){ print "15 Dias uteis"; }else if($res["p_entrega"]=="5"){ print "5 Dias uteis"; }else{ print "30 Dias uteis"; } ?></td>
         </tr>
       <tr>
         <td><strong>Frete:</strong></td>
-        <td><? if($res["frete"]=="1"){ print "FOB - Indicar Transportadora"; }else if($res["frete"]=="3"){ print "FOB - Por Sedex"; }else if($res["frete"]=="4"){ print "FOB - Por PAC"; }else if($res["frete"]=="5"){  print "Cliente Retira"; }else{ print "CIF - Por conta da MKR"; } ?></td>
+        <td><?php if($res["frete"]=="1"){ print "FOB - Indicar Transportadora"; }else if($res["frete"]=="3"){ print "FOB - Por Sedex"; }else if($res["frete"]=="4"){ print "FOB - Por PAC"; }else if($res["frete"]=="5"){  print "Cliente Retira"; }else{ print "CIF - Por conta da MKR"; } ?></td>
         </tr>
       <tr>
         <td><strong>Garantia:</strong></td>
@@ -354,15 +355,15 @@ $sql2=mysql_query("SELECT v.* FROM vendas_orcamento_list as v,prodserv as p WHER
   <tr>
     <td>&nbsp;</td>
   </tr>
-<? $sql2=mysql_query("SELECT * FROM clientes WHERE id='$res[vendedor]'"); $res2=mysql_fetch_array($sql2); ?>
+<?php $sql2=mysql_query("SELECT * FROM clientes WHERE id='$res[vendedor]'"); $res2=mysql_fetch_array($sql2); ?>
   <tr>
-    <td><?= $res2["nome"]; ?></td>
+    <td><?php echo  $res2["nome"]; ?></td>
   </tr>
   <tr>
-    <td><a href="mailto:<?= $res2["email"]; ?>"><?= $res2["email"]; ?></a></td>
+    <td><a href="mailto:<?php echo  $res2["email"]; ?>"><?php echo  $res2["email"]; ?></a></td>
   </tr>
   <tr>
-    <td><?= $res2["fone"]; ?> <?= $res2["fax"]; ?></td>
+    <td><?php echo  $res2["fone"]; ?> <?php echo  $res2["fax"]; ?></td>
   </tr>
   <tr>
     <td>&nbsp;</td>
@@ -374,7 +375,7 @@ $sql2=mysql_query("SELECT v.* FROM vendas_orcamento_list as v,prodserv as p WHER
   </tr>
   <tr align="center">
     <td><input name="Submit22" type="button" class="microtxt" value="Imprimir" onClick="return imprimir(this)">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <input name="Submit22" type="button" class="microtxt" value="Email" onClick="window.location='vendas_email.php?id=<?= $id; ?>&cliente=<?= $res["cliente"]; ?>'">   </td>
+      <input name="Submit22" type="button" class="microtxt" value="Email" onClick="window.location='vendas_email.php?id=<?php echo  $id; ?>&cliente=<?php echo  $res["cliente"]; ?>'">   </td>
   </tr>
   <tr align="center">
     <td>&nbsp;</td>

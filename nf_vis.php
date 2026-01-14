@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 $bd=new set_bd;
 if(!isset($nf)) exit;
@@ -15,10 +15,10 @@ if($acao=="imp"){
 		$sql=mysql_query("UPDATE vendas SET faturamento='1',nf='$valu' WHERE id='$id'");
 		$sql=mysql_query("UPDATE e_compra SET sit='FF' WHERE id='$cp'");
 	//------------- Tirar estoque Total --------------
-						$sql2=mysql_query("SELECT * FROM vendas_list WHERE venda='$id'") or die("Naun foi");
+						$sql2=mysql_query("SELECT * FROM vendas_list WHERE venda='$id'") or erp_db_fail();
 						while($res=mysql_fetch_array($sql2)){
 							if(!empty($res["produto"])){
-									mysql_query("UPDATE vendas_list SET qtd=qtde WHERE id='$res[id]'") or die("Erro qtd");
+									mysql_query("UPDATE vendas_list SET qtd=qtde WHERE id='$res[id]'") or erp_db_fail();
 									$produto=$res["produto"];
 									$pro=mysql_query("SELECT * FROM prodserv WHERE id='$produto'");
 									$pror=mysql_fetch_array($pro);
@@ -27,7 +27,7 @@ if($acao=="imp"){
 									$total=banco2valor($qtd*$res["unitario"]);
 									$total=valor2banco($total);
 									$unita=$res["unitario"];
-										$sql1=mysql_query("SELECT SUM(qtde-qtds) AS qtdt FROM prodserv_est WHERE prodserv='$produto'") or die("Nao foi");
+										$sql1=mysql_query("SELECT SUM(qtde-qtds) AS qtdt FROM prodserv_est WHERE prodserv='$produto'") or erp_db_fail();
 										$res1=mysql_fetch_array($sql1);
 									if($res1["qtdt"]>0 and empty($pror["porta"]) and empty($pror["cortina"])){
 										$sql=mysql_query("INSERT INTO prodserv_est (prodserv,data,qtds,valor,origem,tipomov) VALUES('$produto','$hj','$qtd','$unita','2','6')");
@@ -101,12 +101,12 @@ if($acao=="imp"){
 						}
 					}
 			if($sql){
-				$_SESSION["mensagem"]="Est· em Faturamento!";
+				$_SESSION["mensagem"]="Est√° em Faturamento!";
 				$sql=mysql_query("UPDATE nf SET impresso='1' WHERE id='$nf'");
 				print "<script>opener.location='nf.php';window.close();</script>";
 				
 			}else{
-				$_SESSION["mensagem"]="N„o pode ser imprimido!";
+				$_SESSION["mensagem"]="N√£o pode ser imprimido!";
 				$acao="inc";
 			}
 		
@@ -128,9 +128,9 @@ if($acao=="ge"){
 		$pass=true;
 		$nna=mysql_query("SELECT * FROM nf WHERE numero='$numero_nota'");
 		if(mysql_num_rows($nna) and ($nn!=$numero_nota)){
-			$_SESSION["mensagem"]="N˙mero da nota j· existe!";
+			$_SESSION["mensagem"]="N√∫mero da nota j√° existe!";
 		}else{
-			$sql=mysql_query("UPDATE nf SET numero='$numero_nota',numero_formulario='$numero_formulario',especie='$especie',quantidade='$quantidade',marca='$marca',placa='$placa',impresso='2',linha1='$linha1',linha2='$linha2',linha3='$linha3' WHERE id='$nf'") or die("nao foi");
+			$sql=mysql_query("UPDATE nf SET numero='$numero_nota',numero_formulario='$numero_formulario',especie='$especie',quantidade='$quantidade',marca='$marca',placa='$placa',impresso='2',linha1='$linha1',linha2='$linha2',linha3='$linha3' WHERE id='$nf'") or erp_db_fail();
 		
 			foreach($qtde as $key=>$value){
 				if(!empty($value)){
@@ -141,13 +141,13 @@ if($acao=="ge"){
 						$qtd1=mysql_fetch_array($sql); 
 						if($qtd1["qtdd"]>=$value){
 							$sql3=mysql_query("UPDATE vendas_list SET qtde='$value',qtd='$qtdn' WHERE id='$key'");		
-							$sql=mysql_query("UPDATE nf SET abrir='S' WHERE id='$nf'") or die("nao foi");
+							$sql=mysql_query("UPDATE nf SET abrir='S' WHERE id='$nf'") or erp_db_fail();
 						}else{
 							$pass=false;
 							//tirar quano marco pedir
 							$sql3=mysql_query("UPDATE vendas_list SET qtde='$value',qtd='$qtdn' WHERE id='$key'");			
 							// / / / / / / / / / * * * / / / / / / / / / 
-							$sql=mysql_query("UPDATE nf SET abrir='N' WHERE id='$nf'") or die("nao foi");
+							$sql=mysql_query("UPDATE nf SET abrir='N' WHERE id='$nf'") or erp_db_fail();
 						}
 						$_SESSION["mensagem"]="Salvo com sucesso!!!";
 					}else{
@@ -175,7 +175,8 @@ $res2=mysql_fetch_array($sql2);
 <html>
 <head>
 <title>CyberManager</title>
-<meta http-equiv="Content-Type" content="text/html; UTF-8">
+<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="style.css" rel="stylesheet" type="text/css">
 <script src="scripts.js"></script>
 <script src="mascaras.js"></script>
@@ -243,9 +244,9 @@ function MM_openBrWindow(theURL,winName,features) { //v2.0
     Laser    </td>
   </tr>
   <tr class="textobold">
-    <td align="center"><input name="cp" type="hidden" id="cp" value="<?= $res["compra"]; ?>">
-      <input name="id" type="hidden" id="id" value="<?= $res["pedido"]; ?>">
-      <input name="nf" type="hidden" id="nf" value="<?= $nf; ?>">
+    <td align="center"><input name="cp" type="hidden" id="cp" value="<?php echo  $res["compra"]; ?>">
+      <input name="id" type="hidden" id="id" value="<?php echo  $res["pedido"]; ?>">
+      <input name="nf" type="hidden" id="nf" value="<?php echo  $nf; ?>">
       <input name="acao" type="hidden" id="acao" value="ge">
       <input name="Submit2" type="submit" class="titulos" value="Gerar Nota Fiscal" ></td>
   </tr>
@@ -266,11 +267,11 @@ function MM_openBrWindow(theURL,winName,features) { //v2.0
           <td><table width="300"  border="0" align="left" cellpadding="0" cellspacing="0" class="texto">
             <tr>
               <td width="140">Nota n&uacute;mero: </td>
-              <td width="160" class="textobold"><input name="numero_nota" type="text" class="texto" id="numero_nota" value="<?= $res["numero"]; ?>" size="8" maxlength="10"></td>
+              <td width="160" class="textobold"><input name="numero_nota" type="text" class="texto" id="numero_nota" value="<?php echo  $res["numero"]; ?>" size="8" maxlength="10"></td>
               </tr>
             <tr>
               <td>N&ordm; controle Formul&aacute;rio: </td>
-              <td>                <input name="numero_formulario" type="text" class="texto" id="numero_formulario" value="<?= $res["numero_formulario"]; ?>" size="8" maxlength="10"></td>
+              <td>                <input name="numero_formulario" type="text" class="texto" id="numero_formulario" value="<?php echo  $res["numero_formulario"]; ?>" size="8" maxlength="10"></td>
               </tr>
             
             <tr>
@@ -281,36 +282,36 @@ function MM_openBrWindow(theURL,winName,features) { //v2.0
               <td>Linha 1</td>
               <td><select name="linha1" class="formularioselect" id="linha1">
                 <option value="" >Selecione</option>
-                <?
+                <?php
 				$sql=mysql_query("SELECT * FROM dados");
 				while($res1=mysql_fetch_array($sql)){
 				?>
-                <option value="<? print $res1["id"]; ?>" <? if($res["linha1"]==$res1["id"]) print "selected"; ?>><? print $res1["nome"]; ?></option>
-                <? } ?>
+                <option value="<?php print $res1["id"]; ?>" <?php if($res["linha1"]==$res1["id"]) print "selected"; ?>><?php print $res1["nome"]; ?></option>
+                <?php } ?>
               </select></td>
             </tr>
             <tr>
               <td>Linha 2 </td>
               <td><select name="linha2" class="formularioselect" id="select">
                 <option value="" >Selecione</option>
-                <?
+                <?php
 				$sql=mysql_query("SELECT * FROM dados");
 				while($res1=mysql_fetch_array($sql)){
 				?>
-                <option value="<? print $res1["id"]; ?>" <? if($res["linha2"]==$res1["id"]) print "selected"; ?>><? print $res1["nome"]; ?></option>
-                <? } ?>
+                <option value="<?php print $res1["id"]; ?>" <?php if($res["linha2"]==$res1["id"]) print "selected"; ?>><?php print $res1["nome"]; ?></option>
+                <?php } ?>
               </select></td>
             </tr>
             <tr>
               <td>Linha 3 </td>
               <td><select name="linha3" class="formularioselect" id="select2">
                 <option value="" >Selecione</option>
-                <?
+                <?php
 				$sql=mysql_query("SELECT * FROM dados");
 				while($res1=mysql_fetch_array($sql)){
 				?>
-                <option value="<? print $res1["id"]; ?>" <? if($res["linha3"]==$res1["id"]) print "selected"; ?>><? print $res1["nome"]; ?></option>
-                <? } ?>
+                <option value="<?php print $res1["id"]; ?>" <?php if($res["linha3"]==$res1["id"]) print "selected"; ?>><?php print $res1["nome"]; ?></option>
+                <?php } ?>
               </select></td>
             </tr>
             
@@ -320,19 +321,19 @@ function MM_openBrWindow(theURL,winName,features) { //v2.0
             </tr>
             <tr>
               <td>Volumes:</td>
-              <td><input name="quantidade" type="text" class="texto" id="quantidade" value="<?= $res["quantidade"]; ?>" size="8" maxlength="10"></td>
+              <td><input name="quantidade" type="text" class="texto" id="quantidade" value="<?php echo  $res["quantidade"]; ?>" size="8" maxlength="10"></td>
             </tr>
             <tr>
               <td>Esp&eacute;cie:</td>
-              <td><input name="especie" type="text" class="texto" id="especie" value="<?= $res["especie"]; ?>" size="15" maxlength="20"></td>
+              <td><input name="especie" type="text" class="texto" id="especie" value="<?php echo  $res["especie"]; ?>" size="15" maxlength="20"></td>
             </tr>
             <tr>
               <td>marca:</td>
-              <td><input name="marca" type="text" class="texto" id="marca" value="<?= $res["marca"]; ?>" size="15" maxlength="20"></td>
+              <td><input name="marca" type="text" class="texto" id="marca" value="<?php echo  $res["marca"]; ?>" size="15" maxlength="20"></td>
             </tr>
             <tr>
               <td>Placa:</td>
-              <td><input name="placa" type="text" class="texto" id="placa" value="<?= $res["placa"]; ?>" size="15" maxlength="20"></td>
+              <td><input name="placa" type="text" class="texto" id="placa" value="<?php echo  $res["placa"]; ?>" size="15" maxlength="20"></td>
             </tr>
             <tr>
               <td colspan="2">&nbsp;</td>
@@ -352,7 +353,7 @@ function MM_openBrWindow(theURL,winName,features) { //v2.0
               <td width="15%" align="center" bgcolor="#003366" class="textoboldbranco">Qtd Entregue </td>
               <td width="11%" align="center" bgcolor="#003366" class="textoboldbranco">Valor R$ </td>
             </tr>
-			<?
+			<?php
 			$sql2=mysql_query("SELECT * FROM vendas_list WHERE venda='$res[pedido]'");
 			$i=0;
 				while($res2=mysql_fetch_array($sql2)){
@@ -361,31 +362,31 @@ function MM_openBrWindow(theURL,winName,features) { //v2.0
 			?>
             <tr>
               <td bgcolor="#FFFFFF">
-                <input name="imp[<?= $res2["id"]; ?>]" type="radio" id="imp<?= $i; ?>" value="s" <? if($res2["imp"]=="s"){ print "checked"; } ?>>
+                <input name="imp[<?php echo  $res2["id"]; ?>]" type="radio" id="imp<?php echo  $i; ?>" value="s" <?php if($res2["imp"]=="s"){ print "checked"; } ?>>
                 Sim 
-                <input name="imp[<?= $res2["id"]; ?>]" type="radio" id="impa<?= $i; ?>" value="n" <? if($res2["imp"]=="n" or empty($res2["imp"])){ print "checked"; } ?>>
+                <input name="imp[<?php echo  $res2["id"]; ?>]" type="radio" id="impa<?php echo  $i; ?>" value="n" <?php if($res2["imp"]=="n" or empty($res2["imp"])){ print "checked"; } ?>>
                 N&atilde;o</td>
-              <td bgcolor="#FFFFFF">&nbsp;<?= $res3["codprod"]; ?></td>
-              <td bgcolor="#FFFFFF">&nbsp;<?= substr($res3["desc_curta"],0,35)." . . ."; ?></td>
-              <td align="center" bgcolor="#FFFFFF">&nbsp;<?= $res2["qtd"]; ?></td>
-              <td bgcolor="#FFFFFF"><input name="qtde[<?= $res2["id"]; ?>]" type="text" class="formularioselect" id="qtde" value="" size="10" maxlength="10" onClick="form1.imp<?= $res2["id"]; ?>.checked=true;"></td>
-              <td align="center" bgcolor="#FFFFFF">&nbsp;<?= banco2valor($res2["unitario"]); ?></td>
+              <td bgcolor="#FFFFFF">&nbsp;<?php echo  $res3["codprod"]; ?></td>
+              <td bgcolor="#FFFFFF">&nbsp;<?php echo  substr($res3["desc_curta"],0,35)." . . ."; ?></td>
+              <td align="center" bgcolor="#FFFFFF">&nbsp;<?php echo  $res2["qtd"]; ?></td>
+              <td bgcolor="#FFFFFF"><input name="qtde[<?php echo  $res2["id"]; ?>]" type="text" class="formularioselect" id="qtde" value="" size="10" maxlength="10" onClick="form1.imp<?php echo  $res2["id"]; ?>.checked=true;"></td>
+              <td align="center" bgcolor="#FFFFFF">&nbsp;<?php echo  banco2valor($res2["unitario"]); ?></td>
             </tr>
-			<?	
+			<?php	
 				} 
 			?>
           </table>		  </td>
         </tr>
         <tr>
-          <td align="left"><img src="imagens/apqp_seta.gif" width="18" height="16">&nbsp;&nbsp;<a href="#" class="textobold" onClick="selecionatodos(<?= $i;?>);">&nbsp;marcar todos</a> / <a href="#" class="textobold" onClick="desmarcatodos(<?= $i;?>);">desmarcar todos</a></td>
+          <td align="left"><img src="imagens/apqp_seta.gif" width="18" height="16">&nbsp;&nbsp;<a href="#" class="textobold" onClick="selecionatodos(<?php echo  $i;?>);">&nbsp;marcar todos</a> / <a href="#" class="textobold" onClick="desmarcatodos(<?php echo  $i;?>);">desmarcar todos</a></td>
         </tr>
         <tr>
           <td align="center">
-            <input name="nf" type="hidden" id="nf" value="<?= $nf; ?>">
-            <input name="qtdc" type="hidden" id="qtdc" value="<?= $i; ?>">
-            <input name="nn" type="hidden" id="nn" value="<?= $res["numero"]; ?>">
-            <input name="cp" type="hidden" id="cp" value="<?= $res["compra"]; ?>">
-            <input name="id" type="hidden" id="id" value="<?= $res["pedido"]; ?>">
+            <input name="nf" type="hidden" id="nf" value="<?php echo  $nf; ?>">
+            <input name="qtdc" type="hidden" id="qtdc" value="<?php echo  $i; ?>">
+            <input name="nn" type="hidden" id="nn" value="<?php echo  $res["numero"]; ?>">
+            <input name="cp" type="hidden" id="cp" value="<?php echo  $res["compra"]; ?>">
+            <input name="id" type="hidden" id="id" value="<?php echo  $res["pedido"]; ?>">
             <input name="acao" type="hidden" id="acao" value="atualizar">
             <input type="submit" name="Submit" value="Salvar">                    </td>
         </tr>
@@ -398,4 +399,4 @@ function MM_openBrWindow(theURL,winName,features) { //v2.0
 </table>
 </body>
 </html>
-<? include("mensagem.php"); ?>
+<?php include("mensagem.php"); ?>

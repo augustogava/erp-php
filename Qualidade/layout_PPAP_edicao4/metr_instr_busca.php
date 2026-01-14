@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 include("seguranca.php");
 $hora=hora();
@@ -29,8 +29,8 @@ if($acao=="exc"){
 	$sql2=mysql_query("SELECT * FROM metrologia_instr WHERE metr_instr_id='$id'");
 	$res2=mysql_fetch_array($sql2);
 	$sql=mysql_query("DELETE FROM metrologia_instr WHERE metr_instr_id='$id'");
-	// cria followup caso exclua o padrão
-		mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Exclusão de Instrução.','O usuário $quem1 excluiu a Instrução $res2[metr_instr_desc].','$user')");
+	// cria followup caso exclua o padrÃ£o
+		mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','ExclusÃ£o de InstruÃ§Ã£o.','O usuÃ¡rio $quem1 excluiu a InstruÃ§Ã£o $res2[metr_instr_desc].','$user')");
 	//				
 	header("Location:metr_instr_busca.php");
 	exit;
@@ -95,7 +95,7 @@ if($acao=="exc"){
                 <td width="19" align="center">&nbsp;</td>
                 <td width="19" align="center">&nbsp;</td>
               </tr>
-              <?
+              <?php
 			  $sql=mysql_query("SELECT * FROM metrologia_instr $cond ORDER BY metr_instr_desc ASC");
 			  if(mysql_num_rows($sql)==0){
 			  ?>
@@ -103,7 +103,7 @@ if($acao=="exc"){
                 <td colspan="5" align="center" class="textopretobold">NENHUMA INSTRU&Ccedil;&Atilde;O 
                   ENCONTRADA</td>
               </tr>
-              <?
+              <?php
 			  }else{
 				//BLOCO PAGINACAO
 				$results_tot=mysql_num_rows($sql); //total de registros encontrados
@@ -140,14 +140,14 @@ if($acao=="exc"){
 					$reg_final++; // PAGINACAO conta quantos registros imprimiu
 			  ?>
               <tr bgcolor="#FFFFFF" class="textopreto" onMouseover="changeto('#CCCCCC')" onMouseout="changeback('#FFFFFF')"> 
-                <td align="center"><? print $res["metr_instr_codi"]; ?></td>
-                <td>&nbsp;&nbsp;<? print $res["metr_instr_desc"]; ?></td>
+                <td align="center"><?php print $res["metr_instr_codi"]; ?></td>
+                <td>&nbsp;&nbsp;<?php print $res["metr_instr_desc"]; ?></td>
                 <td>
-                <div align="center"><? if($res["metr_instr_tipo"]=="1"){ print Calibração; } else if($res["metr_instr_tipo"]=="2"){ print Utilização; } else if($res["metr_instr_tipo"]=="3"){ print MSA;}?></div></td>
-                <td width="19" align="center"><a href="metr_instr_cad.php?acao=alt&id=<? print $res["metr_instr_id"]; ?>"><img src="imagens/icon14_alterar.gif" alt="Alterar" width="14" height="14" border="0"></a></td>
-                <td width="19" align="center"><a href="#" onClick="return pergunta('Deseja excluir este Padrão?','metr_instr_busca.php?acao=exc&id=<? print $res["metr_instr_id"]; ?>')"><img src="imagens/icon14_lixeira.gif" alt="Excluir" width="14" height="14" border="0"></a></td>
+                <div align="center"><?php if($res["metr_instr_tipo"]=="1"){ print CalibraÃ§Ã£o; } else if($res["metr_instr_tipo"]=="2"){ print UtilizaÃ§Ã£o; } else if($res["metr_instr_tipo"]=="3"){ print MSA;}?></div></td>
+                <td width="19" align="center"><a href="metr_instr_cad.php?acao=alt&id=<?php print $res["metr_instr_id"]; ?>"><img src="imagens/icon14_alterar.gif" alt="Alterar" width="14" height="14" border="0"></a></td>
+                <td width="19" align="center"><a href="#" onClick="return pergunta('Deseja excluir este PadrÃ£o?','metr_instr_busca.php?acao=exc&id=<?php print $res["metr_instr_id"]; ?>')"><img src="imagens/icon14_lixeira.gif" alt="Excluir" width="14" height="14" border="0"></a></td>
               </tr>
-              <?
+              <?php
 			  	}
 			  }
 			  ?>
@@ -155,7 +155,7 @@ if($acao=="exc"){
         </tr>
       </table></td>
   </tr>
-  <? if($wpaginar){ ?>
+  <?php if($wpaginar){ ?>
   <tr>
     <td colspan="3"><img src="imagens/dot.gif" width="200" height="10"></td>
   </tr>
@@ -163,19 +163,19 @@ if($acao=="exc"){
     <td align="center"> <table width="1%" border="0" cellspacing="0" cellpadding="0">
         <tr valign="top"> 
           <td align="right"> 
-            <? 
+            <?php 
 				$antz=false;
 				if($wp>1){
 					$antz=true;
 				?>
-            <a href="<? print "metr_instr_busca.php?wp=$pg_anterior&bnome=$bnome&bcodi=$bcodi"; ?>" class="paginacao2"> 
-            <? } ?>
+            <a href="<?php print "metr_instr_busca.php?wp=$pg_anterior&bnome=$bnome&bcodi=$bcodi"; ?>" class="paginacao2"> 
+            <?php } ?>
             <img src="imagens/pag_f.gif" width="27" height="14" border="0"> 
-            <? if($antz){ ?>
+            <?php if($antz){ ?>
             <br>
             Anterior</a>
-            <? } ?>          </td>
-          <?
+            <?php } ?>          </td>
+          <?php
 				$link_impressos=0;
 				if ($temp > $wpaginacao){
 		    	    $n_start  = $temp - ceil($wpaginacao/2);
@@ -189,30 +189,30 @@ if($acao=="exc"){
 					$link_impressos++;
 				?>
           <td align="center"> 
-            <? if($pg_atual != $link_impressos){ ?>
-            <a href="<? print "metr_instr_busca.php?wp=$pg_anterior&bnome=$bnome&bcodi=$bcodi"; ?>" class="paginacao"> 
-            <? } ?>
-            <img src="imagens/pag_e<? if($pg_atual==$link_impressos) print "2"; ?>.gif" width="10" height="14" border="0"><br>
-            <? if($pg_atual==$link_impressos){ print "<span class=\"paginacao2\">$link_impressos</span>"; }else{ print $link_impressos; }?>
-            <? if($pg_atual != $link_impressos){ ?>
+            <?php if($pg_atual != $link_impressos){ ?>
+            <a href="<?php print "metr_instr_busca.php?wp=$pg_anterior&bnome=$bnome&bcodi=$bcodi"; ?>" class="paginacao"> 
+            <?php } ?>
+            <img src="imagens/pag_e<?php if($pg_atual==$link_impressos) print "2"; ?>.gif" width="10" height="14" border="0"><br>
+            <?php if($pg_atual==$link_impressos){ print "<span class=\"paginacao2\">$link_impressos</span>"; }else{ print $link_impressos; }?>
+            <?php if($pg_atual != $link_impressos){ ?>
             </a>
-            <? } ?>          </td>
-          <?
+            <?php } ?>          </td>
+          <?php
 				}
 				?>
           <td> 
-            <? if($reg_final<$results_tot){ ?>
-            <a href="<? print "metr_instr_busca.php?wp=$pg_anterior&bnome=$bnome&bcodi=$bcodi"; ?>" class="paginacao2"> 
-            <? } ?>
+            <?php if($reg_final<$results_tot){ ?>
+            <a href="<?php print "metr_instr_busca.php?wp=$pg_anterior&bnome=$bnome&bcodi=$bcodi"; ?>" class="paginacao2"> 
+            <?php } ?>
             <img src="imagens/pag_der.gif" width="26" height="14" border="0"> 
-            <? if($reg_final<$results_tot){ ?>
+            <?php if($reg_final<$results_tot){ ?>
             <br>
-            Próximo</a>
-            <? } ?>          </td>
+            PrÃ³ximo</a>
+            <?php } ?>          </td>
         </tr>
       </table></td>
   </tr>
-    <? } ?>
+    <?php } ?>
   <tr>
     <td align="center">&nbsp;</td>
   </tr>
@@ -224,4 +224,4 @@ if($acao=="exc"){
 </table>
 </body>
 </html>
-<? include("mensagem.php"); ?>
+<?php include("mensagem.php"); ?>

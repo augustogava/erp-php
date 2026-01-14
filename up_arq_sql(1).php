@@ -1,16 +1,16 @@
-<?
+<?php
 include("conecta.php");
 include("seguranca.php");
 if(empty($acao)) exit;
 if($acao=="inc"){
 	if($arquivos <> 'none') {
 		if($arquivos_size==0){
-			$_SESSION["mensagem"]="O arquivo deve ter atÈ 2Mb";
+			$_SESSION["mensagem"]="O arquivo deve ter at√© 2Mb";
 			$acao="inc";
 		}else{
 			$sql=mysql_query("SELECT * FROM up_arq WHERE nome='$arquivos_name' AND pasta='$pasta'");
 			if(mysql_num_rows($sql)){
-				$_SESSION["mensagem"]="O arquivo j· existe!";
+				$_SESSION["mensagem"]="O arquivo j√° existe!";
 				$acao="inc";
 			}else{
 				$data=date("Y-m-d");
@@ -24,7 +24,7 @@ if($acao=="inc"){
 					$_SESSION["mensagem"]="Arquivo carregado com sucesso";
 					$acao="abre_pasta2";
 				}else{
-					$_SESSION["mensagem"]="O arquivo n„o pÙde ser carregado";
+					$_SESSION["mensagem"]="O arquivo n√£o p√¥de ser carregado";
 					$acao="inc";
 				}
 			}
@@ -47,11 +47,11 @@ if($acao=="inc"){
 			$_SESSION["mensagem"]="Arquivo alterado com sucesso!";
 			$acao="abre_pasta2";
 		}else{
-			$_SESSION["mensagem"]="O arquivo n„o pÙde ser alterado!";
+			$_SESSION["mensagem"]="O arquivo n√£o p√¥de ser alterado!";
 			$acao="alt";
 		}
 	}else{
-		$_SESSION["mensagem"]="O arquivo j· existe!";
+		$_SESSION["mensagem"]="O arquivo j√° existe!";
 		$acao="alt";
 	}
 }elseif($acao=="exc"){
@@ -59,9 +59,9 @@ if($acao=="inc"){
 			$sql=mysql_query("DELETE FROM up_arq WHERE id='$id'");
 			if($sql){
 				unlink("$patch/up_files/$id.mng");
-				$_SESSION["mensagem"]="Arquivo excluÌdo com sucesso!";
+				$_SESSION["mensagem"]="Arquivo exclu√≠do com sucesso!";
 			}else{
-				$_SESSION["mensagem"]="O Arquivo n„o pÙde ser excluÌdo!";
+				$_SESSION["mensagem"]="O Arquivo n√£o p√¥de ser exclu√≠do!";
 			}		
 	}
 	$acao="abre_pasta";

@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 $quem=$_SESSION["login_nome"];
 if(empty($acao)) exit;
@@ -158,7 +158,7 @@ if($acao=="nfe"){
 		$_SESSION["mensagem"]="NF de Entrada registrada com sucesso!";
 		$hd="nf";
 	}else{
-		$_SESSION["mensagem"]="A NF de entrada não pôde ser registrada!";
+		$_SESSION["mensagem"]="A NF de entrada nÃ£o pÃ´de ser registrada!";
 		$hd="nfe";
 	}
 }elseif($acao=="nfs"){
@@ -311,7 +311,7 @@ if($acao=="nfe"){
 		$_SESSION["mensagem"]="NF de Entrada registrada com sucesso!";
 		$hd="nf";
 	}else{
-		$_SESSION["mensagem"]="A NF de entrada não pôde ser registrada!";
+		$_SESSION["mensagem"]="A NF de entrada nÃ£o pÃ´de ser registrada!";
 		$hd="nfe";
 	}
 }

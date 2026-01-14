@@ -1,11 +1,11 @@
-<?
+<?php
 include("conecta.php");
 include("seguranca.php");
 $apqp=new set_apqp;
 if(empty($acao)) $acao="entrar";
 $pc=$_SESSION["mpc"];
 $npc=$_SESSION["npc"];
-//VerificaÁ„o
+//Verifica√ß√£o
 $_SESSION["modulo"]="desenho";
 $sqlm=mysql_query("SELECT * FROM online WHERE user<>'$iduser' and peca='$pc' and modulo='desenho'");
 if(mysql_num_rows($sqlm)){
@@ -15,7 +15,7 @@ if(mysql_num_rows($sqlm)){
 	}else{
 		$sql2=mysql_query("SELECT * FROM clientes WHERE id='$resm[user]'"); $res2=mysql_fetch_array($sql2);
 	}
-	$_SESSION["mensagem"]="O usuario $res2[nome] est· alterando esta peÁa!";
+	$_SESSION["mensagem"]="O usuario $res2[nome] est√° alterando esta pe√ßa!";
 	header("Location:apqp_menu.php");
 	exit;
 }
@@ -36,7 +36,7 @@ if($acao=="alt"){
 <!--
 function verifica(cad){
 	if(cad.descr.value==''){
-		alert('Informe a descriÁ„o');
+		alert('Informe a descri√ß√£o');
 		cad.descr.focus();
 		return false;
 	}
@@ -62,8 +62,8 @@ function MM_openBrWindow(theURL,winName,features) { //v2.0
 <body  leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" onLoad="enterativa=1;"onkeypress="return ent()">
 <table width="590" border="0" cellpadding="0" cellspacing="0" class="texto">
       <tr>
-       <td width="27" align="center"><div align="left"><a href="#" onClick="MM_openBrWindow('help/mini_desenho.html','','width=680,height=501')"><img src="imagens/icon14_ahn.gif" width="14" height="14" border="0" onMouseOver="this.T_STICKY=true; this.T_TITLE='Desenho'; this.T_DELAY=10; this.T_WIDTH=225;  return escape('No CYBERMananger È possÌvel cadastrar desenhos relacionados ao APQP da peÁa ou processo. Para cadastrar um incluir desenho, esta pagina exibe os desenhos j· cadastrados.<br><strong>Cadastro de desenho </strong><br>Quando um desenho È cadastrado, no  CYBERMananger faz uma cÛpia do arquivo para o servidor. N„o h· um vÌnculo direto com o arquivo original apÛs o registro. Assim, se o arquivo original for modificado, esta alteraÁ„o n„o ser· refletida no documento registrado no CYBERManager. Para que a nova vers„o do desenho esteja disponÌvel, È necess·rio recadastr·-lo.')"></a><span class="impTextoBold">&nbsp;</span></div></td>
-       <td width="563" align="right"><div align="left" class="textobold style1 style1 style1 style1 style1 style1 style1">APQP - Desenhos <? print $npc; ?></div></td>
+       <td width="27" align="center"><div align="left"><a href="#" onClick="MM_openBrWindow('help/mini_desenho.html','','width=680,height=501')"><img src="imagens/icon14_ahn.gif" width="14" height="14" border="0" onMouseOver="this.T_STICKY=true; this.T_TITLE='Desenho'; this.T_DELAY=10; this.T_WIDTH=225;  return escape('No CYBERMananger √© poss√≠vel cadastrar desenhos relacionados ao APQP da pe√ßa ou processo. Para cadastrar um incluir desenho, esta pagina exibe os desenhos j√° cadastrados.<br><strong>Cadastro de desenho </strong><br>Quando um desenho √© cadastrado, no  CYBERMananger faz uma c√≥pia do arquivo para o servidor. N√£o h√° um v√≠nculo direto com o arquivo original ap√≥s o registro. Assim, se o arquivo original for modificado, esta altera√ß√£o n√£o ser√° refletida no documento registrado no CYBERManager. Para que a nova vers√£o do desenho esteja dispon√≠vel, √© necess√°rio recadastr√°-lo.')"></a><span class="impTextoBold">&nbsp;</span></div></td>
+       <td width="563" align="right"><div align="left" class="textobold style1 style1 style1 style1 style1 style1 style1">APQP - Desenhos <?php print $npc; ?></div></td>
      </tr>
      <tr>
        <td align="center">&nbsp;</td>
@@ -73,7 +73,7 @@ function MM_openBrWindow(theURL,winName,features) { //v2.0
 <table width="602"  border="1" cellpadding="3" cellspacing="0" bordercolor="#CCCCCC">
   <tr>
     <td width="608"><table width="594" border="0" cellpadding="0" cellspacing="0">
-      <? if($acao=="entrar"){ ?>
+      <?php if($acao=="entrar"){ ?>
       <tr>
         <td align="left" valign="top"><table width="594" border="0" cellspacing="0" cellpadding="0">
             <tr>
@@ -89,27 +89,27 @@ function MM_openBrWindow(theURL,winName,features) { //v2.0
                 <td width="19" align="center">&nbsp;</td>
                 <td width="22" align="center">&nbsp;</td>
               </tr>
-              <?
+              <?php
 $sql=mysql_query("SELECT * FROM apqp_des WHERE peca='$pc' ORDER BY descr ASC");
 if(mysql_num_rows($sql)==0){
 ?>
               <tr align="center" bgcolor="#FFFFFF" class="texto">
                 <td colspan="6" align="center" class="textopretobold">NENHUM DOCUMENTO ENCONTRADO </td>
               </tr>
-              <?
+              <?php
 }else{
 	while($res=mysql_fetch_array($sql)){
 		
 ?>
               <tr bgcolor="#FFFFFF" class="textopreto" onMouseover="changeto('#CCCCCC')" onMouseout="changeback('#FFFFFF')">
-                <td width="273">&nbsp;<? print $res["descr"]; ?> </td>
-                <td width="232">&nbsp;<? print $res["original"]; ?></td>
-                <td width="22" align="center"><a href="#"  onClick="return abre('apqp_desobs.php?id=<? print $res["id"]; ?>','obs','width=320,height=200,scrollbars=1');"><img src="imagens/icon14_visualizar.gif" alt="Observa&ccedil;&otilde;es" width="14" height="14" border="0"></a></td>
-                <td width="19" align="center"><a href="apqp_desdown.php?id=<? print $res["id"]; ?>"><img src="imagens/icon_14_down.gif" alt="Download" width="14" height="14" border="0"></a></td>
-                <td width="19" align="center"><a href="apqp_des.php?acao=alt&id=<? print $res["id"]; ?>"><img src="imagens/icon14_alterar.gif" alt="Alterar" width="14" height="14" border="0"></a></td>
-                <td width="22" align="center"><a href="#" onClick="return pergunta('Deseja excluir este desenho?','apqp_des_sql.php?acao=exc&id=<? print $res["id"]; ?>');"><img src="imagens/icon14_lixeira.gif" alt="Excluir" width="14" height="14" border="0"></a></td>
+                <td width="273">&nbsp;<?php print $res["descr"]; ?> </td>
+                <td width="232">&nbsp;<?php print $res["original"]; ?></td>
+                <td width="22" align="center"><a href="#"  onClick="return abre('apqp_desobs.php?id=<?php print $res["id"]; ?>','obs','width=320,height=200,scrollbars=1');"><img src="imagens/icon14_visualizar.gif" alt="Observa&ccedil;&otilde;es" width="14" height="14" border="0"></a></td>
+                <td width="19" align="center"><a href="apqp_desdown.php?id=<?php print $res["id"]; ?>"><img src="imagens/icon_14_down.gif" alt="Download" width="14" height="14" border="0"></a></td>
+                <td width="19" align="center"><a href="apqp_des.php?acao=alt&id=<?php print $res["id"]; ?>"><img src="imagens/icon14_alterar.gif" alt="Alterar" width="14" height="14" border="0"></a></td>
+                <td width="22" align="center"><a href="#" onClick="return pergunta('Deseja excluir este desenho?','apqp_des_sql.php?acao=exc&id=<?php print $res["id"]; ?>');"><img src="imagens/icon14_lixeira.gif" alt="Excluir" width="14" height="14" border="0"></a></td>
               </tr>
-              <?
+              <?php
 	}
 }
 ?>
@@ -122,46 +122,46 @@ if(mysql_num_rows($sql)==0){
         <td align="center" valign="top"><input name="button12" type="button" class="microtxt" value="Voltar" onClick="window.location='apqp_menu.php';">
             <img src="imagens/dot.gif" width="20" height="5"></td>
       </tr>
-      <? }else{ ?>
+      <?php }else{ ?>
       <tr>
         <td align="left" valign="top"><form action="apqp_des_sql.php" method="post" enctype="multipart/form-data" name="frmdes" onSubmit="return verifica(this)">
             <table width="100%" border="0" cellspacing="1" cellpadding="3">
               <tr>
-                <td colspan="2" align="center" bgcolor="#003366" class="textoboldbranco"><? if($acao=="alt"){ print "Alterar"; }else{ print "Incluir"; } ?>
+                <td colspan="2" align="center" bgcolor="#003366" class="textoboldbranco"><?php if($acao=="alt"){ print "Alterar"; }else{ print "Incluir"; } ?>
 &nbsp;Desenho</td>
               </tr>
               <tr>
                 <td width="60" class="textobold">Descri&ccedil;&atilde;o:</td>
-                <td width="519"><input name="descr" type="text" class="formularioselect" id="descr" value="<? print $res["descr"]; ?>" maxlength="50"></td>
+                <td width="519"><input name="descr" type="text" class="formularioselect" id="descr" value="<?php print $res["descr"]; ?>" maxlength="50"></td>
               </tr>
-              <? if($acao=="alt"){ ?>
+              <?php if($acao=="alt"){ ?>
               <tr>
                 <td class="textobold">Nome:</td>
-                <td class="texto">&nbsp;<? print $res["original"]; ?></td>
+                <td class="texto">&nbsp;<?php print $res["original"]; ?></td>
               </tr>
-              <? } ?>
+              <?php } ?>
               <tr>
                 <td class="textobold">Desenho:</td>
                 <td><input name="arquivo" type="file" class="formularioselect" id="arquivo"></td>
               </tr>
               <tr>
                 <td class="textobold">Obs:</td>
-                <td><input name="obs" type="text" class="formularioselect" id="local4" value="<? print $res["obs"]; ?>" maxlength="255"></td>
+                <td><input name="obs" type="text" class="formularioselect" id="local4" value="<?php print $res["obs"]; ?>" maxlength="255"></td>
               </tr>
               <tr>
-                <td colspan="2" align="center" class="textobold"><input name="id" type="hidden" id="id" value="<? print $id; ?>">
-                    <input name="acao" type="hidden" id="acao" value="<? print $acao; ?>">
+                <td colspan="2" align="center" class="textobold"><input name="id" type="hidden" id="id" value="<?php print $id; ?>">
+                    <input name="acao" type="hidden" id="acao" value="<?php print $acao; ?>">
                     <input name="button122" type="button" class="microtxt" value="Voltar" onClick="window.location='apqp_des.php';">
                     &nbsp;
 					<input name="button1222" type="submit" class="microtxt" value="Continuar">
-&nbsp;&nbsp; <?
-$apqp->agenda_p("Desenho (Se aplic·vel)","apqp_des.php");
+&nbsp;&nbsp; <?php
+$apqp->agenda_p("Desenho (Se aplic√°vel)","apqp_des.php");
 ?></td>
               </tr>
             </table>
         </form></td>
       </tr>
-      <? } ?>
+      <?php } ?>
     </table></td>
   </tr>
 </table>
@@ -169,4 +169,4 @@ $apqp->agenda_p("Desenho (Se aplic·vel)","apqp_des.php");
 </body>
 </html>
 <script language="javascript" src="tooltip.js"></script>
-<? include("mensagem.php"); ?>
+<?php include("mensagem.php"); ?>

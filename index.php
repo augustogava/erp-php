@@ -24,7 +24,8 @@ $submenus=explode(",",$res["submenus"]);
 <html lang="pt-BR">
 <head>
 <title>Sistema ERP v3.5.1</title>
-<meta charset="ISO-8859-1">
+<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <link href="style.css" rel="stylesheet" type="text/css">
@@ -238,8 +239,8 @@ $submenus=explode(",",$res["submenus"]);
                 <i class="fas fa-user"></i>
             </div>
             <div>
-                <div style="font-size:14px;font-weight:600;"><?=$_SESSION["login_nome"]?></div>
-                <div style="font-size:12px;opacity:0.8;"><?=$_SESSION["login_nivel_nome"]?></div>
+                <div style="font-size:14px;font-weight:600;"><?php echo $_SESSION["login_nome"]?></div>
+                <div style="font-size:12px;opacity:0.8;"><?php echo $_SESSION["login_nivel_nome"]?></div>
             </div>
         </div>
     </div>
@@ -302,7 +303,7 @@ $submenus=explode(",",$res["submenus"]);
     </div>
     
     <div class="main-footer">
-        <i class="fas fa-code"></i> Sistema ERP v3.5.1 - <?=date("Y")?> - <i class="fas fa-user"></i> <?=$_SESSION["login_nome"]?>
+        <i class="fas fa-code"></i> Sistema ERP v3.5.1 - <?php echo date("Y")?> - <i class="fas fa-user"></i> <?php echo $_SESSION["login_nome"]?>
     </div>
 </div>
 

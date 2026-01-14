@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 include("seguranca.php");
 $acao=verifi($permi,$acao);
@@ -16,7 +16,8 @@ if($acao=="alt"){
 <html>
 <head>
 <title>CyberManager</title>
-<meta http-equiv="Content-Type" content="text/html; UTF-8">
+<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="style.css" rel="stylesheet" type="text/css">
 <script src="scripts.js"></script>
 <script src="mascaras.js"></script>
@@ -44,7 +45,7 @@ function MM_openBrWindow(theURL,winName,features) { //v2.0
 </head>
 <body background="imagens/mdagua.gif" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" onLoad="enterativa=1;"onkeypress="return ent()">
 <table width="594" border="0" cellpadding="0" cellspacing="0">
-<? if($acao=="entrar"){ ?>
+<?php if($acao=="entrar"){ ?>
   <tr>
     <td align="left" valign="top"><table width="590" border="0" cellpadding="0" cellspacing="0" class="texto">
       <tr>
@@ -72,53 +73,53 @@ function MM_openBrWindow(theURL,winName,features) { //v2.0
           <td width="18">&nbsp;</td>
           <td width="20">&nbsp;</td>
         </tr>
-        <?
+        <?php
 			  $sql=mysql_query("SELECT * FROM material ORDER BY nome ASC");
 			  if(mysql_num_rows($sql)==0){
 			  ?>
         <tr bgcolor="#FFFFFF"> 
           <td colspan="5" align="center" class="textobold">NENHUM MATERIAL ENCONTRADO          </td>
         </tr>
-        <?
+        <?php
 			  }else{
 			  	while($res=mysql_fetch_array($sql)){
 			  ?>
         <tr bgcolor="#FFFFFF" class="texto" onMouseover="changeto('#CCCCCC')" onMouseout="changeback('#FFFFFF')"> 
-          <td>&nbsp;<? print $res["nome"]; ?></td>
-          <td>&nbsp;<? print banco2valor($res["valor"]); ?></td>
-          <td>&nbsp;<? print banco2valor($res["peso"]); ?></td>
-          <td width="18" align="center"><a href="material.php?acao=alt&id=<? print $res["id"]; ?>"><img src="imagens/icon14_alterar.gif" alt="Alterar" width="14" height="14" border="0"></a></td>
-          <td width="20" align="center"><a href="#" onClick="return pergunta('Deseja excluir esta Material?','material_sql.php?acao=exc&id=<? print $res["id"]; ?>')"><img src="imagens/icon14_lixeira.gif" alt="Excluir" width="14" height="14" border="0"></a></td>
+          <td>&nbsp;<?php print $res["nome"]; ?></td>
+          <td>&nbsp;<?php print banco2valor($res["valor"]); ?></td>
+          <td>&nbsp;<?php print banco2valor($res["peso"]); ?></td>
+          <td width="18" align="center"><a href="material.php?acao=alt&id=<?php print $res["id"]; ?>"><img src="imagens/icon14_alterar.gif" alt="Alterar" width="14" height="14" border="0"></a></td>
+          <td width="20" align="center"><a href="#" onClick="return pergunta('Deseja excluir esta Material?','material_sql.php?acao=exc&id=<?php print $res["id"]; ?>')"><img src="imagens/icon14_lixeira.gif" alt="Excluir" width="14" height="14" border="0"></a></td>
         </tr>
-        <?
+        <?php
 			  	}
 			  }
 			  ?>
       </table></td>
   </tr>
-  <? }else{ ?>
+  <?php }else{ ?>
   <tr>
     <td align="left" valign="top"><form name="form1" method="post" action="material_sql.php" onSubmit="return verifica(this);">
         <table width="400" border="0" cellpadding="0" cellspacing="0">
           <tr bgcolor="#003366"> 
             <td colspan="2" align="center" class="textoboldbranco"> 
-              <? if($acao=="inc"){ print"Incluir"; }else{ print"Alterar";} ?> Material            </td>
+              <?php if($acao=="inc"){ print"Incluir"; }else{ print"Alterar";} ?> Material            </td>
           </tr>
           <tr>
             <td width="151" class="textobold">&nbsp;Material</td>
-            <td width="249" class="textobold"><input name="nome" type="text" class="formularioselect" id="nome2" value="<? print $res["nome"]; ?>" size="45" maxlength="80"></td>
+            <td width="249" class="textobold"><input name="nome" type="text" class="formularioselect" id="nome2" value="<?php print $res["nome"]; ?>" size="45" maxlength="80"></td>
           </tr>
           <tr>
             <td class="textobold">Apelido</td>
-            <td class="textobold"><input name="apelido" type="text" class="formularioselect" id="nome" value="<? print $res["apelido"]; ?>" size="45" maxlength="80"></td>
+            <td class="textobold"><input name="apelido" type="text" class="formularioselect" id="nome" value="<?php print $res["apelido"]; ?>" size="45" maxlength="80"></td>
           </tr>
           <tr>
             <td class="textobold">&nbsp;Valor</td>
-            <td class="textobold"><input name="valor_ma" type="text" class="formularioselect" id="nome2" value="<? print banco2valor($res["valor"]); ?>" onKeyDown="formataMoeda(this,retornaKeyCode(event))" onKeyUp="formataMoeda(this,retornaKeyCode(event))" size="45" maxlength="30"></td>
+            <td class="textobold"><input name="valor_ma" type="text" class="formularioselect" id="nome2" value="<?php print banco2valor($res["valor"]); ?>" onKeyDown="formataMoeda(this,retornaKeyCode(event))" onKeyUp="formataMoeda(this,retornaKeyCode(event))" size="45" maxlength="30"></td>
           </tr>
           <tr>
             <td class="textobold">&nbsp;Peso</td>
-            <td class="textobold"><input name="peso" type="text" class="formularioselect" id="nome2" value="<? print banco2valor($res["peso"]); ?>" onKeyDown="formataMoeda(this,retornaKeyCode(event))" onKeyUp="formataMoeda(this,retornaKeyCode(event))" size="45" maxlength="30"></td>
+            <td class="textobold"><input name="peso" type="text" class="formularioselect" id="nome2" value="<?php print banco2valor($res["peso"]); ?>" onKeyDown="formataMoeda(this,retornaKeyCode(event))" onKeyUp="formataMoeda(this,retornaKeyCode(event))" size="45" maxlength="30"></td>
           </tr>
           
           <tr align="center"> 
@@ -126,14 +127,14 @@ function MM_openBrWindow(theURL,winName,features) { //v2.0
               <input name="Submit22" type="button" class="microtxt" value="voltar" onClick="window.location='material.php'">
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               <input name="Submit2" type="submit" class="microtxt" value="Continuar">
-              <input name="acao" type="hidden" id="acao" value="<? if($acao=="alt"){ print "alterar"; }else{ print "incluir"; } ?>"> 
-            <input name="id" type="hidden" id="id3" value="<? print $id; ?>"></td>
+              <input name="acao" type="hidden" id="acao" value="<?php if($acao=="alt"){ print "alterar"; }else{ print "incluir"; } ?>"> 
+            <input name="id" type="hidden" id="id3" value="<?php print $id; ?>"></td>
           </tr>
         </table>
       </form>    </td>
-	<? } ?>
+	<?php } ?>
   </tr>
 </table>
 </body>
 </html>
-<? include("mensagem.php"); ?>
+<?php include("mensagem.php"); ?>

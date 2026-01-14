@@ -1,6 +1,6 @@
 <?php
 $npc=$_SESSION["npc"];
-$sql=mysql_query("SELECT *,apqp_pc.nome AS nome, clientes.fantasia AS nomecli FROM apqp_pc,clientes WHERE apqp_pc.id='$pc' AND apqp_pc.cliente=clientes.id") or die("nao");
+$sql=mysql_query("SELECT *,apqp_pc.nome AS nome, clientes.fantasia AS nomecli FROM apqp_pc,clientes WHERE apqp_pc.id='$pc' AND apqp_pc.cliente=clientes.id") or erp_db_fail();
 $res=mysql_fetch_array($sql);
 if(!mysql_num_rows($sql)) exit;
 $sql=mysql_query("SELECT * FROM empresa");
@@ -49,37 +49,37 @@ $pdf->Cell(0, 18, 'Estudio de R&R');
 $pdf->SetFont('Arial','',8);
 	$pdf->SetXY(180, 5);
 	$pdf->SetFont('Arial','B',8);
-	$pdf->MultiCell(40,5,"PPAP Nº $numero \n Página: $pg");
+	$pdf->MultiCell(40,5,"PPAP NÂº $numero \n PÃ¡gina: $pg");
 	$pdf->SetFont('Arial','',8);
 	$pdf->SetXY(5, 18);
 	$pdf->MultiCell(80,5,"Cliente \n $cliente",1);
 	$pdf->SetXY(85, 18);
-	$pdf->MultiCell(60,5,"Número de Pieza (cliente) \n $peca",1);
+	$pdf->MultiCell(60,5,"NÃºmero de Pieza (cliente) \n $peca",1);
 	$pdf->SetXY(145, 18);
 	$pdf->MultiCell(60,5,"Revision/Fecha Plano \n $rev ",1);
 	//linha 2
 	$pdf->SetXY(5, 28);
 	$pdf->MultiCell(80,5,"Suministrador\n $razao",1);
 	$pdf->SetXY(85, 28);
-	$pdf->MultiCell(60,5,"Número de Pieza(Suministrador)\n $num",1);
+	$pdf->MultiCell(60,5,"NÃºmero de Pieza(Suministrador)\n $num",1);
 	$pdf->SetXY(145, 28);
 	$pdf->MultiCell(60,5,"Revision da Pieza(Suministrador) \n $revi",1);
 	//linha 3
 	$pdf->SetXY(5, 38);
 	$pdf->MultiCell(80,5,"Nombre da Pieza \n $nome",1);
 	$pdf->SetXY(85, 38);
-	$pdf->MultiCell(60,5,"Código del  Equipo de Medición \n $disp",1);
+	$pdf->MultiCell(60,5,"CÃ³digo del  Equipo de MediciÃ³n \n $disp",1);
 	$pdf->SetXY(145, 38);
 	$pdf->MultiCell(60,5,"Nombre del Equipo de Medida\n $dispo",1);
 	//linha 4
 	$pdf->SetXY(5, 48);
-	$pdf->MultiCell(40,5,"Caract. Nº \n $num",1);
+	$pdf->MultiCell(40,5,"Caract. NÂº \n $num",1);
 	$pdf->SetXY(45, 48);
-	$pdf->MultiCell(40,5,"Característica \n $carac",1);
+	$pdf->MultiCell(40,5,"CaracterÃ­stica \n $carac",1);
 	$pdf->SetXY(85, 48);
-	$pdf->MultiCell(60,5,"Especificación \n $espec",1);
+	$pdf->MultiCell(60,5,"EspecificaciÃ³n \n $espec",1);
 	$pdf->SetXY(145, 48);
-	$pdf->MultiCell(60,5,"Tolerância \n $tol",1);
+	$pdf->MultiCell(60,5,"TolerÃ¢ncia \n $tol",1);
 	//linhs 5
 	$pdf->SetXY(5,58);
 	$pdf->MultiCell(80,5,"Realizado por \n $por",1);
@@ -97,7 +97,7 @@ $pdf->SetFont('Arial','',8);
 //linha 7
 $pdf->SetXY(5, 80);
 $pdf->SetFont('Arial','B',14);
-$pdf->MultiCell(205,5,"Médias",0,'C');
+$pdf->MultiCell(205,5,"MÃ©dias",0,'C');
 $pdf->SetXY(5, 150);
 $pdf->MultiCell(205,5,"Rangos",0,'C');
 //linha 8

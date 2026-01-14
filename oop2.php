@@ -1,4 +1,4 @@
-<?
+<?php
 class compTxt{
 
     var $size;
@@ -39,7 +39,7 @@ class compTxt{
     }
 }
 ?>
-<?
+<?php
 $txt = new compTxt();
 
 $txt->set_par("face","verdana");

@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 if(empty($btipo)) $btipo="rec_plac";
 
@@ -35,7 +35,7 @@ if (parseInt(navigator.appVersion) >= 4) window.moveTo((screen.width/2)-(windowW
             <td colspan="2" align="center" class="textoboldbranco">BUSCA</td>
           </tr>
           <tr class="textobold"> 
-            <td width="69">&nbsp;DescriÁ„o:</td>
+            <td width="69">&nbsp;Descri√ß√£o:</td>
             <td width="231"> <input name="bitem" type="text" class="formulario" id="bitem" size="30">
               <img src="imagens/dot.gif" width="20" height="5">
               <input name="imageField" type="image" src="imagens/icon_busca.gif" width="17" height="17" border="0">
@@ -50,17 +50,17 @@ if (parseInt(navigator.appVersion) >= 4) window.moveTo((screen.width/2)-(windowW
   <tr>
     <td><table width="300" border="0" cellpadding="3" cellspacing="1" bgcolor="#999999">
         <tr class="textoboldbranco"> 
-          <td width="267">&nbsp;Õtem</td>
+          <td width="267">&nbsp;√çtem</td>
           <td width="18">&nbsp;</td>
         </tr>
-		<?
+		<?php
 		$sql=mysql_query("SELECT * FROM $btipo $busca ORDER BY descr ASC");
 		if(mysql_num_rows($sql)==0){
 		?>
         <tr bgcolor="#FFFFFF" class="texto"> 
           <td colspan="2" align="center" class="textopretobold">NENHUM REGISTRO ENCONTRADO</td>
         </tr>
-        <?
+        <?php
 		}else{
 			//BLOCO PAGINACAO
 			$results_tot=mysql_num_rows($sql); //total de registros encontrados
@@ -97,36 +97,36 @@ if (parseInt(navigator.appVersion) >= 4) window.moveTo((screen.width/2)-(windowW
 				$reg_final++; // PAGINACAO conta quantos registros imprimiu
 		?>
 		<tr bgcolor="#FFFFFF" class="textopreto" onMouseover="changeto('#CCCCCC')" onMouseout="changeback('#FFFFFF')">
-          <td>&nbsp;<? print $res["descr"]; ?></td>
-          <td colspan="2"><div align="center"><a href="javascript:window.close();" onClick="return seleciona('<? print $res["descr"]; ?>','<? print $res["id"]; ?>');"><img src="imagens/icon_14img.gif" width="14" height="14" border="0"></a></div>
+          <td>&nbsp;<?php print $res["descr"]; ?></td>
+          <td colspan="2"><div align="center"><a href="javascript:window.close();" onClick="return seleciona('<?php print $res["descr"]; ?>','<?php print $res["id"]; ?>');"><img src="imagens/icon_14img.gif" width="14" height="14" border="0"></a></div>
           </a></td>
 		</tr>
-		<?
+		<?php
 			}
 		}
 		?>
       </table></td>
   </tr>
   <tr>
-    <td align="center">      <? if($wpaginar) { ?>
+    <td align="center">      <?php if($wpaginar) { ?>
       <table width="300" border="0" cellspacing="0" cellpadding="0">
         <tr> 
           <td align="center"><table width="1%" border="0" cellspacing="0" cellpadding="0">
               <tr valign="top"> 
                 <td align="right"> 
-                  <? 
+                  <?php 
 				$antz=false;
 				if($wp>1){
 					$antz=true;
 				?>
-                  <a href="<? print $_SERVER['PHP_SELF']."?wp=$pg_anterior&bitem=$bitem&btipo=$btipo"; ?>" class="paginacao2"> 
-                  <? } ?>
+                  <a href="<?php print $_SERVER['PHP_SELF']."?wp=$pg_anterior&bitem=$bitem&btipo=$btipo"; ?>" class="paginacao2"> 
+                  <?php } ?>
                   <img src="imagens/pag_f.gif" border="0"> 
-                  <? if($antz){ ?>
+                  <?php if($antz){ ?>
                   <br>
                   Anterior</a> 
-                <? } ?>                </td>
-                <?
+                <?php } ?>                </td>
+                <?php
 				$link_impressos=0;
 				if ($temp > $wpaginacao){
 		    	    $n_start  = $temp - ceil($wpaginacao/2);
@@ -140,32 +140,32 @@ if (parseInt(navigator.appVersion) >= 4) window.moveTo((screen.width/2)-(windowW
 					$link_impressos++;
 				?>
                 <td align="center"> 
-                  <? if($pg_atual != $link_impressos){ ?>
-                  <a href="<? print $_SERVER['PHP_SELF']."?wp=$link_impressos&bitem=$bitem&btipo=$btipo"; ?>" class="paginacao"> 
-                  <? } ?>
-                  <img src="imagens/pag_e<? if($pg_atual==$link_impressos) print "2"; ?>.gif"  border="0"><br>
-                  <? if($pg_atual==$link_impressos){ print "<span class=\"paginacao2\">$link_impressos</span>"; }else{ print $link_impressos; }?>
-                  <? if($pg_atual != $link_impressos){ ?>
+                  <?php if($pg_atual != $link_impressos){ ?>
+                  <a href="<?php print $_SERVER['PHP_SELF']."?wp=$link_impressos&bitem=$bitem&btipo=$btipo"; ?>" class="paginacao"> 
+                  <?php } ?>
+                  <img src="imagens/pag_e<?php if($pg_atual==$link_impressos) print "2"; ?>.gif"  border="0"><br>
+                  <?php if($pg_atual==$link_impressos){ print "<span class=\"paginacao2\">$link_impressos</span>"; }else{ print $link_impressos; }?>
+                  <?php if($pg_atual != $link_impressos){ ?>
                   </a> 
-                  <? } ?>
+                  <?php } ?>
                 </td>
-                <?
+                <?php
 				}
 				?>
                 <td> 
-                  <? if($reg_final<$results_tot){ ?>
-                  <a href="<? print $_SERVER['PHP_SELF']."?wp=$pg_proxima&bitem=$bitem&btipo=$btipo"; ?>" class="paginacao2"> 
-                  <? } ?>
+                  <?php if($reg_final<$results_tot){ ?>
+                  <a href="<?php print $_SERVER['PHP_SELF']."?wp=$pg_proxima&bitem=$bitem&btipo=$btipo"; ?>" class="paginacao2"> 
+                  <?php } ?>
                   <img src="imagens/pag_der.gif" border="0"> 
-                  <? if($reg_final<$results_tot){ ?>
+                  <?php if($reg_final<$results_tot){ ?>
                   <br>
-                  PrÛximo</a> 
-                <? } ?>                </td>
+                  Pr√≥ximo</a> 
+                <?php } ?>                </td>
               </tr>
             </table></td>
         </tr>
       </table>
-      <? } ?></td>
+      <?php } ?></td>
   </tr>
 </table>
 </body>

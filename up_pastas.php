@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 include("seguranca.php");
 if(empty($acao)) $acao="entrar";
@@ -10,7 +10,8 @@ if($acao=="alt"){
 <html>
 <head>
 <title>CyberManager</title>
-<meta http-equiv="Content-Type" content="text/html; UTF-8">
+<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="style.css" rel="stylesheet" type="text/css">
 <script src="scripts.js"></script>
 <script>
@@ -38,7 +39,7 @@ function verifica(cad){
       </tr>
     </table></td>
   </tr>
-<? if($acao=="entrar"){ ?>
+<?php if($acao=="entrar"){ ?>
   <tr> 
     <td align="left" valign="top"><table width="300" border="0" cellspacing="0" cellpadding="0">
         <tr> 
@@ -53,7 +54,7 @@ function verifica(cad){
           <td width="17">&nbsp;</td>
           <td width="16">&nbsp;</td>
         </tr>
-        <?
+        <?php
 			  $sql=mysql_query("SELECT * FROM up_pastas WHERE dono='$_SESSION[login_codigo]' ORDER BY nome ASC");
 			  if(mysql_num_rows($sql)==0){
 			  ?>
@@ -61,41 +62,41 @@ function verifica(cad){
           <td colspan="4" align="center" class="textobold">NENHUMA PASTA ENCONTRADA
           </td>
         </tr>
-        <?
+        <?php
 			  }else{
 			  	while($res=mysql_fetch_array($sql)){
 			  ?>
         <tr bgcolor="#FFFFFF" class="texto" onMouseover="changeto('#CCCCCC')" onMouseout="changeback('#FFFFFF')"> 
-          <td>&nbsp;<? print $res["nome"]; ?></td>
-          <td width="51" align="center">&nbsp;<? print $res["publica"]; ?></td>
-          <td width="17" align="center"><a href="up_pastas.php?acao=alt&id=<? print $res["id"]; ?>"><img src="imagens/icon14_alterar.gif" alt="Alterar" width="14" height="14" border="0"></a></td>
-          <td width="16" align="center"><a href="#" onClick="return pergunta('Deseja excluir esta Pasta?','up_pastas_sql.php?acao=exc&id=<? print $res["id"]; ?>')"><img src="imagens/icon14_lixeira.gif" alt="Excluir" width="14" height="14" border="0"></a></td>
+          <td>&nbsp;<?php print $res["nome"]; ?></td>
+          <td width="51" align="center">&nbsp;<?php print $res["publica"]; ?></td>
+          <td width="17" align="center"><a href="up_pastas.php?acao=alt&id=<?php print $res["id"]; ?>"><img src="imagens/icon14_alterar.gif" alt="Alterar" width="14" height="14" border="0"></a></td>
+          <td width="16" align="center"><a href="#" onClick="return pergunta('Deseja excluir esta Pasta?','up_pastas_sql.php?acao=exc&id=<?php print $res["id"]; ?>')"><img src="imagens/icon14_lixeira.gif" alt="Excluir" width="14" height="14" border="0"></a></td>
         </tr>
-        <?
+        <?php
 			  	}
 			  }
 			  ?>
       </table></td>
   </tr>
-  <? }else{ ?>
+  <?php }else{ ?>
   <tr>
     <td align="left" valign="top"><form name="form1" method="post" action="up_pastas_sql.php" onSubmit="return verifica(this);">
         <table width="300" border="0" cellpadding="0" cellspacing="0">
           <tr bgcolor="#003366"> 
             <td colspan="2" align="center" class="textoboldbranco"> 
-              <? if($acao=="inc"){ print"Incluir"; }else{ print"Alterar";} ?> Pasta
+              <?php if($acao=="inc"){ print"Incluir"; }else{ print"Alterar";} ?> Pasta
             </td>
           </tr>
           <tr> 
             <td width="64" class="textobold">&nbsp;Pasta</td>
-            <td width="236" class="textobold"><input name="nome" type="text" class="formularioselect" id="nome2" value="<? print $res["nome"]; ?>" size="20" maxlength="30"></td>
+            <td width="236" class="textobold"><input name="nome" type="text" class="formularioselect" id="nome2" value="<?php print $res["nome"]; ?>" size="20" maxlength="30"></td>
           </tr>
           <tr>
             <td class="textobold">&nbsp;Publica</td>
             <td class="textobold">
-			<input name="publica" type="radio" value="S" <? if($res["publica"]=="S" ) print "checked"; ?>>
+			<input name="publica" type="radio" value="S" <?php if($res["publica"]=="S" ) print "checked"; ?>>
 		Sim &nbsp;&nbsp;
-			<input name="publica" type="radio" value="N" <? if($res["publica"]=="N" or empty($res["publica"])) print "checked"; ?>>
+			<input name="publica" type="radio" value="N" <?php if($res["publica"]=="N" or empty($res["publica"])) print "checked"; ?>>
 N&atilde;o</td>
           </tr>
           <tr align="center">
@@ -106,16 +107,16 @@ N&atilde;o</td>
               <input name="Submit22" type="button" class="microtxt" value="voltar" onClick="window.location='up_pastas.php'">
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               <input name="Submit2" type="submit" class="microtxt" value="Continuar">
-              <input name="acao" type="hidden" id="acao" value="<? print $acao; ?>"> 
-            <input name="id" type="hidden" id="id3" value="<? print $id; ?>"></td>
+              <input name="acao" type="hidden" id="acao" value="<?php print $acao; ?>"> 
+            <input name="id" type="hidden" id="id3" value="<?php print $id; ?>"></td>
           </tr>
         </table>
       </form>
       
     </td>
-	<? } ?>
+	<?php } ?>
   </tr>
 </table>
 </body>
 </html>
-<? include("mensagem.php"); ?>
+<?php include("mensagem.php"); ?>

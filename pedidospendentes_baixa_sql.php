@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 include("seguranca.php");
 if(empty($cp) or empty($cc)){
@@ -7,7 +7,7 @@ if(empty($cp) or empty($cc)){
 }
 $acao=verifi($permi,$acao);
 if(!empty($acao)){
-	$loc="Aprovação Financeira";
+	$loc="AprovaÃ§Ã£o Financeira";
 	$pagina=$_SERVER['SCRIPT_FILENAME'];
 	include("log.php");
 }
@@ -20,7 +20,7 @@ if($ft=="true"){
 	}else{
 		$sql=mysql_query("UPDATE e_compra SET sit='P',dtbai='$data',serasa='$serasa',pesq_por='$por' WHERE id='$cp'");
 	}
-	$_SESSION["mensagem"]="Baixa concluída";
+	$_SESSION["mensagem"]="Baixa concluÃ­da";
 //Inserir venda
 	$sql=mysql_query("SELECT cliente,pedido,frete,frete_tp FROM e_compra WHERE id='$cp'");
 	$res=mysql_fetch_array($sql);
@@ -168,7 +168,7 @@ if($ft=="true"){
 			$line=str_replace("%PEDIDO%",$pedido,$line);
 			$msg.=$line;
 		}
-		mail($climail,"e-Sinalização - Pedido Aceito","$msg","From: financeiro@e-sinalizacao.com.br\nContent-type: text/html\n");
+		mail($climail,"e-SinalizaÃ§Ã£o - Pedido Aceito","$msg","From: financeiro@e-sinalizacao.com.br\nContent-type: text/html\n");
 		mail("domingos@cyber1.com.br","CyberHosting - $res[dominio] criado","$mensagem","From: acesso@cyberhosting.com.br\nContent-type: text/html\n");
 //mail responsavel
 }
@@ -184,7 +184,7 @@ if($ehbol=="true"){
 	}else{
 		$sql=mysql_query("UPDATE e_compra SET sit='P',dtbai='$data',serasa='$serasa',pesq_por='$por' WHERE id='$cp'");
 	}
-	$_SESSION["mensagem"]="Baixa concluída";
+	$_SESSION["mensagem"]="Baixa concluÃ­da";
 //Inserir venda
 	$sql=mysql_query("SELECT cliente,pedido,frete,frete_tp FROM e_compra WHERE id='$cp'");
 	$res=mysql_fetch_array($sql);
@@ -332,14 +332,14 @@ if($ehbol=="true"){
 			$line=str_replace("%PEDIDO%",$pedido,$line);
 			$msg.=$line;
 		}
-		mail($climail,"e-Sinalização - Pedido Aceito","$msg","From: financeiro@e-sinalizacao.com.br\nContent-type: text/html\n");
+		mail($climail,"e-SinalizaÃ§Ã£o - Pedido Aceito","$msg","From: financeiro@e-sinalizacao.com.br\nContent-type: text/html\n");
 		mail("domingos@cyber1.com.br","CyberHosting - $res[dominio] criado","$mensagem","From: manager@cyberhosting.com.br\nContent-type: text/html\n");
 //mail responsavel
 }
 /*
 	$serasa=data2banco($serasa);
 	$sql=mysql_query("UPDATE e_compra SET sit='F',serasa='$serasa',pesq_por='$por',dtbai='$data' WHERE id='$cp'");
-	$_SESSION["mensagem"]="Baixa concluída";
+	$_SESSION["mensagem"]="Baixa concluÃ­da";
 */
 header("Location:pedidospendentes.php");
 ?>

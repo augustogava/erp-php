@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 include("seguranca.php");
 $apqp=new set_apqp;
@@ -31,7 +31,7 @@ if($acao=="inc"){
 				$erros=0;
 				if($_FILES["arquivo"]["size"] > 1048576){
 					$erros++;
-					$_SESSION["mensagem"].="\\nO documento deve ter no máximo 1Mb";
+					$_SESSION["mensagem"].="\\nO documento deve ter no mÃ¡ximo 1Mb";
 				}
 				if($erros==0){
 					$nomeray=explode(".",$nome);
@@ -44,7 +44,7 @@ if($acao=="inc"){
 					$upa=copy($_FILES["arquivo"]["tmp_name"], $arquivo);
 					if(!$upa){
 						$pau=true;
-						$_SESSION["mensagem"].="O documento não pôde ser carregado";
+						$_SESSION["mensagem"].="O documento nÃ£o pÃ´de ser carregado";
 					}else{
 						$sql=mysql_query("UPDATE apqp_doc SET original='$nome',atual='$nome2' WHERE id='$id'");
 					}
@@ -58,15 +58,15 @@ if($acao=="inc"){
 		if($pau){
 			$comp="&acao=alt";
 		}else{
-			$_SESSION["mensagem"]="Documento incluído com sucesso";
-			// cria followup caso inclua um documento na peça
+			$_SESSION["mensagem"]="Documento incluÃ­do com sucesso";
+			// cria followup caso inclua um documento na peÃ§a
 				$sql_emp=mysql_query("SELECT fantasia FROM empresa");
 				$res_emp=mysql_fetch_array($sql_emp);
-				mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Inclusão de Documento na peça $npc.','O usuário $quem1 incluiu um documento $descr na peça $npc.','$user')");
+				mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','InclusÃ£o de Documento na peÃ§a $npc.','O usuÃ¡rio $quem1 incluiu um documento $descr na peÃ§a $npc.','$user')");
 			//				
 		}
 	}else{
-		$_SESSION["mensagem"]="O documento não pôde ser incluído";
+		$_SESSION["mensagem"]="O documento nÃ£o pÃ´de ser incluÃ­do";
 		$comp="&acao=inc";
 	}
 }elseif($acao=="alt"){
@@ -79,7 +79,7 @@ if($acao=="inc"){
 				$erros=0;
 				if($_FILES["arquivo"]["size"] > 1048576){
 					$erros++;
-					$_SESSION["mensagem"].="\\nO documento deve ter no máximo 1Mb";
+					$_SESSION["mensagem"].="\\nO documento deve ter no mÃ¡ximo 1Mb";
 				}
 				if($erros==0){
 					$nomeray=explode(".",$nome);
@@ -92,7 +92,7 @@ if($acao=="inc"){
 					$upa=copy($_FILES["arquivo"]["tmp_name"], $arquivo);
 					if(!$upa){
 						$pau=true;
-						$_SESSION["mensagem"].="O documento não pôde ser carregado";
+						$_SESSION["mensagem"].="O documento nÃ£o pÃ´de ser carregado";
 					}else{
 						$sql=mysql_query("UPDATE apqp_doc SET original='$nome',atual='$nome2' WHERE id='$id'");
 					}
@@ -105,24 +105,24 @@ if($acao=="inc"){
 		}
 		if(!$pau){
 			$_SESSION["mensagem"]="Documento alterado com sucesso";
-			// cria followup caso altere um documento da peça
+			// cria followup caso altere um documento da peÃ§a
 				$sql_emp=mysql_query("SELECT fantasia FROM empresa");
 				$res_emp=mysql_fetch_array($sql_emp);
-				mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Alteração de Documento da peça $npc.','O usuário $quem1 alterou o documento $descr da peça $npc.','$user')");
+				mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','AlteraÃ§Ã£o de Documento da peÃ§a $npc.','O usuÃ¡rio $quem1 alterou o documento $descr da peÃ§a $npc.','$user')");
 			//				
 			$comp="&acao=entrar";
 		}
 	}else{
-		$_SESSION["mensagem"]="O documento não pôde ser alterado";
+		$_SESSION["mensagem"]="O documento nÃ£o pÃ´de ser alterado";
 	}
 	if(empty($comp)) $comp="&acao=alt";
 }elseif($acao=="exc"){
-	// cria followup caso exclua um documento na peça
+	// cria followup caso exclua um documento na peÃ§a
 		$sql_emp=mysql_query("SELECT fantasia FROM empresa");
 		$res_emp=mysql_fetch_array($sql_emp);
 		$sql_doc=mysql_query("SELECT descr FROM apqp_doc WHERE id='$id'");
 		$res_doc=mysql_fetch_array($sql_doc);		
-		mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Exclusão de Documento da peça $npc.','O usuário $quem1 excluiu o documento $res_doc[descr] da peça $npc.','$user')");
+		mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','ExclusÃ£o de Documento da peÃ§a $npc.','O usuÃ¡rio $quem1 excluiu o documento $res_doc[descr] da peÃ§a $npc.','$user')");
 	//				
 
 	$sql=mysql_query("SELECT * FROM apqp_doc WHERE id='$id'");
@@ -135,9 +135,9 @@ if($acao=="inc"){
 	}
 	$sql=mysql_query("DELETE FROM apqp_doc WHERE id='$id'");
 	if($sql){
-		$_SESSION["mensagem"]="Documento excluído com sucesso";
+		$_SESSION["mensagem"]="Documento excluÃ­do com sucesso";
 	}else{
-		$_SESSION["mensagem"]="O documento não pôde ser excluído";
+		$_SESSION["mensagem"]="O documento nÃ£o pÃ´de ser excluÃ­do";
 	}
 }
 header("Location:apqp_doc.php?id=$id$comp");

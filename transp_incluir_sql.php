@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 include("seguranca.php");
 $acao=verifi($permi,$acao);
@@ -16,10 +16,10 @@ if($acao=="inc"){
 		}
 			$sql=mysql_query("INSERT INTO transportadora (cod_transport,nome,razao,cnpj,ie,endereco,complemento,cep,bairro,cidade,uf,contato,telefone,fax,celular,email,contato2,fax2,tel2,celular2,email2,site,coleta,end_entrega,bairro_entrega,cid_entrega,est_entrega,reg_atuante,est_atuante,temp_col) VALUES ('$cod_transport','$nome','$razao','$cnpj','$ie','$endereco','$complemento','$cep','$bairro','$cidade','$uf','$contato','$telefone','$fax','$celular','$email','$contato2','$fax2','$tel2','$celular2','$email2','$site','$coleta','$end_entrega','$bairro_entrega','$cid_entrega','$est_entrega','$reg_atuante','$est_atuante','$temp_col')");
 	if($sql){
-		$_SESSION["mensagem"]="Transportadora incluída com sucesso!";
+		$_SESSION["mensagem"]="Transportadora incluÃ­da com sucesso!";
 		$acao="entrar";
 	}else{
-		$_SESSION["mensagem"]="A Transportadora não pôde ser incluída!";
+		$_SESSION["mensagem"]="A Transportadora nÃ£o pÃ´de ser incluÃ­da!";
 		$acao="inc";
 	}
 }elseif($acao=="alt"){
@@ -33,16 +33,16 @@ if($acao=="inc"){
 		$_SESSION["mensagem"]="Transportadora alterada com sucesso!";
 		$acao="entrar";
 	}else{
-		$_SESSION["mensagem"]="A Transportadora não pôde ser alterada!";
+		$_SESSION["mensagem"]="A Transportadora nÃ£o pÃ´de ser alterada!";
 		$acao="alt";
 	}
 }elseif($acao=="exc"){
 	if(!empty($id)){
 		$sql=mysql_query("DELETE FROM transportadora WHERE id='$id'");
 		if($sql){
-			$_SESSION["mensagem"]="Transportadora excluída com sucesso!";
+			$_SESSION["mensagem"]="Transportadora excluÃ­da com sucesso!";
 		}else{
-			$_SESSION["mensagem"]="A Transportadora não pôde ser excluída!";
+			$_SESSION["mensagem"]="A Transportadora nÃ£o pÃ´de ser excluÃ­da!";
 		}		
 	}
 	$acao="entrar";

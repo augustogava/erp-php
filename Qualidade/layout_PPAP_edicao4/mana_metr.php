@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 include("seguranca.php");
 unset($_SESSION["mpc"]);
@@ -105,4 +105,4 @@ unset($_SESSION["mpc"]);
 <p>&nbsp;</p>
 </body>
 </html>
-<? include("mensagem.php"); ?>
+<?php include("mensagem.php"); ?>

@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 include("seguranca.php");
 $sql=mysql_query("SELECT * FROM clientes WHERE id='$clid'");
@@ -7,7 +7,8 @@ $res=mysql_fetch_array($sql);
 <html>
 <head>
 <title>CyberManager</title>
-<meta http-equiv="Content-Type" content="text/html; UTF-8">
+<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="style.css" rel="stylesheet" type="text/css">
 <script src="scripts.js"></script>
 <script src="mascaras.js"></script>
@@ -36,15 +37,15 @@ $res=mysql_fetch_array($sql);
     <td align="left" valign="top"><table width="400" cellpadding="0" cellspacing="1" bgcolor="#003366">
       <tr>
         <td width="48" bgcolor="#003366" class="textoboldbranco">&nbsp;Cliente</td>
-        <td width="225" bgcolor="#FFFFFF" class="texto">&nbsp;<? print $res["fantasia"]; ?></td>
+        <td width="225" bgcolor="#FFFFFF" class="texto">&nbsp;<?php print $res["fantasia"]; ?></td>
         <td width="44" bgcolor="#003366" class="textoboldbranco">&nbsp;C&oacute;digo</td>
-        <td width="76" bgcolor="#FFFFFF" class="texto">&nbsp;<? print $res["id"]; ?></td>
+        <td width="76" bgcolor="#FFFFFF" class="texto">&nbsp;<?php print $res["id"]; ?></td>
       </tr>
       <tr>
         <td bgcolor="#003366" class="textoboldbranco">&nbsp;Email</td>
-        <td bgcolor="#FFFFFF" class="texto">&nbsp;<? print $res["email"]; ?></td>
+        <td bgcolor="#FFFFFF" class="texto">&nbsp;<?php print $res["email"]; ?></td>
         <td bgcolor="#003366" class="textoboldbranco">&nbsp;Fone</td>
-        <td bgcolor="#FFFFFF" class="texto">&nbsp;<? print $res["fone"]; ?></td>
+        <td bgcolor="#FFFFFF" class="texto">&nbsp;<?php print $res["fone"]; ?></td>
       </tr>
     </table></td>
   </tr>
@@ -63,7 +64,7 @@ $res=mysql_fetch_array($sql);
         <td width="90" align="right">Desconto % </td>
         <td width="93" align="right"><strong style="font-family: Verdana, Arial, Helvetica, sans-serif;" #invalid_attr_id="none">&nbsp;Valor</strong></td>
       </tr>
-      <?
+      <?php
 		$sql=mysql_query("SELECT * FROM e_compra WHERE id='$cp'");
 		$res=mysql_fetch_array($sql);
 		$vd=$res["pedido"];
@@ -79,18 +80,18 @@ $res=mysql_fetch_array($sql);
 		  	$total+=($res["produto_preco"]*$res["qtd"])-($res["produto_preco"]*$res["qtd"])*$res["desconto"]/100;
 		  ?>
       <tr bgcolor="#FFFFFF" class="texto">
-        <td width="297">&nbsp;<? print $res["produto_nome"]; if($res["tipo"]=="M2"){ print " $res[material] - $res[medidas] - $res[fixacao] - $res[texto]"; } ?></td>
-        <td align="right"><? print banco2valor($res["qtd"]); ?>&nbsp;</td>
-        <td align="right">R$ <? print banco2valor($res["produto_preco"]); ?></td>
-        <td align="right"><? print banco2valor($res["desconto"]); ?>&nbsp;</td>
-        <td align="right">R$ <? print banco2valor(($res["produto_preco"]*$res["qtd"])-(($res["produto_preco"]*$res["qtd"])*$res["desconto"]/100)); ?>&nbsp;</td>
+        <td width="297">&nbsp;<?php print $res["produto_nome"]; if($res["tipo"]=="M2"){ print " $res[material] - $res[medidas] - $res[fixacao] - $res[texto]"; } ?></td>
+        <td align="right"><?php print banco2valor($res["qtd"]); ?>&nbsp;</td>
+        <td align="right">R$ <?php print banco2valor($res["produto_preco"]); ?></td>
+        <td align="right"><?php print banco2valor($res["desconto"]); ?>&nbsp;</td>
+        <td align="right">R$ <?php print banco2valor(($res["produto_preco"]*$res["qtd"])-(($res["produto_preco"]*$res["qtd"])*$res["desconto"]/100)); ?>&nbsp;</td>
       </tr>
-      <? 
+      <?php 
 		  }
 		  $frete=0;
 		  $total+=total; 
 		  ?>
-<? 
+<?php 
 if(!empty($opcao)){
 		$pag=mysql_query("SELECT * FROM op_pagamento WHERE id='$opcao'");
 		$rpag=mysql_fetch_array($pag);
@@ -104,7 +105,7 @@ if(!empty($opcao)){
         <td align="right">&nbsp;</td>
         <td align="right">&nbsp;</td>
         <td align="right">&nbsp;</td>
-        <td align="right"><strong>R$&nbsp;<? print banco2valor($total); ?>&nbsp;</strong></td>
+        <td align="right"><strong>R$&nbsp;<?php print banco2valor($total); ?>&nbsp;</strong></td>
       </tr>
     </table></td>
   </tr>
@@ -113,7 +114,7 @@ if(!empty($opcao)){
   </tr>
   <tr>
     <td align="left" valign="top" class="textobold">DADOS DO PAGAMENTO </td>
-	<? $sql=mysql_query("SELECT * FROM e_compra WHERE id='$cp'");
+	<?php $sql=mysql_query("SELECT * FROM e_compra WHERE id='$cp'");
 	$res=mysql_fetch_array($sql);
 	$cc=false;
 	switch($res["pagamento"]){
@@ -129,53 +130,53 @@ if(!empty($opcao)){
 			$alt="Boleto";
 			break;
 		case "ccvisa":
-			$texto="Cart„o de CrÈdito";
+			$texto="Cart√£o de Cr√©dito";
 			$img="icon14_visa.jpg";					
 			$alt="Visa";
 			$cc=true;
 			break;
 		case "ccmaster":
-			$texto="Cart„o de CrÈdito";
+			$texto="Cart√£o de Cr√©dito";
 			$img="icon14_master.jpg";
 			$alt="Master Card";
 			$cc=true;
 			break;
 		case "ccamerican":
-			$texto="Cart„o de CrÈdito";
+			$texto="Cart√£o de Cr√©dito";
 			$img="icon14_amex.jpg";				
 			$alt="American Express";
 			$cc=true;
 			break;
 		case "ccdiners":
-			$texto="Cart„o de CrÈdito";
+			$texto="Cart√£o de Cr√©dito";
 			$img="icon14_cdiners.jpg";					
 			$alt="Diners Club International";
 			$cc=true;
 			break;
 		case "tbb":
-			$texto="TransferÍncia";
+			$texto="Transfer√™ncia";
 			$img="icon14_bbb.jpg";					
-			$alt="TransferÍncia Banco do Brasil";
+			$alt="Transfer√™ncia Banco do Brasil";
 			break;
 		case "tbradesco":
-			$texto="TransferÍncia";
+			$texto="Transfer√™ncia";
 			$img="icon14_bradesco.jpg";					
-			$alt="TransferÍncia Bradesco";
+			$alt="Transfer√™ncia Bradesco";
 			break;
 		case "titau":
-			$texto="TransferÍncia";
+			$texto="Transfer√™ncia";
 			$img="icon14_itau.jpg";					
-			$alt="TransferÍncia Ita˙";
+			$alt="Transfer√™ncia Ita√∫";
 			break;
 		case "tunibanco":
-			$texto="TransferÍncia";
+			$texto="Transfer√™ncia";
 			$img="icon14_unibanco2.jpg";					
-			$alt="TransferÍncia Unibanco";
+			$alt="Transfer√™ncia Unibanco";
 			break;
 		case "trans":
-					$texto="TransferÍncia";
+					$texto="Transfer√™ncia";
 					$img="icon14_bradesco.jpg";					
-					$alt="TransferÍncia Bradesco";
+					$alt="Transfer√™ncia Bradesco";
 					break;
 	}
 	?>
@@ -188,9 +189,9 @@ function verifica(cad){
 			return false;
 		}
 	}
-	<? if($cc){ ?>
+	<?php if($cc){ ?>
 	if(cad.cc_sit[cad.cc_sit.selectedIndex].value==0){
-		alert('Informe a situaÁ„o do Cart„o');
+		alert('Informe a situa√ß√£o do Cart√£o');
 		cad.cc_sit.focus();
 		return false;
 	}
@@ -201,15 +202,15 @@ function verifica(cad){
 		}		
 	}
 	if(status=='A'){
-		if(!confirm('Confirma cart„o APROVADO?')){
+		if(!confirm('Confirma cart√£o APROVADO?')){
 			return false;
 		}
 	}else if(status=='R'){
-		if(!confirm('Confirma cart„o REPROVADO?')){
+		if(!confirm('Confirma cart√£o REPROVADO?')){
 			return false;
 		}	
 	}
-	<? } ?>
+	<?php } ?>
 	return true;
 }
 </script>
@@ -219,31 +220,31 @@ function verifica(cad){
       <table width="594" border="0" cellspacing="0" cellpadding="0">
 		<tr>
           <td><table width="350" border="0" cellpadding="0" cellspacing="1" bgcolor="#003366">
-		  <? if($res["tipo"]=="E-commerce"){ ?>
+		  <?php if($res["tipo"]=="E-commerce"){ ?>
             <tr bgcolor="#C6DBEF">
               <td bgcolor="#003366" class="textoboldbranco">&nbsp;Natureza</td>
               <td bgcolor="#FFFFFF" class="texto"><select name="natureza" class="formularioselect" id="natureza">
-                <option value="" <? if(empty($res["natureza"])) print "selected"; ?>>Selecione</option>
-                <?
+                <option value="" <?php if(empty($res["natureza"])) print "selected"; ?>>Selecione</option>
+                <?php
 				$sql=mysql_query("SELECT * FROM natureza ORDER BY nome ASC");
 				while($res1=mysql_fetch_array($sql)){
 				?>
-                <option value="<? print $res1["id"]; ?>" ><? print $res1["nome"]; ?></option>
-                <? } ?>
+                <option value="<?php print $res1["id"]; ?>" ><?php print $res1["nome"]; ?></option>
+                <?php } ?>
               </select></td>
             </tr>
-			<? } ?>
+			<?php } ?>
             <tr bgcolor="#C6DBEF">
               <td width="120" bgcolor="#003366" class="textoboldbranco">&nbsp;Forma pg </td>
               <td width="177" bgcolor="#FFFFFF" class="texto"><table width="100%"  border="0" cellspacing="0" cellpadding="0">
                 <tr>
-                  <td width="19%" align="center"><img src="imagens/<? print $img; ?>" alt="<? print $alt; ?>"></td>
-                  <td width="81%" class="texto">&nbsp;<? print $texto; ?>
-                    <input name="cp" type="hidden" id="cp" value="<? print $cp; ?>">
-                    <input name="cc" type="hidden" id="cc2" value="<? if($cc){ print "true"; }else{ print "false"; } ?>">
-                    <input name="ft" type="hidden" id="ft" value="<? if($ft){ print "true"; }else{ print "false"; } ?>"> 
-                    <input name="ehbol" type="hidden" id="ehbol" value="<? if(($alt=="Boleto") or ($alt=="trans") or ($alt=="TransferÍncia Bradesco")){ print "true"; }else{ print "false"; }  ?>">
-                    <input name="opc" type="hidden" id="opc" value="<?= $opcao; ?>"></td>
+                  <td width="19%" align="center"><img src="imagens/<?php print $img; ?>" alt="<?php print $alt; ?>"></td>
+                  <td width="81%" class="texto">&nbsp;<?php print $texto; ?>
+                    <input name="cp" type="hidden" id="cp" value="<?php print $cp; ?>">
+                    <input name="cc" type="hidden" id="cc2" value="<?php if($cc){ print "true"; }else{ print "false"; } ?>">
+                    <input name="ft" type="hidden" id="ft" value="<?php if($ft){ print "true"; }else{ print "false"; } ?>"> 
+                    <input name="ehbol" type="hidden" id="ehbol" value="<?php if(($alt=="Boleto") or ($alt=="trans") or ($alt=="Transfer√™ncia Bradesco")){ print "true"; }else{ print "false"; }  ?>">
+                    <input name="opc" type="hidden" id="opc" value="<?php echo  $opcao; ?>"></td>
                 </tr>
               </table></td>
             </tr>
@@ -255,25 +256,25 @@ function verifica(cad){
               <td bgcolor="#003366" class="textoboldbranco"> &nbsp;Pesquisado POR  </td>
               <td bgcolor="#FFFFFF" class="texto"><input name="por" type="text" class="formularioselect" id="por" size="7" maxlength="10"></td>
             </tr>
-<? if($alt=="Faturamento"){ ?> 
+<?php if($alt=="Faturamento"){ ?> 
             <tr bgcolor="#C6DBEF">
               <td bgcolor="#003366" class="textoboldbranco">&nbsp;Op&ccedil;&atilde;o Pagamento </td>
-              <td bgcolor="#FFFFFF" class="texto">&nbsp;<?  if(empty($opc)){ print $respe["descricao"]; }else{ print $opc; } ?>                </td>
+              <td bgcolor="#FFFFFF" class="texto">&nbsp;<?php  if(empty($opc)){ print $respe["descricao"]; }else{ print $opc; } ?>                </td>
             </tr>
-<? } ?>
-<? 
+<?php } ?>
+<?php 
 if($ft){ 
 for($i=1;$i<=$respe["parcelas"]; $i++){
 $venci=date("Y-m-d",mktime(0,0,0,date("m"),date("d")+($respe["intervalo"]*$i),date("Y")));
 ?>
             <tr bgcolor="#C6DBEF">
               <td bgcolor="#003366" class="textoboldbranco">&nbsp;Data de Vencimento</td>
-              <td bgcolor="#FFFFFF" class="texto"><input name="venc<?= $i; ?>" type="text" class="formulario" id="venc" size="7" maxlength="10" onKeyPress="return validanum(this, event)" value="<? print banco2data($venci); ?> " onKeyUp="mdata(this)">                </td>
+              <td bgcolor="#FFFFFF" class="texto"><input name="venc<?php echo  $i; ?>" type="text" class="formulario" id="venc" size="7" maxlength="10" onKeyPress="return validanum(this, event)" value="<?php print banco2data($venci); ?> " onKeyUp="mdata(this)">                </td>
             </tr>
-<? } } ?>
+<?php } } ?>
           </table></td>
         </tr>
-		<? if($cc){ ?>
+		<?php if($cc){ ?>
 		<tr>
     		<td align="left" valign="top">&nbsp;</td>
   		</tr>
@@ -286,20 +287,20 @@ $venci=date("Y-m-d",mktime(0,0,0,date("m"),date("d")+($respe["intervalo"]*$i),da
 		  
             <tr bgcolor="#C6DBEF">
               <td width="120" bgcolor="#003366" class="textoboldbranco">N&uacute;mero</td>
-              <td width="177" bgcolor="#FFFFFF" class="texto"><span class="texto"><? print base64_decode($res["cc_num"]); ?></span></td>
+              <td width="177" bgcolor="#FFFFFF" class="texto"><span class="texto"><?php print base64_decode($res["cc_num"]); ?></span></td>
             </tr>
 			
             <tr bgcolor="#C6DBEF">
               <td bgcolor="#003366" class="textoboldbranco">C&oacute;digo de seguran&ccedil;a </td>
-              <td bgcolor="#FFFFFF" class="texto"><span class="texto"><? print base64_decode( $res["cc_cod"]); ?></span></td>
+              <td bgcolor="#FFFFFF" class="texto"><span class="texto"><?php print base64_decode( $res["cc_cod"]); ?></span></td>
             </tr>
             <tr bgcolor="#C6DBEF">
               <td bgcolor="#003366" class="textoboldbranco">Nome</td>
-              <td bgcolor="#FFFFFF" class="texto"><span class="texto"><? print base64_decode($res["cc_nome"]); ?></span></td>
+              <td bgcolor="#FFFFFF" class="texto"><span class="texto"><?php print base64_decode($res["cc_nome"]); ?></span></td>
             </tr>
             <tr bgcolor="#C6DBEF">
               <td bgcolor="#003366" class="textoboldbranco">Validade</td>
-              <td bgcolor="#FFFFFF" class="texto"><span class="texto"><? print base64_decode($res["cc_mes"])."/20".base64_decode($res["cc_ano"]); ?>
+              <td bgcolor="#FFFFFF" class="texto"><span class="texto"><?php print base64_decode($res["cc_mes"])."/20".base64_decode($res["cc_ano"]); ?>
               </span></td>
             </tr>
             <tr bgcolor="#C6DBEF">
@@ -320,7 +321,7 @@ $venci=date("Y-m-d",mktime(0,0,0,date("m"),date("d")+($respe["intervalo"]*$i),da
             </tr>
           </table>            </td>
         </tr>
-		<? } ?>
+		<?php } ?>
         <tr>
           <td>&nbsp;</td>
         </tr>
@@ -328,7 +329,7 @@ $venci=date("Y-m-d",mktime(0,0,0,date("m"),date("d")+($respe["intervalo"]*$i),da
           <td align="center">
             <input name="Submit22" type="button" class="microtxt" value="voltar" onClick="window.location='pedidospendentes.php'">
 &nbsp;&nbsp;&nbsp;&nbsp;
-<input name="Submit222" type="button" class="microtxt" value="Ver Pedido" onClick="window.location='vendas.php?acao=alt&id=<?= $vd; ?>'">         
+<input name="Submit222" type="button" class="microtxt" value="Ver Pedido" onClick="window.location='vendas.php?acao=alt&id=<?php echo  $vd; ?>'">         
 <img src="imagens/dot.gif" width="20" height="1">
             <input name="Submit2" type="submit" class="microtxt" value="Continuar"></td>
         </tr>
@@ -338,4 +339,4 @@ $venci=date("Y-m-d",mktime(0,0,0,date("m"),date("d")+($respe["intervalo"]*$i),da
 </table>
 </body>
 </html>
-<? include("mensagem.php"); ?>
+<?php include("mensagem.php"); ?>

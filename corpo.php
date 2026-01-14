@@ -41,6 +41,7 @@ if (!empty($_GET['cal_ano'])) $cal_ano = $_GET['cal_ano'];
 <head>
 <title>Dashboard - ERP System</title>
 <meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <link href="style.css" rel="stylesheet" type="text/css">
@@ -103,7 +104,7 @@ if (!empty($_GET['cal_ano'])) $cal_ano = $_GET['cal_ano'];
     <div class="erp-card" style="margin-bottom:24px;">
         <div style="padding:24px;">
             <h1 style="font-size:28px;font-weight:700;color:#2c3e50;margin-bottom:8px;">
-                <i class="fas fa-hand-wave"></i> Bem-vindo, <?=htmlspecialchars($_SESSION["login_nome"])?>!
+                <i class="fas fa-hand-wave"></i> Bem-vindo, <?php echo htmlspecialchars($_SESSION["login_nome"])?>!
             </h1>
             <p style="color:#6c757d;font-size:14px;">
                 <?php
@@ -134,25 +135,25 @@ if (!empty($_GET['cal_ano'])) $cal_ano = $_GET['cal_ano'];
         
         <div class="stat-card">
             <div class="stat-label"><i class="fas fa-shopping-cart"></i> Vendas Hoje</div>
-            <div class="stat-value">R$ <?=banco2valor($res_vendas["valor"])?></div>
-            <div class="stat-change"><?=$res_vendas["total"]?> pedidos</div>
+            <div class="stat-value">R$ <?php echo banco2valor($res_vendas["valor"])?></div>
+            <div class="stat-change"><?php echo $res_vendas["total"]?> pedidos</div>
         </div>
         
         <div class="stat-card green">
             <div class="stat-label"><i class="fas fa-arrow-up"></i> A Receber Hoje</div>
-            <div class="stat-value">R$ <?=banco2valor($res_cr["valor"])?></div>
-            <div class="stat-change"><?=$res_cr["total"]?> titulos</div>
+            <div class="stat-value">R$ <?php echo banco2valor($res_cr["valor"])?></div>
+            <div class="stat-change"><?php echo $res_cr["total"]?> titulos</div>
         </div>
         
         <div class="stat-card orange">
             <div class="stat-label"><i class="fas fa-arrow-down"></i> A Pagar Hoje</div>
-            <div class="stat-value">R$ <?=banco2valor($res_cp["valor"])?></div>
-            <div class="stat-change"><?=$res_cp["total"]?> titulos</div>
+            <div class="stat-value">R$ <?php echo banco2valor($res_cp["valor"])?></div>
+            <div class="stat-change"><?php echo $res_cp["total"]?> titulos</div>
         </div>
         
         <div class="stat-card red">
             <div class="stat-label"><i class="fas fa-users"></i> Clientes Ativos</div>
-            <div class="stat-value"><?=$res_clientes["total"]?></div>
+            <div class="stat-value"><?php echo $res_clientes["total"]?></div>
             <div class="stat-change">Total cadastrado</div>
         </div>
     </div>
@@ -162,7 +163,7 @@ if (!empty($_GET['cal_ano'])) $cal_ano = $_GET['cal_ano'];
             <div class="erp-card">
                 <div class="erp-card-header" style="border-bottom:none;padding-bottom:0;">
                     <h2 style="font-size:18px;font-weight:600;color:#2c3e50;"><i class="fas fa-calendar-alt"></i> Agenda do Dia</h2>
-                    <a href="agenda_inc.php?dia=<?=$cal_dia?>&mes=<?=$cal_mes?>&ano=<?=$cal_ano?>" class="erp-btn erp-btn-sm erp-btn-outline">
+                    <a href="agenda_inc.php?dia=<?php echo $cal_dia?>&mes=<?php echo $cal_mes?>&ano=<?php echo $cal_ano?>" class="erp-btn erp-btn-sm erp-btn-outline">
                         + Novo
                     </a>
                 </div>
@@ -187,23 +188,23 @@ if (!empty($_GET['cal_ano'])) $cal_ano = $_GET['cal_ano'];
                             
                             $status_color = $res["sit"]=="S" ? "#27AE60" : ($res["reagendada"]=="S" ? "#E74C3C" : "#F39C12");
                             ?>
-                            <div style="padding:16px;background:#f8f9fa;border-radius:8px;border-left:4px solid <?=$status_color?>;">
+                            <div style="padding:16px;background:#f8f9fa;border-radius:8px;border-left:4px solid <?php echo $status_color?>;">
                                 <div style="display:flex;justify-content:space-between;align-items:start;">
                                     <div>
                                         <div style="font-weight:600;color:#2c3e50;margin-bottom:4px;">
-                                            <?=$res["hora"]?> - <?=htmlspecialchars($res["titulo"])?>
+                                            <?php echo $res["hora"]?> - <?php echo htmlspecialchars($res["titulo"])?>
                                         </div>
                                         <div style="font-size:13px;color:#6c757d;">
-                                            Cliente: <?=htmlspecialchars($rcli["nome"])?> | Por: <?=htmlspecialchars($res["nome"])?>
+                                            Cliente: <?php echo htmlspecialchars($rcli["nome"])?> | Por: <?php echo htmlspecialchars($res["nome"])?>
                                         </div>
                                     </div>
                                     <div style="display:flex;gap:8px;">
                                         <?php if($res["sit"]=="N" && ($res["nome"]==$nome || $nivel==1)): ?>
-                                        <a href="corpo.php?conf=<?=$res["numero"]?>&cal_dia=<?=$cal_dia?>&cal_mes=<?=$cal_mes?>&cal_ano=<?=$cal_ano?>" onclick="return confirm('Marcar como realizado?');" title="Concluir" style="color:#27AE60;">
+                                        <a href="corpo.php?conf=<?php echo $res["numero"]?>&cal_dia=<?php echo $cal_dia?>&cal_mes=<?php echo $cal_mes?>&cal_ano=<?php echo $cal_ano?>" onclick="return confirm('Marcar como realizado?');" title="Concluir" style="color:#27AE60;">
                                             <i class="fas fa-check"></i>
                                         </a>
                                         <?php endif; ?>
-                                        <a href="agenda_alt.php?alt=<?=$res["numero"]?>&cal_dia=<?=$cal_dia?>&cal_mes=<?=$cal_mes?>&cal_ano=<?=$cal_ano?>" title="Editar">
+                                        <a href="agenda_alt.php?alt=<?php echo $res["numero"]?>&cal_dia=<?php echo $cal_dia?>&cal_mes=<?php echo $cal_mes?>&cal_ano=<?php echo $cal_ano?>" title="Editar">
                                             <i class="fas fa-edit"></i>
                                         </a>
                                     </div>

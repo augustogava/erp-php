@@ -39,8 +39,8 @@ if(!empty($cliente) and !empty($cliente_tipo)){
 <html lang="pt-BR">
 <head>
 <title>Notas Fiscais - ERP System</title>
-<meta charset="ISO-8859-1">
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <link href="style.css" rel="stylesheet" type="text/css">
@@ -81,13 +81,13 @@ function verifica(cad){
                     <div class="erp-form-group">
                         <label class="erp-form-label">Cliente/Fornecedor</label>
                         <div style="display:flex;gap:5px;">
-                            <input name="nome" type="text" class="erp-form-control" value="<?=$nome?>" readonly style="flex:1;">
+                            <input name="nome" type="text" class="erp-form-control" value="<?php echo $nome?>" readonly style="flex:1;">
                             <a href="#" onclick="return abre('nf_cli.php','a','width=320,height=300,scrollbars=1');" class="erp-btn erp-btn-outline" style="padding:0 12px;">
                                 <i class="fas fa-search"></i>
                             </a>
                         </div>
-                        <input name="cliente" type="hidden" value="<?=$cliente?>">
-                        <input name="cliente_tipo" type="hidden" value="<?=$cliente_tipo?>">
+                        <input name="cliente" type="hidden" value="<?php echo $cliente?>">
+                        <input name="cliente_tipo" type="hidden" value="<?php echo $cliente_tipo?>">
                     </div>
                 </div>
                 <div class="erp-col" style="flex:0 0 140px;">
@@ -119,7 +119,7 @@ function verifica(cad){
 $emp=mysql_query("SELECT id,apelido_fat FROM empresa order by apelido_fat asc");
 while($empr=mysql_fetch_array($emp)){
 ?>
-                            <option value="<?=$empr["id"]?>"><?=$empr["apelido_fat"]?></option>
+                            <option value="<?php echo $empr["id"]?>"><?php echo $empr["apelido_fat"]?></option>
 <?php } ?>
                         </select>
                     </div>
@@ -235,21 +235,21 @@ if(!mysql_num_rows($sql)){
         $tipo_text = ($res["es"]=="E") ? "Entrada" : "Saida";
 ?>
                 <tr>
-                    <td><span class="erp-badge erp-badge-<?=$tipo_class?>"><?=$tipo_text?></span></td>
-                    <td><strong>#<?=$res["numero"]?></strong></td>
-                    <td><?=banco2data($res["emissao"])?></td>
+                    <td><span class="erp-badge erp-badge-<?php echo $tipo_class?>"><?php echo $tipo_text?></span></td>
+                    <td><strong>#<?php echo $res["numero"]?></strong></td>
+                    <td><?php echo banco2data($res["emissao"])?></td>
                     <td><?php $esta->pega_nome_bd("empresa","apelido_fat",$rped["empresa"],$idc="id"); ?></td>
-                    <td><a href="vendas.php?acao=alt&id=<?=$res["pedido"]?>">#<?=$res["pedido"]?></a></td>
-                    <td><a href="crm_infg.php?cli=<?=$res["cliente"]?>"><?=$res["cliente"]?></a></td>
-                    <td class="erp-text-right"><strong>R$ <?=banco2valor($res2["tot"])?></strong></td>
-                    <td><span class="erp-badge erp-badge-<?=$status_class?>"><?=$status_text?></span></td>
+                    <td><a href="vendas.php?acao=alt&id=<?php echo $res["pedido"]?>">#<?php echo $res["pedido"]?></a></td>
+                    <td><a href="crm_infg.php?cli=<?php echo $res["cliente"]?>"><?php echo $res["cliente"]?></a></td>
+                    <td class="erp-text-right"><strong>R$ <?php echo banco2valor($res2["tot"])?></strong></td>
+                    <td><span class="erp-badge erp-badge-<?php echo $status_class?>"><?php echo $status_text?></span></td>
                     <td>
                         <div class="erp-table-actions" style="justify-content:center;">
-                            <a href="#" onclick="return abre('nf_vis.php?nf=<?=$res["id"]?>','nota<?=$res["id"]?>','width=680,height=380,scrollbars=1');" class="erp-table-action" title="Visualizar">
+                            <a href="#" onclick="return abre('nf_vis.php?nf=<?php echo $res["id"]?>','nota<?php echo $res["id"]?>','width=680,height=380,scrollbars=1');" class="erp-table-action" title="Visualizar">
                                 <i class="fas fa-eye"></i>
                             </a>
 <?php if($res["impresso"]!="1"){ ?>
-                            <a href="#" onclick="return abre('nf_canc.php?acao=canc&id=<?=$res["id"]?>&pedido=<?=$res["pedido"]?>&cp=<?=$res["compra"]?>','a','width=320,height=200,scrollbars=1');" class="erp-table-action" title="Cancelar" style="color:#e74c3c;">
+                            <a href="#" onclick="return abre('nf_canc.php?acao=canc&id=<?php echo $res["id"]?>&pedido=<?php echo $res["pedido"]?>&cp=<?php echo $res["compra"]?>','a','width=320,height=200,scrollbars=1');" class="erp-table-action" title="Cancelar" style="color:#e74c3c;">
                                 <i class="fas fa-times-circle"></i>
                             </a>
 <?php } ?>
@@ -267,17 +267,17 @@ if(!mysql_num_rows($sql)){
 <?php if(isset($wpaginar) && $wpaginar) { ?>
     <div style="display:flex;justify-content:center;padding:20px;gap:5px;">
         <?php if($wp>1){ ?>
-        <a href="nf.php?wp=<?=$pg_anterior?>&bde=<?=$bde?>&bate=<?=$bate?>&cliente=<?=$cliente?>&cliente_tipo=<?=$cliente_tipo?>&btipo=<?=$btipo?>&nome=<?=$nome?>&bnum=<?=$bnum?>" class="erp-btn erp-btn-outline erp-btn-sm">
+        <a href="nf.php?wp=<?php echo $pg_anterior?>&bde=<?php echo $bde?>&bate=<?php echo $bate?>&cliente=<?php echo $cliente?>&cliente_tipo=<?php echo $cliente_tipo?>&btipo=<?php echo $btipo?>&nome=<?php echo $nome?>&bnum=<?php echo $bnum?>" class="erp-btn erp-btn-outline erp-btn-sm">
             <i class="fas fa-chevron-left"></i> Anterior
         </a>
         <?php } ?>
         
         <span style="padding:8px 16px;background:#f0f0f0;border-radius:4px;">
-            Pagina <?=$pg_atual?> de <?=$n_paginas?>
+            Pagina <?php echo $pg_atual?> de <?php echo $n_paginas?>
         </span>
         
         <?php if($reg_final<$results_tot){ ?>
-        <a href="nf.php?wp=<?=$pg_proxima?>&bde=<?=$bde?>&bate=<?=$bate?>&cliente=<?=$cliente?>&cliente_tipo=<?=$cliente_tipo?>&btipo=<?=$btipo?>&nome=<?=$nome?>&bnum=<?=$bnum?>" class="erp-btn erp-btn-outline erp-btn-sm">
+        <a href="nf.php?wp=<?php echo $pg_proxima?>&bde=<?php echo $bde?>&bate=<?php echo $bate?>&cliente=<?php echo $cliente?>&cliente_tipo=<?php echo $cliente_tipo?>&btipo=<?php echo $btipo?>&nome=<?php echo $nome?>&bnum=<?php echo $bnum?>" class="erp-btn erp-btn-outline erp-btn-sm">
             Proximo <i class="fas fa-chevron-right"></i>
         </a>
         <?php } ?>

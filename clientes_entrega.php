@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 include("seguranca.php");
 if(!empty($acao)){
@@ -37,7 +37,7 @@ if($acao=="alt"){
 		header("Location:clientes.php?bcod=$bcod&bnome=$bnome");
 		exit;				
 	}else{
-		$_SESSION["mensagem"]="O cadastro não pôde ser alterado!";		
+		$_SESSION["mensagem"]="O cadastro nÃ£o pÃ´de ser alterado!";		
 		$acao="alt";
 	}	
 }
@@ -45,7 +45,8 @@ if($acao=="alt"){
 <html>
 <head>
 <title>CyberManager</title>
-<meta http-equiv="Content-Type" content="text/html; UTF-8">
+<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="style.css" rel="stylesheet" type="text/css">
 <script src="mascaras.js"></script>
 <script src="scripts.js"></script>
@@ -53,7 +54,7 @@ if($acao=="alt"){
 <script>
 function verifica(cad){
 	if(cad.endereco.value==''){
-		alert('Preencha o Endereço');
+		alert('Preencha o EndereÃ§o');
 		cad.endereco.focus();
 		return false;
 	}
@@ -100,47 +101,47 @@ function verifica(cad){
           </tr>
           <tr class="textobold">
             <td>&nbsp;Endere&ccedil;o:</td>
-            <td><input name="endereco" type="text" class="formulario" id="endereco" value="<? print $endereco; ?>" size="50" maxlength="100"></td>
+            <td><input name="endereco" type="text" class="formulario" id="endereco" value="<?php print $endereco; ?>" size="50" maxlength="100"></td>
           </tr>
           <tr class="textobold">
             <td>&nbsp;Bairro:</td>
-            <td><input name="bairro" type="text" class="formulario" id="bairro" value="<? print $bairro; ?>" size="50" maxlength="30"></td>
+            <td><input name="bairro" type="text" class="formulario" id="bairro" value="<?php print $bairro; ?>" size="50" maxlength="30"></td>
           </tr>
           <tr class="textobold">
             <td>&nbsp;CEP: </td>
-            <td><input name="cep" type="text" class="formulario" id="cep" value="<? print $cep; ?>" size="10" maxlength="9" onKeyPress="return validanum(this, event)" onKeyUp="mcep(this)"></td>
+            <td><input name="cep" type="text" class="formulario" id="cep" value="<?php print $cep; ?>" size="10" maxlength="9" onKeyPress="return validanum(this, event)" onKeyUp="mcep(this)"></td>
           </tr>
           <tr class="textobold">
             <td>&nbsp;Estado:</td>
             <td><span class="texto">
               <select name="estado" id="estado"  class="formulario">
                 <option>Selecione</option>
-                <?
-	$sql2=mysql_query("SELECT * FROM estado") or die("nao foi");
+                <?php
+	$sql2=mysql_query("SELECT * FROM estado") or erp_db_fail();
 	while($res2=mysql_fetch_array($sql2)){
 	?>
-                <option value="<?= $res2["id"]; ?>" <? if($res2["id"]==$estado){ print "selected"; } ?>>
-                <?= $res2["nome"]; ?>
+                <option value="<?php echo  $res2["id"]; ?>" <?php if($res2["id"]==$estado){ print "selected"; } ?>>
+                <?php echo  $res2["nome"]; ?>
                 </option>
-                <? } ?>
+                <?php } ?>
               </select>
             </span></td>
           </tr>
           <tr class="textobold">
             <td>&nbsp;Cidade:</td>
-            <td><input name="cidade" type="text" class="formulario" id="cidade" value="<? print $cidade; ?>" size="50" maxlength="30"></td>
+            <td><input name="cidade" type="text" class="formulario" id="cidade" value="<?php print $cidade; ?>" size="50" maxlength="30"></td>
           </tr>
           <tr class="textobold">
             <td>&nbsp;CPF/CNPJ:</td>
-            <td><input name="cnpj" type="text" class="formulario" id="cnpj" value="<? print $cnpj; ?>" size="20" maxlength="15"></td>
+            <td><input name="cnpj" type="text" class="formulario" id="cnpj" value="<?php print $cnpj; ?>" size="20" maxlength="15"></td>
           </tr>
           <tr class="textobold">
             <td>&nbsp;Ins. Estadual:</td>
-            <td><input name="ie" type="text" class="formulario" id="ie" value="<? print $ie; ?>" size="20" maxlength="30"></td>
+            <td><input name="ie" type="text" class="formulario" id="ie" value="<?php print $ie; ?>" size="20" maxlength="30"></td>
           </tr>
           <tr class="textobold">
             <td>&nbsp;Transportadora:</td>
-            <td><input name="transp" type="text" class="formulario" id="transp" value="<? print $transp; ?>" size="20" maxlength="30"></td>
+            <td><input name="transp" type="text" class="formulario" id="transp" value="<?php print $transp; ?>" size="20" maxlength="30"></td>
           </tr>
           <tr class="textobold">
             <td colspan="2" align="center">&nbsp;</td>
@@ -151,46 +152,46 @@ function verifica(cad){
           </tr>
           <tr class="textobold">
             <td>&nbsp;Endere&ccedil;o:</td>
-            <td><input name="endereco_ins" type="text" class="formulario" id="endereco_ins" value="<? print $endereco_ins; ?>" size="50" maxlength="100" /></td>
+            <td><input name="endereco_ins" type="text" class="formulario" id="endereco_ins" value="<?php print $endereco_ins; ?>" size="50" maxlength="100" /></td>
           </tr>
           <tr class="textobold">
             <td>&nbsp;Bairro:</td>
-            <td><input name="bairro_ins" type="text" class="formulario" id="bairro_ins" value="<? print $bairro_ins; ?>" size="50" maxlength="30" /></td>
+            <td><input name="bairro_ins" type="text" class="formulario" id="bairro_ins" value="<?php print $bairro_ins; ?>" size="50" maxlength="30" /></td>
           </tr>
           <tr class="textobold">
             <td>&nbsp;CEP: </td>
-            <td><input name="cep_ins" type="text" class="formulario" id="cep_ins" value="<? print $cep_ins; ?>" size="10" maxlength="9" onKeyPress="return validanum(this, event)" onKeyUp="mcep(this)" /></td>
+            <td><input name="cep_ins" type="text" class="formulario" id="cep_ins" value="<?php print $cep_ins; ?>" size="10" maxlength="9" onKeyPress="return validanum(this, event)" onKeyUp="mcep(this)" /></td>
           </tr>
           <tr class="textobold">
             <td>&nbsp;Estado:</td>
             <td><span class="texto">
               <select name="estado_ins" id="estado_ins" class="formulario">
                 <option>Selecione</option>
-                <?
-	$sql2=mysql_query("SELECT * FROM estado") or die("nao foi");
+                <?php
+	$sql2=mysql_query("SELECT * FROM estado") or erp_db_fail();
 	while($res2=mysql_fetch_array($sql2)){
 	?>
-                <option value="<?= $res2["id"]; ?>" <? if($res2["id"]==$estado_ins){ print "selected"; } ?>>
-                <?= $res2["nome"]; ?>
+                <option value="<?php echo  $res2["id"]; ?>" <?php if($res2["id"]==$estado_ins){ print "selected"; } ?>>
+                <?php echo  $res2["nome"]; ?>
                 </option>
-                <? } ?>
+                <?php } ?>
               </select>
             </span></td>
           </tr>
           <tr class="textobold">
             <td>&nbsp;Cidade:</td>
-            <td><input name="cidade_ins" type="text" class="formulario" id="cidade_ins" value="<? print $cidade_ins; ?>" size="50" maxlength="30"></td>
+            <td><input name="cidade_ins" type="text" class="formulario" id="cidade_ins" value="<?php print $cidade_ins; ?>" size="50" maxlength="30"></td>
           </tr>
           
           <tr class="textobold">
-            <td colspan="2" align="center"><? if($acao=="alt"){ ?>
-                <input name="Button" type="button" class="microtxt" value="Voltar" onClick="window.location='clientes.php<? if(!empty($bcod) or!empty($bnome)) print "?webmst=cpp"; if(!empty($bcod)) print "&bcod=$bcod"; if(!empty($bnome)) print "&bnome=$bnome";?>'">
+            <td colspan="2" align="center"><?php if($acao=="alt"){ ?>
+                <input name="Button" type="button" class="microtxt" value="Voltar" onClick="window.location='clientes.php<?php if(!empty($bcod) or!empty($bnome)) print "?webmst=cpp"; if(!empty($bcod)) print "&bcod=$bcod"; if(!empty($bnome)) print "&bnome=$bnome";?>'">
                 &nbsp;&nbsp;&nbsp;&nbsp;
-                <? } ?>
+                <?php } ?>
                 <input name="Submit" type="submit" class="microtxt" value="Continuar">
                 <font face="Verdana, Arial, Helvetica, sans-serif" size="1" color="#000066">
-                <input name="id" type="hidden" id="id" value="<? print $id; ?>">
-                <input name="acao" type="hidden" id="acao" value="<? if($acao=="inc"){ print "incluir"; }else{ print "alterar"; } ?>">
+                <input name="id" type="hidden" id="id" value="<?php print $id; ?>">
+                <input name="acao" type="hidden" id="acao" value="<?php if($acao=="inc"){ print "incluir"; }else{ print "alterar"; } ?>">
                 </font></td>
           </tr>
         </table>
@@ -200,4 +201,4 @@ function verifica(cad){
 &nbsp; 
 </body>
 </html>
-<? include("mensagem.php"); ?>
+<?php include("mensagem.php"); ?>

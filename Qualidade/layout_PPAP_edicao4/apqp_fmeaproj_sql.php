@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 $apqp=new set_apqp;
 $acao=verifi($permi,$acao);
@@ -36,7 +36,7 @@ if($acao=="email"){
 		$apqp->cliente_apro("apqp_fmeaprojc.php");
 		// - - - - - - - -  -
 if($acao=="altc"){
-	$sql=mysql_query("UPDATE apqp_cron SET resp='$quem1', fim=NOW(), perc='95' WHERE peca='$pc' AND ativ='FMEA de Projeto (Se aplic·vel)'");
+	$sql=mysql_query("UPDATE apqp_cron SET resp='$quem1', fim=NOW(), perc='95' WHERE peca='$pc' AND ativ='FMEA de Projeto (Se aplic√°vel)'");
 	$ini=data2banco($ini);
 	$rev=data2banco($rev);
 	$chv=data2banco($chv);
@@ -47,34 +47,34 @@ if($acao=="altc"){
 		$sql=mysql_query("INSERT INTO apqp_fmeaproj (peca,prep,resp,equipe,obs,ini,rev,chv,numero,quem,dtquem,op) VALUES ('$pc','$prep','$resp','$equipe','$obs','$ini','$rev','$chv','$numero','$quem',NOW(),'$op')");
 	}
 	if($sql){
-		$_SESSION["mensagem"]="AlteraÁıes salvas com sucesso";
-		// cria followup caso salve as alteraÁıes do FMEA de projeto
-			mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Salvando o FMEA de projeto da peÁa $npc.','O usu·rio $quem salvou as alteraÁıes do FMEA de projeto da peÁa $npc.','$user')");
+		$_SESSION["mensagem"]="Altera√ß√µes salvas com sucesso";
+		// cria followup caso salve as altera√ß√µes do FMEA de projeto
+			mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Salvando o FMEA de projeto da pe√ßa $npc.','O usu√°rio $quem salvou as altera√ß√µes do FMEA de projeto da pe√ßa $npc.','$user')");
 		//
 	}else{
-		$_SESSION["mensagem"]="As alteraÁıes n„o poderam ser salvas";
+		$_SESSION["mensagem"]="As altera√ß√µes n√£o poderam ser salvas";
 	}
 	if(isset($ap)){
 		if(empty($quem1)){
 		$quem1=$quem;
 		}
 		//finalizar tarefa!!! - - - - - - - 
-		$apqp->agenda("FMEA de Projeto (Se aplic·vel)");
+		$apqp->agenda("FMEA de Projeto (Se aplic√°vel)");
 		// - - - - - - - -  - - - - - - - - 
-		$sql=mysql_query("UPDATE apqp_cron SET resp='$quem1', fim=NOW(), perc='100' WHERE peca='$pc' AND ativ='FMEA de Projeto (Se aplic·vel)'") or die("nao foi");
-		$sql=mysql_query("UPDATE apqp_fmeaproj SET sit='S', quem='$quem1', dtquem=NOW(), op='$op' WHERE peca='$pc'") or die("nao foi");
+		$sql=mysql_query("UPDATE apqp_cron SET resp='$quem1', fim=NOW(), perc='100' WHERE peca='$pc' AND ativ='FMEA de Projeto (Se aplic√°vel)'") or erp_db_fail();
+		$sql=mysql_query("UPDATE apqp_fmeaproj SET sit='S', quem='$quem1', dtquem=NOW(), op='$op' WHERE peca='$pc'") or erp_db_fail();
 			$_SESSION["mensagem"]="Aprovado com Sucesso!";
 			// cria followup caso o FMEA de projeto seja aprovado 
-				mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','AprovaÁ„o do FMEA de projeto da peÁa $npc.','O usu·rio $quem aprovou o FMEA de projeto da peÁa $npc.','$user')");
+				mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Aprova√ß√£o do FMEA de projeto da pe√ßa $npc.','O usu√°rio $quem aprovou o FMEA de projeto da pe√ßa $npc.','$user')");
 			//		
 			header("Location:apqp_fmeaprojc.php");
 			exit;
 	}elseif(isset($lap)){
-		$sql=mysql_query("UPDATE apqp_cron SET resp='' WHERE peca='$pc' AND ativ='FMEA de Projeto (Se aplic·vel)'");
+		$sql=mysql_query("UPDATE apqp_cron SET resp='' WHERE peca='$pc' AND ativ='FMEA de Projeto (Se aplic√°vel)'");
 		$sql=mysql_query("UPDATE apqp_fmeaproj SET sit='N', quem='', dtquem='', op='$op' WHERE peca='$pc'");
-			$_SESSION["mensagem"]="AprovaÁ„o excluÌda com sucesso!";
+			$_SESSION["mensagem"]="Aprova√ß√£o exclu√≠da com sucesso!";
 			// cria followup caso o FMEA de projeto seja aprovado 
-				mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Removendo aprovaÁ„o do FMEA de projeto da peÁa $npc.','O usu·rio $quem removeu a aprovaÁ„o do FMEA de projeto da peÁa $npc.','$user')");
+				mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Removendo aprova√ß√£o do FMEA de projeto da pe√ßa $npc.','O usu√°rio $quem removeu a aprova√ß√£o do FMEA de projeto da pe√ßa $npc.','$user')");
 			//		
 			header("Location:apqp_fmeaprojc.php");
 			exit;
@@ -87,12 +87,12 @@ if($acao=="altc"){
 			$sql=mysql_query("UPDATE apqp_fmeaproji SET modo='".$modo[$linha]."', efeitos='".$efeitos[$linha]."', sev='".$sev[$linha]."', icone='".$simbolo[$linha]."', causa='".$causa[$linha]."', ocor='".$ocor[$linha]."', controle='".$controle[$linha]."', controle2='".$controle2[$linha]."', det='".$det[$linha]."', npr='".$npr[$linha]."', ar='".$ar[$linha]."', resp='".$resp[$linha]."', prazo='".data2banco($prazo[$linha])."', at='".$at[$linha]."', sev2='".$sev2[$linha]."', ocor2='".$ocor2[$linha]."', det2='".$det2[$linha]."', npr2='".$npr2[$linha]."' WHERE id='$linha'");
 		}
 		if($sql){
-			$_SESSION["mensagem"]="AlteraÁıes salvas com sucesso";
-			// cria followup caso salve as alteraÁıes do cabeÁalho do FMEA de projeto
-				mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Salvando o FMEA de projeto da peÁa $npc.','O usu·rio $quem salvou as alteraÁıes do FMEA de projeto da peÁa $npc.','$user')");
+			$_SESSION["mensagem"]="Altera√ß√µes salvas com sucesso";
+			// cria followup caso salve as altera√ß√µes do cabe√ßalho do FMEA de projeto
+				mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Salvando o FMEA de projeto da pe√ßa $npc.','O usu√°rio $quem salvou as altera√ß√µes do FMEA de projeto da pe√ßa $npc.','$user')");
 			//							
 		}else{
-			$_SESSION["mensagem"]="As alteraÁıes n„o puderam ser salvas";
+			$_SESSION["mensagem"]="As altera√ß√µes n√£o puderam ser salvas";
 		}
 	}
 	if($maisum==1){
@@ -127,7 +127,7 @@ if($acao=="altc"){
 			foreach($del AS $linha){
 				$sql=mysql_query("DELETE FROM apqp_fmeaproji WHERE id='$linha'");
 			}
-			$_SESSION["mensagem"]="Linhas excluÌdas com sucesso";
+			$_SESSION["mensagem"]="Linhas exclu√≠das com sucesso";
 		}else{
 			$_SESSION["mensagem"]="Selecione as linhas que deseja excluir";
 		}

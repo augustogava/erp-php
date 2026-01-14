@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 if(empty($acao)) exit;
 $acao=verifi($permi,$acao);
@@ -40,7 +40,7 @@ if($acao=="inc"){
 		}
 	}			
 	header("Location:compras_cot.php");
-	$_SESSION["mensagem"]="Lista de requisições alterada com sucesso!";
+	$_SESSION["mensagem"]="Lista de requisiÃ§Ãµes alterada com sucesso!";
 	exit;
 }elseif($acao=="alt"){
 	$data=data2banco($data);
@@ -59,9 +59,9 @@ if($acao=="inc"){
 	}
 	$sql=mysql_query("UPDATE compras_cotacao SET valor='$valor2' WHERE id='$id'");
 	if($sql){
-		$_SESSION["mensagem"]="Cotação alterada com sucesso!";
+		$_SESSION["mensagem"]="CotaÃ§Ã£o alterada com sucesso!";
 	}else{
-		$_SESSION["mensagem"]="A cotação não pôde ser alterada!";
+		$_SESSION["mensagem"]="A cotaÃ§Ã£o nÃ£o pÃ´de ser alterada!";
 	}
 	if($maisum){
 		$sql=mysql_query("INSERT INTO compras_cotacao_list (cotacao) VALUES ('$id')");
@@ -81,9 +81,9 @@ if($acao=="inc"){
 	$sql=mysql_query("DELETE FROM compras_cotacao WHERE id='$id'");
 	if($sql){
 		$sql=mysql_query("DELETE FROM compras_cotacao_list WHERE cotacao='$id'");
-		$_SESSION["mensagem"]="Cotação excluída com sucesso!";
+		$_SESSION["mensagem"]="CotaÃ§Ã£o excluÃ­da com sucesso!";
 	}else{
-		$_SESSION["mensagem"]="O Cotação não pôde ser excluída!";
+		$_SESSION["mensagem"]="O CotaÃ§Ã£o nÃ£o pÃ´de ser excluÃ­da!";
 	}
 	header("Location:compras_cot.php");
 	exit;

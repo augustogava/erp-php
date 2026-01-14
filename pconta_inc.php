@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 include("seguranca.php");
 $acao=verifi($permi,$acao);
@@ -18,18 +18,19 @@ if($acao=="alt"){
 <html>
 <head>
 <title>CyberManager</title>
-<meta http-equiv="Content-Type" content="text/html; UTF-8">
+<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="style.css" rel="stylesheet" type="text/css">
 <script src="scripts.js"></script>
 <script>
 function verifica(cad){
 	if(cad.descricao.value==''){
-		alert('Informe a descrição da conta');
+		alert('Informe a descriÃ§Ã£o da conta');
 		cad.descricao.focus();
 		return false;
 	}
 	if(cad.codigo.value==''){
-		alert('Informe o código da conta');
+		alert('Informe o cÃ³digo da conta');
 		cad.codigo.focus();
 		return false;
 	}
@@ -60,27 +61,27 @@ function verifica(cad){
     <td align="left" valign="top"><form name="form1" method="post" action="pconta_inc_sql.php" onSubmit="return verifica(this);">
         <table width="300" border="0" cellspacing="1" cellpadding="0">
           <tr bgcolor="#003366"> 
-            <td colspan="2" align="center" class="textoboldbranco"><? if($acao=="inc"){ print "Incluir Conta"; }else{ print "Alterar Conta"; } ?></td>
+            <td colspan="2" align="center" class="textoboldbranco"><?php if($acao=="inc"){ print "Incluir Conta"; }else{ print "Alterar Conta"; } ?></td>
           </tr>
           <tr> 
             <td width="56" class="textobold">Conta:</td>
-            <td width="241"><input name="descricao" type="text" class="formularioselect" id="descricao" value="<? print $res["descricao"]; ?>" maxlength="50"></td>
+            <td width="241"><input name="descricao" type="text" class="formularioselect" id="descricao" value="<?php print $res["descricao"]; ?>" maxlength="50"></td>
           </tr>
           <tr> 
             <td class="textobold">C&oacute;digo:</td>
-            <td><input name="codigo" type="text" class="formulario" id="codigo" value="<? print $res["codigo"]; ?>" size="15" maxlength="10"></td>
+            <td><input name="codigo" type="text" class="formulario" id="codigo" value="<?php print $res["codigo"]; ?>" size="15" maxlength="10"></td>
           </tr>
           <tr> 
             <td class="textobold">Tipo:</td>
             <td>
 			<select name="tipo" class="formularioselect" id="tipo">
-				<option value="" <? if(empty($res["tipo"])) print "selected"; ?>>Selecione</option>
-				<?
+				<option value="" <?php if(empty($res["tipo"])) print "selected"; ?>>Selecione</option>
+				<?php
 				$sqlc=mysql_query("SELECT * FROM pcontas_tipo ORDER BY tipo ASC");
 				while($resc=mysql_fetch_array($sqlc)){
 				?>
-				<option value="<? print $resc["id"]; ?>" <? if($res["tipo"]==$resc["id"]) print "selected"; ?>><? print $resc["tipo"]; ?></option>
-				<?
+				<option value="<?php print $resc["id"]; ?>" <?php if($res["tipo"]==$resc["id"]) print "selected"; ?>><?php print $resc["tipo"]; ?></option>
+				<?php
 				}
 				?>
 			</select></td>
@@ -91,8 +92,8 @@ function verifica(cad){
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="textobold">
               <input name="Submit2" type="submit" class="microtxt" value="Continuar">
             </span>
-              <input name="acao" type="hidden" id="acao2" value="<? if($acao=="inc"){ print "incluir"; }else{ print "alterar"; } ?>">
-            <input name="id" type="hidden" id="id" value="<? print $id; ?>"></td>
+              <input name="acao" type="hidden" id="acao2" value="<?php if($acao=="inc"){ print "incluir"; }else{ print "alterar"; } ?>">
+            <input name="id" type="hidden" id="id" value="<?php print $id; ?>"></td>
           </tr>
         </table>
       </form></td>
@@ -100,4 +101,4 @@ function verifica(cad){
 </table>
 </body>
 </html>
-<? include("mensagem.php"); ?>
+<?php include("mensagem.php"); ?>

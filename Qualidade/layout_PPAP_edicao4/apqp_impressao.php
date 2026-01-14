@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 require('pdf/fpdf.php');
 $sql=mysql_query("SELECT * FROM apqp_pc WHERE id='$pc'"); $res=mysql_fetch_array($sql); $numer=$res["numero"]; $revi=$res["rev"];
@@ -29,7 +29,7 @@ $msg="";
 $mens="";
 $headers="";
 
-if($acao=="email"){ // envia e-mail com arquivo pdf do módulo anexo
+if($acao=="email"){ // envia e-mail com arquivo pdf do mÃ³dulo anexo
 
 	if(!strstr($email,"@") or !strstr($email,".")){
 		$_SESSION["mensagem"]="Email Invalido!";
@@ -44,7 +44,7 @@ if($acao=="email"){ // envia e-mail com arquivo pdf do módulo anexo
 
 					case "fluxo":
 					// cria followup caso envie e-mail com anexo do Diagrama de fluxo
-						mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Envio de e-mail com anexo do Diagrama de fluxo da peça $npc.','O usuário $quem1 enviou e-mail com anexo do Diagrama de fluxo da peça $npc para $email.','$user')");
+						mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Envio de e-mail com anexo do Diagrama de fluxo da peÃ§a $npc.','O usuÃ¡rio $quem1 enviou e-mail com anexo do Diagrama de fluxo da peÃ§a $npc para $email.','$user')");
 					//					
 					$pdf=new FPDF();
 					$logo="OK";
@@ -53,7 +53,7 @@ if($acao=="email"){ // envia e-mail com arquivo pdf do módulo anexo
 
 					case "dimensional": 
 					// cria followup caso envie e-mail com anexo do Ensaio Dimensional
-						mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Envio de e-mail com anexo do Ensaio Dimensional da peça $npc.','O usuário $quem1 enviou e-mail com anexo do Ensaio Dimensional da peça $npc para $email.','$user')");
+						mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Envio de e-mail com anexo do Ensaio Dimensional da peÃ§a $npc.','O usuÃ¡rio $quem1 enviou e-mail com anexo do Ensaio Dimensional da peÃ§a $npc para $email.','$user')");
 					//					
 					$pdf=new FPDF();
 					$logo="OK";
@@ -66,7 +66,7 @@ if($acao=="email"){ // envia e-mail com arquivo pdf do módulo anexo
 					
 					case "desempenho":
 					// cria followup caso envie e-mail com anexo do Ensaio de Desempenho
-						mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Envio de e-mail com anexo do Ensaio de Desempenho da peça $npc.','O usuário $quem1 enviou e-mail com anexo do Ensaio de Desempenho da peça $npc para $email.','$user')");
+						mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Envio de e-mail com anexo do Ensaio de Desempenho da peÃ§a $npc.','O usuÃ¡rio $quem1 enviou e-mail com anexo do Ensaio de Desempenho da peÃ§a $npc para $email.','$user')");
 					//					
 					$pdf=new FPDF();
 					$logo="OK";
@@ -78,8 +78,8 @@ if($acao=="email"){ // envia e-mail com arquivo pdf do módulo anexo
 					break;
 					
 					case "submissao": 
-					// cria followup caso envie e-mail com anexo do Certificado de Submissão
-						mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Envio de e-mail com anexo do Certificado de Submissão da peça $npc.','O usuário $quem1 enviou e-mail com anexo do Certificado de Submissão da peça $npc para $email.','$user')");
+					// cria followup caso envie e-mail com anexo do Certificado de SubmissÃ£o
+						mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Envio de e-mail com anexo do Certificado de SubmissÃ£o da peÃ§a $npc.','O usuÃ¡rio $quem1 enviou e-mail com anexo do Certificado de SubmissÃ£o da peÃ§a $npc para $email.','$user')");
 					//
 					$pdf=new FPDF();
 					$logo="OK";
@@ -90,8 +90,8 @@ if($acao=="email"){ // envia e-mail com arquivo pdf do módulo anexo
 					}
 					break;
 					case "inst": 
-					// cria followup caso envie e-mail com anexo da Instrução do Operador
-						mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Envio de e-mail com anexo da Instrução do Operador da peça $npc.','O usuário $quem1 enviou e-mail com anexo da Instrução do Operador da peça $npc para $email.','$user')");
+					// cria followup caso envie e-mail com anexo da InstruÃ§Ã£o do Operador
+						mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Envio de e-mail com anexo da InstruÃ§Ã£o do Operador da peÃ§a $npc.','O usuÃ¡rio $quem1 enviou e-mail com anexo da InstruÃ§Ã£o do Operador da peÃ§a $npc para $email.','$user')");
 					//
 					$pdf=new FPDF();
 					$logo="OK";
@@ -100,7 +100,7 @@ if($acao=="email"){ // envia e-mail com arquivo pdf do módulo anexo
 					
 					case "granel": 
 					// cria followup caso envie e-mail com anexo da Checklist Material a Granel
-						mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Envio de e-mail com anexo da Checklist Material a Granel da peça $npc.','O usuário $quem1 enviou e-mail com anexo da Checklist Material a Granel da peça $npc para $email.','$user')");
+						mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Envio de e-mail com anexo da Checklist Material a Granel da peÃ§a $npc.','O usuÃ¡rio $quem1 enviou e-mail com anexo da Checklist Material a Granel da peÃ§a $npc para $email.','$user')");
 					//
 					$pdf=new FPDF();
 					$logo="OK";
@@ -108,8 +108,8 @@ if($acao=="email"){ // envia e-mail com arquivo pdf do módulo anexo
 					break;
 					
 					case "sumario": 
-					// cria followup caso envie e-mail com anexo da Sumário de Aprovação
-						mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Envio de e-mail com anexo da Sumário de Aprovação da peça $npc.','O usuário $quem1 enviou e-mail com anexo da Sumário de Aprovação da peça $npc para $email.','$user')");
+					// cria followup caso envie e-mail com anexo da SumÃ¡rio de AprovaÃ§Ã£o
+						mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Envio de e-mail com anexo da SumÃ¡rio de AprovaÃ§Ã£o da peÃ§a $npc.','O usuÃ¡rio $quem1 enviou e-mail com anexo da SumÃ¡rio de AprovaÃ§Ã£o da peÃ§a $npc para $email.','$user')");
 					//
 					$pdf=new FPDF();
 					$logo="OK";
@@ -118,7 +118,7 @@ if($acao=="email"){ // envia e-mail com arquivo pdf do módulo anexo
 					
 					case "capabilidade": 
 					// cria followup caso envie e-mail com anexo da Capabilidade
-						mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Envio de e-mail com anexo da Capabilidade da peça $npc.','O usuário $quem1 enviou e-mail com anexo da Capabilidade da peça $npc para $email.','$user')");
+						mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Envio de e-mail com anexo da Capabilidade da peÃ§a $npc.','O usuÃ¡rio $quem1 enviou e-mail com anexo da Capabilidade da peÃ§a $npc para $email.','$user')");
 					//
 					$pdf=new FPDF();
 					$logo="OK";
@@ -127,7 +127,7 @@ if($acao=="email"){ // envia e-mail com arquivo pdf do módulo anexo
 					
 					case "rr": 
 					// cria followup caso envie e-mail com anexo do Estudo de R&R
-						mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Envio de e-mail com anexo do Estudo de R&R da peça $npc.','O usuário $quem1 enviou e-mail com anexo do Estudo de R&R da peça $npc para $email.','$user')");
+						mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Envio de e-mail com anexo do Estudo de R&R da peÃ§a $npc.','O usuÃ¡rio $quem1 enviou e-mail com anexo do Estudo de R&R da peÃ§a $npc para $email.','$user')");
 					//
 					$pdf=new FPDF();
 					$logo="OK";
@@ -136,7 +136,7 @@ if($acao=="email"){ // envia e-mail com arquivo pdf do módulo anexo
 					
 					case "material": 
 					// cria followup caso envie e-mail com anexo do Ensaio de Material
-						mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Envio de e-mail com anexo do Ensaio de Material da peça $npc.','O usuário $quem1 enviou e-mail com anexo do Ensaio de Material da peça $npc para $email.','$user')");
+						mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Envio de e-mail com anexo do Ensaio de Material da peÃ§a $npc.','O usuÃ¡rio $quem1 enviou e-mail com anexo do Ensaio de Material da peÃ§a $npc para $email.','$user')");
 					//
 					$pdf=new FPDF();
 					$logo="OK";
@@ -149,7 +149,7 @@ if($acao=="email"){ // envia e-mail com arquivo pdf do módulo anexo
 					
 					case "viabilidade":
 					// cria followup caso envie e-mail com anexo da viabilidade
-						mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Envio de e-mail com anexo da Viabilidade da peça $npc.','O usuário $quem1 enviou e-mail com anexo da Viabilidade da peça $npc para $email.','$user')");
+						mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Envio de e-mail com anexo da Viabilidade da peÃ§a $npc.','O usuÃ¡rio $quem1 enviou e-mail com anexo da Viabilidade da peÃ§a $npc para $email.','$user')");
 					//
 					$pdf=new FPDF();
 					$logo="OK";
@@ -157,8 +157,8 @@ if($acao=="email"){ // envia e-mail com arquivo pdf do módulo anexo
 					break;
 					
 					case "interina":
-					// cria followup caso envie e-mail com anexo da Aprovação Interina
-						mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Envio de e-mail com anexo da Aprovação Interina da peça $npc.','O usuário $quem1 enviou e-mail com anexo da Aprovação Interina da peça $npc para $email.','$user')");
+					// cria followup caso envie e-mail com anexo da AprovaÃ§Ã£o Interina
+						mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Envio de e-mail com anexo da AprovaÃ§Ã£o Interina da peÃ§a $npc.','O usuÃ¡rio $quem1 enviou e-mail com anexo da AprovaÃ§Ã£o Interina da peÃ§a $npc para $email.','$user')");
 					//
 					$pdf=new FPDF();
 					include('pdf/apqp_interina_imp.php');
@@ -166,7 +166,7 @@ if($acao=="email"){ // envia e-mail com arquivo pdf do módulo anexo
 					
 					case "processo":	
 					// cria followup caso envie e-mail com anexo do FMEA de processo
-						mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Envio de e-mail com anexo do FMEA de processo da peça $npc.','O usuário $quem1 enviou e-mail com anexo do FMEA de processo da peça $npc para $email.','$user')");
+						mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Envio de e-mail com anexo do FMEA de processo da peÃ§a $npc.','O usuÃ¡rio $quem1 enviou e-mail com anexo do FMEA de processo da peÃ§a $npc para $email.','$user')");
 					//
 					$pdf=new FPDF('L');
 					include("pdf/apqp_fmeaproc_imp2.php");
@@ -174,7 +174,7 @@ if($acao=="email"){ // envia e-mail com arquivo pdf do módulo anexo
 					
 					case "projeto": 
 					// cria followup caso envie e-mail com anexo do FMEA de projeto
-						mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Envio de e-mail com anexo do FMEA de projeto da peça $npc.','O usuário $quem1 enviou e-mail com anexo do FMEA de projeto da peça $npc para $email.','$user')");
+						mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Envio de e-mail com anexo do FMEA de projeto da peÃ§a $npc.','O usuÃ¡rio $quem1 enviou e-mail com anexo do FMEA de projeto da peÃ§a $npc para $email.','$user')");
 					//
 					$pdf=new FPDF('L');
 					include("pdf/apqp_fmeaproj_imp2.php");
@@ -182,7 +182,7 @@ if($acao=="email"){ // envia e-mail com arquivo pdf do módulo anexo
 
 					case "controle": 
 					// cria followup caso envie e-mail com anexo do Plano de Controle
-						mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Envio de e-mail com anexo do Plano de Controle da peça $npc.','O usuário $quem1 enviou e-mail com anexo do Plano de Controle da peça $npc para $email.','$user')");
+						mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Envio de e-mail com anexo do Plano de Controle da peÃ§a $npc.','O usuÃ¡rio $quem1 enviou e-mail com anexo do Plano de Controle da peÃ§a $npc para $email.','$user')");
 					//
 					$pdf=new FPDF('L');
 					include("pdf/apqp_plano_imp2.php");
@@ -190,15 +190,15 @@ if($acao=="email"){ // envia e-mail com arquivo pdf do módulo anexo
 					
 					case "crono": 
 					// cria followup caso envie email do cronograma
-						mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Envio de e-mail com anexo do Cronograma da peça $npc.','O usuário $quem1 enviou e-mail com anexo do Cronograma da peça $npc para $email.','$user')");
+						mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Envio de e-mail com anexo do Cronograma da peÃ§a $npc.','O usuÃ¡rio $quem1 enviou e-mail com anexo do Cronograma da peÃ§a $npc para $email.','$user')");
 					//
 					$pdf=new FPDF('L');
 					include("pdf/apqp_crono_imp2.php");
 					break;
 					
 					case "aparencia": 
-					// cria followup caso envie e-mail com anexo da Aprovação de Aparência
-						mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Envio de e-mail com anexo da Aprovação de Aparência da peça $npc.','O usuário $quem1 enviou e-mail com anexo da Aprovação de Aparência da peça $npc para $email.','$user')");
+					// cria followup caso envie e-mail com anexo da AprovaÃ§Ã£o de AparÃªncia
+						mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Envio de e-mail com anexo da AprovaÃ§Ã£o de AparÃªncia da peÃ§a $npc.','O usuÃ¡rio $quem1 enviou e-mail com anexo da AprovaÃ§Ã£o de AparÃªncia da peÃ§a $npc para $email.','$user')");
 					//
 					$pdf=new FPDF('L');
 					include("pdf/apqp_apro_imp2.php");
@@ -206,15 +206,15 @@ if($acao=="email"){ // envia e-mail com arquivo pdf do módulo anexo
 					
 					case "chk":
 					// cria followup caso envie email do Checklist APQP
-						mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Envio de e-mail com anexo do Checklist APQP da peça $npc.','O usuário $quem1 enviou e-mail com anexo do Checklist APQP da peça $npc para $email.','$user')");
+						mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Envio de e-mail com anexo do Checklist APQP da peÃ§a $npc.','O usuÃ¡rio $quem1 enviou e-mail com anexo do Checklist APQP da peÃ§a $npc para $email.','$user')");
 					//
 					$pdf=new FPDF('L');
 					include('pdf/apqp_chk_imp2.php');
 					break;
 					
 					case "ope":
-					// cria followup caso envie email do FMEA de Operação
-						mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Envio de e-mail com anexo do FMEA de Operação da peça $npc.','O usuário $quem1 enviou e-mail com anexo do FMEA de Operação da peça $npc para $email.','$user')");
+					// cria followup caso envie email do FMEA de OperaÃ§Ã£o
+						mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Envio de e-mail com anexo do FMEA de OperaÃ§Ã£o da peÃ§a $npc.','O usuÃ¡rio $quem1 enviou e-mail com anexo do FMEA de OperaÃ§Ã£o da peÃ§a $npc para $email.','$user')");
 					//
 					$pdf=new FPDF('L');
 					include('pdf/apqp_fmeaope_imp2.php');
@@ -271,8 +271,8 @@ if($acao=="imp"){  // imprimir
 				switch($local){
 					
 					case "fluxo":
-					// cria followup caso efetue a impressão do arquivo do Diagrama de fluxo
-						mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Impressão do Diagrama de fluxo da peça $npc.','O usuário $quem1 imprimiu o Diagrama de fluxo da peça $npc.','$user')");
+					// cria followup caso efetue a impressÃ£o do arquivo do Diagrama de fluxo
+						mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','ImpressÃ£o do Diagrama de fluxo da peÃ§a $npc.','O usuÃ¡rio $quem1 imprimiu o Diagrama de fluxo da peÃ§a $npc.','$user')");
 					//					
 					$pdf=new FPDF();
 					$logo="OK";
@@ -280,8 +280,8 @@ if($acao=="imp"){  // imprimir
 					break;
 					
 					case "dimensional": 
-					// cria followup caso efetue a impressão do arquivo do Ensaio Dimensional
-						mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Impressão do Ensaio Dimensional da peça $npc.','O usuário $quem1 imprimiu o Ensaio Dimensional da peça $npc.','$user')");
+					// cria followup caso efetue a impressÃ£o do arquivo do Ensaio Dimensional
+						mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','ImpressÃ£o do Ensaio Dimensional da peÃ§a $npc.','O usuÃ¡rio $quem1 imprimiu o Ensaio Dimensional da peÃ§a $npc.','$user')");
 					$pdf=new FPDF();
 					$logo="OK";
 					if($resc["relatorios"]!="S"){
@@ -292,8 +292,8 @@ if($acao=="imp"){  // imprimir
 					break;
 					
 					case "desempenho":
-					// cria followup caso efetue a impressão do arquivo do Ensaio de Desempenho
-						mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Impressão do Ensaio de Desempenho da peça $npc.','O usuário $quem1 imprimiu o Ensaio de Desempenho da peça $npc.','$user')");
+					// cria followup caso efetue a impressÃ£o do arquivo do Ensaio de Desempenho
+						mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','ImpressÃ£o do Ensaio de Desempenho da peÃ§a $npc.','O usuÃ¡rio $quem1 imprimiu o Ensaio de Desempenho da peÃ§a $npc.','$user')");
 					$pdf=new FPDF();
 					$logo="OK";
 					if($resc["relatorios"]!="S"){
@@ -304,8 +304,8 @@ if($acao=="imp"){  // imprimir
 					break;
 					
 					case "submissao": 
-					// cria followup caso efetue a impressão do arquivo do Certificado de Submissão
-						mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Impressão do Certificado de Submissão da peça $npc.','O usuário $quem1 imprimiu o Certificado de Submissão da peça $npc.','$user')");
+					// cria followup caso efetue a impressÃ£o do arquivo do Certificado de SubmissÃ£o
+						mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','ImpressÃ£o do Certificado de SubmissÃ£o da peÃ§a $npc.','O usuÃ¡rio $quem1 imprimiu o Certificado de SubmissÃ£o da peÃ§a $npc.','$user')");
 					$pdf=new FPDF();
 					$logo="OK";
 					if($tag=="S"){
@@ -316,48 +316,48 @@ if($acao=="imp"){  // imprimir
 					break;
 					
 					case "inst": 
-					// cria followup caso efetue a impressão do arquivo do Instrução do Operador
-						mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Impressão do Instrução do Operador da peça $npc.','O usuário $quem1 imprimiu o Instrução do Operador da peça $npc.','$user')");
+					// cria followup caso efetue a impressÃ£o do arquivo do InstruÃ§Ã£o do Operador
+						mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','ImpressÃ£o do InstruÃ§Ã£o do Operador da peÃ§a $npc.','O usuÃ¡rio $quem1 imprimiu o InstruÃ§Ã£o do Operador da peÃ§a $npc.','$user')");
 					$pdf=new FPDF();
 					$logo="OK";
 					include('pdf/apqp_inst_imp2.php');
 					break;
 					
 					case "granel": 
-					// cria followup caso efetue a impressão do arquivo do Diagrama de fluxo
-						mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Impressão do Checklist Material a Granel da peça $npc.','O usuário $quem1 imprimiu o Checklist Material a Granel da peça $npc.','$user')");
+					// cria followup caso efetue a impressÃ£o do arquivo do Diagrama de fluxo
+						mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','ImpressÃ£o do Checklist Material a Granel da peÃ§a $npc.','O usuÃ¡rio $quem1 imprimiu o Checklist Material a Granel da peÃ§a $npc.','$user')");
 					$pdf=new FPDF();
 					$logo="OK";
 					include('pdf/apqp_granel_imp2.php');
 					break;
 					
 					case "sumario": 
-					// cria followup caso efetue a impressão do arquivo do Sumário de Aprovação
-						mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Impressão do Sumário de Aprovação da peça $npc.','O usuário $quem1 imprimiu o Sumário de Aprovação da peça $npc.','$user')");
+					// cria followup caso efetue a impressÃ£o do arquivo do SumÃ¡rio de AprovaÃ§Ã£o
+						mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','ImpressÃ£o do SumÃ¡rio de AprovaÃ§Ã£o da peÃ§a $npc.','O usuÃ¡rio $quem1 imprimiu o SumÃ¡rio de AprovaÃ§Ã£o da peÃ§a $npc.','$user')");
 					$pdf=new FPDF();
 					$logo="OK";
 					include('pdf/apqp_sum_imp_2.php');
 					break;
 					
 					case "capabilidade": 
-					// cria followup caso efetue a impressão do arquivo da Capabilidade
-						mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Impressão da Capabilidade da peça $npc.','O usuário $quem1 imprimiu a Capabilidade da peça $npc.','$user')");
+					// cria followup caso efetue a impressÃ£o do arquivo da Capabilidade
+						mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','ImpressÃ£o da Capabilidade da peÃ§a $npc.','O usuÃ¡rio $quem1 imprimiu a Capabilidade da peÃ§a $npc.','$user')");
 					$pdf=new FPDF();
 					$logo="OK";
 					include('pdf/apqp_cap_imp_2.php');
 					break;
 					
 					case "rr": 
-					// cria followup caso efetue a impressão do arquivo do Estudo de R&R
-						mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Impressão do Estudo de R&R da peça $npc.','O usuário $quem1 imprimiu o Estudo de R&R da peça $npc.','$user')");
+					// cria followup caso efetue a impressÃ£o do arquivo do Estudo de R&R
+						mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','ImpressÃ£o do Estudo de R&R da peÃ§a $npc.','O usuÃ¡rio $quem1 imprimiu o Estudo de R&R da peÃ§a $npc.','$user')");
 					$pdf=new FPDF();
 					$logo="OK";
 					include('pdf/apqp_rr_imp_2.php');
 					break;
 					
 					case "material": 
-					// cria followup caso efetue a impressão do arquivo do Ensaio de Material
-						mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Impressão do Ensaio de Material da peça $npc.','O usuário $quem1 imprimiu o Ensaio de Material da peça $npc.','$user')");
+					// cria followup caso efetue a impressÃ£o do arquivo do Ensaio de Material
+						mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','ImpressÃ£o do Ensaio de Material da peÃ§a $npc.','O usuÃ¡rio $quem1 imprimiu o Ensaio de Material da peÃ§a $npc.','$user')");
 					$pdf=new FPDF();
 					$logo="OK";
 					if($resc["relatorios"]!="S"){	
@@ -368,65 +368,65 @@ if($acao=="imp"){  // imprimir
 					break;
 					
 					case "interina":
-					// cria followup caso efetue a impressão do arquivo da Aprovação Interina
-						mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Impressão da Aprovação Interina da peça $npc.','O usuário $quem1 imprimiu a Aprovação Interina da peça $npc.','$user')");
+					// cria followup caso efetue a impressÃ£o do arquivo da AprovaÃ§Ã£o Interina
+						mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','ImpressÃ£o da AprovaÃ§Ã£o Interina da peÃ§a $npc.','O usuÃ¡rio $quem1 imprimiu a AprovaÃ§Ã£o Interina da peÃ§a $npc.','$user')");
 					$pdf=new FPDF();
 					include('pdf/apqp_interina_imp.php');
 					break;
 					
 					case "viabilidade":
-					// cria followup caso efetue a impressão do arquivo da Viabilidade
-						mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Impressão da Viabilidade da peça $npc.','O usuário $quem1 imprimiu a Viabilidade da peça $npc.','$user')");
+					// cria followup caso efetue a impressÃ£o do arquivo da Viabilidade
+						mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','ImpressÃ£o da Viabilidade da peÃ§a $npc.','O usuÃ¡rio $quem1 imprimiu a Viabilidade da peÃ§a $npc.','$user')");
 					$pdf=new FPDF();
 					$logo="OK";
 					include("pdf/apqp_viabilidade_imp1_2.php");
 					break;
 					
 					case "processo":
-					// cria followup caso efetue a impressão do arquivo do FMEA de Processo
-						mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Impressão do FMEA de Processo da peça $npc.','O usuário $quem1 imprimiu o FMEA de Processo da peça $npc.','$user')");
+					// cria followup caso efetue a impressÃ£o do arquivo do FMEA de Processo
+						mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','ImpressÃ£o do FMEA de Processo da peÃ§a $npc.','O usuÃ¡rio $quem1 imprimiu o FMEA de Processo da peÃ§a $npc.','$user')");
 					$pdf=new FPDF('L');
 					include("pdf/apqp_fmeaproc_imp2.php");
 					break;
 					
 					case "projeto": 
-					// cria followup caso efetue a impressão do arquivo do FMEA de Projeto
-						mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Impressão do FMEA de Projeto da peça $npc.','O usuário $quem1 imprimiu o FMEA de Projeto da peça $npc.','$user')");
+					// cria followup caso efetue a impressÃ£o do arquivo do FMEA de Projeto
+						mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','ImpressÃ£o do FMEA de Projeto da peÃ§a $npc.','O usuÃ¡rio $quem1 imprimiu o FMEA de Projeto da peÃ§a $npc.','$user')");
 					$pdf=new FPDF('L');
 					include("pdf/apqp_fmeaproj_imp2.php");
 					break;
 					
 					case "controle": 
-					// cria followup caso efetue a impressão do arquivo do Plano de Controle
-						mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Impressão do Plano de Controle da peça $npc.','O usuário $quem1 imprimiu o Plano de Controle da peça $npc.','$user')");
+					// cria followup caso efetue a impressÃ£o do arquivo do Plano de Controle
+						mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','ImpressÃ£o do Plano de Controle da peÃ§a $npc.','O usuÃ¡rio $quem1 imprimiu o Plano de Controle da peÃ§a $npc.','$user')");
 					$pdf=new FPDF('L');
 					include("pdf/apqp_plano_imp2.php");
 					break;
 					
 					case "crono": 
-					// cria followup caso efetue a impressão do arquivo do Cronograma
-						mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Impressão do Cronograma da peça $npc.','O usuário $quem1 imprimiu o Cronograma da peça $npc.','$user')");
+					// cria followup caso efetue a impressÃ£o do arquivo do Cronograma
+						mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','ImpressÃ£o do Cronograma da peÃ§a $npc.','O usuÃ¡rio $quem1 imprimiu o Cronograma da peÃ§a $npc.','$user')");
 					$pdf=new FPDF('L');
 					include("pdf/apqp_crono_imp2.php");
 					break;
 					
 					case "aparencia": 
-					// cria followup caso efetue a impressão do arquivo da Aprovação de Aparência
-						mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Impressão da Aprovação de Aparência da peça $npc.','O usuário $quem1 imprimiu a Aprovação de Aparência da peça $npc.','$user')");
+					// cria followup caso efetue a impressÃ£o do arquivo da AprovaÃ§Ã£o de AparÃªncia
+						mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','ImpressÃ£o da AprovaÃ§Ã£o de AparÃªncia da peÃ§a $npc.','O usuÃ¡rio $quem1 imprimiu a AprovaÃ§Ã£o de AparÃªncia da peÃ§a $npc.','$user')");
 					$pdf=new FPDF('L');
 					include("pdf/apqp_apro_imp2.php");
 					break;
 					
 					case "chk":
-					// cria followup caso efetue a impressão do arquivo do Checklist APQP
-						mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Impressão do Checklist APQP da peça $npc.','O usuário $quem1 imprimiu o Checklist APQP da peça $npc.','$user')");
+					// cria followup caso efetue a impressÃ£o do arquivo do Checklist APQP
+						mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','ImpressÃ£o do Checklist APQP da peÃ§a $npc.','O usuÃ¡rio $quem1 imprimiu o Checklist APQP da peÃ§a $npc.','$user')");
 					$pdf=new FPDF('L');
 					include('pdf/apqp_chk_imp2.php');
 					break;
 					
 					case "ope":
-					// cria followup caso efetue a impressão do arquivo do FMEA de Operação
-						mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Impressão do FMEA de Operação da peça $npc.','O usuário $quem1 imprimiu o FMEA de Operação da peça $npc.','$user')");
+					// cria followup caso efetue a impressÃ£o do arquivo do FMEA de OperaÃ§Ã£o
+						mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','ImpressÃ£o do FMEA de OperaÃ§Ã£o da peÃ§a $npc.','O usuÃ¡rio $quem1 imprimiu o FMEA de OperaÃ§Ã£o da peÃ§a $npc.','$user')");
 					$pdf=new FPDF('L');
 					include('pdf/apqp_fmeaope_imp2.php');
 					
@@ -437,7 +437,7 @@ if($acao=="imp"){  // imprimir
 unset($ato);
 unset($acao);
 }
-if($acao=="salvar"){  // botão salvar em disco
+if($acao=="salvar"){  // botÃ£o salvar em disco
 
 		include ("classes/jpgraph/jpgraph.php");
 		include ("classes/jpgraph/jpgraph_line.php");
@@ -446,7 +446,7 @@ if($acao=="salvar"){  // botão salvar em disco
 					
 					case "fluxo":					
 					// cria followup caso salve em disco o Diagrama de fluxo
-						mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Salvando em disco o arquivo do Diagrama de fluxo da peça $npc.','O usuário $quem1 salvou em disco o arquivo do Diagrama de fluxo da peça $npc.','$user')");
+						mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Salvando em disco o arquivo do Diagrama de fluxo da peÃ§a $npc.','O usuÃ¡rio $quem1 salvou em disco o arquivo do Diagrama de fluxo da peÃ§a $npc.','$user')");
 					//
 					$pdf=new FPDF();
 					$logo="OK";
@@ -456,7 +456,7 @@ if($acao=="salvar"){  // botão salvar em disco
 					
 					case "dimensional": 
 					// cria followup caso salve em disco o Ensaio Dimensional
-						mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Salvando em disco o arquivo do Ensaio Dimensional da peça $npc.','O usuário $quem1 salvou em disco o arquivo do Ensaio Dimensional da peça $npc.','$user')");
+						mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Salvando em disco o arquivo do Ensaio Dimensional da peÃ§a $npc.','O usuÃ¡rio $quem1 salvou em disco o arquivo do Ensaio Dimensional da peÃ§a $npc.','$user')");
 					//
 					$pdf=new FPDF();
 					$logo="OK";
@@ -470,7 +470,7 @@ if($acao=="salvar"){  // botão salvar em disco
 					
 					case "desempenho":
 					// cria followup caso salve em disco o Ensaio Desempenho
-						mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Salvando em disco o arquivo do Ensaio de Desempenho da peça $npc.','O usuário $quem1 salvou em disco o arquivo do Ensaio de Desempenho da peça $npc.','$user')");
+						mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Salvando em disco o arquivo do Ensaio de Desempenho da peÃ§a $npc.','O usuÃ¡rio $quem1 salvou em disco o arquivo do Ensaio de Desempenho da peÃ§a $npc.','$user')");
 					//					
 					$nom="Ensaio Desempenho";
 					$pdf=new FPDF();
@@ -483,12 +483,12 @@ if($acao=="salvar"){  // botão salvar em disco
 					break;
 					
 					case "submissao": 
-					// cria followup caso salve em disco o Certificado de Submissão
-						mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Salvando em disco o arquivo do Certificado de Submissão da peça $npc.','O usuário $quem1 salvou em disco o arquivo do Certificado de Submissão da peça $npc.','$user')");
+					// cria followup caso salve em disco o Certificado de SubmissÃ£o
+						mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Salvando em disco o arquivo do Certificado de SubmissÃ£o da peÃ§a $npc.','O usuÃ¡rio $quem1 salvou em disco o arquivo do Certificado de SubmissÃ£o da peÃ§a $npc.','$user')");
 					//
 					$pdf=new FPDF();
 					$logo="OK";
-					$nom="Certificado Submissão";
+					$nom="Certificado SubmissÃ£o";
 					if($tag=="S"){
 						include('pdf/apqp_sub_imp2_2.php');
 					} else {
@@ -496,18 +496,18 @@ if($acao=="salvar"){  // botão salvar em disco
 					}
 					break;
 					case "inst": 
-					// cria followup caso salve em disco a Instrução do Operador
-						mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Salvando em disco o arquivo da Instrução do Operador da peça $npc.','O usuário $quem1 salvou em disco o arquivo da Instrução do Operador da peça $npc.','$user')");
+					// cria followup caso salve em disco a InstruÃ§Ã£o do Operador
+						mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Salvando em disco o arquivo da InstruÃ§Ã£o do Operador da peÃ§a $npc.','O usuÃ¡rio $quem1 salvou em disco o arquivo da InstruÃ§Ã£o do Operador da peÃ§a $npc.','$user')");
 					//
 					$pdf=new FPDF();
 					$logo="OK";
-					$nom="Instrução Operador";
+					$nom="InstruÃ§Ã£o Operador";
 					include('pdf/apqp_inst_imp2.php');
 					break;
 					
 					case "granel": 
 					// cria followup caso envie e-mail com anexo da Checklist Material a Granel
-						mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Envio de e-mail com anexo da Checklist Material a Granel da peça $npc.','O usuário $quem1 enviou e-mail com anexo da Checklist Material a Granel da peça $npc para $email.','$user')");
+						mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Envio de e-mail com anexo da Checklist Material a Granel da peÃ§a $npc.','O usuÃ¡rio $quem1 enviou e-mail com anexo da Checklist Material a Granel da peÃ§a $npc para $email.','$user')");
 					//
 					$pdf=new FPDF();
 					$logo="OK";
@@ -516,18 +516,18 @@ if($acao=="salvar"){  // botão salvar em disco
 					break;
 					
 					case "sumario": 
-					// cria followup caso salve em disco a Sumário de Aprovação
-						mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Salvando em disco o arquivo da Sumário de Aprovação da peça $npc.','O usuário $quem1 salvou em disco o arquivo da Sumário de Aprovação da peça $npc.','$user')");
+					// cria followup caso salve em disco a SumÃ¡rio de AprovaÃ§Ã£o
+						mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Salvando em disco o arquivo da SumÃ¡rio de AprovaÃ§Ã£o da peÃ§a $npc.','O usuÃ¡rio $quem1 salvou em disco o arquivo da SumÃ¡rio de AprovaÃ§Ã£o da peÃ§a $npc.','$user')");
 					//
 					$pdf=new FPDF();
 					$logo="OK";
-					$nom="Sumário e Aprovação APQP";
+					$nom="SumÃ¡rio e AprovaÃ§Ã£o APQP";
 					include('pdf/apqp_sum_imp_2.php');
 					break;
 					
 					case "capabilidade": 
 					// cria followup caso envie e-mail com anexo da Capabilidade
-						mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Envio de e-mail com anexo da Capabilidade da peça $npc.','O usuário $quem1 enviou e-mail com anexo da Capabilidade da peça $npc para $email.','$user')");
+						mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Envio de e-mail com anexo da Capabilidade da peÃ§a $npc.','O usuÃ¡rio $quem1 enviou e-mail com anexo da Capabilidade da peÃ§a $npc para $email.','$user')");
 					//
 					$pdf=new FPDF();
 					$logo="OK";
@@ -537,7 +537,7 @@ if($acao=="salvar"){  // botão salvar em disco
 					
 					case "rr": 
 					// cria followup caso salve em disco o Estudo de R&R
-						mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Salvando em disco o arquivo do Estudo de R&R da peça $npc.','O usuário $quem1 salvou em disco o arquivo do Estudo de R&R da peça $npc.','$user')");
+						mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Salvando em disco o arquivo do Estudo de R&R da peÃ§a $npc.','O usuÃ¡rio $quem1 salvou em disco o arquivo do Estudo de R&R da peÃ§a $npc.','$user')");
 					//
 					$pdf=new FPDF();
 					$logo="OK";
@@ -547,7 +547,7 @@ if($acao=="salvar"){  // botão salvar em disco
 				
 					case "material": 
 					// cria followup caso salve em disco o Ensaio de Material
-						mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Salvando em disco o arquivo do Ensaio de Material da peça $npc.','O usuário $quem1 salvou em disco o arquivo do Ensaio de Material da peça $npc.','$user')");
+						mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Salvando em disco o arquivo do Ensaio de Material da peÃ§a $npc.','O usuÃ¡rio $quem1 salvou em disco o arquivo do Ensaio de Material da peÃ§a $npc.','$user')");
 					//
 					$pdf=new FPDF();
 					$logo="OK";
@@ -561,7 +561,7 @@ if($acao=="salvar"){  // botão salvar em disco
 			
 					case "viabilidade":
 					// cria followup caso salve em disco a Viabilidade
-						mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Salvando em disco o arquivo da Viabilidade da peça $npc.','O usuário $quem1 salvou em disco o arquivo do da Viabilidade da peça $npc.','$user')");
+						mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Salvando em disco o arquivo da Viabilidade da peÃ§a $npc.','O usuÃ¡rio $quem1 salvou em disco o arquivo do da Viabilidade da peÃ§a $npc.','$user')");
 					//
 					$pdf=new FPDF();
 					$logo="OK";
@@ -570,18 +570,18 @@ if($acao=="salvar"){  // botão salvar em disco
 					break;
 			
 					case "interina":
-					// cria followup caso salve em disco a Aprovação Interina
-						mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Salvando em disco o arquivo da Aprovação Interina da peça $npc.','O usuário $quem1 salvou em disco o arquivo do da Aprovação Interina da peça $npc.','$user')");
+					// cria followup caso salve em disco a AprovaÃ§Ã£o Interina
+						mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Salvando em disco o arquivo da AprovaÃ§Ã£o Interina da peÃ§a $npc.','O usuÃ¡rio $quem1 salvou em disco o arquivo do da AprovaÃ§Ã£o Interina da peÃ§a $npc.','$user')");
 					//
 					$pdf=new FPDF();
 					$logo="OK";
-					$nom="Aprovação Interina";
+					$nom="AprovaÃ§Ã£o Interina";
 					include('pdf/apqp_interina_imp.php');
 					break;
 			
 					case "processo":
 					// cria followup caso salve em disco o do FMEA de processo
-						mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Salvando em disco o arquivo do FMEA de processo da peça $npc.','O usuário $quem1 salvou em disco o arquivo do FMEA de processo da peça $npc.','$user')");
+						mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Salvando em disco o arquivo do FMEA de processo da peÃ§a $npc.','O usuÃ¡rio $quem1 salvou em disco o arquivo do FMEA de processo da peÃ§a $npc.','$user')");
 					//
 					$pdf=new FPDF('L');
 					$nom="Fmea Processo";
@@ -590,7 +590,7 @@ if($acao=="salvar"){  // botão salvar em disco
 		
 					case "projeto": 
 					// cria followup caso salve em disco o do FMEA de projeto
-						mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Salvando em disco o arquivo do FMEA de projeto da peça $npc.','O usuário $quem1 salvou em disco o arquivo do FMEA de projeto da peça $npc.','$user')");
+						mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Salvando em disco o arquivo do FMEA de projeto da peÃ§a $npc.','O usuÃ¡rio $quem1 salvou em disco o arquivo do FMEA de projeto da peÃ§a $npc.','$user')");
 					//
 					$pdf=new FPDF('L');
 					$nom="Fmea Projeto";
@@ -599,7 +599,7 @@ if($acao=="salvar"){  // botão salvar em disco
 		
 					case "controle": 
 					// cria followup caso salve em disco o Plano de controle
-						mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Salvando em disco o arquivo do Plano de Controle da peça $npc.','O usuário $quem1 salvou em disco o arquivo do Plano de Controle da peça $npc.','$user')");
+						mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Salvando em disco o arquivo do Plano de Controle da peÃ§a $npc.','O usuÃ¡rio $quem1 salvou em disco o arquivo do Plano de Controle da peÃ§a $npc.','$user')");
 					//
 					$pdf=new FPDF('L');
 					$nom="Plano Controle";
@@ -608,7 +608,7 @@ if($acao=="salvar"){  // botão salvar em disco
 		
 					case "crono": 
 					// cria followup caso salve em disco o Cronograma
-						mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Salvando em disco o arquivo do Cronograma da peça $npc.','O usuário $quem1 salvou em disco o arquivo do Cronograma da peça $npc.','$user')");
+						mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Salvando em disco o arquivo do Cronograma da peÃ§a $npc.','O usuÃ¡rio $quem1 salvou em disco o arquivo do Cronograma da peÃ§a $npc.','$user')");
 					//
 					$pdf=new FPDF('L');
 					$nom="Cronograma";
@@ -616,17 +616,17 @@ if($acao=="salvar"){  // botão salvar em disco
 					break;
 		
 					case "aparencia": 
-					// cria followup caso salve em disco a Aprovação de Aparência
-						mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Salvando em disco o arquivo da Aprovação de Aparência da peça $npc.','O usuário $quem1 salvou em disco o arquivo do da Aprovação de Aparência da peça $npc.','$user')");
+					// cria followup caso salve em disco a AprovaÃ§Ã£o de AparÃªncia
+						mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Salvando em disco o arquivo da AprovaÃ§Ã£o de AparÃªncia da peÃ§a $npc.','O usuÃ¡rio $quem1 salvou em disco o arquivo do da AprovaÃ§Ã£o de AparÃªncia da peÃ§a $npc.','$user')");
 					//
-					$nom="Aprovação Aparência";
+					$nom="AprovaÃ§Ã£o AparÃªncia";
 					$pdf=new FPDF('L');
 					include("pdf/apqp_apro_imp2.php");
 					break;
 		
 					case "chk":
 					// cria followup caso salve em disco o Checklist APQP
-						mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Salvando em disco o arquivo do Checklist APQP da peça $npc.','O usuário $quem1 salvou em disco o arquivo do Checklist APQP da peça $npc.','$user')");
+						mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Salvando em disco o arquivo do Checklist APQP da peÃ§a $npc.','O usuÃ¡rio $quem1 salvou em disco o arquivo do Checklist APQP da peÃ§a $npc.','$user')");
 					//
 					$nom="Checklist APQP";
 					$pdf=new FPDF('L');
@@ -634,10 +634,10 @@ if($acao=="salvar"){  // botão salvar em disco
 					break;
 			
 					case "ope":
-					// cria followup caso salve em disco o FMEA de Operação
-						mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Salvando em disco o arquivo do FMEA de Operação da peça $npc.','O usuário $quem1 salvou em disco o arquivo do FMEA de Operação da peça $npc.','$user')");
+					// cria followup caso salve em disco o FMEA de OperaÃ§Ã£o
+						mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Salvando em disco o arquivo do FMEA de OperaÃ§Ã£o da peÃ§a $npc.','O usuÃ¡rio $quem1 salvou em disco o arquivo do FMEA de OperaÃ§Ã£o da peÃ§a $npc.','$user')");
 					//
-					$nom="Fmea Operações";
+					$nom="Fmea OperaÃ§Ãµes";
 					$pdf=new FPDF('L');
 					include('pdf/apqp_fmeaope_imp2.php');
 					

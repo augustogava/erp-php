@@ -1,11 +1,12 @@
-<?
+<?php
 include("conecta.php");
 include("seguranca.php");
 ?>
 <html>
 <head>
 <title>CyberManager</title>
-<meta http-equiv="Content-Type" content="text/html; UTF-8">
+<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="style.css" rel="stylesheet" type="text/css">
 <script src="scripts.js"></script>
 <script>
@@ -209,4 +210,4 @@ function some(num){
 <p>&nbsp;</p>
 </body>
 </html>
-<? include("mensagem.php"); ?>
+<?php include("mensagem.php"); ?>

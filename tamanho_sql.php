@@ -1,13 +1,13 @@
-<?
+<?php
 include("conecta.php");
 if(empty($acao)) exit;
 if($acao=="incluir"){
 	$sql=mysql_query("INSERT INTO tamanho (nome) VALUES ('$nome')");
 	if($sql){
-		$_SESSION["mensagem"]="Tamanho incluído com sucesso!";
+		$_SESSION["mensagem"]="Tamanho incluÃ­do com sucesso!";
 		$acao="entrar";
 	}else{
-		$_SESSION["mensagem"]="O Tamanho não pôde ser incluída!";
+		$_SESSION["mensagem"]="O Tamanho nÃ£o pÃ´de ser incluÃ­da!";
 		$acao="inc";
 	}
 }elseif($acao=="alterar"){
@@ -16,16 +16,16 @@ if($acao=="incluir"){
 		$_SESSION["mensagem"]="Tamanho alterado com sucesso!";
 		$acao="entrar";
 	}else{
-		$_SESSION["mensagem"]="O Tamanho não pôde ser alterado!";
+		$_SESSION["mensagem"]="O Tamanho nÃ£o pÃ´de ser alterado!";
 		$acao="alt";
 	}
 }elseif($acao=="exc"){
 	if(!empty($id)){
 		$sql=mysql_query("DELETE FROM tamanho WHERE id='$id'");
 		if($sql){
-			$_SESSION["mensagem"]="Tamanho excluído com sucesso!";
+			$_SESSION["mensagem"]="Tamanho excluÃ­do com sucesso!";
 		}else{
-			$_SESSION["mensagem"]="O Tamanho não pôde ser excluído!";
+			$_SESSION["mensagem"]="O Tamanho nÃ£o pÃ´de ser excluÃ­do!";
 		}		
 	}
 	$acao="entrar";

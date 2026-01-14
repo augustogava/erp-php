@@ -1,11 +1,11 @@
-<?
+<?php
 include("conecta.php");
 include("seguranca.php");
 $apqp=new set_apqp;
 if(empty($acao)) $acao="entrar";
 $pc=$_SESSION["mpc"];
 $npc=$_SESSION["npc"];
-//VerificaÁ„o
+//Verifica√ß√£o
 $_SESSION["modulo"]="fprojeto";
 $sqlm=mysql_query("SELECT * FROM online WHERE user<>'$iduser' and peca='$pc' and modulo='fprojeto'");
 if(mysql_num_rows($sqlm)){
@@ -15,7 +15,7 @@ if(mysql_num_rows($sqlm)){
 	}else{
 		$sql2=mysql_query("SELECT * FROM clientes WHERE id='$resm[user]'"); $res2=mysql_fetch_array($sql2);
 	}
-	$_SESSION["mensagem"]="O usuario $res2[nome] est· alterando este mÛdulo!";
+	$_SESSION["mensagem"]="O usuario $res2[nome] est√° alterando este m√≥dulo!";
 	header("Location:apqp_menu.php");
 	exit;
 }
@@ -29,29 +29,29 @@ if(mysql_num_rows($sql)){
 		if(!$apok){
 			$apro="if(confirm('Deseja aprovar esta FMEA?')){form1.acao.value='altc';form1.submit()};";
 		}else{
-			$apro="alert('As aÁıes tomadas devem ser informadas antes da aprovaÁ„o\\nClique na aba TABELA e informe todos os campos necess·rios'); return false;";
+			$apro="alert('As a√ß√µes tomadas devem ser informadas antes da aprova√ß√£o\\nClique na aba TABELA e informe todos os campos necess√°rios'); return false;";
 		}
 	}else{
-		$apro="alert('Esta FMEA j· est· aprovada'); return false;";
+		$apro="alert('Esta FMEA j√° est√° aprovada'); return false;";
 	}
 }
-	$sqlb=mysql_query("SELECT * FROM apqp_cron WHERE perc='100' AND peca='$pc' AND ativ='Certificado de Submiss„o'");
+	$sqlb=mysql_query("SELECT * FROM apqp_cron WHERE perc='100' AND peca='$pc' AND ativ='Certificado de Submiss√£o'");
 	if(!mysql_num_rows($sqlb)){
 	
-		$sqlb=mysql_query("SELECT * FROM apqp_cron WHERE perc='100' AND peca='$pc' AND ativ='FMEA de Projeto (Se aplic·vel)'");
+		$sqlb=mysql_query("SELECT * FROM apqp_cron WHERE perc='100' AND peca='$pc' AND ativ='FMEA de Projeto (Se aplic√°vel)'");
 		if(mysql_num_rows($sqlb)){
 			
 			$sqlfmea=mysql_query("SELECT * FROM apqp_cron WHERE perc='100' AND peca='$pc' AND ativ='Viabilidade'");
 			if(mysql_num_rows($sqlfmea)){
-				$btnsalva="if (confirm('Caso queira editar este documento ter· que revisar todos os documentos a frente e aprov·-los novamente.')){ form1.acao.value='altc';return verifica(form1) } return false;";
+				$btnsalva="if (confirm('Caso queira editar este documento ter√° que revisar todos os documentos a frente e aprov√°-los novamente.')){ form1.acao.value='altc';return verifica(form1) } return false;";
 			}else{
-				$btnsalva="if (confirm('Documento Aprovado! Caso queira alter·-lo ser· removida a aprovaÁ„o')){ form1.acao.value='altc';return verifica(form1) }else{ return false; }";
+				$btnsalva="if (confirm('Documento Aprovado! Caso queira alter√°-lo ser√° removida a aprova√ß√£o')){ form1.acao.value='altc';return verifica(form1) }else{ return false; }";
 			}
 		}else{
 			$btnsalva="form1.acao.value='altc';return verifica(form1)";
 		}
 	}else{
-		$btnsalva="if(confirm('O Certificado de submiss„o j· esta aprovado, caso queira remover a aprovaÁ„o deste Estudo ser· removida a aprovaÁ„o de todos os relatÛrios. Deseja remover?')){ if(confirm('VocÍ tem certeza que deseja remover a aprovaÁ„o? Ter· que aprovar todos os relatÛrios novamente.')){ lista.verifica(); }else{ return false; } }else{ return false; }";
+		$btnsalva="if(confirm('O Certificado de submiss√£o j√° esta aprovado, caso queira remover a aprova√ß√£o deste Estudo ser√° removida a aprova√ß√£o de todos os relat√≥rios. Deseja remover?')){ if(confirm('Voc√™ tem certeza que deseja remover a aprova√ß√£o? Ter√° que aprovar todos os relat√≥rios novamente.')){ lista.verifica(); }else{ return false; } }else{ return false; }";
 	}
 ?>
 <html>
@@ -80,17 +80,17 @@ function abrir(url,id){
 	return true;
 }
 function salvar(url,id){
-	window.open('apqp_impressao.php?acao=salvar&local='+ url +'&pc='+ <?=$pc?> + '');
+	window.open('apqp_impressao.php?acao=salvar&local='+ url +'&pc='+ <?php echo $pc?> + '');
 	return true;
 }
 function verifica(cad){
 	if(cad.ini.value==''){
-		alert('Informe a Data de inÌcio');
+		alert('Informe a Data de in√≠cio');
 		cad.ini.focus();
 		return false;
 	}
 	if(cad.rev.value==''){
-		alert('Informe a Data de Revis„o');
+		alert('Informe a Data de Revis√£o');
 		cad.rev.focus();
 		return false;
 	}
@@ -100,7 +100,7 @@ function verifica(cad){
 		return false;
 	}
 	if(cad.resp.value==''){
-		alert('Informe o Respons·vel');
+		alert('Informe o Respons√°vel');
 		cad.resp.focus();
 		return false;
 	}
@@ -133,8 +133,8 @@ function MM_openBrWindow(theURL,winName,features) { //v2.0
   <tr>
     <td align="left" valign="top" class="chamadas"><table width="590" border="0" cellpadding="0" cellspacing="0" class="texto">
       <tr>
-        <td width="27" align="center"><div align="left"><a href="#" onClick="MM_openBrWindow('help/mini_fmea_projeto.html','','width=680,height=501,left=300,top=50')"><img src="imagens/icon14_ahn.gif" width="14" height="14" border="0" onMouseOver="this.T_STICKY=true; this.T_TITLE='FMEA de projeto'; this.T_DELAY=10; this.T_WIDTH=300;  return escape('<strong>Data de inicio - </strong>data prevista para inicio<br><strong>Data de Revis„o - </strong>data que foi feita ‡ revis„o<br><strong>Data chave - </strong>data prevista para o termino<br><strong>N∞ do FMEA - </strong>identificaÁ„o do FMEA<br><strong>Resp.Projeto - </strong>respons·vel pelo projeto<br><strong>Equipe - </strong>nome da equipe ou dos integrantes da equipe<br><strong>Obs - </strong>algum item que deve ser ressaltado<br><strong>Preparado por - </strong>quem preparou o projeto')"></a><span class="impTextoBold">&nbsp;</span></div></td>
-        <td width="563" align="right"><div align="left" class="textobold style1 style1 style1 style1 style1 style1 style1">APQP - FMEA de Projeto <? print $npc; ?></div></td>
+        <td width="27" align="center"><div align="left"><a href="#" onClick="MM_openBrWindow('help/mini_fmea_projeto.html','','width=680,height=501,left=300,top=50')"><img src="imagens/icon14_ahn.gif" width="14" height="14" border="0" onMouseOver="this.T_STICKY=true; this.T_TITLE='FMEA de projeto'; this.T_DELAY=10; this.T_WIDTH=300;  return escape('<strong>Data de inicio - </strong>data prevista para inicio<br><strong>Data de Revis√£o - </strong>data que foi feita √† revis√£o<br><strong>Data chave - </strong>data prevista para o termino<br><strong>N¬∞ do FMEA - </strong>identifica√ß√£o do FMEA<br><strong>Resp.Projeto - </strong>respons√°vel pelo projeto<br><strong>Equipe - </strong>nome da equipe ou dos integrantes da equipe<br><strong>Obs - </strong>algum item que deve ser ressaltado<br><strong>Preparado por - </strong>quem preparou o projeto')"></a><span class="impTextoBold">&nbsp;</span></div></td>
+        <td width="563" align="right"><div align="left" class="textobold style1 style1 style1 style1 style1 style1 style1">APQP - FMEA de Projeto <?php print $npc; ?></div></td>
       </tr>
       <tr>
         <td align="center">&nbsp;</td>
@@ -146,7 +146,7 @@ function MM_openBrWindow(theURL,winName,features) { //v2.0
     <td align="left" valign="top"><table width="594" border="1" cellpadding="0" cellspacing="0" bordercolor="#FFFFFF">
       <tr>
         <td width="100" align="center" bordercolor="#CCCCCC" bgcolor="#003366" class="textoboldbranco">cabe&ccedil;alho</td>
-		<a href="#" onClick="if(confirm('O Documento j· foi salvo? Se sim clique em OK, caso contr·rio em Cancelar')){ window.location.href ='apqp_fmeaprojt.php'; } return false;">
+		<a href="#" onClick="if(confirm('O Documento j√° foi salvo? Se sim clique em OK, caso contr√°rio em Cancelar')){ window.location.href ='apqp_fmeaprojt.php'; } return false;">
 		<td width="100" align="center" bordercolor="#CCCCCC" bgcolor="#FFFFFF" class="textobold" onMouseOver="this.style.backgroundColor='#006699';this.style.color='#FFFFFF';" onMouseOut="this.style.backgroundColor='#FFFFFF';this.style.color='#003366';">tabela</td></a>
         <td>&nbsp;</td>
       </tr>
@@ -162,29 +162,29 @@ function MM_openBrWindow(theURL,winName,features) { //v2.0
             </tr>
             <tr>
               <td width="15%" class="textobold">Data de In&iacute;cio:</td>
-              <td width="18%" ><input name="ini" type="text" class="formulario" id="ini" onKeyPress="return validanum(this, event)" onKeyUp="mdata(this)" value="<?= banco2data($res["ini"]); ?>" size="10" maxlength="10">                &nbsp;<a href="#" class="" onClick="window.open('agenda_pop.php?window_position=apqp_fmeaprojc_1&var_field=ini','','scrollbars=no,width=155,height=138');"><img src="imagens/icon14_cal.gif" width="14" height="14" border="0"></a></td>
+              <td width="18%" ><input name="ini" type="text" class="formulario" id="ini" onKeyPress="return validanum(this, event)" onKeyUp="mdata(this)" value="<?php echo  banco2data($res["ini"]); ?>" size="10" maxlength="10">                &nbsp;<a href="#" class="" onClick="window.open('agenda_pop.php?window_position=apqp_fmeaprojc_1&var_field=ini','','scrollbars=no,width=155,height=138');"><img src="imagens/icon14_cal.gif" width="14" height="14" border="0"></a></td>
               <td width="19%" class="textobold">&nbsp;Data de Revis&atilde;o:</td>
-              <td width="18%"><input name="rev" type="text" class="formulario" id="rev" onKeyPress="return validanum(this, event)" onKeyUp="mdata(this)" value="<?= banco2data($res["rev"]); ?>" size="10" maxlength="10">&nbsp;<a href="#" class="" onClick="window.open('agenda_pop.php?window_position=apqp_fmeaprojc_2&var_field=rev','','scrollbars=no,width=155,height=138');"><img src="imagens/icon14_cal.gif" width="14" height="14" border="0"></a></td>
+              <td width="18%"><input name="rev" type="text" class="formulario" id="rev" onKeyPress="return validanum(this, event)" onKeyUp="mdata(this)" value="<?php echo  banco2data($res["rev"]); ?>" size="10" maxlength="10">&nbsp;<a href="#" class="" onClick="window.open('agenda_pop.php?window_position=apqp_fmeaprojc_2&var_field=rev','','scrollbars=no,width=155,height=138');"><img src="imagens/icon14_cal.gif" width="14" height="14" border="0"></a></td>
               <td width="13%"  class="textobold">&nbsp;Data Chave:</td>
-              <td width="17%" ><input name="chv" type="text" class="formulario" id="chv" onKeyPress="return validanum(this, event)" onKeyUp="mdata(this)" value="<?= banco2data($res["chv"]); ?>" size="10" maxlength="10">&nbsp;<a href="#" class="" onClick="window.open('agenda_pop.php?window_position=apqp_fmeaprojc_3&var_field=chv','','scrollbars=no,width=155,height=138');"><img src="imagens/icon14_cal.gif" width="14" height="14" border="0"></a></td>
+              <td width="17%" ><input name="chv" type="text" class="formulario" id="chv" onKeyPress="return validanum(this, event)" onKeyUp="mdata(this)" value="<?php echo  banco2data($res["chv"]); ?>" size="10" maxlength="10">&nbsp;<a href="#" class="" onClick="window.open('agenda_pop.php?window_position=apqp_fmeaprojc_3&var_field=chv','','scrollbars=no,width=155,height=138');"><img src="imagens/icon14_cal.gif" width="14" height="14" border="0"></a></td>
             </tr>
             <tr>
               <td class="textobold">N&ordm; da FMEA:</td>
-              <td><input name="numero" type="text" class="formularioselect" id="ini4" value="<?= $res["numero"]; ?>" size="7" maxlength="10"></td>
+              <td><input name="numero" type="text" class="formularioselect" id="ini4" value="<?php echo  $res["numero"]; ?>" size="7" maxlength="10"></td>
               <td class="textobold">&nbsp;Resp. Projeto:</td>
-              <td colspan="3"><input name="resp" type="text" class="formularioselect" id="resp" value="<?= $res["resp"]; ?>" size="7" maxlength="50"></td>
+              <td colspan="3"><input name="resp" type="text" class="formularioselect" id="resp" value="<?php echo  $res["resp"]; ?>" size="7" maxlength="50"></td>
               </tr>
             <tr>
               <td class="textobold">Equipe:</td>
-              <td colspan="5"><input name="equipe" type="text" class="formularioselect" id="equipe" value="<?= $res["equipe"]; ?>" size="7" maxlength="100"></td>
+              <td colspan="5"><input name="equipe" type="text" class="formularioselect" id="equipe" value="<?php echo  $res["equipe"]; ?>" size="7" maxlength="100"></td>
             </tr>
             <tr>
               <td class="textobold">Obs:</td>
-              <td colspan="5"><input name="obs" type="text" class="formularioselect" id="obs" value="<?= $res["obs"]; ?>" size="7" maxlength="100"></td>
+              <td colspan="5"><input name="obs" type="text" class="formularioselect" id="obs" value="<?php echo  $res["obs"]; ?>" size="7" maxlength="100"></td>
             </tr>
             <tr>
               <td class="textobold">Preparado por:</td>
-              <td colspan="5"><input name="prep" type="text" class="formularioselect" id="prep" value="<?= $res["prep"]; ?>" size="7" maxlength="50"></td>
+              <td colspan="5"><input name="prep" type="text" class="formularioselect" id="prep" value="<?php echo  $res["prep"]; ?>" size="7" maxlength="50"></td>
             </tr>
             <tr>
               <td colspan="6"><img src="imagens/dot.gif" width="20" height="8"></td>
@@ -195,7 +195,7 @@ function MM_openBrWindow(theURL,winName,features) { //v2.0
                   <td width="388" align="center" class="textoboldbranco"><div align="center">Op&ccedil;&otilde;es</div></td>
                 </tr>
                 <tr bgcolor="#FFFFFF">
-                  <td class="textobold"><input name="op" type="radio" value="1" <? if(empty($res["op"]) or $res["op"]=="1") print "checked"; ?>>
+                  <td class="textobold"><input name="op" type="radio" value="1" <?php if(empty($res["op"]) or $res["op"]=="1") print "checked"; ?>>
       Controles Preventivos e Detectivos em duas Colunas (FMEA 3&ordf; Edi&ccedil;&atilde;o) </td>
                 </tr>
               </table></td>
@@ -204,22 +204,22 @@ function MM_openBrWindow(theURL,winName,features) { //v2.0
               <td colspan="6" align="center"><table width="100%"  border="0" cellpadding="3" cellspacing="0">
                 <tr>
                   <td width="16%" align="left" class="textobold">Aprovado por:&nbsp; </td>
-                  <td width="64%" class="textobold"><?  $sel=mysql_query("SELECT * FROM apqp_cron WHERE peca='$pc' AND ativ='FMEA de Projeto (Se aplic·vel)'"); $sele=mysql_fetch_array($sel); ?>
-                      <input name="quem1" type="text" class="formularioselect" id="quem1" value="<?= $sele["resp"]; ?>"></td>
+                  <td width="64%" class="textobold"><?php  $sel=mysql_query("SELECT * FROM apqp_cron WHERE peca='$pc' AND ativ='FMEA de Projeto (Se aplic√°vel)'"); $sele=mysql_fetch_array($sel); ?>
+                      <input name="quem1" type="text" class="formularioselect" id="quem1" value="<?php echo  $sele["resp"]; ?>"></td>
                   <td width="20%" align="center"><p>
-				   <? 
+				   <?php 
 				  if(empty($sele["resp"])){
 					$javas="if(confirm('Deseja Aprovar FMEA de projeto?')){form1.acao.value='altc';form1.submit();}else{ return false; }";
 				  }else{
-					$javas="window.alert('O FMEA de Projeto j· foi aprovado, caso deseje retirar a aprovaÁ„o, clique no bot„o limpar.');return false;";
+					$javas="window.alert('O FMEA de Projeto j√° foi aprovado, caso deseje retirar a aprova√ß√£o, clique no bot√£o limpar.');return false;";
 				  }
 				  ?>
-  <input name="ap" type="submit" class="microtxt" id="ap" value="aprovar" onClick="<?= $javas; ?>">
+  <input name="ap" type="submit" class="microtxt" id="ap" value="aprovar" onClick="<?php echo  $javas; ?>">
 &nbsp;
       <input name="lap" type="submit" class="microtxt" id="lap" value="limpar" onClick="if(confirm('Deseja Desaprovar FMEA de projeto?')){form1.acao.value='altc';form1.submit();}else{ return false; }">
       </p>                    </td>
                 </tr>
-              </table> <? if($aprov=="N") print "<script>bloke();</script>"; ?>
+              </table> <?php if($aprov=="N") print "<script>bloke();</script>"; ?>
 			  <a href="#" onClick="return abre('busca_email_grupo.php','a','width=320,height=380,scrollbars=1');">
 			  <input name="grupo" type="hidden" id="grupo">
 			  <input name="grupo_nome" type="hidden" id="grupo_nome">
@@ -233,21 +233,21 @@ function MM_openBrWindow(theURL,winName,features) { //v2.0
 			  
                 <table width="601" border="0" align="center" cellpadding="3" cellspacing="0" class="texto">
                   <tr>
-				  <? if($_SESSION["e_mail"]=="S"){ ?>
+				  <?php if($_SESSION["e_mail"]=="S"){ ?>
                     <td width="16%" align="left" class="textobold">&nbsp;Enviar e-mail: </td>
                     <td width="56%"><input name="email" type="text" class="formularioselect" id="email3" value="Digite o e-mail aqui"></td> 
-					<? if(in_array("U",$emailt)){ ?>
-                    <td width="3%"><div align="center"><a href="#" onClick="return abre('busca_email2.php','a','width=320,height=380,scrollbars=1');"><img src="imagens/icon14_pessoas.gif" alt="Buscar Email de Funcion·rios" width="14" height="14" border="0"></a></div></td>
-					<? } if(in_array("G",$emailt)){ ?>
+					<?php if(in_array("U",$emailt)){ ?>
+                    <td width="3%"><div align="center"><a href="#" onClick="return abre('busca_email2.php','a','width=320,height=380,scrollbars=1');"><img src="imagens/icon14_pessoas.gif" alt="Buscar Email de Funcion√°rios" width="14" height="14" border="0"></a></div></td>
+					<?php } if(in_array("G",$emailt)){ ?>
                     <td width="8%"><div align="center"><a href="#" onClick="return abre('busca_email_grupo.php','a','width=320,height=380,scrollbars=1');"><input name="grupo" type="hidden" id="grupo">
                 <input name="grupo_nome" type="hidden" id="grupo_nome"><img src="imagens/icon14_grupo.gif" alt="Buscar Grupo de Emails" width="26" height="13" border="0"></a></div></td>
-				 <? } if(in_array("C",$emailt)){ ?>
+				 <?php } if(in_array("C",$emailt)){ ?>
                     <td width="4%"><div align="center"><a href="#" onClick="return abre('busca_email.php','a','width=320,height=380,scrollbars=1');"></a><a href="#" onClick="return abre('busca_email.php','a','width=320,height=300,scrollbars=1');"><img src="imagens/icon_cli.gif" alt="Buscar Emails de Clientes" width="18" height="18" border="0"></a></div></td>
-				<? } ?>
-                    <td width="9%"><div align="center"><? if($_SESSION["login_funcionario"]=="S"){ ?><a href="#" onClick="vailogo1('email','<?= $pc; ?>');"><img src="imagens/icon14_mail.gif" alt="Enviar Email" width="16" height="10" border="0"></a><? } ?></div></td>
-					<? } if($_SESSION["i_mp"]=="S"){ ?>
+				<?php } ?>
+                    <td width="9%"><div align="center"><?php if($_SESSION["login_funcionario"]=="S"){ ?><a href="#" onClick="vailogo1('email','<?php echo  $pc; ?>');"><img src="imagens/icon14_mail.gif" alt="Enviar Email" width="16" height="10" border="0"></a><?php } ?></div></td>
+					<?php } if($_SESSION["i_mp"]=="S"){ ?>
                     <td width="4%"><div align="center"><a href="#" onClick="vailogo('imp');"><img src="imagens/icon14_imp.gif" alt="Imprimir" width="15" height="15" border="0"></a></div></td>
-					<? } ?>
+					<?php } ?>
                   </tr>
                   <tr>
                     <td colspan="7" align="left" class="textobold"><img src="imagens/spacer.gif" width="46" height="5"></td>
@@ -256,12 +256,12 @@ function MM_openBrWindow(theURL,winName,features) { //v2.0
 				
                 <input name="button122" type="button" class="microtxt" value="Voltar" onClick="window.location='apqp_menu.php';">
 &nbsp;
-<input name="acao2" type="button" class="microtxt" value="Salvar em Disco" onClick="salvar('projeto','<?=$res["id"];?>')">
+<input name="acao2" type="button" class="microtxt" value="Salvar em Disco" onClick="salvar('projeto','<?php echo $res["id"];?>')">
 &nbsp;
-<input name="button122222" type="submit" class="microtxt" value="Salvar" onClick="<?= $btnsalva; ?>">
+<input name="button122222" type="submit" class="microtxt" value="Salvar" onClick="<?php echo  $btnsalva; ?>">
 &nbsp;&nbsp;
-<?
-$apqp->agenda_p("FMEA de Projeto (Se aplic·vel)","apqp_fmeaprojc.php");
+<?php
+$apqp->agenda_p("FMEA de Projeto (Se aplic√°vel)","apqp_fmeaprojc.php");
 ?></td>
               </tr>
           </table>
@@ -273,4 +273,4 @@ $apqp->agenda_p("FMEA de Projeto (Se aplic·vel)","apqp_fmeaprojc.php");
 </body>
 </html>
 <script language="javascript" src="tooltip.js"></script>
-<? include("mensagem.php"); ?>
+<?php include("mensagem.php"); ?>

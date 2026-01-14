@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 include("seguranca.php");
 $acao=verifi($permi,$acao);
@@ -8,7 +8,7 @@ $quem1=$_SESSION["login_nome"];
 $user=$_SESSION["login_codigo"];
 
 if(!empty($acao)){
-	$loc="Cad Inst Medição";
+	$loc="Cad Inst MediÃ§Ã£o";
 	$pagina=$_SERVER['SCRIPT_FILENAME'];
 	include("log.php");
 }
@@ -31,7 +31,7 @@ $tipo=strtoupper($tipo);
 
 	$sql2=mysql_query("SELECT tipo FROM ins_medicao WHERE tipo='$tipo'");
 		if(!mysql_num_rows($sql2)==0){
-		$_SESSION["mensagem"]="O cadastro do Tipo de Instrumento não foi incluído. Digite outro Tipo para o Tipo de Instrumento, este já existe!";
+		$_SESSION["mensagem"]="O cadastro do Tipo de Instrumento nÃ£o foi incluÃ­do. Digite outro Tipo para o Tipo de Instrumento, este jÃ¡ existe!";
 		header("Location:metr_medg.php?acao=inc&tipo=$tipo&descricao=$descricao&inst_cali=$inst_cali&inst_util=$inst_util&org_cali=$org_cali&cad_med=$cad_med&tip_med=$tip_med");
 		exit;		
 	}
@@ -39,16 +39,16 @@ $tipo=strtoupper($tipo);
 	$sql=mysql_query("INSERT INTO ins_medicao (tipo,descricao,inst_cali,inst_util,org_cali,cad_med,tip_med) VALUES ('$tipo','$descricao','$inst_cali','$inst_util','$org_cali','$cad_med', '$tip_med')");
 	//print "INSERT INTO ins_medicao (tipo,descricao,inst_cali,inst_util,org_cali,cad_med,tip_med) VALUES ('$tipo','$descricao','$inst_cali','$inst_util','$org_cali','$cad_med', '$tip_med')";
 	if($sql){
-		$_SESSION["mensagem"]="Cadastro concluído!";
+		$_SESSION["mensagem"]="Cadastro concluÃ­do!";
 		// cria followup caso inclua 
 			$sql_emp=mysql_query("SELECT fantasia FROM empresa");
 			$res_emp=mysql_fetch_array($sql_emp);
-			mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Inclusão de Tipo de Instrumento.','O usuário $quem1 incluiu um novo Tipo de Instrumento chamado $descricao.','$user')");
+			mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','InclusÃ£o de Tipo de Instrumento.','O usuÃ¡rio $quem1 incluiu um novo Tipo de Instrumento chamado $descricao.','$user')");
 		//	
 		header("Location:metr_cati.php");
 		exit;
 	}else{
-		$_SESSION["mensagem"]="O cadastro não pôde ser concluído!";
+		$_SESSION["mensagem"]="O cadastro nÃ£o pÃ´de ser concluÃ­do!";
 		$acao="inc";
 	}	
 }elseif($acao=="alterar"){
@@ -58,12 +58,12 @@ $tipo=strtoupper($tipo);
 		// cria followup caso altere
 			$sql_emp=mysql_query("SELECT fantasia FROM empresa");
 			$res_emp=mysql_fetch_array($sql_emp);
-			mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Alteração do cadastro do Tipo de Instrumento.','O usuário $quem1 alterou o cadastro do Tipo de Instrumento $descricao.','$user')");
+			mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','AlteraÃ§Ã£o do cadastro do Tipo de Instrumento.','O usuÃ¡rio $quem1 alterou o cadastro do Tipo de Instrumento $descricao.','$user')");
 		//			
 		header("Location:metr_cati.php?desc=$desc&bnome=$bnome");
 		exit;		
 	}else{
-		$_SESSION["mensagem"]="O cadastro não pôde ser alterado!";
+		$_SESSION["mensagem"]="O cadastro nÃ£o pÃ´de ser alterado!";
 		$acao="alt";
 	}
 }
@@ -82,27 +82,27 @@ function verifica(cad){
 		return false;
 	}
 	if(cad.descricao.value==''){
-		alert('Preencha a Descrição');
+		alert('Preencha a DescriÃ§Ã£o');
 		cad.descricao.focus();
 		return false;
 	}
 	if(cad.inst_cali2.value==''){
-		alert('Selecione a Instrução de Calibração');
+		alert('Selecione a InstruÃ§Ã£o de CalibraÃ§Ã£o');
 		cad.inst_cali2.focus();
 		return false;
 	}
 	if(cad.inst_util2.value==''){
-		alert('Selecione a Instrução de Utilização');
+		alert('Selecione a InstruÃ§Ã£o de UtilizaÃ§Ã£o');
 		cad.inst_util2.focus();
 		return false;
 	}
 	if(cad.org_cali2.value==''){
-		alert('Selecione o Órgão Calibrador');
+		alert('Selecione o Ã“rgÃ£o Calibrador');
 		cad.org_cali2.focus();
 		return false;
 	}
 	if(cad.tip_med.value==''){
-		alert('Selecione a quantidade de Tipos de Medições');
+		alert('Selecione a quantidade de Tipos de MediÃ§Ãµes');
 		cad.tip_med.focus();
 		return false;
 	}
@@ -137,52 +137,52 @@ function verifica(cad){
 			<form name="form1" method="post" action=""  id="form1" onSubmit="return verifica(this)">
               <tr class="textobold">
                 <td>Tipo: </td>
-                <td><input name="tipo" type="text" class="formulario" id="tipo" value="<? print $tipo; ?>" size="20" maxlength="25" <? if($acao=="alt") { ?> readonly="" <? } ?>></td>
+                <td><input name="tipo" type="text" class="formulario" id="tipo" value="<?php print $tipo; ?>" size="20" maxlength="25" <?php if($acao=="alt") { ?> readonly="" <?php } ?>></td>
               </tr>
               <tr class="textobold">
                 <td width="145">Descri&ccedil;&atilde;o:</td>
-                <td width="257"><input name="descricao" type="text" class="formulario" id="descricao" value="<? print $descricao; ?>" size="49" maxlength="100"></td>
+                <td width="257"><input name="descricao" type="text" class="formulario" id="descricao" value="<?php print $descricao; ?>" size="49" maxlength="100"></td>
               </tr>
               <tr class="textobold">
-                <td>Instr. de Calibra&ccedil;&atilde;o:</td><? $sql2=mysql_query("SELECT metr_instr_desc FROM metrologia_instr WHERE metr_instr_id='$inst_cali'"); $res2=mysql_fetch_array($sql2);?>
-                <td><input name="inst_cali2" type="text" class="formulario" id="inst_cali2" value="<?= $res2["metr_instr_desc"];?>" size="45" maxlength="100" readonly>
+                <td>Instr. de Calibra&ccedil;&atilde;o:</td><?php $sql2=mysql_query("SELECT metr_instr_desc FROM metrologia_instr WHERE metr_instr_id='$inst_cali'"); $res2=mysql_fetch_array($sql2);?>
+                <td><input name="inst_cali2" type="text" class="formulario" id="inst_cali2" value="<?php echo  $res2["metr_instr_desc"];?>" size="45" maxlength="100" readonly>
                   <a href="#"><img src="imagens/icon_14img.gif" width="14" height="14" border="0" onClick="window.open('metr_medg_instc.php','PPAP','width=520,height=280,scrollbars=1');"></a></td>
               </tr>
               <tr class="textobold">
-                <td>Instr. de Utiliza&ccedil;&atilde;o:</td><? $sql3=mysql_query("SELECT metr_instr_desc FROM metrologia_instr WHERE metr_instr_id='$inst_util'"); $res3=mysql_fetch_array($sql3); ?>
-                <td><input name="inst_util2" type="text" class="formulario" id="inst_util2" value="<?= $res3["metr_instr_desc"];?>" size="45" maxlength="100" readonly>
+                <td>Instr. de Utiliza&ccedil;&atilde;o:</td><?php $sql3=mysql_query("SELECT metr_instr_desc FROM metrologia_instr WHERE metr_instr_id='$inst_util'"); $res3=mysql_fetch_array($sql3); ?>
+                <td><input name="inst_util2" type="text" class="formulario" id="inst_util2" value="<?php echo  $res3["metr_instr_desc"];?>" size="45" maxlength="100" readonly>
                 <a href="#"><img src="imagens/icon_14img.gif" width="14" height="14" border="0" onClick="window.open('metr_medg_instu.php','PPAP','width=520,height=280,scrollbars=1');"></a></td>
               </tr>
               <tr class="textobold">
-                <td>&Oacute;rg&atilde;o Calibrador:</td><? $sql4=mysql_query("SELECT metr_lab_fant FROM metrologia_lab WHERE metr_lab_id='$org_cali'"); $res4=mysql_fetch_array($sql4); ?>
-                <td><input name="org_cali2" type="text" class="formulario" id="org_cali2" value="<?= $res4["metr_lab_fant"];?>" size="45" maxlength="100" readonly>
+                <td>&Oacute;rg&atilde;o Calibrador:</td><?php $sql4=mysql_query("SELECT metr_lab_fant FROM metrologia_lab WHERE metr_lab_id='$org_cali'"); $res4=mysql_fetch_array($sql4); ?>
+                <td><input name="org_cali2" type="text" class="formulario" id="org_cali2" value="<?php echo  $res4["metr_lab_fant"];?>" size="45" maxlength="100" readonly>
                   <a href="#"><img src="imagens/icon_14img.gif" width="14" height="14" border="0" onClick="window.open('metr_medg_orgc.php','PPAP','width=520,height=280,scrollbars=1');"></a></td>
               </tr>
               <tr class="textobold">
                 <td>Cad. Medi&ccedil;&otilde;es:</td>
                 <td><label>&nbsp;
-                    <input name="cad_med" type="radio" value="S" <? if($cad_med=="S"){?>checked<? } ?>>                  
+                    <input name="cad_med" type="radio" value="S" <?php if($cad_med=="S"){?>checked<?php } ?>>                  
                   Sim
                 &nbsp;&nbsp;&nbsp;&nbsp;
-                  <input name="cad_med" type="radio" value="N" <? if($cad_med=="N"){?>checked<? } ?>>
+                  <input name="cad_med" type="radio" value="N" <?php if($cad_med=="N"){?>checked<?php } ?>>
 N&atilde;o </label></td>
               </tr>
               <tr class="textobold">
                 <td height="20">Tipos de Medi&ccedil;&otilde;es :</td>
                 <td><label>
                   <select name="tip_med" class="formulario" id="tip_med">
-                    <option value="1"<? if($tip_med=="1") print "selected";?>>1</option>
-                    <option value="2"<? if($tip_med=="2") print "selected";?>>2</option>
-                    <option value="3"<? if($tip_med=="3") print "selected";?>>3</option>
-                    <option value="4"<? if($tip_med=="4") print "selected";?>>4</option>
-                    <option value="5"<? if($tip_med=="5") print "selected";?>>5</option>
-                    <option value="6"<? if($tip_med=="6") print "selected";?>>6</option>
-                    <option value="7"<? if($tip_med=="7") print "selected";?>>7</option>
-                    <option value="8"<? if($tip_med=="8") print "selected";?>>8</option>
-                    <option value="9"<? if($tip_med=="9") print "selected";?>>9</option>
-                    <option value="10"<? if($tip_med=="10") print "selected";?>>10</option>
-                    <option value="11"<? if($tip_med=="11") print "selected";?>>11</option>
-                    <option value="12"<? if($tip_med=="12") print "selected";?>>12</option>
+                    <option value="1"<?php if($tip_med=="1") print "selected";?>>1</option>
+                    <option value="2"<?php if($tip_med=="2") print "selected";?>>2</option>
+                    <option value="3"<?php if($tip_med=="3") print "selected";?>>3</option>
+                    <option value="4"<?php if($tip_med=="4") print "selected";?>>4</option>
+                    <option value="5"<?php if($tip_med=="5") print "selected";?>>5</option>
+                    <option value="6"<?php if($tip_med=="6") print "selected";?>>6</option>
+                    <option value="7"<?php if($tip_med=="7") print "selected";?>>7</option>
+                    <option value="8"<?php if($tip_med=="8") print "selected";?>>8</option>
+                    <option value="9"<?php if($tip_med=="9") print "selected";?>>9</option>
+                    <option value="10"<?php if($tip_med=="10") print "selected";?>>10</option>
+                    <option value="11"<?php if($tip_med=="11") print "selected";?>>11</option>
+                    <option value="12"<?php if($tip_med=="12") print "selected";?>>12</option>
                   </select>
                 </label></td>
               </tr>
@@ -196,19 +196,19 @@ N&atilde;o </label></td>
         </tr>
         <tr>
           <td><div align="center">
-            <input name="acao" type="hidden" id="acao2" value="<? if($acao=="inc"){ print "incluir"; }else{ print "alterar"; } ?>">
-            <input name="id" type="hidden" id="id" value="<? print $id; ?>">
-            <input name="inst_cali" type="hidden" id="inst_cali" value="<? print $inst_cali; ?>">
-            <input name="inst_util" type="hidden" id="inst_util" value="<? print $inst_util; ?>">
-            <input name="org_cali" type="hidden" id="org_cali" value="<? print $org_cali; ?>">
+            <input name="acao" type="hidden" id="acao2" value="<?php if($acao=="inc"){ print "incluir"; }else{ print "alterar"; } ?>">
+            <input name="id" type="hidden" id="id" value="<?php print $id; ?>">
+            <input name="inst_cali" type="hidden" id="inst_cali" value="<?php print $inst_cali; ?>">
+            <input name="inst_util" type="hidden" id="inst_util" value="<?php print $inst_util; ?>">
+            <input name="org_cali" type="hidden" id="org_cali" value="<?php print $org_cali; ?>">
             <input name="Voltar" type="button" class="microtxt" id="Voltar" onClick="window.location='metr_cati.php';" value="Voltar">
   &nbsp;&nbsp;&nbsp;&nbsp;
-  <? if ($acao=="alt"){ ?>
+  <?php if ($acao=="alt"){ ?>
   <input name="alterar" type="submit" class="microtxt" id="alterar" value="Alterar">
-  <? } ?>
-<? if($acao=="inc"){ ?>
+  <?php } ?>
+<?php if($acao=="inc"){ ?>
 <input name="incluir" type="submit" class="microtxt" id="incluir" value="Incluir">
-<? } ?>
+<?php } ?>
           </div></td>
         </tr>
       </table>
@@ -218,4 +218,4 @@ N&atilde;o </label></td>
 </table>
 </body>
 </html>
-<? include("mensagem.php"); ?>
+<?php include("mensagem.php"); ?>

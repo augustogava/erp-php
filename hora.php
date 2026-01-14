@@ -1,4 +1,4 @@
-<?
+<?php
 
 function horas($hora1,$hora2){
 	$ex=explode(":",$hora1);
@@ -28,5 +28,5 @@ function horas($hora1,$hora2){
 
 horas("02:15:33","05:20:05");
 
-// para pegar a data atual é date("h:m:s");
+// para pegar a data atual Ã© date("h:m:s");
 ?>

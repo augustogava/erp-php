@@ -16,7 +16,7 @@ $pdf->AddPage();
 $pdf->Image('empresa_logo/logo.jpg',5,1,25);
 $pdf->SetFont('Arial','B',14);
 $pdf->SetXY(5, 5);
-$pdf->MultiCell(290,5,"FMEA DE OPERAÇÕES",0,'C');
+$pdf->MultiCell(290,5,"FMEA DE OPERAÃ‡Ã•ES",0,'C');
 $pdf->SetXY(5, 18);
 $pdf->SetFont('Arial','',8);
 $cliente=$res[pecacli];
@@ -24,31 +24,31 @@ $rev=$res[niveleng]." - ".banco2data($res["dteng"]);
 $peca=$res[nome];
 $fmea=$resp[numero];
 $pg=$pdf->PageNo();
-$pdf->MultiCell(50,4,"Número da Peça (cliente) \n $cliente",1);
+$pdf->MultiCell(50,4,"NÃºmero da PeÃ§a (cliente) \n $cliente",1);
 $pdf->SetXY(55, 18);
 $pdf->MultiCell(50,4,"Rev. / Data do Desenho \n $rev",1);
 $pdf->SetXY(105, 18);
-$pdf->MultiCell(80,4,"Nome da Peça \n $peca",1);
+$pdf->MultiCell(80,4,"Nome da PeÃ§a \n $peca",1);
 $pdf->SetXY(185, 18);
-$pdf->MultiCell(105,4,"Número da FMEA \n $fmea",1);
+$pdf->MultiCell(105,4,"NÃºmero da FMEA \n $fmea",1);
 $pdf->SetXY(260, 5);
 $pdf->SetFont('Arial','B',8);
-$pdf->MultiCell(40,5,"Página: $pg");
+$pdf->MultiCell(40,5,"PÃ¡gina: $pg");
 $pdf->SetFont('Arial','',8);
 //linha 2
 $pdf->SetXY(5, 26);
 $pdf->MultiCell(100,4,"Preparado Por \n $resp[prep]",1);
 $pdf->SetXY(105, 26);
-$pdf->MultiCell(80,4,"Responsável Pelo Projeto \n $resp[resp]",1);
+$pdf->MultiCell(80,4,"ResponsÃ¡vel Pelo Projeto \n $resp[resp]",1);
 $pdf->SetXY(185, 26);
 $pdf->MultiCell(105,4,"Cliente \n $res[nomecli]",1);
 //linha3
 $pdf->SetXY(5, 34);
 $pdf->MultiCell(100,4,"Fornecedor \n $rese[razao]",1);
 $pdf->SetXY(105, 34);
-$pdf->MultiCell(80,4,"Identificação Do Produto \n ",1);
+$pdf->MultiCell(80,4,"IdentificaÃ§Ã£o Do Produto \n ",1);
 $pdf->SetXY(185, 34);
-$pdf->MultiCell(105,4,"Número/Rev. Peça(fornecedor) \n $res[numero] - $res[rev]",1);
+$pdf->MultiCell(105,4,"NÃºmero/Rev. PeÃ§a(fornecedor) \n $res[numero] - $res[rev]",1);
 //linha4
 $pdf->SetXY(5, 42);
 $pdf->MultiCell(180,4,"Equipe \n $resp[equipe] ",1);
@@ -58,9 +58,9 @@ $pdf->SetXY(260, 42);
 $pdf->MultiCell(30,4,"Data \n ".banco2data($resp["dtquem"])."",1);
 //linha5
 $pdf->SetXY(5, 50);
-$pdf->MultiCell(180,4,"Observações \n $resp[obs]",1);
+$pdf->MultiCell(180,4,"ObservaÃ§Ãµes \n $resp[obs]",1);
 $pdf->SetXY(185, 50);
-$pdf->MultiCell(37.5,4,"Data Início \n ".banco2data($resp["ini"])."",1);
+$pdf->MultiCell(37.5,4,"Data InÃ­cio \n ".banco2data($resp["ini"])."",1);
 $pdf->SetXY(222.5, 50);
 $pdf->MultiCell(37.5,4,"Data Rev. \n ".banco2data($resp["rev"])."",1);
 $pdf->SetXY(260, 50);
@@ -68,7 +68,7 @@ $pdf->MultiCell(30,4,"Data Chave \n ".banco2data($resp["chv"])."",1);
 //linha6
 $pdf->SetFont('Arial','B',8);
 $pdf->SetXY(5, 60);
-$pdf->MultiCell(19,4," \n Função & Requisitos do Processo ",1,'C');
+$pdf->MultiCell(19,4," \n FunÃ§Ã£o & Requisitos do Processo ",1,'C');
 $pdf->SetXY(24, 60);
 $pdf->MultiCell(22,4," \n Modo de Falha Potencial \n ",1,'C');
 $pdf->SetXY(46, 60);
@@ -84,21 +84,21 @@ $pdf->MultiCell(4,4,"Ocorr",1,'C');
 $pdf->SetXY(121, 60);
 $pdf->MultiCell(70,4," \n Controles Atuais do Projeto \n ",1,'C');
 $pdf->SetXY(121, 72);
-$pdf->MultiCell(35,8,"Prevenção",1,'C');
+$pdf->MultiCell(35,8,"PrevenÃ§Ã£o",1,'C');
 $pdf->SetXY(156, 72);
-$pdf->MultiCell(35,8,"Detenção",1,'C');
+$pdf->MultiCell(35,8,"DetenÃ§Ã£o",1,'C');
 $pdf->SetXY(191, 60);
 $pdf->MultiCell(4,4,"Detec",1,'C');
 $pdf->SetXY(195, 60);
 $pdf->MultiCell(6,4,"   N P R   ",1,'C');
 $pdf->SetXY(201, 60);
-$pdf->MultiCell(24,4," \n Ações Recomendadas \n \n ",1,'C');
+$pdf->MultiCell(24,4," \n AÃ§Ãµes Recomendadas \n \n ",1,'C');
 $pdf->SetXY(225, 60);
-$pdf->MultiCell(24,4," \n Responsável / Prazo \n \n ",1,'C');
+$pdf->MultiCell(24,4," \n ResponsÃ¡vel / Prazo \n \n ",1,'C');
 $pdf->SetXY(249, 60);
-$pdf->MultiCell(41,4,"Resultado Das Ações",1,'C');
+$pdf->MultiCell(41,4,"Resultado Das AÃ§Ãµes",1,'C');
 $pdf->SetXY(249, 64);
-$pdf->MultiCell(23,4," \n Ações Tomadas \n ",1,'C');
+$pdf->MultiCell(23,4," \n AÃ§Ãµes Tomadas \n ",1,'C');
 $pdf->SetXY(272, 64);
 $pdf->MultiCell(4,4,"Serv",1,'C');
 $pdf->SetXY(276, 64);
@@ -115,7 +115,7 @@ if(mysql_num_rows($sql)){
 	$y=80;
 	while($res=mysql_fetch_array($sql)){
 		//calculando o tamanho dos campos
-		$ope=mysql_query("select * from apqp_op where id=$res[item]")or die("Não Foi");
+		$ope=mysql_query("select * from apqp_op where id=$res[item]")or erp_db_fail();
 		$ope_tb=mysql_fetch_array($ope);
 		if($opera==$ope_tb["descricao"]){
 			$show=" ";
@@ -176,7 +176,7 @@ if(mysql_num_rows($sql)){
 		 $y=191;
 		}
 		$w=4;
-		//adicionando uma nova página
+		//adicionando uma nova pÃ¡gina
 		if($y>=185){
 			$y=48;
 			$pdf->AddPage();
@@ -187,20 +187,20 @@ if(mysql_num_rows($sql)){
 			$pdf->SetXY(5, 18);
 			$pdf->SetFont('Arial','',8);
 			$pg=$pdf->PageNo();
-			$pdf->MultiCell(50,4,"Número da Peça (cliente) \n $cliente",1);
+			$pdf->MultiCell(50,4,"NÃºmero da PeÃ§a (cliente) \n $cliente",1);
 			$pdf->SetXY(55, 18);
 			$pdf->MultiCell(50,4,"Rev. / Data do Desenho \n $rev",1);
 			$pdf->SetXY(105, 18);
-			$pdf->MultiCell(80,4,"Nome da Peça \n $peca",1);
+			$pdf->MultiCell(80,4,"Nome da PeÃ§a \n $peca",1);
 			$pdf->SetXY(185, 18);
-			$pdf->MultiCell(105,4,"Número da FMEA \n $fmea",1);
+			$pdf->MultiCell(105,4,"NÃºmero da FMEA \n $fmea",1);
 			$pdf->SetXY(260, 5);
 			$pdf->SetFont('Arial','B',8);
-			$pdf->MultiCell(40,5,"Página: $pg");
+			$pdf->MultiCell(40,5,"PÃ¡gina: $pg");
 			$pdf->SetFont('Arial','',8);
 			$pdf->SetFont('Arial','B',8);
 			$pdf->SetXY(5, 28);
-			$pdf->MultiCell(19,4," \n Função & Requisitos do Processo ",1,'C');
+			$pdf->MultiCell(19,4," \n FunÃ§Ã£o & Requisitos do Processo ",1,'C');
 			$pdf->SetXY(24, 28);
 			$pdf->MultiCell(22,4," \n Modo de Falha Potencial \n ",1,'C');
 			$pdf->SetXY(46, 28);
@@ -216,21 +216,21 @@ if(mysql_num_rows($sql)){
 			$pdf->SetXY(121, 28);
 			$pdf->MultiCell(70,4," \n Controles Atuais do Projeto \n ",1,'C');
 			$pdf->SetXY(121, 40);
-			$pdf->MultiCell(35,8,"Prevenção",1,'C');
+			$pdf->MultiCell(35,8,"PrevenÃ§Ã£o",1,'C');
 			$pdf->SetXY(156, 40);
-			$pdf->MultiCell(35,8,"Detenção",1,'C');
+			$pdf->MultiCell(35,8,"DetenÃ§Ã£o",1,'C');
 			$pdf->SetXY(191, 28);
 			$pdf->MultiCell(4,4,"Detec",1,'C');
 			$pdf->SetXY(195, 28);
 			$pdf->MultiCell(6,4,"   N P R   ",1,'C');
 			$pdf->SetXY(201, 28);
-			$pdf->MultiCell(24,4," \n Ações Recomendadas \n \n ",1,'C');
+			$pdf->MultiCell(24,4," \n AÃ§Ãµes Recomendadas \n \n ",1,'C');
 			$pdf->SetXY(225, 28);
-			$pdf->MultiCell(24,4," \n Responsável / Prazo \n \n ",1,'C');
+			$pdf->MultiCell(24,4," \n ResponsÃ¡vel / Prazo \n \n ",1,'C');
 			$pdf->SetXY(249, 28);
-			$pdf->MultiCell(41,4,"Resultado Das Ações",1,'C');
+			$pdf->MultiCell(41,4,"Resultado Das AÃ§Ãµes",1,'C');
 			$pdf->SetXY(249, 32);
-			$pdf->MultiCell(23,4," \n Ações Tomadas \n ",1,'C');
+			$pdf->MultiCell(23,4," \n AÃ§Ãµes Tomadas \n ",1,'C');
 			$pdf->SetXY(272, 32);
 			$pdf->MultiCell(4,4,"Serv",1,'C');
 			$pdf->SetXY(276, 32);

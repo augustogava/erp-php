@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 $apqp=new set_apqp;
 //$acao=verifi($permi,$acao);
@@ -27,7 +27,7 @@ if($acao=="email"){
 		//verificar Cliente
 		$apqp->cliente_apro("apqp_fluxo.php");
 		// - - - - - - - -  -
-///Tirar Aprovaçõesss
+///Tirar AprovaÃ§Ãµesss
 	$sql=mysql_query("SELECT * FROM apqp_cron WHERE perc='100' AND peca='$pc' AND ativ='Diagrama de Fluxo'");
 	if(mysql_num_rows($sql)){
 			$sqlba=mysql_query("SELECT * FROM apqp_cron WHERE perc='100' AND peca='$pc' AND ativ<>'Viabilidade'");
@@ -102,14 +102,14 @@ if(isset($ap)){
 	}
 	$sql=mysql_query("SELECT * FROM apqp_cron WHERE perc='100' AND peca='$pc' AND ativ='Viabilidade'");
 	if(!mysql_num_rows($sql)){
-		$_SESSION["mensagem"]="Não pode ser aprovado pois existem relatórios anteriores abertos!!";
+		$_SESSION["mensagem"]="NÃ£o pode ser aprovado pois existem relatÃ³rios anteriores abertos!!";
 		header("Location:apqp_fluxo.php");
 		exit;
 	}
-	$sql=mysql_query("UPDATE apqp_cron SET resp='$quem1', fim=NOW(), perc='100' WHERE peca='$pc' AND ativ='Diagrama de Fluxo'") or die('Nao foi');
+	$sql=mysql_query("UPDATE apqp_cron SET resp='$quem1', fim=NOW(), perc='100' WHERE peca='$pc' AND ativ='Diagrama de Fluxo'") or erp_db_fail();
 		$_SESSION["mensagem"]="Aprovado com Sucesso!";
 		// cria followup caso aprove o diagrama de fluxo
-			$sql_ap=mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Aprovação do Diagrama de Fluxo da peça $npc.','O usuário $quem aprovou o Diagrama de Fluxo da peça $npc.','$user')");
+			$sql_ap=mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','AprovaÃ§Ã£o do Diagrama de Fluxo da peÃ§a $npc.','O usuÃ¡rio $quem aprovou o Diagrama de Fluxo da peÃ§a $npc.','$user')");
 		//	
 		header("Location:apqp_fluxo.php");
 		exit;
@@ -118,19 +118,19 @@ if(isset($ap)){
 		$res_status=mysql_fetch_array($sql_status);
 		if($res_status["status"]=="2"){
 			mysql_query("UPDATE apqp_pc SET status='1' WHERE id='$pc'");
-			// cria followup caso remova a aprovação do R&R e mude o status
-				mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Removendo a aprovação do Diagrama de Fluxo da peça $npc.','O usuário $quem removeu a aprovação da peça $npc devido a remoção da aprovação do Diagrama de Fluxo.','$user')");
+			// cria followup caso remova a aprovaÃ§Ã£o do R&R e mude o status
+				mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Removendo a aprovaÃ§Ã£o do Diagrama de Fluxo da peÃ§a $npc.','O usuÃ¡rio $quem removeu a aprovaÃ§Ã£o da peÃ§a $npc devido a remoÃ§Ã£o da aprovaÃ§Ã£o do Diagrama de Fluxo.','$user')");
 			//	
-				$apqp->set_email("Remoção da aprovação da peça $npc.","O usuário $quem removeu a aprovação da peça $this->npc devido a remoção da aprovação do Diagrama de Fluxo.");
+				$apqp->set_email("RemoÃ§Ã£o da aprovaÃ§Ã£o da peÃ§a $npc.","O usuÃ¡rio $quem removeu a aprovaÃ§Ã£o da peÃ§a $this->npc devido a remoÃ§Ã£o da aprovaÃ§Ã£o do Diagrama de Fluxo.");
 				$apqp->email();
 			//
 		}else{
 		// cria followup caso desaprove o diagrama de fluxo
-			$sql_ap=mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Removendo aprovação do Diagrama de Fluxo da peça $npc.','O usuário $quem removeu a aprovação do Diagrama de Fluxo da peça $npc.','$user')");
+			$sql_ap=mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Removendo aprovaÃ§Ã£o do Diagrama de Fluxo da peÃ§a $npc.','O usuÃ¡rio $quem removeu a aprovaÃ§Ã£o do Diagrama de Fluxo da peÃ§a $npc.','$user')");
 		//	
 		}
 		$sql=mysql_query("UPDATE apqp_cron SET resp='',perc='95',fim='' WHERE peca='$pc' AND ativ='Diagrama de Fluxo'");
-		$_SESSION["mensagem"]="Aprovação excluída com sucesso!";
+		$_SESSION["mensagem"]="AprovaÃ§Ã£o excluÃ­da com sucesso!";
 		header("Location:apqp_fluxo.php");
 		exit;
 }

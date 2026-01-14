@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 include("seguranca.php");
 if(empty($acao)) $acao="inc";
@@ -9,7 +9,7 @@ if($acao=="alt"){
 	}
 }elseif($acao=="alterar"){
 	$previsao=data2banco($previsao);
-	$sql=mysql_query("UPDATE prodserv_ordem SET previsao='$previsao',obs='$obs',status='$status' WHERE id='$id'") or die("nao foi");
+	$sql=mysql_query("UPDATE prodserv_ordem SET previsao='$previsao',obs='$obs',status='$status' WHERE id='$id'") or erp_db_fail();
 	header("location:prodserv_ordem.php");
 	exit;
 }
@@ -17,7 +17,8 @@ if($acao=="alt"){
 <html>
 <head>
 <title>CyberManager</title>
-<meta http-equiv="Content-Type" content="text/html; UTF-8">
+<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="style.css" rel="stylesheet" type="text/css">
 <script src="scripts.js"></script>
 <script src="mascaras.js"></script>
@@ -43,43 +44,43 @@ if($acao=="alt"){
     <td align="left" valign="top"><form name="form1" method="post" action="">
       <table width="400" border="0" cellspacing="0" cellpadding="0">
         <tr>
-          <td colspan="2" align="center" bgcolor="#003366" class="textoboldbranco"><? if($acao=="inc"){ print "Abrir"; }else{ print "Alterar"; }?> Ordem de Produ&ccedil;&atilde;o </td>
+          <td colspan="2" align="center" bgcolor="#003366" class="textoboldbranco"><?php if($acao=="inc"){ print "Abrir"; }else{ print "Alterar"; }?> Ordem de Produ&ccedil;&atilde;o </td>
           </tr>
         <tr>
           <td class="textobold">Status</td>
           <td><select name="status" id="status">
             <option value="">Selecione</option>
-            <option value="1" <? if($res["status"]=="1") print "selected"; ?>>Na fila</option>
-            <option value="2" <? if($res["status"]=="2") print "selected"; ?>>Em produção</option>
-            <option value="3" <? if($res["status"]=="3") print "selected"; ?>>Produzido</option>
+            <option value="1" <?php if($res["status"]=="1") print "selected"; ?>>Na fila</option>
+            <option value="2" <?php if($res["status"]=="2") print "selected"; ?>>Em produÃ§Ã£o</option>
+            <option value="3" <?php if($res["status"]=="3") print "selected"; ?>>Produzido</option>
           </select></td>
         </tr>
         <tr>
-<?
+<?php
 if($acao=="inc"){
 	$wabre="return abre('prodserv_bus2.php','busca','width=320,height=300,scrollbars=1');";
 	$wcan="prodserv_ordem.php";
 }elseif($acao=="alt"){
-	$wabre="return mensagem('Você não pode alterar o produto desta Ordem de Produção');";
-	$wcan="prodserv_sql.php?acao=ordemcan&id=$res[id]\" onclick=\"return confirm('Deseja realmente cancelar esta Ordem de Produção?');";
+	$wabre="return mensagem('VocÃª nÃ£o pode alterar o produto desta Ordem de ProduÃ§Ã£o');";
+	$wcan="prodserv_sql.php?acao=ordemcan&id=$res[id]\" onclick=\"return confirm('Deseja realmente cancelar esta Ordem de ProduÃ§Ã£o?');";
 }
 ?>
           <td width="71" class="textobold">&nbsp;Previs&atilde;o</td>
-          <td width="308"><input name="previsao" type="text" class="formulario" id="emissao4" onKeyPress="return validanum(this, event)" onKeyUp="mdata(this)" value="<? print banco2data($res["previsao"]); ?>" size="15" maxlength="15"></td>
+          <td width="308"><input name="previsao" type="text" class="formulario" id="emissao4" onKeyPress="return validanum(this, event)" onKeyUp="mdata(this)" value="<?php print banco2data($res["previsao"]); ?>" size="15" maxlength="15"></td>
           </tr>
         <tr>
           <td class="textobold">Obs</td>
-          <td><textarea name="obs" class="formularioselect" id="obs"><?= $res["obs"]; ?>
+          <td><textarea name="obs" class="formularioselect" id="obs"><?php echo  $res["obs"]; ?>
           </textarea>            
             <input name="acao" type="hidden" id="acao" value="alterar">
-            <input name="id" type="hidden" id="id" value="<? print $id; ?>"></td>
+            <input name="id" type="hidden" id="id" value="<?php print $id; ?>"></td>
           </tr>
         <tr>
           <td colspan="2" align="center" class="textobold"><img src="imagens/dot.gif" width="100" height="5"></td>
           </tr>
         <tr>
           <td colspan="2" align="center" class="textobold">
-            <input name="Submit22" type="button" class="microtxt" value="Cancelar" onClick="window.location='<? print $wcan; ?>'">
+            <input name="Submit22" type="button" class="microtxt" value="Cancelar" onClick="window.location='<?php print $wcan; ?>'">
        <img src="imagens/dot.gif" width="20" height="5">
             <input name="Submit2" type="submit" class="microtxt" value="Continuar"></td>
         </tr>
@@ -89,4 +90,4 @@ if($acao=="inc"){
 </table>
 </body>
 </html>
-<? include("mensagem.php"); ?>
+<?php include("mensagem.php"); ?>

@@ -1,9 +1,9 @@
-<?
+<?php
 include("conecta.php");
 include("seguranca.php");
 $acao=verifi($permi,$acao);
 if(!empty($acao)){
-	$loc="Fixação";
+	$loc="FixaÃ§Ã£o";
 	$pagina=$_SERVER['SCRIPT_FILENAME'];
 	include("log.php");
 }
@@ -16,7 +16,8 @@ if($acao=="alt"){
 <html>
 <head>
 <title>CyberManager</title>
-<meta http-equiv="Content-Type" content="text/html; UTF-8">
+<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="style.css" rel="stylesheet" type="text/css">
 <script src="scripts.js"></script>
 <script src="mascaras.js"></script>
@@ -53,12 +54,12 @@ function verifica(cad){
       </tr>
     </table></td>
   </tr>
-<? if($acao=="entrar"){ ?>
+<?php if($acao=="entrar"){ ?>
   <tr> 
     <td align="left" valign="top"><table width="300" border="0" cellspacing="0" cellpadding="0">
         <tr> 
           <td><div align="center"><a href="fixacao.php?acao=inc" class="textobold">Incluir 
-              um Modo de Fixação </a> </div></td>
+              um Modo de FixaÃ§Ã£o </a> </div></td>
         </tr>
       </table>
       <table width="300" border="0" cellpadding="0" cellspacing="1" bgcolor="#003366">
@@ -68,58 +69,58 @@ function verifica(cad){
           <td width="17">&nbsp;</td>
           <td width="19">&nbsp;</td>
         </tr>
-        <?
+        <?php
 			  $sql=mysql_query("SELECT * FROM fixacao $where ORDER BY nome ASC");
 			  if(mysql_num_rows($sql)==0){
 			  ?>
         <tr bgcolor="#FFFFFF"> 
           <td colspan="4" align="center" class="textobold">NADA ENCONTRADO          </td>
         </tr>
-        <?
+        <?php
 			  }else{
 			  	while($res=mysql_fetch_array($sql)){
 			  ?>
         <tr bgcolor="#FFFFFF" class="texto" onMouseover="changeto('#CCCCCC')" onMouseout="changeback('#FFFFFF')"> 
-          <td>&nbsp;<? print $res["nome"]; ?></td>
-          <td>&nbsp;<? print banco2valor($res["valor"]); ?></td>
-          <td width="17" align="center"><a href="fixacao.php?acao=alt&id=<? print $res["id"]; ?>"><img src="imagens/icon14_alterar.gif" alt="Alterar" width="14" height="14" border="0"></a></td>
-          <td width="19" align="center"><a href="#" onClick="return pergunta('Deseja excluir esta Material?','fixacao_sql.php?acao=exc&id=<? print $res["id"]; ?>')"><img src="imagens/icon14_lixeira.gif" alt="Excluir" width="14" height="14" border="0"></a></td>
+          <td>&nbsp;<?php print $res["nome"]; ?></td>
+          <td>&nbsp;<?php print banco2valor($res["valor"]); ?></td>
+          <td width="17" align="center"><a href="fixacao.php?acao=alt&id=<?php print $res["id"]; ?>"><img src="imagens/icon14_alterar.gif" alt="Alterar" width="14" height="14" border="0"></a></td>
+          <td width="19" align="center"><a href="#" onClick="return pergunta('Deseja excluir esta Material?','fixacao_sql.php?acao=exc&id=<?php print $res["id"]; ?>')"><img src="imagens/icon14_lixeira.gif" alt="Excluir" width="14" height="14" border="0"></a></td>
         </tr>
-        <?
+        <?php
 			  	}
 			  }
 			  ?>
       </table></td>
   </tr>
-  <? }else{ ?>
+  <?php }else{ ?>
   <tr>
     <td align="left" valign="top"><form name="form1" method="post" action="fixacao_sql.php" onSubmit="return verifica(this);">
         <table width="300" border="0" cellpadding="0" cellspacing="0">
           <tr bgcolor="#003366"> 
             <td colspan="2" align="center" class="textoboldbranco"> 
-              <? if($acao=="inc"){ print"Incluir"; }else{ print"Alterar";} ?> Modo de fixação            </td>
+              <?php if($acao=="inc"){ print"Incluir"; }else{ print"Alterar";} ?> Modo de fixaÃ§Ã£o            </td>
           </tr>
           <tr>
             <td class="textobold">&nbsp;Nome</td>
-            <td class="textobold"><input name="nome" type="text" class="formularioselect" id="nome2" value="<? print $res["nome"]; ?>" size="45" maxlength="30"></td>
+            <td class="textobold"><input name="nome" type="text" class="formularioselect" id="nome2" value="<?php print $res["nome"]; ?>" size="45" maxlength="30"></td>
           </tr>
           <tr> 
             <td width="39" class="textobold">&nbsp;Valor</td>
-            <td width="258" class="textobold"><input name="valor" type="text" class="formularioselect" id="nome2" value="<? print banco2valor($res["valor"]); ?>" onKeyDown="formataMoeda(this,retornaKeyCode(event))" onKeyUp="formataMoeda(this,retornaKeyCode(event))" size="45" maxlength="30"></td>
+            <td width="258" class="textobold"><input name="valor" type="text" class="formularioselect" id="nome2" value="<?php print banco2valor($res["valor"]); ?>" onKeyDown="formataMoeda(this,retornaKeyCode(event))" onKeyUp="formataMoeda(this,retornaKeyCode(event))" size="45" maxlength="30"></td>
           </tr>
           <tr align="center"> 
             <td colspan="2" class="textobold">
               <input name="Submit22" type="button" class="microtxt" value="voltar" onClick="window.location='material.php'">
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               <input name="Submit2" type="submit" class="microtxt" value="Continuar">
-              <input name="acao" type="hidden" id="acao" value="<? if($acao=="alt"){ print "alterar"; }else{ print "incluir"; } ?>"> 
-            <input name="id" type="hidden" id="id3" value="<? print $id; ?>"></td>
+              <input name="acao" type="hidden" id="acao" value="<?php if($acao=="alt"){ print "alterar"; }else{ print "incluir"; } ?>"> 
+            <input name="id" type="hidden" id="id3" value="<?php print $id; ?>"></td>
           </tr>
         </table>
       </form>    </td>
-	<? } ?>
+	<?php } ?>
   </tr>
 </table>
 </body>
 </html>
-<? include("mensagem.php"); ?>
+<?php include("mensagem.php"); ?>

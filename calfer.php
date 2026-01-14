@@ -1,4 +1,4 @@
-<? 
+<?php 
 if(empty($cal_dia))$cal_dia=date("d");	
 if(empty($cal_mes))$cal_mes=date("m");
 if(empty($cal_ano))$cal_ano=date("Y");
@@ -52,7 +52,7 @@ function ver_mes($mes1){
 			$mes2 = 'Fevereiro';
 			break;
 		case 3:
-			$mes2 = 'Março';
+			$mes2 = 'MarÃ§o';
 			break;
 		case 4:
 			$mes2 = 'Abril';

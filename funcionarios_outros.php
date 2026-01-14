@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 include("seguranca.php");
 if(empty($acao)) $acao="alt";
@@ -16,7 +16,7 @@ if($acao=="alterar"){
 		header("Location:funcionarios.php?bcod=$bcod&bnome=$bnome");
 		exit;		
 	}else{
-		$_SESSION["mensagem"]="O cadastro de outros dados não pôde ser alterado!";
+		$_SESSION["mensagem"]="O cadastro de outros dados nao pode ser alterado!";
 		$afastamento_ini=banco2data($afastamento_ini);
 		$afastamento_fim=banco2data($afastamento_fim);
 		$res_data=banco2data($res_data);
@@ -42,99 +42,138 @@ if($acao=="alterar"){
 	$fantasia=$res["fantasia"];
 }
 ?>
-<html>
+<!DOCTYPE html>
+<html lang="pt-BR">
 <head>
-<title>CyberManager</title>
-<meta http-equiv="Content-Type" content="text/html; UTF-8">
+<title>Funcionarios - Outros Dados</title>
+<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <link href="style.css" rel="stylesheet" type="text/css">
+<link href="components.css" rel="stylesheet" type="text/css">
+<link href="layout-fixes.css" rel="stylesheet" type="text/css">
+<script src="mascaras.js"></script>
+<script src="scripts.js"></script>
 <script>
 function verifica(cad){
 	return true;
 }
 </script>
-<script src="mascaras.js"></script>
-<script src="scripts.js"></script>
 </head>
-<body  leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" onLoad="enterativa=1;"onkeypress="return ent()">
-<table width="594" border="0" cellpadding="0" cellspacing="0">
-  <tr> 
-    <td><form name="form1" method="post" action="" onSubmit="return verifica(this)">
-        <table width="450" border="0" cellpadding="0" cellspacing="0">
-          <tr> 
-            <td colspan="2" align="center" bgcolor="#003366" class="textoboldbranco">Cadastro 
-              de Funcion&aacute;rios - Outros Dados</td>
-          </tr>
-          <tr class="textobold"> 
-            <td width="116">Nome:</td>
-            <td width="334"><? print $fantasia; ?></td>
-          </tr>
-          <tr class="textobold"> 
-            <td>Situa&ccedil;&atilde;o:</td>
-            <td> 
-              <input name="situacao" type="text" class="formulario" id="situacao" value="<? print $situacao; ?>" size="20" maxlength="20"></td>
-          </tr>
-          <tr class="textobold"> 
-            <td>Ini. Afastamento:</td>
-            <td>
-<input name="afastamento_ini" type="text" class="formulario" id="afastamento_ini" onKeyPress="return validanum(this, event)" onKeyUp="mdata(this)" value="<? print $afastamento_ini; ?>" size="10" maxlength="10"></td>
-          </tr>
-          <tr class="textobold"> 
-            <td>Fim Afastamento:</td>
-            <td>
-<input name="afastamento_fim" type="text" class="formulario" id="afastamento_fim" onKeyPress="return validanum(this, event)" onKeyUp="mdata(this)" value="<? print $afastamento_fim; ?>" size="10" maxlength="10"></td>
-          </tr>
-          <tr class="textobold"> 
-            <td>Causa Rescis&atilde;o:</td>
-            <td> 
-              <input name="res_causa" type="text" class="formularioselect" id="res_causa" value="<? print $res_causa; ?>" size="63" maxlength="50"></td>
-          </tr>
-          <tr class="textobold"> 
-            <td>Data Rescis&atilde;o:</td>
-            <td>
-<input name="res_data" type="text" class="formulario" id="res_data" onKeyPress="return validanum(this, event)" onKeyUp="mdata(this)" value="<? print $res_data; ?>" size="10" maxlength="10"></td>
-          </tr>
-          <tr class="textobold"> 
-            <td>In&iacute;cio das F&eacute;rias:</td>
-            <td>
-<input name="ferias_ini" type="text" class="formulario" id="ferias_ini" onKeyPress="return validanum(this, event)" onKeyUp="mdata(this)" value="<? print $ferias_ini; ?>" size="10" maxlength="10"></td>
-          </tr>
-          <tr class="textobold"> 
-            <td>Fim das F&eacute;rias:</td>
-            <td>
-<input name="ferias_fim" type="text" class="formulario" id="ferias_fim" onKeyPress="return validanum(this, event)" onKeyUp="mdata(this)" value="<? print $ferias_fim; ?>" size="10" maxlength="10"></td>
-          </tr>
-          <tr class="textobold"> 
-            <td>Crach&aacute; Provis&oacute;rio:</td>
-            <td> 
-              <input name="cracha_prov" type="text" class="formulario" id="cracha_prov" value="<? print $cracha_prov; ?>" size="20" maxlength="20"></td>
-          </tr>
-          <tr class="textobold"> 
-            <td>Ini. Crach&aacute; Prov.:</td>
-            <td>
-<input name="cracha_prov_ini" type="text" class="formulario" id="cracha_prov_ini" onKeyPress="return validanum(this, event)" onKeyUp="mdata(this)" value="<? print $cracha_prov_ini; ?>" size="10" maxlength="10"></td>
-          </tr>
-          <tr class="textobold"> 
-            <td>Fim Crach&aacute; Prov.:</td>
-            <td>
-<input name="cracha_prov_fim" type="text" class="formulario" id="cracha_prov_fim" onKeyPress="return validanum(this, event)" onKeyUp="mdata(this)" value="<? print $cracha_prov_fim; ?>" size="10" maxlength="10"> 
-              <input name="id" type="hidden" id="id3" value="<? print $id; ?>"> 
-              <input name="acao" type="hidden" id="acao2" value="<? if($acao=="inc"){ print "incluir"; }else{ print "alterar"; } ?>"></td>
-          </tr>
-          <tr class="textobold"> 
-            <td colspan="2" align="center"> 
-              <? if($acao=="alt"){ ?>
-             
-              <input name="Submit22" type="button" class="microtxt" value="voltar" onClick="window.location='funcionarios.php<? if(!empty($bcod) or!empty($bnome)) print "?webmst=cpp"; if(!empty($bcod)) print "&bcod=$bcod"; if(!empty($bnome)) print "&bnome=$bnome";?>'">
-            
-              <img src="imagens/dot.gif" width="50" height="5"> 
-              <? } ?>
-              <input name="Submit2" type="submit" class="microtxt" value="Continuar"></td>
-          </tr>
-        </table>
-      </form></td>
-  </tr>
-</table>
-&nbsp; 
+
+<body style="background:#f8f9fa;padding:24px;" onLoad="enterativa=1;" onkeypress="return ent()">
+
+<div class="erp-container-fluid">
+    <div class="erp-card">
+        <div class="erp-card-header">
+            <h1 class="erp-card-title"><i class="fas fa-id-card"></i> Funcionarios - Outros Dados</h1>
+            <div>
+                <a href="funcionarios.php?bcod=<?php echo $bcod?>&bnome=<?php echo $bnome?>" class="erp-btn erp-btn-outline">
+                    <i class="fas fa-arrow-left"></i> Voltar
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <?php if(isset($_SESSION["mensagem"])): ?>
+    <div class="erp-alert erp-alert-<?php echo strpos($_SESSION["mensagem"],'alterado')!==false||strpos($_SESSION["mensagem"],'sucesso')!==false?'success':'danger'?>">
+        <?php echo $_SESSION["mensagem"]; unset($_SESSION["mensagem"]); ?>
+    </div>
+    <?php endif; ?>
+
+    <form name="form1" method="post" action="" onSubmit="return verifica(this)">
+        <input name="id" type="hidden" value="<?php print $id; ?>">
+        <input name="bcod" type="hidden" value="<?php print $bcod; ?>">
+        <input name="bnome" type="hidden" value="<?php print $bnome; ?>">
+        <input name="acao" type="hidden" value="<?php if($acao=="inc"){ print "incluir"; }else{ print "alterar"; } ?>">
+
+        <div class="erp-card">
+            <h3 style="margin-bottom:20px;font-size:18px;color:#2c3e50;"><i class="fas fa-user"></i> Dados</h3>
+
+            <div class="erp-row">
+                <div class="erp-col" style="flex:2;">
+                    <div class="erp-form-group">
+                        <label class="erp-form-label">Nome</label>
+                        <input type="text" class="erp-form-control" value="<?php print $fantasia; ?>" disabled>
+                    </div>
+                </div>
+                <div class="erp-col" style="flex:1;">
+                    <div class="erp-form-group">
+                        <label class="erp-form-label">Situacao</label>
+                        <input name="situacao" type="text" class="erp-form-control" id="situacao" value="<?php print $situacao; ?>" maxlength="20">
+                    </div>
+                </div>
+            </div>
+
+            <div class="erp-row">
+                <div class="erp-col">
+                    <div class="erp-form-group">
+                        <label class="erp-form-label">Ini. Afastamento</label>
+                        <input name="afastamento_ini" type="text" class="erp-form-control" id="afastamento_ini" onKeyPress="return validanum(this, event)" onKeyUp="mdata(this)" value="<?php print $afastamento_ini; ?>" maxlength="10">
+                    </div>
+                </div>
+                <div class="erp-col">
+                    <div class="erp-form-group">
+                        <label class="erp-form-label">Fim Afastamento</label>
+                        <input name="afastamento_fim" type="text" class="erp-form-control" id="afastamento_fim" onKeyPress="return validanum(this, event)" onKeyUp="mdata(this)" value="<?php print $afastamento_fim; ?>" maxlength="10">
+                    </div>
+                </div>
+                <div class="erp-col" style="flex:2;">
+                    <div class="erp-form-group">
+                        <label class="erp-form-label">Causa Rescisao</label>
+                        <input name="res_causa" type="text" class="erp-form-control" id="res_causa" value="<?php print $res_causa; ?>" maxlength="50">
+                    </div>
+                </div>
+                <div class="erp-col">
+                    <div class="erp-form-group">
+                        <label class="erp-form-label">Data Rescisao</label>
+                        <input name="res_data" type="text" class="erp-form-control" id="res_data" onKeyPress="return validanum(this, event)" onKeyUp="mdata(this)" value="<?php print $res_data; ?>" maxlength="10">
+                    </div>
+                </div>
+            </div>
+
+            <div class="erp-row">
+                <div class="erp-col">
+                    <div class="erp-form-group">
+                        <label class="erp-form-label">Inicio Ferias</label>
+                        <input name="ferias_ini" type="text" class="erp-form-control" id="ferias_ini" onKeyPress="return validanum(this, event)" onKeyUp="mdata(this)" value="<?php print $ferias_ini; ?>" maxlength="10">
+                    </div>
+                </div>
+                <div class="erp-col">
+                    <div class="erp-form-group">
+                        <label class="erp-form-label">Fim Ferias</label>
+                        <input name="ferias_fim" type="text" class="erp-form-control" id="ferias_fim" onKeyPress="return validanum(this, event)" onKeyUp="mdata(this)" value="<?php print $ferias_fim; ?>" maxlength="10">
+                    </div>
+                </div>
+                <div class="erp-col">
+                    <div class="erp-form-group">
+                        <label class="erp-form-label">Cracha Provisorio</label>
+                        <input name="cracha_prov" type="text" class="erp-form-control" id="cracha_prov" value="<?php print $cracha_prov; ?>" maxlength="20">
+                    </div>
+                </div>
+                <div class="erp-col">
+                    <div class="erp-form-group">
+                        <label class="erp-form-label">Ini. Cracha Prov.</label>
+                        <input name="cracha_prov_ini" type="text" class="erp-form-control" id="cracha_prov_ini" onKeyPress="return validanum(this, event)" onKeyUp="mdata(this)" value="<?php print $cracha_prov_ini; ?>" maxlength="10">
+                    </div>
+                </div>
+                <div class="erp-col">
+                    <div class="erp-form-group">
+                        <label class="erp-form-label">Fim Cracha Prov.</label>
+                        <input name="cracha_prov_fim" type="text" class="erp-form-control" id="cracha_prov_fim" onKeyPress="return validanum(this, event)" onKeyUp="mdata(this)" value="<?php print $cracha_prov_fim; ?>" maxlength="10">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div style="display:flex;gap:12px;justify-content:flex-end;margin-top:24px;">
+            <a href="funcionarios.php?bcod=<?php echo $bcod?>&bnome=<?php echo $bnome?>" class="erp-btn erp-btn-secondary">Cancelar</a>
+            <button type="submit" class="erp-btn erp-btn-success">Continuar</button>
+        </div>
+    </form>
+</div>
+
+<?php include("mensagem.php"); ?>
 </body>
 </html>
-<? include("mensagem.php"); ?>

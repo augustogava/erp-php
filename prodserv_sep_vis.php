@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 $bd=new set_bd;
 $sql=mysql_query("SELECT MAX(prodserv.prazo_entrega) as prazo FROM prodserv,prodserv_sep_list WHERE prodserv_sep_list.est='$id' AND prodserv_sep_list.prodserv=prodserv.id"); $res=mysql_fetch_array($sql);
@@ -17,7 +17,8 @@ $resp=mysql_fetch_array($sqlp);
 <html>
 <head>
 <title>Cybermanager</title>
-<meta http-equiv="Content-Type" content="text/html; UTF-8">
+<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="style.css" rel="stylesheet" type="text/css">
 <script src="scripts.js"></script>
 <script src="mascaras.js"></script>
@@ -59,20 +60,20 @@ body {
   </tr>
   <tr>
     <td align="left"><strong>Pedido: </strong>
-        <?= $res["pedido"]; ?></td>
+        <?php echo  $res["pedido"]; ?></td>
     <td width="183"><strong>Data:</strong>
-        <?= banco2data($res["emissao"]); ?></td>
+        <?php echo  banco2data($res["emissao"]); ?></td>
     <td width="164"><strong>Vendedor:</strong>
-        <?= $res["nome"]; ?></td>
+        <?php echo  $res["nome"]; ?></td>
     <td width="166"><strong>Previs&atilde;o:</strong>
-        <?= $prazo; ?>
+        <?php echo  $prazo; ?>
       Dias </td>
   </tr>
   <tr>
     <td width="187" align="left"><strong>C&oacute;digo Cliente: </strong>
-      <?= $resp["codigo"]; ?>    </td>
+      <?php echo  $resp["codigo"]; ?>    </td>
     <td colspan="3"><strong>Nome:  </strong>
-      <?= $resp["nome"]; ?>   </td>
+      <?php echo  $resp["nome"]; ?>   </td>
   </tr>
   <tr>
     <td colspan="4" align="right">&nbsp;</td>
@@ -85,14 +86,14 @@ body {
         <td width="44" align="left">Qtd</td>
         <td width="113" align="left">Localiza&ccedil;&atilde;o</td>
         </tr>
-      <?
+      <?php
 			  $sql=mysql_query("SELECT * FROM prodserv_sep_list WHERE est='$id' ORDER BY pedido ASC");
 			  if(mysql_num_rows($sql)==0){
 			  ?>
       <tr bgcolor="#FFFFFF">
         <td colspan="4" align="center" bgcolor="#FFFFFF" class="textobold">NENHUM TEXTO ENCONTRADO </td>
       </tr>
-      <?
+      <?php
 			  }else{
 			  	while($res=mysql_fetch_array($sql)){
 				switch($res["sit"]){
@@ -106,7 +107,7 @@ body {
 							$st="Coletado";
 							break;
 						case "4":
-							$st="Em Separação";
+							$st="Em SeparaÃ§Ã£o";
 							break;
 						case "5":
 							$st="Em Produ&ccedil;&atilde;o";
@@ -127,12 +128,12 @@ body {
 $prod=$res["prodserv"]; $sql2=mysql_query("SELECT * FROM prodserv WHERE id='$prod'"); $res2=mysql_fetch_array($sql2); $cod=$res2["codprod"]; $descricao=$res2["nome"];
 			  ?>
       <tr bgcolor="#FFFFFF" class="texto" onMouseover="changeto('#CCCCCC')" onMouseout="changeback('#FFFFFF')">
-        <td>&nbsp;<? print $cod; ?></td>
-        <td ><? print $descricao; ?></td>
-        <td align="left">&nbsp;<? print $res["qtd"]; ?></td>
-        <td width="113" align="left"> &nbsp;<? print $res2["corredor"]." - ".$res2["prateleira"]." - ".$res2["posi"]; ?></td>
+        <td>&nbsp;<?php print $cod; ?></td>
+        <td ><?php print $descricao; ?></td>
+        <td align="left">&nbsp;<?php print $res["qtd"]; ?></td>
+        <td width="113" align="left"> &nbsp;<?php print $res2["corredor"]." - ".$res2["prateleira"]." - ".$res2["posi"]; ?></td>
         </tr>
-      <?
+      <?php
 			  	}
 			  }
 			  ?>
@@ -141,7 +142,7 @@ $prod=$res["prodserv"]; $sql2=mysql_query("SELECT * FROM prodserv WHERE id='$pro
   <tr align="center">
     <td colspan="4">&nbsp;</td>
   </tr>
-<? 
+<?php 
 $sql2=mysql_query("SELECT * FROM e_compra WHERE id='$res[compra]'");
 $res2=mysql_fetch_array($sql2);
 ?>
@@ -151,26 +152,26 @@ $res2=mysql_fetch_array($sql2);
         <td class="menu">Endere&ccedil;o Entrega</td>
       </tr>
       <tr>
-        <td><strong>Endere&ccedil;o:</strong> <? print $resp["endereco"]." ".$resp["numero"]; ?></td>
+        <td><strong>Endere&ccedil;o:</strong> <?php print $resp["endereco"]." ".$resp["numero"]; ?></td>
       </tr>
       <tr>
-        <td><strong>Bairro:</strong> <? print $resp["bairro"]; ?></td>
+        <td><strong>Bairro:</strong> <?php print $resp["bairro"]; ?></td>
       </tr>
       <tr>
-        <td><strong>CEP:</strong> <? print $resp["cep"]; ?></td>
+        <td><strong>CEP:</strong> <?php print $resp["cep"]; ?></td>
       </tr>
       <tr>
-        <td><strong>Cidade:</strong> <? print $resp["cidade"]; ?></td>
+        <td><strong>Cidade:</strong> <?php print $resp["cidade"]; ?></td>
       </tr>
       <tr>
         <td><strong>Estado:</strong>
-            <? $bd->pega_nome_bd("estado","nome",$resp["estado"]);  ?></td>
+            <?php $bd->pega_nome_bd("estado","nome",$resp["estado"]);  ?></td>
       </tr>
       
     </table>      </td>
   </tr>
   <tr align="left">
-    <td colspan="4"><strong>Envio: </strong><? if(empty($res2["forn_nome"])){ print "Pelo correio"; }else{ print "Transportadora $res2[forn_nome] - $res2[forn_tel]"; } ?></td>
+    <td colspan="4"><strong>Envio: </strong><?php if(empty($res2["forn_nome"])){ print "Pelo correio"; }else{ print "Transportadora $res2[forn_nome] - $res2[forn_tel]"; } ?></td>
   </tr>
   <tr align="center">
     <td colspan="4"><table width="100%" border="0" cellpadding="0" cellspacing="0" class="texto">
@@ -181,7 +182,7 @@ $res2=mysql_fetch_array($sql2);
         <td class="menu">Transportadora</td>
       </tr>
       <tr>
-        <td><strong>C&oacute;digo:</strong> &nbsp;<? print $cod_trans; ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>Nome:</strong> <? print $nome_trans; ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>Tel:</strong> <? print $tel_trans; ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+        <td><strong>C&oacute;digo:</strong> &nbsp;<?php print $cod_trans; ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>Nome:</strong> <?php print $nome_trans; ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>Tel:</strong> <?php print $tel_trans; ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
       </tr>
       <tr>
         <td><strong>Transportadora que coletou &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A mesma: [&nbsp;&nbsp;&nbsp;] &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Outra:_____________________________________________</strong></td>
@@ -212,6 +213,6 @@ $res2=mysql_fetch_array($sql2);
     <td colspan="4"><a href="#"><img src="imagens/imprimir.gif" width="60" id="bot" name="bot" height="14" border="0" onClick="return imprimir(this)"></a></td>
   </tr>
 </table>
-    
+Â Â Â  
 </body>
 </html>

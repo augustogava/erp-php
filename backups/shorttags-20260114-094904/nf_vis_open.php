@@ -1,0 +1,1 @@
+<script>window.location='pdf/nf.php?nf=<?= $nf; ?>';</script>

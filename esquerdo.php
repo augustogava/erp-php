@@ -28,20 +28,20 @@ $menus=explode(",",$res["menus"]);
 $submenus=explode(",",$res["submenus"]); 
 
 $menu_icons = [
-	'Cadastros' => 'ð',
-	'Comercial' => 'ð',
-	'Financeiro' => 'ð°',
-	'Estoque' => 'ð¦',
-	'CRM' => 'ð¥',
-	'Relatorios' => 'ð',
-	'Configuracoes' => 'âï¸'
+	'Cadastros' => '<i class="fas fa-clipboard-list"></i>',
+	'Comercial' => '<i class="fas fa-bag-shopping"></i>',
+	'Financeiro' => '<i class="fas fa-dollar-sign"></i>',
+	'Estoque' => '<i class="fas fa-boxes-stacked"></i>',
+	'CRM' => '<i class="fas fa-users"></i>',
+	'Relatorios' => '<i class="fas fa-chart-bar"></i>',
+	'Configuracoes' => '<i class="fas fa-gear"></i>'
 ];
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="ISO-8859-1">
-<meta http-equiv="Content-Type" content="text/html; UTF-8">
+<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <link href="style.css" rel="stylesheet" type="text/css">
@@ -201,8 +201,8 @@ body {
 <body>
 <nav>
     <a href="corpo.php" target="corpo" class="erp-menu-home">
-        <span style="font-size:18px;">ð </span>
-        <span>PÃ¡gina Inicial</span>
+        <span style="font-size:18px;"><i class="fas fa-house"></i></span>
+        <span>Pagina Inicial</span>
     </a>
     
     <div class="erp-menu-divider"></div>
@@ -219,13 +219,13 @@ body {
         if(in_array($res["id"],$menus) or $res["sit"]=="F" or $_SESSION["login_c1"]=="mkrsis"){
             $menu_id = $res["id"];
             $menu_text = $res["texto"];
-            $icon = isset($menu_icons[$menu_text]) ? $menu_icons[$menu_text] : 'ð';
+            $icon = isset($menu_icons[$menu_text]) ? $menu_icons[$menu_text] : '<i class="fas fa-file-lines"></i>';
             
             echo '<li class="erp-menu-item">';
             echo '<a href="javascript:void(0)" class="erp-menu-link" onclick="toggleSubmenu('.$menu_id.')">';
             echo '<span class="erp-menu-icon">'.$icon.'</span>';
             echo '<span class="erp-menu-text">'.$menu_text.'</span>';
-            echo '<span class="erp-menu-arrow">â¶</span>';
+            echo '<span class="erp-menu-arrow"><i class="fas fa-chevron-right"></i></span>';
             echo '</a>';
             
             $sql2=mysql_query("SELECT * FROM submenus WHERE menu=$menu_id ORDER BY posicao ASC");

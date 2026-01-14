@@ -1,11 +1,11 @@
-<?
+<?php
 include("conecta.php");
 include("seguranca.php");
 $apqp=new set_apqp;
 if(empty($acao)) $acao="entrar";
 $pc=$_SESSION["mpc"];
 $npc=$_SESSION["npc"];
-//Verificação
+//VerificaÃ§Ã£o
 $_SESSION["modulo"]="apare";
 $sqlm=mysql_query("SELECT * FROM online WHERE user<>'$iduser' and peca='$pc' and modulo='apare'");
 if(mysql_num_rows($sqlm)){
@@ -15,7 +15,7 @@ if(mysql_num_rows($sqlm)){
 	}else{
 		$sql2=mysql_query("SELECT * FROM clientes WHERE id='$resm[user]'"); $res2=mysql_fetch_array($sql2);
 	}
-	$_SESSION["mensagem"]="O usuario $res2[nome] está alterando este módulo!";
+	$_SESSION["mensagem"]="O usuario $res2[nome] estÃ¡ alterando este mÃ³dulo!";
 	header("Location:apqp_menu.php");
 	exit;
 }
@@ -53,7 +53,7 @@ function abrir(url,id){
 	return true;
 }
 function salvar(url,id){
-	window.open('apqp_impressao.php?acao=salvar&local='+ url +'&pc='+ <?=$pc?> + '');
+	window.open('apqp_impressao.php?acao=salvar&local='+ url +'&pc='+ <?php echo $pc?> + '');
 	return true;
 }
 
@@ -73,8 +73,8 @@ function MM_openBrWindow(theURL,winName,features) { //v2.0
   <tr>
     <td align="left" valign="top" class="chamadas"><table width="590" border="0" cellpadding="0" cellspacing="0" class="texto">
       <tr>
-        <td width="27" align="center"><div align="left"><a href="#" onClick="MM_openBrWindow('help/mini_aprova_apa.html','','width=680,height=501,left=300,top=50')"><img src="imagens/icon14_ahn.gif" width="14" height="14" border="0" onMouseOver="this.T_STICKY=true; this.T_TITLE='Aprovação de Aparência'; this.T_DELAY=10; this.T_WIDTH=225;  return escape('O Relatório de Aprovação de Aparência deve ser preenchido conforme o Manual do PPAP da AIAG - Segunda Edição, Fevereiro 95 Segunda Impressão Julho 95.<br>Preenchimentos dos Campos:<br><strong>Local da Fabricação - </strong>Localidade onde a peça está sendo desenvolvida, fabricada ou montada.<br><strong>Data - </strong>Data da aprovação<br><strong>Razão para a submissão - </strong>Marcar o(s) quadro(s) que indicam as razões para submissão<br><strong>Avaliação ded Aparência - </strong>Informações da aparência da peça o estado físico da peça.')"></a><span class="impTextoBold">&nbsp;</span></div></td>
-        <td width="563" align="right"><div align="left" class="textobold style1">APQP - Aprova&ccedil;&atilde;o de Apar&ecirc;ncia&nbsp;<? print $npc; ?></div></td>
+        <td width="27" align="center"><div align="left"><a href="#" onClick="MM_openBrWindow('help/mini_aprova_apa.html','','width=680,height=501,left=300,top=50')"><img src="imagens/icon14_ahn.gif" width="14" height="14" border="0" onMouseOver="this.T_STICKY=true; this.T_TITLE='AprovaÃ§Ã£o de AparÃªncia'; this.T_DELAY=10; this.T_WIDTH=225;  return escape('O RelatÃ³rio de AprovaÃ§Ã£o de AparÃªncia deve ser preenchido conforme o Manual do PPAP da AIAG - Segunda EdiÃ§Ã£o, Fevereiro 95 Segunda ImpressÃ£o Julho 95.<br>Preenchimentos dos Campos:<br><strong>Local da FabricaÃ§Ã£o - </strong>Localidade onde a peÃ§a estÃ¡ sendo desenvolvida, fabricada ou montada.<br><strong>Data - </strong>Data da aprovaÃ§Ã£o<br><strong>RazÃ£o para a submissÃ£o - </strong>Marcar o(s) quadro(s) que indicam as razÃµes para submissÃ£o<br><strong>AvaliaÃ§Ã£o ded AparÃªncia - </strong>InformaÃ§Ãµes da aparÃªncia da peÃ§a o estado fÃ­sico da peÃ§a.')"></a><span class="impTextoBold">&nbsp;</span></div></td>
+        <td width="563" align="right"><div align="left" class="textobold style1">APQP - Aprova&ccedil;&atilde;o de Apar&ecirc;ncia&nbsp;<?php print $npc; ?></div></td>
       </tr>
       <tr>
         <td align="center">&nbsp;</td>
@@ -100,13 +100,13 @@ function MM_openBrWindow(theURL,winName,features) { //v2.0
           <table width="571" border="0" cellspacing="0" cellpadding="3">
             <tr>
               <td width="78" class="textobold">Local de Fab.:</td>
-              <td width="338"><input name="localfab" type="text" class="formularioselect" id="localfab" value="<?= $res["local"]; ?>" size="1" maxlength="255"></td>
+              <td width="338"><input name="localfab" type="text" class="formularioselect" id="localfab" value="<?php echo  $res["local"]; ?>" size="1" maxlength="255"></td>
               <td width="45" align="right" class="textobold"><div align="center">Data:</div></td>
-              <td width="100"><input name="data" type="text" class="formulario" id="data" onKeyPress="return validanum(this, event)" onKeyUp="mdata(this)" value="<?= banco2data($res["data"]); ?>" size="10" maxlength="10">&nbsp;<a href="#" class="" onClick="window.open('agenda_pop.php?window_position=apqp_aproc&var_field=data','','scrollbars=no,width=155,height=138');"><img src="imagens/icon14_cal.gif" width="14" height="14" border="0"></a></td>
+              <td width="100"><input name="data" type="text" class="formulario" id="data" onKeyPress="return validanum(this, event)" onKeyUp="mdata(this)" value="<?php echo  banco2data($res["data"]); ?>" size="10" maxlength="10">&nbsp;<a href="#" class="" onClick="window.open('agenda_pop.php?window_position=apqp_aproc&var_field=data','','scrollbars=no,width=155,height=138');"><img src="imagens/icon14_cal.gif" width="14" height="14" border="0"></a></td>
               </tr>
             <tr>
               <td class="textobold">Comprador:</td>
-              <td colspan="3"><input name="comprador" type="text" class="formularioselect" id="comprador" value="<?= $res["comprador"]; ?>" size="7" maxlength="50"></td>
+              <td colspan="3"><input name="comprador" type="text" class="formularioselect" id="comprador" value="<?php echo  $res["comprador"]; ?>" size="7" maxlength="50"></td>
               </tr>
             <tr>
               <td colspan="4"><img src="imagens/dot.gif" width="20" height="5"></td>
@@ -119,23 +119,23 @@ function MM_openBrWindow(theURL,winName,features) { //v2.0
                 <tr bgcolor="#FFFFFF">
                   <td class="textobold"><table width="571" border="0" cellspacing="0" cellpadding="3">
                     <tr class="textobold">
-                      <td width="50%"><input name="razao1" type="radio" value="1" <? if(empty($res["razao1"]) or $res["razao1"]=="1") print "checked"; ?>>
+                      <td width="50%"><input name="razao1" type="radio" value="1" <?php if(empty($res["razao1"]) or $res["razao1"]=="1") print "checked"; ?>>
       Certificado de submiss&atilde;o da pe&ccedil;a</td>
-                      <td width="50%"><input name="razao1" type="radio" value="2" <? if($res["razao1"]=="2") print "checked"; ?>>
+                      <td width="50%"><input name="razao1" type="radio" value="2" <?php if($res["razao1"]=="2") print "checked"; ?>>
       Amostra especial </td>
                     </tr>
                   </table>
                   <table width="571" border="0" cellspacing="0" cellpadding="3">
                     <tr class="textobold">
-                      <td width="50%"><input name="razao2" type="radio" value="1" <? if(empty($res["razao2"]) or $res["razao2"]=="1") print "checked"; ?>>
+                      <td width="50%"><input name="razao2" type="radio" value="1" <?php if(empty($res["razao2"]) or $res["razao2"]=="1") print "checked"; ?>>
 Embarque da primeira produ&ccedil;&atilde;o</td>
-                      <td width="50%"><input name="razao2" type="radio" value="2" <? if($res["razao2"]=="2") print "checked"; ?>>
+                      <td width="50%"><input name="razao2" type="radio" value="2" <?php if($res["razao2"]=="2") print "checked"; ?>>
 Altera&ccedil;&atilde;o de engenharia </td>
                     </tr>
                     <tr class="textobold">
-                      <td width="50%"><input name="razao2" type="radio" value="3" <? if($res["razao2"]=="3") print "checked"; ?>>
+                      <td width="50%"><input name="razao2" type="radio" value="3" <?php if($res["razao2"]=="3") print "checked"; ?>>
                         Re-submiss&atilde;o</td>
-                      <td width="50%"><input name="razao2" type="radio" value="4" <? if($res["razao2"]=="4") print "checked"; ?>>
+                      <td width="50%"><input name="razao2" type="radio" value="4" <?php if($res["razao2"]=="4") print "checked"; ?>>
                         Pr&eacute;-textura</td>
                     </tr>
                   </table>                    </td>
@@ -152,7 +152,7 @@ Altera&ccedil;&atilde;o de engenharia </td>
                   </tr>
                 <tr bgcolor="#FFFFFF">
                   <td width="155" class="textobold">&nbsp;Info. sobre sub-fornecedor &nbsp;e textura: </td>
-                  <td width="413" class="textobold"><textarea name="aval" rows="3" wrap="VIRTUAL" class="formularioselect" id="aval" onFocus="enterativa=0;" onBlur="enterativa=1;"><?= $res["aval"]; ?></textarea></td>
+                  <td width="413" class="textobold"><textarea name="aval" rows="3" wrap="VIRTUAL" class="formularioselect" id="aval" onFocus="enterativa=0;" onBlur="enterativa=1;"><?php echo  $res["aval"]; ?></textarea></td>
                 </tr>
               </table></td>
               </tr>
@@ -161,27 +161,27 @@ Altera&ccedil;&atilde;o de engenharia </td>
               </tr>
             <tr class="textobold">
               <td>Coment&aacute;rios:</td>
-              <td colspan="3"><input name="coments" type="text" class="formularioselect" id="coments" value="<?= $res["coments"]; ?>" size="1" maxlength="255"></td>
+              <td colspan="3"><input name="coments" type="text" class="formularioselect" id="coments" value="<?php echo  $res["coments"]; ?>" size="1" maxlength="255"></td>
               </tr>
             <tr class="textobold">
               <td colspan="4"><table width="100%" border="0" cellpadding="3" cellspacing="0">
                 <tr>
                   <td width="16%" class="textobold">Aprovado por:</td>
-                  <td width="37%"><input name="quem" type="text" class="formularioselect" id="quem" value="<?= $res["quem"]; ?>" readonly=""></td>
+                  <td width="37%"><input name="quem" type="text" class="formularioselect" id="quem" value="<?php echo  $res["quem"]; ?>" readonly=""></td>
                   <td width="8%" align="right" class="textobold"><div align="right">Data:</div></td>
-                  <td width="19%"><input name="dtquem" type="text" class="formularioselect" id="dtquem" onKeyPress="return validanum(this, event)" onKeyUp="mdata(this)" value="<?= banco2data($res["dtquem"]); ?>" size="7" maxlength="10" readonly=""></td>
-				   <? 
+                  <td width="19%"><input name="dtquem" type="text" class="formularioselect" id="dtquem" onKeyPress="return validanum(this, event)" onKeyUp="mdata(this)" value="<?php echo  banco2data($res["dtquem"]); ?>" size="7" maxlength="10" readonly=""></td>
+				   <?php 
 				  if(empty($res["quem"])){
 				  	$javas="if(confirm('Deseja Aprovar Apar&ecirc;ncia?')){form1.acao.value='altc';form1.submit();}else{ return false; }";
 				  }else{
 				  $javas="window.alert('Clique em Limpar primeiro');return false;";
 				  }
 				  ?>
-                  <td width="20%"><input name="ap" type="submit" class="microtxt" id="ap3" value="aprovar" onClick="<?= $javas; ?>">
+                  <td width="20%"><input name="ap" type="submit" class="microtxt" id="ap3" value="aprovar" onClick="<?php echo  $javas; ?>">
 &nbsp;
 <input name="lap" type="submit" class="microtxt" id="lap3" value="limpar" onClick="if(confirm('Deseja excluir aprova&ccedil;&atilde;o?')){form1.acao.value='altc';form1.submit();}else{ return false; }"></td>
                 </tr>
-              </table><? if($aprov=="N") print "<script>bloke();</script>"; ?></td>
+              </table><?php if($aprov=="N") print "<script>bloke();</script>"; ?></td>
             </tr>
             <tr class="textobold">
               <td colspan="4"><img src="imagens/dot.gif" width="20" height="5"></td>
@@ -190,21 +190,21 @@ Altera&ccedil;&atilde;o de engenharia </td>
               <td colspan="4" align="center">
                 <table width="601" border="0" align="center" cellpadding="3" cellspacing="0" class="texto">
                   <tr>
-				  <? if($_SESSION["e_mail"]=="S"){ ?>
+				  <?php if($_SESSION["e_mail"]=="S"){ ?>
                     <td width="16%" align="left" class="textobold">&nbsp;Enviar e-mail: </td>
                     <td width="56%"><input name="email" type="text" class="formularioselect" id="email3" value="Digite o e-mail aqui"></td> 
-					<? if(in_array("U",$emailt)){ ?>
-                    <td width="3%"><div align="center"><a href="#" onClick="return abre('busca_email2.php','a','width=320,height=380,scrollbars=1');"><img src="imagens/icon14_pessoas.gif" alt="Buscar Email de Funcionários" width="14" height="14" border="0"></a></div></td>
-					<? } if(in_array("G",$emailt)){ ?>
+					<?php if(in_array("U",$emailt)){ ?>
+                    <td width="3%"><div align="center"><a href="#" onClick="return abre('busca_email2.php','a','width=320,height=380,scrollbars=1');"><img src="imagens/icon14_pessoas.gif" alt="Buscar Email de FuncionÃ¡rios" width="14" height="14" border="0"></a></div></td>
+					<?php } if(in_array("G",$emailt)){ ?>
                     <td width="8%"><div align="center"><a href="#" onClick="return abre('busca_email_grupo.php','a','width=320,height=380,scrollbars=1');"><input name="grupo" type="hidden" id="grupo">
                 <input name="grupo_nome" type="hidden" id="grupo_nome"><img src="imagens/icon14_grupo.gif" alt="Buscar Grupo de Emails" width="26" height="13" border="0"></a></div></td>
-				 <? } if(in_array("C",$emailt)){ ?>
+				 <?php } if(in_array("C",$emailt)){ ?>
                     <td width="4%"><div align="center"><a href="#" onClick="return abre('busca_email.php','a','width=320,height=380,scrollbars=1');"></a><a href="#" onClick="return abre('busca_email.php','a','width=320,height=300,scrollbars=1');"><img src="imagens/icon_cli.gif" alt="Buscar Emails de Clientes" width="18" height="18" border="0"></a></div></td>
-				<? } ?>
-                    <td width="9%"><div align="center"><? if($_SESSION["login_funcionario"]=="S"){ ?><a href="#" onClick="vailogo1('email','<?= $pc; ?>');"><img src="imagens/icon14_mail.gif" alt="Enviar Email" width="16" height="10" border="0"></a><? } ?></div></td>
-					<? } if($_SESSION["i_mp"]=="S"){ ?>
+				<?php } ?>
+                    <td width="9%"><div align="center"><?php if($_SESSION["login_funcionario"]=="S"){ ?><a href="#" onClick="vailogo1('email','<?php echo  $pc; ?>');"><img src="imagens/icon14_mail.gif" alt="Enviar Email" width="16" height="10" border="0"></a><?php } ?></div></td>
+					<?php } if($_SESSION["i_mp"]=="S"){ ?>
                     <td width="4%"><div align="center"><a href="#" onClick="vailogo('imp');"><img src="imagens/icon14_imp.gif" alt="Imprimir" width="15" height="15" border="0"></a></div></td>
-					<? } ?>
+					<?php } ?>
                   </tr>
                   <tr>
                     <td colspan="7" align="left" class="textobold"><img src="imagens/spacer.gif" width="46" height="5"></td>
@@ -213,12 +213,12 @@ Altera&ccedil;&atilde;o de engenharia </td>
 				
               <input name="button122" type="button" class="microtxt" value="Voltar" onClick="window.location='apqp_menu.php';">
 			&nbsp;
-<input name="acao2" type="button" class="microtxt" value="Salvar em Disco" onClick="salvar('aparencia','<?=$res["id"];?>')">
+<input name="acao2" type="button" class="microtxt" value="Salvar em Disco" onClick="salvar('aparencia','<?php echo $res["id"];?>')">
 			&nbsp;
 			  <input name="button12222" type="submit" class="microtxt" value="Salvar" onClick="vailogo('altc')">
 			&nbsp;&nbsp;
-<?
-$apqp->agenda_p("Relatório de Aprovação de Aparência (Se aplicável)","apqp_aproc.php");
+<?php
+$apqp->agenda_p("RelatÃ³rio de AprovaÃ§Ã£o de AparÃªncia (Se aplicÃ¡vel)","apqp_aproc.php");
 ?>
 			  <input name="acao" type="hidden" id="acao" value="1">
 			  <a href="#" onClick="return abre('busca_email.php','a','width=320,height=300,scrollbars=1');">
@@ -235,4 +235,4 @@ $apqp->agenda_p("Relatório de Aprovação de Aparência (Se aplicável)","apqp_aproc
 </html>
 <script language="javascript" src="tooltip.js"></script>
 <script language="javascript" src="tooltip.js"></script>
-<? include("mensagem.php"); ?>
+<?php include("mensagem.php"); ?>

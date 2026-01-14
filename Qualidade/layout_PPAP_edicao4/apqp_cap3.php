@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 include("seguranca.php");
 $apqp=new set_apqp;
@@ -18,33 +18,33 @@ if(mysql_num_rows($sql)){
 	$res=mysql_fetch_array($sql);
 }
 $id=$res["id"];
-	$sqlb=mysql_query("SELECT * FROM apqp_cron WHERE perc='100' AND peca='$pc' AND ativ='Certificado de Submiss„o'");
+	$sqlb=mysql_query("SELECT * FROM apqp_cron WHERE perc='100' AND peca='$pc' AND ativ='Certificado de Submiss√£o'");
 	if(!mysql_num_rows($sqlb)){
 		$sqlb=mysql_query("SELECT * FROM apqp_cron WHERE perc='100' AND peca='$pc' AND ativ='Estudos de Capabilidade'");
 		if(mysql_num_rows($sqlb)){
 			$sqlb=mysql_query("SELECT * FROM apqp_cron WHERE perc='100' AND peca='$pc' AND ativ='Ensaio Dimensional'");
 			if(mysql_num_rows($sqlb)){
-				$javalimp="if(confirm('Deseja Remover a AprovaÁ„o?')){ if(confirm('Caso queira remover a aprovaÁ„o, ter· que revisar todos os documentos a frente e aprov·-los novamente.')) { form1.acao.value='cap3';form1.submit(); }else{ return false; } }else{ return false; }";	$javalimp2="if(confirm('Deseja Remover a AprovaÁ„o?')){ if(confirm('Caso queira remover a aprovaÁ„o, ter· que revisar todos os documentos a frente e aprov·-los novamente.')) {form1.submit(); }else{ return false; } }else{ return false; }";	
+				$javalimp="if(confirm('Deseja Remover a Aprova√ß√£o?')){ if(confirm('Caso queira remover a aprova√ß√£o, ter√° que revisar todos os documentos a frente e aprov√°-los novamente.')) { form1.acao.value='cap3';form1.submit(); }else{ return false; } }else{ return false; }";	$javalimp2="if(confirm('Deseja Remover a Aprova√ß√£o?')){ if(confirm('Caso queira remover a aprova√ß√£o, ter√° que revisar todos os documentos a frente e aprov√°-los novamente.')) {form1.submit(); }else{ return false; } }else{ return false; }";	
 			
 			}else{
 				print "foi";
-				$javalimp="if (confirm('Documento Aprovado! Caso queira alter·-lo ser· removida a aprovaÁ„o')){ form1.acao.value='cap3';form1.submit(); } else {return false;} } return false;";
-				$javalimp2="if (confirm('Documento Aprovado! Caso queira alter·-lo ser· removida a aprovaÁ„o')){ form1.submit(); } else {return false;} } return false;";
+				$javalimp="if (confirm('Documento Aprovado! Caso queira alter√°-lo ser√° removida a aprova√ß√£o')){ form1.acao.value='cap3';form1.submit(); } else {return false;} } return false;";
+				$javalimp2="if (confirm('Documento Aprovado! Caso queira alter√°-lo ser√° removida a aprova√ß√£o')){ form1.submit(); } else {return false;} } return false;";
 			}	
 		}else{
 			$sqlc=mysql_query("SELECT * FROM apqp_car WHERE id='$car' AND quem_cap<>''");
 			if(mysql_num_rows($sqlc)){
-				$btnsalva="if (confirm('Documento Aprovado! Caso queira alter·-lo ser· removida a aprovaÁ„o')){ form1.submit(); return false; } return false;";
-				$javalimp="if (confirm('Documento Aprovado! Caso queira alter·-lo ser· removida a aprovaÁ„o')){  form1.acao.value='cap3';form1.submit(); } else {return false;}";
-				$javalimp2="if (confirm('Documento Aprovado! Caso queira alter·-lo ser· removida a aprovaÁ„o')){   form1.submit(); } else {return false;}";
+				$btnsalva="if (confirm('Documento Aprovado! Caso queira alter√°-lo ser√° removida a aprova√ß√£o')){ form1.submit(); return false; } return false;";
+				$javalimp="if (confirm('Documento Aprovado! Caso queira alter√°-lo ser√° removida a aprova√ß√£o')){  form1.acao.value='cap3';form1.submit(); } else {return false;}";
+				$javalimp2="if (confirm('Documento Aprovado! Caso queira alter√°-lo ser√° removida a aprova√ß√£o')){   form1.submit(); } else {return false;}";
 			}else{
-				$javalimp="if(confirm('Deseja remover a aprovaÁ„o?')){  form1.acao.value='cap3';form1.submit(); } else {return false;}";
-				$javalimp2="if(confirm('Deseja remover a aprovaÁ„o?')){  form1.submit(); } else {return false;}";
+				$javalimp="if(confirm('Deseja remover a aprova√ß√£o?')){  form1.acao.value='cap3';form1.submit(); } else {return false;}";
+				$javalimp2="if(confirm('Deseja remover a aprova√ß√£o?')){  form1.submit(); } else {return false;}";
 			}
 		}
 	}else{
-		$javalimp="if(confirm('O Certificado de submiss„o j· esta aprovado, caso queira remover a aprovaÁ„o deste Estudo ser· removida a aprovaÁ„o de todos os relatÛrios. Deseja remover?')){ if(confirm('VocÍ tem certeza que deseja remover a aprovaÁ„o? Ter· que aprovar todos os relatÛrios novamente.')){ form1.acao.value='cap3';form1.submit(); }else{ return false; } }else{ return false; }";
-		$javalimp2="if(confirm('O Certificado de submiss„o j· esta aprovado, caso queira remover a aprovaÁ„o deste Estudo ser· removida a aprovaÁ„o de todos os relatÛrios. Deseja remover?')){ if(confirm('VocÍ tem certeza que deseja remover a aprovaÁ„o? Ter· que aprovar todos os relatÛrios novamente.')){ form1.submit(); }else{ return false; } }else{ return false; }";
+		$javalimp="if(confirm('O Certificado de submiss√£o j√° esta aprovado, caso queira remover a aprova√ß√£o deste Estudo ser√° removida a aprova√ß√£o de todos os relat√≥rios. Deseja remover?')){ if(confirm('Voc√™ tem certeza que deseja remover a aprova√ß√£o? Ter√° que aprovar todos os relat√≥rios novamente.')){ form1.acao.value='cap3';form1.submit(); }else{ return false; } }else{ return false; }";
+		$javalimp2="if(confirm('O Certificado de submiss√£o j√° esta aprovado, caso queira remover a aprova√ß√£o deste Estudo ser√° removida a aprova√ß√£o de todos os relat√≥rios. Deseja remover?')){ if(confirm('Voc√™ tem certeza que deseja remover a aprova√ß√£o? Ter√° que aprovar todos os relat√≥rios novamente.')){ form1.submit(); }else{ return false; } }else{ return false; }";
 	}
 ?>
 <html>
@@ -74,7 +74,7 @@ function abrir(url,id){
 	return true;
 }
 function salvar(url,id){
-	window.open('apqp_impressao.php?acao=salvar&local='+ form1.local.value +'&pc='+ id + '&car='+ <?=$car?> +'');
+	window.open('apqp_impressao.php?acao=salvar&local='+ form1.local.value +'&pc='+ id + '&car='+ <?php echo $car?> +'');
 	return true;
 }
 
@@ -94,8 +94,8 @@ function MM_openBrWindow(theURL,winName,features) { //v2.0
   <tr>
     <td align="left" valign="top" class="chamadas"><table width="590" border="0" cellpadding="0" cellspacing="0" class="texto">
       <tr>
-        <td width="27" align="center"><div align="left"><a href="#" onClick="MM_openBrWindow('help/mini_estudo_capabi.html','','width=680,height=501,left=300,top=50')"><img src="imagens/icon14_ahn.gif" width="14" height="14" border="0" onMouseOver="this.T_STICKY=true; this.T_TITLE='Estudo de Capabilidade'; this.T_DELAY=10; this.T_WIDTH=225;  return escape('Nesta tela s„o exibidos os resultados do estudo de Capabilidade.<strong>Õndice de Capacidade (Cp);</strong><br><strong>Õndice de Capacidade Centralizado (Cpk)</strong><br><strong>Õndice de Desempenho (Pp)</strong><br><strong>Õndice de Desempenho Centralizado (Ppk)</strong>')"></a><span class="impTextoBold">&nbsp;</span></div></td>
-        <td width="563" align="right"><div align="left" class="textobold style1 style1 style1 style1 style1">APQP - Estudo de Capabilidade <? print $npc; ?></div></td>
+        <td width="27" align="center"><div align="left"><a href="#" onClick="MM_openBrWindow('help/mini_estudo_capabi.html','','width=680,height=501,left=300,top=50')"><img src="imagens/icon14_ahn.gif" width="14" height="14" border="0" onMouseOver="this.T_STICKY=true; this.T_TITLE='Estudo de Capabilidade'; this.T_DELAY=10; this.T_WIDTH=225;  return escape('Nesta tela s√£o exibidos os resultados do estudo de Capabilidade.<strong>√çndice de Capacidade (Cp);</strong><br><strong>√çndice de Capacidade Centralizado (Cpk)</strong><br><strong>√çndice de Desempenho (Pp)</strong><br><strong>√çndice de Desempenho Centralizado (Ppk)</strong>')"></a><span class="impTextoBold">&nbsp;</span></div></td>
+        <td width="563" align="right"><div align="left" class="textobold style1 style1 style1 style1 style1">APQP - Estudo de Capabilidade <?php print $npc; ?></div></td>
       </tr>
       <tr>
         <td align="center">&nbsp;</td>
@@ -106,7 +106,7 @@ function MM_openBrWindow(theURL,winName,features) { //v2.0
   <tr> 
     <td align="left" valign="top"><table width="594" height="25" border="1" cellpadding="0" cellspacing="0" bordercolor="#FFFFFF">
       <tr>
-        <a href="apqp_cap2.php?car=<?= $car; ?>">
+        <a href="apqp_cap2.php?car=<?php echo  $car; ?>">
 		<td width="100" align="center" bordercolor="#CCCCCC" bgcolor="#FFFFFF" class="textobold" onMouseOver="this.style.backgroundColor='#006699';this.style.color='#FFFFFF';" onMouseOut="this.style.backgroundColor='#FFFFFF';this.style.color='#003366';">estudo</td>
 		</a>
 		<td width="100" align="center" bordercolor="#CCCCCC" bgcolor="#003366" class="textoboldbranco">resultados</td>
@@ -131,32 +131,32 @@ function MM_openBrWindow(theURL,winName,features) { //v2.0
                         </tr>
                       <tr>
                         <td width="78" height="35" class="textobold">&nbsp;Qtd. de Grupos:</td>
-                        <td width="52" ><input name="textfield7" type="text" class="formularioselect" value="<?=completa($res["nli"],2); ?>" size="2" readonly=""></td>
+                        <td width="52" ><input name="textfield7" type="text" class="formularioselect" value="<?php echo completa($res["nli"],2); ?>" size="2" readonly=""></td>
                         <td width="54" class="textobold">&nbsp;LIE:</td>
-                        <td width="62"  class="texto"><input name="textfield72" type="text" class="formularioselect" value="<?= banco2valor3($resc["lie"]); ?>" size="2" readonly=""></td>
+                        <td width="62"  class="texto"><input name="textfield72" type="text" class="formularioselect" value="<?php echo  banco2valor3($resc["lie"]); ?>" size="2" readonly=""></td>
                         <td width="67" class="textobold">&nbsp;X:</td>
-                        <td width="62"  class="texto"><input name="textfield722" type="text" class="formularioselect" value="<?= banco2valor3($res["xbar"]); ?>" size="2" readonly=""></td>
+                        <td width="62"  class="texto"><input name="textfield722" type="text" class="formularioselect" value="<?php echo  banco2valor3($res["xbar"]); ?>" size="2" readonly=""></td>
                       </tr>
                       <tr>
                         <td width="78" class="textobold">&nbsp;Tamanho do Subgrupo:</td>
                         <td><input name="textfield23" type="text" class="formularioselect" value="05" size="2" readonly=""></td>
                         <td class="textobold">&nbsp;LSE:</td>
-                        <td class="texto"><input name="textfield73" type="text" class="formularioselect" value="<?= banco2valor3($resc["lse"]); ?>" size="2" readonly=""></td>
+                        <td class="texto"><input name="textfield73" type="text" class="formularioselect" value="<?php echo  banco2valor3($resc["lse"]); ?>" size="2" readonly=""></td>
                         <td class="textobold">&nbsp;R:</td>
-                        <td class="texto"><input name="textfield723" type="text" class="formularioselect" value="<?= banco2valor3($res["rbar"]);  ?>" size="2" readonly=""></td>
+                        <td class="texto"><input name="textfield723" type="text" class="formularioselect" value="<?php echo  banco2valor3($res["rbar"]);  ?>" size="2" readonly=""></td>
                       </tr>
                       <tr>
                         <td width="78" class="textobold">&nbsp;N&ordm; total de Medidas:</td>
-                        <td><input name="textfield33" type="text" class="formularioselect" value="<?=completa($res["nli"]*5,3); ?>" size="2" readonly=""></td>
+                        <td><input name="textfield33" type="text" class="formularioselect" value="<?php echo completa($res["nli"]*5,3); ?>" size="2" readonly=""></td>
                         <td class="textobold">&nbsp;M&iacute;nimo:</td>
-                        <td class="texto"><input name="textfield74" type="text" class="formularioselect" value="<?= banco2valor3($res["min"]); ?>" size="2" readonly=""></td>
+                        <td class="texto"><input name="textfield74" type="text" class="formularioselect" value="<?php echo  banco2valor3($res["min"]); ?>" size="2" readonly=""></td>
                         <td class="textobold">&nbsp;M&aacute;ximo:</td>
-                        <td class="texto"><input name="textfield724" type="text" class="formularioselect" value="<?= banco2valor3($res["max"]); ?>" size="2" readonly=""></td>
+                        <td class="texto"><input name="textfield724" type="text" class="formularioselect" value="<?php echo  banco2valor3($res["max"]); ?>" size="2" readonly=""></td>
                       </tr>
                       <tr>
                         <td colspan="4" class="textobold">&nbsp;N&uacute;mero de pontos fora  limites de controle :</td>
                         <td class="textobold"><span class="texto">
-                          <input name="textfield725223" type="text" class="formularioselect" value="<?= $res["pf"]; ?>" size="2" readonly="">
+                          <input name="textfield725223" type="text" class="formularioselect" value="<?php echo  $res["pf"]; ?>" size="2" readonly="">
                         </span></td>
                         <td class="texto">&nbsp;</td>
                       </tr>
@@ -179,14 +179,14 @@ function MM_openBrWindow(theURL,winName,features) { //v2.0
                           <tr>
                             <td width="85" class="textobold">&nbsp;Inferior (LCI) :</td>
                             <td width="61"><span class="texto">
-                              <input name="textfield742" type="text" class="formularioselect" value="<?= banco2valor3($res["lcl"]); ?>" size="2" readonly="">
+                              <input name="textfield742" type="text" class="formularioselect" value="<?php echo  banco2valor3($res["lcl"]); ?>" size="2" readonly="">
                             </span></td>
                             <td width="102" class="textobold">&nbsp;Superior (LCS) :</td>
-                            <td width="56" class="texto"><input name="textfield725" type="text" class="formularioselect" value="<?= banco2valor3($res["uclx"]); ?>" size="2" readonly=""></td>
+                            <td width="56" class="texto"><input name="textfield725" type="text" class="formularioselect" value="<?php echo  banco2valor3($res["uclx"]); ?>" size="2" readonly=""></td>
                             </tr>
                           <tr>
                             <td colspan="3" class="textobold">&nbsp;N&uacute;mero de pontos fora  limites de controle : </td>
-                            <td class="texto"><input name="textfield725222" type="text" class="formularioselect" value="<?= $res["mpf"]; ?>" size="2" readonly=""></td>
+                            <td class="texto"><input name="textfield725222" type="text" class="formularioselect" value="<?php echo  $res["mpf"]; ?>" size="2" readonly=""></td>
                           </tr>
                       </table></td>
                     </tr>
@@ -200,14 +200,14 @@ function MM_openBrWindow(theURL,winName,features) { //v2.0
                           <tr>
                             <td width="99" class="textobold">&nbsp;Inferior (LCI) :</td>
                             <td width="51"><span class="texto">
-                              <input name="textfield7422" type="text" class="formularioselect" value="<?= banco2valor3(0); ?>" size="2" readonly="">
+                              <input name="textfield7422" type="text" class="formularioselect" value="<?php echo  banco2valor3(0); ?>" size="2" readonly="">
                             </span></td>
                             <td width="104" class="textobold">&nbsp;Superior (LCS) :</td>
-                            <td width="53" class="texto"><input name="textfield7252" type="text" class="formularioselect" value="<?= banco2valor3($res["uclr"]); ?>" size="2" readonly=""></td>
+                            <td width="53" class="texto"><input name="textfield7252" type="text" class="formularioselect" value="<?php echo  banco2valor3($res["uclr"]); ?>" size="2" readonly=""></td>
                           </tr>
                           <tr>
                             <td colspan="3" class="textobold">&nbsp;N&uacute;mero de pontos fora limites de controle:</td>
-                            <td class="texto"><input name="textfield72522" type="text" class="formularioselect" value="<?= $res["apf"]; ?>" size="2" readonly=""></td>
+                            <td class="texto"><input name="textfield72522" type="text" class="formularioselect" value="<?php echo  $res["apf"]; ?>" size="2" readonly=""></td>
                           </tr>
                       </table>
                         <p>&nbsp;</p>
@@ -230,14 +230,14 @@ function MM_openBrWindow(theURL,winName,features) { //v2.0
                     <tr>
                       <td width="103" class="textobold">&nbsp;Desvio Padr&atilde;o :</td>
                       <td width="82"><span class="texto">
-                        <input name="textfield7262" type="text" class="formularioselect" value="<?= banco2valor3($res["sigma"]); ?>" size="2" readonly="">
+                        <input name="textfield7262" type="text" class="formularioselect" value="<?php echo  banco2valor3($res["sigma"]); ?>" size="2" readonly="">
                       </span></td>
                       <td width="22" align="center" class="textobold">&nbsp;Cp:</td>
-                      <td width="94" class="texto"><input name="textfield726" type="text" class="formularioselect" value="<?= banco2valor3($res["cp"]); ?>" size="2" readonly=""></td>
+                      <td width="94" class="texto"><input name="textfield726" type="text" class="formularioselect" value="<?php echo  banco2valor3($res["cp"]); ?>" size="2" readonly=""></td>
                       <td width="33" align="center" class="textobold">&nbsp;Cpk:</td>
-                      <td width="88" class="texto"><input name="textfield7222" type="text" class="formularioselect" value="<?= banco2valor3($res["cpk"]); ?>" size="2" readonly=""></td>
+                      <td width="88" class="texto"><input name="textfield7222" type="text" class="formularioselect" value="<?php echo  banco2valor3($res["cpk"]); ?>" size="2" readonly=""></td>
                       <td width="30" class="textobold"><div align="center">CR:</div></td>
-                      <td width="89" class="texto"><input name="textfield72222" type="text" class="formularioselect" value="<?= banco2valor3($res["cr"]); ?>" size="2" readonly=""></td>
+                      <td width="89" class="texto"><input name="textfield72222" type="text" class="formularioselect" value="<?php echo  banco2valor3($res["cr"]); ?>" size="2" readonly=""></td>
                     </tr>
                   </table></td>
                 </tr>
@@ -252,14 +252,14 @@ function MM_openBrWindow(theURL,winName,features) { //v2.0
                         <tr>
                           <td width="103" class="textobold">&nbsp;Desvio Padr&atilde;o :</td>
                           <td width="82"><span class="texto">
-                            <input name="per" type="text" class="formularioselect" id="per" value="<?= banco2valor3($res["sigma2"]); ?>" size="2" readonly="">
+                            <input name="per" type="text" class="formularioselect" id="per" value="<?php echo  banco2valor3($res["sigma2"]); ?>" size="2" readonly="">
                           </span></td>
                           <td width="22" align="center" class="textobold">Pp:</td>
-                          <td width="94" class="texto"><input name="pp" type="text" class="formularioselect" id="pp" value="<?= banco2valor3($res["pp"]); ?>" size="2" readonly=""></td>
+                          <td width="94" class="texto"><input name="pp" type="text" class="formularioselect" id="pp" value="<?php echo  banco2valor3($res["pp"]); ?>" size="2" readonly=""></td>
                           <td width="33" align="center" class="textobold">Ppk:</td>
-                          <td width="88" class="texto"><input name="ppk" type="text" class="formularioselect" id="ppk" value="<?= banco2valor3($res["ppk"]); ?>" size="2" readonly=""></td>
+                          <td width="88" class="texto"><input name="ppk" type="text" class="formularioselect" id="ppk" value="<?php echo  banco2valor3($res["ppk"]); ?>" size="2" readonly=""></td>
                           <td width="30" class="textobold"><div align="center">PR:</div></td>
-                          <td width="89" class="texto"><input name="pr" type="text" class="formularioselect" id="pr" value="<?= banco2valor3($res["pr"]); ?>" size="2" readonly=""></td>
+                          <td width="89" class="texto"><input name="pr" type="text" class="formularioselect" id="pr" value="<?php echo  banco2valor3($res["pr"]); ?>" size="2" readonly=""></td>
                         </tr>
                     </table></td>
                   </tr>
@@ -272,12 +272,12 @@ function MM_openBrWindow(theURL,winName,features) { //v2.0
               <td align="center" bgcolor="#003366" class="textoboldbranco">M&eacute;dias</td>
             </tr>
             <tr>
-              <td align="center"><img src="apqp_cap_xbar.php?id=<?= $res["id"]; ?>"></td>
+              <td align="center"><img src="apqp_cap_xbar.php?id=<?php echo  $res["id"]; ?>"></td>
             </tr>
             <tr>
-              <td align="center" class="texto"><span class="textobold">X:</span>&nbsp;<?= banco2valor3($res["xbar"]); ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="textobold">LICX:</span>&nbsp;
-                <?= banco2valor3($res["lcl"]); ?>                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="textobold">LSCX</span>:&nbsp;
-                <?= banco2valor3($res["uclx"]); ?></td>
+              <td align="center" class="texto"><span class="textobold">X:</span>&nbsp;<?php echo  banco2valor3($res["xbar"]); ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="textobold">LICX:</span>&nbsp;
+                <?php echo  banco2valor3($res["lcl"]); ?>                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="textobold">LSCX</span>:&nbsp;
+                <?php echo  banco2valor3($res["uclx"]); ?></td>
             </tr>
             <tr>
               <td align="center"><img src="imagens/dot.gif" width="20" height="8"></td>
@@ -286,19 +286,19 @@ function MM_openBrWindow(theURL,winName,features) { //v2.0
               <td align="center" bgcolor="#003366" class="textoboldbranco">Amplitudes</td>
             </tr>
             <tr>
-              <td align="center"><img src="apqp_cap_rbar.php?id=<?= $res["id"]; ?>"></td>
+              <td align="center"><img src="apqp_cap_rbar.php?id=<?php echo  $res["id"]; ?>"></td>
             </tr>
             <tr>
               <td align="center" class="texto"><span class="textobold">R:</span>&nbsp;
-                  <?= banco2valor3($res["rbar"]); ?>
+                  <?php echo  banco2valor3($res["rbar"]); ?>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="textobold">LSCR</span>:&nbsp;
-    <?= banco2valor3($res["uclr"]); ?></td>
+    <?php echo  banco2valor3($res["uclr"]); ?></td>
             </tr>
             <tr>
               <td align="center" bgcolor="#003366" class="textoboldbranco">Histograma</td>
             </tr>
             <tr>
-              <td align="center"><img src="apqp_cap_hbar.php?id=<?= $res["id"]; ?>"></td>
+              <td align="center"><img src="apqp_cap_hbar.php?id=<?php echo  $res["id"]; ?>"></td>
             </tr>
             <tr>
               <td><img src="imagens/spacer.gif" width="46" height="5"></td>
@@ -313,77 +313,77 @@ function MM_openBrWindow(theURL,winName,features) { //v2.0
                   </tr>
                 <tr>
                   
-                  <td align="center" class="textobold"><input name="tap1" type="text" class="formularioselect" id="tap15" value="<? if($res["sit"]==0){ print "pendente"; }elseif($res["sit"]==1){ print "aprovado"; }else{ print "reprovado"; } ?>" size="1"></td>
+                  <td align="center" class="textobold"><input name="tap1" type="text" class="formularioselect" id="tap15" value="<?php if($res["sit"]==0){ print "pendente"; }elseif($res["sit"]==1){ print "aprovado"; }else{ print "reprovado"; } ?>" size="1"></td>
                   <td align="center"><span class="textobold">
-                    <input name="tap12" type="text" class="formularioselect" id="tap123" value="<?= $resc["quem_cap"]; ?>">
+                    <input name="tap12" type="text" class="formularioselect" id="tap123" value="<?php echo  $resc["quem_cap"]; ?>">
                   </span></td>
-                  <td align="center" class="textobold"><input name="dap" type="text" class="formularioselect" id="dap12" onKeyPress="return validanum(this, event)" onKeyUp="mdata(this)" value="<?= banco2data($resc["dtquem_cap"]); ?>" size="7" maxlength="10"></td>
-				   <? 
+                  <td align="center" class="textobold"><input name="dap" type="text" class="formularioselect" id="dap12" onKeyPress="return validanum(this, event)" onKeyUp="mdata(this)" value="<?php echo  banco2data($resc["dtquem_cap"]); ?>" size="7" maxlength="10"></td>
+				   <?php 
 				  if($res["sit"]==2){
-				  	$javalimp2="window.alert('O Estudo de Capabilidade j· est· reprovado!'); return false;";
-					$javas="window.alert('O Estudo de Capabilidade est· reprovado, caso deseje retirar a aprovaÁ„o, clique no bot„o limpar.');return false;";
+				  	$javalimp2="window.alert('O Estudo de Capabilidade j√° est√° reprovado!'); return false;";
+					$javas="window.alert('O Estudo de Capabilidade est√° reprovado, caso deseje retirar a aprova√ß√£o, clique no bot√£o limpar.');return false;";
 				  }else{
 				  	  if(empty($resc["quem_cap"])){
 				  		$javas="if(confirm('Deseja Aprovar essa Pe&ccedil;a?')){form1.submit();}else{ return false; }";
-						$javalimp="window.alert('O Estudo de Capabilidade n„o foi aprovado ainda, se deseja aprovar, clique em Aprovar.');return false;";
+						$javalimp="window.alert('O Estudo de Capabilidade n√£o foi aprovado ainda, se deseja aprovar, clique em Aprovar.');return false;";
 				  	}else{
-				  		$javas="window.alert('O Estudo de Capabilidade j· foi aprovado, caso deseje retirar a aprovaÁ„o, clique no bot„o limpar.');return false;";
+				  		$javas="window.alert('O Estudo de Capabilidade j√° foi aprovado, caso deseje retirar a aprova√ß√£o, clique no bot√£o limpar.');return false;";
 					  }
 				  }
 				  ?>
                   <td align="center"><p>
-                      <input name="ap" type="submit" class="microtxt" id="ap" value="aprovar" onClick="<?= $javas; ?>">
+                      <input name="ap" type="submit" class="microtxt" id="ap" value="aprovar" onClick="<?php echo  $javas; ?>">
 				&nbsp;
-				<input name="rep" type="submit" class="microtxt" id="rep" value="rejeitar" onClick="<?= $javalimp2;?>">
+				<input name="rep" type="submit" class="microtxt" id="rep" value="rejeitar" onClick="<?php echo  $javalimp2;?>">
 				&nbsp;
-				<input name="lap" type="submit" class="microtxt" id="lap" value="limpar" onClick="<?= $javalimp;?>">
+				<input name="lap" type="submit" class="microtxt" id="lap" value="limpar" onClick="<?php echo  $javalimp;?>">
                   </p>                    </td>
 					</tr>
-					<? 
+					<?php 
 				   $sqlb=mysql_query("SELECT * FROM apqp_cron WHERE perc='100' AND peca='$pc' AND ativ='Estudos de Capabilidade'");
 				   $resb=mysql_fetch_array($sqlb);
 				  if($resb["resp"]){
-						$javas2="window.alert('O Estudo de R&R est· reprovado, se deseja aprovar, clique em Limpar primeiro.');return false;";
+						$javas2="window.alert('O Estudo de R&R est√° reprovado, se deseja aprovar, clique em Limpar primeiro.');return false;";
 						$limpa2="form1.submit();";
 				  }else{
 				  	  if(empty($res["quem"])){
 				  		$javas2="if(confirm('Deseja Aprovar essa Pe&ccedil;a?')){ form1.submit(); }else{ return false; }";
-						$limpa2="window.alert('O Estudo de R&R n„o foi aprovado ainda, se deseja aprovar, clique em Aprovar.');return false;";
+						$limpa2="window.alert('O Estudo de R&R n√£o foi aprovado ainda, se deseja aprovar, clique em Aprovar.');return false;";
 				  	}else{
-				  		$javas2="window.alert('O Estudo de R&R j· foi aprovado, caso deseje retirar a aprovaÁ„o, clique no bot„o limpar.');return false;";
+				  		$javas2="window.alert('O Estudo de R&R j√° foi aprovado, caso deseje retirar a aprova√ß√£o, clique no bot√£o limpar.');return false;";
 					  }
 				  }
 				  ?>
                 <tr>
                   <td align="center" class="textobold">Aprova&ccedil;&atilde;o Capabilidade </td>
                   <td align="center"><span class="textobold">
-                    <input name="tap1232" type="text" class="formularioselect" id="tap1232" value="<?= $resb["resp"]; ?>">
+                    <input name="tap1232" type="text" class="formularioselect" id="tap1232" value="<?php echo  $resb["resp"]; ?>">
                   </span></td>
-                  <td align="center" class="textobold"><input name="dap12" type="text" class="formularioselect" id="dap1" onKeyPress="return validanum(this, event)" onKeyUp="mdata(this)" value="<?= banco2data($resb["fim"]); ?>" size="7" maxlength="10"></td>
-                  <td align="center"><input name="apro" type="submit" class="microtxt" id="apro" value="Aprovar" onClick="<?= $javas2; ?>">
+                  <td align="center" class="textobold"><input name="dap12" type="text" class="formularioselect" id="dap1" onKeyPress="return validanum(this, event)" onKeyUp="mdata(this)" value="<?php echo  banco2data($resb["fim"]); ?>" size="7" maxlength="10"></td>
+                  <td align="center"><input name="apro" type="submit" class="microtxt" id="apro" value="Aprovar" onClick="<?php echo  $javas2; ?>">
                     &nbsp;&nbsp;&nbsp;
-                    <input name="lim" type="submit" class="microtxt" id="lim" value="Limpar" onClick="<?= $limpa2; ?>"></td>
+                    <input name="lim" type="submit" class="microtxt" id="lim" value="Limpar" onClick="<?php echo  $limpa2; ?>"></td>
                 </tr>
                 <input name="acao2" type="hidden" id="acao2" value="v4">
               </table>
-			  <? if($aprov=="N") print "<script>bloke();</script>"; ?>
+			  <?php if($aprov=="N") print "<script>bloke();</script>"; ?>
                 <table width="601" border="0" align="center" cellpadding="3" cellspacing="0" class="texto">
                   <tr>
-				  <? if($_SESSION["e_mail"]=="S"){ ?>
+				  <?php if($_SESSION["e_mail"]=="S"){ ?>
                     <td width="16%" align="left" class="textobold">&nbsp;Enviar e-mail: </td>
                     <td width="56%"><input name="email" type="text" class="formularioselect" id="email3" value="Digite o e-mail aqui"></td> 
-					<? if(in_array("U",$emailt)){ ?>
-                    <td width="3%"><div align="center"><a href="#" onClick="return abre('busca_email2.php','a','width=320,height=380,scrollbars=1');"><img src="imagens/icon14_pessoas.gif" alt="Buscar Email de Funcion·rios" width="14" height="14" border="0"></a></div></td>
-					<? } if(in_array("G",$emailt)){ ?>
+					<?php if(in_array("U",$emailt)){ ?>
+                    <td width="3%"><div align="center"><a href="#" onClick="return abre('busca_email2.php','a','width=320,height=380,scrollbars=1');"><img src="imagens/icon14_pessoas.gif" alt="Buscar Email de Funcion√°rios" width="14" height="14" border="0"></a></div></td>
+					<?php } if(in_array("G",$emailt)){ ?>
                     <td width="8%"><div align="center"><a href="#" onClick="return abre('busca_email_grupo.php','a','width=320,height=380,scrollbars=1');"><input name="grupo" type="hidden" id="grupo">
                 <input name="grupo_nome" type="hidden" id="grupo_nome"><img src="imagens/icon14_grupo.gif" alt="Buscar Grupo de Emails" width="26" height="13" border="0"></a></div></td>
-				 <? } if(in_array("C",$emailt)){ ?>
+				 <?php } if(in_array("C",$emailt)){ ?>
                     <td width="4%"><div align="center"><a href="#" onClick="return abre('busca_email.php','a','width=320,height=380,scrollbars=1');"></a><a href="#" onClick="return abre('busca_email.php','a','width=320,height=300,scrollbars=1');"><img src="imagens/icon_cli.gif" alt="Buscar Emails de Clientes" width="18" height="18" border="0"></a></div></td>
-				<? } ?>
-                    <td width="9%"><div align="center"><? if($_SESSION["login_funcionario"]=="S"){ ?><a href="#" onClick="vailogo1('email','<?= $pc; ?>');"><img src="imagens/icon14_mail.gif" alt="Enviar Email" width="16" height="10" border="0"></a><? } ?></div></td>
-					<? } if($_SESSION["i_mp"]=="S"){ ?>
+				<?php } ?>
+                    <td width="9%"><div align="center"><?php if($_SESSION["login_funcionario"]=="S"){ ?><a href="#" onClick="vailogo1('email','<?php echo  $pc; ?>');"><img src="imagens/icon14_mail.gif" alt="Enviar Email" width="16" height="10" border="0"></a><?php } ?></div></td>
+					<?php } if($_SESSION["i_mp"]=="S"){ ?>
                     <td width="4%"><div align="center"><a href="#" onClick="vailogo('imp');"><img src="imagens/icon14_imp.gif" alt="Imprimir" width="15" height="15" border="0"></a></div></td>
-					<? } ?>
+					<?php } ?>
                   </tr>
                   <tr>
                     <td colspan="7" align="left" class="textobold"><img src="imagens/spacer.gif" width="46" height="5"></td>
@@ -396,14 +396,14 @@ function MM_openBrWindow(theURL,winName,features) { //v2.0
               <td align="center">
                 <input name="button12" type="button" class="microtxt" value="Voltar" onClick="window.location='apqp_cap.php';">
 				&nbsp;
-				<input name="button34" type="button" class="microtxt" value="Salvar em Disco" onClick="salvar('apqp_cap_imp','<?=$res["id"];?>')">
+				<input name="button34" type="button" class="microtxt" value="Salvar em Disco" onClick="salvar('apqp_cap_imp','<?php echo $res["id"];?>')">
 &nbsp;&nbsp;
-<?
+<?php
 $apqp->agenda_p("Estudos de Capabilidade","apqp_cap3.php");
 ?>
-<input name="car" type="hidden" id="car" value="<?= $car; ?>">
+<input name="car" type="hidden" id="car" value="<?php echo  $car; ?>">
                 <input name="acao" type="hidden" id="acao" value="cap3">
-                <input name="id" type="hidden" id="id" value="<?= $res["id"]; ?>">
+                <input name="id" type="hidden" id="id" value="<?php echo  $res["id"]; ?>">
                 <a href="#" onClick="return abre('busca_email.php','a','width=320,height=300,scrollbars=1');">
                 <input name="local" type="hidden" id="local" value="capabilidade">
                 </a></td>
@@ -417,4 +417,4 @@ $apqp->agenda_p("Estudos de Capabilidade","apqp_cap3.php");
 </body>
 </html>
 <script language="javascript" src="tooltip.js"></script>
-<? include("mensagem.php"); ?>
+<?php include("mensagem.php"); ?>

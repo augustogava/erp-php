@@ -1,11 +1,12 @@
-<?
+<?php
 include("conecta.php");
 if(empty($acao)) $acao="entrar";
 ?>
 <html>
 <head>
 <title>CyberManager</title>
-<meta http-equiv="Content-Type" content="text/html; UTF-8">
+<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="style.css" rel="stylesheet" type="text/css">
 <script src="scripts.js"></script>
 <script src="mascaras.js"></script>
@@ -31,7 +32,7 @@ if(empty($acao)) $acao="entrar";
     </table></td>
   </tr>
   <tr> 
-    <td align="center" valign="top"><? 
+    <td align="center" valign="top"><?php 
 $sel=mysql_query("SELECT DISTINCT (regiao) FROM `frete");
 $linhas=mysql_num_rows($sel);
 ?>
@@ -41,43 +42,43 @@ $linhas=mysql_num_rows($sel);
         <tr class="textoboldbranco">
           <td width="88" align="center">&nbsp;Peso(kg)</td> 
           
-<? 
+<?php 
 $sel=mysql_query("SELECT DISTINCT (estado) FROM cep");
 while($selr=mysql_fetch_array($sel)){
 ?>
-<td align="center" class="textoboldbranco"><? $sql1=mysql_query("SELECT * FROM estado WHERE id='$selr[estado]'"); $res1=mysql_fetch_array($sql1); print $res1["nome"]; ?></td>
-<? } ?>
+<td align="center" class="textoboldbranco"><?php $sql1=mysql_query("SELECT * FROM estado WHERE id='$selr[estado]'"); $res1=mysql_fetch_array($sql1); print $res1["nome"]; ?></td>
+<?php } ?>
         </tr>
-        <?
-			  $sql=mysql_query("SELECT * FROM cep WHERE estado='27' and tipo='sedex' ORDER BY id ASC") or die("aaa");
+        <?php
+			  $sql=mysql_query("SELECT * FROM cep WHERE estado='27' and tipo='sedex' ORDER BY id ASC") or erp_db_fail();
 			  if(mysql_num_rows($sql)==0){
 			  ?>
         <tr bgcolor="#FFFFFF"> 
           <td colspan="3" align="center" class="textobold">NENHUM CEP ENCONTRADO          </td>
         </tr>
-        <?
+        <?php
 			  }else{
 				while($res=mysql_fetch_array($sql)){
 			  ?>
         <tr bgcolor="#FFFFFF" class="texto" onMouseover="changeto('#CCCCCC')" onMouseout="changeback('#FFFFFF')">
-          <td align="right"><? print $res["peso_in"]; ?> a <? print $res["peso_fi"]; ?></td>
-<? 
+          <td align="right"><?php print $res["peso_in"]; ?> a <?php print $res["peso_fi"]; ?></td>
+<?php 
 $sel=mysql_query("SELECT DISTINCT (estado) FROM cep");
 while($selr=mysql_fetch_array($sel)){
 	 $sql2=mysql_query("SELECT * FROM cep WHERE estado='$selr[estado]' AND peso_in<='$res[peso_in]' AND peso_fi>='$res[peso_fi]' and tipo='sedex'");
 	$res2=mysql_fetch_array($sql2);
 ?>
           <td align="right">
-		  <? 
+		  <?php 
 		   print banco2valor($res2["valor"]); 
 		   ?>          </td> 
-<? } ?>
+<?php } ?>
         </tr>
-<? } } ?>
+<?php } } ?>
       </table>    </td>
   </tr>
   <tr>
-    <td align="center" valign="top"><? 
+    <td align="center" valign="top"><?php 
 $sel=mysql_query("SELECT DISTINCT (regiao) FROM `frete");
 $linhas=mysql_num_rows($sel);
 ?>
@@ -85,42 +86,42 @@ $linhas=mysql_num_rows($sel);
       <table width="100%" border="0" cellpadding="0" cellspacing="1" bgcolor="#003366">
         <tr class="textoboldbranco">
           <td width="88" align="center">&nbsp;Peso(kg)</td>
-          <? 
+          <?php 
 $sel=mysql_query("SELECT DISTINCT (estado) FROM cep");
 while($selr=mysql_fetch_array($sel)){
 ?>
-          <td align="center" class="textoboldbranco"><? $sql1=mysql_query("SELECT * FROM estado WHERE id='$selr[estado]'"); $res1=mysql_fetch_array($sql1); print $res1["nome"]; ?></td>
-          <? } ?>
+          <td align="center" class="textoboldbranco"><?php $sql1=mysql_query("SELECT * FROM estado WHERE id='$selr[estado]'"); $res1=mysql_fetch_array($sql1); print $res1["nome"]; ?></td>
+          <?php } ?>
         </tr>
-        <?
-			  $sql=mysql_query("SELECT * FROM cep WHERE estado='27' and tipo='pac' ORDER BY id ASC") or die("aaa");
+        <?php
+			  $sql=mysql_query("SELECT * FROM cep WHERE estado='27' and tipo='pac' ORDER BY id ASC") or erp_db_fail();
 			  if(mysql_num_rows($sql)==0){
 			  ?>
         <tr bgcolor="#FFFFFF">
           <td colspan="3" align="center" class="textobold">NENHUM CEP ENCONTRADO </td>
         </tr>
-        <?
+        <?php
 			  }else{
 				while($res=mysql_fetch_array($sql)){
 			  ?>
         <tr bgcolor="#FFFFFF" class="texto" onMouseover="changeto('#CCCCCC')" onMouseout="changeback('#FFFFFF')">
-          <td align="right"><? print $res["peso_in"]; ?> a <? print $res["peso_fi"]; ?></td>
-          <? 
+          <td align="right"><?php print $res["peso_in"]; ?> a <?php print $res["peso_fi"]; ?></td>
+          <?php 
 $sel=mysql_query("SELECT DISTINCT (estado) FROM cep");
 while($selr=mysql_fetch_array($sel)){
 	 $sql2=mysql_query("SELECT * FROM cep WHERE estado='$selr[estado]' AND peso_in<='$res[peso_in]' AND peso_fi>='$res[peso_fi]' and tipo='pac'");
 	$res2=mysql_fetch_array($sql2);
 ?>
-          <td align="right"><? 
+          <td align="right"><?php 
 		   print banco2valor($res2["valor"]); 
 		   ?>
           </td>
-          <? } ?>
+          <?php } ?>
         </tr>
-        <? } } ?>
+        <?php } } ?>
       </table></td>
   </tr>
 </table>
 </body>
 </html>
-<? include("mensagem.php"); ?>
+<?php include("mensagem.php"); ?>

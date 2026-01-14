@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 if(empty($id)){
 	print"<script>window.close();</script>;";
@@ -21,14 +21,15 @@ if($acao=="entrar"){
 <html>
 <head>
 <title>Cyber Post-it________________________________________</title>
-<meta http-equiv="Content-Type" content="text/html; UTF-8">
+<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="style.css" rel="stylesheet" type="text/css">
 <script language="JavaScript">
 windowWidth=201;
 windowHeight=135;
 if (parseInt(navigator.appVersion) >= 4) window.moveTo((screen.width/2)-(windowWidth/2+10),(screen.height/2)-(windowHeight/2+20));
 function responde(){
-	opener.location.href='postit_add.php?acao=res&id=<? print $id; ?>';
+	opener.location.href='postit_add.php?acao=res&id=<?php print $id; ?>';
 	opener.focus();
 }
 </script>
@@ -44,7 +45,7 @@ function responde(){
                 <tr> 
                   <td width="15" align="right"><img src="imagens/postit_mini.gif" width="15" height="14"></td>
                   
-                <td bgcolor="#003366" class="textoboldbranco"><img src="imagens/dot.gif" width="1" height="1"><? print $res["titulo"]; ?></td>
+                <td bgcolor="#003366" class="textoboldbranco"><img src="imagens/dot.gif" width="1" height="1"><?php print $res["titulo"]; ?></td>
                 </tr>
               </table></td>
           </tr>
@@ -55,14 +56,14 @@ function responde(){
                 <td><table width="200" border="0" cellpadding="0" cellspacing="0">
                     <tr> 
                       <td width="18" align="center" class="textobold">DE:</td>
-                      <td width="124" class="texto">&nbsp;<? print $res["de"]; ?></td>
+                      <td width="124" class="texto">&nbsp;<?php print $res["de"]; ?></td>
                       <td width="58" align="center" class="textobold"><a href="#" class="textobold" onClick="responde()">Responder</a></td>
                     </tr>
                   </table>
                 </td>
               </tr>
 				<tr>   
-                <td class="texto"><textarea name="mensagem" cols="45" rows="6" wrap="VIRTUAL" class="postit" id="mensagem"><? print $res["msg"]; ?></textarea></td>
+                <td class="texto"><textarea name="mensagem" cols="45" rows="6" wrap="VIRTUAL" class="postit" id="mensagem"><?php print $res["msg"]; ?></textarea></td>
                 </tr>
               </table></td>
           </tr>
@@ -76,8 +77,8 @@ function responde(){
           <tr> 
             <td bgcolor="#FFFFCC"><table width="189" border="0" align="center" cellpadding="0" cellspacing="0">
               <tr> 
-                <td width="132" class="textobold"><? print banco2data($res["data"]); ?> &nbsp;<? print $res["hora"]; ?></td>
-                <td width="57" align="center" class="textobold"><a href="postit.php?acao=exc&id=<? print $id; ?>" class="textobold">Apagar</a></td>
+                <td width="132" class="textobold"><?php print banco2data($res["data"]); ?> &nbsp;<?php print $res["hora"]; ?></td>
+                <td width="57" align="center" class="textobold"><a href="postit.php?acao=exc&id=<?php print $id; ?>" class="textobold">Apagar</a></td>
               </tr>
             </table></td>
           </tr>

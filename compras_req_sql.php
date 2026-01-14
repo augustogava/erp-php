@@ -1,9 +1,9 @@
-<?
+<?php
 include("conecta.php");
 if(empty($acao)) exit;
 $acao=verifi($permi,$acao);
 if(!empty($acao)){
-	$loc="Requisição de Compra";
+	$loc="RequisiÃ§Ã£o de Compra";
 	$pagina=$_SERVER['SCRIPT_FILENAME'];
 	include("log.php");
 }
@@ -48,10 +48,10 @@ if($acao=="inc"){
 			}
 		}		
 	if($sql){
-		$_SESSION["mensagem"]="Requisição alterada com sucesso!";
+		$_SESSION["mensagem"]="RequisiÃ§Ã£o alterada com sucesso!";
 		$acao="entrar";
 	}else{
-		$_SESSION["mensagem"]="A requisição não pôde ser alterada!";
+		$_SESSION["mensagem"]="A requisiÃ§Ã£o nÃ£o pÃ´de ser alterada!";
 		$acao="alt";
 	}
 }elseif($acao=="fechar"){
@@ -63,9 +63,9 @@ if($acao=="inc"){
 		mysql_query("INSERT INTO prodserv_est (prodserv,data,qtds,valor,origem,tipomov) VALUES('$res[produto]','$hj','$res[qtd]','$res[valor]','2','6')");
 	}
 	if($sql){
-		$_SESSION["mensagem"]="Requisição Fechada com sucesso!";
+		$_SESSION["mensagem"]="RequisiÃ§Ã£o Fechada com sucesso!";
 	}else{
-		$_SESSION["mensagem"]="A requisição não pôde ser fechada!";
+		$_SESSION["mensagem"]="A requisiÃ§Ã£o nÃ£o pÃ´de ser fechada!";
 	}		
 	header("Location:compras_req.php");
 	exit;

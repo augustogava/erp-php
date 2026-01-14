@@ -5,7 +5,7 @@ include("configuracoes.php");
 $cnx = @mysql_connect($host,$user,$pwd);
 if($cnx) {
     @mysql_select_db($bd, $cnx);
-    @mysql_set_charset('latin1', $cnx);
+    @mysql_set_charset('utf8mb4', $cnx);
 }
 
 $erro = isset($_SESSION["lerro"]) ? $_SESSION["lerro"] : "";
@@ -14,8 +14,9 @@ unset($_SESSION["lerro"]);
 <!DOCTYPE html>
 <html>
 <head>
+<meta charset="UTF-8">
 <title>Sistema ERP - Login</title>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
 body {

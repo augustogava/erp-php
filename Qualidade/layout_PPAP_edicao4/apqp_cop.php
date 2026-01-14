@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 include("seguranca.php");
 unset($_SESSION["mpc"]);
@@ -43,7 +43,7 @@ function MM_openBrWindow(theURL,winName,features) { //v2.0
   <tr>
     <td align="left" valign="top" class="chamadas"><table width="590" border="0" cellpadding="0" cellspacing="0" class="texto">
       <tr>
-        <td width="27" align="center"><div align="left"><a href="#" onClick="MM_openBrWindow('help/mini_copiar.html','','width=680,height=501')"><img src="imagens/icon14_ahn.gif" width="14" height="14" border="0" onMouseOver="this.T_STICKY=true; this.T_TITLE='APQP - Copiar'; this.T_DELAY=10; this.T_WIDTH=225;  return escape('Para facilitar sua vida evitando digitação desnecessária você pode fazer uma copia do APQP de uma peça, selecione a peça que queira copiar e de um clique nela para ir até a tela APQP - Copiar.')"></a><span class="impTextoBold"></span></div></td>
+        <td width="27" align="center"><div align="left"><a href="#" onClick="MM_openBrWindow('help/mini_copiar.html','','width=680,height=501')"><img src="imagens/icon14_ahn.gif" width="14" height="14" border="0" onMouseOver="this.T_STICKY=true; this.T_TITLE='APQP - Copiar'; this.T_DELAY=10; this.T_WIDTH=225;  return escape('Para facilitar sua vida evitando digitaÃ§Ã£o desnecessÃ¡ria vocÃª pode fazer uma copia do APQP de uma peÃ§a, selecione a peÃ§a que queira copiar e de um clique nela para ir atÃ© a tela APQP - Copiar.')"></a><span class="impTextoBold"></span></div></td>
         <td width="563" align="right"><div align="left" class="textobold style1 style1 style1 style1 style1 style1 style1 style1">APQP - Copiar de:</div></td>
       </tr>
       <tr>
@@ -88,14 +88,14 @@ function MM_openBrWindow(theURL,winName,features) { //v2.0
         <td>&nbsp;Cliente</td>
         <td>&nbsp;Status</td>
       </tr>
-	  <?
+	  <?php
 	  $sql=mysql_query("SELECT apqp_pc.id,apqp_pc.numero,apqp_pc.nome,apqp_pc.rev,apqp_pc.dtrev,apqp_pc.status,clientes.fantasia FROM apqp_pc,clientes $cond ORDER BY numero ASC, rev ASC");
 	  if(mysql_num_rows($sql)==0){
 	  ?>
       <tr bgcolor="#FFFFFF">
         <td colspan="5" align="center" class="textopretobold">NENHUMA PE&Ccedil;A ENCONTRADA &nbsp;</td>
         </tr>
-      <?
+      <?php
 	  }else{
 				//BLOCO PAGINACAO
 				$results_tot=mysql_num_rows($sql); //total de registros encontrados
@@ -135,7 +135,7 @@ function MM_openBrWindow(theURL,winName,features) { //v2.0
 					$status="Em processo";
 					break;
 				case "2":
-					$status="Aguardando Disposição do Cliente";
+					$status="Aguardando DisposiÃ§Ã£o do Cliente";
 					break;
 				case "3":
 					$status="Aprovado";
@@ -149,39 +149,39 @@ function MM_openBrWindow(theURL,winName,features) { //v2.0
 			}
 	  ?>
       <tr bgcolor="#FFFFFF" class="textopreto" onMouseover="changeto('#CCCCCC')" onMouseout="changeback('#FFFFFF')">
-       <a href="apqp_copiar.php?pc=<? print $res["id"]; ?>"> 
-       <td width="90" height="18">&nbsp;<? print $res["numero"]." - ".$res["rev"]; ?></td>
-        <td width="65" align="center"><? print banco2data($res["dtrev"]); ?></td>
-        <td>&nbsp;<? print $res["nome"]; ?></td>
-        <td>&nbsp;<? print $res["fantasia"]; ?></td>
-        <td>&nbsp;<? print $status; ?></td>
+       <a href="apqp_copiar.php?pc=<?php print $res["id"]; ?>"> 
+       <td width="90" height="18">&nbsp;<?php print $res["numero"]." - ".$res["rev"]; ?></td>
+        <td width="65" align="center"><?php print banco2data($res["dtrev"]); ?></td>
+        <td>&nbsp;<?php print $res["nome"]; ?></td>
+        <td>&nbsp;<?php print $res["fantasia"]; ?></td>
+        <td>&nbsp;<?php print $status; ?></td>
        </a>
         </tr>
-	  <?
+	  <?php
 	  	}
 	}
 	?>
     </table>
-      <? if($wpaginar) { ?>
+      <?php if($wpaginar) { ?>
       <table width="80%" border="0" cellspacing="0" cellpadding="0">
         <tr>
           <td align="center"><table width="1%" border="0" cellspacing="0" cellpadding="0">
               <tr valign="top">
                 <td align="right">
-                  <? 
+                  <?php 
 				$antz=false;
 				if($wp>1){
 					$antz=true;
 				?>
-                  <a href="<? print "apqp_cop.php?wp=$pg_anterior&bcli=$bcli&bpeca=$bpeca&bnum=$bnum"; ?>" class="paginacao2">
-                  <? } ?>
+                  <a href="<?php print "apqp_cop.php?wp=$pg_anterior&bcli=$bcli&bpeca=$bpeca&bnum=$bnum"; ?>" class="paginacao2">
+                  <?php } ?>
                   <img src="imagens/pag_f.gif" width="27" height="14" border="0">
-                  <? if($antz){ ?>
+                  <?php if($antz){ ?>
                   <br>
             Anterior</a>
-                  <? } ?>
+                  <?php } ?>
                 </td>
-                <?
+                <?php
 				$link_impressos=0;
 				if ($temp > $wpaginacao){
 		    	    $n_start  = $temp - ceil($wpaginacao/2);
@@ -195,32 +195,32 @@ function MM_openBrWindow(theURL,winName,features) { //v2.0
 					$link_impressos++;
 				?>
                 <td align="center">
-                  <? if($pg_atual != $link_impressos){ ?>
-                  <a href="<? print "apqp_cop.php?wp=$link_impressos&bcli=$bcli&bpeca=$bpeca&bnum=$bnum"; ?>" class="paginacao">
-                  <? } ?>
-                  <img src="imagens/pag_e<? if($pg_atual==$link_impressos) print "2"; ?>.gif" width="10" height="14" border="0"><br>
-                  <? if($pg_atual==$link_impressos){ print "<span class=\"paginacao2\">$link_impressos</span>"; }else{ print $link_impressos; }?>
-                  <? if($pg_atual != $link_impressos){ ?>
+                  <?php if($pg_atual != $link_impressos){ ?>
+                  <a href="<?php print "apqp_cop.php?wp=$link_impressos&bcli=$bcli&bpeca=$bpeca&bnum=$bnum"; ?>" class="paginacao">
+                  <?php } ?>
+                  <img src="imagens/pag_e<?php if($pg_atual==$link_impressos) print "2"; ?>.gif" width="10" height="14" border="0"><br>
+                  <?php if($pg_atual==$link_impressos){ print "<span class=\"paginacao2\">$link_impressos</span>"; }else{ print $link_impressos; }?>
+                  <?php if($pg_atual != $link_impressos){ ?>
                   </a>
-                  <? } ?>
+                  <?php } ?>
                 </td>
-                <?
+                <?php
 				}
 				?>
                 <td>
-                  <? if($reg_final<$results_tot){ ?>
-                  <a href="<? print "apqp_cop.php?wp=$pg_proxima&bcli=$bcli&bpeca=$bpeca&bnum=$bnum"; ?>" class="paginacao2">
-                  <? } ?>
+                  <?php if($reg_final<$results_tot){ ?>
+                  <a href="<?php print "apqp_cop.php?wp=$pg_proxima&bcli=$bcli&bpeca=$bpeca&bnum=$bnum"; ?>" class="paginacao2">
+                  <?php } ?>
                   <img src="imagens/pag_der.gif" width="26" height="14" border="0">
-                  <? if($reg_final<$results_tot){ ?>
+                  <?php if($reg_final<$results_tot){ ?>
                   <br>
             Pr&oacute;ximo</a>
-                  <? } ?></td>
+                  <?php } ?></td>
               </tr>
           </table></td>
         </tr>
       </table>
-    <? } ?></td>
+    <?php } ?></td>
   </tr>
   <tr>
     <td align="left" valign="top">&nbsp;</td>
@@ -229,4 +229,4 @@ function MM_openBrWindow(theURL,winName,features) { //v2.0
 </body>
 </html>
 <script language="javascript" src="tooltip.js"></script>
-<? include("mensagem.php"); ?>
+<?php include("mensagem.php"); ?>

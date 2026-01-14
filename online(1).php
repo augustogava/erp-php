@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 $ip=$_SERVER['REMOTE_ADDR'];
 $data=date("Y-m-d H:i:s");
@@ -22,22 +22,22 @@ if($funcionario=="S"){ $tipo="funcionario"; }else{ $tipo="cliente"; }
 			$_SESSION["logado"]=$res["id"];	
 		}
 
-$sql=mysql_query("SELECT * FROM online WHERE (UNIX_TIMESTAMP()-UNIX_TIMESTAMP(data)) > 50") or die("nao");
+$sql=mysql_query("SELECT * FROM online WHERE (UNIX_TIMESTAMP()-UNIX_TIMESTAMP(data)) > 50") or erp_db_fail();
 while($res=mysql_fetch_array($sql)){
 	$sql2=mysql_query("DELETE FROM online WHERE id='$res[id]'");
 }
 //MENSAGEMM ------ - - - - -- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-$sqlt=mysql_query("SELECT * FROM msg WHERE user='$iduser' AND enviado='N'") or die("nao foi");
+$sqlt=mysql_query("SELECT * FROM msg WHERE user='$iduser' AND enviado='N'") or erp_db_fail();
 if(mysql_num_rows($sqlt)){
 	$res=mysql_fetch_array($sqlt);
-	$sql2=mysql_query("UPDATE msg SET enviado='S' WHERE id='$res[id]'") or die("tb nao foi");
+	$sql2=mysql_query("UPDATE msg SET enviado='S' WHERE id='$res[id]'") or erp_db_fail();
 	print "<script>window.alert('$res[msg]');</script>";
 }
 //------========== MSG PRA TODOS - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-$sqlt=mysql_query("SELECT * FROM msg WHERE user='666666' AND enviado='N'") or die("nao foi");
+$sqlt=mysql_query("SELECT * FROM msg WHERE user='666666' AND enviado='N'") or erp_db_fail();
 if(mysql_num_rows($sqlt)){
 	$res=mysql_fetch_array($sqlt);
-	$sql2=mysql_query("UPDATE msg SET enviado='S' WHERE id='$res[id]'") or die("tb nao foi");
+	$sql2=mysql_query("UPDATE msg SET enviado='S' WHERE id='$res[id]'") or erp_db_fail();
 	print "<script>window.alert('$res[msg]');</script>";
 }
 // - - - - - - - -BLOQUEAR - - - - - - - - - - - - - - - - - - - - - - - - - - - - 

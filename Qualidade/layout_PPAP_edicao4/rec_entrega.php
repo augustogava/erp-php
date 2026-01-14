@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 include("seguranca.php");
 $acao=verifi($permi,$acao);
@@ -26,7 +26,7 @@ if($acao=="entrar"){
 	$sql2=mysql_query("SELECT nome FROM fornecedores WHERE id='$res[fornecedor]'");
 	$res2=mysql_fetch_array($sql2);
 }elseif($acao=="alt"){
-	$sql=mysql_query("SELECT * FROM entrega WHERE id='$id'") or die("Nao selecio0neo");
+	$sql=mysql_query("SELECT * FROM entrega WHERE id='$id'") or erp_db_fail();
 	$res=mysql_fetch_array($sql);
 	$sql2=mysql_query("SELECT nome FROM fornecedores WHERE id='$res[fornecedor]'");
 	$res2=mysql_fetch_array($sql2);
@@ -43,7 +43,7 @@ if($acao=="entrar"){
 function verificabusca(cad){
 	if(cad.emissao.value!=''){
 		if(!verifica_data(cad.emissao.value)){
-			alert('Data de emissão incorreta');
+			alert('Data de emissÃ£o incorreta');
 			cad.emissao.focus();
 			return false;
 		}
@@ -90,7 +90,7 @@ function verifica(cad){
   <tr>
     <td align="left" valign="top"><img src="imagens/dot.gif" width="20" height="8"></td>
   </tr>
-<?
+<?php
 if($acao=="entrar"){
 ?>
   <tr>
@@ -126,14 +126,14 @@ if($acao=="entrar"){
         <td width="29" align="center">&nbsp;</td>
         <td width="29" align="center">&nbsp;</td>
       </tr>
-<?
+<?php
 if(!mysql_num_rows($sql)){
 ?>	  
 
       <tr bgcolor="#FFFFFF">
         <td colspan="4" align="center" class="textopretobold">NENHUM PEDIDO DE VENDA ENCONTRADO</td>
         </tr>
-<?
+<?php
 }else{				
 				//BLOCO PAGINACAO
 				$results_tot=mysql_num_rows($sql); //total de registros encontrados
@@ -172,33 +172,33 @@ if(!mysql_num_rows($sql)){
 	while($res=mysql_fetch_array($sql)){
 ?>
       <tr bgcolor="#FFFFFF" class="textopreto" onMouseover="changeto('#CCCCCC')" onMouseout="changeback('#FFFFFF')">
-        <td align="center"><?= $res["ids"]; ?></td>
-        <td width="466">&nbsp;<?= $res["fantasia"]; ?></td>
-        <td width="29" align="center"><a href="<?= $_SERVER['PHP_SELF']; ?>?acao=alt&id=<?= $res["ids"]; ?>"><img src="imagens/icon14_alterar.gif" alt="Alterar" width="14" height="14" border="0"></a></td>
-        <td width="29" align="center"><a href="#" onClick="pergunta('Deseja excluir esta entrega?','rec_entrega_sql.php?id=<?= $res["ids"]; ?>&acao=exc');"><img src="imagens/icon14_lixeira.gif" alt="Excluir" width="14" height="14" border="0"></a></td>
+        <td align="center"><?php echo  $res["ids"]; ?></td>
+        <td width="466">&nbsp;<?php echo  $res["fantasia"]; ?></td>
+        <td width="29" align="center"><a href="<?php echo  $_SERVER['PHP_SELF']; ?>?acao=alt&id=<?php echo  $res["ids"]; ?>"><img src="imagens/icon14_alterar.gif" alt="Alterar" width="14" height="14" border="0"></a></td>
+        <td width="29" align="center"><a href="#" onClick="pergunta('Deseja excluir esta entrega?','rec_entrega_sql.php?id=<?php echo  $res["ids"]; ?>&acao=exc');"><img src="imagens/icon14_lixeira.gif" alt="Excluir" width="14" height="14" border="0"></a></td>
       </tr>
-<?
+<?php
 	}
 }
 ?>
     </table>
     <div align="center"><br>
-	<? if($wpaginar){ ?>
+	<?php if($wpaginar){ ?>
      <table width="1%" border="0" cellspacing="0" cellpadding="0">
         <tr valign="top">
-          <td align="right"><? 
+          <td align="right"><?php 
 				$antz=false;
 				if($wp>1){
 					$antz=true;
 				?>
-              <a href="<? print "rec_entrega.php?wp=$pg_anterior&forne=$forne"; ?>" class="paginacao2">
-              <? } ?>
+              <a href="<?php print "rec_entrega.php?wp=$pg_anterior&forne=$forne"; ?>" class="paginacao2">
+              <?php } ?>
               <img src="imagens/pag_f.gif" width="27" height="14" border="0">
-              <? if($antz){ ?>
+              <?php if($antz){ ?>
               <br>
                 Anterior</a>
-              <? } ?>          </td>
-          <?
+              <?php } ?>          </td>
+          <?php
 				$link_impressos=0;
 				if ($temp > $wpaginacao){
 		    	    $n_start  = $temp - ceil($wpaginacao/2);
@@ -211,31 +211,31 @@ if(!mysql_num_rows($sql)){
 				while(($link_impressos<$n_paginas) and ($link_impressos<$wpaginacao)){
 					$link_impressos++;
 				?>
-          <td align="center"><? if($pg_atual != $link_impressos){ ?>
-              <a href="<? print "rec_entrega.php?wp=$link_impressos&forne=$forne"; ?>" class="paginacao">
-              <? } ?>
-              <img src="imagens/pag_e<? if($pg_atual==$link_impressos) print "2"; ?>.gif" width="10" height="14" border="0"><br>
-              <? if($pg_atual==$link_impressos){ print "<span class=\"paginacao2\">$link_impressos</span>"; }else{ print $link_impressos; }?>
-              <? if($pg_atual != $link_impressos){ ?>
+          <td align="center"><?php if($pg_atual != $link_impressos){ ?>
+              <a href="<?php print "rec_entrega.php?wp=$link_impressos&forne=$forne"; ?>" class="paginacao">
+              <?php } ?>
+              <img src="imagens/pag_e<?php if($pg_atual==$link_impressos) print "2"; ?>.gif" width="10" height="14" border="0"><br>
+              <?php if($pg_atual==$link_impressos){ print "<span class=\"paginacao2\">$link_impressos</span>"; }else{ print $link_impressos; }?>
+              <?php if($pg_atual != $link_impressos){ ?>
               </a>
-              <? } ?>          </td>
-          <?
+              <?php } ?>          </td>
+          <?php
 				}
 				?>
-          <td><? if($reg_final<$results_tot){ ?>
-              <a href="<? print "rec_entrega.php?wp=$pg_proxima&forne=$forne"; ?>" class="paginacao2">
-              <? } ?>
+          <td><?php if($reg_final<$results_tot){ ?>
+              <a href="<?php print "rec_entrega.php?wp=$pg_proxima&forne=$forne"; ?>" class="paginacao2">
+              <?php } ?>
               <img src="imagens/pag_der.gif" width="26" height="14" border="0">
-              <? if($reg_final<$results_tot){ ?>
+              <?php if($reg_final<$results_tot){ ?>
               <br>
                 Pr&oacute;ximo</a>
-              <? } ?>          </td>
+              <?php } ?>          </td>
         </tr>
-      </table><? } ?>
+      </table><?php } ?>
     </div>
     </td>
   </tr>
-<?
+<?php
 }elseif($acao=="alt"){
 ?>
 <form name="form1" method="post" action="rec_entrega_sql.php" onSubmit="return verifica(this);">
@@ -245,7 +245,7 @@ if(!mysql_num_rows($sql)){
         <td><table width="100%" border="0" cellspacing="3" cellpadding="0">
           <tr>
             <td align="left" valign="top" bgcolor="#003366" class="textoboldbranco">&nbsp;
-                <? if($acao=="alt"){ print "Alterar"; }else{ print "Incluir"; } ?>
+                <?php if($acao=="alt"){ print "Alterar"; }else{ print "Incluir"; } ?>
               Entrega </td>
           </tr>
           <tr>
@@ -257,12 +257,12 @@ if(!mysql_num_rows($sql)){
                   <td width="7">&nbsp;</td>
                   <td width="122">&nbsp;</td>
                   <td width="48">&nbsp;</td>
-                  <td width="84"><input name="fornecedor" type="hidden" id="fornecedor" value="<?= $res["fornecedor"]; ?>"></td>
+                  <td width="84"><input name="fornecedor" type="hidden" id="fornecedor" value="<?php echo  $res["fornecedor"]; ?>"></td>
                   <td width="21">&nbsp;</td>
                   <td width="69" colspan="3" rowspan="5">&nbsp;</td>
                 </tr>
                 <tr>
-                  <td colspan="7"><input name="nome" type="text" class="formularioselect" id="nome" value="<? print $res2["nome"]; ?>" readonly></td>
+                  <td colspan="7"><input name="nome" type="text" class="formularioselect" id="nome" value="<?php print $res2["nome"]; ?>" readonly></td>
                   <td align="center"><a href="#" onClick="return abre('rec_skip_lote_forn.php','a','width=320,height=300,scrollbars=1');"> <img src="imagens/icon_14_pess.gif" width="14" height="14" border="0"> </a></td>
                 </tr>
                 <tr>
@@ -274,12 +274,12 @@ if(!mysql_num_rows($sql)){
                   <td align="center">&nbsp;</td>
                 </tr>
                 <tr>
-                  <td><input name="data" type="text" class="formulario" id="data" value="<?= banco2data($res["data"]); ?>" onKeyPress="return validanum(this, event)" onKeyUp="mdata(this)" size="10" maxlength="10">
+                  <td><input name="data" type="text" class="formulario" id="data" value="<?php echo  banco2data($res["data"]); ?>" onKeyPress="return validanum(this, event)" onKeyUp="mdata(this)" size="10" maxlength="10">
                     <a href="#" class="" onClick="window.open('agenda_pop.php?window_position=rec_entrega_1&var_field=data','','scrollbars=no,width=155,height=138');"><img src="imagens/icon14_cal.gif" width="14" height="14" border="0"></a></td>
                   <td>&nbsp;</td>
-                  <td><input name="lote" type="text" class="formularioselect" id="lote" value="<?= $res["lote"]; ?>" maxlength="20"></td>
+                  <td><input name="lote" type="text" class="formularioselect" id="lote" value="<?php echo  $res["lote"]; ?>" maxlength="20"></td>
                   <td>&nbsp;</td>
-                  <td colspan="3"><input name="atraso" type="text" class="formularioselect" id="atraso" value="<?= $res["atraso"]; ?>" maxlength="20"></td>
+                  <td colspan="3"><input name="atraso" type="text" class="formularioselect" id="atraso" value="<?php echo  $res["atraso"]; ?>" maxlength="20"></td>
                   <td align="center">&nbsp;</td>
                 </tr>
                 <tr>
@@ -293,14 +293,14 @@ if(!mysql_num_rows($sql)){
                   <td align="center">&nbsp;</td>
                 </tr>
                 <tr>
-                  <td><input name="tamanho" type="text" class="formularioselect" id="skip3" value="<?= $res["tamanho"]; ?>" maxlength="20"></td>
+                  <td><input name="tamanho" type="text" class="formularioselect" id="skip3" value="<?php echo  $res["tamanho"]; ?>" maxlength="20"></td>
                   <td>&nbsp;</td>
-                  <td><input name="tam_amostragem" type="text" class="formularioselect" id="skip4" value="<? print $res["tam_amostragem"]; ?>" maxlength="20"></td>
+                  <td><input name="tam_amostragem" type="text" class="formularioselect" id="skip4" value="<?php print $res["tam_amostragem"]; ?>" maxlength="20"></td>
                   <td>&nbsp;</td>
-                  <td><input name="nf" type="text" class="formularioselect" id="papp" value="<?= $res["nf"]; ?>" maxlength="20"></td>
+                  <td><input name="nf" type="text" class="formularioselect" id="papp" value="<?php echo  $res["nf"]; ?>" maxlength="20"></td>
                   <td>&nbsp;</td>
                   <td class="textobold">Data da NF </td>
-                  <td colspan="4" align="left"><input name="data_nf" type="text" class="formulario" id="papp4" onKeyPress="return validanum(this, event)" onKeyUp="mdata(this)" value="<?= banco2data($res["data_nf"]); ?>" size="10" maxlength="10">
+                  <td colspan="4" align="left"><input name="data_nf" type="text" class="formulario" id="papp4" onKeyPress="return validanum(this, event)" onKeyUp="mdata(this)" value="<?php echo  banco2data($res["data_nf"]); ?>" size="10" maxlength="10">
                     <a href="#" class="" onClick="window.open('agenda_pop.php?window_position=rec_entrega_2&var_field=data_nf','','scrollbars=no,width=155,height=138');"><img src="imagens/icon14_cal.gif" width="14" height="14" border="0"></a></td>
                 </tr>
                 <tr>
@@ -311,17 +311,17 @@ if(!mysql_num_rows($sql)){
                   <td>&nbsp;</td>
                   <td>&nbsp;</td>
                   <td class="textobold">Pre&ccedil;o Unit&aacute;rio</td>
-                  <td colspan="4" align="left"><input name="unitario" type="text" class="formulario" id="papp5" onKeyDown="formataMoeda(this,retornaKeyCode(event))" onKeyUp="formataMoeda(this,retornaKeyCode(event))" value="<?= banco2valor($res["unitario"]); ?>" size="10" maxlength="20"></td>
+                  <td colspan="4" align="left"><input name="unitario" type="text" class="formulario" id="papp5" onKeyDown="formataMoeda(this,retornaKeyCode(event))" onKeyUp="formataMoeda(this,retornaKeyCode(event))" value="<?php echo  banco2valor($res["unitario"]); ?>" size="10" maxlength="20"></td>
                 </tr>
                 <tr>
-                  <td><input name="pedido" type="text" class="formularioselect" id="papp2" value="<?= $res["pedido"]; ?>" maxlength="20"></td>
+                  <td><input name="pedido" type="text" class="formularioselect" id="papp2" value="<?php echo  $res["pedido"]; ?>" maxlength="20"></td>
                   <td>&nbsp;</td>
-                  <td><input name="crm" type="text" class="formularioselect" id="papp3" value="<?= $res["crm"]; ?>" maxlength="20"></td>
+                  <td><input name="crm" type="text" class="formularioselect" id="papp3" value="<?php echo  $res["crm"]; ?>" maxlength="20"></td>
                   <td>&nbsp;</td>
                   <td>&nbsp;</td>
                   <td>&nbsp;</td>
                   <td class="textobold">Certificado</td>
-                  <td colspan="4" align="left"><input name="certificado" type="text" class="formulario" id="papp6" value="<?= $res["certificado"]; ?>" size="10" maxlength="20"></td>
+                  <td colspan="4" align="left"><input name="certificado" type="text" class="formulario" id="papp6" value="<?php echo  $res["certificado"]; ?>" size="10" maxlength="20"></td>
                 </tr>
             </table></td>
           </tr>
@@ -337,7 +337,7 @@ if(!mysql_num_rows($sql)){
                         <td width="0">Descri&ccedil;&atilde;o</td>
                         <td width="24" align="center">&nbsp;</td>
                       </tr>
-                      <?
+                      <?php
 $sql=mysql_query("SELECT * FROM entrega_list WHERE entrega='$id'");
 if(!mysql_num_rows($sql)){
 	$sql=mysql_query("INSERT INTO entrega_list (entrega) VALUES ('$id')");
@@ -352,12 +352,12 @@ if(mysql_num_rows($sql)){
 		}
 ?>
                       <tr bgcolor="#FFFFFF">
-                        <td align="center"><input name="del[<?= $resl["id"]; ?>]" type="checkbox" id="del<?= $resl["id"]; ?>" value="<?= $resl["id"]; ?>"></td>
-                        <td width="0"><input name="descricao[<?= $resl["id"]; ?>]" type="text" class="formularioselect" id="descricao<?= $resl["id"]; ?>" size="1" readonly="" value="<?= $resl["prod"]; ?>">
-                            <input name="prodserv[<?= $resl["id"]; ?>]" type="hidden" id="prodserv<?= $resl["id"]; ?>" value="<?= $resl["item"] ?>"></td>
-                        <td align="center"><a href="#" onClick="return abre('rec_skip_lote_pc.php?line=<?= $resl["id"]; ?>&abre=S','busca','width=320,height=300,scrollbars=1');"><img src="imagens/icon_14_search.gif" width="14" height="14" border="0"></a></td>
+                        <td align="center"><input name="del[<?php echo  $resl["id"]; ?>]" type="checkbox" id="del<?php echo  $resl["id"]; ?>" value="<?php echo  $resl["id"]; ?>"></td>
+                        <td width="0"><input name="descricao[<?php echo  $resl["id"]; ?>]" type="text" class="formularioselect" id="descricao<?php echo  $resl["id"]; ?>" size="1" readonly="" value="<?php echo  $resl["prod"]; ?>">
+                            <input name="prodserv[<?php echo  $resl["id"]; ?>]" type="hidden" id="prodserv<?php echo  $resl["id"]; ?>" value="<?php echo  $resl["item"] ?>"></td>
+                        <td align="center"><a href="#" onClick="return abre('rec_skip_lote_pc.php?line=<?php echo  $resl["id"]; ?>&abre=S','busca','width=320,height=300,scrollbars=1');"><img src="imagens/icon_14_search.gif" width="14" height="14" border="0"></a></td>
                       </tr>
-                      <?
+                      <?php
 	}
 }
 ?>
@@ -378,7 +378,7 @@ if(mysql_num_rows($sql)){
   </tr>
   <tr>
     <td align="center" valign="top"><span class="textobold"></a>&nbsp;
-      <input name="Button" type="button" class="microtxt" value="Voltar" onClick="window.location='<?= $_SERVER['PHP_SELF']; ?>';">      
+      <input name="Button" type="button" class="microtxt" value="Voltar" onClick="window.location='<?php echo  $_SERVER['PHP_SELF']; ?>';">      
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       <input name="Button" type="button" class="microtxt" value="Adicionar Linha" onClick="form1.maisum.value='1'; form1.submit();">
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -388,12 +388,12 @@ if(mysql_num_rows($sql)){
         <input name="acao" type="hidden" id="acao" value="alt">
         <input name="delsel" type="hidden" id="delsel">
         <input name="maisum" type="hidden" id="maisum2">
-        <input name="id" type="hidden" id="maisum3" value="<?= $id; ?>">
+        <input name="id" type="hidden" id="maisum3" value="<?php echo  $id; ?>">
 </span></td>
   </tr>
   </form>
- <? } ?>
+ <?php } ?>
 </table>
 </body>
 </html>
-<? include("mensagem.php"); ?>
+<?php include("mensagem.php"); ?>

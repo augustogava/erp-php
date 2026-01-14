@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 include("seguranca.php");
 if($buscar){
@@ -6,7 +6,7 @@ if($buscar){
 }
 $acao=verifi($permi,$acao);
 if(!empty($acao)){
-	$loc="Estoque Mínimo";
+	$loc="Estoque MÃ­nimo";
 	$pagina=$_SERVER['SCRIPT_FILENAME'];
 	include("log.php");
 }
@@ -28,7 +28,8 @@ if($acao=="venda"){
 <html>
 <head>
 <title>CyberManager</title>
-<meta http-equiv="Content-Type" content="text/html; UTF-8">
+<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="style.css" rel="stylesheet" type="text/css">
 <script src="scripts.js"></script>
 <script src="mascaras.js"></script>
@@ -36,12 +37,12 @@ if($acao=="venda"){
 function verifica(cad){
 	if(cad.bde.value!='' || cad.bate.value!=''){
 		if(!verifica_data(cad.bde.value)){
-			alert('Período incorreto');
+			alert('PerÃ­odo incorreto');
 			cad.bde.focus();
 			return false;
 		}
 		if(!verifica_data(cad.bate.value)){
-			alert('Período incorreto');
+			alert('PerÃ­odo incorreto');
 			cad.bate.focus();
 			return false;
 		}
@@ -104,14 +105,14 @@ function verifica(cad){
         <td width="124">Estoque M&iacute;nimo </td>
         <td width="17" align="center">&nbsp;</td>
       </tr>
-      <?
+      <?php
 $sql=mysql_query("SELECT * FROM prodserv $busc ORDER BY id ASC");
 if(!mysql_num_rows($sql)){
 ?>
       <tr bgcolor="#FFFFFF" class="texto">
         <td colspan="6" align="center" class="textobold">NENHUM PRODUTO </td>
       </tr>
-      <?
+      <?php
 }else{
 	//BLOCO PAGINACAO
 	$results_tot=mysql_num_rows($sql); //total de registros encontrados
@@ -152,14 +153,14 @@ if(!mysql_num_rows($sql)){
 			if(((($res["min"]==0) and ($res1["qtdd"]<0)) or (($res["min"]>"0") and ($res["min"]<$res1["qtdt"]))) and !($res["tipo"]=="PL")){
 ?>
       <tr bgcolor="#FFFFFF" class="texto">
-        <td width="53">&nbsp;<? print $res["codprod"]; ?></td>
-        <td width="255">&nbsp;<? print $res["nome"]; ?></td>
-        <td width="139">&nbsp;<? print $res1["qtdd"] ?></td>
-        <td width="124"><? print $res1["qtdt"] ?></td>
-        <td width="124">&nbsp;<? print $res["min"]; ?></td>
-        <td width="17" align="center"><a href="prodserv_oc.php?acao=venda&produto=<?= $res["id"]; ?>"><img src="imagens/icon14_dollar.gif" alt="Gerar Venda" width="14" height="14" border="0"></a></td>
+        <td width="53">&nbsp;<?php print $res["codprod"]; ?></td>
+        <td width="255">&nbsp;<?php print $res["nome"]; ?></td>
+        <td width="139">&nbsp;<?php print $res1["qtdd"] ?></td>
+        <td width="124"><?php print $res1["qtdt"] ?></td>
+        <td width="124">&nbsp;<?php print $res["min"]; ?></td>
+        <td width="17" align="center"><a href="prodserv_oc.php?acao=venda&produto=<?php echo  $res["id"]; ?>"><img src="imagens/icon14_dollar.gif" alt="Gerar Venda" width="14" height="14" border="0"></a></td>
       </tr>
-      <?
+      <?php
 			}
 	}
 }
@@ -167,8 +168,8 @@ if(!mysql_num_rows($sql)){
     </table></td>
   </tr>
   <tr>
-    <td align="center" valign="top"><? if($wpaginar) { ?>
-    <? } ?></td>
+    <td align="center" valign="top"><?php if($wpaginar) { ?>
+    <?php } ?></td>
   </tr>
   <tr>
     <td align="left" valign="top">&nbsp;</td>
@@ -176,4 +177,4 @@ if(!mysql_num_rows($sql)){
 </table>
 </body>
 </html>
-<? include("mensagem.php"); ?>
+<?php include("mensagem.php"); ?>

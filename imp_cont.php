@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 $arquivo=file("contatos.txt");
 $pro=array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z');
@@ -17,7 +17,7 @@ foreach($arquivo as $linha){
 				$sel=mysql_query("SELECT * FROM cliente_contato WHERE cliente='$cli'");
 				if(!mysql_num_rows($sel)){
 					print "foi <br>";
-					mysql_query("INSERT INTO cliente_contato (cliente,nome) VALUES('$cli','$nome')") or die("INSERT INTO cliente_contato (cliente,nome) VALUES('$cli','$val')");
+					mysql_query("INSERT INTO cliente_contato (cliente,nome) VALUES('$cli','$nome')") or erp_db_fail();
 				}
 			}else{
 				print "nao foi <br>";

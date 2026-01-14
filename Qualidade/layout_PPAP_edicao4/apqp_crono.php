@@ -1,10 +1,10 @@
-<?
+<?php
 include("conecta.php");
 include("seguranca.php");
 if(empty($acao)) $acao="entrar";
 $pc=$_SESSION["mpc"];
 $npc=$_SESSION["npc"];
-//VerificaÁ„o
+//Verifica√ß√£o
 $_SESSION["modulo"]="crono";
 $sqlm=mysql_query("SELECT * FROM online WHERE user<>'$iduser' and peca='$pc' and modulo='crono'");
 if(mysql_num_rows($sqlm)){
@@ -14,7 +14,7 @@ if(mysql_num_rows($sqlm)){
 	}else{
 		$sql2=mysql_query("SELECT * FROM clientes WHERE id='$resm[user]'"); $res2=mysql_fetch_array($sql2);
 	}
-	$_SESSION["mensagem"]="O usuario $res2[nome] est· alterando este mÛdulo!";
+	$_SESSION["mensagem"]="O usuario $res2[nome] est√° alterando este m√≥dulo!";
 	header("Location:apqp_menu.php");
 	exit;
 }
@@ -36,17 +36,17 @@ if(mysql_num_rows($sql)==0){
 	$cronoger=$res["crono_ger"];
 	if($cronoger=="N"){
 		//geracronos
-		$apps=Array("Desenho (Se aplic·vel)",
-		"FMEA de Projeto (Se aplic·vel)",
-		"ProtÛtipo (Se aplic·vel)",
+		$apps=Array("Desenho (Se aplic√°vel)",
+		"FMEA de Projeto (Se aplic√°vel)",
+		"Prot√≥tipo (Se aplic√°vel)",
 		"Viabilidade",
 		"Diagrama de Fluxo",
 		"FMEA de Processo",
 		"Plano de Controle",
-		"An·lise Critica",
-		"Ferramental/InstalaÁıes",
-		"InstruÁıes do Operador",
-		"VerificaÁ„o / validaÁ„o",
+		"An√°lise Critica",
+		"Ferramental/Instala√ß√µes",
+		"Instru√ß√µes do Operador",
+		"Verifica√ß√£o / valida√ß√£o",
 		"Lote Piloto",
 		"Estudos de R&R",
 		"Estudos de Capabilidade",
@@ -54,9 +54,9 @@ if(mysql_num_rows($sql)==0){
 		"Ensaio Material",
 		"Ensaio Desempenho",
 		"Interina",
-		"RelatÛrio de AprovaÁ„o de AparÍncia (Se aplic·vel)",
-		"Certificado de Submiss„o",
-		"Sumario de AprovaÁ„o do APQP (ValidaÁ„o final)");
+		"Relat√≥rio de Aprova√ß√£o de Apar√™ncia (Se aplic√°vel)",
+		"Certificado de Submiss√£o",
+		"Sumario de Aprova√ß√£o do APQP (Valida√ß√£o final)");
 		for($i=0;$i<count($apps);$i++){
 			$app=$apps[$i];
 			$sql=mysql_query("INSERT INTO apqp_cron (peca,ativ,cod,pos) VALUES ('$pc','$app','$i','$i')");
@@ -97,7 +97,7 @@ if(mysql_num_rows($sql)==0){
 }else{
 	$alt=true;
 }
-	$sqlb=mysql_query("SELECT * FROM apqp_cron WHERE perc='100' AND peca='$pc' AND ativ='Certificado de Submiss„o'");
+	$sqlb=mysql_query("SELECT * FROM apqp_cron WHERE perc='100' AND peca='$pc' AND ativ='Certificado de Submiss√£o'");
 	if(!mysql_num_rows($sqlb)){
 		$sql=mysql_query("SELECT * FROM apqp_pc WHERE crono_apro='S' AND id='$pc'");
 		if(!mysql_num_rows($sql)){
@@ -106,23 +106,23 @@ if(mysql_num_rows($sql)==0){
 		}else{
 			$sqlfmea=mysql_query("SELECT * FROM apqp_cron WHERE perc='100' AND peca='$pc' AND ativ='Viabilidade'");
 			if(mysql_num_rows($sqlfmea)){
-				$btnsalva="if (confirm('Caso queira editar este documento ter· que revisar todos os documentos a frente e aprovalos novamente!?')){  } ";
-				$btnsalva2="if (confirm('Caso queira editar este documento ter· que revisar todos os documentos a frente e aprovalos novamente!?')){ window.location='apqp_crono.php?acao=inc'; } return false;";
+				$btnsalva="if (confirm('Caso queira editar este documento ter√° que revisar todos os documentos a frente e aprovalos novamente!?')){  } ";
+				$btnsalva2="if (confirm('Caso queira editar este documento ter√° que revisar todos os documentos a frente e aprovalos novamente!?')){ window.location='apqp_crono.php?acao=inc'; } return false;";
 			}else{
-				$btnsalva="if (confirm('Documento Aprovado! Caso queira alter·-lo ser· removida a aprovaÁ„o')){ }else{ return false; }";
-				$btnsalva2="if (confirm('Documento Aprovado! Caso queira alter·-lo ser· removida a aprovaÁ„o')){ window.location='apqp_crono.php?acao=inc'; } return false;";
+				$btnsalva="if (confirm('Documento Aprovado! Caso queira alter√°-lo ser√° removida a aprova√ß√£o')){ }else{ return false; }";
+				$btnsalva2="if (confirm('Documento Aprovado! Caso queira alter√°-lo ser√° removida a aprova√ß√£o')){ window.location='apqp_crono.php?acao=inc'; } return false;";
 			}
 		}
 		$sqlfmea=mysql_query("SELECT * FROM apqp_cron WHERE perc='100' AND peca='$pc' AND ativ='Viabilidade'");
 		if(!mysql_num_rows($sqlfmea)){
-			$javalimp="if(confirm('Deseja remover a aprovaÁ„o?')){  } else{ return false; }";
+			$javalimp="if(confirm('Deseja remover a aprova√ß√£o?')){  } else{ return false; }";
 		 } else {
-			$javalimp="if(confirm('Deseja remover a aprovaÁ„o?')){ if(confirm('Caso queira remover a aprovaÁ„o, ter· que revisar todos os documentos a frente e aprov·-los novamente.')){  }else{ return false; } } else { return false; }";
+			$javalimp="if(confirm('Deseja remover a aprova√ß√£o?')){ if(confirm('Caso queira remover a aprova√ß√£o, ter√° que revisar todos os documentos a frente e aprov√°-los novamente.')){  }else{ return false; } } else { return false; }";
 		}
 	}else{
-			$btnsalva="if(confirm('O Certificado de submiss„o j· esta aprovado, caso queira remover a aprovaÁ„o deste Estudo ser· removida a aprovaÁ„o de todos os relatÛrios. Deseja remover?')){ if(confirm('VocÍ tem certeza que deseja remover a aprovaÁ„o? Ter· que aprovar todos os relatÛrios novamente.')){  }else{ return false; } }else{ return false; }";
-			$btnsalva2="if(confirm('O Certificado de submiss„o j· esta aprovado, caso queira remover a aprovaÁ„o deste Estudo ser· removida a aprovaÁ„o de todos os relatÛrios. Deseja remover?')){ if(confirm('VocÍ tem certeza que deseja remover a aprovaÁ„o? Ter· que aprovar todos os relatÛrios novamente.')){ window.location='apqp_crono.php?acao=inc'; }else{ return false; } }else{ return false; }";
-			$javalimp="if(confirm('O Certificado de submiss„o j· esta aprovado, caso queira remover a aprovaÁ„o deste Estudo ser· removida a aprovaÁ„o de todos os relatÛrios. Deseja remover?')){ if(confirm('VocÍ tem certeza que deseja remover a aprovaÁ„o? Ter· que aprovar todos os relatÛrios novamente.')){  }else{ return false; } }else{ return false; }";
+			$btnsalva="if(confirm('O Certificado de submiss√£o j√° esta aprovado, caso queira remover a aprova√ß√£o deste Estudo ser√° removida a aprova√ß√£o de todos os relat√≥rios. Deseja remover?')){ if(confirm('Voc√™ tem certeza que deseja remover a aprova√ß√£o? Ter√° que aprovar todos os relat√≥rios novamente.')){  }else{ return false; } }else{ return false; }";
+			$btnsalva2="if(confirm('O Certificado de submiss√£o j√° esta aprovado, caso queira remover a aprova√ß√£o deste Estudo ser√° removida a aprova√ß√£o de todos os relat√≥rios. Deseja remover?')){ if(confirm('Voc√™ tem certeza que deseja remover a aprova√ß√£o? Ter√° que aprovar todos os relat√≥rios novamente.')){ window.location='apqp_crono.php?acao=inc'; }else{ return false; } }else{ return false; }";
+			$javalimp="if(confirm('O Certificado de submiss√£o j√° esta aprovado, caso queira remover a aprova√ß√£o deste Estudo ser√° removida a aprova√ß√£o de todos os relat√≥rios. Deseja remover?')){ if(confirm('Voc√™ tem certeza que deseja remover a aprova√ß√£o? Ter√° que aprovar todos os relat√≥rios novamente.')){  }else{ return false; } }else{ return false; }";
 
 	}
 
@@ -161,7 +161,7 @@ function vailogo(type){
 function vailogo1(type,peca){
 	window.open('apqp_imp_email.php?acao='+type+'&local='+form1.local.value+'&email='+form1.email.value+'&pc='+peca,'busca','width=430,height=140,scrollbars=1');
 }
-<? if($acao=="inc"){ ?>
+<?php if($acao=="inc"){ ?>
 function verificainc(cad){
 	if(cad.ativ.value==''){
 		alert('Informe a atividade');
@@ -170,28 +170,28 @@ function verificainc(cad){
 	}
 	return true;
 }
-<?
+<?php
 }elseif($acao=="alt"){
 if($alt){
 ?>
 function verificalt(cad){
-<?
+<?php
 	while($res=mysql_fetch_array($sql)){
 		$wid=$res["id"];
 ?>
-	if(cad.ativ<? print $wid; ?>.value==''){
+	if(cad.ativ<?php print $wid; ?>.value==''){
 		alert('Informe a atividade');
-		cad.ativ<? print $wid; ?>.focus();
+		cad.ativ<?php print $wid; ?>.focus();
 		return false;
 	}
-<? 
+<?php 
 	} 
 ?>
 
 	for(i=1;i<cad.acum.value;i++){
 			if(document.all['responsavel'+i].value!=''){
 			if(document.all['ini'+i].value==''){
-				alert('Preencha a data inÌcio.');
+				alert('Preencha a data in√≠cio.');
 				//cad.document.all['ini'+i].focus();
 				return false;
 			}
@@ -204,7 +204,7 @@ function verificalt(cad){
 	}
 	return true;
 }
-<? 
+<?php 
 }
 } 
 ?>
@@ -213,7 +213,7 @@ function abrir(url,id){
 	return true;
 }
 function salvar(url,id){
-	window.open('apqp_impressao.php?acao=salvar&local='+ url +'&pc='+ <?=$pc?> + '');
+	window.open('apqp_impressao.php?acao=salvar&local='+ url +'&pc='+ <?php echo $pc?> + '');
 	return true;
 }
 
@@ -234,8 +234,8 @@ function MM_openBrWindow(theURL,winName,features) { //v2.0
 <body  leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" onLoad="enterativa=1;"onkeypress="return ent()">
 <table width="590" border="0" cellpadding="0" cellspacing="0" class="texto">
       <tr>
-        <td width="27" align="center"><div align="left"><a href="#" onClick="MM_openBrWindow('help/mini_cronograma.html','','width=680,height=501,left=300,top=50')"><img src="imagens/icon14_ahn.gif" width="14" height="14" border="0" onMouseOver="this.T_STICKY=true; this.T_TITLE='CRONOGRAMA'; this.T_DELAY=10; this.T_WIDTH=225;  return escape('Nesta modulo vocÍ se programar· quanto ao desenvolvimento do APQP e delegar· respons·veis por cada atividade definindo data de inicio.')"></a><span class="impTextoBold">&nbsp;</span></div></td>
-        <td width="563" align="right"><div align="left" class="textobold style1 style1 style1 style1 style1 style1">APQP - Cronograma <? print $npc; ?></div></td>
+        <td width="27" align="center"><div align="left"><a href="#" onClick="MM_openBrWindow('help/mini_cronograma.html','','width=680,height=501,left=300,top=50')"><img src="imagens/icon14_ahn.gif" width="14" height="14" border="0" onMouseOver="this.T_STICKY=true; this.T_TITLE='CRONOGRAMA'; this.T_DELAY=10; this.T_WIDTH=225;  return escape('Nesta modulo voc√™ se programar√° quanto ao desenvolvimento do APQP e delegar√° respons√°veis por cada atividade definindo data de inicio.')"></a><span class="impTextoBold">&nbsp;</span></div></td>
+        <td width="563" align="right"><div align="left" class="textobold style1 style1 style1 style1 style1 style1">APQP - Cronograma <?php print $npc; ?></div></td>
       </tr>
       <tr>
         <td align="center">&nbsp;</td>
@@ -245,7 +245,7 @@ function MM_openBrWindow(theURL,winName,features) { //v2.0
 <table width="711"  border="1" cellpadding="3" cellspacing="0" bordercolor="#CCCCCC">
   <tr>
     <td width="701"><table width="701" border="1" cellpadding="0" cellspacing="0" bordercolor="#FFFFFF">
-      <? if($acao=="entrar"){ ?>
+      <?php if($acao=="entrar"){ ?>
 	  
       <tr>
         <td width="697" align="left" valign="top"><table width="824" border="0" cellpadding="3" cellspacing="1" bgcolor="#999999">
@@ -261,25 +261,25 @@ function MM_openBrWindow(theURL,winName,features) { //v2.0
               <td align="center">Obs</td>
               <td align="center">&nbsp;</td>
             </tr>
-            <?
+            <?php
 $sql=mysql_query("SELECT * FROM apqp_cron WHERE peca='$pc' ORDER BY pos ASC");
 if(mysql_num_rows($sql)==0){
 ?>
             <tr align="center" bgcolor="#FFFFFF" class="texto">
               <td colspan="10" class="textobold"><span class="textopretobold">NENHUMA ATIVIDADE ENCONTRADA</span></td>
             </tr>
-            <?
+            <?php
 }else{
 	while($res=mysql_fetch_array($sql)){
 		$hj=date("Y-m-d"); 
 		$val= round(strtotime($res["prazo"]) - strtotime($hj)) / (60 * 60 * 24); 
 ?>	
-	<tr class="textopreto" onMouseover="changeto('#CCCCCC')" <? if(($val>="3")||($res["prazo"]=="0000-00-00")){ ?> bgcolor="#99FF66" onMouseout="changeback('#99FF66')" <? } else if(($val>="0")&&($val<="2")){ ?> bgcolor="#FFFF66" onMouseout="changeback('#FFFF66')" <? } else if($val<"0") { ?> bgcolor="#FF3300" onMouseout="changeback('#FF3300')" <? } else{ ?>  bgcolor="#FFFFFF" onMouseout="changeback('#FFFFFF')" <? } ?>><td width="160"><? print $res["ativ"]; if(($res["ativ"]=="Plano de Controle")&&(!empty($res_f1["quem"]))){?>&nbsp;&nbsp;&nbsp;&nbsp;<img src="imagens/icon_f1.gif" alt="ProtÛtipo Aprovado" width="10" height="10" border="0"><? } if(($res["ativ"]=="Plano de Controle")&&(!empty($res_f2["quem"]))){?>&nbsp;&nbsp;&nbsp;<img src="imagens/icon_f2.gif" alt="PrÈ-LanÁamento Aprovado" width="10" height="10" border="0"><? } if(($res["ativ"]=="Plano de Controle")&&(!empty($res_f3["quem"]))){?>&nbsp;&nbsp;&nbsp;<img src="imagens/icon_f3.gif" alt="ProduÁ„o Aprovada" width="10" height="10" border="0"><? } ?></td>
-                <td><? print $res["responsavel"]; ?></td>
-                <td width="64" align="center"><? if($res["ini"]=="0000-00-00"){ print "&nbsp;"; }else{ print banco2data($res["ini"]); } ?></td>
-              <td width="64" align="center"><? if($res["prazo"]=="0000-00-00"){ print "&nbsp;"; }else{ print banco2data($res["prazo"]); } ?></td>
-              <td width="64" align="center"><? if($res["fim"]=="0000-00-00"){ print "&nbsp;"; }else{ print banco2data($res["fim"]); } ?></td>
-              <td width="64" align="center"><? 
+	<tr class="textopreto" onMouseover="changeto('#CCCCCC')" <?php if(($val>="3")||($res["prazo"]=="0000-00-00")){ ?> bgcolor="#99FF66" onMouseout="changeback('#99FF66')" <?php } else if(($val>="0")&&($val<="2")){ ?> bgcolor="#FFFF66" onMouseout="changeback('#FFFF66')" <?php } else if($val<"0") { ?> bgcolor="#FF3300" onMouseout="changeback('#FF3300')" <?php } else{ ?>  bgcolor="#FFFFFF" onMouseout="changeback('#FFFFFF')" <?php } ?>><td width="160"><?php print $res["ativ"]; if(($res["ativ"]=="Plano de Controle")&&(!empty($res_f1["quem"]))){?>&nbsp;&nbsp;&nbsp;&nbsp;<img src="imagens/icon_f1.gif" alt="Prot√≥tipo Aprovado" width="10" height="10" border="0"><?php } if(($res["ativ"]=="Plano de Controle")&&(!empty($res_f2["quem"]))){?>&nbsp;&nbsp;&nbsp;<img src="imagens/icon_f2.gif" alt="Pr√©-Lan√ßamento Aprovado" width="10" height="10" border="0"><?php } if(($res["ativ"]=="Plano de Controle")&&(!empty($res_f3["quem"]))){?>&nbsp;&nbsp;&nbsp;<img src="imagens/icon_f3.gif" alt="Produ√ß√£o Aprovada" width="10" height="10" border="0"><?php } ?></td>
+                <td><?php print $res["responsavel"]; ?></td>
+                <td width="64" align="center"><?php if($res["ini"]=="0000-00-00"){ print "&nbsp;"; }else{ print banco2data($res["ini"]); } ?></td>
+              <td width="64" align="center"><?php if($res["prazo"]=="0000-00-00"){ print "&nbsp;"; }else{ print banco2data($res["prazo"]); } ?></td>
+              <td width="64" align="center"><?php if($res["fim"]=="0000-00-00"){ print "&nbsp;"; }else{ print banco2data($res["fim"]); } ?></td>
+              <td width="64" align="center"><?php 
 			  $hj=date("Y-m-d");
 			   if($res["fim"]=="0000-00-00"){
 					if($res["prazo"]=="0000-00-00"){
@@ -299,12 +299,12 @@ if(mysql_num_rows($sql)==0){
 				  if($atrazo>="0"){ print round($atrazo); } 
 			  }
 			  ?></td>
-              <td width="121" align="left"><? print $res["resp"]; ?></td>
-              <td width="37" align="center"><? print $res["perc"]; ?></td>
-              <td width="30" align="center"><a href="#"  onClick="return abre('apqp_cronobs.php?id=<? print $res["id"]; ?>','obs','width=320,height=200,scrollbars=1');"><img src="imagens/icon14_visualizar.gif" alt="Observa&ccedil;&otilde;es" width="14" height="14" border="0"></a></td>
-              <td width="28" align="center"><a href="#" onClick="return pergunta('Deseja excluir esta atividade?','apqp_crono_sql.php?acao=exc&id=<? print $res["id"]; ?>');"><img src="imagens/icon14_lixeira.gif" alt="Excluir" width="14" height="14" border="0"></a></td>
+              <td width="121" align="left"><?php print $res["resp"]; ?></td>
+              <td width="37" align="center"><?php print $res["perc"]; ?></td>
+              <td width="30" align="center"><a href="#"  onClick="return abre('apqp_cronobs.php?id=<?php print $res["id"]; ?>','obs','width=320,height=200,scrollbars=1');"><img src="imagens/icon14_visualizar.gif" alt="Observa&ccedil;&otilde;es" width="14" height="14" border="0"></a></td>
+              <td width="28" align="center"><a href="#" onClick="return pergunta('Deseja excluir esta atividade?','apqp_crono_sql.php?acao=exc&id=<?php print $res["id"]; ?>');"><img src="imagens/icon14_lixeira.gif" alt="Excluir" width="14" height="14" border="0"></a></td>
             </tr>
-            <?
+            <?php
 	}
 }
 ?>
@@ -319,29 +319,29 @@ if(mysql_num_rows($sql)==0){
 		<form name="form1" method="post" action="apqp_crono_sql.php" onSubmit="return verifica(this)">
           <table width="100%" border="0" cellpadding="3" cellspacing="0">
             <tr class="texto">
-              <? if($_SESSION["e_mail"]=="S"){ ?>
+              <?php if($_SESSION["e_mail"]=="S"){ ?>
               <td align="left" class="textobold">&nbsp;Enviar e-mail: 
                 <input name="local" type="hidden" id="local" value="crono">
                 <input name="acao" type="hidden" id="acao" value="1"></td>
               <td><input name="email" type="text" class="formularioselect" id="email3" value="Digite o e-mail aqui"></td>
-              <? if(in_array("U",$emailt)){ ?>
+              <?php if(in_array("U",$emailt)){ ?>
               <td><div align="center"><a href="#" onClick="return abre('busca_email2.php','a','width=320,height=380,scrollbars=1');"><img src="imagens/icon14_pessoas.gif" alt="Buscar Email de Funcion&aacute;rios" width="14" height="14" border="0"></a></div></td>
-              <? } if(in_array("G",$emailt)){ ?>
+              <?php } if(in_array("G",$emailt)){ ?>
               <td><div align="center"><a href="#" onClick="return abre('busca_email_grupo.php','a','width=320,height=380,scrollbars=1');">
                 <input name="grupo" type="hidden" id="grupo">
                   <input name="grupo_nome" type="hidden" id="grupo_nome">
                 <img src="imagens/icon14_grupo.gif" alt="Buscar Grupo de Emails" width="26" height="13" border="0"></a></div></td>
-              <? } if(in_array("C",$emailt)){ ?>
+              <?php } if(in_array("C",$emailt)){ ?>
               <td><div align="center"><a href="#" onClick="return abre('busca_email.php','a','width=320,height=380,scrollbars=1');"></a><a href="#" onClick="return abre('busca_email.php','a','width=320,height=300,scrollbars=1');"><img src="imagens/icon_cli.gif" alt="Buscar Emails de Clientes" width="18" height="18" border="0"></a></div></td>
-              <? } ?>
-              <td><div align="center"><a href="#" onClick="vailogo1('email','<?= $pc; ?>');">
-                <? if($_SESSION["login_funcionario"]=="S"){ ?>
+              <?php } ?>
+              <td><div align="center"><a href="#" onClick="vailogo1('email','<?php echo  $pc; ?>');">
+                <?php if($_SESSION["login_funcionario"]=="S"){ ?>
                 <img src="imagens/icon14_mail.gif" alt="Enviar Email" width="16" height="10" border="0"></a>
-                  <? } ?>
+                  <?php } ?>
               </div></td>
-              <? } if($_SESSION["i_mp"]=="S"){ ?>
+              <?php } if($_SESSION["i_mp"]=="S"){ ?>
               <td><div align="center"><a href="#" onClick="vailogo('imp');"><img src="imagens/icon14_imp.gif" alt="Imprimir" width="15" height="15" border="0"></a></div></td>
-              <? } ?>
+              <?php } ?>
             </tr>
           </table>
 		  
@@ -360,22 +360,22 @@ if(mysql_num_rows($sql)==0){
             </table>
 			<p><input name="button12" type="button" class="microtxt" value="Voltar" onClick="window.location='apqp_menu.php';">
 			  &nbsp;
-			  <input name="acao3" type="button" class="microtxt" value="Salvar em Disco" onClick="salvar('crono','<?=$res["id"];?>')">
-			  <? if($alt){ ?>
+			  <input name="acao3" type="button" class="microtxt" value="Salvar em Disco" onClick="salvar('crono','<?php echo $res["id"];?>')">
+			  <?php if($alt){ ?>
 			  &nbsp;
 			  <input name="button122" type="button" class="microtxt" value="Alterar" onClick="window.location='apqp_crono.php?acao=alt';">
-			  <? } ?>
+			  <?php } ?>
 			  &nbsp;
-			  <input name="button1222" type="button" class="microtxt" value="Incluir Atividade" onClick="<?= $btnsalva2; ?>">
+			  <input name="button1222" type="button" class="microtxt" value="Incluir Atividade" onClick="<?php echo  $btnsalva2; ?>">
 			  &nbsp;
-			  <?
+			  <?php
 			  $sqlcron=mysql_query("SELECT * FROM apqp_pc WHERE id='$pc'");
 			$resc=mysql_fetch_array($sqlcron);
 			  ?>
-			  <input name="button12222" type="button" class="microtxt" value="Gerar Cronograma" onClick="window.location='apqp_crono.php?acao=gera';" <? if(!empty($resc["crono_quem"]) or $res["crono_ger"]=="S" ){ ?> disabled <? } ?>>
+			  <input name="button12222" type="button" class="microtxt" value="Gerar Cronograma" onClick="window.location='apqp_crono.php?acao=gera';" <?php if(!empty($resc["crono_quem"]) or $res["crono_ger"]=="S" ){ ?> disabled <?php } ?>>
 		  <img src="imagens/dot.gif" width="20" height="5"> &nbsp; </p></td>
       </tr>
-      <? }elseif($acao=="alt"){ ?>
+      <?php }elseif($acao=="alt"){ ?>
       <tr>
         <td align="left" valign="top"><form name="form1" id="form1" method="post" action="apqp_crono_sql.php" onSubmit="return verificalt(this);">
             <table width="826" border="0" cellpadding="3" cellspacing="1" bgcolor="#999999">
@@ -389,14 +389,14 @@ if(mysql_num_rows($sql)==0){
                 <td width="35" align="center">%</td>
                 <td width="141" align="center">Obs</td>
               </tr>
-              <?
+              <?php
 $sql=mysql_query("SELECT * FROM apqp_cron WHERE peca='$pc' ORDER BY pos ASC");
 if(mysql_num_rows($sql)==0){
 ?>
               <tr align="center" bgcolor="#FFFFFF" class="texto">
                 <td colspan="8" class="textobold"><span class="textopretobold">NENHUMA ATIVIDADE ENCONTRADA</span></td>
               </tr>
-              <?
+              <?php
 }else{
 $i=0;
 	while($res=mysql_fetch_array($sql)){
@@ -404,38 +404,38 @@ $i=0;
 		$ativ=$res["ativ"];
 ?>
               <tr bgcolor="#FFFFFF" onMouseover="changeto('#CCCCCC')" onMouseout="changeback('#FFFFFF')">
-                <td width="158"><input name="ativ[<? print $res["id"]; ?>]" type="text" class="formularioselectsemborda" id="ativ<? print $res["id"]; ?>" value="<? print $res["ativ"]; ?>" size="1" readonly></td>
+                <td width="158"><input name="ativ[<?php print $res["id"]; ?>]" type="text" class="formularioselectsemborda" id="ativ<?php print $res["id"]; ?>" value="<?php print $res["ativ"]; ?>" size="1" readonly></td>
                 <td class="texto"><span class="textobold">
-                  <select name="responsavel[<? print $res["id"]; ?>]" class="formulario" id="responsavel<? print $i; ?>">
+                  <select name="responsavel[<?php print $res["id"]; ?>]" class="formulario" id="responsavel<?php print $i; ?>">
                     <option value="">Selecione</option>
-                    <?
+                    <?php
 $sqlr=mysql_query("SELECT * FROM funcionarios ORDER BY nome ASC");
 while($resr=mysql_fetch_array($sqlr)){
 	$nomer=$resr["nome"];
 ?>
-                    <option value="<? print $nomer; ?>"<? if($res["responsavel"]==$nomer) print "selected"; ?>><? print($nomer); ?></option>
-                    <? } ?>
+                    <option value="<?php print $nomer; ?>"<?php if($res["responsavel"]==$nomer) print "selected"; ?>><?php print($nomer); ?></option>
+                    <?php } ?>
                   </select>
                 </span></td>
                 <td width="64" class="texto">
 				  <div align="center">
-				    <input name="ini[<? print $res["id"]; ?>]" type="text" class="formularioselectsemborda" id="ini<? print $i; ?>" value="<? if($res["ini"]=="0000-00-00"){ print ""; }else{ print banco2data($res["ini"]); } ?>" size="1" maxlength="10" onKeyUp="mdata(this)" onKeyPress="return validanum(this, event)">
+				    <input name="ini[<?php print $res["id"]; ?>]" type="text" class="formularioselectsemborda" id="ini<?php print $i; ?>" value="<?php if($res["ini"]=="0000-00-00"){ print ""; }else{ print banco2data($res["ini"]); } ?>" size="1" maxlength="10" onKeyUp="mdata(this)" onKeyPress="return validanum(this, event)">
 			      </div></td>
                 <td width="65" class="texto"><div align="center">
-                  <input name="prazo[<? print $res["id"]; ?>]" type="text" class="formularioselectsemborda" id="prazo<? print $i; ?>" value="<? if($res["prazo"]=="0000-00-00"){ print ""; }else{ print banco2data($res["prazo"]); } ?>" size="1" maxlength="10" onKeyUp="mdata(this)" onKeyPress="return validanum(this, event)">
+                  <input name="prazo[<?php print $res["id"]; ?>]" type="text" class="formularioselectsemborda" id="prazo<?php print $i; ?>" value="<?php if($res["prazo"]=="0000-00-00"){ print ""; }else{ print banco2data($res["prazo"]); } ?>" size="1" maxlength="10" onKeyUp="mdata(this)" onKeyPress="return validanum(this, event)">
                 </div></td>
                 <td width="64" class="texto"><div align="center">
-                  <input name="fim[<? print $res["id"]; ?>]" type="text" class="formularioselectsemborda" id="fim<? print $res["id"]; ?>" value="<? if($res["fim"]=="0000-00-00"){ print ""; }else{ print banco2data($res["fim"]); } ?>" size="1" maxlength="10" onKeyUp="mdata(this)" onKeyPress="return validanum(this, event)" <? if($ativ!="An·lise Critica" and $ativ!="Ferramental/InstalaÁıes" and $ativ!="InstruÁıes do Operador" and $ativ!="VerificaÁ„o / validaÁ„o" and $ativ!="Lote Piloto"){ print "readonly"; } ?>>
+                  <input name="fim[<?php print $res["id"]; ?>]" type="text" class="formularioselectsemborda" id="fim<?php print $res["id"]; ?>" value="<?php if($res["fim"]=="0000-00-00"){ print ""; }else{ print banco2data($res["fim"]); } ?>" size="1" maxlength="10" onKeyUp="mdata(this)" onKeyPress="return validanum(this, event)" <?php if($ativ!="An√°lise Critica" and $ativ!="Ferramental/Instala√ß√µes" and $ativ!="Instru√ß√µes do Operador" and $ativ!="Verifica√ß√£o / valida√ß√£o" and $ativ!="Lote Piloto"){ print "readonly"; } ?>>
                 </div></td>
                 <td width="121" align="center" class="texto"><span class="textobold">
-                  <input name="resp[<? print $res["id"]; ?>]" class="formularioselectsemborda" id="resp" value="<? print $res["resp"] ?>" <? if($ativ!='An·lise Critica' and $ativ!='VerificaÁ„o / validaÁ„o'){ print "readonly"; } ?>>
+                  <input name="resp[<?php print $res["id"]; ?>]" class="formularioselectsemborda" id="resp" value="<?php print $res["resp"] ?>" <?php if($ativ!='An√°lise Critica' and $ativ!='Verifica√ß√£o / valida√ß√£o'){ print "readonly"; } ?>>
                 </span></td>
                 <td width="35" class="texto"><div align="center">
-                  <input name="perc[<? print $res["id"]; ?>]" type="text" class="formularioselectsemborda" id="perc<? print $res["id"]; ?>" value="<? print $res["perc"]; ?>" size="1" maxlength="3" <? if($ativ!='An·lise Critica' and $ativ!='VerificaÁ„o / validaÁ„o'){ print "readonly"; } ?>>
+                  <input name="perc[<?php print $res["id"]; ?>]" type="text" class="formularioselectsemborda" id="perc<?php print $res["id"]; ?>" value="<?php print $res["perc"]; ?>" size="1" maxlength="3" <?php if($ativ!='An√°lise Critica' and $ativ!='Verifica√ß√£o / valida√ß√£o'){ print "readonly"; } ?>>
                 </div></td>
-                <td align="center" class="texto"><input name="obs[<? print $res["id"]; ?>]" type="text" class="formularioselectsemborda" id="obs<? print $res["id"]; ?>" value="<? print $res["obs"]; ?>" size="1" maxlength="255"></td>
+                <td align="center" class="texto"><input name="obs[<?php print $res["id"]; ?>]" type="text" class="formularioselectsemborda" id="obs<?php print $res["id"]; ?>" value="<?php print $res["obs"]; ?>" size="1" maxlength="255"></td>
               </tr>
-              <?
+              <?php
 	}
 }
 ?>
@@ -446,20 +446,20 @@ while($resr=mysql_fetch_array($sqlr)){
               </tr>
               <tr>
                 <td align="left" valign="top"><table width="826" border="0" cellspacing="0" cellpadding="0">
-                    <?
+                    <?php
 $sqlcron=mysql_query("SELECT * FROM apqp_pc WHERE id='$pc'");
 $resc=mysql_fetch_array($sqlcron);
 ?>
                     <tr class="textobold">
                       
                       <td width="96" align="right">Aprovado por:&nbsp; </td>
-                      <td width="268"><input name="quem" type="text" class="formularioselect" id="quem" value="<?= $resc["crono_quem"]; ?>" readonly></td>
+                      <td width="268"><input name="quem" type="text" class="formularioselect" id="quem" value="<?php echo  $resc["crono_quem"]; ?>" readonly></td>
                       <td width="32" align="center">data:</td>
-                      <td width="69"><input name="dtquem" type="text" class="formularioselect" id="dtquem3" onKeyPress="return validanum(this, event)" onKeyUp="mdata(this)" value="<?= banco2data($resc["crono_dtquem"]); ?>" size="7" maxlength="10" readonly=""></td>
+                      <td width="69"><input name="dtquem" type="text" class="formularioselect" id="dtquem3" onKeyPress="return validanum(this, event)" onKeyUp="mdata(this)" value="<?php echo  banco2data($resc["crono_dtquem"]); ?>" size="7" maxlength="10" readonly=""></td>
 					  
-					  <?
+					  <?php
 					  if(empty($resc["crono_quem"])){
-							$javas="if(confirm('Documento j· foi salvo?  Caso contr·rio os dados ser„o perdidos!')){ 
+							$javas="if(confirm('Documento j√° foi salvo?  Caso contr√°rio os dados ser√£o perdidos!')){ 
 										if(confirm('Deseja Aprovar o Cronograma?')){ 
 										}else{ 
 											return false; 
@@ -473,9 +473,9 @@ $resc=mysql_fetch_array($sqlcron);
 					  ?>
                     <td width="129"><div align="center">
                             <p>
-                              <input name="ap" type="submit" class="microtxt" id="ap" value="aprovar" onClick="<?= $javas; ?>">
+                              <input name="ap" type="submit" class="microtxt" id="ap" value="aprovar" onClick="<?php echo  $javas; ?>">
                               &nbsp;
-							  <input name="lap" type="submit" class="microtxt" id="lap" value="limpar" onClick="<? print $javalimp; ?>">
+							  <input name="lap" type="submit" class="microtxt" id="lap" value="limpar" onClick="<?php print $javalimp; ?>">
                             </p>
                             </div></td></tr>
                 </table></td>
@@ -487,13 +487,13 @@ $resc=mysql_fetch_array($sqlcron);
                 <td align="center"><input name="acao" type="hidden" id="acao" value="alt">
                     <input name="voltar" type="button" class="microtxt" value="Voltar" onClick="window.location='apqp_crono.php';">
                     &nbsp;
-				  <input name="continuar" type="submit" class="microtxt" value="Continuar" onClick="<?= $btnsalva; ?>">
-				  <input name="acum" type="hidden" id="acum" value="<? print $i;?>"></td>
+				  <input name="continuar" type="submit" class="microtxt" value="Continuar" onClick="<?php echo  $btnsalva; ?>">
+				  <input name="acum" type="hidden" id="acum" value="<?php print $i;?>"></td>
               </tr>
             </table>
-         <? if($aprov=="N") print "<script>bloke();</script>"; ?> </form></td>
+         <?php if($aprov=="N") print "<script>bloke();</script>"; ?> </form></td>
       </tr>
-      <? }elseif($acao=="inc"){ ?>
+      <?php }elseif($acao=="inc"){ ?>
       <tr>
         <td align="left" valign="top"><form name="form2" method="post" action="apqp_crono_sql.php" onSubmit="return verificainc(this);">
             <table width="825" border="0" cellpadding="3" cellspacing="1" bgcolor="#999999">
@@ -507,22 +507,22 @@ $resc=mysql_fetch_array($sqlcron);
                 <td width="264" align="center">Obs</td>
               </tr>
               <tr bgcolor="#FFFFFF">
-                <td width="160"><input name="ativ" type="text" class="formularioselectsemborda" id="ativ[<? print $res["id"]; ?>]3" size="1"></td>
+                <td width="160"><input name="ativ" type="text" class="formularioselectsemborda" id="ativ[<?php print $res["id"]; ?>]3" size="1"></td>
                 <td width="121" class="texto"><select name="responsavel" class="formulario" id="responsavel">
 <option value="">Selecione</option>
-                    <?
+                    <?php
 $sqlr=mysql_query("SELECT * FROM funcionarios ORDER BY nome ASC");
 while($resr=mysql_fetch_array($sqlr)){
 	$nomer=$resr["nome"];
 ?>
-                    <option value="<? print $nomer; ?>"<? if($res["responsavel"]==$nomer) print "selected"; ?>><? print($nomer); ?></option>
-                    <? } ?>
+                    <option value="<?php print $nomer; ?>"<?php if($res["responsavel"]==$nomer) print "selected"; ?>><?php print($nomer); ?></option>
+                    <?php } ?>
                 </select></td>
-                <td width="65" align="center" class="texto"><input name="ini" type="text" class="formularioselectsemborda" id="ini[<? print $res["id"]; ?>]3" size="1" maxlength="10" onKeyUp="mdata(this)" onKeyPress="return validanum(this, event)"></td>
-                <td width="64" align="center" class="texto"><input name="prazo" type="text" class="formularioselectsemborda" id="prazo[<? print $res["id"]; ?>]3" size="1" maxlength="10" onKeyUp="mdata(this)" onKeyPress="return validanum(this, event)"></td>
-                <td width="64" align="center" class="texto"><input name="fim" type="text" class="formularioselectsemborda" id="fim[<? print $res["id"]; ?>]3" size="1" maxlength="10" onKeyUp="mdata(this)" onKeyPress="return validanum(this, event)"></td>
-                <td width="37" align="center" class="texto"><input name="perc" type="text" class="formularioselectsemborda" id="perc[<? print $res["id"]; ?>]3" value="0" size="1" maxlength="3" onKeyPress="return validanum(this, event)"></td>
-                <td align="center" class="texto"><input name="obs" type="text" class="formularioselectsemborda" id="obs[<? print $res["id"]; ?>]3" size="1" maxlength="255"></td>
+                <td width="65" align="center" class="texto"><input name="ini" type="text" class="formularioselectsemborda" id="ini[<?php print $res["id"]; ?>]3" size="1" maxlength="10" onKeyUp="mdata(this)" onKeyPress="return validanum(this, event)"></td>
+                <td width="64" align="center" class="texto"><input name="prazo" type="text" class="formularioselectsemborda" id="prazo[<?php print $res["id"]; ?>]3" size="1" maxlength="10" onKeyUp="mdata(this)" onKeyPress="return validanum(this, event)"></td>
+                <td width="64" align="center" class="texto"><input name="fim" type="text" class="formularioselectsemborda" id="fim[<?php print $res["id"]; ?>]3" size="1" maxlength="10" onKeyUp="mdata(this)" onKeyPress="return validanum(this, event)"></td>
+                <td width="37" align="center" class="texto"><input name="perc" type="text" class="formularioselectsemborda" id="perc[<?php print $res["id"]; ?>]3" value="0" size="1" maxlength="3" onKeyPress="return validanum(this, event)"></td>
+                <td align="center" class="texto"><input name="obs" type="text" class="formularioselectsemborda" id="obs[<?php print $res["id"]; ?>]3" size="1" maxlength="255"></td>
               </tr>
             </table>
             <table width="826" border="0" cellspacing="0" cellpadding="0">
@@ -538,13 +538,13 @@ while($resr=mysql_fetch_array($sqlr)){
                       <td width="77" align="center" class="textobold">Incluir</td>
                       <td width="323"><select name="pos" class="formularioselect" id="pos">
                           <option value="0">no in&iacute;cio do cronograma</option>
-                          <?
+                          <?php
 $sql=mysql_query("SELECT * FROM apqp_cron WHERE peca='$pc' ORDER BY pos ASC");
 if(mysql_num_rows($sql)!=0){
 	while($res=mysql_fetch_array($sql)){
 ?>
-                          <option value="<? print $res["pos"]; ?>">depois de <? print $res["ativ"]; ?></option>
-                          <?
+                          <option value="<?php print $res["pos"]; ?>">depois de <?php print $res["ativ"]; ?></option>
+                          <?php
 		
 	}
 }
@@ -560,13 +560,13 @@ if(mysql_num_rows($sql)!=0){
                 <td width="826" align="center"><input name="acao" type="hidden" id="acao" value="inc">
                     <input name="button1233" type="button" class="microtxt" value="Voltar" onClick="window.location='apqp_crono.php';">
                     &nbsp;
-				  <input name="button12322" type="submit" class="microtxt" value="Continuar" onClick="<?= $btnsalva; ?>">                </td>
+				  <input name="button12322" type="submit" class="microtxt" value="Continuar" onClick="<?php echo  $btnsalva; ?>">                </td>
               </tr>
             </table>
         </form></td>
       </tr>
 	
-      <? } ?>
+      <?php } ?>
     </table></td>
   </tr>
 </table>
@@ -574,4 +574,4 @@ if(mysql_num_rows($sql)!=0){
 </body>
 </html>
 <script language="javascript" src="tooltip.js"></script>
-<? include("mensagem.php"); ?>
+<?php include("mensagem.php"); ?>

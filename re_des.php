@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 include("seguranca.php");
 unset($_SESSION["ps"]);
@@ -13,14 +13,15 @@ if(!empty($nome)){
 <html>
 <head>
 <title>CyberManager</title>
-<meta http-equiv="Content-Type" content="text/html; UTF-8">
+<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="style.css" rel="stylesheet" type="text/css">
 <script src="scripts.js"></script>
 <script src="mascaras.js"></script>
 <script>
 function verifica(cad){
 	if(cad.codprod.value==''){
-		alert('Informe o Código do produto');
+		alert('Informe o CÃ³digo do produto');
 		cad.codprod.focus();
 		return false;
 	}
@@ -75,15 +76,15 @@ function verifica(cad){
           <td><select name="vendedor" class="formularioselect" id="vendedor" onChange="form1.representante.value='';">
               <option value="0">Selecione</option>
 			  <option value="todos">Todos Vendedores</option>
-              <?
+              <?php
 		  $sqlven=mysql_query("SELECT c.id,c.nome FROM clientes AS c,cliente_login AS cl, niveis AS n WHERE c.id=cl.cliente AND cl.nivel=n.id AND n.vendedor=1 ORDER BY c.nome ASC");
 		  if(mysql_num_rows($sqlven)){
 		  	while($resven=mysql_fetch_array($sqlven)){
 		  ?>
-              <option value="<?= $resven["id"]; ?>" <? if($resven["id"]==$res["vendedor"]) print "selected"; ?>>
-              <?= $resven["nome"]; ?>
+              <option value="<?php echo  $resven["id"]; ?>" <?php if($resven["id"]==$res["vendedor"]) print "selected"; ?>>
+              <?php echo  $resven["nome"]; ?>
               </option>
-              <?
+              <?php
 		  	}
 		}
 		?>
@@ -94,15 +95,15 @@ function verifica(cad){
           <td><select name="representante" class="formularioselect" id="representante" onChange="form1.vendedor.value='';">
             <option value="0">Selecione</option>
 			 <option value="todos">Todos Representantes</option>
-            <?
+            <?php
 		  $sqlven=mysql_query("SELECT * FROM representante ORDER By nome ASC");
 		  if(mysql_num_rows($sqlven)){
 		  	while($resven=mysql_fetch_array($sqlven)){
 		  ?>
-            <option value="<?= $resven["id"]; ?>">
-              <?= $resven["nome"]; ?>
+            <option value="<?php echo  $resven["id"]; ?>">
+              <?php echo  $resven["nome"]; ?>
               </option>
-            <?
+            <?php
 		  	}
 		}
 		?>
@@ -121,4 +122,4 @@ function verifica(cad){
 
 </body>
 </html>
-<? include("mensagem.php"); ?>
+<?php include("mensagem.php"); ?>

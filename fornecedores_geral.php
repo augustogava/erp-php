@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 include("seguranca.php");
 
@@ -85,9 +85,9 @@ if($acao=="alt"){
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<title><?=$acao=="alt"?"Editar":"Novo"?> Fornecedor - ERP System</title>
-<meta charset="ISO-8859-1">
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title><?php echo $acao=="alt"?"Editar":"Novo"?> Fornecedor - ERP System</title>
+<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <link href="style.css" rel="stylesheet" type="text/css">
@@ -104,8 +104,8 @@ if($acao=="alt"){
     <div class="erp-card">
         <div class="erp-card-header">
             <h1 class="erp-card-title">
-                <i class="fas fa-<?=$acao=="alt"?"edit":"plus"?>"></i> <?=$acao=="alt"?"Editar":"Novo"?> Fornecedor
-                <?=$acao=="alt"?" #".$id:""?>
+                <i class="fas fa-<?php echo $acao=="alt"?"edit":"plus"?>"></i> <?php echo $acao=="alt"?"Editar":"Novo"?> Fornecedor
+                <?php echo $acao=="alt"?" #".$id:""?>
             </h1>
             <div>
                 <a href="fornecedores.php" class="erp-btn erp-btn-outline">
@@ -116,14 +116,14 @@ if($acao=="alt"){
     </div>
     
     <?php if(isset($_SESSION["mensagem"])): ?>
-    <div class="erp-alert erp-alert-<?=strpos($_SESSION["mensagem"],'sucesso')!==false?'success':'danger'?>">
+    <div class="erp-alert erp-alert-<?php echo strpos($_SESSION["mensagem"],'sucesso')!==false?'success':'danger'?>">
         <?php echo $_SESSION["mensagem"]; unset($_SESSION["mensagem"]); ?>
     </div>
     <?php endif; ?>
     
     <form name="form1" method="post" action="">
-        <input type="hidden" name="id" value="<?=$id?>">
-        <input type="hidden" name="loja" value="<?=$loja?>">
+        <input type="hidden" name="id" value="<?php echo $id?>">
+        <input type="hidden" name="loja" value="<?php echo $loja?>">
         
         <div class="erp-card">
             <h3 style="margin-bottom:20px;font-size:18px;color:#2c3e50;"><i class="fas fa-building"></i> Dados Principais</h3>
@@ -131,13 +131,13 @@ if($acao=="alt"){
                 <div class="erp-col" style="flex:3;">
                     <div class="erp-form-group">
                         <label class="erp-form-label">Razao Social *</label>
-                        <input type="text" name="nome" class="erp-form-control" value="<?=$nome?>" required>
+                        <input type="text" name="nome" class="erp-form-control" value="<?php echo $nome?>" required>
                     </div>
                 </div>
                 <div class="erp-col" style="flex:2;">
                     <div class="erp-form-group">
                         <label class="erp-form-label">Nome Fantasia</label>
-                        <input type="text" name="fantasia" class="erp-form-control" value="<?=$fantasia?>">
+                        <input type="text" name="fantasia" class="erp-form-control" value="<?php echo $fantasia?>">
                     </div>
                 </div>
             </div>
@@ -147,33 +147,33 @@ if($acao=="alt"){
                     <div class="erp-form-group">
                         <label class="erp-form-label">Tipo</label>
                         <select name="tipo" class="erp-form-control">
-                            <option value="J" <?=$tipo=="J"?"selected":""?>>Juridica</option>
-                            <option value="F" <?=$tipo=="F"?"selected":""?>>Fisica</option>
+                            <option value="J" <?php echo $tipo=="J"?"selected":""?>>Juridica</option>
+                            <option value="F" <?php echo $tipo=="F"?"selected":""?>>Fisica</option>
                         </select>
                     </div>
                 </div>
                 <div class="erp-col">
                     <div class="erp-form-group">
                         <label class="erp-form-label">CNPJ</label>
-                        <input type="text" name="cnpj" class="erp-form-control" value="<?=$cnpj?>">
+                        <input type="text" name="cnpj" class="erp-form-control" value="<?php echo $cnpj?>">
                     </div>
                 </div>
                 <div class="erp-col">
                     <div class="erp-form-group">
                         <label class="erp-form-label">CPF</label>
-                        <input type="text" name="cpf" class="erp-form-control" value="<?=$cpf?>">
+                        <input type="text" name="cpf" class="erp-form-control" value="<?php echo $cpf?>">
                     </div>
                 </div>
                 <div class="erp-col">
                     <div class="erp-form-group">
                         <label class="erp-form-label">IE</label>
-                        <input type="text" name="ie" class="erp-form-control" value="<?=$ie?>">
+                        <input type="text" name="ie" class="erp-form-control" value="<?php echo $ie?>">
                     </div>
                 </div>
                 <div class="erp-col">
                     <div class="erp-form-group">
                         <label class="erp-form-label">IM</label>
-                        <input type="text" name="im" class="erp-form-control" value="<?=$im?>">
+                        <input type="text" name="im" class="erp-form-control" value="<?php echo $im?>">
                     </div>
                 </div>
             </div>
@@ -185,13 +185,13 @@ if($acao=="alt"){
                 <div class="erp-col" style="flex:1;">
                     <div class="erp-form-group">
                         <label class="erp-form-label">CEP</label>
-                        <input type="text" name="cep" class="erp-form-control" value="<?=$cep?>" maxlength="9" onBlur="busca_cep(this.value,'','');">
+                        <input type="text" name="cep" class="erp-form-control" value="<?php echo $cep?>" maxlength="9" onBlur="busca_cep(this.value,'','');">
                     </div>
                 </div>
                 <div class="erp-col" style="flex:4;">
                     <div class="erp-form-group">
                         <label class="erp-form-label">Endereco</label>
-                        <input type="text" name="endereco" id="endereco" class="erp-form-control" value="<?=$endereco?>">
+                        <input type="text" name="endereco" id="endereco" class="erp-form-control" value="<?php echo $endereco?>">
                     </div>
                 </div>
             </div>
@@ -200,19 +200,19 @@ if($acao=="alt"){
                 <div class="erp-col">
                     <div class="erp-form-group">
                         <label class="erp-form-label">Bairro</label>
-                        <input type="text" name="bairro" id="bairro" class="erp-form-control" value="<?=$bairro?>">
+                        <input type="text" name="bairro" id="bairro" class="erp-form-control" value="<?php echo $bairro?>">
                     </div>
                 </div>
                 <div class="erp-col">
                     <div class="erp-form-group">
                         <label class="erp-form-label">Cidade</label>
-                        <input type="text" name="cidade" id="cidade" class="erp-form-control" value="<?=$cidade?>">
+                        <input type="text" name="cidade" id="cidade" class="erp-form-control" value="<?php echo $cidade?>">
                     </div>
                 </div>
                 <div class="erp-col" style="flex:0.5;">
                     <div class="erp-form-group">
                         <label class="erp-form-label">UF</label>
-                        <input type="text" name="estado" id="estado" class="erp-form-control" value="<?=$estado?>" maxlength="2">
+                        <input type="text" name="estado" id="estado" class="erp-form-control" value="<?php echo $estado?>" maxlength="2">
                     </div>
                 </div>
             </div>
@@ -224,25 +224,25 @@ if($acao=="alt"){
                 <div class="erp-col">
                     <div class="erp-form-group">
                         <label class="erp-form-label">Telefone</label>
-                        <input type="text" name="fone" class="erp-form-control" value="<?=$fone?>">
+                        <input type="text" name="fone" class="erp-form-control" value="<?php echo $fone?>">
                     </div>
                 </div>
                 <div class="erp-col">
                     <div class="erp-form-group">
                         <label class="erp-form-label">Telefone 2</label>
-                        <input type="text" name="fone2" class="erp-form-control" value="<?=$fone2?>">
+                        <input type="text" name="fone2" class="erp-form-control" value="<?php echo $fone2?>">
                     </div>
                 </div>
                 <div class="erp-col">
                     <div class="erp-form-group">
                         <label class="erp-form-label">Celular</label>
-                        <input type="text" name="celular" class="erp-form-control" value="<?=$celular?>">
+                        <input type="text" name="celular" class="erp-form-control" value="<?php echo $celular?>">
                     </div>
                 </div>
                 <div class="erp-col">
                     <div class="erp-form-group">
                         <label class="erp-form-label">Fax</label>
-                        <input type="text" name="fax" class="erp-form-control" value="<?=$fax?>">
+                        <input type="text" name="fax" class="erp-form-control" value="<?php echo $fax?>">
                     </div>
                 </div>
             </div>
@@ -251,19 +251,19 @@ if($acao=="alt"){
                 <div class="erp-col">
                     <div class="erp-form-group">
                         <label class="erp-form-label">Contato Principal</label>
-                        <input type="text" name="contato" class="erp-form-control" value="<?=$contato?>">
+                        <input type="text" name="contato" class="erp-form-control" value="<?php echo $contato?>">
                     </div>
                 </div>
                 <div class="erp-col">
                     <div class="erp-form-group">
                         <label class="erp-form-label">E-mail</label>
-                        <input type="email" name="email" class="erp-form-control" value="<?=$email?>">
+                        <input type="email" name="email" class="erp-form-control" value="<?php echo $email?>">
                     </div>
                 </div>
                 <div class="erp-col">
                     <div class="erp-form-group">
                         <label class="erp-form-label">Website</label>
-                        <input type="text" name="site" class="erp-form-control" value="<?=$site?>">
+                        <input type="text" name="site" class="erp-form-control" value="<?php echo $site?>">
                     </div>
                 </div>
             </div>
@@ -276,8 +276,8 @@ if($acao=="alt"){
                     <div class="erp-form-group">
                         <label class="erp-form-label">Status</label>
                         <select name="aceita" class="erp-form-control">
-                            <option value="S" <?=$aceita=="S"?"selected":""?>>Ativo</option>
-                            <option value="N" <?=$aceita=="N"?"selected":""?>>Inativo</option>
+                            <option value="S" <?php echo $aceita=="S"?"selected":""?>>Ativo</option>
+                            <option value="N" <?php echo $aceita=="N"?"selected":""?>>Inativo</option>
                         </select>
                     </div>
                 </div>
@@ -286,13 +286,13 @@ if($acao=="alt"){
         
         <div style="display:flex;gap:12px;justify-content:flex-end;margin-top:24px;">
             <a href="fornecedores.php" class="erp-btn erp-btn-secondary">Cancelar</a>
-            <button type="submit" name="acao" value="<?=$acao=="alt"?"alterar":"incluir"?>" class="erp-btn erp-btn-success">
-                <i class="fas fa-check"></i> <?=$acao=="alt"?"Salvar Alteracoes":"Cadastrar Fornecedor"?>
+            <button type="submit" name="acao" value="<?php echo $acao=="alt"?"alterar":"incluir"?>" class="erp-btn erp-btn-success">
+                <i class="fas fa-check"></i> <?php echo $acao=="alt"?"Salvar Alteracoes":"Cadastrar Fornecedor"?>
             </button>
         </div>
     </form>
 </div>
 
-<? include("mensagem.php"); ?>
+<?php include("mensagem.php"); ?>
 </body>
 </html>

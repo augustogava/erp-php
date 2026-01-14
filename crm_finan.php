@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 include("seguranca.php");
 $acao=verifi($permi,$acao);
@@ -33,7 +33,8 @@ $res6=mysql_fetch_array($sql6);
 <html>
 <head>
 <title>CyberManager</title>
-<meta http-equiv="Content-Type" content="text/html; UTF-8">
+<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="style.css" rel="stylesheet" type="text/css">
 <script src="scripts.js"></script>
 <script src="mascaras.js"></script>
@@ -61,22 +62,22 @@ $res6=mysql_fetch_array($sql6);
                         <td><span class="menu">Endere&ccedil;o Cliente </span></td>
                       </tr>
                       <tr>
-                        <td><strong>Nome</strong>:<? print $res4["nome"]; ?></td>
+                        <td><strong>Nome</strong>:<?php print $res4["nome"]; ?></td>
                       </tr>
                       <tr>
-                        <td><strong>Endere&ccedil;o:</strong> <? print $res4["endereco"]; ?><strong> Compl.:</strong> <? print $res4["complemento"]; ?></td>
+                        <td><strong>Endere&ccedil;o:</strong> <?php print $res4["endereco"]; ?><strong> Compl.:</strong> <?php print $res4["complemento"]; ?></td>
                       </tr>
                       <tr>
-                        <td><strong>CEP: </strong><? print $res4["cep"]; ?></td>
+                        <td><strong>CEP: </strong><?php print $res4["cep"]; ?></td>
                       </tr>
                       <tr>
-                        <td><strong>Cidade:</strong> <? print $res4["cidade"]; ?> <strong>UF:</strong> <? print $res4["estado"]; ?></td>
+                        <td><strong>Cidade:</strong> <?php print $res4["cidade"]; ?> <strong>UF:</strong> <?php print $res4["estado"]; ?></td>
                       </tr>
                       <tr>
-                        <td><strong>Telefone:</strong>&nbsp;<? print $res4["ddd"]." ".$res4["fone"]; ?></td>
+                        <td><strong>Telefone:</strong>&nbsp;<?php print $res4["ddd"]." ".$res4["fone"]; ?></td>
                       </tr>
                       <tr>
-                        <td><strong>Contato:</strong> <? print $res4["contato"]; ?></td>
+                        <td><strong>Contato:</strong> <?php print $res4["contato"]; ?></td>
                       </tr>
                     </table></td>
                 </tr>
@@ -88,13 +89,13 @@ $res6=mysql_fetch_array($sql6);
                 </tr>
                 
                 <tr>
-                  <td bgcolor="#FFFFFF"><strong>Endere&ccedil;o:</strong> <? print $res5["endereco"]; ?><strong> Compl.:</strong> <? print $res5["numero"]; ?></td>
+                  <td bgcolor="#FFFFFF"><strong>Endere&ccedil;o:</strong> <?php print $res5["endereco"]; ?><strong> Compl.:</strong> <?php print $res5["numero"]; ?></td>
                 </tr>
                 <tr>
-                  <td bgcolor="#FFFFFF"><strong>CEP: </strong><? print $res5["cep"]; ?></td>
+                  <td bgcolor="#FFFFFF"><strong>CEP: </strong><?php print $res5["cep"]; ?></td>
                 </tr>
                 <tr>
-                  <td bgcolor="#FFFFFF"><strong>Cidade:</strong> <? print $res5["cidade"]; ?> <strong>UF:</strong> <? print $res5["estado"]; ?></td>
+                  <td bgcolor="#FFFFFF"><strong>Cidade:</strong> <?php print $res5["cidade"]; ?> <strong>UF:</strong> <?php print $res5["estado"]; ?></td>
                 </tr>
                 
                 <tr>
@@ -104,22 +105,22 @@ $res6=mysql_fetch_array($sql6);
                   <td align="left" bgcolor="#FFFFFF" class="menu">Resumo</td>
                 </tr>
                 <tr>
-                  <td width="639" align="left" bgcolor="#FFFFFF"><strong>Data da &ugrave;ltima Compra:</strong> <? print $ultima; ?></td>
+                  <td width="639" align="left" bgcolor="#FFFFFF"><strong>Data da &ugrave;ltima Compra:</strong> <?php print $ultima; ?></td>
                 </tr>
                 <tr>
-                  <td align="left" bgcolor="#FFFFFF"><div><strong>Ultima pesquisa no Serasa:</strong> <? print banco2data($res6["serasa"]); ?></div></td>
+                  <td align="left" bgcolor="#FFFFFF"><div><strong>Ultima pesquisa no Serasa:</strong> <?php print banco2data($res6["serasa"]); ?></div></td>
                 </tr>
                 <tr>
-                  <td align="left" bgcolor="#FFFFFF"><div><strong>Valor Acumulado de Compras:</strong> <? print $valor; ?></div></td>
+                  <td align="left" bgcolor="#FFFFFF"><div><strong>Valor Acumulado de Compras:</strong> <?php print $valor; ?></div></td>
                 </tr>
                 <tr>
-                  <td align="left" bgcolor="#FFFFFF"><div><strong>Valor em Aberto:</strong> <? print $aberto; ?></div></td>
+                  <td align="left" bgcolor="#FFFFFF"><div><strong>Valor em Aberto:</strong> <?php print $aberto; ?></div></td>
                 </tr>
                 <tr>
-                  <td align="left" bgcolor="#FFFFFF"><div><strong>Prazo m&eacute;dio de pagamento:</strong> <? print $prazo; ?></div></td>
+                  <td align="left" bgcolor="#FFFFFF"><div><strong>Prazo m&eacute;dio de pagamento:</strong> <?php print $prazo; ?></div></td>
                 </tr>
                 <tr>
-                  <td align="left" bgcolor="#FFFFFF"><strong>Media de Atraso:</strong> <? print $media; ?></td>
+                  <td align="left" bgcolor="#FFFFFF"><strong>Media de Atraso:</strong> <?php print $media; ?></td>
                 </tr>
             </table></td>
           </tr>
@@ -132,4 +133,4 @@ $res6=mysql_fetch_array($sql6);
 </table>
 </body>
 </html>
-<? include("mensagem.php"); ?>
+<?php include("mensagem.php"); ?>

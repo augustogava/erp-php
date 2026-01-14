@@ -1,5 +1,5 @@
 <map name="Map" id="Map">
-<?
+<?php
 $left=0;
 $top=0;
 $right=0;
@@ -13,8 +13,8 @@ for($i=1;$i<=100;$i++){
 		$right+=10;
 		$x++;
 ?>
-<area shape="rect" onMouseOver="this.T_STICKY=true; this.T_TITLE='Campos Preenchimentos obrigatorio'; this.T_DELAY=10; this.T_WIDTH=225;  return escape('aaa')" coords="<?= "$left , $top, $right, $bottom"; ?>" href="http://www.teste.net" title="<?= "$i e $j" ?>" target="_blank"/>
-<?
+<area shape="rect" onMouseOver="this.T_STICKY=true; this.T_TITLE='Campos Preenchimentos obrigatorio'; this.T_DELAY=10; this.T_WIDTH=225;  return escape('aaa')" coords="<?php echo  "$left , $top, $right, $bottom"; ?>" href="http://www.teste.net" title="<?php echo  "$i e $j" ?>" target="_blank"/>
+<?php
 	$left+=10;
 	}
 	

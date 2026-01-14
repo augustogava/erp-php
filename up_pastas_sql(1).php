@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 if(empty($acao)) exit;
 if($acao=="inc"){
@@ -7,7 +7,7 @@ if($acao=="inc"){
 		$_SESSION["mensagem"]="Pasta criada com sucesso!";
 		$acao="entrar";
 	}else{
-		$_SESSION["mensagem"]="A Pasta não pôde ser criada!";
+		$_SESSION["mensagem"]="A Pasta nÃ£o pÃ´de ser criada!";
 		$acao="inc";
 	}
 }elseif($acao=="alt"){
@@ -16,7 +16,7 @@ if($acao=="inc"){
 		$_SESSION["mensagem"]="Pasta alterada com sucesso!";
 		$acao="entrar";
 	}else{
-		$_SESSION["mensagem"]="A Pasta não pôde ser alterada!";
+		$_SESSION["mensagem"]="A Pasta nÃ£o pÃ´de ser alterada!";
 		$acao="alt";
 	}
 }elseif($acao=="exc"){
@@ -33,12 +33,12 @@ if($acao=="inc"){
 				}
 			}
 			if($sql){
-			$_SESSION["mensagem"]="Pasta excluída com sucesso!";
+			$_SESSION["mensagem"]="Pasta excluÃ­da com sucesso!";
 			}else{
-			$_SESSION["mensagem"]="A Pasta não pôde ser excluída!";
+			$_SESSION["mensagem"]="A Pasta nÃ£o pÃ´de ser excluÃ­da!";
 			}		
 		}else{
-		$_SESSION["mensagem"]="A Pasta não pôde ser excluída!";
+		$_SESSION["mensagem"]="A Pasta nÃ£o pÃ´de ser excluÃ­da!";
 		}
 	}
 	$acao="entrar";

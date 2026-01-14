@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 include("seguranca.php");
 $nivel=$_SESSION["login_nivel"];
@@ -109,16 +109,17 @@ if($acao=="exc"){
 		$err=true;
 	}
 	if(!$err){
-		$_SESSION["mensagem"]="Cliente excluído com sucesso!";
+		$_SESSION["mensagem"]="Cliente excluÃ­do com sucesso!";
 	}else{
-		$_SESSION["mensagem"]="O cliente não pôde ser excluído!";
+		$_SESSION["mensagem"]="O cliente nÃ£o pÃ´de ser excluÃ­do!";
 	}
 }
 ?>
 <html>
 <head>
 <title>CyberManager</title>
-<meta http-equiv="Content-Type" content="text/html; UTF-8">
+<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="style.css" rel="stylesheet" type="text/css">
 <script src="mascaras.js"></script>
 <script src="scripts.js"></script>
@@ -165,7 +166,7 @@ if($acao=="exc"){
                   <td><select name="porte" class="textobold" id="porte">
                       <option value="" selected="selected">Selecione</option>
 						<option value="1">Pequeno</option>
-						<option value="2">Médio</option>
+						<option value="2">MÃ©dio</option>
 						<option value="3">Grande</option>
                   </select></td>
                 </tr>
@@ -173,26 +174,26 @@ if($acao=="exc"){
                   <td width="151">Matriz/Filial:</td>
                   <td width="249"><select name="grupo" class="textobold" id="select2">
                     <option value="" selected="selected">Selecione</option>
-                    <? $sql=mysql_query("select * from grupos");
+                    <?php $sql=mysql_query("select * from grupos");
 			while($res=mysql_fetch_array($sql)){
 			 ?>
-                    <option value="<?= $res["id"]; ?>">
-                      <?= $res["nome"]; ?>
+                    <option value="<?php echo  $res["id"]; ?>">
+                      <?php echo  $res["nome"]; ?>
                       </option>
-                    <? } ?>
+                    <?php } ?>
                   </select></td>
                 </tr>
                 <tr class="textobold">
                   <td>Ramo:</td>
                   <td><select name="ramo" class="textobold" id="select3">
                     <option value="" selected="selected">Selecione</option>
-                    <? $sql=mysql_query("select * from ramo");
+                    <?php $sql=mysql_query("select * from ramo");
 			while($res=mysql_fetch_array($sql)){
 			 ?>
-                    <option value="<?= $res["id"]; ?>">
-                    <?= $res["nome"]; ?>
+                    <option value="<?php echo  $res["id"]; ?>">
+                    <?php echo  $res["nome"]; ?>
                     </option>
-                    <? } ?>
+                    <?php } ?>
                   </select></td>
                 </tr>
                 <tr class="textobold">
@@ -209,14 +210,14 @@ if($acao=="exc"){
                   <td><span class="texto">
                     <select name="estado" id="estado" class="formulario">
                       <option value="">Selecione</option>
-                      <?
-	$sql2=mysql_query("SELECT * FROM estado") or die("nao foi");
+                      <?php
+	$sql2=mysql_query("SELECT * FROM estado") or erp_db_fail();
 	while($res2=mysql_fetch_array($sql2)){
 	?>
-                      <option value="<?= $res2["id"]; ?>" <? if($res2["id"]==$estado){ print "selected"; } ?>>
-                      <?= $res2["nome"]; ?>
+                      <option value="<?php echo  $res2["id"]; ?>" <?php if($res2["id"]==$estado){ print "selected"; } ?>>
+                      <?php echo  $res2["nome"]; ?>
                       </option>
-                      <? } ?>
+                      <?php } ?>
                     </select>
                   </span></td>
                 </tr>
@@ -245,12 +246,12 @@ if($acao=="exc"){
                   <td>Origem:</td>
                   <td><select name="origem" class="textobold" id="origem">
                       <option selected="selected" value="">Selecione</option>
-                      <option value="mkr" <? if($origem=="mkr"){ print "selected"; } ?>>MKR</option>
-                      <option value="site" <? if($origem=="site"){ print "selected"; } ?>>Site</option>
-                      <option value="ativo" <? if($origem=="ativo"){ print "selected"; } ?>>Ativo</option>
-                      <option value="Receptivo" <? if($origem=="receptivo"){ print "selected"; } ?>>Receptivo</option>
-                      <option value="bd" <? if($origem=="bd"){ print "selected"; } ?>>BD Externo</option>
-                      <option value="Representante" <? if($origem=="representante"){ print "selected"; } ?>>Representante</option>
+                      <option value="mkr" <?php if($origem=="mkr"){ print "selected"; } ?>>MKR</option>
+                      <option value="site" <?php if($origem=="site"){ print "selected"; } ?>>Site</option>
+                      <option value="ativo" <?php if($origem=="ativo"){ print "selected"; } ?>>Ativo</option>
+                      <option value="Receptivo" <?php if($origem=="receptivo"){ print "selected"; } ?>>Receptivo</option>
+                      <option value="bd" <?php if($origem=="bd"){ print "selected"; } ?>>BD Externo</option>
+                      <option value="Representante" <?php if($origem=="representante"){ print "selected"; } ?>>Representante</option>
                     </select></td>
                 </tr>
                 
@@ -267,13 +268,13 @@ if($acao=="exc"){
                   <td><input type="text" value="" onKeyPress="return validanum(this, event)" onKeyUp="mdata(this)" maxlength="10" size="10" name="followup" onChange="form1.proposta.value='';form1.comprado.value='';"> &nbsp;
                     <select name="vendedor" class="formulario" id="vendedor">
                       <option value="" selected>Selecione</option>
-                      <?
+                      <?php
 $sqlv=mysql_query("SELECT c.fantasia,c.id FROM clientes AS c, cliente_login AS cl, niveis AS n WHERE cl.nivel=n.id AND n.vendedor=1 AND cl.cliente=c.id ORDER BY c.fantasia ASC");
 if(mysql_num_rows($sqlv)){
 	while($resv=mysql_fetch_array($sqlv)){
 ?>
-                      <option value="<?= $resv["id"]; ?>" <? if($resv["id"]==$res["vendedor"]) print "selected"; ?>><?= $resv["fantasia"]; ?></option>
-                      <?
+                      <option value="<?php echo  $resv["id"]; ?>" <?php if($resv["id"]==$res["vendedor"]) print "selected"; ?>><?php echo  $resv["fantasia"]; ?></option>
+                      <?php
 	}
 }
 ?>
@@ -284,7 +285,7 @@ if(mysql_num_rows($sqlv)){
                   <td>Tiveram Produto com proposta: </td>
                   <td><select name="proposta" class="formularioselect" id="proposta" onChange="form1.comprado.value='';form1.compra.value='';">
 				  <option value="">Selecione</option>
-                    <?
+                    <?php
 					function no($idpai,$wcat){
 	$sql=mysql_query("SELECT * FROM prodserv_cat WHERE idpai='$idpai' ORDER BY texto ASC");
 	if(mysql_num_rows($sql)!=0){
@@ -319,7 +320,7 @@ no(0,$w);
                   <td>Tiveram Produto Comprado: </td>
                   <td><select name="comprado" class="formularioselect" id="comprado" onChange="form1.proposta.value='';form1.compra.value='';">
 				   <option value="">Selecione</option>
-                    <?
+                    <?php
 $w=$res["ecat"];
 no(0,$w);
 ?>
@@ -346,9 +347,9 @@ no(0,$w);
                 <td width="51" align="center">C&oacute;d</td>
                 <td width="345">&nbsp;Nome</td>
                 <td width="194">Loja</td>
-                <? if($nivel=="1"){ ?>  <? } ?>
+                <?php if($nivel=="1"){ ?>  <?php } ?>
               </tr>
-              <?
+              <?php
 			  $sql=mysql_query($query);
 			  if(mysql_num_rows($sql)==0){
 			  ?>
@@ -356,7 +357,7 @@ no(0,$w);
                 <td colspan="3" align="center" class="textobold">NENHUM CLIENTE 
                   ENCONTRADO </td>
               </tr>
-              <?
+              <?php
 			  }else{
 				//BLOCO PAGINACAO
 				$results_tot=mysql_num_rows($sql); //total de registros encontrados
@@ -394,12 +395,12 @@ no(0,$w);
 					$reg_final++; // PAGINACAO conta quantos registros imprimiu
 			  ?>
               <tr bgcolor="#FFFFFF" class="texto" onMouseover="changeto('#CCCCCC')" onMouseout="changeback('#FFFFFF')"> 
-			  <a href="crm_infg.php?cli=<? print $res["id"]; ?>" class="textobold">
-                <td align="center"><? print $res["id"]; ?></td>
-                <td>&nbsp;<? print $res["nome"];  ?></td>
-			    <td><? print $res["loja"];  ?></td>
+			  <a href="crm_infg.php?cli=<?php print $res["id"]; ?>" class="textobold">
+                <td align="center"><?php print $res["id"]; ?></td>
+                <td>&nbsp;<?php print $res["nome"];  ?></td>
+			    <td><?php print $res["loja"];  ?></td>
 			  </a>              </tr>
-              <?
+              <?php
 			  	}
 			  }
 			  ?>
@@ -407,7 +408,7 @@ no(0,$w);
         </tr>
       </table></td>
   </tr>
-  <? if($wpaginar){ ?>
+  <?php if($wpaginar){ ?>
   <tr>
     <td colspan="3"><img src="imagens/dot.gif" width="200" height="10"></td>
   </tr>
@@ -415,20 +416,20 @@ no(0,$w);
     <td align="center"> <table width="1%" border="0" cellspacing="0" cellpadding="0">
         <tr valign="top"> 
           <td align="right"> 
-            <? 
+            <?php 
 				$antz=false;
 				if($wp>1){
 					$antz=true;
 				?>
-            <a href="<? print "crm_clientes.php?wp=$pg_anterior&nome=$nome&razao=$razao&porte=$porte&grupo=$grupo&ramo=$ramo&cnpj=$cnpj&bairro=$bairro&estado=$estado&cidade=$cidade&compra=$compra&atualizacao=$atualizacao&followup=$followup&proposta=$proposta&comprado=$comprado&vendedor=$vendedor&origem=$origem&endereco=$endereco"; ?>" class="paginacao2"> 
-            <? } ?>
+            <a href="<?php print "crm_clientes.php?wp=$pg_anterior&nome=$nome&razao=$razao&porte=$porte&grupo=$grupo&ramo=$ramo&cnpj=$cnpj&bairro=$bairro&estado=$estado&cidade=$cidade&compra=$compra&atualizacao=$atualizacao&followup=$followup&proposta=$proposta&comprado=$comprado&vendedor=$vendedor&origem=$origem&endereco=$endereco"; ?>" class="paginacao2"> 
+            <?php } ?>
             <img src="imagens/pag_f.gif" width="27" height="14" border="0"> 
-            <? if($antz){ ?>
+            <?php if($antz){ ?>
             <br>
             Anterior</a>
-            <? } ?>
+            <?php } ?>
           </td>
-          <?
+          <?php
 				$link_impressos=0;
 				if ($temp > $wpaginacao){
 		    	    $n_start  = $temp - ceil($wpaginacao/2);
@@ -442,33 +443,33 @@ no(0,$w);
 					$link_impressos++;
 				?>
           <td align="center"> 
-            <? if($pg_atual != $link_impressos){ ?>
-            <a href="<? print "crm_clientes.php?wp=$link_impressos&nome=$nome&razao=$razao&porte=$porte&grupo=$grupo&ramo=$ramo&cnpj=$cnpj&bairro=$bairro&estado=$estado&cidade=$cidade&compra=$compra&atualizacao=$atualizacao&followup=$followup&proposta=$proposta&comprado=$comprado&vendedor=$vendedor&origem=$origem&endereco=$endereco"; ?>" class="paginacao"> 
-            <? } ?>
-            <img src="imagens/pag_e<? if($pg_atual==$link_impressos) print "2"; ?>.gif" width="10" height="14" border="0"><br>
-            <? if($pg_atual==$link_impressos){ print "<span class=\"paginacao2\">$link_impressos</span>"; }else{ print $link_impressos; }?>
-            <? if($pg_atual != $link_impressos){ ?>
+            <?php if($pg_atual != $link_impressos){ ?>
+            <a href="<?php print "crm_clientes.php?wp=$link_impressos&nome=$nome&razao=$razao&porte=$porte&grupo=$grupo&ramo=$ramo&cnpj=$cnpj&bairro=$bairro&estado=$estado&cidade=$cidade&compra=$compra&atualizacao=$atualizacao&followup=$followup&proposta=$proposta&comprado=$comprado&vendedor=$vendedor&origem=$origem&endereco=$endereco"; ?>" class="paginacao"> 
+            <?php } ?>
+            <img src="imagens/pag_e<?php if($pg_atual==$link_impressos) print "2"; ?>.gif" width="10" height="14" border="0"><br>
+            <?php if($pg_atual==$link_impressos){ print "<span class=\"paginacao2\">$link_impressos</span>"; }else{ print $link_impressos; }?>
+            <?php if($pg_atual != $link_impressos){ ?>
             </a>
-            <? } ?>
+            <?php } ?>
           </td>
-          <?
+          <?php
 				}
 				?>
           <td> 
-            <? if($reg_final<$results_tot){ ?>
-            <a href="<? print "crm_clientes.php?wp=$pg_proxima&nome=$nome&razao=$razao&porte=$porte&grupo=$grupo&ramo=$ramo&cnpj=$cnpj&bairro=$bairro&estado=$estado&cidade=$cidade&compra=$compra&atualizacao=$atualizacao&followup=$followup&proposta=$proposta&comprado=$comprado&vendedor=$vendedor&origem=$origem&endereco=$endereco"; ?>" class="paginacao2"> 
-            <? } ?>
+            <?php if($reg_final<$results_tot){ ?>
+            <a href="<?php print "crm_clientes.php?wp=$pg_proxima&nome=$nome&razao=$razao&porte=$porte&grupo=$grupo&ramo=$ramo&cnpj=$cnpj&bairro=$bairro&estado=$estado&cidade=$cidade&compra=$compra&atualizacao=$atualizacao&followup=$followup&proposta=$proposta&comprado=$comprado&vendedor=$vendedor&origem=$origem&endereco=$endereco"; ?>" class="paginacao2"> 
+            <?php } ?>
             <img src="imagens/pag_der.gif" width="26" height="14" border="0"> 
-            <? if($reg_final<$results_tot){ ?>
+            <?php if($reg_final<$results_tot){ ?>
             <br>
-            Próximo</a>
-            <? } ?>
+            PrÃ³ximo</a>
+            <?php } ?>
           </td>
         </tr>
       </table></td>
   </tr>
-  <? } ?>
+  <?php } ?>
 </table>
 </body>
 </html>
-<? include("mensagem.php"); ?>
+<?php include("mensagem.php"); ?>

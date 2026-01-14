@@ -30,6 +30,7 @@ if(!empty($bde) and !empty($bate)){
 <head>
 <title>Movimentacao de Estoque - ERP System</title>
 <meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <link href="style.css" rel="stylesheet" type="text/css">
@@ -64,12 +65,12 @@ function verifica(bus){
                     <div class="erp-form-group">
                         <label class="erp-form-label">Produto</label>
                         <div style="display:flex;gap:5px;">
-                            <input name="nome" type="text" class="erp-form-control" value="<?=$bnome?>" readonly style="flex:1;">
+                            <input name="nome" type="text" class="erp-form-control" value="<?php echo $bnome?>" readonly style="flex:1;">
                             <a href="#" onclick="return abre('prodserv_bus.php','busca','width=420,height=350,scrollbars=1');" class="erp-btn erp-btn-outline" style="padding:0 12px;">
                                 <i class="fas fa-search"></i>
                             </a>
                         </div>
-                        <input name="item" type="hidden" value="<?=$item?>">
+                        <input name="item" type="hidden" value="<?php echo $item?>">
                         <input name="buscar" type="hidden" value="true">
                     </div>
                 </div>
@@ -169,12 +170,12 @@ if(mysql_num_rows($sql)==0){
         $tipo_class = (strpos($tipo, "Entrada") !== false || strpos($tipo, "Estorno Saida") !== false) ? "success" : "danger";
 ?>
                 <tr>
-                    <td><?=banco2data($res["data"])?></td>
-                    <td><span class="erp-badge erp-badge-<?=$tipo_class?>"><?=$tipo?></span></td>
-                    <td class="erp-text-right"><strong><?=$qtd?></strong></td>
-                    <td class="erp-text-right">R$ <?=banco2valor($res["valor"])?></td>
-                    <td><?=$res["doc"]?></td>
-                    <td><?=$origem?></td>
+                    <td><?php echo banco2data($res["data"])?></td>
+                    <td><span class="erp-badge erp-badge-<?php echo $tipo_class?>"><?php echo $tipo?></span></td>
+                    <td class="erp-text-right"><strong><?php echo $qtd?></strong></td>
+                    <td class="erp-text-right">R$ <?php echo banco2valor($res["valor"])?></td>
+                    <td><?php echo $res["doc"]?></td>
+                    <td><?php echo $origem?></td>
                 </tr>
 <?php
     }
@@ -198,15 +199,15 @@ $valort=$res1["valort"];
                 <div class="erp-card-body">
                     <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #eee;">
                         <span>Quantidade</span>
-                        <strong><?=banco2valor($qtdt)?></strong>
+                        <strong><?php echo banco2valor($qtdt)?></strong>
                     </div>
                     <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #eee;">
                         <span>Qtd Disponivel</span>
-                        <strong><?=banco2valor($qtdd)?></strong>
+                        <strong><?php echo banco2valor($qtdd)?></strong>
                     </div>
                     <div style="display:flex;justify-content:space-between;padding:8px 0;">
                         <span>Valor</span>
-                        <strong style="color:#27AE60;">R$ <?=banco2valor($valort)?></strong>
+                        <strong style="color:#27AE60;">R$ <?php echo banco2valor($valort)?></strong>
                     </div>
                 </div>
             </div>
@@ -218,16 +219,16 @@ $valort=$res1["valort"];
                 </div>
                 <div class="erp-card-body">
                     <div style="display:flex;gap:10px;flex-wrap:wrap;">
-                        <a href="#" onclick="return abre('prodserv_ese.php?act=em&item=<?=$item?>','entrada','width=420,height=240,scrollbars=1');" class="erp-btn erp-btn-success">
+                        <a href="#" onclick="return abre('prodserv_ese.php?act=em&item=<?php echo $item?>','entrada','width=420,height=240,scrollbars=1');" class="erp-btn erp-btn-success">
                             <i class="fas fa-plus"></i> Entrada Manual
                         </a>
-                        <a href="#" onclick="return abre('prodserv_ese.php?act=sm&item=<?=$item?>','saida','width=420,height=240,scrollbars=1');" class="erp-btn erp-btn-danger">
+                        <a href="#" onclick="return abre('prodserv_ese.php?act=sm&item=<?php echo $item?>','saida','width=420,height=240,scrollbars=1');" class="erp-btn erp-btn-danger">
                             <i class="fas fa-minus"></i> Saida Manual
                         </a>
-                        <a href="#" onclick="return abre('prodserv_ese.php?act=ee&item=<?=$item?>','eentrada','width=420,height=240,scrollbars=1');" class="erp-btn erp-btn-warning">
+                        <a href="#" onclick="return abre('prodserv_ese.php?act=ee&item=<?php echo $item?>','eentrada','width=420,height=240,scrollbars=1');" class="erp-btn erp-btn-warning">
                             <i class="fas fa-undo"></i> Estorno Entrada
                         </a>
-                        <a href="#" onclick="return abre('prodserv_ese.php?act=es&item=<?=$item?>','esaida','width=420,height=240,scrollbars=1');" class="erp-btn erp-btn-warning">
+                        <a href="#" onclick="return abre('prodserv_ese.php?act=es&item=<?php echo $item?>','esaida','width=420,height=240,scrollbars=1');" class="erp-btn erp-btn-warning">
                             <i class="fas fa-redo"></i> Estorno Saida
                         </a>
                     </div>
@@ -239,15 +240,15 @@ $valort=$res1["valort"];
 <?php if(isset($wpaginar) && $wpaginar) { ?>
     <div style="display:flex;justify-content:center;padding:20px;gap:5px;">
         <?php if($wp>1){ ?>
-        <a href="prodserv_est.php?wp=<?=$pg_anterior?>&item=<?=$item?>&bde=<?=$bde?>&bate=<?=$bate?>" class="erp-btn erp-btn-outline erp-btn-sm">
+        <a href="prodserv_est.php?wp=<?php echo $pg_anterior?>&item=<?php echo $item?>&bde=<?php echo $bde?>&bate=<?php echo $bate?>" class="erp-btn erp-btn-outline erp-btn-sm">
             <i class="fas fa-chevron-left"></i> Anterior
         </a>
         <?php } ?>
         <span style="padding:8px 16px;background:#f0f0f0;border-radius:4px;">
-            Pagina <?=$pg_atual?> de <?=$n_paginas?>
+            Pagina <?php echo $pg_atual?> de <?php echo $n_paginas?>
         </span>
         <?php if($reg_final<$results_tot){ ?>
-        <a href="prodserv_est.php?wp=<?=$pg_proxima?>&item=<?=$item?>&bde=<?=$bde?>&bate=<?=$bate?>" class="erp-btn erp-btn-outline erp-btn-sm">
+        <a href="prodserv_est.php?wp=<?php echo $pg_proxima?>&item=<?php echo $item?>&bde=<?php echo $bde?>&bate=<?php echo $bate?>" class="erp-btn erp-btn-outline erp-btn-sm">
             Proximo <i class="fas fa-chevron-right"></i>
         </a>
         <?php } ?>
@@ -268,11 +269,11 @@ $valort=$res1["valort"];
 ?>
             <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #eee;">
                 <span>Quantidade Total</span>
-                <strong><?=banco2valor($qtdt)?></strong>
+                <strong><?php echo banco2valor($qtdt)?></strong>
             </div>
             <div style="display:flex;justify-content:space-between;padding:8px 0;">
                 <span>Valor Total</span>
-                <strong style="color:#27AE60;">R$ <?=banco2valor($valort)?></strong>
+                <strong style="color:#27AE60;">R$ <?php echo banco2valor($valort)?></strong>
             </div>
         </div>
     </div>

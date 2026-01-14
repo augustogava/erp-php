@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 unset($_SESSION["login_funcionario"]);
 unset($_SESSION["login_codigo"]);

@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 include("seguranca.php");
 
@@ -81,7 +81,7 @@ if($acao=="exc"){
                 <td width="20" align="center">&nbsp;</td>
                 <td width="24" align="center">&nbsp;</td>
               </tr>
-              <?
+              <?php
 			  $sql=mysql_query("SELECT * FROM ensaio $cond ORDER BY codigo ASC");
 			  if(mysql_num_rows($sql)==0){
 			  ?>
@@ -89,7 +89,7 @@ if($acao=="exc"){
                 <td colspan="4" align="center" class="textopretobold">NENHUM ENSAIO 
                 ENCONTRADO </td>
               </tr>
-              <?
+              <?php
 			  }else{
 				//BLOCO PAGINACAO
 				$results_tot=mysql_num_rows($sql); //total de registros encontrados
@@ -126,15 +126,15 @@ if($acao=="exc"){
 					$reg_final++; // PAGINACAO conta quantos registros imprimiu
 			  ?>
               <tr bgcolor="#FFFFFF" class="textopreto" onMouseover="changeto('#CCCCCC')" onMouseout="changeback('#FFFFFF')"> 
-                <td align="center"><? print $res["codigo"]; ?></td>
+                <td align="center"><?php print $res["codigo"]; ?></td>
                 <td>                
-				 
-				<? 
+				Â 
+				<?php 
 				 print $res["descricao"]; ?></td>
-                <td width="20" align="center"><a href="rec_ensaio_geral.php?acao=alt&id=<? print $res["id"]; ?>"><img src="imagens/icon14_alterar.gif" alt="Alterar" width="14" height="14" border="0"></a></td>
-                <td width="24" align="center"><a href="#" onClick="return pergunta('Deseja excluir este Ensaio?','rec_ensaio.php?acao=exc&id=<? print $res["id"]; ?>')"><img src="imagens/icon14_lixeira.gif" alt="Excluir" width="14" height="14" border="0"></a></td>
+                <td width="20" align="center"><a href="rec_ensaio_geral.php?acao=alt&id=<?php print $res["id"]; ?>"><img src="imagens/icon14_alterar.gif" alt="Alterar" width="14" height="14" border="0"></a></td>
+                <td width="24" align="center"><a href="#" onClick="return pergunta('Deseja excluir este Ensaio?','rec_ensaio.php?acao=exc&id=<?php print $res["id"]; ?>')"><img src="imagens/icon14_lixeira.gif" alt="Excluir" width="14" height="14" border="0"></a></td>
               </tr>
-              <?
+              <?php
 			  	}
 			  }
 			  ?>
@@ -142,7 +142,7 @@ if($acao=="exc"){
         </tr>
       </table></td>
   </tr>
-  <? if($wpaginar){ ?>
+  <?php if($wpaginar){ ?>
   <tr>
     <td colspan="3"><img src="imagens/dot.gif" width="200" height="10"></td>
   </tr>
@@ -150,19 +150,19 @@ if($acao=="exc"){
     <td align="center"> <table width="1%" border="0" cellspacing="0" cellpadding="0">
         <tr valign="top"> 
           <td align="right"> 
-            <? 
+            <?php 
 				$antz=false;
 				if($wp>1){
 					$antz=true;
 				?>
-            <a href="<? print "rec_ensaio.php?wp=$pg_anterior&bdescr=$bdescr&bcod=$bcod"; ?>" class="paginacao2"> 
-            <? } ?>
+            <a href="<?php print "rec_ensaio.php?wp=$pg_anterior&bdescr=$bdescr&bcod=$bcod"; ?>" class="paginacao2"> 
+            <?php } ?>
             <img src="imagens/pag_f.gif" width="27" height="14" border="0"> 
-            <? if($antz){ ?>
+            <?php if($antz){ ?>
             <br>
             Anterior</a>
-            <? } ?>          </td>
-          <?
+            <?php } ?>          </td>
+          <?php
 				$link_impressos=0;
 				if ($temp > $wpaginacao){
 		    	    $n_start  = $temp - ceil($wpaginacao/2);
@@ -176,30 +176,30 @@ if($acao=="exc"){
 					$link_impressos++;
 				?>
           <td align="center"> 
-            <? if($pg_atual != $link_impressos){ ?>
-            <a href="<? print "rec_ensaio.php?wp=$link_impressos&bdescr=$bdescr&bcod=$bcod"; ?>" class="paginacao"> 
-            <? } ?>
-            <img src="imagens/pag_e<? if($pg_atual==$link_impressos) print "2"; ?>.gif" width="10" height="14" border="0"><br>
-            <? if($pg_atual==$link_impressos){ print "<span class=\"paginacao2\">$link_impressos</span>"; }else{ print $link_impressos; }?>
-            <? if($pg_atual != $link_impressos){ ?>
+            <?php if($pg_atual != $link_impressos){ ?>
+            <a href="<?php print "rec_ensaio.php?wp=$link_impressos&bdescr=$bdescr&bcod=$bcod"; ?>" class="paginacao"> 
+            <?php } ?>
+            <img src="imagens/pag_e<?php if($pg_atual==$link_impressos) print "2"; ?>.gif" width="10" height="14" border="0"><br>
+            <?php if($pg_atual==$link_impressos){ print "<span class=\"paginacao2\">$link_impressos</span>"; }else{ print $link_impressos; }?>
+            <?php if($pg_atual != $link_impressos){ ?>
             </a>
-            <? } ?>          </td>
-          <?
+            <?php } ?>          </td>
+          <?php
 				}
 				?>
           <td> 
-            <? if($reg_final<$results_tot){ ?>
-            <a href="<? print "rec_ensaio.php?wp=$pg_proxima&bdescr=$bdescr&bcod=$bcod"; ?>" class="paginacao2"> 
-            <? } ?>
+            <?php if($reg_final<$results_tot){ ?>
+            <a href="<?php print "rec_ensaio.php?wp=$pg_proxima&bdescr=$bdescr&bcod=$bcod"; ?>" class="paginacao2"> 
+            <?php } ?>
             <img src="imagens/pag_der.gif" width="26" height="14" border="0"> 
-            <? if($reg_final<$results_tot){ ?>
+            <?php if($reg_final<$results_tot){ ?>
             <br>
-            Próximo</a>
-            <? } ?>          </td>
+            PrÃ³ximo</a>
+            <?php } ?>          </td>
         </tr>
       </table></td>
   </tr>
-    <? } ?>
+    <?php } ?>
   <tr>
     <td align="center">&nbsp;</td>
   </tr>
@@ -211,4 +211,4 @@ if($acao=="exc"){
 </table>
 </body>
 </html>
-<? include("mensagem.php"); ?>
+<?php include("mensagem.php"); ?>

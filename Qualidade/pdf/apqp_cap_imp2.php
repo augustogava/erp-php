@@ -1,4 +1,4 @@
-<? 
+<?php 
 $npc=$_SESSION["npc"];
 $sql=mysql_query("SELECT *,apqp_pc.nome AS nome, clientes.fantasia AS nomecli FROM apqp_pc,clientes WHERE apqp_pc.id='$pc' AND apqp_pc.cliente=clientes.id");
 $res=mysql_fetch_array($sql);
@@ -21,14 +21,14 @@ $pdf->SetFont('Arial','',8);
 $pdf->SetXY(5, 18);
 $pdf->MultiCell(100,5,"Cliente \n $res[nomecli]",1);
 $pdf->SetXY(105, 18);
-$pdf->MultiCell(50,5,"Número da Peça (cliente) \n $res[pecacli]",1);
+$pdf->MultiCell(50,5,"NÃºmero da PeÃ§a (cliente) \n $res[pecacli]",1);
 $pdf->SetXY(155, 18);
 $pdf->MultiCell(50,5,"Rev. / Data do Desenho \n $res[rev] - ".banco2data($res[dtrev])."",1);
 //linha 2
 $pdf->SetXY(5, 28);
 $pdf->MultiCell(100,5,"Fornecedor\n $rese[razao]",1);
 $pdf->SetXY(105, 28);
-$pdf->MultiCell(100,5,"Nome da Peça \n $res[nome]",1);
+$pdf->MultiCell(100,5,"Nome da PeÃ§a \n $res[nome]",1);
 //linha 3
 $pdf->SetXY(5, 38);
 $pdf->MultiCell(100,5,"Realizado \n $resp[quem]",1);
@@ -36,18 +36,18 @@ $pdf->SetXY(105, 38);
 $pdf->MultiCell(100,5,"Data \n ".banco2data($resp["dtquem"])."",1);
 //linha 4
 $pdf->SetXY(5, 48);
-$pdf->MultiCell(30,5,"Caract Nº \n $resc[numero]",1);
+$pdf->MultiCell(30,5,"Caract NÂº \n $resc[numero]",1);
 $pdf->SetXY(35, 48);
-$pdf->MultiCell(30,5,"Característica \n $resc[descricao]",1);
+$pdf->MultiCell(30,5,"CaracterÃ­stica \n $resc[descricao]",1);
 $pdf->SetXY(65, 48);
-$pdf->MultiCell(40,5,"Especificação \n $resc[espec]",1);
+$pdf->MultiCell(40,5,"EspecificaÃ§Ã£o \n $resc[espec]",1);
 $pdf->SetXY(105, 48);
 $pdf->MultiCell(55,5,"LIE \n".banco2valor3($resc[lie])."",1);
 $pdf->SetXY(205, 48);
 $pdf->MultiCell(30,5,"LSE \n".banco2valor3($resc[lse])."",1);
 //linha 5
 $pdf->SetXY(5, 58);
-$pdf->MultiCell(100,5,"Observações \n $resp[obs]",1);
+$pdf->MultiCell(100,5,"ObservaÃ§Ãµes \n $resp[obs]",1);
 $pdf->SetXY(105, 58);
 $pdf->MultiCell(50,5,"Tamanho do Subgrupo \n".completa(5,2)."",1);
 $pdf->SetXY(155, 58);
@@ -55,7 +55,7 @@ $pdf->MultiCell(50,5,"Qtd. de Grupos \n".completa($resp["nli"],2)."",1);
 //linha 6
 $pdf->SetXY(5, 75);
 $pdf->SetFont('Arial','B',14);
-$pdf->MultiCell(205,5,"Médias",0,'C');
+$pdf->MultiCell(205,5,"MÃ©dias",0,'C');
 $pdf->SetXY(5, 145);
 $pdf->MultiCell(205,5,"Amplitudes",0,'C');
 $pdf->SetXY(5, 215);

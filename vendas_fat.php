@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 include("seguranca.php");
 if(empty($acao)) $acao="entrar";
@@ -32,7 +32,8 @@ if($acao=="entrar"){
 <html>
 <head>
 <title>CyberManager</title>
-<meta http-equiv="Content-Type" content="text/html; UTF-8">
+<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="style.css" rel="stylesheet" type="text/css">
 <script src="scripts.js"></script>
 <script src="mascaras.js"></script>
@@ -40,7 +41,7 @@ if($acao=="entrar"){
 function verificabusca(cad){
 	if(cad.emissao.value!=''){
 		if(!verifica_data(cad.emissao.value)){
-			alert('Data de emiss„o incorreta');
+			alert('Data de emiss√£o incorreta');
 			cad.emissao.focus();
 			return false;
 		}
@@ -77,18 +78,18 @@ function verificabusca(cad){
         </tr>
         <tr>
           <td width="70" class="textobold">Situa&ccedil;&atilde;o</td>
-          <td width="277" colspan="2" class="textobold"><input name="wsit" type="radio" value="1" <? if($wsit=="1") print "checked"; ?>>
+          <td width="277" colspan="2" class="textobold"><input name="wsit" type="radio" value="1" <?php if($wsit=="1") print "checked"; ?>>
         pendentes
-          <input name="wsit" type="radio" value="2" <? if($wsit=="2") print "checked"; ?>>
+          <input name="wsit" type="radio" value="2" <?php if($wsit=="2") print "checked"; ?>>
         faturadas
-        <input name="wsit" type="radio" value="3" <? if($wsit=="3") print "checked"; ?>>
+        <input name="wsit" type="radio" value="3" <?php if($wsit=="3") print "checked"; ?>>
         bloqueadas</td>
         </tr>
         <tr>
           <td class="textobold">Emiss&atilde;o</td>
-          <td colspan="2" class="textobold"><input name="emissao" type="text" class="formulario" id="emissao" onKeyPress="return validanum(this, event)" onKeyUp="mdata(this)" value="<? print $emissao; ?>" size="10" maxlength="10" <? if($block) print "readonly"; ?>>
+          <td colspan="2" class="textobold"><input name="emissao" type="text" class="formulario" id="emissao" onKeyPress="return validanum(this, event)" onKeyUp="mdata(this)" value="<?php print $emissao; ?>" size="10" maxlength="10" <?php if($block) print "readonly"; ?>>
 &nbsp;&agrave;
-        <input name="emissao2" type="text" class="formulario" id="emissao3" onKeyPress="return validanum(this, event)" onKeyUp="mdata(this)" value="<? print $emissao2; ?>" size="10" maxlength="10" <? if($block) print "readonly"; ?>><img src="imagens/dot.gif" width="10" height="5">
+        <input name="emissao2" type="text" class="formulario" id="emissao3" onKeyPress="return validanum(this, event)" onKeyUp="mdata(this)" value="<?php print $emissao2; ?>" size="10" maxlength="10" <?php if($block) print "readonly"; ?>><img src="imagens/dot.gif" width="10" height="5">
         <input name="Submit22" type="submit" class="microtxt" value="Buscar"></td>
         </tr>
       </table>
@@ -105,13 +106,13 @@ function verificabusca(cad){
         <td width="70" align="center">bloqueado</td>
         <td width="50" align="center">faturar</td>
       </tr>
-<?
+<?php
 if(!mysql_num_rows($sql)){
 ?>	  
       <tr bgcolor="#FFFFFF">
         <td colspan="6" align="center" class="textobold">nenhum pedido de venda encontrado </td>
         </tr>
-<?
+<?php
 }else{
 	while($res=mysql_fetch_array($sql)){
 		$sqlv=mysql_query("SELECT SUM((qtd*unitario)-(qtd*unitario*desconto)/100) AS valor FROM vendas_list WHERE venda='$res[id]'");
@@ -120,15 +121,15 @@ if(!mysql_num_rows($sql)){
 		}
 ?>
       <tr bgcolor="#FFFFFF" class="texto" onMouseover="changeto('#CCCCCC')" onMouseout="changeback('#FFFFFF')">
-        <td align="center"><?= $res["id"]; ?></td>
-        <td align="right"><?= banco2valor($resv["valor"]); ?>&nbsp;</td>
-        <td width="285">&nbsp;<?= $res["fantasia"]; ?></td>
-        <td align="center"><?= banco2data($res["entrega"]); ?></td>
-        <td align="center"><? if($res["faturamento"]=="0"){ print "sim"; }else{ print "n„o"; } ?></td>
-        <td width="50" align="center"><input name="faturamento[<?= $res["id"]; ?>]" type="hidden" id="faturamento[<?= $res["id"]; ?>]" value="<?= $res["faturamento"]; ?>">
-        <input type="checkbox" name="faturar[<?= $res["id"]; ?>]" value="<?= $res["id"]; ?>" <? if($res["faturado"]) print "checked"; ?>></td>
+        <td align="center"><?php echo  $res["id"]; ?></td>
+        <td align="right"><?php echo  banco2valor($resv["valor"]); ?>&nbsp;</td>
+        <td width="285">&nbsp;<?php echo  $res["fantasia"]; ?></td>
+        <td align="center"><?php echo  banco2data($res["entrega"]); ?></td>
+        <td align="center"><?php if($res["faturamento"]=="0"){ print "sim"; }else{ print "n√£o"; } ?></td>
+        <td width="50" align="center"><input name="faturamento[<?php echo  $res["id"]; ?>]" type="hidden" id="faturamento[<?php echo  $res["id"]; ?>]" value="<?php echo  $res["faturamento"]; ?>">
+        <input type="checkbox" name="faturar[<?php echo  $res["id"]; ?>]" value="<?php echo  $res["id"]; ?>" <?php if($res["faturado"]) print "checked"; ?>></td>
       </tr>
-<?
+<?php
 	}
 }
 ?>
@@ -147,4 +148,4 @@ if(!mysql_num_rows($sql)){
 </table>
 </body>
 </html>
-<? include("mensagem.php"); ?>
+<?php include("mensagem.php"); ?>

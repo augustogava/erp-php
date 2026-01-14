@@ -52,6 +52,7 @@ if($acao=="alt"){
 <head>
 <title>Contas a Receber - ERP System</title>
 <meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <link href="style.css" rel="stylesheet" type="text/css">
@@ -138,15 +139,15 @@ function verifica(cad){
                         <div class="erp-form-group">
                             <label class="erp-form-label">Nome</label>
                             <div style="display:flex;gap:5px;">
-                                <input name="nome" type="text" class="erp-form-control" value="<?=$nome?>" readonly style="flex:1;">
+                                <input name="nome" type="text" class="erp-form-control" value="<?php echo $nome?>" readonly style="flex:1;">
 <?php if(!$block){ ?>
                                 <a href="#" onclick="return abre('cp_cli.php','a','width=320,height=300,scrollbars=1');" class="erp-btn erp-btn-outline" style="padding:0 12px;">
                                     <i class="fas fa-search"></i>
                                 </a>
 <?php } ?>
                             </div>
-                            <input name="cliente" type="hidden" value="<?=$cliente?>">
-                            <input name="cliente_tipo" type="hidden" value="<?=$cliente_tipo?>">
+                            <input name="cliente" type="hidden" value="<?php echo $cliente?>">
+                            <input name="cliente_tipo" type="hidden" value="<?php echo $cliente_tipo?>">
                         </div>
                     </div>
                 </div>
@@ -154,25 +155,25 @@ function verifica(cad){
                     <div class="erp-col">
                         <div class="erp-form-group">
                             <label class="erp-form-label">Documento</label>
-                            <input name="documento" type="text" class="erp-form-control" value="<?=$documento?>" maxlength="30" <?php if($block) echo "readonly"; ?>>
+                            <input name="documento" type="text" class="erp-form-control" value="<?php echo $documento?>" maxlength="30" <?php if($block) echo "readonly"; ?>>
                         </div>
                     </div>
                     <div class="erp-col" style="flex:0 0 150px;">
                         <div class="erp-form-group">
                             <label class="erp-form-label">Emissao</label>
-                            <input name="emissao" type="text" class="erp-form-control" value="<?=$emissao?>" maxlength="10" onKeyPress="return validanum(this, event)" onKeyUp="mdata(this)" <?php if($block) echo "readonly"; ?>>
+                            <input name="emissao" type="text" class="erp-form-control" value="<?php echo $emissao?>" maxlength="10" onKeyPress="return validanum(this, event)" onKeyUp="mdata(this)" <?php if($block) echo "readonly"; ?>>
                         </div>
                     </div>
                     <div class="erp-col" style="flex:0 0 150px;">
                         <div class="erp-form-group">
                             <label class="erp-form-label">Valor</label>
-                            <input name="valor" type="text" class="erp-form-control" value="<?=$valor?>" onKeyDown="formataMoeda(this,retornaKeyCode(event))" onKeyUp="formataMoeda(this,retornaKeyCode(event))" <?php if($block) echo "readonly"; ?>>
+                            <input name="valor" type="text" class="erp-form-control" value="<?php echo $valor?>" onKeyDown="formataMoeda(this,retornaKeyCode(event))" onKeyUp="formataMoeda(this,retornaKeyCode(event))" <?php if($block) echo "readonly"; ?>>
                         </div>
                     </div>
                     <div class="erp-col" style="flex:0 0 150px;">
                         <div class="erp-form-group">
                             <label class="erp-form-label">Competencia</label>
-                            <input name="competencia" type="text" class="erp-form-control" value="<?=$competencia?>" maxlength="7" onKeyPress="return validanum(this, event)" onKeyUp="mcomp(this)" <?php if($block) echo "readonly"; ?>>
+                            <input name="competencia" type="text" class="erp-form-control" value="<?php echo $competencia?>" maxlength="7" onKeyPress="return validanum(this, event)" onKeyUp="mcomp(this)" <?php if($block) echo "readonly"; ?>>
                         </div>
                     </div>
                 </div>
@@ -186,7 +187,7 @@ function verifica(cad){
 $sql=mysql_query("SELECT * FROM parcelamentos ORDER BY descricao ASC");
 while($res=mysql_fetch_array($sql)){
 ?>
-                                <option value="<?=$res["id"]?>" <?php if($parcelamento==$res["id"]) echo "selected"; ?>><?=$res["descricao"]?></option>
+                                <option value="<?php echo $res["id"]?>" <?php if($parcelamento==$res["id"]) echo "selected"; ?>><?php echo $res["descricao"]?></option>
 <?php } ?>
                             </select>
                         </div>
@@ -200,7 +201,7 @@ while($res=mysql_fetch_array($sql)){
 $sql=mysql_query("SELECT * FROM pcontas WHERE idpai!=0 ORDER BY descricao ASC");
 while($res=mysql_fetch_array($sql)){
 ?>
-                                <option value="<?=$res["id"]?>" <?php if($conta==$res["id"]) echo "selected"; ?>><?=$res["descricao"]?></option>
+                                <option value="<?php echo $res["id"]?>" <?php if($conta==$res["id"]) echo "selected"; ?>><?php echo $res["descricao"]?></option>
 <?php } ?>
                             </select>
                         </div>
@@ -216,7 +217,7 @@ while($res=mysql_fetch_array($sql)){
 $sql=mysql_query("SELECT * FROM categorias ORDER BY nome ASC");
 while($res=mysql_fetch_array($sql)){
 ?>
-                                <option value="<?=$res["id"]?>" <?php if($categoria==$res["id"]) echo "selected"; ?>><?=$res["nome"]?></option>
+                                <option value="<?php echo $res["id"]?>" <?php if($categoria==$res["id"]) echo "selected"; ?>><?php echo $res["nome"]?></option>
 <?php } ?>
                             </select>
                         </div>
@@ -229,7 +230,7 @@ while($res=mysql_fetch_array($sql)){
 $sqlo=mysql_query("SELECT * FROM bancos ORDER BY apelido ASC");
 while($reso=mysql_fetch_array($sqlo)){
 ?>
-                                <option value="<?=$reso["id"]?>" <?php if($reso["id"]==$banco) echo "selected"; ?>><?=$reso["apelido"]?></option>
+                                <option value="<?php echo $reso["id"]?>" <?php if($reso["id"]==$banco) echo "selected"; ?>><?php echo $reso["apelido"]?></option>
 <?php } ?>
                             </select>
                         </div>
@@ -239,7 +240,7 @@ while($reso=mysql_fetch_array($sqlo)){
                     <div class="erp-col">
                         <div class="erp-form-group">
                             <label class="erp-form-label">Historico</label>
-                            <input name="historico" type="text" class="erp-form-control" value="<?=$historico?>" maxlength="100">
+                            <input name="historico" type="text" class="erp-form-control" value="<?php echo $historico?>" maxlength="100">
                         </div>
                     </div>
                 </div>
@@ -270,8 +271,8 @@ while($reso=mysql_fetch_array($sqlo)){
                     </div>
                 </div>
 
-                <input name="acao" type="hidden" value="<?=$acao?>">
-                <input name="id" type="hidden" value="<?=$id?>">
+                <input name="acao" type="hidden" value="<?php echo $acao?>">
+                <input name="id" type="hidden" value="<?php echo $id?>">
 
 <?php if($acao=="inc"){ ?>
                 <div style="margin-top:20px;display:flex;gap:10px;justify-content:center;">
@@ -317,17 +318,17 @@ while($res=mysql_fetch_array($sql)){
                         <tr>
                             <td>
 <?php if($res["pago"]=="S" and $sit!="C"){ echo banco2data($res["vencimento"]); }else{ ?>
-                                <input name="vencimento[<?=$res["id"]?>]" type="text" class="erp-form-control" style="width:100px;" value="<?=banco2data($res["vencimento"])?>" maxlength="10" onkeypress="return validanum(this, event)" onKeyUp="mdata(this)">
+                                <input name="vencimento[<?php echo $res["id"]?>]" type="text" class="erp-form-control" style="width:100px;" value="<?php echo banco2data($res["vencimento"])?>" maxlength="10" onkeypress="return validanum(this, event)" onKeyUp="mdata(this)">
 <?php } ?>
                             </td>
-                            <td class="erp-text-right"><?=banco2valor($res["valor"])?></td>
-                            <td><?=banco2data($res["pagto"])?></td>
-                            <td class="erp-text-right"><?=banco2valor($res["diferenca"])?></td>
-                            <td><?=$res["documento"]?></td>
-                            <td><?=$op?></td>
-                            <td><?=$banco_nome?></td>
+                            <td class="erp-text-right"><?php echo banco2valor($res["valor"])?></td>
+                            <td><?php echo banco2data($res["pagto"])?></td>
+                            <td class="erp-text-right"><?php echo banco2valor($res["diferenca"])?></td>
+                            <td><?php echo $res["documento"]?></td>
+                            <td><?php echo $op?></td>
+                            <td><?php echo $banco_nome?></td>
                             <td class="erp-text-center">
-                                <a href="#" onclick="return abre('cr_hist.php?id=<?=$res["id"]?>','a','width=470,height=300,scrollbars=1');">
+                                <a href="#" onclick="return abre('cr_hist.php?id=<?php echo $res["id"]?>','a','width=470,height=300,scrollbars=1');">
 <?php if($res["pago"]=="N"){ ?>
                                     <span class="erp-badge erp-badge-warning">Nao</span>
 <?php }else{ ?>
@@ -337,7 +338,7 @@ while($res=mysql_fetch_array($sql)){
                             </td>
                             <td class="erp-text-center">
 <?php if($res["pago"]=="S" and $sit!="C"){ ?>
-                                <a href="#" onclick="return pergunta('Deseja desfazer o recebimento desta parcela?','cr_sql.php?acao=desf&ct=<?=$id?>&id=<?=$res["id"]?>');" class="erp-table-action" style="color:#e74c3c;">
+                                <a href="#" onclick="return pergunta('Deseja desfazer o recebimento desta parcela?','cr_sql.php?acao=desf&ct=<?php echo $id?>&id=<?php echo $res["id"]?>');" class="erp-table-action" style="color:#e74c3c;">
                                     <i class="fas fa-undo"></i>
                                 </a>
 <?php } ?>
@@ -366,9 +367,9 @@ while($res=mysql_fetch_array($sql)){
                     </thead>
                     <tbody>
                         <tr>
-                            <td><strong>R$ <?=$valor?></strong></td>
-                            <td><strong>R$ <?=banco2valor($tp)?></strong></td>
-                            <td><strong style="color:#27AE60;">R$ <?=banco2valor($valor2-$tp2)?></strong></td>
+                            <td><strong>R$ <?php echo $valor?></strong></td>
+                            <td><strong>R$ <?php echo banco2valor($tp)?></strong></td>
+                            <td><strong style="color:#27AE60;">R$ <?php echo banco2valor($valor2-$tp2)?></strong></td>
                             <td>
 <?php 
 $sit_class = "info";
@@ -377,7 +378,7 @@ if($sit=="C"){ $sit_class="danger"; $sit_text="Cancelado"; }
 elseif($sit=="P"){ $sit_class="warning"; $sit_text="Pendente"; }
 elseif($sit=="Q"){ $sit_class="success"; $sit_text="Quitado"; }
 ?>
-                                <span class="erp-badge erp-badge-<?=$sit_class?>"><?=$sit_text?></span>
+                                <span class="erp-badge erp-badge-<?php echo $sit_class?>"><?php echo $sit_text?></span>
                             </td>
                         </tr>
                     </tbody>

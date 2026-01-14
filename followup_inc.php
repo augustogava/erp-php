@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 include("seguranca.php");
 if($acao=="inc"){
@@ -6,16 +6,17 @@ if($acao=="inc"){
 	$hora=hora();
 	$sql=mysql_query("INSERT INTO followup (cliente,data,hora,titulo,descricao) VALUES ('$cliente','$data','$hora','$titulo','$descricao')");
 	if($sql){
-		$_SESSION["mensagem"]="As informações foram incluídas com sucesso";
+		$_SESSION["mensagem"]="As informaÃ§Ãµes foram incluÃ­das com sucesso";
 	}else{
-		$_SESSION["mensagem"]="As informações não puderam ser incluídas";
+		$_SESSION["mensagem"]="As informaÃ§Ãµes nÃ£o puderam ser incluÃ­das";
 	}
 }
 ?>
 <html>
 <head>
 <title>CyberManager</title>
-<meta http-equiv="Content-Type" content="text/html; UTF-8">
+<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="style.css" rel="stylesheet" type="text/css">
 <script src="scripts.js"></script>
 <script>
@@ -26,12 +27,12 @@ function verifica(cad){
 		return false;
 	}
 	if(cad.titulo.value==''){
-		alert('Informe o título');
+		alert('Informe o tÃ­tulo');
 		cad.titulo.focus();
 		return false;
 	}
 	if(cad.descricao.value==''){
-		alert('Informe a descrição');
+		alert('Informe a descriÃ§Ã£o');
 		cad.descricao.focus();
 		return false;
 	}
@@ -84,4 +85,4 @@ function verifica(cad){
 </table>
 </body>
 </html>
-<? include("mensagem.php"); ?>
+<?php include("mensagem.php"); ?>

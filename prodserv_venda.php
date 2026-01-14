@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 include("seguranca.php");
 $sql=mysql_query("SELECT prodserv.nome,prodserv.apelido,prodserv.class,unidades.nome AS unidade FROM prodserv,unidades WHERE prodserv.id='$id' AND prodserv.unidade=unidades.id");
@@ -9,7 +9,7 @@ $unidade=$res["unidade"];
 $class=$res["class"];
 $sql=mysql_query("SELECT * FROM prodserv_custo WHERE prodserv='$id'");
 if(mysql_num_rows($sql)==0){
-	$_SESSION["mensagem"]="Defina o custo de aquisição";
+	$_SESSION["mensagem"]="Defina o custo de aquisiÃ§Ã£o";
 	header("Location:prodserv_custo.php?id=$id");
 	exit;
 }
@@ -39,7 +39,8 @@ if(mysql_num_rows($sql)!=0){
 <html>
 <head>
 <title>CyberManager</title>
-<meta http-equiv="Content-Type" content="text/html; UTF-8">
+<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="style.css" rel="stylesheet" type="text/css">
 <script src="scripts.js"></script>
 <script src="mascaras.js"></script>
@@ -87,13 +88,13 @@ function cvenda(frm){
         </tr>
         <tr bgcolor="#CCCCCC">
           <td width="52" class="textobold">&nbsp;Produto:</td>
-          <td colspan="3" class="texto">&nbsp;<? print $nome; ?></td>
+          <td colspan="3" class="texto">&nbsp;<?php print $nome; ?></td>
         </tr>
         <tr bgcolor="#CCCCCC">
           <td class="textobold">&nbsp;Apelido:</td>
-          <td width="271" class="texto">&nbsp;<? print $apelido; ?></td>
+          <td width="271" class="texto">&nbsp;<?php print $apelido; ?></td>
           <td width="59" align="center" class="textobold">Unidade:</td>
-          <td width="118" class="texto"><span class="texto">&nbsp;<? print $unidade; ?></span></td>
+          <td width="118" class="texto"><span class="texto">&nbsp;<?php print $unidade; ?></span></td>
         </tr>
         <tr>
           <td class="textobold"><img src="imagens/dot.gif" width="20" height="8"></td>
@@ -105,21 +106,21 @@ function cvenda(frm){
           <td colspan="4" class="textobold"><table width="500" border="0" cellspacing="1" cellpadding="0">
             <tr class="textobold">
               <td width="134" bgcolor="#003366" class="textoboldbranco">&nbsp;Custo de aquisi&ccedil;&atilde;o </td>
-              <td width="97"><input name="custo" type="text" class="formularioselect" id="custo" value="<? print banco2valor($custo); ?>" size="10" onKeyDown="formataMoeda(this,retornaKeyCode(event))" onKeyUp="formataMoeda(this,retornaKeyCode(event))" onBlur="cvenda(this.form);" readonly>                </td>
+              <td width="97"><input name="custo" type="text" class="formularioselect" id="custo" value="<?php print banco2valor($custo); ?>" size="10" onKeyDown="formataMoeda(this,retornaKeyCode(event))" onKeyUp="formataMoeda(this,retornaKeyCode(event))" onBlur="cvenda(this.form);" readonly>                </td>
               <td width="153" bgcolor="#003366" class="textoboldbranco">&nbsp;&nbsp;Impostos % </td>
-              <td width="116"><input name="imp" type="text" class="formularioselect" id="imp" value="<? print banco2valor($res["imp"]); ?>" size="10" onKeyDown="formataMoeda(this,retornaKeyCode(event))" onKeyUp="formataMoeda(this,retornaKeyCode(event))" onBlur="cvenda(this.form);"></td>
+              <td width="116"><input name="imp" type="text" class="formularioselect" id="imp" value="<?php print banco2valor($res["imp"]); ?>" size="10" onKeyDown="formataMoeda(this,retornaKeyCode(event))" onKeyUp="formataMoeda(this,retornaKeyCode(event))" onBlur="cvenda(this.form);"></td>
             </tr>
             <tr class="textobold">
               <td bgcolor="#003366" class="textoboldbranco">&nbsp;Comiss&atilde;o % </td>
-              <td><input name="comi" type="text" class="formularioselect" id="comi" value="<? print banco2valor($res["comi"]); ?>" size="10" onKeyDown="formataMoeda(this,retornaKeyCode(event))" onKeyUp="formataMoeda(this,retornaKeyCode(event))" onBlur="cvenda(this.form);"></td>
+              <td><input name="comi" type="text" class="formularioselect" id="comi" value="<?php print banco2valor($res["comi"]); ?>" size="10" onKeyDown="formataMoeda(this,retornaKeyCode(event))" onKeyUp="formataMoeda(this,retornaKeyCode(event))" onBlur="cvenda(this.form);"></td>
               <td bgcolor="#003366" class="textoboldbranco">&nbsp;&nbsp;Margem desejada </td>
-              <td><input name="marg" type="text" class="formularioselect" id="marg" value="<? print banco2valor($res["marg"]); ?>" size="10" onKeyDown="formataMoeda(this,retornaKeyCode(event))" onKeyUp="formataMoeda(this,retornaKeyCode(event))" onBlur="cvenda(this.form);"></td>
+              <td><input name="marg" type="text" class="formularioselect" id="marg" value="<?php print banco2valor($res["marg"]); ?>" size="10" onKeyDown="formataMoeda(this,retornaKeyCode(event))" onKeyUp="formataMoeda(this,retornaKeyCode(event))" onBlur="cvenda(this.form);"></td>
             </tr>
             <tr class="textobold">
               <td bgcolor="#003366" class="textoboldbranco">&nbsp;Pre&ccedil;o proposto </td>
               <td><input name="proposto" type="text" class="formularioselect" id="proposto" value="0,00" size="10" onKeyDown="formataMoeda(this,retornaKeyCode(event))" onKeyUp="formataMoeda(this,retornaKeyCode(event))" onBlur="cvenda(this.form);" readonly></td>
               <td bgcolor="#003366" class="textoboldbranco">&nbsp;&nbsp;Pre&ccedil;o de venda </td>
-              <td><input name="venda" type="text" class="formularioselect" id="venda" value="<? print banco2valor($res["venda"]); ?>" size="10" onKeyDown="formataMoeda(this,retornaKeyCode(event))" onKeyUp="formataMoeda(this,retornaKeyCode(event))" onBlur="cvenda(this.form);"></td>
+              <td><input name="venda" type="text" class="formularioselect" id="venda" value="<?php print banco2valor($res["venda"]); ?>" size="10" onKeyDown="formataMoeda(this,retornaKeyCode(event))" onKeyUp="formataMoeda(this,retornaKeyCode(event))" onBlur="cvenda(this.form);"></td>
             </tr>
           </table></td>
           </tr>
@@ -132,9 +133,9 @@ function cvenda(frm){
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <input name="Submit2" type="submit" class="microtxt" value="Continuar">
             <input name="acao" type="hidden" id="acao2" value="venda">
-              <input name="id" type="hidden" id="id" value="<? print $id; ?>">
-              <input name="pcusto" type="hidden" id="pcusto" value="<? print banco2valor($custo); ?>">
-            <input name="valor2" type="hidden" id="valor2" value="<? print $valor2; ?>"></td>
+              <input name="id" type="hidden" id="id" value="<?php print $id; ?>">
+              <input name="pcusto" type="hidden" id="pcusto" value="<?php print banco2valor($custo); ?>">
+            <input name="valor2" type="hidden" id="valor2" value="<?php print $valor2; ?>"></td>
         </tr>
       </table>
     </form></td><script>cvenda(frmvenda);</script>
@@ -142,4 +143,4 @@ function cvenda(frm){
 </table>
 </body>
 </html>
-<? include("mensagem.php"); ?>
+<?php include("mensagem.php"); ?>

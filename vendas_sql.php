@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 if(empty($acao)) exit;
 $acao=verifi($permi,$acao);
@@ -17,7 +17,7 @@ if($acao=="inc"){
 }elseif($acao=="cr"){
 	$sql=mysql_query("SELECT * FROM vendas WHERE id='$id' AND cr=0");
 	if(!mysql_num_rows($sql)){
-		$_SESSION["mensagem"]="N„o foi possivel gerar o Contas a Receber\\nVerifique se o mesmo n„o foi gerado anteriormente";
+		$_SESSION["mensagem"]="N√£o foi possivel gerar o Contas a Receber\\nVerifique se o mesmo n√£o foi gerado anteriormente";
 	}else{
 		$res=mysql_fetch_array($sql);
 		$_SESSION["cliente"]=$res["cliente"];
@@ -39,7 +39,7 @@ if($acao=="inc"){
 }elseif($acao=="alt"){
 	$sql=mysql_query("SELECT * FROM vendas WHERE id='$id' AND entrega<>'0000-00-00'");
 	if(mysql_num_rows($sql)){
-		$_SESSION["mensagem"]="Este pedido de venda j· foi entregue e n„o pode mais ser alterado";		
+		$_SESSION["mensagem"]="Este pedido de venda j√° foi entregue e n√£o pode mais ser alterado";		
 	}else{
 	$hj=date("Y-m-d");
 		$emissao=data2banco($emissao);
@@ -69,7 +69,7 @@ if($acao=="inc"){
 	$sql=mysql_query("UPDATE vendas SET valor='$valor2' WHERE id='$id'");
 // nao sei se vai usar isso aqui
 		if($entregue=="S"){
-		$sql2=mysql_query("SELECT * FROM vendas_list WHERE venda='$id'") or die("Naun foi");
+		$sql2=mysql_query("SELECT * FROM vendas_list WHERE venda='$id'") or erp_db_fail();
 			while($res=mysql_fetch_array($sql2)){
 			$produto=$res["produto"];
 			$qtd=$res["qtd"];
@@ -85,7 +85,7 @@ if($acao=="inc"){
 		if($sql){
 			$_SESSION["mensagem"]="Pedido de venda alterado com sucesso!";
 		}else{
-			$_SESSION["mensagem"]="O pedido de venda n„o pÙde ser alterado!";
+			$_SESSION["mensagem"]="O pedido de venda n√£o p√¥de ser alterado!";
 		}
 		if($maisum){
 			$sql=mysql_query("INSERT INTO vendas_list (venda) VALUES ('$id')");
@@ -106,9 +106,9 @@ if($acao=="inc"){
 	$sql=mysql_query("DELETE FROM vendas WHERE id='$id'");
 	if($sql){
 		$sql=mysql_query("DELETE FROM vendas_list WHERE venda='$id'");
-		$_SESSION["mensagem"]="Pedido de venda excluÌdo com sucesso!";
+		$_SESSION["mensagem"]="Pedido de venda exclu√≠do com sucesso!";
 	}else{
-		$_SESSION["mensagem"]="O pedido de venda n„o pÙde ser excluÌdo!";
+		$_SESSION["mensagem"]="O pedido de venda n√£o p√¥de ser exclu√≠do!";
 	}
 	header("Location:vendas.php");
 	exit;
@@ -124,13 +124,13 @@ if($acao=="inc"){
 				$sqle=mysql_query("SELECT * FROM cliente_entrega WHERE cliente='$resv[l_entrega]'");
 				$rese=mysql_fetch_array($sqle);
 			}
-			$sql=mysql_query("INSERT INTO e_compra (cliente,pedido,endereco,bairro,cep,cidade,estado,dtabre,pagamento,sit,data,hora,tipo) VALUES ('$cliente','$id','$rese[endereco]','$rese[bairro]','$rese[cep]','$rese[cidade]','$rese[estado]','$data','faturamento','E','$data','$hora','Interno')") or die("nao foi");		
+			$sql=mysql_query("INSERT INTO e_compra (cliente,pedido,endereco,bairro,cep,cidade,estado,dtabre,pagamento,sit,data,hora,tipo) VALUES ('$cliente','$id','$rese[endereco]','$rese[bairro]','$rese[cep]','$rese[cidade]','$rese[estado]','$data','faturamento','E','$data','$hora','Interno')") or erp_db_fail();		
 				$sql=mysql_query("SELECT MAX(id) AS id FROM e_compra");
 				$res=mysql_fetch_array($sql); $cp=$res["id"];
 	//Inserir Itens do E-compraaa
-		$sql2=mysql_query("SELECT * FROM vendas_list WHERE venda='$id'") or die("SELECT * FROM vendas_list WHERE venda='$id'");
+		$sql2=mysql_query("SELECT * FROM vendas_list WHERE venda='$id'") or erp_db_fail();
 		while($res=mysql_fetch_array($sql2)){
-			$sqlp=mysql_query("SELECT * FROM prodserv WHERE id='$res[produto]'") or die("tb"); $resp=mysql_fetch_array($sqlp);
+			$sqlp=mysql_query("SELECT * FROM prodserv WHERE id='$res[produto]'") or erp_db_fail(); $resp=mysql_fetch_array($sqlp);
 			$nome=$resp["nome"]; $tipo=$resp["tipo"];
 			$medidas="$res[altura]X$res[largura]";
 				$sql=mysql_query("INSERT INTO e_itens (compra,produto_id,produto_nome,produto_preco,tipo,medidas,qtd,desconto) VALUES ('$cp','$res[produto]','$nome','$res[unitario]','$tipo','$medidas','$res[qtd]','$res[desconto]')");
@@ -139,7 +139,7 @@ if($acao=="inc"){
 		$valor2+=$resv[frete];
 		$sql=mysql_query("UPDATE vendas SET valor='$valor2' WHERE id='$id'");
 		//Email
-		mail("odair@mkrcomercial.com.br","Aprovar Pedido","Pedido N∫ $id foi Fechado e est· aguardando sua aprovaÁ„o!");
+		mail("odair@mkrcomercial.com.br","Aprovar Pedido","Pedido N¬∫ $id foi Fechado e est√° aguardando sua aprova√ß√£o!");
 
 	// Caba aki td parte de compra 
 	// Separacaoooo

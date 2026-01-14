@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 include("vlm.php");
 	$_SESSION["usu"]=$usuario;
@@ -16,7 +16,7 @@ include("vlm.php");
 				$dian="Segunda";
 				break;
 			case "2":
-				$dian="TerÁa";
+				$dian="Ter√ßa";
 				break;
 			case "3":
 				$dian="Quarta";
@@ -33,7 +33,7 @@ include("vlm.php");
 		}
 		$ext=true;
 		$sql=mysql_query("INSERT INTO externo (usuario,data,hora,ip) VALUES('$usuario','$data','$hora','$ip')");
-		$msg="<b>Acesso Externo Manager $resas[fantasia]</b><br><br>Usu·rio: $usuario<br>Data: $data $dian<br>Hora: $hora<br>IP: $ip";
+		$msg="<b>Acesso Externo Manager $resas[fantasia]</b><br><br>Usu√°rio: $usuario<br>Data: $data $dian<br>Hora: $hora<br>IP: $ip";
 		mail("domingos@cyber1.com.br","Acesso externo Cybermanager ","$msg","From: manager@200.143.15.104\nContent-type: text/html\n");
 		mail("douglas@cyber1.com.br","Acesso externo Cybermanager ","$msg","From: manager@200.143.15.104\nContent-type: text/html\n");mail("augusto@cyber1.com.br","Acesso externo Cybermanager ","$msg","From: manager@200.143.15.104\nContent-type: text/html\n");
 
@@ -42,14 +42,14 @@ include("vlm.php");
 	}
 include("inclog.php");
 
-$sql=mysql_query("SELECT * FROM online WHERE (UNIX_TIMESTAMP()-UNIX_TIMESTAMP(data)) > 100") or die("nao");
+$sql=mysql_query("SELECT * FROM online WHERE (UNIX_TIMESTAMP()-UNIX_TIMESTAMP(data)) > 100") or erp_db_fail();
 while($res=mysql_fetch_array($sql)){
 	$sql2=mysql_query("DELETE FROM online WHERE id='$res[id]'");
 }
 $sqlb=mysql_query("SELECT * FROM bloquear WHERE id=1");
 $resb=mysql_fetch_array($sqlb);
 if($resb["block"]=="S"){
-	$_SESSION["lerro"]="Sistema em ManutenÁ„o";
+	$_SESSION["lerro"]="Sistema em Manuten√ß√£o";
 	header("Location:../adm/index.php");
 	exit;
 }
@@ -81,7 +81,7 @@ if($erro){
 	$_SESSION["lerro"]="Login Incorreto";
 	header("Location:../adm/index.php");
 }else if($erro2){
-	$_SESSION["lerro"]="Usu·rio Bloqueado para acesso externo, contate administrador!";
+	$_SESSION["lerro"]="Usu√°rio Bloqueado para acesso externo, contate administrador!";
 	header("Location:../adm/index.php");
 }else{
 	$res=mysql_fetch_array($sql);
@@ -94,26 +94,26 @@ if($erro){
 			$nome=$res["clinome"];
 			$nivel=$res["nivel"];
 		}else{
-			$nome="N„o Localizado";
-			$nivel="N„o Localizado";
+			$nome="N√£o Localizado";
+			$nivel="N√£o Localizado";
 		}
 		$sql=mysql_query("SELECT cargos.nome as cargonome FROM funcionarios,cargos WHERE funcionarios.cliente='$cliente' AND cargos.id=funcionarios.cargo");
 		if($sql){
 			$res=mysql_fetch_array($sql);
 			$cargo=$res["cargonome"];
 		}
-			$_SESSION["login_funcionario"]="N"; // isso sgnifica que o login È de cliente
+			$_SESSION["login_funcionario"]="N"; // isso sgnifica que o login √© de cliente
 	}else{
 		$nivelnum=$res["nivel"];
 		$cliente=$res["funcionario"];
-		$sql=mysql_query("SELECT funcionarios.nome as clinome,niveis.nome as nivel,cliente_login.primeiro as primeiro,cliente_login.id as ids,cliente_login.perm as permissao,cliente_login.aprovar as aprovar,cliente_login.email as email,cliente_login.email_t as email_t,cliente_login.imp FROM funcionarios,niveis,cliente_login WHERE funcionarios.id=$cliente AND funcionarios.id=cliente_login.funcionario AND cliente_login.nivel=niveis.id") or die("SELECT funcionarios.nome as clinome,niveis.nome as nivel,cliente_login.primeiro as primeiro,cliente_login.id as ids,cliente_login.perm as permissao,cliente_login.aprovar as aprovar,cliente_login.email as email,cliente_login.email_t as email_t,cliente_login.imp FROM funcionarios,niveis,cliente_login WHERE funcionarios.id=$cliente AND funcionarios.id=cliente_login.funcionario AND cliente_login.nivel=niveis.id");
+		$sql=mysql_query("SELECT funcionarios.nome as clinome,niveis.nome as nivel,cliente_login.primeiro as primeiro,cliente_login.id as ids,cliente_login.perm as permissao,cliente_login.aprovar as aprovar,cliente_login.email as email,cliente_login.email_t as email_t,cliente_login.imp FROM funcionarios,niveis,cliente_login WHERE funcionarios.id=$cliente AND funcionarios.id=cliente_login.funcionario AND cliente_login.nivel=niveis.id") or erp_db_fail();
 		if(mysql_num_rows($sql)!=0){
 			$res=mysql_fetch_array($sql);
 			$nome=$res["clinome"];
 			$nivel=$res["nivel"];
 		}else{
-			$nome="N„o Localizado";
-			$nivel="N„o Localizado";
+			$nome="N√£o Localizado";
+			$nivel="N√£o Localizado";
 		}
 		$sql=mysql_query("SELECT cargo FROM funcionarios WHERE id='$cliente'");
 		if($sql){
@@ -123,7 +123,7 @@ if($erro){
 	}
 	$sql=mysql_query("SELECT * FROM online WHERE user='$cliente'");
 	if(mysql_num_rows($sql)){
-			$_SESSION["lerro"]="Usu·rio j· logado no sistema";
+			$_SESSION["lerro"]="Usu√°rio j√° logado no sistema";
 			header("Location:../adm/index.php");
 	}else{
 		$_SESSION["email_adm"]=$resm["admin"];

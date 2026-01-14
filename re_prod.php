@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 include("seguranca.php");
 unset($_SESSION["ps"]);
@@ -13,14 +13,15 @@ if(!empty($nome)){
 <html>
 <head>
 <title>CyberManager</title>
-<meta http-equiv="Content-Type" content="text/html; UTF-8">
+<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="style.css" rel="stylesheet" type="text/css">
 <script src="scripts.js"></script>
 <script src="mascaras.js"></script>
 <script>
 function verifica(cad){
 	if(cad.codprod.value==''){
-		alert('Informe o Código do produto');
+		alert('Informe o CÃ³digo do produto');
 		cad.codprod.focus();
 		return false;
 	}
@@ -67,12 +68,12 @@ function verifica(cad){
           <td>&nbsp;Categoria:</td>
           <td><select name="cat" class="formularioselect" id="cat">
               <option value="">Selecione</option>
-              <?
+              <?php
 $sqlr=mysql_query("SELECT * FROM categorias ORDER BY nome ASC");
 while($resr=mysql_fetch_array($sqlr)){
 ?>
-              <option value="<? print $resr["id"]; ?>"><? print($resr["nome"]); ?></option>
-              <? } ?>
+              <option value="<?php print $resr["id"]; ?>"><?php print($resr["nome"]); ?></option>
+              <?php } ?>
           </select></td>
         </tr>
         <tr class="textobold">
@@ -96,4 +97,4 @@ while($resr=mysql_fetch_array($sqlr)){
 
 </body>
 </html>
-<? include("mensagem.php"); ?>
+<?php include("mensagem.php"); ?>

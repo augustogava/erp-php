@@ -1,6 +1,6 @@
 <?php
 $npc=$_SESSION["npc"];
-$sql=mysql_query("SELECT *,apqp_pc.nome AS nome, clientes.fantasia AS nomecli FROM apqp_pc,clientes WHERE apqp_pc.id='$pc' AND apqp_pc.cliente=clientes.id") or die("nao");
+$sql=mysql_query("SELECT *,apqp_pc.nome AS nome, clientes.fantasia AS nomecli FROM apqp_pc,clientes WHERE apqp_pc.id='$pc' AND apqp_pc.cliente=clientes.id") or erp_db_fail();
 $res=mysql_fetch_array($sql);
 if(!mysql_num_rows($sql)) exit;
 $sql=mysql_query("SELECT * FROM empresa");
@@ -49,7 +49,7 @@ $pdf->Cell(0, 18, 'R&R Study');
 $pdf->SetFont('Arial','',8);
 	$pdf->SetXY(180, 5);
 	$pdf->SetFont('Arial','B',8);
-	$pdf->MultiCell(40,5,"PPAP Nº $numero \n Page: $pg");
+	$pdf->MultiCell(40,5,"PPAP NÂº $numero \n Page: $pg");
 	$pdf->SetFont('Arial','',8);
 	$pdf->SetXY(5, 18);
 	$pdf->MultiCell(80,5,"Customer \n $cliente",1);

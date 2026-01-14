@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 include("seguranca.php");
 if(empty($acao)) $acao="entrar";
@@ -12,7 +12,7 @@ if(mysql_num_rows($sql)){
 	exit;
 }
 $coment=$res["comentario"];
-		$sqlb=mysql_query("SELECT * FROM apqp_cron WHERE perc='100' AND peca='$pc' AND ativ='Certificado de Submissão'");
+		$sqlb=mysql_query("SELECT * FROM apqp_cron WHERE perc='100' AND peca='$pc' AND ativ='Certificado de SubmissÃ£o'");
 		if(!mysql_num_rows($sqlb)){
 			$btnsalva="return abre('apqp_sub_ass2.php','busca','width=320,height=100,scrollbars=1'); return false;";
 		}else{
@@ -44,7 +44,7 @@ function abrir(url,id){
 	return true;
 }
 function salvar(url,id){
-	window.open('apqp_impressao.php?acao=salvar&local='+ url +'&pc='+ <?=$pc?> + '');
+	window.open('apqp_impressao.php?acao=salvar&local='+ url +'&pc='+ <?php echo $pc?> + '');
 	return true;
 }
 function MM_openBrWindow(theURL,winName,features) { //v2.0
@@ -65,7 +65,7 @@ function MM_openBrWindow(theURL,winName,features) { //v2.0
     <td align="left" valign="top" class="chamadas"><table width="590" border="0" cellpadding="0" cellspacing="0" class="texto">
       <tr>
         <td width="27" align="center"><div align="left"><a href="#" onClick="MM_openBrWindow('help/mini_certf_submi.html','','width=680,height=501,left=300,top=50')"><img src="imagens/icon14_ahn.gif" width="14" height="14" border="0" onMouseOver="this.T_STICKY=true; this.T_TITLE='Certificado de Submiss&atilde;o'; this.T_DELAY=10; this.T_WIDTH=225;  return escape('O Certificado de Submiss&atilde;o deve ser preenchido conforme o Manual do PPAP da AIAG - Terceira Edi&ccedil;&atilde;o. Utilize as abas da parte superior da tela para navegar entre os diversos t&oacute;picos do certificado de submiss&atilde;o.')"></a><span class="impTextoBold"></span></div></td>
-        <td width="563" align="right"><div align="left" class="textobold style1 style1 style1 style1 style1 style1 style1 style1">APQP - Certificado de submiss&atilde;o <? print $npc; ?></div></td>
+        <td width="563" align="right"><div align="left" class="textobold style1 style1 style1 style1 style1 style1 style1 style1">APQP - Certificado de submiss&atilde;o <?php print $npc; ?></div></td>
       </tr>
       <tr>
         <td align="center">&nbsp;</td>
@@ -107,66 +107,66 @@ function MM_openBrWindow(theURL,winName,features) { //v2.0
                 </tr>
                 <tr>
                   <td bgcolor="#FFFFFF" class="textobold"><table width="550" border="0" align="center" cellpadding="3" cellspacing="0">
-				  <? if($resc["tag"]!="S"){?>
+				  <?php if($resc["tag"]!="S"){?>
                       <tr>
-                        <td colspan="2" class="textobold"><input name="disp" type="radio" value="1" <? if($res["disp"]=="1" or empty($res["disp"])) print "checked"; ?>>
+                        <td colspan="2" class="textobold"><input name="disp" type="radio" value="1" <?php if($res["disp"]=="1" or empty($res["disp"])) print "checked"; ?>>
                           Sem Disposi&ccedil;&atilde;o
-                            <input name="disp" type="radio" value="2" <? if($res["disp"]=="2") print "checked"; ?>>
+                            <input name="disp" type="radio" value="2" <?php if($res["disp"]=="2") print "checked"; ?>>
                             Aprovado
-                            <input name="disp" type="radio" value="3" <? if($res["disp"]=="3") print "checked"; ?>>
+                            <input name="disp" type="radio" value="3" <?php if($res["disp"]=="3") print "checked"; ?>>
                             Derrogado</td>
                         </tr>
 					  <tr>
-                        <td width="67" class="textobold"><input name="disp" type="radio" value="4" <? if($res["disp"]=="4") print "checked"; ?>>                          
+                        <td width="67" class="textobold"><input name="disp" type="radio" value="4" <?php if($res["disp"]=="4") print "checked"; ?>>                          
                           Outro:</td>
-                        <td width="483" class="textobold"><input name="disp_pq" type="text" class="formularioselect" id="atende_pq3" value="<? print $res["disp_pq"]; ?>" maxlength="255"></td>
+                        <td width="483" class="textobold"><input name="disp_pq" type="text" class="formularioselect" id="atende_pq3" value="<?php print $res["disp_pq"]; ?>" maxlength="255"></td>
                       </tr>
-					  <? } else { ?>
+					  <?php } else { ?>
 					  <tr>
-                        <td colspan="2" class="textobold"><input name="disp" type="radio" value="1" <? if($res["disp"]=="1" or empty($res["disp"])) print "checked"; ?>>
+                        <td colspan="2" class="textobold"><input name="disp" type="radio" value="1" <?php if($res["disp"]=="1" or empty($res["disp"])) print "checked"; ?>>
 Sem Disposi&ccedil;&atilde;o
-<input name="disp" type="radio" value="2" <? if($res["disp"]=="2") print "checked"; ?>>
+<input name="disp" type="radio" value="2" <?php if($res["disp"]=="2") print "checked"; ?>>
 Aprovado
-<input name="disp" type="radio" value="3" <? if($res["disp"]=="3") print "checked"; ?>>
+<input name="disp" type="radio" value="3" <?php if($res["disp"]=="3") print "checked"; ?>>
 Derrogado
-<input name="disp" type="radio" value="4" <? if($res["disp"]=="4") print "checked"; ?>> 
+<input name="disp" type="radio" value="4" <?php if($res["disp"]=="4") print "checked"; ?>> 
 Aprova&ccedil;&atilde;o Interina
 </td>
                         </tr>
-					  <? } ?>
+					  <?php } ?>
                   </table></td>
                 </tr>
               </table></td>
               </tr>
             <tr class="textobold">
               <td colspan="2">
-			  <? if($resc["tag"]=="S"){?><img src="imagens/dot.gif" width="50" height="5"></td>
+			  <?php if($resc["tag"]=="S"){?><img src="imagens/dot.gif" width="50" height="5"></td>
               </tr>
             <tr class="textobold">
               <td width="165">Coment&aacute;rios:</td>
-              <td width="406"><textarea name="comentario" cols="72" rows="2" class="formulario" id="comentario"><? print $coment; ?></textarea>
+              <td width="406"><textarea name="comentario" cols="72" rows="2" class="formulario" id="comentario"><?php print $coment; ?></textarea>
               &nbsp;</td>
             </tr>
             <tr>
-              <td colspan="2"><? } ?>
+              <td colspan="2"><?php } ?>
 			  <img src="imagens/dot.gif" width="50" height="5">
               	<table width="601" border="0" align="center" cellpadding="3" cellspacing="0" class="texto">
                   <tr>
-				  <? if($_SESSION["e_mail"]=="S"){ ?>
+				  <?php if($_SESSION["e_mail"]=="S"){ ?>
                     <td width="16%" align="left" class="textobold">&nbsp;Enviar e-mail: </td>
                     <td width="56%"><input name="email" type="text" class="formularioselect" id="email3" value="Digite o e-mail aqui"></td> 
-					<? if(in_array("U",$emailt)){ ?>
-                    <td width="3%"><div align="center"><a href="#" onClick="return abre('busca_email2.php','a','width=320,height=380,scrollbars=1');"><img src="imagens/icon14_pessoas.gif" alt="Buscar Email de Funcionários" width="14" height="14" border="0"></a></div></td>
-					<? } if(in_array("G",$emailt)){ ?>
+					<?php if(in_array("U",$emailt)){ ?>
+                    <td width="3%"><div align="center"><a href="#" onClick="return abre('busca_email2.php','a','width=320,height=380,scrollbars=1');"><img src="imagens/icon14_pessoas.gif" alt="Buscar Email de FuncionÃ¡rios" width="14" height="14" border="0"></a></div></td>
+					<?php } if(in_array("G",$emailt)){ ?>
                     <td width="8%"><div align="center"><a href="#" onClick="return abre('busca_email_grupo.php','a','width=320,height=380,scrollbars=1');"><input name="grupo" type="hidden" id="grupo">
                 <input name="grupo_nome" type="hidden" id="grupo_nome"><img src="imagens/icon14_grupo.gif" alt="Buscar Grupo de Emails" width="26" height="13" border="0"></a></div></td>
-				 <? } if(in_array("C",$emailt)){ ?>
+				 <?php } if(in_array("C",$emailt)){ ?>
                     <td width="4%"><div align="center"><a href="#" onClick="return abre('busca_email.php','a','width=320,height=380,scrollbars=1');"></a><a href="#" onClick="return abre('busca_email.php','a','width=320,height=300,scrollbars=1');"><img src="imagens/icon_cli.gif" alt="Buscar Emails de Clientes" width="18" height="18" border="0"></a></div></td>
-				<? } ?>
-                    <td width="9%"><div align="center"><? if($_SESSION["login_funcionario"]=="S"){ ?><a href="#" onClick="vailogo1('email','<?= $pc; ?>');"><img src="imagens/icon14_mail.gif" alt="Enviar Email" width="16" height="10" border="0"></a><? } ?></div></td>
-					<? } if($_SESSION["i_mp"]=="S"){ ?>
+				<?php } ?>
+                    <td width="9%"><div align="center"><?php if($_SESSION["login_funcionario"]=="S"){ ?><a href="#" onClick="vailogo1('email','<?php echo  $pc; ?>');"><img src="imagens/icon14_mail.gif" alt="Enviar Email" width="16" height="10" border="0"></a><?php } ?></div></td>
+					<?php } if($_SESSION["i_mp"]=="S"){ ?>
                     <td width="4%"><div align="center"><a href="#" onClick="vailogo('imp');"><img src="imagens/icon14_imp.gif" alt="Imprimir" width="15" height="15" border="0"></a></div></td>
-					<? } ?>
+					<?php } ?>
                   </tr>
                   <tr>
                     <td colspan="7" align="left" class="textobold"><img src="imagens/spacer.gif" width="46" height="5"></td>
@@ -176,9 +176,9 @@ Aprova&ccedil;&atilde;o Interina
             <tr>
               <td colspan="2" align="center"><input name="button122" type="button" class="microtxt" value="Voltar" onClick="window.location='apqp_menu.php';">                
 &nbsp;
-<input name="acao2" type="button" class="microtxt" value="Salvar em Disco" onClick="salvar('submissao','<?=$res["id"];?>')">
+<input name="acao2" type="button" class="microtxt" value="Salvar em Disco" onClick="salvar('submissao','<?php echo $res["id"];?>')">
 &nbsp;
-<input name="button12222" type="button" class="microtxt" value="Salvar" onClick="<?= $btnsalva; ?>">
+<input name="button12222" type="button" class="microtxt" value="Salvar" onClick="<?php echo  $btnsalva; ?>">
 <input name="acao" type="hidden" id="acao" value="1">
 <input name="assinatura" type="hidden" id="assinatura">
 <a href="#" onClick="return abre('busca_email.php','a','width=320,height=300,scrollbars=1');">
@@ -194,4 +194,4 @@ Aprova&ccedil;&atilde;o Interina
 </body>
 </html>
 <script language="javascript" src="tooltip.js"></script>
-<? include("mensagem.php"); ?>
+<?php include("mensagem.php"); ?>

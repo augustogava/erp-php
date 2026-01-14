@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 include("seguranca.php");
 $acao=verifi($permi,$acao);
@@ -23,7 +23,8 @@ if($acao=="alt"){
 <title>
 <MMString:LoadString id="insertbar/formsHidden" />
 </title>
-<meta http-equiv="Content-Type" content="text/html; UTF-8">
+<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="style.css" rel="stylesheet" type="text/css">
 <script src="scripts.js"></script>
 <script src="mascaras.js"></script>
@@ -51,7 +52,7 @@ if($acao=="alt"){
       </tr>
     </table></td>
   </tr>
-<? if($acao=="entrar"){ ?>
+<?php if($acao=="entrar"){ ?>
   <tr> 
     <td align="left" valign="top"><table width="450" border="0" cellspacing="0" cellpadding="0">
         <tr> 
@@ -65,23 +66,23 @@ if($acao=="alt"){
           <td width="18" align="center">&nbsp;</td>
           <td width="20" align="center">&nbsp;</td>
         </tr>
-        <?
+        <?php
 			  $sql=mysql_query("SELECT * FROM portasp ORDER By nome ASC");
 			  if(mysql_num_rows($sql)==0){
 			  ?>
         <tr bgcolor="#FFFFFF"> 
           <td colspan="3" align="center" class="textobold">NENHUMA PORTA</td>
         </tr>
-        <?
+        <?php
 			  }else{
 			  	while($res=mysql_fetch_array($sql)){
 			  ?>
         <tr bgcolor="#FFFFFF" class="texto" onMouseover="changeto('#CCCCCC')" onMouseout="changeback('#FFFFFF')"> 
-          <td width="408">&nbsp;<? print $res["nome"]; ?></td>
-          <td width="18" align="center"><a href="cpvc.php?acao=alt&id=<? print $res["id"]; ?>"><img src="imagens/icon14_alterar.gif" alt="Alterar" width="14" height="14" border="0"></a></td>
-          <td width="20" align="center"><a href="#" onClick="return pergunta('Deseja excluir esta Porta?','cpvc_sql.php?acao=exc&id=<? print $res["id"]; ?>')"><img src="imagens/icon14_lixeira.gif" alt="Excluir" width="14" height="14" border="0"></a></td>
+          <td width="408">&nbsp;<?php print $res["nome"]; ?></td>
+          <td width="18" align="center"><a href="cpvc.php?acao=alt&id=<?php print $res["id"]; ?>"><img src="imagens/icon14_alterar.gif" alt="Alterar" width="14" height="14" border="0"></a></td>
+          <td width="20" align="center"><a href="#" onClick="return pergunta('Deseja excluir esta Porta?','cpvc_sql.php?acao=exc&id=<?php print $res["id"]; ?>')"><img src="imagens/icon14_lixeira.gif" alt="Excluir" width="14" height="14" border="0"></a></td>
         </tr>
-        <?
+        <?php
 			  	}
 			  }
 			  ?>
@@ -97,26 +98,26 @@ if($acao=="alt"){
         </tr>
       </table></td>
   </tr>
-  <? }else{ ?>
+  <?php }else{ ?>
   <tr>
     <td align="left" valign="top"><form name="form1" method="post" action="cpvc_sql.php">
         <table width="350" border="0" cellpadding="0" cellspacing="0">
           <tr bgcolor="#003366"> 
             <td colspan="2" align="center" class="textoboldbranco"> 
-              <? if($acao=="inc"){ print"Incluir Porta"; }else{ print"Alterar Porta";} ?>            </td>
+              <?php if($acao=="inc"){ print"Incluir Porta"; }else{ print"Alterar Porta";} ?>            </td>
           </tr>
           <tr>
             <td class="textobold">&nbsp;Nome</td>
-            <td class="textobold"><input name="nome" type="text" class="formularioselect" id="nome" value="<? print $res["nome"]; ?>" size="10" onBlur="ccusto(this.form);"></td>
+            <td class="textobold"><input name="nome" type="text" class="formularioselect" id="nome" value="<?php print $res["nome"]; ?>" size="10" onBlur="ccusto(this.form);"></td>
           </tr>
           <tr>
             <td width="71" class="textobold">&nbsp;Perfil            </td>
             <td width="279" class="textobold"><table width="100%"  border="0" cellspacing="0" cellpadding="0">
                 <tr>
-				<?
+				<?php
 				$sql2=mysql_query("SELECT * FROM perfil WHERE id='$res[perfil]'"); $res2=mysql_fetch_array($sql2);
 				?>
-                  <td><input name="perfiln" type="text" class="formularioselect" id="perfiln" value="<? print $res2["nome"]; ?>" size="7" maxlength="50" readonly></td>
+                  <td><input name="perfiln" type="text" class="formularioselect" id="perfiln" value="<?php print $res2["nome"]; ?>" size="7" maxlength="50" readonly></td>
                   <td width="20" align="center"><a href="#" onClick="return abre('cpvc_per.php','busca','width=320,height=300,scrollbars=1');"><img src="imagens/icon_14_search.gif" alt="Selecione um Item" width="14" height="14" border="0"></a></td>
                 </tr>
             </table></td>
@@ -126,66 +127,66 @@ if($acao=="alt"){
 
 
 
-              <input name="inferior" type="hidden" id="inferior" value="<?= $res["pvc_inferior"]; ?>"></td>
+              <input name="inferior" type="hidden" id="inferior" value="<?php echo  $res["pvc_inferior"]; ?>"></td>
             <td class="textobold"><table width="100%"  border="0" cellspacing="0" cellpadding="0">
               <tr>
-                <?
+                <?php
 				$sql2=mysql_query("SELECT * FROM prodserv WHERE id='$res[pvc_inferior]'"); $res2=mysql_fetch_array($sql2);
 				?>
-                <td><input name="inferiorn" type="text" class="formularioselect" value="<? print $res2["nome"]; ?>" size="7" maxlength="50" readonly></td>
+                <td><input name="inferiorn" type="text" class="formularioselect" value="<?php print $res2["nome"]; ?>" size="7" maxlength="50" readonly></td>
                 <td width="20" align="center"><a href="#" onClick="return abre('cpvc_pvc_inf.php','busca','width=320,height=300,scrollbars=1');"><img src="imagens/icon_14_search.gif" alt="Selecione um Item" width="14" height="14" border="0"></a></td>
               </tr>
             </table></td>
           </tr>
           <tr>
             <td valign="middle" class="textobold">&nbsp;PVC Sup
-              <input name="superior" type="hidden" id="superior" value="<?= $res["pvc_superior"]; ?>"></td>
+              <input name="superior" type="hidden" id="superior" value="<?php echo  $res["pvc_superior"]; ?>"></td>
             <td class="textobold"><table width="100%"  border="0" cellspacing="0" cellpadding="0">
                 <tr>
-                  <?
+                  <?php
 				$sql2=mysql_query("SELECT * FROM prodserv WHERE id='$res[pvc_superior]'"); $res2=mysql_fetch_array($sql2);
 				?>
-                  <td><input name="superiorn" type="text" class="formularioselect"  value="<? print $res2["nome"]; ?>" size="7" maxlength="50" readonly></td>
+                  <td><input name="superiorn" type="text" class="formularioselect"  value="<?php print $res2["nome"]; ?>" size="7" maxlength="50" readonly></td>
                   <td width="20" align="center"><a href="#" onClick="return abre('cpvc_pvc_sup.php','busca','width=320,height=300,scrollbars=1');"><img src="imagens/icon_14_search.gif" alt="Selecione um Item" width="14" height="14" border="0"></a></td>
                 </tr>
             </table></td>
           </tr>
           <tr>
             <td valign="middle" class="textobold">&nbsp;PVC Cristal
-              <input name="cristal" type="hidden" id="cristal" value="<?= $res["pvc_cristal"]; ?>"></td>
+              <input name="cristal" type="hidden" id="cristal" value="<?php echo  $res["pvc_cristal"]; ?>"></td>
             <td class="textobold"><table width="100%"  border="0" cellspacing="0" cellpadding="0">
                 <tr>
-                  <?
+                  <?php
 				$sql2=mysql_query("SELECT * FROM prodserv WHERE id='$res[pvc_cristal]'"); $res2=mysql_fetch_array($sql2);
 				?>
-                  <td><input name="cristaln" type="text" class="formularioselect"  value="<? print $res2["nome"]; ?>" size="7" maxlength="50" readonly></td>
+                  <td><input name="cristaln" type="text" class="formularioselect"  value="<?php print $res2["nome"]; ?>" size="7" maxlength="50" readonly></td>
                   <td width="20" align="center"><a href="#" onClick="return abre('cpvc_pvc_cri.php','busca','width=320,height=300,scrollbars=1');"><img src="imagens/icon_14_search.gif" alt="Selecione um Item" width="14" height="14" border="0"></a></td>
                 </tr>
             </table></td>
           </tr>
           <tr>
             <td class="textobold"> &nbsp;CS Banda1 </td>
-            <td class="textobold"><input name="b1" type="text" class="formulario" id="b1" value="<? print banco2valor($res["b1"]); ?>" size="10" onKeyDown="formataMoeda(this,retornaKeyCode(event))" onKeyUp="formataMoeda(this,retornaKeyCode(event))" <? if($class=="I") print "readonly"; ?> onBlur="ccusto(this.form);"> 
+            <td class="textobold"><input name="b1" type="text" class="formulario" id="b1" value="<?php print banco2valor($res["b1"]); ?>" size="10" onKeyDown="formataMoeda(this,retornaKeyCode(event))" onKeyUp="formataMoeda(this,retornaKeyCode(event))" <?php if($class=="I") print "readonly"; ?> onBlur="ccusto(this.form);"> 
               &nbsp;PVC Cinza Superior  </td>
           </tr>
           <tr>
             <td class="textobold">&nbsp;CI Banda2 </td>
-            <td class="textobold"><input name="b2" type="text" class="formulario" id="b2" value="<? print banco2valor($res["b2"]); ?>" size="10" onKeyDown="formataMoeda(this,retornaKeyCode(event))" onKeyUp="formataMoeda(this,retornaKeyCode(event))" <? if($class=="I") print "readonly"; ?> onBlur="ccusto(this.form);">
+            <td class="textobold"><input name="b2" type="text" class="formulario" id="b2" value="<?php print banco2valor($res["b2"]); ?>" size="10" onKeyDown="formataMoeda(this,retornaKeyCode(event))" onKeyUp="formataMoeda(this,retornaKeyCode(event))" <?php if($class=="I") print "readonly"; ?> onBlur="ccusto(this.form);">
             &nbsp;PVC Cinza Inferior </td>
           </tr>
           <tr>
             <td class="textobold">&nbsp;CR Banda </td>
-            <td class="textobold"><input name="b3" type="text" class="formulario" id="b3" value="<? print banco2valor($res["b3"]); ?>" size="10" onKeyDown="formataMoeda(this,retornaKeyCode(event))" onKeyUp="formataMoeda(this,retornaKeyCode(event))" <? if($class=="I") print "readonly"; ?> onBlur="ccusto(this.form);">
+            <td class="textobold"><input name="b3" type="text" class="formulario" id="b3" value="<?php print banco2valor($res["b3"]); ?>" size="10" onKeyDown="formataMoeda(this,retornaKeyCode(event))" onKeyUp="formataMoeda(this,retornaKeyCode(event))" <?php if($class=="I") print "readonly"; ?> onBlur="ccusto(this.form);">
 &nbsp;            PVC Cristal </td>
           </tr>
           <tr>
             <td class="textobold">&nbsp;Corte 1 </td>
-            <td class="textobold"><input name="co1" type="text" class="formulario" id="co1" value="<? print banco2valor($res["co1"]); ?>" size="10" onKeyDown="formataMoeda(this,retornaKeyCode(event))" onKeyUp="formataMoeda(this,retornaKeyCode(event))" <? if($class=="I") print "readonly"; ?> onBlur="ccusto(this.form);">
+            <td class="textobold"><input name="co1" type="text" class="formulario" id="co1" value="<?php print banco2valor($res["co1"]); ?>" size="10" onKeyDown="formataMoeda(this,retornaKeyCode(event))" onKeyUp="formataMoeda(this,retornaKeyCode(event))" <?php if($class=="I") print "readonly"; ?> onBlur="ccusto(this.form);">
             &nbsp;PVC Cinza Superior </td>
           </tr>
           <tr>
             <td class="textobold">&nbsp;Corte 2</td>
-            <td class="textobold"><input name="co2" type="text" class="formulario" id="co2" value="<? print banco2valor($res["co2"]); ?>" size="10" onKeyDown="formataMoeda(this,retornaKeyCode(event))" onKeyUp="formataMoeda(this,retornaKeyCode(event))" <? if($class=="I") print "readonly"; ?> onBlur="ccusto(this.form);">
+            <td class="textobold"><input name="co2" type="text" class="formulario" id="co2" value="<?php print banco2valor($res["co2"]); ?>" size="10" onKeyDown="formataMoeda(this,retornaKeyCode(event))" onKeyUp="formataMoeda(this,retornaKeyCode(event))" <?php if($class=="I") print "readonly"; ?> onBlur="ccusto(this.form);">
             &nbsp;PVC Cinza Inferior </td>
           </tr>
           <tr>
@@ -197,15 +198,15 @@ if($acao=="alt"){
               <input name="Submit2222" type="button" class="microtxt" value="voltar" onClick="window.location='cpvc.php'">
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <input name="Submit2" type="submit" class="microtxt" value="Continuar">
-            <input name="acao" type="hidden" id="acao" value="<? if($acao=="alt"){ print "alterar"; }else{ print "incluir"; } ?>"> 
-            <input name="id" type="hidden" id="id3" value="<? print $id; ?>">
-            <input name="perfil" type="hidden" id="perfil" value="<?= $res["perfil"] ?>"></td>
+            <input name="acao" type="hidden" id="acao" value="<?php if($acao=="alt"){ print "alterar"; }else{ print "incluir"; } ?>"> 
+            <input name="id" type="hidden" id="id3" value="<?php print $id; ?>">
+            <input name="perfil" type="hidden" id="perfil" value="<?php echo  $res["perfil"] ?>"></td>
           </tr>
         </table>
       </form>    </td>
-	<? } ?>
+	<?php } ?>
   </tr>
 </table>
 </body>
 </html>
-<? include("mensagem.php"); ?>
+<?php include("mensagem.php"); ?>

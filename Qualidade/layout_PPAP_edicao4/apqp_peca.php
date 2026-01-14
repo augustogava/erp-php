@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 if(empty($peca)){ exit; }
 if(!empty($acao)){
@@ -12,16 +12,16 @@ if($acao=="sel"){
 		$res=mysql_fetch_array($sql);
 			$sql_r=mysql_query("SELECT * FROM apqp_car WHERE peca='$peca' AND tipo='$res[tipo]' AND numero='$res[numero]'");
 			if(!mysql_num_rows($sql_r)){
-				$sql2=mysql_query("INSERT INTO apqp_car (peca,descricao,espec,numero,pc,simbolo,tipo,lie,lse,tol,nominal) VALUES('$peca','$res[descricao]','$res[espec]','$res[numero]','$res[pc]','$res[simbolo]','$res[tipo]','$res[lie]','$res[lse]','$res[tol]','$res[nominal]')") or die("Akii tb nao foi");
+				$sql2=mysql_query("INSERT INTO apqp_car (peca,descricao,espec,numero,pc,simbolo,tipo,lie,lse,tol,nominal) VALUES('$peca','$res[descricao]','$res[espec]','$res[numero]','$res[pc]','$res[simbolo]','$res[tipo]','$res[lie]','$res[lse]','$res[tol]','$res[nominal]')") or erp_db_fail();
 			}
 	}
 }else if($acao=="tudo"){
 	
-	$sql=mysql_query("SELECT * FROM apqp_car WHERE peca='$id'") or die("Erro");
+	$sql=mysql_query("SELECT * FROM apqp_car WHERE peca='$id'") or erp_db_fail();
 		while($res=mysql_fetch_array($sql)){
 			$sql_r=mysql_query("SELECT * FROM apqp_car WHERE peca='$peca' AND tipo='$res[tipo]' AND numero='$res[numero]'");
 			if(!mysql_num_rows($sql_r)){
-				$sql2=mysql_query("INSERT INTO apqp_car (peca,descricao,espec,numero,pc,simbolo,tipo,lie,lse,tol,nominal) VALUES('$peca','$res[descricao]','$res[espec]','$res[numero]','$res[pc]','$res[simbolo]','$res[tipo]','$res[lie]','$res[lse]','$res[tol]','$res[nominal]')") or die("Nao ta indo aki");
+				$sql2=mysql_query("INSERT INTO apqp_car (peca,descricao,espec,numero,pc,simbolo,tipo,lie,lse,tol,nominal) VALUES('$peca','$res[descricao]','$res[espec]','$res[numero]','$res[pc]','$res[simbolo]','$res[tipo]','$res[lie]','$res[lse]','$res[tol]','$res[nominal]')") or erp_db_fail();
 			}
 		}
 }
@@ -29,7 +29,7 @@ if($acao=="sel"){
 		$_SESSION["mensagem"]="Importado com Sucesso!!";
 		print "<script>opener.location='apqp_car.php?id=$peca&acao=inc';window.close();</script>";
 	}else{
-		$_SESSION["mensagem"]="Não pode ser Importado";
+		$_SESSION["mensagem"]="NÃ£o pode ser Importado";
 		print "<script>opener.location='apqp_car.php?id=$peca&acao=inc';window.close();</script>";
 	}
 ?>

@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 $apqp=new set_apqp;
 $acao=verifi($permi,$acao);
@@ -32,7 +32,7 @@ if($acao=="email"){
 		//verificar Cliente
 		$apqp->cliente_apro("apqp_cap.php");
 		// - - - - - - - -  -
-		///Tirar AprovaÁıesss
+		///Tirar Aprova√ß√µesss
 	$sql=mysql_query("SELECT * FROM apqp_cron WHERE perc='100' AND peca='$pc' AND ativ='Estudos de Capabilidade'");
 	if(mysql_num_rows($sql)){
 			$sqlba=mysql_query("SELECT * FROM apqp_cron WHERE perc='100' AND peca='$pc' AND ativ<>'Viabilidade' AND ativ<>'Diagrama de Fluxo' AND ativ<>'FMEA de Processo' AND ativ<>'Plano de Controle' AND ativ<>'Estudos de R&R'");
@@ -185,7 +185,7 @@ if($acao=="cap2"){
 		}else{
 			$rokh="OK";
 		}
-//Histrograma comeÁa aqui -------------------// -----------------
+//Histrograma come√ßa aqui -------------------// -----------------
 for($i=1;$i<=$nli*5;$i++){
 	$tot[]=$_POST["a".$i];
 }
@@ -342,12 +342,12 @@ for($i=1;$i<=7;$i++){
 //print $quer;
 	$sql=mysql_query("UPDATE apqp_car SET disp_cap='0',quem_cap='', dtquem_cap='' WHERE id='$car'");
 	if($sql){
-		$_SESSION["mensagem"]="AlteraÁıes salvas com sucesso";
+		$_SESSION["mensagem"]="Altera√ß√µes salvas com sucesso";
 		// cria followup caso salve o conteudo da capabilidade
-			$sql_sal=mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Salvando alteraÁıes da Capabilidade da peÁa $npc.','O usu·rio $quem salvou as alteraÁıes da Capabilidade da peÁa $npc.','$user')");
+			$sql_sal=mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Salvando altera√ß√µes da Capabilidade da pe√ßa $npc.','O usu√°rio $quem salvou as altera√ß√µes da Capabilidade da pe√ßa $npc.','$user')");
 		//	
 	}else{
-		$_SESSION["mensagem"]="As alteraÁıes n„o puderam ser salvas";
+		$_SESSION["mensagem"]="As altera√ß√µes n√£o puderam ser salvas";
 	}
 	header("location:apqp_cap3.php?car=$car");
 	exit;
@@ -361,27 +361,27 @@ for($i=1;$i<=7;$i++){
 		}
 		$sql=mysql_query("SELECT * FROM apqp_cron WHERE perc='100' AND peca='$pc' AND ativ='Estudos de R&R'");
 		if(!mysql_num_rows($sql)){
-			$_SESSION["mensagem"]="N„o pode ser aprovado pois existem relatÛrios anteriores abertos!!";
+			$_SESSION["mensagem"]="N√£o pode ser aprovado pois existem relat√≥rios anteriores abertos!!";
 			header("Location:apqp_cap3.php?car=$car");
 			exit;
 		}
 		$sql=mysql_query("UPDATE apqp_cron SET fim=NOW(), perc='100',resp='$tap12' WHERE ativ='Estudos de Capabilidade' AND peca='$pc'");
 			$_SESSION["mensagem"]="Aprovado com Sucesso!";
 			// cria followup caso aprove o conteudo do Estudo de R&R 
-				$sql_ap=mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','AprovaÁ„o do estudo de Capabilidade da peÁa $npc.','O usu·rio $quem aprovou o estudo de Capabilidade da peÁa $npc.','$user')");
+				$sql_ap=mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Aprova√ß√£o do estudo de Capabilidade da pe√ßa $npc.','O usu√°rio $quem aprovou o estudo de Capabilidade da pe√ßa $npc.','$user')");
 			header("Location:apqp_cap3.php?car=$car");
 			exit;
 	}	
 	if(isset($lim)){
 			$sql=mysql_query("UPDATE apqp_cron SET resp='$tap12',fim=NOW(),perc='95' WHERE ativ='Estudos de Capabilidade' AND peca='$pc'");
-			// cria followup caso remova a aprovaÁ„o do R&R e mude o status
-				mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Removendo a aprovaÁ„o do estudo de Capabilidade da peÁa $npc.','O usu·rio $quem removeu a aprovaÁ„o da peÁa $npc devido a remoÁ„o da aprovaÁ„o estudo de Capabilidade.','$user')");
+			// cria followup caso remova a aprova√ß√£o do R&R e mude o status
+				mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Removendo a aprova√ß√£o do estudo de Capabilidade da pe√ßa $npc.','O usu√°rio $quem removeu a aprova√ß√£o da pe√ßa $npc devido a remo√ß√£o da aprova√ß√£o estudo de Capabilidade.','$user')");
 			// EMAIL	
-				$apqp->set_email("RemoÁ„o da aprovaÁ„o da peÁa $npc.","O usu·rio $quem removeu a aprovaÁ„o da peÁa $this->npc devido a remoÁ„o da aprovaÁ„o doestudo de Capabilidade.");
+				$apqp->set_email("Remo√ß√£o da aprova√ß√£o da pe√ßa $npc.","O usu√°rio $quem removeu a aprova√ß√£o da pe√ßa $this->npc devido a remo√ß√£o da aprova√ß√£o doestudo de Capabilidade.");
 				$apqp->email();
-			$_SESSION["mensagem"]="AprovaÁ„o excluÌda com sucesso!";
-			// cria followup caso remove a aprovaÁ„o do Estudo de R&R 
-			mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Removendo aprovaÁ„o da CaracterÌstica no estudo de Capabilidade da peÁa $npc.','O usu·rio $quem removeu a aprovaÁ„o do estudo de Capabilidade da peÁa $npc.','$user')");	
+			$_SESSION["mensagem"]="Aprova√ß√£o exclu√≠da com sucesso!";
+			// cria followup caso remove a aprova√ß√£o do Estudo de R&R 
+			mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Removendo aprova√ß√£o da Caracter√≠stica no estudo de Capabilidade da pe√ßa $npc.','O usu√°rio $quem removeu a aprova√ß√£o do estudo de Capabilidade da pe√ßa $npc.','$user')");	
 		
 		//$sql=mysql_query("UPDATE apqp_cron SET resp='',fim='',perc='95' WHERE ativ='Estudos de R&R' AND peca='$pc'");
 		$sql=mysql_query("UPDATE apqp_car SET disp_cap='0',quem_cap='', dtquem_cap='' WHERE id='$car'");
@@ -396,15 +396,15 @@ for($i=1;$i<=7;$i++){
 		}
 		$sql=mysql_query("SELECT * FROM apqp_cron WHERE perc='100' AND peca='$pc' AND ativ='Estudos de R&R'");
 		if(!mysql_num_rows($sql)){
-			$_SESSION["mensagem"]="N„o pode ser aprovado pois existem relatÛrios anteriores abertos!!";
+			$_SESSION["mensagem"]="N√£o pode ser aprovado pois existem relat√≥rios anteriores abertos!!";
 			header("Location:apqp_cap3.php?car=$car");
 			exit;
 		}
-			$sql=mysql_query("UPDATE apqp_cap SET sit=1 WHERE id='$id'") or die("UPDATE apqp_cap SET sit=1,quem='$tap12' dtquem=NOW() WHERE id='$id'");
+			$sql=mysql_query("UPDATE apqp_cap SET sit=1 WHERE id='$id'") or erp_db_fail();
 			$sql=mysql_query("UPDATE apqp_car SET disp_cap='1',quem_cap='$tap12', dtquem_cap=NOW() WHERE id='$car'");
-				$_SESSION["mensagem"]="AprovaÁ„o concluÌda com sucesso"; 
+				$_SESSION["mensagem"]="Aprova√ß√£o conclu√≠da com sucesso"; 
 				// cria followup caso aprove o conteudo da Capabilidade
-					$sql_ap=mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','AprovaÁ„o da CaracterÌstica da Capabilidade na peÁa $npc.','O usu·rio $quem aprovou a CaracterÌstica da Capabilidade na peÁa $npc.','$user')");
+					$sql_ap=mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Aprova√ß√£o da Caracter√≠stica da Capabilidade na pe√ßa $npc.','O usu√°rio $quem aprovou a Caracter√≠stica da Capabilidade na pe√ßa $npc.','$user')");
 				//	
 	}
 	if(isset($rep)){
@@ -414,21 +414,21 @@ for($i=1;$i<=7;$i++){
 		$sql=mysql_query("UPDATE apqp_cap SET sit=2 WHERE id='$id'");
 		$sql=mysql_query("UPDATE apqp_car SET disp_cap='2',quem_cap='$tap12',dtquem_cap=NOW() WHERE id='$car'");
 
-		$_SESSION["mensagem"]="ReprovaÁ„o concluÌda com sucesso";
+		$_SESSION["mensagem"]="Reprova√ß√£o conclu√≠da com sucesso";
 		// cria followup caso aprove o conteudo da Capabilidade
-			$sql_ap=mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','ReprovaÁ„o a CaracterÌstica da Capabilidade na peÁa $npc.','O usu·rio $quem reprovou a CaracterÌstica da Capabilidade na peÁa $npc.','$user')");		
+			$sql_ap=mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Reprova√ß√£o a Caracter√≠stica da Capabilidade na pe√ßa $npc.','O usu√°rio $quem reprovou a Caracter√≠stica da Capabilidade na pe√ßa $npc.','$user')");		
 	}
 	if(isset($lap)){
 			mysql_query("UPDATE apqp_pc SET status='1' WHERE id='$pc'");
-			// cria followup caso remova a aprovaÁ„o do R&R e mude o status
-				mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Removendo a aprovaÁ„o do Estudo de Capabilidade da peÁa $npc.','O usu·rio $quem removeu a aprovaÁ„o da peÁa $npc devido a remoÁ„o da aprovaÁ„o do Estudo de Capabilidade.','$user')");
-				$apqp->set_email("RemoÁ„o da aprovaÁ„o da peÁa $npc.","O usu·rio $quem removeu a aprovaÁ„o da peÁa $this->npc devido a remoÁ„o da aprovaÁ„o do Estudo Capabilidade.");
+			// cria followup caso remova a aprova√ß√£o do R&R e mude o status
+				mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Removendo a aprova√ß√£o do Estudo de Capabilidade da pe√ßa $npc.','O usu√°rio $quem removeu a aprova√ß√£o da pe√ßa $npc devido a remo√ß√£o da aprova√ß√£o do Estudo de Capabilidade.','$user')");
+				$apqp->set_email("Remo√ß√£o da aprova√ß√£o da pe√ßa $npc.","O usu√°rio $quem removeu a aprova√ß√£o da pe√ßa $this->npc devido a remo√ß√£o da aprova√ß√£o do Estudo Capabilidade.");
 				$apqp->email();
-		// cria followup caso remove a aprovaÁ„o da Capabilidade
-		mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Removendo aprovaÁ„o da Capabilidade da peÁa $npc.','O usu·rio $quem removeu a aprovaÁ„o da Capabilidade da peÁa $npc.','$user')");
+		// cria followup caso remove a aprova√ß√£o da Capabilidade
+		mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Removendo aprova√ß√£o da Capabilidade da pe√ßa $npc.','O usu√°rio $quem removeu a aprova√ß√£o da Capabilidade da pe√ßa $npc.','$user')");
 		$sql=mysql_query("UPDATE apqp_cap SET sit=0 WHERE id='$id'");
 		$sql=mysql_query("UPDATE apqp_car SET disp_cap='0',quem_cap='', dtquem_cap='' WHERE id='$car'");
-		$_SESSION["mensagem"]="AprovaÁ„o excluÌda com sucesso";
+		$_SESSION["mensagem"]="Aprova√ß√£o exclu√≠da com sucesso";
 	}
 	header("location:apqp_cap3.php?car=$car");
 	exit;

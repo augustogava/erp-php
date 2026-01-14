@@ -1,11 +1,12 @@
-<?
+<?php
 include("conecta.php");
 include("seguranca.php");
 ?>
 <html>
 <head>
 <title>CyberManager</title>
-<meta http-equiv="Content-Type" content="text/html; UTF-8">
+<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="style.css" rel="stylesheet" type="text/css">
 <script src="scripts.js"></script>
 </head>
@@ -35,7 +36,7 @@ include("seguranca.php");
         </tr>
         <tr> 
           <td class="texto"> <table width="350" border="0" cellspacing="0" cellpadding="0">
-              <? 
+              <?php 
 			  $sql=mysql_query("SELECT * FROM pcontas WHERE idpai=0 ORDER BY codigo ASC");
 			  if(mysql_num_rows($sql)==0){
 			  ?>
@@ -43,7 +44,7 @@ include("seguranca.php");
                 <td colspan="4" align="center" class="textobold">NENHUMA CONTA 
                   CADASTRADA</td>
               </tr>
-              <?
+              <?php
 			  }else{
 			  	while($res=mysql_fetch_array($sql)){
 					$res["descricao"]=strtoupper($res["descricao"]);
@@ -52,23 +53,23 @@ include("seguranca.php");
                 <td colspan="4"><img src="imagens/dot.gif" width="100" height="8"></td>
               </tr>
               <tr onMouseover="changeto('#CCCCCC')" onMouseout="changeback('')"> 
-                <td><span class="textobold"><? print $res["codigo"]; ?> <? print $res["descricao"]; ?></span></td>
-                <td width="16" align="center"><a href="pcontasub_inc.php?idpai=<? print $res["id"]; ?>"><img src="imagens/icon_14_add2.gif" alt="Incluir Subconta" width="14" height="16" border="0"></a></td>
-                <td width="16" align="center"><a href="pconta_inc.php?acao=alt&id=<? print $res["id"]; ?>"><img src="imagens/icon14_alterar.gif" alt="Alterar" width="14" height="14" border="0"></a></td>
-                <td width="16" align="center"><a href="#" onClick="return pergunta('Deseja excluir esta conta e suas subcontas?','pconta_inc_sql.php?acao=exc&id=<? print $res["id"]; ?>');"><img src="imagens/icon14_lixeira.gif" alt="Excluir" width="14" height="14" border="0"></a></td>
+                <td><span class="textobold"><?php print $res["codigo"]; ?> <?php print $res["descricao"]; ?></span></td>
+                <td width="16" align="center"><a href="pcontasub_inc.php?idpai=<?php print $res["id"]; ?>"><img src="imagens/icon_14_add2.gif" alt="Incluir Subconta" width="14" height="16" border="0"></a></td>
+                <td width="16" align="center"><a href="pconta_inc.php?acao=alt&id=<?php print $res["id"]; ?>"><img src="imagens/icon14_alterar.gif" alt="Alterar" width="14" height="14" border="0"></a></td>
+                <td width="16" align="center"><a href="#" onClick="return pergunta('Deseja excluir esta conta e suas subcontas?','pconta_inc_sql.php?acao=exc&id=<?php print $res["id"]; ?>');"><img src="imagens/icon14_lixeira.gif" alt="Excluir" width="14" height="14" border="0"></a></td>
               </tr>
-              <?
+              <?php
 			  		$sqls=mysql_query("SELECT * FROM pcontas WHERE idpai='$res[id]' ORDER BY codigo ASC");
 					while($ress=mysql_fetch_array($sqls)){
 			  ?>
               <tr onMouseover="changeto('#CCCCCC')" onMouseout="changeback('')"> 
-                <td><img src="imagens/dot.gif" width="25" height="5"><span class="textobold"><? print $ress["codigo"]; ?></span> 
-                  <span class="texto"><? print $ress["descricao"]; ?> </span></td>
+                <td><img src="imagens/dot.gif" width="25" height="5"><span class="textobold"><?php print $ress["codigo"]; ?></span> 
+                  <span class="texto"><?php print $ress["descricao"]; ?> </span></td>
                 <td width="16" align="center">&nbsp;</td>
-                <td width="16" align="center"><a href="pcontasub_inc.php?acao=alt&id=<? print $ress["id"]; ?>"><img src="imagens/icon14_alterar.gif" alt="Alterar" width="14" height="14" border="0"></a></td>
-                <td width="16" align="center"><a href="#" onClick="return pergunta('Deseja excluir esta subconta?','pcontasub_inc_sql.php?acao=exc&id=<? print $ress["id"]; ?>');"><img src="imagens/icon14_lixeira.gif" alt="Excluir" width="14" height="14" border="0"></a></td>
+                <td width="16" align="center"><a href="pcontasub_inc.php?acao=alt&id=<?php print $ress["id"]; ?>"><img src="imagens/icon14_alterar.gif" alt="Alterar" width="14" height="14" border="0"></a></td>
+                <td width="16" align="center"><a href="#" onClick="return pergunta('Deseja excluir esta subconta?','pcontasub_inc_sql.php?acao=exc&id=<?php print $ress["id"]; ?>');"><img src="imagens/icon14_lixeira.gif" alt="Excluir" width="14" height="14" border="0"></a></td>
               </tr>
-              <?
+              <?php
 			  		}
 				}
 			  }
@@ -83,4 +84,4 @@ include("seguranca.php");
 </table>
 </body>
 </html>
-<? include("mensagem.php"); ?>
+<?php include("mensagem.php"); ?>

@@ -24,8 +24,8 @@ $ate=date("Y-m-d",mktime(0,0,0,date("m"),date("d")-$bdias,date("Y")));
 <html lang="pt-BR">
 <head>
 <title>Lancamentos Bancarios - ERP System</title>
-<meta charset="ISO-8859-1">
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <link href="style.css" rel="stylesheet" type="text/css">

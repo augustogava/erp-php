@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 include("seguranca.php");
 if($buscar){
@@ -76,14 +76,14 @@ if(!empty($bnum)){
         <td>&nbsp;Cliente</td>
         <td width="16" align="center">&nbsp;</td>
         </tr>
-	  <?
+	  <?php
 	  $sql=mysql_query("SELECT apqp_pc.id,apqp_pc.numero,apqp_pc.nome,apqp_pc.rev,apqp_pc.dtrev,clientes.fantasia FROM apqp_pc,clientes $cond ORDER BY numero ASC, rev ASC");
 	  if(mysql_num_rows($sql)==0){
 	  ?>
       <tr bgcolor="#FFFFFF">
         <td colspan="5" align="center" class="textopretobold">NENHUMA PE&Ccedil;A ENCONTRADA &nbsp;</td>
         </tr>
-      <?
+      <?php
 	  }else{
 				//BLOCO PAGINACAO
 				$results_tot=mysql_num_rows($sql); //total de registros encontrados
@@ -120,39 +120,39 @@ if(!empty($bnum)){
 				$reg_final++; // PAGINACAO conta quantos registros imprimiu
 	  ?>
       <tr bgcolor="#FFFFFF" class="textopreto" onMouseover="changeto('#CCCCCC')" onMouseout="changeback('#FFFFFF')">
-       <a href="#" onClick="return pergunta('Deseja copiar todas as Características?','apqp_peca.php?id=<? print $res["id"]; ?>&peca=<? print $id; ?>&acao=tudo')"> 
-       <td width="90">&nbsp;<? print $res["numero"]." - ".$res["rev"]; ?></td>
-        <td width="65" align="center"><? print banco2data($res["dtrev"]); ?></td>
-        <td>&nbsp;<? print $res["nome"]; ?></td>
-        <td>&nbsp;<? print $res["fantasia"]; ?></td></a>
-        <td align="center"><a href="apqp_car_pop.php?id=<? print $res["id"]; ?>&acao=inc&menu=S&num=<? print $res["numero"]; ?>&rev=<? print $res["rev"]; ?>&peca=<? print $id; ?>&npc2=<? print $npc2; ?>"><img src="imagens/icon14_alterar.gif" alt="Visualizar" width="14" height="14" border="0"></a></td>
+       <a href="#" onClick="return pergunta('Deseja copiar todas as CaracterÃ­sticas?','apqp_peca.php?id=<?php print $res["id"]; ?>&peca=<?php print $id; ?>&acao=tudo')"> 
+       <td width="90">&nbsp;<?php print $res["numero"]." - ".$res["rev"]; ?></td>
+        <td width="65" align="center"><?php print banco2data($res["dtrev"]); ?></td>
+        <td>&nbsp;<?php print $res["nome"]; ?></td>
+        <td>&nbsp;<?php print $res["fantasia"]; ?></td></a>
+        <td align="center"><a href="apqp_car_pop.php?id=<?php print $res["id"]; ?>&acao=inc&menu=S&num=<?php print $res["numero"]; ?>&rev=<?php print $res["rev"]; ?>&peca=<?php print $id; ?>&npc2=<?php print $npc2; ?>"><img src="imagens/icon14_alterar.gif" alt="Visualizar" width="14" height="14" border="0"></a></td>
        
         </tr>
-	  <?
+	  <?php
 	  	}
 	}
 	?>
     </table>
-      <? if($wpaginar) { ?>
+      <?php if($wpaginar) { ?>
       <table width="594" border="0" cellspacing="0" cellpadding="0">
         <tr>
           <td align="center"><table width="1%" border="0" cellspacing="0" cellpadding="0">
               <tr valign="top">
                 <td align="right">
-                  <? 
+                  <?php 
 				$antz=false;
 				if($wp>1){
 					$antz=true;
 				?>
-                  <a href="<? print "apqp_pc_pop.php?wp=$pg_anterior&bcli=$bcli&bpeca=$bpeca&bnum=$bnum"; ?>" class="paginacao2">
-                  <? } ?>
+                  <a href="<?php print "apqp_pc_pop.php?wp=$pg_anterior&bcli=$bcli&bpeca=$bpeca&bnum=$bnum"; ?>" class="paginacao2">
+                  <?php } ?>
                   <img src="imagens/pag_f.gif" width="27" height="14" border="0">
-                  <? if($antz){ ?>
+                  <?php if($antz){ ?>
                   <br>
             Anterior</a>
-                  <? } ?>
+                  <?php } ?>
                 </td>
-                <?
+                <?php
 				$link_impressos=0;
 				if ($temp > $wpaginacao){
 		    	    $n_start  = $temp - ceil($wpaginacao/2);
@@ -166,35 +166,35 @@ if(!empty($bnum)){
 					$link_impressos++;
 				?>
                 <td align="center">
-                  <? if($pg_atual != $link_impressos){ ?>
-                  <a href="<? print "apqp_pc_pop.php?wp=$link_impressos&bcli=$bcli&bpeca=$bpeca&bnum=$bnum"; ?>" class="paginacao">
-                  <? } ?>
-                  <img src="imagens/pag_e<? if($pg_atual==$link_impressos) print "2"; ?>.gif" width="10" height="14" border="0"><br>
-                  <? if($pg_atual==$link_impressos){ print "<span class=\"paginacao2\">$link_impressos</span>"; }else{ print $link_impressos; }?>
-                  <? if($pg_atual != $link_impressos){ ?>
+                  <?php if($pg_atual != $link_impressos){ ?>
+                  <a href="<?php print "apqp_pc_pop.php?wp=$link_impressos&bcli=$bcli&bpeca=$bpeca&bnum=$bnum"; ?>" class="paginacao">
+                  <?php } ?>
+                  <img src="imagens/pag_e<?php if($pg_atual==$link_impressos) print "2"; ?>.gif" width="10" height="14" border="0"><br>
+                  <?php if($pg_atual==$link_impressos){ print "<span class=\"paginacao2\">$link_impressos</span>"; }else{ print $link_impressos; }?>
+                  <?php if($pg_atual != $link_impressos){ ?>
                   </a>
-                  <? } ?>
+                  <?php } ?>
                 </td>
-                <?
+                <?php
 				}
 				?>
                 <td>
-                  <? if($reg_final<$results_tot){ ?>
-                  <a href="<? print "apqp_pc_pop.php?wp=$pg_proxima&bcli=$bcli&bpeca=$bpeca&bnum=$bnum"; ?>" class="paginacao2">
-                  <? } ?>
+                  <?php if($reg_final<$results_tot){ ?>
+                  <a href="<?php print "apqp_pc_pop.php?wp=$pg_proxima&bcli=$bcli&bpeca=$bpeca&bnum=$bnum"; ?>" class="paginacao2">
+                  <?php } ?>
                   <img src="imagens/pag_der.gif" width="26" height="14" border="0">
-                  <? if($reg_final<$results_tot){ ?>
+                  <?php if($reg_final<$results_tot){ ?>
                   <br>
             Pr&oacute;ximo</a>
-                  <? } ?>
+                  <?php } ?>
                 </td>
               </tr>
           </table></td>
         </tr>
       </table>
-    <? } ?></td>
+    <?php } ?></td>
   </tr>
 </table>
 </body>
 </html>
-<? include("mensagem.php"); ?>
+<?php include("mensagem.php"); ?>

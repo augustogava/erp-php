@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 $acao=verifi($permi,$acao);
 $pc=$_SESSION["mpc"];
@@ -39,7 +39,7 @@ if((isset($lap1) or isset($lap2) or isset($lap3) or isset($lap4) or isset($lap5)
 		// - - - - - - - -  -
 
 
-///Tirar Aprovaçõesss
+///Tirar AprovaÃ§Ãµesss
 	$sql=mysql_query("SELECT * FROM apqp_cron WHERE perc='100' AND peca='$pc' AND ativ='Viabilidade'");
 	if(mysql_num_rows($sql)){
 			$sqlba=mysql_query("SELECT * FROM apqp_cron WHERE perc='100' AND peca='$pc'");
@@ -72,42 +72,42 @@ if((isset($lap1) or isset($lap2) or isset($lap3) or isset($lap4) or isset($lap5)
 if($acao=="v1"){
 	$sql=mysql_query("UPDATE apqp_viabilidade SET sn1='$sn1',sn2='$sn2',sn3='$sn3',sn4='$sn4',sn5='$sn5',sn6='$sn6',sn7='$sn7',sn8='$sn8',sn9='$sn9',sn10='$sn10',sn11='$sn11',sn12='$sn12',sn13='$sn13' WHERE peca='$pc'");
 	if($sql){
-		$_SESSION["mensagem"]="Alterações salvas com sucesso";
+		$_SESSION["mensagem"]="AlteraÃ§Ãµes salvas com sucesso";
 		// cria followup caso salve o conteudo da viabilidade
-			mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Salvando alterações da Viabilidade da peça $npc.','O usuário $quem salvou as alterações da Viabilidade da peça $npc.','$user')");
+			mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Salvando alteraÃ§Ãµes da Viabilidade da peÃ§a $npc.','O usuÃ¡rio $quem salvou as alteraÃ§Ãµes da Viabilidade da peÃ§a $npc.','$user')");
 		//	
 	}else{
-		$_SESSION["mensagem"]="As alterações não puderam ser salvas";
+		$_SESSION["mensagem"]="As alteraÃ§Ãµes nÃ£o puderam ser salvas";
 	}	
 	header("location:apqp_viabilidade1.php");
 }elseif($acao=="v2"){
 	$sql=mysql_query("UPDATE apqp_viabilidade SET obs='$obs' WHERE peca='$pc'");
 	if($sql){
-		$_SESSION["mensagem"]="Alterações salvas com sucesso";
+		$_SESSION["mensagem"]="AlteraÃ§Ãµes salvas com sucesso";
 		// cria followup caso salve o conteudo da viabilidade
-			mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Salvando alterações da Viabilidade da peça $npc.','O usuário $quem salvou as alterações da Viabilidade da peça $npc.','$user')");
+			mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Salvando alteraÃ§Ãµes da Viabilidade da peÃ§a $npc.','O usuÃ¡rio $quem salvou as alteraÃ§Ãµes da Viabilidade da peÃ§a $npc.','$user')");
 		//	
 		}else{
-		$_SESSION["mensagem"]="As alterações não puderam ser salvas";
+		$_SESSION["mensagem"]="As alteraÃ§Ãµes nÃ£o puderam ser salvas";
 	}
 	header("location:apqp_viabilidade2.php");
 }elseif($acao=="v3"){
 	$data=data2banco($data);
 	$sql=mysql_query("UPDATE apqp_viabilidade SET conclusao='$conclusao', data='$data' WHERE peca='$pc'");
 	if($sql){
-		$_SESSION["mensagem"]="Alterações salvas com sucesso";
+		$_SESSION["mensagem"]="AlteraÃ§Ãµes salvas com sucesso";
 		// cria followup caso salve o conteudo da viabilidade
-			mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Salvando alterações da Viabilidade da peça $npc.','O usuário $quem salvou as alterações da Viabilidade da peça $npc.','$user')");
+			mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Salvando alteraÃ§Ãµes da Viabilidade da peÃ§a $npc.','O usuÃ¡rio $quem salvou as alteraÃ§Ãµes da Viabilidade da peÃ§a $npc.','$user')");
 		//	
 		}else{
-		$_SESSION["mensagem"]="As alterações não puderam ser salvas";
+		$_SESSION["mensagem"]="As alteraÃ§Ãµes nÃ£o puderam ser salvas";
 	}
 	header("location:apqp_viabilidade3.php");
 }elseif($acao=="v4"){
 	if(isset($ap1) or isset($ap2) or isset($ap3) or isset($ap4) or isset($ap5) or isset($ap6)){
 		$sql=mysql_query("SELECT * FROM apqp_pc WHERE crono_apro='S' AND id='$pc'");
 		if(!mysql_num_rows($sql)){
-			$_SESSION["mensagem"]="Não pode ser aprovado pois existem relatórios anteriores abertos!!";
+			$_SESSION["mensagem"]="NÃ£o pode ser aprovado pois existem relatÃ³rios anteriores abertos!!";
 			header("Location:apqp_viabilidade4.php");
 			exit;
 		}
@@ -116,7 +116,7 @@ if($acao=="v1"){
 	
 	if(isset($ap1)){
 			if($res_ap>0){
-				$_SESSION["mensagem"]="O Sistema não permite que um mesmo usuário aprove duas vezes o mesmo Estudo.";
+				$_SESSION["mensagem"]="O Sistema nÃ£o permite que um mesmo usuÃ¡rio aprove duas vezes o mesmo Estudo.";
 				header("location:apqp_viabilidade4.php");
 				exit;
 			}
@@ -127,35 +127,35 @@ if($acao=="v1"){
 			}
 			$sql=mysql_query("UPDATE apqp_viabilidade SET ap1='$tap1', dt1=NOW() WHERE peca='$pc'");
 			$sql=mysql_query("UPDATE apqp_cron SET resp='$tap1', fim=NOW(), perc='100' WHERE peca='$pc' AND ativ='Viabilidade'");
-			$_SESSION["mensagem"]="Aprovação concluída com sucesso";
+			$_SESSION["mensagem"]="AprovaÃ§Ã£o concluÃ­da com sucesso";
 			// cria followup caso aprove o conteudo da viabilidade
-				mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Aprovação da Viabilidade da peça $npc.','O usuário $quem aprovou a Viabilidade da peça $npc.','$user')");
+				mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','AprovaÃ§Ã£o da Viabilidade da peÃ§a $npc.','O usuÃ¡rio $quem aprovou a Viabilidade da peÃ§a $npc.','$user')");
 			//	
 		}else{
-			$_SESSION["mensagem"]="Esta posição já está ocupada";
+			$_SESSION["mensagem"]="Esta posiÃ§Ã£o jÃ¡ estÃ¡ ocupada";
 		}
 	}elseif(isset($lap1)){
 		$sql_status=mysql_query("SELECT status FROM apqp_pc WHERE id='$pc'");
 		$res_status=mysql_fetch_array($sql_status);
 		if($res_status["status"]=="2"){
 			mysql_query("UPDATE apqp_pc SET status='1' WHERE id='$pc'");
-			// cria followup caso remova a aprovação do R&R e mude o status
-				mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Removendo a aprovação da Viabilidade da peça $npc.','O usuário $quem removeu a aprovação da peça $npc devido a remoção da aprovação da Viabilidade.','$user')");
+			// cria followup caso remova a aprovaÃ§Ã£o do R&R e mude o status
+				mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Removendo a aprovaÃ§Ã£o da Viabilidade da peÃ§a $npc.','O usuÃ¡rio $quem removeu a aprovaÃ§Ã£o da peÃ§a $npc devido a remoÃ§Ã£o da aprovaÃ§Ã£o da Viabilidade.','$user')");
 			//	
-				$apqp->set_email("Remoção da aprovação da peça $npc.","O usuário $quem removeu a aprovação da peça $this->npc devido a remoção da aprovação do Estudo Viabilidade.");
+				$apqp->set_email("RemoÃ§Ã£o da aprovaÃ§Ã£o da peÃ§a $npc.","O usuÃ¡rio $quem removeu a aprovaÃ§Ã£o da peÃ§a $this->npc devido a remoÃ§Ã£o da aprovaÃ§Ã£o do Estudo Viabilidade.");
 				$apqp->email();
 			//
 		}else{
-			// cria followup caso remove a aprovação 1 da viabilidade 
-			mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Removendo aprovação da Viabilidade da peça $npc.','O usuário $quem removeu a aprovação da Viabilidade da peça $npc.','$user')");
+			// cria followup caso remove a aprovaÃ§Ã£o 1 da viabilidade 
+			mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Removendo aprovaÃ§Ã£o da Viabilidade da peÃ§a $npc.','O usuÃ¡rio $quem removeu a aprovaÃ§Ã£o da Viabilidade da peÃ§a $npc.','$user')");
 			//	
 		}
 		$sql=mysql_query("UPDATE apqp_viabilidade SET ap1='', dt1='0000-00-00' WHERE peca='$pc'");
-		$_SESSION["mensagem"]="Aprovação excluída com sucesso";
+		$_SESSION["mensagem"]="AprovaÃ§Ã£o excluÃ­da com sucesso";
 		
 	}elseif(isset($ap2)){
 		if($res_ap>0){
-			$_SESSION["mensagem"]="O Sistema não permite que um mesmo usuário aprove duas vezes o mesmo Estudo.";
+			$_SESSION["mensagem"]="O Sistema nÃ£o permite que um mesmo usuÃ¡rio aprove duas vezes o mesmo Estudo.";
 			header("location:apqp_viabilidade4.php");
 			exit;
 		}
@@ -166,36 +166,36 @@ if($acao=="v1"){
 		if(mysql_num_rows($sql)){
 			$sql=mysql_query("UPDATE apqp_viabilidade SET ap2='$tap12', dt2=NOW() WHERE peca='$pc'");
 			$sql=mysql_query("UPDATE apqp_cron SET resp='$tap12', fim=NOW(), perc='100' WHERE peca='$pc' AND ativ='Viabilidade'");
-			$_SESSION["mensagem"]="Aprovação concluída com sucesso";
+			$_SESSION["mensagem"]="AprovaÃ§Ã£o concluÃ­da com sucesso";
 			// cria followup caso aprove o conteudo da viabilidade
-				mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Aprovação da Viabilidade da peça $npc.','O usuário $quem aprovou a Viabilidade da peça $npc.','$user')");
+				mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','AprovaÃ§Ã£o da Viabilidade da peÃ§a $npc.','O usuÃ¡rio $quem aprovou a Viabilidade da peÃ§a $npc.','$user')");
 			//	
 		}else{
-			$_SESSION["mensagem"]="Esta posição já está ocupada";
+			$_SESSION["mensagem"]="Esta posiÃ§Ã£o jÃ¡ estÃ¡ ocupada";
 		}
 	}elseif(isset($lap2)){
 		$sql_status=mysql_query("SELECT status FROM apqp_pc WHERE id='$pc'");
 		$res_status=mysql_fetch_array($sql_status);
 		if($res_status["status"]=="2"){
 			mysql_query("UPDATE apqp_pc SET status='1' WHERE id='$pc'");
-			// cria followup caso remova a aprovação do R&R e mude o status
-				mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Removendo a aprovação da Viabilidade da peça $npc.','O usuário $quem removeu a aprovação da peça $npc devido a remoção da aprovação da Viabilidade.','$user')");
+			// cria followup caso remova a aprovaÃ§Ã£o do R&R e mude o status
+				mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Removendo a aprovaÃ§Ã£o da Viabilidade da peÃ§a $npc.','O usuÃ¡rio $quem removeu a aprovaÃ§Ã£o da peÃ§a $npc devido a remoÃ§Ã£o da aprovaÃ§Ã£o da Viabilidade.','$user')");
 			//	
-				$apqp->set_email("Remoção da aprovação da peça $npc.","O usuário $quem removeu a aprovação da peça $this->npc devido a remoção da aprovação do Estudo Viabilidade.");
+				$apqp->set_email("RemoÃ§Ã£o da aprovaÃ§Ã£o da peÃ§a $npc.","O usuÃ¡rio $quem removeu a aprovaÃ§Ã£o da peÃ§a $this->npc devido a remoÃ§Ã£o da aprovaÃ§Ã£o do Estudo Viabilidade.");
 				$apqp->email();
 			//
 		}else{
-			// cria followup caso remove a aprovação 2 da viabilidade 
-				mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Removendo aprovação da Viabilidade da peça $npc.','O usuário $quem removeu a aprovação da Viabilidade da peça $npc.','$user')");
+			// cria followup caso remove a aprovaÃ§Ã£o 2 da viabilidade 
+				mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Removendo aprovaÃ§Ã£o da Viabilidade da peÃ§a $npc.','O usuÃ¡rio $quem removeu a aprovaÃ§Ã£o da Viabilidade da peÃ§a $npc.','$user')");
 			//	
 		}
 		$sql=mysql_query("UPDATE apqp_viabilidade SET ap2='', dt2='0000-00-00' WHERE peca='$pc'");
-		$_SESSION["mensagem"]="Aprovação excluída com sucesso";
+		$_SESSION["mensagem"]="AprovaÃ§Ã£o excluÃ­da com sucesso";
 
 
 	}elseif(isset($ap3)){
 		if($res_ap>0){
-			$_SESSION["mensagem"]="O Sistema não permite que um mesmo usuário aprove duas vezes o mesmo Estudo.";
+			$_SESSION["mensagem"]="O Sistema nÃ£o permite que um mesmo usuÃ¡rio aprove duas vezes o mesmo Estudo.";
 			header("location:apqp_viabilidade4.php");
 			exit;
 		}
@@ -206,36 +206,36 @@ if($acao=="v1"){
 		if(mysql_num_rows($sql)){
 			$sql=mysql_query("UPDATE apqp_viabilidade SET ap3='$tap13', dt3=NOW() WHERE peca='$pc'");
 			$sql=mysql_query("UPDATE apqp_cron SET resp='$tap13', fim=NOW(), perc='100' WHERE peca='$pc' AND ativ='Viabilidade'");
-			$_SESSION["mensagem"]="Aprovação concluída com sucesso";
+			$_SESSION["mensagem"]="AprovaÃ§Ã£o concluÃ­da com sucesso";
 			// cria followup caso aprove o conteudo da viabilidade
-				mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Aprovação da Viabilidade da peça $npc.','O usuário $quem aprovou a Viabilidade da peça $npc.','$user')");
+				mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','AprovaÃ§Ã£o da Viabilidade da peÃ§a $npc.','O usuÃ¡rio $quem aprovou a Viabilidade da peÃ§a $npc.','$user')");
 			//	
 		}else{
-			$_SESSION["mensagem"]="Esta posição já está ocupada";
+			$_SESSION["mensagem"]="Esta posiÃ§Ã£o jÃ¡ estÃ¡ ocupada";
 		}
 	}elseif(isset($lap3)){
 		$sql_status=mysql_query("SELECT status FROM apqp_pc WHERE id='$pc'");
 		$res_status=mysql_fetch_array($sql_status);
 		if($res_status["status"]=="2"){
 			mysql_query("UPDATE apqp_pc SET status='1' WHERE id='$pc'");
-			// cria followup caso remova a aprovação do R&R e mude o status
-				mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Removendo a aprovação da Viabilidade da peça $npc.','O usuário $quem removeu a aprovação da peça $npc devido a remoção da aprovação da Viabilidade.','$user')");
+			// cria followup caso remova a aprovaÃ§Ã£o do R&R e mude o status
+				mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Removendo a aprovaÃ§Ã£o da Viabilidade da peÃ§a $npc.','O usuÃ¡rio $quem removeu a aprovaÃ§Ã£o da peÃ§a $npc devido a remoÃ§Ã£o da aprovaÃ§Ã£o da Viabilidade.','$user')");
 			//	
-				$apqp->set_email("Remoção da aprovação da peça $npc.","O usuário $quem removeu a aprovação da peça $this->npc devido a remoção da aprovação do Estudo Viabilidade.");
+				$apqp->set_email("RemoÃ§Ã£o da aprovaÃ§Ã£o da peÃ§a $npc.","O usuÃ¡rio $quem removeu a aprovaÃ§Ã£o da peÃ§a $this->npc devido a remoÃ§Ã£o da aprovaÃ§Ã£o do Estudo Viabilidade.");
 				$apqp->email();
 			//
 		}else{
-			// cria followup caso remove a aprovação 3 da viabilidade
-				mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Removendo aprovação da Viabilidade da peça $npc.','O usuário $quem removeu a aprovação da Viabilidade da peça $npc.','$user')");
+			// cria followup caso remove a aprovaÃ§Ã£o 3 da viabilidade
+				mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Removendo aprovaÃ§Ã£o da Viabilidade da peÃ§a $npc.','O usuÃ¡rio $quem removeu a aprovaÃ§Ã£o da Viabilidade da peÃ§a $npc.','$user')");
 			//	
 		}
 		$sql=mysql_query("UPDATE apqp_viabilidade SET ap3='', dt3='0000-00-00' WHERE peca='$pc'");
-		$_SESSION["mensagem"]="Aprovação excluída com sucesso";
+		$_SESSION["mensagem"]="AprovaÃ§Ã£o excluÃ­da com sucesso";
 		
 
 	}elseif(isset($ap4)){
 		if($res_ap>0){
-			$_SESSION["mensagem"]="O Sistema não permite que um mesmo usuário aprove duas vezes o mesmo Estudo.";
+			$_SESSION["mensagem"]="O Sistema nÃ£o permite que um mesmo usuÃ¡rio aprove duas vezes o mesmo Estudo.";
 			header("location:apqp_viabilidade4.php");
 			exit;
 		}
@@ -246,35 +246,35 @@ if($acao=="v1"){
 		if(mysql_num_rows($sql)){
 			$sql=mysql_query("UPDATE apqp_viabilidade SET ap4='$tap14', dt4=NOW() WHERE peca='$pc'");
 			$sql=mysql_query("UPDATE apqp_cron SET resp='$tap14', fim=NOW(), perc='100' WHERE peca='$pc' AND ativ='Viabilidade'");
-			$_SESSION["mensagem"]="Aprovação concluída com sucesso";
+			$_SESSION["mensagem"]="AprovaÃ§Ã£o concluÃ­da com sucesso";
 			// cria followup caso aprove o conteudo da viabilidade
-				mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Aprovação da Viabilidade da peça $npc.','O usuário $quem aprovou a Viabilidade da peça $npc.','$user')");
+				mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','AprovaÃ§Ã£o da Viabilidade da peÃ§a $npc.','O usuÃ¡rio $quem aprovou a Viabilidade da peÃ§a $npc.','$user')");
 			//	
 		}else{
-			$_SESSION["mensagem"]="Esta posição já está ocupada";
+			$_SESSION["mensagem"]="Esta posiÃ§Ã£o jÃ¡ estÃ¡ ocupada";
 		}
 	}elseif(isset($lap4)){
 		$sql_status=mysql_query("SELECT status FROM apqp_pc WHERE id='$pc'");
 		$res_status=mysql_fetch_array($sql_status);
 		if($res_status["status"]=="2"){
 			mysql_query("UPDATE apqp_pc SET status='1' WHERE id='$pc'");
-			// cria followup caso remova a aprovação do R&R e mude o status
-				mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Removendo a aprovação da Viabilidade da peça $npc.','O usuário $quem removeu a aprovação da peça $npc devido a remoção da aprovação da Viabilidade.','$user')");
+			// cria followup caso remova a aprovaÃ§Ã£o do R&R e mude o status
+				mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Removendo a aprovaÃ§Ã£o da Viabilidade da peÃ§a $npc.','O usuÃ¡rio $quem removeu a aprovaÃ§Ã£o da peÃ§a $npc devido a remoÃ§Ã£o da aprovaÃ§Ã£o da Viabilidade.','$user')");
 			//	
-				$apqp->set_email("Remoção da aprovação da peça $npc.","O usuário $quem removeu a aprovação da peça $this->npc devido a remoção da aprovação do Estudo Viabilidade.");
+				$apqp->set_email("RemoÃ§Ã£o da aprovaÃ§Ã£o da peÃ§a $npc.","O usuÃ¡rio $quem removeu a aprovaÃ§Ã£o da peÃ§a $this->npc devido a remoÃ§Ã£o da aprovaÃ§Ã£o do Estudo Viabilidade.");
 				$apqp->email();
 			//
 		}else{
-		// cria followup caso remove a aprovação 4 da viabilidade
-				mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Removendo aprovação da Viabilidade da peça $npc.','O usuário $quem removeu a aprovação da Viabilidade da peça $npc.','$user')");
+		// cria followup caso remove a aprovaÃ§Ã£o 4 da viabilidade
+				mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Removendo aprovaÃ§Ã£o da Viabilidade da peÃ§a $npc.','O usuÃ¡rio $quem removeu a aprovaÃ§Ã£o da Viabilidade da peÃ§a $npc.','$user')");
 		//	
 		}
 		$sql=mysql_query("UPDATE apqp_viabilidade SET ap4='', dt4='0000-00-00' WHERE peca='$pc'");
-		$_SESSION["mensagem"]="Aprovação excluída com sucesso";
+		$_SESSION["mensagem"]="AprovaÃ§Ã£o excluÃ­da com sucesso";
 
 	}elseif(isset($ap5)){
 		if($res_ap>0){
-			$_SESSION["mensagem"]="O Sistema não permite que um mesmo usuário aprove duas vezes o mesmo Estudo.";
+			$_SESSION["mensagem"]="O Sistema nÃ£o permite que um mesmo usuÃ¡rio aprove duas vezes o mesmo Estudo.";
 			header("location:apqp_viabilidade4.php");
 			exit;
 		}
@@ -285,36 +285,36 @@ if($acao=="v1"){
 		if(mysql_num_rows($sql)){
 			$sql=mysql_query("UPDATE apqp_viabilidade SET ap5='$tap15', dt5=NOW() WHERE peca='$pc'");
 			$sql=mysql_query("UPDATE apqp_cron SET resp='$tap15', fim=NOW(), perc='100' WHERE peca='$pc' AND ativ='Viabilidade'");
-			$_SESSION["mensagem"]="Aprovação concluída com sucesso";
+			$_SESSION["mensagem"]="AprovaÃ§Ã£o concluÃ­da com sucesso";
 			// cria followup caso aprove o conteudo da viabilidade
-				mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Aprovação da Viabilidade da peça $npc.','O usuário $quem aprovou a Viabilidade da peça $npc.','$user')");
+				mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','AprovaÃ§Ã£o da Viabilidade da peÃ§a $npc.','O usuÃ¡rio $quem aprovou a Viabilidade da peÃ§a $npc.','$user')");
 			//	
 		}else{
-			$_SESSION["mensagem"]="Esta posição já está ocupada";
+			$_SESSION["mensagem"]="Esta posiÃ§Ã£o jÃ¡ estÃ¡ ocupada";
 		}
 	}elseif(isset($lap5)){
 		$sql_status=mysql_query("SELECT status FROM apqp_pc WHERE id='$pc'");
 		$res_status=mysql_fetch_array($sql_status);
 		if($res_status["status"]=="2"){
 			mysql_query("UPDATE apqp_pc SET status='1' WHERE id='$pc'");
-			// cria followup caso remova a aprovação do R&R e mude o status
-				mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Removendo a aprovação da Viabilidade da peça $npc.','O usuário $quem removeu a aprovação da peça $npc devido a remoção da aprovação da Viabilidade.','$user')");
+			// cria followup caso remova a aprovaÃ§Ã£o do R&R e mude o status
+				mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Removendo a aprovaÃ§Ã£o da Viabilidade da peÃ§a $npc.','O usuÃ¡rio $quem removeu a aprovaÃ§Ã£o da peÃ§a $npc devido a remoÃ§Ã£o da aprovaÃ§Ã£o da Viabilidade.','$user')");
 			//	
-				$apqp->set_email("Remoção da aprovação da peça $npc.","O usuário $quem removeu a aprovação da peça $this->npc devido a remoção da aprovação do Estudo Viabilidade.");
+				$apqp->set_email("RemoÃ§Ã£o da aprovaÃ§Ã£o da peÃ§a $npc.","O usuÃ¡rio $quem removeu a aprovaÃ§Ã£o da peÃ§a $this->npc devido a remoÃ§Ã£o da aprovaÃ§Ã£o do Estudo Viabilidade.");
 				$apqp->email();
 			//
 		}else{
-		// cria followup caso remove a aprovação 5 da viabilidade
-			mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Removendo aprovação da Viabilidade da peça $npc.','O usuário $quem removeu a aprovação da Viabilidade da peça $npc.','$user')");
+		// cria followup caso remove a aprovaÃ§Ã£o 5 da viabilidade
+			mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Removendo aprovaÃ§Ã£o da Viabilidade da peÃ§a $npc.','O usuÃ¡rio $quem removeu a aprovaÃ§Ã£o da Viabilidade da peÃ§a $npc.','$user')");
 		//	
 		}
 		$sql=mysql_query("UPDATE apqp_viabilidade SET ap5='', dt5='0000-00-00' WHERE peca='$pc'");
-		$_SESSION["mensagem"]="Aprovação excluída com sucesso";
+		$_SESSION["mensagem"]="AprovaÃ§Ã£o excluÃ­da com sucesso";
 
 		
 	}elseif(isset($ap6)){
 		if($res_ap>0){
-			$_SESSION["mensagem"]="O Sistema não permite que um mesmo usuário aprove duas vezes o mesmo Estudo.";
+			$_SESSION["mensagem"]="O Sistema nÃ£o permite que um mesmo usuÃ¡rio aprove duas vezes o mesmo Estudo.";
 			header("location:apqp_viabilidade4.php");
 			exit;
 		}
@@ -325,31 +325,31 @@ if($acao=="v1"){
 		if(mysql_num_rows($sql)){
 			$sql=mysql_query("UPDATE apqp_viabilidade SET ap6='$tap16', dt6=NOW() WHERE peca='$pc'");
 			$sql=mysql_query("UPDATE apqp_cron SET resp='$tap16', fim=NOW(), perc='100' WHERE peca='$pc' AND ativ='Viabilidade'");
-			$_SESSION["mensagem"]="Aprovação concluída com sucesso";
+			$_SESSION["mensagem"]="AprovaÃ§Ã£o concluÃ­da com sucesso";
 			// cria followup caso aprove o conteudo da viabilidade
-				mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Aprovação da Viabilidade da peça $npc.','O usuário $quem aprovou a Viabilidade da peça $npc.','$user')");
+				mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','AprovaÃ§Ã£o da Viabilidade da peÃ§a $npc.','O usuÃ¡rio $quem aprovou a Viabilidade da peÃ§a $npc.','$user')");
 			//	
 		}else{
-			$_SESSION["mensagem"]="Esta posição já está ocupada";
+			$_SESSION["mensagem"]="Esta posiÃ§Ã£o jÃ¡ estÃ¡ ocupada";
 		}
 	}elseif(isset($lap6)){
 		$sql_status=mysql_query("SELECT status FROM apqp_pc WHERE id='$pc'");
 		$res_status=mysql_fetch_array($sql_status);
 		if($res_status["status"]=="2"){
 			mysql_query("UPDATE apqp_pc SET status='1' WHERE id='$pc'");
-			// cria followup caso remova a aprovação do R&R e mude o status
-				mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Removendo a aprovação da Viabilidade da peça $npc.','O usuário $quem removeu a aprovação da peça $npc devido a remoção da aprovação da Viabilidade.','$user')");
+			// cria followup caso remova a aprovaÃ§Ã£o do R&R e mude o status
+				mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Removendo a aprovaÃ§Ã£o da Viabilidade da peÃ§a $npc.','O usuÃ¡rio $quem removeu a aprovaÃ§Ã£o da peÃ§a $npc devido a remoÃ§Ã£o da aprovaÃ§Ã£o da Viabilidade.','$user')");
 			//	
-				$apqp->set_email("Remoção da aprovação da peça $npc.","O usuário $quem removeu a aprovação da peça $this->npc devido a remoção da aprovação do Estudo Viabilidade.");
+				$apqp->set_email("RemoÃ§Ã£o da aprovaÃ§Ã£o da peÃ§a $npc.","O usuÃ¡rio $quem removeu a aprovaÃ§Ã£o da peÃ§a $this->npc devido a remoÃ§Ã£o da aprovaÃ§Ã£o do Estudo Viabilidade.");
 				$apqp->email();
 			//
 		}else{
-		// cria followup caso remove a aprovação 6 da viabilidade
-			mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Removendo aprovação da Viabilidade da peça $npc.','O usuário $quem removeu a aprovação da Viabilidade da peça $npc.','$user')");
+		// cria followup caso remove a aprovaÃ§Ã£o 6 da viabilidade
+			mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Removendo aprovaÃ§Ã£o da Viabilidade da peÃ§a $npc.','O usuÃ¡rio $quem removeu a aprovaÃ§Ã£o da Viabilidade da peÃ§a $npc.','$user')");
 		//	
 		}
 		$sql=mysql_query("UPDATE apqp_viabilidade SET ap6='', dt6='0000-00-00' WHERE peca='$pc'");
-		$_SESSION["mensagem"]="Aprovação excluída com sucesso";
+		$_SESSION["mensagem"]="AprovaÃ§Ã£o excluÃ­da com sucesso";
 
 	}else if(isset($hp)){
 		$dt1=data2banco($dt1);
@@ -368,7 +368,7 @@ if($acao=="v1"){
 			$sql=mysql_query("UPDATE apqp_cron SET resp='$tap1', fim=NOW(), perc='95' WHERE peca='$pc' AND ativ='Viabilidade'");
 
 		// cria followup caso salve o conteudo da viabilidade
-			mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Salvando alterações da Viabilidade da peça $npc.','O usuário $quem salvou as alterações da Viabilidade da peça $npc.','$user')");
+			mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Salvando alteraÃ§Ãµes da Viabilidade da peÃ§a $npc.','O usuÃ¡rio $quem salvou as alteraÃ§Ãµes da Viabilidade da peÃ§a $npc.','$user')");
 		//	
 	}
 	$sql=mysql_query("SELECT * FROM apqp_viabilidade WHERE peca='$pc'");

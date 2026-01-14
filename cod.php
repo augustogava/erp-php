@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 /*
 $sql=mysql_query("SELECT * FROM prodserv");

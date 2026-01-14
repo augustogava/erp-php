@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 include("seguranca.php");
 if(!empty($acao)){
@@ -55,7 +55,7 @@ function verifica(cad){
               </tr>
 </table>
 <table width="594" border="0" cellpadding="0" cellspacing="0">
-<? if($acao=="entrar"){ ?>
+<?php if($acao=="entrar"){ ?>
   <tr> 
     <td align="left" valign="top"><table width="300" border="0" cellspacing="0" cellpadding="0">
         <tr> 
@@ -69,24 +69,24 @@ function verifica(cad){
           <td width="16">&nbsp;</td>
           <td width="19">&nbsp;</td>
         </tr>
-        <?
+        <?php
 			  $sql1=mysql_query("select * from unidades order by nome asc");
 			  if(mysql_num_rows($sql1)==0){
 			  ?>
         <tr bgcolor="#FFFFFF"> 
           <td colspan="4" align="center" class="textobold">NENHUMA UNIDADE CADASTRADA</td>
         </tr>
-        <?
+        <?php
 			  }else{
 			  	while($res=mysql_fetch_array($sql1)){
 			  ?>
         <tr bgcolor="#FFFFFF" class="textopreto" onMouseover="changeto('#CCCCCC')" onMouseout="changeback('#FFFFFF')"> 
-          <td width="113" height="18">&nbsp;<? print $res["nome"]; ?></td>
-          <td height="18">&nbsp;<? print $res["apelido"]; ?></td>
-          <td width="16" height="18" align="center"><a href="insm_unim.php?acao=alt&id=<? print $res["id"]; ?>"><img src="imagens/icon14_alterar.gif" alt="Alterar" width="14" height="14" border="0"></a></td>
-          <td width="19" height="18" align="center"><a href="#" onClick="return pergunta('Deseja excluir esta Unidade?','insm_unim_sql.php?acao=exc&id=<? print $res["id"]; ?>')"><img src="imagens/icon14_lixeira.gif" alt="Excluir" width="14" height="14" border="0"></a></td>
+          <td width="113" height="18">&nbsp;<?php print $res["nome"]; ?></td>
+          <td height="18">&nbsp;<?php print $res["apelido"]; ?></td>
+          <td width="16" height="18" align="center"><a href="insm_unim.php?acao=alt&id=<?php print $res["id"]; ?>"><img src="imagens/icon14_alterar.gif" alt="Alterar" width="14" height="14" border="0"></a></td>
+          <td width="19" height="18" align="center"><a href="#" onClick="return pergunta('Deseja excluir esta Unidade?','insm_unim_sql.php?acao=exc&id=<?php print $res["id"]; ?>')"><img src="imagens/icon14_lixeira.gif" alt="Excluir" width="14" height="14" border="0"></a></td>
         </tr>
-        <?
+        <?php
 			  	}
 			  }
 			  ?>
@@ -103,7 +103,7 @@ function verifica(cad){
         </tr>
       </table>      </td>
   </tr>
-  <? }else{ ?>
+  <?php }else{ ?>
   <tr>
     <td align="left" valign="top">
       <form name="form1" method="post" action="insm_unim_sql.php" onSubmit="return verifica(this);">
@@ -113,15 +113,15 @@ function verifica(cad){
           <tr>
             <td><table width="300" border="0" cellpadding="0" cellspacing="3">
               <tr bgcolor="#003366">
-                <td colspan="2" align="center" class="textoboldbranco"><? if($acao=="inc"){ print"Incluir Unidade"; }else{ print"Alterar Unidade";} ?>                </td>
+                <td colspan="2" align="center" class="textoboldbranco"><?php if($acao=="inc"){ print"Incluir Unidade"; }else{ print"Alterar Unidade";} ?>                </td>
               </tr>
               <tr>
                 <td width="39" class="textobold">&nbsp;Nome</td>
-                <td width="258" class="textobold"><input name="nome" type="text" class="formularioselect" id="nome" value="<? print $res["nome"]; ?>" size="45" maxlength="50"></td>
+                <td width="258" class="textobold"><input name="nome" type="text" class="formularioselect" id="nome" value="<?php print $res["nome"]; ?>" size="45" maxlength="50"></td>
               </tr>
               <tr>
                 <td class="textobold">&nbsp;Apelido</td>
-                <td class="textobold"><input name="apelido" type="text" class="formulario" id="nome" value="<? print $res["apelido"]; ?>"size="10" maxlength="4"></td>
+                <td class="textobold"><input name="apelido" type="text" class="formulario" id="nome" value="<?php print $res["apelido"]; ?>"size="10" maxlength="4"></td>
               </tr>
 
             </table></td>
@@ -134,17 +134,17 @@ function verifica(cad){
                     <input name="Button" type="button" class="microtxt" value="Voltar" onClick="window.location='insm_unim.php'">
   &nbsp;&nbsp;&nbsp;
                   <input name="Submit" type="submit" class="microtxt" value="Continuar">
-                  <input name="acao" type="hidden" id="acao" value="<? if($acao=="alt"){ print "alterar"; }else{ print "incluir"; } ?>">
-                  <input name="id" type="hidden" id="id3" value="<? print $id; ?>">
+                  <input name="acao" type="hidden" id="acao" value="<?php if($acao=="alt"){ print "alterar"; }else{ print "incluir"; } ?>">
+                  <input name="id" type="hidden" id="id3" value="<?php print $id; ?>">
                   </p></td>
             </tr>
           </table></td>
       </tr>
     </table>
     </form></td>
-	<? } ?>
+	<?php } ?>
   </tr>
 </table>
 </body>
 </html>
-<? include("mensagem.php"); ?>
+<?php include("mensagem.php"); ?>

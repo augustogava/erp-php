@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 require('pdf/fpdf.php');
 
@@ -30,16 +30,16 @@ if($acao=="email"){
 			$msg.="<a href=\"http://www.cybermanager.com.br/cybermanager/pdf/apqp_ende_imp.php?pc=$pc\" class=\"textobold style1\">Ensaio Desempenho</a><br>";
 			break;
 			case "submissao": 
-			$msg.="<a href=\"http://www.cybermanager.com.br/cybermanager/pdf/apqp_sub_imp.php?pc=$pc\" class=\"textobold style1\">Certificado de Submissão</a><br>";
+			$msg.="<a href=\"http://www.cybermanager.com.br/cybermanager/pdf/apqp_sub_imp.php?pc=$pc\" class=\"textobold style1\">Certificado de SubmissÃ£o</a><br>";
 			break;
 			case "capabilidade": 
 			$msg.="<a href=\"http://www.cybermanager.com.br/cybermanager/pdf/apqp_cap_imp.php?pc=$pc\" class=\"textobold style1\">Estudo de Capabilidade</a><br>";
 			break;
 			case "inst": 
-			$msg.="<a href=\"http://www.cybermanager.com.br/cybermanager/pdf/apqp_inst_imp.php?pc=$pc\" class=\"textobold style1\">Instruções do Operador </a><br>";
+			$msg.="<a href=\"http://www.cybermanager.com.br/cybermanager/pdf/apqp_inst_imp.php?pc=$pc\" class=\"textobold style1\">InstruÃ§Ãµes do Operador </a><br>";
 			break;
 			case "granel": 
-			$msg.="<a href=\"http://www.cybermanager.com.br/cybermanager/pdf/apqp_granel_imp.php?pc=$pc\" class=\"textobold style1\">Instruções do Operador </a><br>";
+			$msg.="<a href=\"http://www.cybermanager.com.br/cybermanager/pdf/apqp_granel_imp.php?pc=$pc\" class=\"textobold style1\">InstruÃ§Ãµes do Operador </a><br>";
 			break;
 		}
 	}
@@ -61,7 +61,7 @@ if($acao=="email"){
 			$msg.="<a href=\"http://www.cybermanager.com.br/cybermanager/pdf/apqp_apro_imp.php?pc=$pc\" class=\"textobold style1\">Aprova&ccedil;&atilde;o de Apar&ecirc;ncia</a><br>";
 			break;
 			case "sumario": 
-			$msg.="<a href=\"http://www.cybermanager.com.br/cybermanager/pdf/apqp_sum_imp.php?pc=$pc\" class=\"textobold style1\">Sumário e Aprovação do APQP</a><br>";
+			$msg.="<a href=\"http://www.cybermanager.com.br/cybermanager/pdf/apqp_sum_imp.php?pc=$pc\" class=\"textobold style1\">SumÃ¡rio e AprovaÃ§Ã£o do APQP</a><br>";
 			break;
 		}
 	}
@@ -72,7 +72,7 @@ if($acao=="email"){
 					$line=str_replace("%MSG%",$msg,$line);
 					$mensagem.="$line";		
 				}
-				email('augusto@cyber1.com.br','Feeder',$email,"PPAP",'PPAP - Relatórios',$mensagem);
+				email('augusto@cyber1.com.br','Feeder',$email,"PPAP",'PPAP - RelatÃ³rios',$mensagem);
 				$_SESSION["mensagem"]="Email enviado com sucesso!";
 				print "<script>window.location='apqp_ppap.php';</script>";
 		}

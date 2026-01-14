@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 include("seguranca.php");
 $sql=mysql_query("SELECT custo FROM prodserv_custo WHERE prodserv='$item'");
@@ -9,7 +9,7 @@ if(mysql_num_rows($sql)){
 if($act=="em"){
 	$titulo="Entrada Manual";
 }elseif($act=="sm"){
-	$titulo="Saída Manual";
+	$titulo="SaÃ­da Manual";
 }elseif($act=="ee"){
 	$titulo="Estorno de Entrada";
 	$sql=mysql_query("SELECT qtde,valor FROM prodserv_est WHERE tipomov=1 ORDER BY data DESC,id DESC");
@@ -20,7 +20,7 @@ if($act=="em"){
 	}
 	$block=true;
 }elseif($act=="es"){
-	$titulo="Estorno de Saída";
+	$titulo="Estorno de SaÃ­da";
 	$sql=mysql_query("SELECT qtds,valor FROM prodserv_est WHERE tipomov=2 ORDER BY data DESC,id DESC");
 	if(mysql_num_rows($sql)){
 		$res=mysql_fetch_array($sql);
@@ -38,7 +38,8 @@ if(mysql_num_rows($sql)){
 <html>
 <head>
 <title>CyberManager</title>
-<meta http-equiv="Content-Type" content="text/html; UTF-8">
+<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="style.css" rel="stylesheet" type="text/css">
 <script src="scripts.js"></script>
 <script src="mascaras.js"></script>
@@ -69,7 +70,7 @@ if (parseInt(navigator.appVersion) >= 4) window.moveTo((screen.width/2)-(windowW
 <body background="imagens/mdagua2.gif" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" onLoad="enterativa=1;"onkeypress="return ent()">
 <table width="400" border="0" align="center" cellpadding="0" cellspacing="0">
   <tr> 
-    <td align="left" valign="top" class="titulos"><? print $titulo; ?></td>
+    <td align="left" valign="top" class="titulos"><?php print $titulo; ?></td>
   </tr>
   <tr>
     <td align="left" valign="top"><img src="imagens/dot.gif" width="20" height="8"></td>
@@ -78,7 +79,7 @@ if (parseInt(navigator.appVersion) >= 4) window.moveTo((screen.width/2)-(windowW
     <td align="left" valign="top"><form name="form1" method="post" action="prodserv_ese_sql.php" onSubmit="return verifica(this);">
       <table width="400" border="0" cellspacing="0" cellpadding="0">
         <tr>
-          <td class="textobold"><span class="titulos"><? print $ps; ?></span></td>
+          <td class="textobold"><span class="titulos"><?php print $ps; ?></span></td>
         </tr>
         <tr>
           <td><img src="imagens/dot.gif" width="20" height="5"></td>
@@ -99,9 +100,9 @@ if (parseInt(navigator.appVersion) >= 4) window.moveTo((screen.width/2)-(windowW
                 <input name="data" type="text" class="formularioselect" id="data" size="10" maxlength="10" onKeyPress="return validanum(this, event)" onKeyUp="mdata(this)">
               </span></td>
               <td width="10">&nbsp;</td>
-              <td width="118"><input name="qtd" type="text" class="formularioselect" id="qtd" onKeyDown="formataMoeda(this,retornaKeyCode(event))" onKeyUp="formataMoeda(this,retornaKeyCode(event))" value="<? print banco2valor($qtd); ?>" size="10"></td>
+              <td width="118"><input name="qtd" type="text" class="formularioselect" id="qtd" onKeyDown="formataMoeda(this,retornaKeyCode(event))" onKeyUp="formataMoeda(this,retornaKeyCode(event))" value="<?php print banco2valor($qtd); ?>" size="10"></td>
               <td width="9">&nbsp;</td>
-              <td><input name="valor" type="text" class="formularioselect" id="valor" onKeyDown="formataMoeda(this,retornaKeyCode(event))" onKeyUp="formataMoeda(this,retornaKeyCode(event))" value="<? print banco2valor($valor); ?>" size="10" <? if($block) print "readonly"; ?>></td>
+              <td><input name="valor" type="text" class="formularioselect" id="valor" onKeyDown="formataMoeda(this,retornaKeyCode(event))" onKeyUp="formataMoeda(this,retornaKeyCode(event))" value="<?php print banco2valor($valor); ?>" size="10" <?php if($block) print "readonly"; ?>></td>
               <td width="9">&nbsp;</td>
               <td width="104"><input name="doc" type="text" class="formularioselect" id="doc" size="10" maxlength="25"></td>
             </tr>
@@ -112,8 +113,8 @@ if (parseInt(navigator.appVersion) >= 4) window.moveTo((screen.width/2)-(windowW
         </tr>
         <tr>
           <td class="textobold">Observa&ccedil;&otilde;es
-            <input name="acao" type="hidden" id="acao" value="<? print $act; ?>">
-            <input name="item" type="hidden" id="item" value="<? print $item; ?>"></td>
+            <input name="acao" type="hidden" id="acao" value="<?php print $act; ?>">
+            <input name="item" type="hidden" id="item" value="<?php print $item; ?>"></td>
         </tr>
         <tr>
           <td><textarea name="obs" rows="5" wrap="VIRTUAL" class="formularioselect" id="obs"></textarea></td>
@@ -133,4 +134,4 @@ if (parseInt(navigator.appVersion) >= 4) window.moveTo((screen.width/2)-(windowW
 </table>
 </body>
 </html>
-<? include("mensagem.php"); ?>
+<?php include("mensagem.php"); ?>

@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 //include("seguranca.php");
 $acao=verifi($permi,$acao);
@@ -16,10 +16,10 @@ $atualizacao=data2banco($atualizacao);
 if($acao=="inc"){
 			$sql=mysql_query("INSERT INTO af (af,recebimento,anexo,recebimento_anexo,entrega,atualizacao,situacao) VALUES ('$af','$recebimento','$anexo','$recebimento_anexo','$entrega','$atualizacao','$situacao')");
 	if($sql){
-		$_SESSION["mensagem"]="AF incluída com sucesso!";
+		$_SESSION["mensagem"]="AF incluÃ­da com sucesso!";
 		$acao="entrar";
 	}else{
-		$_SESSION["mensagem"]="A AF não pôde ser incluída!";
+		$_SESSION["mensagem"]="A AF nÃ£o pÃ´de ser incluÃ­da!";
 		$acao="inc";
 	}
 }elseif($acao=="alt"){
@@ -28,16 +28,16 @@ if($acao=="inc"){
 		$_SESSION["mensagem"]="AF alterada com sucesso!";
 		$acao="entrar";
 	}else{
-		$_SESSION["mensagem"]="A AF não pôde ser alterada!";
+		$_SESSION["mensagem"]="A AF nÃ£o pÃ´de ser alterada!";
 		$acao="alt";
 	}
 }elseif($acao=="exc"){
 	if(!empty($id)){
 		$sql=mysql_query("DELETE FROM af WHERE id='$id'");
 		if($sql){
-			$_SESSION["mensagem"]="AF excluída com sucesso!";
+			$_SESSION["mensagem"]="AF excluÃ­da com sucesso!";
 		}else{
-			$_SESSION["mensagem"]="A AF não pôde ser excluída!";
+			$_SESSION["mensagem"]="A AF nÃ£o pÃ´de ser excluÃ­da!";
 		}		
 	}
 	$acao="entrar";

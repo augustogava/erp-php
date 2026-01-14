@@ -1,9 +1,9 @@
-<?
+<?php
 include("conecta.php");
 include("seguranca.php");
 $apqp=new set_apqp;
 // Log do sistema - - - - 
-$loc="Cadastro de Peças";
+$loc="Cadastro de PeÃ§as";
 $pagina=$_SERVER['SCRIPT_FILENAME'];
 include("log.php");
 $hora=hora();
@@ -24,10 +24,10 @@ if($acao=="alt"){
 	$sql=mysql_query("UPDATE apqp_pc SET numero='$numero',rev='$rev',dtrev='$dtrev',nome='$nome',cliente='$cliente',desenhoi='$desenhoi',desenhoc='$desenhoc',pecacli='$pecacli',aplicacao='$aplicacao',niveleng='$niveleng',dteng='$dteng',nivelproj='$nivelproj', dtproj='$dtproj',historico='$historico',idioma='$idioma',num_ferram='$num_ferram' WHERE id='$id'");
 	if($sql){
 		$_SESSION["mensagem"]="Cadastro alterado com sucesso!";
-		// cria followup caso altere o cadastro da peça 
+		// cria followup caso altere o cadastro da peÃ§a 
 			$sql_emp=mysql_query("SELECT fantasia FROM empresa");
 			$res_emp=mysql_fetch_array($sql_emp);
-			mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Alteração do cadastro da peça $npc.','O usuário $quem1 alterou o cadastro da peça $npc.','$user')");
+			mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','AlteraÃ§Ã£o do cadastro da peÃ§a $npc.','O usuÃ¡rio $quem1 alterou o cadastro da peÃ§a $npc.','$user')");
 		//
 
 		header("Location:apqp_pc2.php?acao=alt&id=$id");
@@ -40,15 +40,15 @@ if($acao=="add"){
 	$dtproj=data2banco($dtproj);
 	$sql=mysql_query("insert into apqp_pc(numero,rev,dtrev,nome,cliente,nomecli,desenhoi,pecacli,desenhoc,aplicacao,niveleng,dteng,nivelproj,dtproj,historico,num_ferram) values('$numero','$rev','$dtrev','$nome','$cliente','$nomecli','$desenhoi','$pecacli','$desenhoc','$aplicacao','$niveleng','$dteng','$nivelproj','dtproj','$historico','$num_ferram')");
 	if($sql){
-		$_SESSION["mensagem"]="Peça cadastrada com sucesso!";
-		// cria followup caso inclua uma nova peça 
+		$_SESSION["mensagem"]="PeÃ§a cadastrada com sucesso!";
+		// cria followup caso inclua uma nova peÃ§a 
 			$sql_emp=mysql_query("SELECT fantasia FROM empresa");
 			$res_emp=mysql_fetch_array($sql_emp);
-			mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Inclusão de uma nova peça.','O usuário $quem1 efetuou o cadastro e a inclusão de peça $npc.','$user')");
+			mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','InclusÃ£o de uma nova peÃ§a.','O usuÃ¡rio $quem1 efetuou o cadastro e a inclusÃ£o de peÃ§a $npc.','$user')");
 		//
 		header("Location:apqp_pc.php?bnum=$numero");
 	}else{
-		$_SESSION["mensagem"]="Não Foi Possível Cadastrar a Peça";
+		$_SESSION["mensagem"]="NÃ£o Foi PossÃ­vel Cadastrar a PeÃ§a";
 	}
 }
 header("Location:apqp_pc_inc.php");

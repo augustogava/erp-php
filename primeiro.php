@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 include("seguranca.php");
 if(!empty($acao)){
@@ -13,7 +13,7 @@ if($acao=="alterar"){
 		$_SESSION["mensagem"]="Senha aletarada com Sucesso!";
 		header("Location:index.php");
 	}else{
-		$_SESSION["mensagem"]="A senha n„o pÙde ser alterado!";
+		$_SESSION["mensagem"]="A senha n√£o p√¥de ser alterado!";
 		$acao="alt";
 	}
 }
@@ -25,13 +25,14 @@ $antigo=$res2["senha"];
 <head>
 <title>
 </title>
-<meta http-equiv="Content-Type" content="text/html; UTF-8">
+<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="style.css" rel="stylesheet" type="text/css">
 <script src="scripts.js"></script>
 <script>
 function verifica(cad){
 	if(cad.senha.value==cad.antigo.value){
-		alert('A senha n„o pode ser igual a anterior, escolha outra!');
+		alert('A senha n√£o pode ser igual a anterior, escolha outra!');
 			cad.senha.focus();
 			return false;
 	}else{
@@ -42,7 +43,7 @@ function verifica(cad){
 				return false;
 			}
 			if(cad.senha2.value!=cad.senha.value){
-				alert('A senha e a confirmaÁ„o n„o conferem');
+				alert('A senha e a confirma√ß√£o n√£o conferem');
 				cad.senha2.value='';
 				cad.senha2.focus();
 				return false;
@@ -88,9 +89,9 @@ function verifica(cad){
             <tr>
               <td>&nbsp;</td>
               <td><input name="button12222" type="submit" class="microtxt" value="Salvar" >
-                  <input name="id" type="hidden" id="id" value="<?= $id; ?>">
+                  <input name="id" type="hidden" id="id" value="<?php echo  $id; ?>">
                   <input name="acao" type="hidden" id="acao" value="alterar">
-                  <input name="antigo" type="hidden" id="antiga" value="<?= $antigo; ?>"></td>
+                  <input name="antigo" type="hidden" id="antiga" value="<?php echo  $antigo; ?>"></td>
             </tr>
           </table></td>
         </tr>
@@ -100,4 +101,4 @@ function verifica(cad){
 </table>
 </body>
 </html>
-<? include("mensagem.php"); ?>
+<?php include("mensagem.php"); ?>

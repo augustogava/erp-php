@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 if($buscar){
 	unset($wp);
@@ -10,7 +10,8 @@ if(!empty($bcli)){
 <html>
 <head>
 <title>CyberManager</title>
-<meta http-equiv="Content-Type" content="text/html; UTF-8">
+<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="style.css" rel="stylesheet" type="text/css">
 <script src="scripts.js"></script>
 <script src="mascaras.js"></script>
@@ -51,14 +52,14 @@ if (parseInt(navigator.appVersion) >= 4) window.moveTo((screen.width/2)-(windowW
             <td width="277">Descri&ccedil;&atilde;o do Usu&aacute;rio: </td>
             <td width="20" align="center">&nbsp;</td>
           </tr>
-		<?
+		<?php
 		$sql=mysql_query("SELECT * FROM funcionarios $busca ORDER BY nome ASC");
 		if(mysql_num_rows($sql)==0){
 		?>
           <tr bgcolor="#FFFFFF" class="texto"> 
             <td colspan="2" align="center">NENHUM BANCO ENCONTRADO</td>
           </tr>
-          <?
+          <?php
 		}else{
 			//BLOCO PAGINACAO
 			$results_tot=mysql_num_rows($sql); //total de registros encontrados
@@ -96,34 +97,34 @@ if (parseInt(navigator.appVersion) >= 4) window.moveTo((screen.width/2)-(windowW
 				
 		?>
 		  <tr bgcolor="#FFFFFF" class="texto"> 
-            <td>&nbsp;<? print $res["nome"]; ?></td>
-            <td width="20" align="center"><a href="#" onClick="return seleciona('<? print $res["id"]; ?>','<?= $res["nome"]; ?>');"><img src="imagens/icon_14_use.gif" alt="Selecionar" width="14" height="14" border="0"></a></td>
+            <td>&nbsp;<?php print $res["nome"]; ?></td>
+            <td width="20" align="center"><a href="#" onClick="return seleciona('<?php print $res["id"]; ?>','<?php echo  $res["nome"]; ?>');"><img src="imagens/icon_14_use.gif" alt="Selecionar" width="14" height="14" border="0"></a></td>
           </tr>
-		  <?
+		  <?php
 			}
 		}
 		?>
     </table></td></tr>
   <tr>
-    <td align="center">      <? if($wpaginar) { ?>
+    <td align="center">      <?php if($wpaginar) { ?>
       <table width="300" border="0" cellspacing="0" cellpadding="0">
         <tr> 
           <td align="center"><table width="1%" border="0" cellspacing="0" cellpadding="0">
               <tr valign="top"> 
                 <td align="right"> 
-                  <? 
+                  <?php 
 				$antz=false;
 				if($wp>1){
 					$antz=true;
 				?>
-                  <a href="<? print "moni_esta_raex_imp_busc.php?wp=$pg_anterior&bcli=$bcli"; ?>" class="paginacao2"> 
-                  <? } ?>
+                  <a href="<?php print "moni_esta_raex_imp_busc.php?wp=$pg_anterior&bcli=$bcli"; ?>" class="paginacao2"> 
+                  <?php } ?>
                   <img src="imagens/pag_f.gif" border="0"> 
-                  <? if($antz){ ?>
+                  <?php if($antz){ ?>
                   <br>
                   Anterior</a> 
-                <? } ?>                </td>
-                <?
+                <?php } ?>                </td>
+                <?php
 				$link_impressos=0;
 				if ($temp > $wpaginacao){
 		    	    $n_start  = $temp - ceil($wpaginacao/2);
@@ -137,32 +138,32 @@ if (parseInt(navigator.appVersion) >= 4) window.moveTo((screen.width/2)-(windowW
 					$link_impressos++;
 				?>
                 <td align="center"> 
-                  <? if($pg_atual != $link_impressos){ ?>
-                  <a href="<? print "moni_esta_raex_imp_busc.php?wp=$link_impressos&bcli=$bcli"; ?>" class="paginacao"> 
-                  <? } ?>
-                  <img src="imagens/pag_e<? if($pg_atual==$link_impressos) print "2"; ?>.gif" border="0"><br>
-                  <? if($pg_atual==$link_impressos){ print "<span class=\"paginacao2\">$link_impressos</span>"; }else{ print $link_impressos; }?>
-                  <? if($pg_atual != $link_impressos){ ?>
+                  <?php if($pg_atual != $link_impressos){ ?>
+                  <a href="<?php print "moni_esta_raex_imp_busc.php?wp=$link_impressos&bcli=$bcli"; ?>" class="paginacao"> 
+                  <?php } ?>
+                  <img src="imagens/pag_e<?php if($pg_atual==$link_impressos) print "2"; ?>.gif" border="0"><br>
+                  <?php if($pg_atual==$link_impressos){ print "<span class=\"paginacao2\">$link_impressos</span>"; }else{ print $link_impressos; }?>
+                  <?php if($pg_atual != $link_impressos){ ?>
                   </a> 
-                  <? } ?>
+                  <?php } ?>
                 </td>
-                <?
+                <?php
 				}
 				?>
                 <td> 
-                  <? if($reg_final<$results_tot){ ?>
-                  <a href="<? print "moni_esta_raex_imp_busc.php?wp=$pg_proxima&bcli=$bcli"; ?>" class="paginacao2"> 
-                  <? } ?>
+                  <?php if($reg_final<$results_tot){ ?>
+                  <a href="<?php print "moni_esta_raex_imp_busc.php?wp=$pg_proxima&bcli=$bcli"; ?>" class="paginacao2"> 
+                  <?php } ?>
                   <img src="imagens/pag_der.gif" border="0"> 
-                  <? if($reg_final<$results_tot){ ?>
+                  <?php if($reg_final<$results_tot){ ?>
                   <br>
-                  Próximo</a> 
-                <? } ?>                </td>
+                  PrÃ³ximo</a> 
+                <?php } ?>                </td>
               </tr>
             </table></td>
         </tr>
       </table>
-      <? } ?></td>
+      <?php } ?></td>
   </tr>
 </table>
 </body>

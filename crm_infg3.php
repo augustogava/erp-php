@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 include("seguranca.php");
 
@@ -6,7 +6,8 @@ include("seguranca.php");
 <html>
 <head>
 <title>CyberManager</title>
-<meta http-equiv="Content-Type" content="text/html; UTF-8">
+<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="style.css" rel="stylesheet" type="text/css">
 <script src="scripts.js"></script>
 <script src="mascaras.js"></script>
@@ -22,7 +23,7 @@ include("seguranca.php");
   <tr>
     <td align="left" valign="top">
 	<table width="100%" border="0" cellpadding="3" cellspacing="1" bgcolor="#999999">
-	<? 
+	<?php 
 	$sql=mysql_query("SELECT * FROM vendas_orcamento WHERE cliente='$cli' AND sit<>'1' ORDER by emissao DESC,id DESC");
 	if(!mysql_num_rows($sql)){
 	?>
@@ -31,15 +32,15 @@ include("seguranca.php");
         </tr>
 		
     
-<? }else{ ?>
+<?php }else{ ?>
       
 
-   <? while($res=mysql_fetch_array($sql)){ 
+   <?php while($res=mysql_fetch_array($sql)){ 
    		$sql3=mysql_query("SELECT SUM(qtd*unitario) as valor FROM vendas_orcamento_list WHERE orcamento='$res[id]'");
 		$res3=mysql_fetch_array($sql3);
    switch($res["motivo"]){
 		case 1:
-			$motivo="Concorrência";
+			$motivo="ConcorrÃªncia";
 			break;
 		case 2:
 			$motivo="Investimento futuro";
@@ -55,17 +56,17 @@ include("seguranca.php");
 			break;
 	}
    ?>
-   <a href="vendas_orc.php?acao=alt&id=<?= $res["id"]; ?>" target="_parent">
+   <a href="vendas_orc.php?acao=alt&id=<?php echo  $res["id"]; ?>" target="_parent">
       <tr bgcolor="#FFFFFF" class="textopreto" onMouseover="changeto('#CCCCCC')" onMouseout="changeback('#FFFFFF')">
-        <td width="64" height="18" align="center"><? print banco2data($res["emissao"]); ?></td>
-        <td width="65" align="center"><? print $res["id"]; ?></td>
-        <td width="472"><? $sql2=mysql_query("SELECT * FROM clientes WHERE id='$res[vendedor]'"); $res2=mysql_fetch_array($sql2); print substr($res2["nome"],0,25)."..."; ?></td>	
-        <td width="80" align="center"><? print banco2valor($res3["valor"]); ?></td>
-        <td width="180" align="center"><? $sql2=mysql_query("SELECT * FROM cliente_contato WHERE id='$res[contato]'"); $res2=mysql_fetch_array($sql2); print $res2["nome"]; ?></td>
-        <td width="111" align="center"><? if($res["sit"]=="0"){ print "pendente"; }elseif($res["sit"]=="1"){ print "Fechado"; }else if($res["sit"]=="2"){ print "Cancelado<br>($motivo)"; } ?></td>
+        <td width="64" height="18" align="center"><?php print banco2data($res["emissao"]); ?></td>
+        <td width="65" align="center"><?php print $res["id"]; ?></td>
+        <td width="472"><?php $sql2=mysql_query("SELECT * FROM clientes WHERE id='$res[vendedor]'"); $res2=mysql_fetch_array($sql2); print substr($res2["nome"],0,25)."..."; ?></td>	
+        <td width="80" align="center"><?php print banco2valor($res3["valor"]); ?></td>
+        <td width="180" align="center"><?php $sql2=mysql_query("SELECT * FROM cliente_contato WHERE id='$res[contato]'"); $res2=mysql_fetch_array($sql2); print $res2["nome"]; ?></td>
+        <td width="111" align="center"><?php if($res["sit"]=="0"){ print "pendente"; }elseif($res["sit"]=="1"){ print "Fechado"; }else if($res["sit"]=="2"){ print "Cancelado<br>($motivo)"; } ?></td>
       </tr>
 	  </a>
-<? } } ?>
+<?php } } ?>
     </table>
     </td>
   </tr>
@@ -73,4 +74,4 @@ include("seguranca.php");
 </body>
 </html>
 <script language="javascript" src="tooltip.js"></script>
-<? include("mensagem.php"); ?>
+<?php include("mensagem.php"); ?>

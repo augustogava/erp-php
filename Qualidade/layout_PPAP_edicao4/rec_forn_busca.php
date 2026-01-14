@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 include("seguranca.php");
 unset($_SESSION["mpc"]);
@@ -76,7 +76,7 @@ $sql=mysql_query("DELETE FROM fornecedores WHERE id='$id'");
                 <td width="31" align="center">&nbsp;</td>
                 <td width="20" align="center">&nbsp;</td>
               </tr>
-              <?
+              <?php
 			  $sql=mysql_query("SELECT * FROM fornecedores $cond ORDER BY fantasia ASC");
 			  if(mysql_num_rows($sql)==0){
 			  ?>
@@ -84,7 +84,7 @@ $sql=mysql_query("DELETE FROM fornecedores WHERE id='$id'");
                 <td colspan="4" align="center" class="textopretobold">NENHUM FORNECEDOR 
                   ENCONTRADO </td>
               </tr>
-              <?
+              <?php
 			  }else{
 			  	//BLOCO PAGINACAO
 				$results_tot=mysql_num_rows($sql); //total de registros encontrados
@@ -120,12 +120,12 @@ $sql=mysql_query("DELETE FROM fornecedores WHERE id='$id'");
 			  	while($res=mysql_fetch_array($sql)){
 			  ?>
               <tr bgcolor="#FFFFFF" class="textopreto" onMouseover="changeto('#CCCCCC')" onMouseout="changeback('#FFFFFF')"> 
-                <td align="center"><? print $res["id"]; ?></td>
-                <td>&nbsp;<? print $res["fantasia"]; ?></td>
-                <td align="center"><a href="rec_forn_geral.php?acao=alt&id=<? print $res["id"]; print "&bcod=$bcod&bnome=$bnome";?>"><img src="imagens/icon14_transp.gif" alt="Entrega" width="26" height="14" border="0"></a></td>
-                <td align="center"><a href="#" onClick="return pergunta('Deseja excluir este fornecedor?','rec_forn_busca.php?acao=exc&id=<? print $res["id"]; ?>')"><img src="imagens/icon14_lixeira.gif" alt="Excluir" width="14" height="14" border="0"></a></td>
+                <td align="center"><?php print $res["id"]; ?></td>
+                <td>&nbsp;<?php print $res["fantasia"]; ?></td>
+                <td align="center"><a href="rec_forn_geral.php?acao=alt&id=<?php print $res["id"]; print "&bcod=$bcod&bnome=$bnome";?>"><img src="imagens/icon14_transp.gif" alt="Entrega" width="26" height="14" border="0"></a></td>
+                <td align="center"><a href="#" onClick="return pergunta('Deseja excluir este fornecedor?','rec_forn_busca.php?acao=exc&id=<?php print $res["id"]; ?>')"><img src="imagens/icon14_lixeira.gif" alt="Excluir" width="14" height="14" border="0"></a></td>
               </tr>
-              <?
+              <?php
 			  	}
 			  }
 			  ?>
@@ -133,23 +133,23 @@ $sql=mysql_query("DELETE FROM fornecedores WHERE id='$id'");
           <table width="100%" border="0" cellspacing="0" cellpadding="0">
             <tr>
               <td align="center"><br>
-                <? if($wpaginar){ ?>
+                <?php if($wpaginar){ ?>
 				<table width="1%" border="0" cellspacing="0" cellpadding="0">
                   <tr valign="top">
-                    <td align="right"><? 
+                    <td align="right"><?php 
 				$antz=false;
 				if($wp>1){
 					$antz=true;
 				?>
-                        <a href="<? print "rec_forn_busca.php?wp=$pg_anterior&bnome=$bnome&bcod=$bcod"; ?>" class="paginacao2">
-                        <? } ?>
+                        <a href="<?php print "rec_forn_busca.php?wp=$pg_anterior&bnome=$bnome&bcod=$bcod"; ?>" class="paginacao2">
+                        <?php } ?>
                         <img src="imagens/pag_f.gif" width="27" height="14" border="0">
-                        <? if($antz){ ?>
+                        <?php if($antz){ ?>
                         <br>
                           Anterior</a>
-                        <? } ?>
+                        <?php } ?>
                     </td>
-                    <?
+                    <?php
 				$link_impressos=0;
 				if ($temp > $wpaginacao){
 		    	    $n_start  = $temp - ceil($wpaginacao/2);
@@ -162,30 +162,30 @@ $sql=mysql_query("DELETE FROM fornecedores WHERE id='$id'");
 				while(($link_impressos<$n_paginas) and ($link_impressos<$wpaginacao)){
 					$link_impressos++;
 				?>
-                    <td align="center"><? if($pg_atual != $link_impressos){ ?>
-                        <a href="<? print "rec_forn_busca.php?wp=$link_impressos&bnome=$bnome&bcod=$bcod"; ?>" class="paginacao">
-                        <? } ?>
-                        <img src="imagens/pag_e<? if($pg_atual==$link_impressos) print "2"; ?>.gif" width="10" height="14" border="0"><br>
-                        <? if($pg_atual==$link_impressos){ print "<span class=\"paginacao2\">$link_impressos</span>"; }else{ print $link_impressos; }?>
-                        <? if($pg_atual != $link_impressos){ ?>
+                    <td align="center"><?php if($pg_atual != $link_impressos){ ?>
+                        <a href="<?php print "rec_forn_busca.php?wp=$link_impressos&bnome=$bnome&bcod=$bcod"; ?>" class="paginacao">
+                        <?php } ?>
+                        <img src="imagens/pag_e<?php if($pg_atual==$link_impressos) print "2"; ?>.gif" width="10" height="14" border="0"><br>
+                        <?php if($pg_atual==$link_impressos){ print "<span class=\"paginacao2\">$link_impressos</span>"; }else{ print $link_impressos; }?>
+                        <?php if($pg_atual != $link_impressos){ ?>
                         </a>
-                        <? } ?>
+                        <?php } ?>
                     </td>
-                    <?
+                    <?php
 				}
 				?>
-                    <td><? if($reg_final<$results_tot){ ?>
-                        <a href="<? print "rec_forn_busca.php?wp=$pg_proxima&bnome=$bnome&bcod=$bcod"; ?>" class="paginacao2">
-                        <? } ?>
+                    <td><?php if($reg_final<$results_tot){ ?>
+                        <a href="<?php print "rec_forn_busca.php?wp=$pg_proxima&bnome=$bnome&bcod=$bcod"; ?>" class="paginacao2">
+                        <?php } ?>
                         <img src="imagens/pag_der.gif" width="26" height="14" border="0">
-                        <? if($reg_final<$results_tot){ ?>
+                        <?php if($reg_final<$results_tot){ ?>
                         <br>
                           Pr&oacute;ximo</a>
-                        <? } ?>
+                        <?php } ?>
                     </td>
                   </tr>
                 </table>
-				<? } ?>
+				<?php } ?>
                 <span class="textobold"><br>
                 <input name="voltar" type="button" class="microtxt" value="Voltar" onClick="window.location='mana_rece.php';">
                               </span></td>
@@ -198,4 +198,4 @@ $sql=mysql_query("DELETE FROM fornecedores WHERE id='$id'");
 </table>
 </body>
 </html>
-<? include("mensagem.php"); ?>
+<?php include("mensagem.php"); ?>

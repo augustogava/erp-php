@@ -4,9 +4,9 @@
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
-SET NAMES utf8;
+SET NAMES utf8mb4;
 
-CREATE DATABASE IF NOT EXISTS `erp_db` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+CREATE DATABASE IF NOT EXISTS `erp_db` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 USE `erp_db`;
 
 -- --------------------------------------------------------
@@ -51,14 +51,14 @@ CREATE TABLE IF NOT EXISTS `empresa` (
   `cidade_4` varchar(50) DEFAULT NULL,
   `cep_4` varchar(10) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `estado` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(50) NOT NULL,
   `sigla` varchar(2) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 INSERT INTO `estado` (`id`, `nome`, `sigla`) VALUES
 (1, 'Acre', 'AC'),
@@ -101,7 +101,7 @@ CREATE TABLE IF NOT EXISTS `niveis` (
   `submenus` text,
   `vendedor` tinyint(1) DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 INSERT INTO `niveis` (`id`, `nome`, `tipo`, `menus`, `submenus`, `vendedor`) VALUES
 (1, 'Administrador', 'F', NULL, NULL, 1);
@@ -113,7 +113,7 @@ CREATE TABLE IF NOT EXISTS `menus` (
   `posicao` int(11) DEFAULT '0',
   `sit` char(1) DEFAULT 'A',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 INSERT INTO `menus` (`id`, `texto`, `url`, `posicao`, `sit`) VALUES
 (1, 'Dashboard', 'corpo.php', 1, 'A'),
@@ -132,7 +132,7 @@ CREATE TABLE IF NOT EXISTS `submenus` (
   `posicao` int(11) DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `menu` (`menu`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 INSERT INTO `submenus` (`id`, `menu`, `texto`, `url`, `posicao`) VALUES
 (1, 2, 'Clientes', 'clientes.php', 1),
@@ -167,7 +167,7 @@ CREATE TABLE IF NOT EXISTS `cliente_login` (
   KEY `cliente` (`cliente`),
   KEY `funcionario` (`funcionario`),
   KEY `nivel` (`nivel`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 INSERT INTO `cliente_login` (`id`, `cliente`, `funcionario`, `login`, `senha`, `nivel`, `sit`, `blok`, `blok_externo`, `primeiro`, `perm`) VALUES
 (1, NULL, 1, 'admin', 'admin123', 1, 'A', 0, 0, 'N', '4');
@@ -184,21 +184,21 @@ CREATE TABLE IF NOT EXISTS `acessos` (
   `hora` time DEFAULT NULL,
   `ip` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `online` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user` int(11) DEFAULT NULL,
   `data` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `bloquear` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `block` char(1) DEFAULT 'N',
   `externo` char(1) DEFAULT 'S',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 INSERT INTO `bloquear` (`id`, `block`, `externo`) VALUES (1, 'N', 'S');
 
@@ -209,7 +209,7 @@ CREATE TABLE IF NOT EXISTS `externo` (
   `hora` time DEFAULT NULL,
   `ip` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `log` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -220,7 +220,7 @@ CREATE TABLE IF NOT EXISTS `log` (
   `data` date DEFAULT NULL,
   `hora` time DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 -- Clients Tables
@@ -274,7 +274,7 @@ CREATE TABLE IF NOT EXISTS `clientes` (
   PRIMARY KEY (`id`),
   KEY `estado` (`estado`),
   KEY `ramo` (`ramo`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `cliente_cobranca` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -286,7 +286,7 @@ CREATE TABLE IF NOT EXISTS `cliente_cobranca` (
   `estado` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `cliente` (`cliente`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `cliente_entrega` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -303,7 +303,7 @@ CREATE TABLE IF NOT EXISTS `cliente_entrega` (
   `estado_ins` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `cliente` (`cliente`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `cliente_financeiro` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -312,7 +312,7 @@ CREATE TABLE IF NOT EXISTS `cliente_financeiro` (
   `prazo` int(11) DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `cliente` (`cliente`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `cliente_contato` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -323,7 +323,7 @@ CREATE TABLE IF NOT EXISTS `cliente_contato` (
   `email` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `cliente` (`cliente`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 -- Employees Tables
@@ -351,7 +351,7 @@ CREATE TABLE IF NOT EXISTS `funcionarios` (
   `sit` char(1) DEFAULT 'A',
   PRIMARY KEY (`id`),
   KEY `cargo` (`cargo`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 INSERT INTO `funcionarios` (`id`, `nome`, `cargo`, `sit`) VALUES
 (1, 'Administrador', NULL, 'A');
@@ -360,7 +360,7 @@ CREATE TABLE IF NOT EXISTS `cargos` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `funcionario_apontamento` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -371,7 +371,7 @@ CREATE TABLE IF NOT EXISTS `funcionario_apontamento` (
   `obs` text,
   PRIMARY KEY (`id`),
   KEY `funcionario` (`funcionario`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `funcionario_outros` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -380,7 +380,7 @@ CREATE TABLE IF NOT EXISTS `funcionario_outros` (
   `valor` text,
   PRIMARY KEY (`id`),
   KEY `funcionario` (`funcionario`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 -- Suppliers Tables
@@ -407,7 +407,7 @@ CREATE TABLE IF NOT EXISTS `fornecedores` (
   `obs` text,
   `sit` char(1) DEFAULT 'A',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `fornecedor_financeiro` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -417,7 +417,7 @@ CREATE TABLE IF NOT EXISTS `fornecedor_financeiro` (
   `conta` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fornecedor` (`fornecedor`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `transportadora` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -429,7 +429,7 @@ CREATE TABLE IF NOT EXISTS `transportadora` (
   `estado` int(11) DEFAULT NULL,
   `fone` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `representante` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -438,7 +438,7 @@ CREATE TABLE IF NOT EXISTS `representante` (
   `email` varchar(100) DEFAULT NULL,
   `comissao` decimal(10,2) DEFAULT '0.00',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 -- Products/Services Tables
@@ -449,14 +449,14 @@ CREATE TABLE IF NOT EXISTS `categorias` (
   `nome` varchar(100) NOT NULL,
   `pai` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `unidades` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(20) NOT NULL,
   `sigla` varchar(5) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 INSERT INTO `unidades` (`id`, `nome`, `sigla`) VALUES
 (1, 'Unidade', 'UN'),
@@ -490,13 +490,13 @@ CREATE TABLE IF NOT EXISTS `prodserv` (
   PRIMARY KEY (`id`),
   KEY `categoria` (`categoria`),
   KEY `unidade` (`unidade`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `prodserv_cat` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(100) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `prodserv_est` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -508,7 +508,7 @@ CREATE TABLE IF NOT EXISTS `prodserv_est` (
   `obs` text,
   PRIMARY KEY (`id`),
   KEY `produto` (`produto`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `prodserv_custo` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -517,7 +517,7 @@ CREATE TABLE IF NOT EXISTS `prodserv_custo` (
   `data` date DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `produto` (`produto`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `prodserv_item` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -527,7 +527,7 @@ CREATE TABLE IF NOT EXISTS `prodserv_item` (
   PRIMARY KEY (`id`),
   KEY `produto` (`produto`),
   KEY `item` (`item`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `prodserv_venda` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -536,7 +536,7 @@ CREATE TABLE IF NOT EXISTS `prodserv_venda` (
   `data` date DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `produto` (`produto`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `prodserv_ordem` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -548,7 +548,7 @@ CREATE TABLE IF NOT EXISTS `prodserv_ordem` (
   `obs` text,
   PRIMARY KEY (`id`),
   KEY `produto` (`produto`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `prodserv_sep` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -556,7 +556,7 @@ CREATE TABLE IF NOT EXISTS `prodserv_sep` (
   `data` date DEFAULT NULL,
   `sit` char(1) DEFAULT 'A',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `prodserv_sep_list` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -566,7 +566,7 @@ CREATE TABLE IF NOT EXISTS `prodserv_sep_list` (
   PRIMARY KEY (`id`),
   KEY `sep` (`sep`),
   KEY `produto` (`produto`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 -- Sales Tables
@@ -603,7 +603,7 @@ CREATE TABLE IF NOT EXISTS `vendas` (
   PRIMARY KEY (`id`),
   KEY `cliente` (`cliente`),
   KEY `vendedor` (`vendedor`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `vendas_list` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -618,7 +618,7 @@ CREATE TABLE IF NOT EXISTS `vendas_list` (
   PRIMARY KEY (`id`),
   KEY `venda` (`venda`),
   KEY `produto` (`produto`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `vendas_orc` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -632,7 +632,7 @@ CREATE TABLE IF NOT EXISTS `vendas_orc` (
   `obs` text,
   PRIMARY KEY (`id`),
   KEY `cliente` (`cliente`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `vendas_orc_list` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -644,7 +644,7 @@ CREATE TABLE IF NOT EXISTS `vendas_orc_list` (
   PRIMARY KEY (`id`),
   KEY `orcamento` (`orcamento`),
   KEY `produto` (`produto`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `vendas_orcamento` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -657,7 +657,7 @@ CREATE TABLE IF NOT EXISTS `vendas_orcamento` (
   `sit` char(1) DEFAULT 'A',
   PRIMARY KEY (`id`),
   KEY `cliente` (`cliente`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `vendas_orcamento_list` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -667,7 +667,7 @@ CREATE TABLE IF NOT EXISTS `vendas_orcamento_list` (
   `unitario` decimal(10,4) DEFAULT '0.0000',
   PRIMARY KEY (`id`),
   KEY `orcamento` (`orcamento`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 -- Purchases Tables
@@ -684,7 +684,7 @@ CREATE TABLE IF NOT EXISTS `compras` (
   `obs` text,
   PRIMARY KEY (`id`),
   KEY `fornecedor` (`fornecedor`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `compras_list` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -695,7 +695,7 @@ CREATE TABLE IF NOT EXISTS `compras_list` (
   PRIMARY KEY (`id`),
   KEY `compra` (`compra`),
   KEY `produto` (`produto`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `compras_requisicao` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -703,7 +703,7 @@ CREATE TABLE IF NOT EXISTS `compras_requisicao` (
   `solicitante` int(11) DEFAULT NULL,
   `sit` char(1) DEFAULT 'A',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `compras_requisicao_list` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -712,7 +712,7 @@ CREATE TABLE IF NOT EXISTS `compras_requisicao_list` (
   `qtd` decimal(10,2) DEFAULT '1.00',
   PRIMARY KEY (`id`),
   KEY `requisicao` (`requisicao`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `compras_cotacao` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -720,7 +720,7 @@ CREATE TABLE IF NOT EXISTS `compras_cotacao` (
   `data` date DEFAULT NULL,
   `sit` char(1) DEFAULT 'A',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `compras_cotacao_list` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -730,7 +730,7 @@ CREATE TABLE IF NOT EXISTS `compras_cotacao_list` (
   `preco` decimal(10,4) DEFAULT '0.0000',
   PRIMARY KEY (`id`),
   KEY `cotacao` (`cotacao`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `e_compra` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -739,7 +739,7 @@ CREATE TABLE IF NOT EXISTS `e_compra` (
   `data` date DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `pedido` (`pedido`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `e_itens` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -748,7 +748,7 @@ CREATE TABLE IF NOT EXISTS `e_itens` (
   `qtd` decimal(10,2) DEFAULT '1.00',
   PRIMARY KEY (`id`),
   KEY `compra` (`compra`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 -- Financial Tables
@@ -769,7 +769,7 @@ CREATE TABLE IF NOT EXISTS `cp` (
   `sit` char(1) DEFAULT 'A',
   PRIMARY KEY (`id`),
   KEY `fornecedor` (`fornecedor`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `cp_itens` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -779,7 +779,7 @@ CREATE TABLE IF NOT EXISTS `cp_itens` (
   `banco` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `cp` (`cp`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `cr` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -796,7 +796,7 @@ CREATE TABLE IF NOT EXISTS `cr` (
   `sit` char(1) DEFAULT 'A',
   PRIMARY KEY (`id`),
   KEY `cliente` (`cliente`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `cr_itens` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -806,7 +806,7 @@ CREATE TABLE IF NOT EXISTS `cr_itens` (
   `banco` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `cr` (`cr`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `bancos` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -815,7 +815,7 @@ CREATE TABLE IF NOT EXISTS `bancos` (
   `conta` varchar(20) DEFAULT NULL,
   `saldo` decimal(10,2) DEFAULT '0.00',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `bancos_lan` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -826,21 +826,21 @@ CREATE TABLE IF NOT EXISTS `bancos_lan` (
   `descricao` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `banco` (`banco`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `natureza` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(100) NOT NULL,
   `tipo` char(1) DEFAULT 'E',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `parcelamentos` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `descricao` varchar(100) NOT NULL,
   `parcelas` int(11) DEFAULT '1',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 INSERT INTO `parcelamentos` (`id`, `descricao`, `parcelas`) VALUES
 (1, 'À Vista', 1),
@@ -852,7 +852,7 @@ CREATE TABLE IF NOT EXISTS `op_pagamento` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 INSERT INTO `op_pagamento` (`id`, `nome`) VALUES
 (1, 'Dinheiro'),
@@ -868,13 +868,13 @@ CREATE TABLE IF NOT EXISTS `pcontas` (
   `nome` varchar(100) NOT NULL,
   `tipo` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `pcontas_tipo` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 -- CRM Tables
@@ -886,7 +886,7 @@ CREATE TABLE IF NOT EXISTS `crm_acao` (
   `data` date DEFAULT NULL,
   `descricao` text,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `crm_acaor` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -895,7 +895,7 @@ CREATE TABLE IF NOT EXISTS `crm_acaor` (
   PRIMARY KEY (`id`),
   KEY `acao` (`acao`),
   KEY `cliente` (`cliente`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `followup` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -908,13 +908,13 @@ CREATE TABLE IF NOT EXISTS `followup` (
   `usuario` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `cliente` (`cliente`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `followup_tipo` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 INSERT INTO `followup_tipo` (`id`, `nome`) VALUES
 (1, 'Telefone'),
@@ -931,7 +931,7 @@ CREATE TABLE IF NOT EXISTS `agenda` (
   `descricao` text,
   `cliente` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `postit` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -939,7 +939,7 @@ CREATE TABLE IF NOT EXISTS `postit` (
   `texto` text,
   `cor` varchar(10) DEFAULT 'yellow',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 -- Auxiliary Tables
@@ -949,13 +949,13 @@ CREATE TABLE IF NOT EXISTS `grupos` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(100) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `ramo` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(100) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `frete` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -963,28 +963,28 @@ CREATE TABLE IF NOT EXISTS `frete` (
   `destino` varchar(50) DEFAULT NULL,
   `valor` decimal(10,2) DEFAULT '0.00',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `feriados` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `data` date NOT NULL,
   `descricao` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `textos` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `titulo` varchar(100) NOT NULL,
   `texto` text,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `up_pastas` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(100) NOT NULL,
   `pai` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `up_arq` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -995,7 +995,7 @@ CREATE TABLE IF NOT EXISTS `up_arq` (
   `data` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `pasta` (`pasta`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 -- Invoice/NF Tables
@@ -1013,7 +1013,7 @@ CREATE TABLE IF NOT EXISTS `nf` (
   PRIMARY KEY (`id`),
   KEY `cliente` (`cliente`),
   KEY `venda` (`venda`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `nf_prod` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -1023,7 +1023,7 @@ CREATE TABLE IF NOT EXISTS `nf_prod` (
   `unitario` decimal(10,4) DEFAULT '0.0000',
   PRIMARY KEY (`id`),
   KEY `nf` (`nf`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `romaneio` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -1032,7 +1032,7 @@ CREATE TABLE IF NOT EXISTS `romaneio` (
   `motorista` varchar(100) DEFAULT NULL,
   `placa` varchar(10) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `romaneio_itens` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -1040,7 +1040,7 @@ CREATE TABLE IF NOT EXISTS `romaneio_itens` (
   `nf` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `romaneio` (`romaneio`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 -- Other Tables
@@ -1050,56 +1050,56 @@ CREATE TABLE IF NOT EXISTS `opertab` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(100) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `operacoes` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(100) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `material` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(100) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `tip_material` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(100) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `tamanho` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `fixacao` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(100) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `sitri` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(100) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `clafis` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(100) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `dados` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `chave` varchar(50) NOT NULL,
   `valor` text,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `msg` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -1110,7 +1110,7 @@ CREATE TABLE IF NOT EXISTS `msg` (
   `data` datetime DEFAULT NULL,
   `lida` tinyint(1) DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `emails` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -1118,7 +1118,7 @@ CREATE TABLE IF NOT EXISTS `emails` (
   `email` varchar(100) NOT NULL,
   `nome` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 -- Curtain/PVC specific tables (industry-specific)
@@ -1135,7 +1135,7 @@ CREATE TABLE IF NOT EXISTS `cortinas` (
   `penduralg` int(11) DEFAULT NULL,
   `penduralp` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `cortinas_not` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -1144,7 +1144,7 @@ CREATE TABLE IF NOT EXISTS `cortinas_not` (
   `perfil1` int(11) DEFAULT NULL,
   `perfil2` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `perfil` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -1152,7 +1152,7 @@ CREATE TABLE IF NOT EXISTS `perfil` (
   `perfil` int(11) DEFAULT NULL,
   `b1` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `portasp` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -1166,7 +1166,7 @@ CREATE TABLE IF NOT EXISTS `portasp` (
   `co1` decimal(10,2) DEFAULT NULL,
   `co2` decimal(10,2) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Commit all changes
 COMMIT;

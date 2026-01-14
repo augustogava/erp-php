@@ -1,10 +1,10 @@
-<?
+<?php
 include("conecta.php");
 include("seguranca.php");
 if(empty($acao)) $acao="entrar";
 $pc=$_SESSION["mpc"];
 $npc=$_SESSION["npc"];
-//Verificação
+//VerificaÃ§Ã£o
 $_SESSION["modulo"]="viabilidade";
 $sqlm=mysql_query("SELECT * FROM online WHERE user<>'$iduser' and peca='$pc' and modulo='viabilidade'");
 if(mysql_num_rows($sqlm)){
@@ -14,7 +14,7 @@ if(mysql_num_rows($sqlm)){
 	}else{
 		$sql2=mysql_query("SELECT * FROM clientes WHERE id='$resm[user]'"); $res2=mysql_fetch_array($sql2);
 	}
-	$_SESSION["mensagem"]="O usuario $res2[nome] está alterando este módulo!";
+	$_SESSION["mensagem"]="O usuario $res2[nome] estÃ¡ alterando este mÃ³dulo!";
 	header("Location:apqp_menu.php");
 	exit;
 }
@@ -27,7 +27,7 @@ if(mysql_num_rows($sql)){
 	$sql=mysql_query("SELECT * FROM apqp_viabilidade WHERE peca='$pc'");
 	$res=mysql_fetch_array($sql);
 }
-	$sqlb=mysql_query("SELECT * FROM apqp_cron WHERE perc='100' AND peca='$pc' AND ativ='Certificado de Submissão'");
+	$sqlb=mysql_query("SELECT * FROM apqp_cron WHERE perc='100' AND peca='$pc' AND ativ='Certificado de SubmissÃ£o'");
 	if(!mysql_num_rows($sqlb)){
 		$sqlb=mysql_query("SELECT * FROM apqp_cron WHERE perc='100' AND peca='$pc' AND ativ='Viabilidade'");
 		if(!mysql_num_rows($sqlb)){
@@ -35,13 +35,13 @@ if(mysql_num_rows($sql)){
 		}else{
 			$sqlb=mysql_query("SELECT * FROM apqp_cron WHERE perc='100' AND peca='$pc' AND ativ='Diagrama de Fluxo'");
 			if(mysql_num_rows($sqlb)){
-				$btnsalva="if (confirm('Caso queira editar este documento terá que revisar todos os documentos a frente e aprovalos novamente!?')){ form1.acao.value='v1'; form1.submit();  } return false;";
+				$btnsalva="if (confirm('Caso queira editar este documento terÃ¡ que revisar todos os documentos a frente e aprovalos novamente!?')){ form1.acao.value='v1'; form1.submit();  } return false;";
 			}else{
-				$btnsalva="if (confirm('Documento Aprovado! Caso queira alterá-lo será removida a aprovação')){ form1.acao.value='v1'; form1.submit(); return false; }else{ return false; }";
+				$btnsalva="if (confirm('Documento Aprovado! Caso queira alterÃ¡-lo serÃ¡ removida a aprovaÃ§Ã£o')){ form1.acao.value='v1'; form1.submit(); return false; }else{ return false; }";
 			}
 		}
 	}else{
-		$btnsalva="if(confirm('O Certificado de submissão já esta aprovado, caso queira remover a aprovação deste Estudo será removida a aprovação de todos os relatórios. Deseja remover?')){ if(confirm('Você tem certeza que deseja remover a aprovação? Terá que aprovar todos os relatórios novamente.')){ form1.acao.value='v1'; form1.submit(); }else{ return false; } }else{ return false; }";
+		$btnsalva="if(confirm('O Certificado de submissÃ£o jÃ¡ esta aprovado, caso queira remover a aprovaÃ§Ã£o deste Estudo serÃ¡ removida a aprovaÃ§Ã£o de todos os relatÃ³rios. Deseja remover?')){ if(confirm('VocÃª tem certeza que deseja remover a aprovaÃ§Ã£o? TerÃ¡ que aprovar todos os relatÃ³rios novamente.')){ form1.acao.value='v1'; form1.submit(); }else{ return false; } }else{ return false; }";
 	}
 ?>
 <html>
@@ -66,7 +66,7 @@ function abrir(url,id){
 	return true;
 }
 function salvar(url,id){
-	window.open('apqp_impressao.php?acao=salvar&local='+ url +'&pc='+ <?=$pc?> + '');
+	window.open('apqp_impressao.php?acao=salvar&local='+ url +'&pc='+ <?php echo $pc?> + '');
 	return true;
 }
 function MM_openBrWindow(theURL,winName,features) { //v2.0
@@ -85,7 +85,7 @@ function MM_openBrWindow(theURL,winName,features) { //v2.0
 <table width="590" border="0" cellpadding="0" cellspacing="0" class="texto">
       <tr>
         <td width="27" align="center"><div align="left"><a href="#" onClick="MM_openBrWindow('help/mini_viabilidade.html','','width=680,height=501,left=300,top=50')"><img src="imagens/icon14_ahn.gif" width="14" height="14" border="0" onMouseOver="this.T_STICKY=true; this.T_TITLE='Comprometimento de viabilidade '; this.T_DELAY=10; this.T_WIDTH=225;  return escape('Avaliar a viabilidade do projeto proposto pode ser fabricado, montado, testado, embalado e expedido no prazo e na quantidade requerida. ')"></a><span class="impTextoBold">&nbsp;</span></div></td>
-        <td width="563" align="right"><div align="left" class="textobold style1 style1 style1 style1 style1 style1 style1 style1">APQP - Viabilidade <? print $npc; ?></div></td>
+        <td width="563" align="right"><div align="left" class="textobold style1 style1 style1 style1 style1 style1 style1 style1">APQP - Viabilidade <?php print $npc; ?></div></td>
       </tr>
       <tr>
         <td align="center">&nbsp;</td>
@@ -137,74 +137,74 @@ function MM_openBrWindow(theURL,winName,features) { //v2.0
                             <td width="517" align="center">considera&ccedil;&atilde;o</td>
                           </tr>
                           <tr bgcolor="#FFFFFF">
-                            <td width="28" align="center"><input name="sn1" type="radio" value="S" <? if($res["sn1"]=="S") print "checked"; ?>></td>
-                            <td width="28" align="center"><input name="sn1" type="radio" value="N" <? if($res["sn1"]=="N") print "checked"; ?>></td>
+                            <td width="28" align="center"><input name="sn1" type="radio" value="S" <?php if($res["sn1"]=="S") print "checked"; ?>></td>
+                            <td width="28" align="center"><input name="sn1" type="radio" value="N" <?php if($res["sn1"]=="N") print "checked"; ?>></td>
                             <td width="517" class="textopreto">&nbsp;O produto est&aacute; adequadamente definido (requisito de aplica&ccedil;&atilde;o, etc) para habilitar a &nbsp;avalia&ccedil;&atilde;o da viabilidade?</td>
                           </tr>
                           <tr bgcolor="#FFFFFF">
-                            <td width="28" align="center"><input name="sn2" type="radio" value="S" <? if($res["sn2"]=="S") print "checked"; ?>></td>
-                            <td width="28" align="center"><input name="sn2" type="radio" value="N" <? if($res["sn2"]=="N") print "checked"; ?>></td>
+                            <td width="28" align="center"><input name="sn2" type="radio" value="S" <?php if($res["sn2"]=="S") print "checked"; ?>></td>
+                            <td width="28" align="center"><input name="sn2" type="radio" value="N" <?php if($res["sn2"]=="N") print "checked"; ?>></td>
                             <td width="517" class="textopreto">&nbsp;As Especifica&ccedil;&otilde;es de Desempenho de Engenharia podem ser atendidas, como descritas?</td>
                           </tr>
                           <tr bgcolor="#FFFFFF">
-                            <td width="28" align="center"><input name="sn3" type="radio" value="S" <? if($res["sn3"]=="S") print "checked"; ?>></td>
-                            <td width="28" align="center"><input name="sn3" type="radio" value="N" <? if($res["sn3"]=="N") print "checked"; ?>></td>
+                            <td width="28" align="center"><input name="sn3" type="radio" value="S" <?php if($res["sn3"]=="S") print "checked"; ?>></td>
+                            <td width="28" align="center"><input name="sn3" type="radio" value="N" <?php if($res["sn3"]=="N") print "checked"; ?>></td>
                             <td width="517" class="textopreto">&nbsp;O produto pode ser manufaturado de acordo com as toler&acirc;ncias especificadas no desenho?</td>
                           </tr>
                           <tr bgcolor="#FFFFFF">
-                            <td width="28" align="center"><input name="sn4" type="radio" value="S" <? if($res["sn4"]=="S") print "checked"; ?>></td>
-                            <td width="28" align="center"><input name="sn4" type="radio" value="N" <? if($res["sn4"]=="N") print "checked"; ?>></td>
+                            <td width="28" align="center"><input name="sn4" type="radio" value="S" <?php if($res["sn4"]=="S") print "checked"; ?>></td>
+                            <td width="28" align="center"><input name="sn4" type="radio" value="N" <?php if($res["sn4"]=="N") print "checked"; ?>></td>
                             <td width="517" class="textopreto">&nbsp;O produto pode ser manufaturado com Cpk's que atendem &agrave;s especifica&ccedil;&otilde;es?</td>
                           </tr>
                           <tr bgcolor="#FFFFFF">
-                            <td width="28" align="center"><input name="sn5" type="radio" value="S" <? if($res["sn5"]=="S") print "checked"; ?>></td>
-                            <td width="28" align="center"><input name="sn5" type="radio" value="N" <? if($res["sn5"]=="N") print "checked"; ?>></td>
+                            <td width="28" align="center"><input name="sn5" type="radio" value="S" <?php if($res["sn5"]=="S") print "checked"; ?>></td>
+                            <td width="28" align="center"><input name="sn5" type="radio" value="N" <?php if($res["sn5"]=="N") print "checked"; ?>></td>
                             <td width="517" class="textopreto">&nbsp;Existe capacidade adequada para a fabrica&ccedil;&atilde;o do produto?</td>
                           </tr>
                           <tr bgcolor="#FFFFFF">
-                            <td width="28" align="center"><input name="sn6" type="radio" value="S" <? if($res["sn6"]=="S") print "checked"; ?>></td>
-                            <td width="28" align="center"><input name="sn6" type="radio" value="N" <? if($res["sn6"]=="N") print "checked"; ?>></td>
+                            <td width="28" align="center"><input name="sn6" type="radio" value="S" <?php if($res["sn6"]=="S") print "checked"; ?>></td>
+                            <td width="28" align="center"><input name="sn6" type="radio" value="N" <?php if($res["sn6"]=="N") print "checked"; ?>></td>
                             <td width="517" class="textopreto">&nbsp;O projeto permite o uso de t&eacute;cnicas eficientes de manuseio de material?</td>
                           </tr>
                           <tr bgcolor="#FFFFFF">
                             <td colspan="3" align="center" bgcolor="#003366" class="textoboldbranco">o produto pode ser manufaturado sem incorrer em inesperados: </td>
                           </tr>
                           <tr bgcolor="#FFFFFF">
-                            <td width="28" align="center"><input name="sn7" type="radio" value="S" <? if($res["sn7"]=="S") print "checked"; ?>></td>
-                            <td width="28" align="center"><input name="sn7" type="radio" value="N" <? if($res["sn7"]=="N") print "checked"; ?>></td>
+                            <td width="28" align="center"><input name="sn7" type="radio" value="S" <?php if($res["sn7"]=="S") print "checked"; ?>></td>
+                            <td width="28" align="center"><input name="sn7" type="radio" value="N" <?php if($res["sn7"]=="N") print "checked"; ?>></td>
                             <td width="517" class="textopreto">- Custos de equipamentos de transforma&ccedil;&atilde;o?</td>
                           </tr>
                           <tr bgcolor="#FFFFFF">
-                            <td width="28" align="center"><input name="sn8" type="radio" value="S" <? if($res["sn8"]=="S") print "checked"; ?>></td>
-                            <td width="28" align="center"><input name="sn8" type="radio" value="N" <? if($res["sn8"]=="N") print "checked"; ?>></td>
+                            <td width="28" align="center"><input name="sn8" type="radio" value="S" <?php if($res["sn8"]=="S") print "checked"; ?>></td>
+                            <td width="28" align="center"><input name="sn8" type="radio" value="N" <?php if($res["sn8"]=="N") print "checked"; ?>></td>
                             <td width="517" class="textopreto">- Custos de ferramental?</td>
                           </tr>
                           <tr bgcolor="#FFFFFF">
-                            <td width="28" align="center"><input name="sn9" type="radio" value="S" <? if($res["sn9"]=="S") print "checked"; ?>></td>
-                            <td width="28" align="center"><input name="sn9" type="radio" value="N" <? if($res["sn9"]=="N") print "checked"; ?>></td>
+                            <td width="28" align="center"><input name="sn9" type="radio" value="S" <?php if($res["sn9"]=="S") print "checked"; ?>></td>
+                            <td width="28" align="center"><input name="sn9" type="radio" value="N" <?php if($res["sn9"]=="N") print "checked"; ?>></td>
                             <td width="517" class="textopreto">- M&eacute;todos de manufatura alternativos?</td>
                           </tr>
                           <tr bgcolor="#FFFFFF">
-                            <td width="28" align="center"><input name="sn10" type="radio" value="S" <? if($res["sn10"]=="S") print "checked"; ?>></td>
-                            <td width="28" align="center"><input name="sn10" type="radio" value="N" <? if($res["sn10"]=="N") print "checked"; ?>></td>
+                            <td width="28" align="center"><input name="sn10" type="radio" value="S" <?php if($res["sn10"]=="S") print "checked"; ?>></td>
+                            <td width="28" align="center"><input name="sn10" type="radio" value="N" <?php if($res["sn10"]=="N") print "checked"; ?>></td>
                             <td width="517" class="textopreto">&nbsp;&Eacute; necess&aacute;rio controle estat&iacute;stico do processo para o produto?</td>
                           </tr>
                           <tr bgcolor="#FFFFFF">
-                            <td width="28" align="center"><input name="sn11" type="radio" value="S" <? if($res["sn11"]=="S") print "checked"; ?>></td>
-                            <td width="28" align="center"><input name="sn11" type="radio" value="N" <? if($res["sn11"]=="N") print "checked"; ?>></td>
+                            <td width="28" align="center"><input name="sn11" type="radio" value="S" <?php if($res["sn11"]=="S") print "checked"; ?>></td>
+                            <td width="28" align="center"><input name="sn11" type="radio" value="N" <?php if($res["sn11"]=="N") print "checked"; ?>></td>
                             <td width="517" class="textopreto">&nbsp;O controle estat&iacute;stico do processo est&aacute; sendo atualmente utilizado em produtos similares?</td>
                           </tr>
                           <tr bgcolor="#FFFFFF">
                             <td colspan="3" align="center" bgcolor="#003366" class="textoboldbranco">onde for utilizado controle estat&iacute;stico do processo em produtos similares: </td>
                           </tr>
                           <tr bgcolor="#FFFFFF">
-                            <td width="28" align="center"><input name="sn12" type="radio" value="S" <? if($res["sn12"]=="S") print "checked"; ?>></td>
-                            <td width="28" align="center"><input name="sn12" type="radio" value="N" <? if($res["sn12"]=="N") print "checked"; ?>></td>
+                            <td width="28" align="center"><input name="sn12" type="radio" value="S" <?php if($res["sn12"]=="S") print "checked"; ?>></td>
+                            <td width="28" align="center"><input name="sn12" type="radio" value="N" <?php if($res["sn12"]=="N") print "checked"; ?>></td>
                             <td width="517" class="textopreto">- Os processos est&atilde;o sob controle e est&aacute;veis?</td>
                           </tr>
                           <tr bgcolor="#FFFFFF">
-                            <td width="28" align="center"><input name="sn13" type="radio" value="S" <? if($res["sn13"]=="S") print "checked"; ?>></td>
-                            <td width="28" align="center"><input name="sn13" type="radio" value="N" <? if($res["sn13"]=="N") print "checked"; ?>></td>
+                            <td width="28" align="center"><input name="sn13" type="radio" value="S" <?php if($res["sn13"]=="S") print "checked"; ?>></td>
+                            <td width="28" align="center"><input name="sn13" type="radio" value="N" <?php if($res["sn13"]=="N") print "checked"; ?>></td>
                             <td width="517" class="textopreto">- Os Cpk's s&atilde;o maiores que 1,33?</td>
                           </tr>
                       </table></td>
@@ -218,21 +218,21 @@ function MM_openBrWindow(theURL,winName,features) { //v2.0
 					   
                 <table width="601" border="0" align="center" cellpadding="3" cellspacing="0" class="texto">
                   <tr>
-				  <? if($_SESSION["e_mail"]=="S"){ ?>
+				  <?php if($_SESSION["e_mail"]=="S"){ ?>
                     <td width="16%" align="left" class="textobold">&nbsp;Enviar e-mail: </td>
                     <td width="56%"><input name="email" type="text" class="formularioselect" id="email3" value="Digite o e-mail aqui"></td> 
-					<? if(in_array("U",$emailt)){ ?>
-                    <td width="3%"><div align="center"><a href="#" onClick="return abre('busca_email2.php','a','width=320,height=380,scrollbars=1');"><img src="imagens/icon14_pessoas.gif" alt="Buscar Email de Funcionários" width="14" height="14" border="0"></a></div></td>
-					<? } if(in_array("G",$emailt)){ ?>
+					<?php if(in_array("U",$emailt)){ ?>
+                    <td width="3%"><div align="center"><a href="#" onClick="return abre('busca_email2.php','a','width=320,height=380,scrollbars=1');"><img src="imagens/icon14_pessoas.gif" alt="Buscar Email de FuncionÃ¡rios" width="14" height="14" border="0"></a></div></td>
+					<?php } if(in_array("G",$emailt)){ ?>
                     <td width="8%"><div align="center"><a href="#" onClick="return abre('busca_email_grupo.php','a','width=320,height=380,scrollbars=1');"><input name="grupo" type="hidden" id="grupo">
                 <input name="grupo_nome" type="hidden" id="grupo_nome"><img src="imagens/icon14_grupo.gif" alt="Buscar Grupo de Emails" width="26" height="13" border="0"></a></div></td>
-				 <? } if(in_array("C",$emailt)){ ?>
+				 <?php } if(in_array("C",$emailt)){ ?>
                     <td width="4%"><div align="center"><a href="#" onClick="return abre('busca_email.php','a','width=320,height=380,scrollbars=1');"></a><a href="#" onClick="return abre('busca_email.php','a','width=320,height=300,scrollbars=1');"><img src="imagens/icon_cli.gif" alt="Buscar Emails de Clientes" width="18" height="18" border="0"></a></div></td>
-				<? } ?>
-                    <td width="9%"><div align="center"><? if($_SESSION["login_funcionario"]=="S"){ ?><a href="#" onClick="vailogo1('email','<?= $pc; ?>');"><img src="imagens/icon14_mail.gif" alt="Enviar Email" width="16" height="10" border="0"></a><? } ?></div></td>
-					<? } if($_SESSION["i_mp"]=="S"){ ?>
+				<?php } ?>
+                    <td width="9%"><div align="center"><?php if($_SESSION["login_funcionario"]=="S"){ ?><a href="#" onClick="vailogo1('email','<?php echo  $pc; ?>');"><img src="imagens/icon14_mail.gif" alt="Enviar Email" width="16" height="10" border="0"></a><?php } ?></div></td>
+					<?php } if($_SESSION["i_mp"]=="S"){ ?>
                     <td width="4%"><div align="center"><a href="#" onClick="vailogo('imp');"><img src="imagens/icon14_imp.gif" alt="Imprimir" width="15" height="15" border="0"></a></div></td>
-					<? } ?>
+					<?php } ?>
                   </tr>
                   <tr>
                     <td colspan="7" align="left" class="textobold"><img src="imagens/spacer.gif" width="46" height="5"></td>
@@ -241,9 +241,9 @@ function MM_openBrWindow(theURL,winName,features) { //v2.0
 			
 					<input name="button122" type="button" class="microtxt" value="Voltar" onClick="window.location='apqp_menu.php';">
 					&nbsp;
-                    <input name="acao2" type="button" class="microtxt" value="Salvar em Disco" onClick="salvar('viabilidade','<?=$res["id"];?>')">
+                    <input name="acao2" type="button" class="microtxt" value="Salvar em Disco" onClick="salvar('viabilidade','<?php echo $res["id"];?>')">
 					&nbsp;
-                    <input name="button12222" type="button" class="microtxt" value="Salvar" onClick="<?= $btnsalva; ?>">
+                    <input name="button12222" type="button" class="microtxt" value="Salvar" onClick="<?php echo  $btnsalva; ?>">
 					&nbsp;
                     <input name="acao" type="hidden" id="acao" value="1">
                     <a href="#" onClick="return abre('busca_email.php','a','width=320,height=380,scrollbars=1');"><span class="textobold">
@@ -262,4 +262,4 @@ function MM_openBrWindow(theURL,winName,features) { //v2.0
 </body>
 </html>
 <script language="javascript" src="tooltip.js"></script>
-<? include("mensagem.php"); ?>
+<?php include("mensagem.php"); ?>

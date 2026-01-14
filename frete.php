@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 include("seguranca.php");
 if(empty($acao)) $acao="entrar";
@@ -10,7 +10,8 @@ if($acao=="alt"){
 <html>
 <head>
 <title>CyberManager</title>
-<meta http-equiv="Content-Type" content="text/html; UTF-8">
+<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="style.css" rel="stylesheet" type="text/css">
 <script src="scripts.js"></script>
 <script src="mascaras.js"></script>
@@ -47,7 +48,7 @@ function verifica(cad){
       </tr>
     </table></td>
   </tr>
-<? if($acao=="entrar"){ ?>
+<?php if($acao=="entrar"){ ?>
   <tr> 
     <td align="left" valign="top"><table width="600" border="0" cellspacing="0" cellpadding="0">
       
@@ -56,26 +57,26 @@ function verifica(cad){
               Frete </a> </div></td>
         </tr>
       </table>
-<? 
+<?php 
 $sel=mysql_query("SELECT DISTINCT (regiao) FROM `frete");
 $linhas=mysql_num_rows($sel);
 ?>
       <table width="600" border="0" cellpadding="0" cellspacing="1" bgcolor="#003366">
         <tr class="textoboldbranco">
           <td width="88" rowspan="2" align="center">&nbsp;Peso(kg)</td>
-          <td align="center" colspan="<?= $linhas; ?>">Capital - Capital</td>
+          <td align="center" colspan="<?php echo  $linhas; ?>">Capital - Capital</td>
         </tr>
         <tr class="textoboldbranco"> 
           
-<? 
+<?php 
 $sel=mysql_query("SELECT DISTINCT (regiao) FROM `frete");
 while($selr=mysql_fetch_array($sel)){
 ?>
-<td align="center" class="textoboldbranco"><? print $selr["regiao"]; $sql1=mysql_query("SELECT * FROM frete WHERE regiao='$selr[regiao]'"); $res1=mysql_fetch_array($sql1); ?><a href="frete.php?acao=alt&id=<? print $res1["id"]; ?>"><br>
-  <img src="imagens/icon14_alterar.gif" alt="Alterar" width="14" height="14" border="0"></a> <a href="#" onClick="return pergunta('Deseja excluir este Frete?','frete_sql.php?acao=exc&id=<? print $res1["id"]; ?>')"><img src="imagens/icon14_lixeira.gif" alt="Excluir" width="14" height="14" border="0"></a></td>
-<? } ?>
+<td align="center" class="textoboldbranco"><?php print $selr["regiao"]; $sql1=mysql_query("SELECT * FROM frete WHERE regiao='$selr[regiao]'"); $res1=mysql_fetch_array($sql1); ?><a href="frete.php?acao=alt&id=<?php print $res1["id"]; ?>"><br>
+  <img src="imagens/icon14_alterar.gif" alt="Alterar" width="14" height="14" border="0"></a> <a href="#" onClick="return pergunta('Deseja excluir este Frete?','frete_sql.php?acao=exc&id=<?php print $res1["id"]; ?>')"><img src="imagens/icon14_lixeira.gif" alt="Excluir" width="14" height="14" border="0"></a></td>
+<?php } ?>
         </tr>
-        <?
+        <?php
 			  $sql=mysql_query("SELECT * FROM frete ORDER BY id ASC");
 			  if(mysql_num_rows($sql)==0){
 			  ?>
@@ -83,80 +84,80 @@ while($selr=mysql_fetch_array($sel)){
           <td colspan="3" align="center" class="textobold">NENHUM FRETE ENCONTRADO 
           </td>
         </tr>
-        <?
+        <?php
 			  }else{
 			  	$res=mysql_fetch_array($sql)
 			  ?>
-<? for($i=1; $i<=31; $i++){ ?>
+<?php for($i=1; $i<=31; $i++){ ?>
         <tr bgcolor="#FFFFFF" class="texto" onMouseover="changeto('#CCCCCC')" onMouseout="changeback('#FFFFFF')">
-          <td align="right"><? eval("print \$res[peso_ini$i];"); ?> a <? eval("print \$res[peso_fin$i];"); ?>
+          <td align="right"><?php eval("print \$res[peso_ini$i];"); ?> a <?php eval("print \$res[peso_fin$i];"); ?>
           &nbsp;</td>
 
-          <? 
+          <?php 
 $sel=mysql_query("SELECT DISTINCT (regiao) FROM `frete");
 while($selr=mysql_fetch_array($sel)){
 ?>
-          <td align="right"><? $sql1=mysql_query("SELECT * FROM frete WHERE regiao='$selr[regiao]'"); $res1=mysql_fetch_array($sql1); eval("print banco2valor(\$res1[peso_preco$i]);"); ?>
+          <td align="right"><?php $sql1=mysql_query("SELECT * FROM frete WHERE regiao='$selr[regiao]'"); $res1=mysql_fetch_array($sql1); eval("print banco2valor(\$res1[peso_preco$i]);"); ?>
           &nbsp;</td> 
-<? } ?>
+<?php } ?>
         </tr>
-<? } } ?>
+<?php } } ?>
       </table></td>
   </tr>
-  <? }else{ ?>
+  <?php }else{ ?>
   <tr>
     <td align="left" valign="top"><form name="form1" method="post" action="frete_sql.php" onSubmit="return verifica(this);">
         <table width="300" border="0" cellpadding="0" cellspacing="0">
           <tr bgcolor="#003366"> 
             <td colspan="2" align="center" class="textoboldbranco"> 
-              <? if($acao=="inc"){ print"Incluir"; }else{ print"Alterar";} ?> Frete
+              <?php if($acao=="inc"){ print"Incluir"; }else{ print"Alterar";} ?> Frete
             </td>
           </tr>
           <tr>
             <td class="textobold">&nbsp;Regi&atilde;o</td>
-            <td class="textobold"><input name="regiao" type="text" class="formularioselect" id="nome2" value="<? print $res["regiao"]; ?>" size="40" maxlength="25"></td>
+            <td class="textobold"><input name="regiao" type="text" class="formularioselect" id="nome2" value="<?php print $res["regiao"]; ?>" size="40" maxlength="25"></td>
           </tr>
           <tr>
             <td class="textobold">&nbsp;CEP Ini. </td>
-            <td class="textobold"><input name="cep_inicial" type="text" class="formulario" id="nome2" value="<? print $res["cep_inicial"]; ?>"  size="6" maxlength="6"></td>
+            <td class="textobold"><input name="cep_inicial" type="text" class="formulario" id="nome2" value="<?php print $res["cep_inicial"]; ?>"  size="6" maxlength="6"></td>
           </tr>
           <tr>
             <td class="textobold">&nbsp;CEP Final. </td>
-            <td class="textobold"><input name="cep_final" type="text" class="formulario" id="nome2" value="<? print $res["cep_final"]; ?>" size="6" maxlength="6"></td>
+            <td class="textobold"><input name="cep_final" type="text" class="formulario" id="nome2" value="<?php print $res["cep_final"]; ?>" size="6" maxlength="6"></td>
           </tr>
 
-<? for($i=1; $i<=31; $i++){ ?>
+<?php for($i=1; $i<=31; $i++){ ?>
           <tr>
-            <td class="textobold">&nbsp;Peso ini. <?= $i; ?></td>
-            <td class="textobold"><input name="peso_ini<?= $i; ?>" type="text" class="formulario" id="peso_ini<?= $i; ?>"  value="<? print $res["peso_ini$i"]; ?>" size="10" maxlength="10"></td>
+            <td class="textobold">&nbsp;Peso ini. <?php echo  $i; ?></td>
+            <td class="textobold"><input name="peso_ini<?php echo  $i; ?>" type="text" class="formulario" id="peso_ini<?php echo  $i; ?>"  value="<?php print $res["peso_ini$i"]; ?>" size="10" maxlength="10"></td>
           </tr>
           <tr>
-            <td class="textobold">&nbsp;Peso Fin. <?= $i; ?></td>
-            <td class="textobold"><input name="peso_fin<?= $i; ?>" type="text" class="formulario" id="peso_fin<?= $i; ?>"  value="<? print $res["peso_fin$i"]; ?>" size="10" maxlength="10"></td>
+            <td class="textobold">&nbsp;Peso Fin. <?php echo  $i; ?></td>
+            <td class="textobold"><input name="peso_fin<?php echo  $i; ?>" type="text" class="formulario" id="peso_fin<?php echo  $i; ?>"  value="<?php print $res["peso_fin$i"]; ?>" size="10" maxlength="10"></td>
           </tr>
           <tr> 
-            <td width="97" class="textobold">&nbsp;Peso Preco. <?= $i; ?></td>
-            <td width="203" class="textobold"><input name="peso_preco<?= $i; ?>" type="text" class="formulario" id="peso_preco<?= $i; ?>" value="<? print banco2valor($res["peso_preco$i"]); ?>" onKeyDown="formataMoeda(this,retornaKeyCode(event))" onKeyUp="formataMoeda(this,retornaKeyCode(event))" size="10" maxlength="10"></td>
+            <td width="97" class="textobold">&nbsp;Peso Preco. <?php echo  $i; ?></td>
+            <td width="203" class="textobold"><input name="peso_preco<?php echo  $i; ?>" type="text" class="formulario" id="peso_preco<?php echo  $i; ?>" value="<?php print banco2valor($res["peso_preco$i"]); ?>" onKeyDown="formataMoeda(this,retornaKeyCode(event))" onKeyUp="formataMoeda(this,retornaKeyCode(event))" size="10" maxlength="10"></td>
           </tr>
 <tr align="center">
             <td colspan="2" class="textobold"><img src="../layout/layout_menu/spacer.gif" width="1" height="5"></td>
           </tr>
-<? } ?>   
+<?php } ?>   
           <tr align="center"> 
             <td colspan="2" class="textobold">
               <input name="Submit22" type="button" class="microtxt" value="voltar" onClick="window.location='material.php'">
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               <input name="Submit2" type="submit" class="microtxt" value="Continuar">
-              <input name="acao" type="hidden" id="acao" value="<? if($acao=="alt"){ print "alterar"; }else{ print "incluir"; } ?>"> 
-            <input name="id" type="hidden" id="id3" value="<? print $id; ?>"></td>
+              <input name="acao" type="hidden" id="acao" value="<?php if($acao=="alt"){ print "alterar"; }else{ print "incluir"; } ?>"> 
+            <input name="id" type="hidden" id="id3" value="<?php print $id; ?>"></td>
           </tr>
         </table>	
       </form>
       
     </td>
-	<? } ?>
+	<?php } ?>
   </tr>
 </table>
 </body>
 </html>
-<? include("mensagem.php"); ?>
+<?php include("mensagem.php"); ?>

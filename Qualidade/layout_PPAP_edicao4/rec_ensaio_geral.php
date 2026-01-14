@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 include("seguranca.php");
 $acao=verifi($permi,$acao);
@@ -31,7 +31,7 @@ $cod=strtoupper($cod);
 
 	$sql2=mysql_query("SELECT codigo FROM ensaio WHERE codigo='$cod'");
 		if(!mysql_num_rows($sql2)==0){
-		$_SESSION["mensagem"]="O cadastro do Ensaio não foi incluído. Digite outro Código do Ensaio, este já existe!";
+		$_SESSION["mensagem"]="O cadastro do Ensaio nÃ£o foi incluÃ­do. Digite outro CÃ³digo do Ensaio, este jÃ¡ existe!";
 		header("Location:rec_ensaio_geral.php?acao=inc&cod=$cod&descricao=$descricao&data_cad=$data_cad&usuario=$usuario&carta=$carta&metodo=$metodo");
 		exit;		
 	}
@@ -41,16 +41,16 @@ $cod=strtoupper($cod);
 	$sql=mysql_query("INSERT INTO ensaio (codigo,descricao,data_cad,usuario,carta,metodo) VALUES ('$cod','$descricao','$data_cad','$usuario','$carta','$metodo')");
 
 	if($sql){
-		$_SESSION["mensagem"]="Ensaio incluído com sucesso!";
+		$_SESSION["mensagem"]="Ensaio incluÃ­do com sucesso!";
 		// cria followup caso inclua 
 			$sql_emp=mysql_query("SELECT fantasia FROM empresa");
 			$res_emp=mysql_fetch_array($sql_emp);
-			mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Inclusão de Ensaio.','O usuário $quem1 incluiu um novo Ensaio chamado $descricao.','$user')");
+			mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','InclusÃ£o de Ensaio.','O usuÃ¡rio $quem1 incluiu um novo Ensaio chamado $descricao.','$user')");
 		//	
 		header("Location:rec_ensaio.php");
 		exit;
 	}else{
-		$_SESSION["mensagem"]="O Ensaio não pôde ser concluído!";
+		$_SESSION["mensagem"]="O Ensaio nÃ£o pÃ´de ser concluÃ­do!";
 	}	
 }
 
@@ -61,12 +61,12 @@ if($acao=="alterar"){
 		// cria followup caso altere
 			$sql_emp=mysql_query("SELECT fantasia FROM empresa");
 			$res_emp=mysql_fetch_array($sql_emp);
-			mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Alteração do cadastro do Ensaio.','O usuário $quem1 alterou o cadastro do Ensaio $descricao.','$user')");
+			mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','AlteraÃ§Ã£o do cadastro do Ensaio.','O usuÃ¡rio $quem1 alterou o cadastro do Ensaio $descricao.','$user')");
 		//			
 		header("Location:rec_ensaio.php");
 		exit;		
 	}else{
-		$_SESSION["mensagem"]="O Ensaio não pôde ser alterado!";
+		$_SESSION["mensagem"]="O Ensaio nÃ£o pÃ´de ser alterado!";
 	}
 }
 ?>
@@ -78,12 +78,12 @@ if($acao=="alterar"){
 <script>
 function verifica(cad){
 	if(cad.cod.value==''){
-		alert('Preencha o Código');
+		alert('Preencha o CÃ³digo');
 		cad.cod.focus();
 		return false;
 	}
 	if(cad.descricao.value==''){
-		alert('Preencha a Descrição');
+		alert('Preencha a DescriÃ§Ã£o');
 		cad.descricao.focus();
 		return false;
 	}
@@ -93,7 +93,7 @@ function verifica(cad){
 		return false;
 	}
 	if(cad.metodo.value==''){
-		alert('Preencha o Método');
+		alert('Preencha o MÃ©todo');
 		cad.metodo.focus();
 		return false;
 	}
@@ -130,39 +130,39 @@ function verifica(cad){
               <td>&nbsp;C&oacute;digo do Ensaio: </td>
               <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
                   <tr>
-                    <td width="26%" class="textobold"><input name="cod" type="text" class="formulario" id="cod" value="<? print $cod; ?>" size="10" maxlength="10"></td>
+                    <td width="26%" class="textobold"><input name="cod" type="text" class="formulario" id="cod" value="<?php print $cod; ?>" size="10" maxlength="10"></td>
                     <td width="44%" class="textobold">&nbsp;&nbsp;&nbsp;Data do Cadastro: </td>
-                    <td width="30%" class="textobold"><input name="datacad" type="text" class="formulario" id="datacad" value="<? if(empty($data_cad)){ print date("d/m/Y"); }else{ print $data_cad; } ?>" size="10" maxlength="15" readonly=""></td>
+                    <td width="30%" class="textobold"><input name="datacad" type="text" class="formulario" id="datacad" value="<?php if(empty($data_cad)){ print date("d/m/Y"); }else{ print $data_cad; } ?>" size="10" maxlength="15" readonly=""></td>
                   </tr>
                 </table></td>
             </tr>
             <tr class="textobold">
               <td width="124">&nbsp;Descri&ccedil;&atilde;o:</td>
-              <td width="260"><input name="descricao" type="text" class="formulario" id="descricao" value="<? print $descricao; ?>" size="50" maxlength="100"></td>
+              <td width="260"><input name="descricao" type="text" class="formulario" id="descricao" value="<?php print $descricao; ?>" size="50" maxlength="100"></td>
             </tr>
             <tr class="textobold">
               <td>&nbsp;Cadastrador:</td>
-              <td><input name="usuario" type="text" class="formulario" id="usuario" value="<? if(empty($usuario)){ print $_SESSION["login_nome"]; }else{ print $usuario; } ?>" size="30" maxlength="100" readonly=""></td>
+              <td><input name="usuario" type="text" class="formulario" id="usuario" value="<?php if(empty($usuario)){ print $_SESSION["login_nome"]; }else{ print $usuario; } ?>" size="30" maxlength="100" readonly=""></td>
             </tr>
             <tr class="textobold">
               <td>&nbsp;Carta:</td>
               <td><label><select name="carta" class="textopreto" id="carta">
-                  <option value="0"<? if($carta==0){ print "selected"; }?>>Selecione</option>
-                  <option value="1"<? if($carta==1){ print "selected"; }?>>HIS - Histograma</option>
+                  <option value="0"<?php if($carta==0){ print "selected"; }?>>Selecione</option>
+                  <option value="1"<?php if($carta==1){ print "selected"; }?>>HIS - Histograma</option>
                   <option value="2">XBR - M&eacute;dias e Amplitudes</option>
                   <option value="3">XBS - M&eacute;dias e Desvio Padr&atilde;o</option>
-                  <option value="4"<? if($carta==4){ print "selected"; }?>>XMR - Medianas e Amplitudes</option>
-                  <option value="5"<? if($carta==5){ print "selected"; }?>>IND - Individuais</option>
+                  <option value="4"<?php if($carta==4){ print "selected"; }?>>XMR - Medianas e Amplitudes</option>
+                  <option value="5"<?php if($carta==5){ print "selected"; }?>>IND - Individuais</option>
                   <option value="6">P.- Porc. Unid. N&atilde;o Conforme</option>
                   <option value="7">U. - N&uacute;m. N&atilde;o Conform. p/ Unid.</option>
                   <option value="8">NP - N&uacute;m. Unidades N&atilde;o Conforme</option>
                   <option value="9">C - N&uacute;m. N&atilde;o Conformidades</option>
-                  <option value="10"<? if($carta==10){ print "selected"; }?>>TXT - Texto</option>
+                  <option value="10"<?php if($carta==10){ print "selected"; }?>>TXT - Texto</option>
                 </select></label></td>
             </tr>
             <tr class="textobold">
               <td>&nbsp;M&eacute;todo: </td>
-              <td><input name="metodo" type="text" class="formulario" id="metodo" value="<? print $metodo; ?>" size="30" maxlength="30"></td>
+              <td><input name="metodo" type="text" class="formulario" id="metodo" value="<?php print $metodo; ?>" size="30" maxlength="30"></td>
             </tr>
 
           </table></td>
@@ -174,25 +174,25 @@ function verifica(cad){
         </tr>
         <tr>
           <td><div align="center">
-           <? /* <input name="id" type="hidden" id="id2" value="<? print $id; ?>">
-            <input name="acao" type="hidden" id="acao2" value="<? if($acao=="inc"){ print "incluir"; }else{ print "alterar"; } ?>">
-            <? if($acao=="alt"){ ?>
-            <input name="button12" type="button" class="microtxt" value="Voltar" onClick="window.location='rec_ensaio.php<? if(!empty($bcod) or!empty($bnome)) print "?webmst=cpp"; if(!empty($bcod)) print "&bcod=$bcod"; if(!empty($bnome)) print "&bnome=$bnome";?>';">
+           <?php /* <input name="id" type="hidden" id="id2" value="<?php print $id; ?>">
+            <input name="acao" type="hidden" id="acao2" value="<?php if($acao=="inc"){ print "incluir"; }else{ print "alterar"; } ?>">
+            <?php if($acao=="alt"){ ?>
+            <input name="button12" type="button" class="microtxt" value="Voltar" onClick="window.location='rec_ensaio.php<?php if(!empty($bcod) or!empty($bnome)) print "?webmst=cpp"; if(!empty($bcod)) print "&bcod=$bcod"; if(!empty($bnome)) print "&bnome=$bnome";?>';">
   &nbsp;&nbsp;&nbsp;&nbsp;
-  <? } ?>
+  <?php } ?>
   <input name="button122" type="submit" class="microtxt" value="Continuar">
           */ ?>
            <span class="textobold">
            <input name="Voltar" type="button" class="microtxt" id="Voltar" onClick="window.location='rec_ensaio.php';" value="Voltar">
 &nbsp;&nbsp;&nbsp;&nbsp;
-<? if ($acao=="alt"){ ?>
+<?php if ($acao=="alt"){ ?>
 <input name="Alterar" type="submit" class="microtxt" value="Alterar">
-<? } ?>
-<? if($acao=="inc"){ ?>
+<?php } ?>
+<?php if($acao=="inc"){ ?>
 <input name="Incluir" type="submit" class="microtxt" id="Incluir" value="Incluir">
-<? } ?>
-<input type="hidden" name="acao" id="acao2"	value="<? if($acao=="alt"){ print "alterar"; } else if($acao=="inc"){ print "incluir"; } ?>">
-<input type="hidden" name="id" value= <? print $id;?>>
+<?php } ?>
+<input type="hidden" name="acao" id="acao2"	value="<?php if($acao=="alt"){ print "alterar"; } else if($acao=="inc"){ print "incluir"; } ?>">
+<input type="hidden" name="id" value= <?php print $id;?>>
            </span></div></td>
         </tr>
       </table>
@@ -202,4 +202,4 @@ function verifica(cad){
 &nbsp; 
 </body>
 </html>
-<? include("mensagem.php"); ?>
+<?php include("mensagem.php"); ?>

@@ -1,1 +1,1 @@
-<script>window.location='pdf/nf2.php?nf=<?= $nf; ?>';</script>
+<script>window.location='pdf/nf2.php?nf=<?php echo  $nf; ?>';</script>

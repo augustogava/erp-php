@@ -23,7 +23,7 @@ $fmea=$resp[numero];
 $pg=1;
 $pdf->SetXY(260, 5);
 $pdf->SetFont('Arial','B',8);
-$pdf->MultiCell(40,5,"PPAP Nº $numero \n Page: $pg");
+$pdf->MultiCell(40,5,"PPAP NÂº $numero \n Page: $pg");
 $pdf->SetFont('Arial','',8);
 $pdf->SetXY(5, 18);
 $pdf->MultiCell(50,4,"part Number(Customer) \n $cliente",1);
@@ -117,7 +117,7 @@ if(mysql_num_rows($sql)){
 	while($res=mysql_fetch_array($sql)){
 		
 		//calculando o tamanho dos campos
-		$ope=mysql_query("select * from apqp_op where id=$res[item]")or die("Não Foi");
+		$ope=mysql_query("select * from apqp_op where id=$res[item]")or erp_db_fail();
 		$ope_tb=mysql_fetch_array($ope);
 		if($opera==$ope_tb["descricao"]){
 			$show=" ";
@@ -175,7 +175,7 @@ if(mysql_num_rows($sql)){
 		 $y=191;
 		}
 		$w=4;
-		//adicionando uma nova página
+		//adicionando uma nova pÃ¡gina
 		if($y>=185){
 			$p++;
 			$y=48;
@@ -200,7 +200,7 @@ if(mysql_num_rows($sql)){
 			$pdf->MultiCell(105,4,"FMEA Number \n $fmea",1);
 			$pdf->SetXY(260, 5);
 			$pdf->SetFont('Arial','B',8);
-			$pdf->MultiCell(40,5,"PPAP Nº $numero \n Page: $pg");
+			$pdf->MultiCell(40,5,"PPAP NÂº $numero \n Page: $pg");
 			$pdf->SetFont('Arial','B',8);
 			$pdf->SetXY(5, 28);
 			$pdf->MultiCell(19,4," \n \n Item or Function \n ",1,'C');

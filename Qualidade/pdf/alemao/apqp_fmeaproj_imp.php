@@ -116,7 +116,7 @@ if(mysql_num_rows($sql)){
 	$y=80;
 	while($res=mysql_fetch_array($sql)){
 		//calculando o tamanho dos campos
-		$ope=mysql_query("select * from apqp_op where id=$res[item]")or die("Não Foi");
+		$ope=mysql_query("select * from apqp_op where id=$res[item]")or erp_db_fail();
 		$ope_tb=mysql_fetch_array($ope);
 		if($opera==$ope_tb["descricao"]){
 			$show=" ";
@@ -174,7 +174,7 @@ if(mysql_num_rows($sql)){
 		 $y=191;
 		}
 		$w=4;
-		//adicionando uma nova página
+		//adicionando uma nova pÃ¡gina
 		if($y>=185){
 			$y=48;
 			$pdf->AddPage();

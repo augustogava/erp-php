@@ -1,13 +1,13 @@
-<?
+<?php
 include("conecta.php");
 if(empty($acao)) exit;
 if($acao=="exc"){
 	if(!empty($id)){
 		$sql=mysql_query("DELETE FROM parcelamentos WHERE id='$id'");
 		if($sql){
-			$_SESSION["mensagem"]="Parcelamento excluído com sucesso!";
+			$_SESSION["mensagem"]="Parcelamento excluÃ­do com sucesso!";
 		}else{
-			$_SESSION["mensagem"]="O Parcelamento não pôde ser excluído!";
+			$_SESSION["mensagem"]="O Parcelamento nÃ£o pÃ´de ser excluÃ­do!";
 		}
 	}
 	$acao="entrar";
@@ -20,10 +20,10 @@ if($acao=="exc"){
 	$jurosdia=valor2banco($jurosdia);
 	$sql=mysql_query("INSERT INTO parcelamentos (descricao,parcelado,parcelas,intervalo,carencia,alt,alts,ent_sn,ent_perc,multa,desconto,jurosdia,vencimento,obs) VALUES ('$descricao','$parcelado','$parcelas','$intervalo','$carencia','$alt','$alts','$ent_sn','$ent_perc','$multa','$desconto','$jurosdia','$vencimento','$obs')");
 	if($sql){
-		$_SESSION["mensagem"]="Parcelamento incluído com sucesso!";
+		$_SESSION["mensagem"]="Parcelamento incluÃ­do com sucesso!";
 		$acao="entrar";
 	}else{
-		$_SESSION["mensagem"]="O Parcelamento não pôde ser incluído!";
+		$_SESSION["mensagem"]="O Parcelamento nÃ£o pÃ´de ser incluÃ­do!";
 		$acao="inc";
 	}
 }elseif($acao=="alt"){
@@ -39,7 +39,7 @@ if($acao=="exc"){
 			$_SESSION["mensagem"]="Parcelamento alterado com sucesso!";
 			$acao="entrar";
 		}else{
-			$_SESSION["mensagem"]="O Parcelamento não pôde ser alterado!";
+			$_SESSION["mensagem"]="O Parcelamento nÃ£o pÃ´de ser alterado!";
 			$acao="alt";
 		}
 	}else{

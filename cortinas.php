@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 include("seguranca.php");
 $acao=verifi($permi,$acao);
@@ -14,9 +14,9 @@ if($acao=="alt"){
 }else if($acao=="exc"){
 	$sql=mysql_query("DELETE FROM cortinas WHERE id='$id'");
 	if($sql){
-			$_SESSION["mensagem"]="Cortina excluída com sucesso!";
+			$_SESSION["mensagem"]="Cortina excluÃ­da com sucesso!";
 	}else{
-			$_SESSION["mensagem"]="A Cortina não pôde ser excluída!";
+			$_SESSION["mensagem"]="A Cortina nÃ£o pÃ´de ser excluÃ­da!";
 	}	
 	$acao="entrar";
 }
@@ -26,7 +26,8 @@ if($acao=="alt"){
 <title>
 <MMString:LoadString id="insertbar/formsHidden" />
 </title>
-<meta http-equiv="Content-Type" content="text/html; UTF-8">
+<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="style.css" rel="stylesheet" type="text/css">
 <script src="scripts.js"></script>
 <script src="mascaras.js"></script>
@@ -57,7 +58,7 @@ function MM_openBrWindow(theURL,winName,features) { //v2.0
       </tr>
     </table></td>
   </tr>
-  <? if($acao=="entrar"){ ?>
+  <?php if($acao=="entrar"){ ?>
   <tr>
     <td align="left" valign="top"><table width="450" border="0" cellspacing="0" cellpadding="0">
       <tr>
@@ -71,23 +72,23 @@ function MM_openBrWindow(theURL,winName,features) { //v2.0
           <td width="18" align="center">&nbsp;</td>
           <td width="20" align="center">&nbsp;</td>
         </tr>
-        <?
+        <?php
 			  $sql=mysql_query("SELECT * FROM cortinas ORDER By nome ASC");
 			  if(mysql_num_rows($sql)==0){
 			  ?>
         <tr bgcolor="#FFFFFF">
           <td colspan="3" align="center" class="textobold">NENHUMA CORTINA</td>
         </tr>
-        <?
+        <?php
 			  }else{
 			  	while($res=mysql_fetch_array($sql)){
 			  ?>
         <tr bgcolor="#FFFFFF" class="texto" onMouseover="changeto('#CCCCCC')" onMouseout="changeback('#FFFFFF')">
-          <td width="408">&nbsp;<? print $res["nome"]; ?></td>
-          <td width="18" align="center"><a href="cortinas.php?acao=alt&id=<? print $res["id"]; ?>"><img src="imagens/icon14_alterar.gif" alt="Alterar" width="14" height="14" border="0"></a></td>
-          <td width="20" align="center"><a href="#" onClick="return pergunta('Deseja excluir esta Cortina?','cortinas.php?acao=exc&id=<? print $res["id"]; ?>')"><img src="imagens/icon14_lixeira.gif" alt="Excluir" width="14" height="14" border="0"></a></td>
+          <td width="408">&nbsp;<?php print $res["nome"]; ?></td>
+          <td width="18" align="center"><a href="cortinas.php?acao=alt&id=<?php print $res["id"]; ?>"><img src="imagens/icon14_alterar.gif" alt="Alterar" width="14" height="14" border="0"></a></td>
+          <td width="20" align="center"><a href="#" onClick="return pergunta('Deseja excluir esta Cortina?','cortinas.php?acao=exc&id=<?php print $res["id"]; ?>')"><img src="imagens/icon14_lixeira.gif" alt="Excluir" width="14" height="14" border="0"></a></td>
         </tr>
-        <?
+        <?php
 			  	}
 			  }
 			  ?>
@@ -103,27 +104,27 @@ function MM_openBrWindow(theURL,winName,features) { //v2.0
         </tr>
       </table></td>
   </tr>
-  <? }else if($acao=="alt" or $acao=="inc"){ ?>
+  <?php }else if($acao=="alt" or $acao=="inc"){ ?>
   <tr>
     <td align="left" valign="top"><form name="form1" method="post" action="cortinas_sql.php" onSubmit="return verifica(this);">
         <table width="350" border="0" cellpadding="0" cellspacing="0">
           <tr bgcolor="#003366"> 
             <td colspan="2" align="center" class="textoboldbranco"> 
-              <? if($acao=="inc"){ print"Incluir Cortina"; }else{ print"Configurar Cortina";} ?>            </td>
+              <?php if($acao=="inc"){ print"Incluir Cortina"; }else{ print"Configurar Cortina";} ?>            </td>
           </tr>
           <tr>
             <td class="textobold">&nbsp;Nome</td>
-            <td class="textobold"><input name="nome" type="text" class="formulario" id="nome" value="<? print ($res["nome"]); ?>" size="35" ></td>
+            <td class="textobold"><input name="nome" type="text" class="formulario" id="nome" value="<?php print ($res["nome"]); ?>" size="35" ></td>
           </tr>
           <tr>
             <td width="71" class="textobold">&nbsp;Trilho
-            <input name="trilho" type="hidden" id="trilho" value="<?= $res["trilho"]; ?>"></td>
+            <input name="trilho" type="hidden" id="trilho" value="<?php echo  $res["trilho"]; ?>"></td>
             <td width="279" class="textobold"><table width="100%"  border="0" cellspacing="0" cellpadding="0">
               <tr>
-                <?
+                <?php
 				$sql2=mysql_query("SELECT * FROM prodserv WHERE id='$res[trilho]'"); $res2=mysql_fetch_array($sql2);
 				?>
-                <td><input name="trilhon" type="text" class="formularioselect" id="trilhon" value="<? print $res2["nome"]; ?>" size="7" maxlength="50" readonly></td>
+                <td><input name="trilhon" type="text" class="formularioselect" id="trilhon" value="<?php print $res2["nome"]; ?>" size="7" maxlength="50" readonly></td>
                 <td width="20" align="center"><a href="#" onClick="return abre('cortinas_prod.php?pag=trilho','busca','width=420,height=300,scrollbars=1');"><img src="imagens/icon_14_search.gif" alt="Selecione um Item" width="14" height="14" border="0"></a></td>
               </tr>
             </table></td>
@@ -134,78 +135,78 @@ function MM_openBrWindow(theURL,winName,features) { //v2.0
 
 
 
-              <input name="pvc" type="hidden" id="pvc" value="<?= $res["pvc"]; ?>"></td>
+              <input name="pvc" type="hidden" id="pvc" value="<?php echo  $res["pvc"]; ?>"></td>
             <td class="textobold"><table width="100%"  border="0" cellspacing="0" cellpadding="0">
               <tr>
-                <?
+                <?php
 				$sql2=mysql_query("SELECT * FROM prodserv WHERE id='$res[pvc]'"); $res2=mysql_fetch_array($sql2);
 				?>
-                <td><input name="pvcn" type="text" class="formularioselect" id="pvcn" value="<? print $res2["nome"]; ?>" size="7" maxlength="50" readonly></td>
+                <td><input name="pvcn" type="text" class="formularioselect" id="pvcn" value="<?php print $res2["nome"]; ?>" size="7" maxlength="50" readonly></td>
                 <td width="20" align="center"><a href="#" onClick="return abre('cortinas_prod.php?pag=pvc','busca','width=420,height=300,scrollbars=1');"><img src="imagens/icon_14_search.gif" alt="Selecione um Item" width="14" height="14" border="0"></a></td>
               </tr>
             </table></td>
           </tr>
           <tr>
             <td valign="middle" class="textobold">&nbsp;Arrebites
-              <input name="arrebites" type="hidden" id="arrebites" value="<?= $res["arrebites"]; ?>"></td>
+              <input name="arrebites" type="hidden" id="arrebites" value="<?php echo  $res["arrebites"]; ?>"></td>
             <td class="textobold"><table width="100%"  border="0" cellspacing="0" cellpadding="0">
                 <tr>
-                  <?
+                  <?php
 				$sql2=mysql_query("SELECT * FROM prodserv WHERE id='$res[arrebites]'"); $res2=mysql_fetch_array($sql2);
 				?>
-                  <td><input name="arrebitesn" type="text" class="formularioselect" id="arrebitesn"  value="<? print $res2["nome"]; ?>" size="7" maxlength="50" readonly></td>
+                  <td><input name="arrebitesn" type="text" class="formularioselect" id="arrebitesn"  value="<?php print $res2["nome"]; ?>" size="7" maxlength="50" readonly></td>
                   <td width="20" align="center"><a href="#" onClick="return abre('cortinas_prod.php?pag=arrebites','busca','width=420,height=300,scrollbars=1');"><img src="imagens/icon_14_search.gif" alt="Selecione um Item" width="14" height="14" border="0"></a></td>
                 </tr>
             </table></td>
           </tr>
           <tr>
             <td valign="middle" class="textobold">&nbsp;Parafusos
-              <input name="parafusos" type="hidden" id="parafusos" value="<?= $res["parafusos"]; ?>"></td>
+              <input name="parafusos" type="hidden" id="parafusos" value="<?php echo  $res["parafusos"]; ?>"></td>
             <td class="textobold"><table width="100%"  border="0" cellspacing="0" cellpadding="0">
                 <tr>
-                  <?
+                  <?php
 				$sql2=mysql_query("SELECT * FROM prodserv WHERE id='$res[parafusos]'"); $res2=mysql_fetch_array($sql2);
 				?>
-                  <td><input name="parafusosn" type="text" class="formularioselect" id="parafusosn"  value="<? print $res2["nome"]; ?>" size="7" maxlength="50" readonly></td>
+                  <td><input name="parafusosn" type="text" class="formularioselect" id="parafusosn"  value="<?php print $res2["nome"]; ?>" size="7" maxlength="50" readonly></td>
                   <td width="20" align="center"><a href="#" onClick="return abre('cortinas_prod.php?pag=parafusos','busca','width=420,height=300,scrollbars=1');"><img src="imagens/icon_14_search.gif" alt="Selecione um Item" width="14" height="14" border="0"></a></td>
                 </tr>
             </table></td>
           </tr>
           <tr>
             <td class="textobold">&nbsp;Buchas
-              <input name="buchas" type="hidden" id="buchas" value="<?= $res["buchas"]; ?>"></td>
+              <input name="buchas" type="hidden" id="buchas" value="<?php echo  $res["buchas"]; ?>"></td>
             <td class="textobold"><table width="100%"  border="0" cellspacing="0" cellpadding="0">
                 <tr>
-                  <?
+                  <?php
 				$sql2=mysql_query("SELECT * FROM prodserv WHERE id='$res[buchas]'"); $res2=mysql_fetch_array($sql2);
 				?>
-                  <td><input name="buchasn" type="text" class="formularioselect" id="buchasn"  value="<? print $res2["nome"]; ?>" size="7" maxlength="50" readonly></td>
+                  <td><input name="buchasn" type="text" class="formularioselect" id="buchasn"  value="<?php print $res2["nome"]; ?>" size="7" maxlength="50" readonly></td>
                   <td width="20" align="center"><a href="#" onClick="return abre('cortinas_prod.php?pag=buchas','busca','width=420,height=300,scrollbars=1');"><img src="imagens/icon_14_search.gif" alt="Selecione um Item" width="14" height="14" border="0"></a></td>
                 </tr>
             </table></td>
           </tr>
           <tr>
             <td class="textobold">&nbsp;Pendural G. 
-              <input name="penduralg" type="hidden" id="penduralg" value="<?= $res["penduralg"]; ?>"></td>
+              <input name="penduralg" type="hidden" id="penduralg" value="<?php echo  $res["penduralg"]; ?>"></td>
             <td class="textobold"><table width="100%"  border="0" cellspacing="0" cellpadding="0">
                 <tr>
-                  <?
+                  <?php
 				$sql2=mysql_query("SELECT * FROM prodserv WHERE id='$res[penduralg]'"); $res2=mysql_fetch_array($sql2);
 				?>
-                  <td><input name="penduralgn" type="text" class="formularioselect" id="penduralgn"  value="<? print $res2["nome"]; ?>" size="7" maxlength="50" readonly></td>
+                  <td><input name="penduralgn" type="text" class="formularioselect" id="penduralgn"  value="<?php print $res2["nome"]; ?>" size="7" maxlength="50" readonly></td>
                   <td width="20" align="center"><a href="#" onClick="return abre('cortinas_prod.php?pag=penduralg','busca','width=420,height=300,scrollbars=1');"><img src="imagens/icon_14_search.gif" alt="Selecione um Item" width="14" height="14" border="0"></a></td>
                 </tr>
             </table></td>
           </tr>
           <tr>
             <td class="textobold">&nbsp;Pendural P. 
-              <input name="penduralp" type="hidden" id="penduralp" value="<?= $res["penduralp"]; ?>"></td>
+              <input name="penduralp" type="hidden" id="penduralp" value="<?php echo  $res["penduralp"]; ?>"></td>
             <td class="textobold"><table width="100%"  border="0" cellspacing="0" cellpadding="0">
               <tr>
-                <?
+                <?php
 				$sql2=mysql_query("SELECT * FROM prodserv WHERE id='$res[penduralp]'"); $res2=mysql_fetch_array($sql2);
 				?>
-                <td><input name="penduralpn" type="text" class="formularioselect" id="penduralpn"  value="<? print $res2["nome"]; ?>" size="7" maxlength="50" readonly></td>
+                <td><input name="penduralpn" type="text" class="formularioselect" id="penduralpn"  value="<?php print $res2["nome"]; ?>" size="7" maxlength="50" readonly></td>
                 <td width="20" align="center"><a href="#" onClick="return abre('cortinas_prod.php?pag=penduralp','busca','width=420,height=300,scrollbars=1');"><img src="imagens/icon_14_search.gif" alt="Selecione um Item" width="14" height="14" border="0"></a></td>
               </tr>
             </table></td>
@@ -217,14 +218,14 @@ function MM_openBrWindow(theURL,winName,features) { //v2.0
               <input name="Submit22" type="button" class="microtxt" value="voltar" onClick="window.location='cortinas.php'">
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <input name="Submit2" type="submit" class="microtxt" value="Continuar">
-            <input name="acao" type="hidden" id="acao" value="<? if($acao=="alt"){ print "alterar"; }else{ print "incluir"; } ?>">
-            <input name="id" type="hidden" id="id3" value="<? print $id; ?>"></td>
+            <input name="acao" type="hidden" id="acao" value="<?php if($acao=="alt"){ print "alterar"; }else{ print "incluir"; } ?>">
+            <input name="id" type="hidden" id="id3" value="<?php print $id; ?>"></td>
           </tr>
         </table>
       </form>    </td>
   </tr>
-  <? } ?>
+  <?php } ?>
 </table>
 </body>
 </html>
-<? include("mensagem.php"); ?>
+<?php include("mensagem.php"); ?>

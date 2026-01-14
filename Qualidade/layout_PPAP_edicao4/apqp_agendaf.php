@@ -1,7 +1,7 @@
-<?
+<?php
 include("conecta.php");
 include("seguranca.php");
-//selecionar n˙mero
+//selecionar n√∫mero
 		switch($es){
 			case "Estudos de RR":
 				$es="Estudos de R&R";
@@ -20,14 +20,14 @@ include("seguranca.php");
 		$tit=$res_agenda["titulo"];
 		$ray1=explode("-",$tit);
 		
-		mysql_query("INSERT INTO postit (quem,titulo,msg,data,hora,de,denum) VALUES ('$res_agenda[user_apro]', '$ray1[0]', 'O usu·rio $login_nome j· finalizou o estudo $ray1[0] e est· aguardando a sua aprovaÁ„o.', '$data', '$now', '$login_nome', '$codigo')");
-		// e-mail para o respons·vel do cronograma
-		//pegar usuario responsavel aprovaÁao
+		mysql_query("INSERT INTO postit (quem,titulo,msg,data,hora,de,denum) VALUES ('$res_agenda[user_apro]', '$ray1[0]', 'O usu√°rio $login_nome j√° finalizou o estudo $ray1[0] e est√° aguardando a sua aprova√ß√£o.', '$data', '$now', '$login_nome', '$codigo')");
+		// e-mail para o respons√°vel do cronograma
+		//pegar usuario responsavel aprova√ßao
 			$sql3=mysql_query("SELECT * FROM agenda WHERE numero='$conf'");	
 			$res3=mysql_fetch_array($sql3);
 			$sql4=mysql_query("SELECT * FROM funcionarios WHERE id='$res3[user_apro]'");	
 			$res4=mysql_fetch_array($sql4);
-		//pegar resp respons·vel pelo estudo
+		//pegar resp respons√°vel pelo estudo
 			$sql5=mysql_query("SELECT id FROM funcionarios WHERE nome='$login_nome'");	
 			$res5=mysql_fetch_array($sql5);
 			$sql6=mysql_query("SELECT * FROM funcionarios WHERE id='$res5[id]'");	
@@ -35,7 +35,7 @@ include("seguranca.php");
 			
 			$inicio=banco2data($res3[ini]);
 			$prazo=banco2data($res3[prazo]);
-			$mensagem="$res4[nome], o $res6[nome] j· finalizou o estudo $ray1[0] da peÁa $ray1[1]-$ray1[2].";
+			$mensagem="$res4[nome], o $res6[nome] j√° finalizou o estudo $ray1[0] da pe√ßa $ray1[1]-$ray1[2].";
 			$from="From: $login_nome<$res4[email]>";
 			mail($res4["email"],$ray1[0],$mensagem,$from);
 		//
@@ -44,7 +44,7 @@ include("seguranca.php");
 			
 			$sql_emp=mysql_query("SELECT fantasia FROM empresa");
 			$res_emp=mysql_fetch_array($sql_emp);
-			mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao) VALUES ('$res_emp[fantasia]','$data','$now','FinalizaÁ„o da $ray1[0]$ray1[1]-$ray1[2].','O usu·rio $login_nome finalizou a atividade $ray1[0]$ray1[1]-$ray1[2].')");
+			mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao) VALUES ('$res_emp[fantasia]','$data','$now','Finaliza√ß√£o da $ray1[0]$ray1[1]-$ray1[2].','O usu√°rio $login_nome finalizou a atividade $ray1[0]$ray1[1]-$ray1[2].')");
 			$_SESSION["mensagem"]="Finalizado com sucesso!";
 			header("Location:$pag");
 			exit;

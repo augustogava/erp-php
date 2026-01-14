@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 include("seguranca.php");
 $nivel=$_SESSION["login_nivel"];
@@ -25,18 +25,18 @@ if($acao=="exc"){
 	$sql=mysql_query("DELETE FROM cliente_login WHERE funcionario='$id'");
 	$sql=mysql_query("DELETE FROM funcionarios WHERE id='$id'");
 	if($sql){
-		$_SESSION["mensagem"]="Funciona¡rio exclua­do com sucesso!";
+		$_SESSION["mensagem"]="Funcionario excluido com sucesso!";
 	}else{
-		$_SESSION["mensagem"]="Erro ao excluir funciona¡rio!";
+		$_SESSION["mensagem"]="Erro ao excluir funcionario!";
 	}
 }
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<title>Funciona¡rios - ERP System</title>
-<meta charset="ISO-8859-1">
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Funcionarios - ERP System</title>
+<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <link href="style.css" rel="stylesheet" type="text/css">
@@ -50,10 +50,10 @@ if($acao=="exc"){
 <div class="erp-container-fluid">
     <div class="erp-card">
         <div class="erp-card-header">
-            <h1 class="erp-card-title">ð¨âð¼ Funciona¡rios</h1>
+            <h1 class="erp-card-title"><i class="fas fa-users"></i> Funcionarios</h1>
             <div>
                 <a href="funcionarios_geral.php?acao=inc" class="erp-btn erp-btn-primary">
-                    + Novo Funciona¡rio
+                    + Novo Funcionario
                 </a>
             </div>
         </div>
@@ -65,19 +65,19 @@ if($acao=="exc"){
                 <div class="erp-col" style="flex:2;">
                     <div class="erp-form-group">
                         <label class="erp-form-label">Nome</label>
-                        <input name="bnome" type="text" class="erp-form-control" placeholder="Digite o nome do funciona¡rio...">
+                        <input name="bnome" type="text" class="erp-form-control" placeholder="Digite o nome do funcionario...">
                     </div>
                 </div>
                 <div class="erp-col">
                     <div class="erp-form-group">
-                        <label class="erp-form-label">Ca³digo</label>
+                        <label class="erp-form-label">Codigo</label>
                         <input name="bcod" type="text" class="erp-form-control" placeholder="000">
                     </div>
                 </div>
                 <div class="erp-col" style="flex:0 0 auto;display:flex;align-items:flex-end;">
                     <div class="erp-form-group" style="margin-bottom:0;">
                         <button type="submit" class="erp-btn erp-btn-primary" style="height:42px;">
-                            ð Buscar
+                            <i class="fas fa-search"></i> Buscar
                         </button>
                     </div>
                 </div>
@@ -95,11 +95,11 @@ if($acao=="exc"){
         <table class="erp-table">
             <thead>
                 <tr>
-                    <th width="60">Ca³d</th>
+                    <th width="60">Cod</th>
                     <th>Nome</th>
                     <th width="120">Cargo</th>
                     <th width="100">Status</th>
-                    <th width="<?=$nivel=="1"?'200':'150'?>" class="erp-text-center">Acaµes</th>
+                    <th width="<?php echo $nivel=="1"?'200':'150'?>" class="erp-text-center">Acoes</th>
                 </tr>
             </thead>
             <tbody>
@@ -107,42 +107,42 @@ if($acao=="exc"){
             $sql=mysql_query("SELECT funcionarios.*, cargos.nome as cargo_nome FROM funcionarios LEFT JOIN cargos ON funcionarios.cargo=cargos.id $cond ORDER BY funcionarios.nome ASC");
             
             if(mysql_num_rows($sql)==0){
-                echo '<tr><td colspan="5" class="erp-text-center" style="padding:40px;">Nenhum funciona¡rio encontrado</td></tr>';
+                echo '<tr><td colspan="5" class="erp-text-center" style="padding:40px;">Nenhum funcionario encontrado</td></tr>';
             }else{
                 while($res=mysql_fetch_array($sql)){
                     $status_class = $res["sit"]=="A" ? "success" : "danger";
                     $status_text = $res["sit"]=="A" ? "Ativo" : "Inativo";
                     ?>
                     <tr>
-                        <td><strong><?=$res["id"]?></strong></td>
+                        <td><strong><?php echo $res["id"]?></strong></td>
                         <td>
-                            <div style="font-weight:600;"><?=$res["nome"]?></div>
+                            <div style="font-weight:600;"><?php echo $res["nome"]?></div>
                             <?php if(!empty($res["email"])): ?>
-                            <div style="font-size:12px;color:#6c757d;"><?=$res["email"]?></div>
+                            <div style="font-size:12px;color:#6c757d;"><?php echo $res["email"]?></div>
                             <?php endif; ?>
                         </td>
-                        <td><?=$res["cargo_nome"]?></td>
+                        <td><?php echo $res["cargo_nome"]?></td>
                         <td>
-                            <span class="erp-badge erp-badge-<?=$status_class?>"><?=$status_text?></span>
+                            <span class="erp-badge erp-badge-<?php echo $status_class?>"><?php echo $status_text?></span>
                         </td>
                         <td>
                             <div class="erp-table-actions" style="justify-content:center;">
-                                <a href="funcionarios_geral.php?id=<?=$res["id"]?>&bcod=<?=$bcod?>&bnome=<?=$bnome?>" class="erp-table-action" title="Editar Dados">
-                                    âï¸
+                                <a href="funcionarios_geral.php?id=<?php echo $res["id"]?>&bcod=<?php echo $bcod?>&bnome=<?php echo $bnome?>" class="erp-table-action" title="Editar Dados">
+                                    <i class="fas fa-edit"></i>
                                 </a>
-                                <a href="funcionarios_outros.php?id=<?=$res["id"]?>" class="erp-table-action" title="Outros Dados">
-                                    ð
+                                <a href="funcionarios_outros.php?id=<?php echo $res["id"]?>" class="erp-table-action" title="Outros Dados">
+                                    <i class="fas fa-file-lines"></i>
                                 </a>
                                 <?php if($nivel=="1"): ?>
-                                <a href="funcionario_login.php?id=<?=$res["id"]?>" class="erp-table-action" title="Acesso/Senha">
-                                    ð
+                                <a href="funcionario_login.php?id=<?php echo $res["id"]?>" class="erp-table-action" title="Acesso/Senha">
+                                    <i class="fas fa-key"></i>
                                 </a>
                                 <?php endif; ?>
-                                <a href="funcionarios_apontamento.php?id=<?=$res["id"]?>" class="erp-table-action" title="Apontamentos">
-                                    â±ï¸
+                                <a href="funcionarios_apontamento.php?id=<?php echo $res["id"]?>" class="erp-table-action" title="Apontamentos">
+                                    <i class="fas fa-stopwatch"></i>
                                 </a>
-                                <a href="#" onclick="return pergunta('Confirma exclusao?','funcionarios.php?acao=exc&id=<?=$res["id"]?>');" class="erp-table-action" title="Excluir" style="color:#e74c3c;">
-                                    ðï¸
+                                <a href="#" onclick="return pergunta('Confirma exclusao?','funcionarios.php?acao=exc&id=<?php echo $res["id"]?>');" class="erp-table-action" title="Excluir" style="color:#e74c3c;">
+                                    <i class="fas fa-trash"></i>
                                 </a>
                             </div>
                         </td>
@@ -156,6 +156,6 @@ if($acao=="exc"){
     </div>
 </div>
 
-<? include("mensagem.php"); ?>
+<?php include("mensagem.php"); ?>
 </body>
 </html>

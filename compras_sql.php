@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 if(empty($acao)) exit;
 $acao=verifi($permi,$acao);
@@ -17,7 +17,7 @@ if($acao=="inc"){
 }elseif($acao=="cp"){
 	$sql=mysql_query("SELECT * FROM compras WHERE id='$id' AND cp=0");
 	if(!mysql_num_rows($sql)){
-		$_SESSION["mensagem"]="Não foi possivel gerar o Contas a Pagar\\nVerifique se o mesmo não foi gerado anteriormente";
+		$_SESSION["mensagem"]="NÃ£o foi possivel gerar o Contas a Pagar\\nVerifique se o mesmo nÃ£o foi gerado anteriormente";
 	}else{
 
 		$res=mysql_fetch_array($sql);
@@ -40,7 +40,7 @@ if($acao=="inc"){
 }elseif($acao=="alt"){
 	$sql=mysql_query("SELECT * FROM compras WHERE id='$id' AND entregue='S'");
 	if(mysql_num_rows($sql)){
-		$_SESSION["mensagem"]="Este pedido de compra já foi entregue e não pode mais ser alterado";		
+		$_SESSION["mensagem"]="Este pedido de compra jÃ¡ foi entregue e nÃ£o pode mais ser alterado";		
 	}else{
 		$hj=date("Y-m-d");
 		$emissao=data2banco($emissao);
@@ -71,7 +71,7 @@ if($acao=="inc"){
 		}
 		if($entregue=="S"){
 		//inserir estoque
-		$sql2=mysql_query("SELECT * FROM compras_list WHERE compra='$id'") or die("Naun foi");
+		$sql2=mysql_query("SELECT * FROM compras_list WHERE compra='$id'") or erp_db_fail();
 			//$frete=$frete/mysql_num_rows($sql2);
 			while($res=mysql_fetch_array($sql2)){
 				$ipi=$res["ipi"];
@@ -114,9 +114,9 @@ if($acao=="inc"){
 			$unita=$res["unitario"];
 			$sql=mysql_query("UPDATE compras SET sit='1' WHERE id='$id'");
 			$sql=mysql_query("UPDATE compras_list SET entregue='S',qtd_ent='$qtd' WHERE id='$res[id]'");
-			$sql=mysql_query("SELECT SUM(qtde) as qtd FROM prodserv_est WHERE prodserv='$produto'") or die("nao foi");
+			$sql=mysql_query("SELECT SUM(qtde) as qtd FROM prodserv_est WHERE prodserv='$produto'") or erp_db_fail();
 
-					$sql=mysql_query("INSERT INTO prodserv_est (prodserv,cp,data,qtde,valor,origem,tipomov) VALUES('$produto','$id','$hj','$qtd','$unita','2','5')") or die("Nao foi");
+					$sql=mysql_query("INSERT INTO prodserv_est (prodserv,cp,data,qtde,valor,origem,tipomov) VALUES('$produto','$id','$hj','$qtd','$unita','2','5')") or erp_db_fail();
 //Calculo estoque
 				$sqlestoque=mysql_query("SELECT SUM(qtde-qtds) AS qtdt FROM prodserv_est WHERE prodserv='$produto'");
 				$esto=mysql_fetch_array($sqlestoque);
@@ -125,7 +125,7 @@ if($acao=="inc"){
 		}
 //entrega parcialll ------------
 		if($entregue=="P"){
-			$sql2=mysql_query("SELECT * FROM compras_list WHERE compra='$id'") or die("Naun foi");
+			$sql2=mysql_query("SELECT * FROM compras_list WHERE compra='$id'") or erp_db_fail();
 				while($res=mysql_fetch_array($sql2)){
 					//Inserir estoque
 					if(!empty($res["qtd_ent"]) and $res["entregue"]=="N"){
@@ -138,7 +138,7 @@ if($acao=="inc"){
 						$produto=$res["produto"];
 						$unitario=$res["unitario"];
 						$qtd_ent=$res["qtd_ent"];
-						$sql=mysql_query("SELECT * FROM prodserv_est WHERE prodserv='$produto' AND cp='$id'") or die("nao foi");
+						$sql=mysql_query("SELECT * FROM prodserv_est WHERE prodserv='$produto' AND cp='$id'") or erp_db_fail();
 						if(mysql_num_rows($sql)){
 							$est=mysql_fetch_array($sql);
 							$qtd=$est["qtde"];
@@ -191,7 +191,7 @@ if($acao=="inc"){
 		if($sql){
 			$_SESSION["mensagem"]="Pedido de compra alterado com sucesso!";
 		}else{
-			$_SESSION["mensagem"]="O pedido de compra não pôde ser alterado!";
+			$_SESSION["mensagem"]="O pedido de compra nÃ£o pÃ´de ser alterado!";
 		}
 		if($maisum){
 			$sql=mysql_query("INSERT INTO compras_list (compra) VALUES ('$id')");
@@ -212,9 +212,9 @@ if($acao=="inc"){
 	$sql=mysql_query("DELETE FROM compras WHERE id='$id'");
 	if($sql){
 		$sql=mysql_query("DELETE FROM compras_list WHERE compra='$id'");
-		$_SESSION["mensagem"]="Pedido de compra excluído com sucesso!";
+		$_SESSION["mensagem"]="Pedido de compra excluÃ­do com sucesso!";
 	}else{
-		$_SESSION["mensagem"]="O pedido de compra não pôde ser excluído!";
+		$_SESSION["mensagem"]="O pedido de compra nÃ£o pÃ´de ser excluÃ­do!";
 	}
 	header("Location:compras.php");
 	exit;

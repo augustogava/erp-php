@@ -1,10 +1,10 @@
-<?
+<?php
 include("conecta.php");
 include("seguranca.php");
 $bd=new set_bd;
 $acao=verifi($permi,$acao);
 if(!empty($acao)){
-	$loc="CRM - Ação Marketing";
+	$loc="CRM - AÃ§Ã£o Marketing";
 	$pagina=$_SERVER['SCRIPT_FILENAME'];
 	include("log.php");
 }
@@ -19,7 +19,8 @@ $res=mysql_fetch_array($sql);
 <html>
 <head>
 <title>CyberManager</title>
-<meta http-equiv="Content-Type" content="text/html; UTF-8">
+<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="style.css" rel="stylesheet" type="text/css">
 <script src="scripts.js"></script>
 <script src="mascaras.js"></script>
@@ -51,26 +52,26 @@ $res=mysql_fetch_array($sql);
                     <td width="193"><span class="textobold">
                       <select name="linha" id="linha">
                         <option selected="">Selecione</option>
-                        <option value="equipamentos" <? if($res["linha"]=="equipamentos"){ print "selected"; } ?>>Equipamentos</option>
-                        <option value="pdv" <? if($res["linha"]=="pdv"){ print "selected"; } ?>>PDV+</option>
-                        <option value="geral" <? if($res["linha"]=="geral"){ print "selected"; } ?>>Geral</option>
-                      </select><? print $res["linha"]; ?>
+                        <option value="equipamentos" <?php if($res["linha"]=="equipamentos"){ print "selected"; } ?>>Equipamentos</option>
+                        <option value="pdv" <?php if($res["linha"]=="pdv"){ print "selected"; } ?>>PDV+</option>
+                        <option value="geral" <?php if($res["linha"]=="geral"){ print "selected"; } ?>>Geral</option>
+                      </select><?php print $res["linha"]; ?>
                     </span></td>
                   </tr>
                   <tr>
-                    <td colspan="2"><input name="autonomia" type="radio" value="d" <? if($res["autonomia"]=="d"){ print "checked"; } ?>>
+                    <td colspan="2"><input name="autonomia" type="radio" value="d" <?php if($res["autonomia"]=="d"){ print "checked"; } ?>>
                       Decisor 
-                      <input name="autonomia" type="radio" value="i" <? if($res["autonomia"]=="i"){ print "checked"; } ?>>
+                      <input name="autonomia" type="radio" value="i" <?php if($res["autonomia"]=="i"){ print "checked"; } ?>>
                       Influenciador</td>
                   </tr>
                   <tr>
                     <td colspan="2">&nbsp;</td>
                   </tr>
                   <tr>
-                    <td colspan="2"><input name="facao" type="checkbox" id="facao" value="S" <? if($res["acao"]=="S"){ print "checked"; } ?>> 
+                    <td colspan="2"><input name="facao" type="checkbox" id="facao" value="S" <?php if($res["acao"]=="S"){ print "checked"; } ?>> 
                     Fazer A&ccedil;&atilde;o de Marketing 
                     <input name="acao" type="hidden" id="acao" value="salvar">
-                    <input name="cli" type="hidden" id="cli" value="<?= $cli; ?>"></td>
+                    <input name="cli" type="hidden" id="cli" value="<?php echo  $cli; ?>"></td>
                   </tr>
               </table></td>
             </tr>
@@ -86,4 +87,4 @@ $res=mysql_fetch_array($sql);
 </table>
 </body>
 </html>
-<? include("mensagem.php"); ?>
+<?php include("mensagem.php"); ?>

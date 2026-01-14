@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 function valor2banco2($vl){
 	$vl=str_replace(".",".",$vl);
@@ -17,12 +17,12 @@ for($i=1; $i<=31; $i++){
 	eval("\$a.=\",'\$peso_fin$i'\";");
 	eval("\$a.=\",'\$peso_preco$i'\";");
 }
-	$sql=mysql_query("INSERT INTO frete (regiao,cep_inicial,cep_final".$ali.") VALUES ('$regiao','$cep_inicial','$cep_final'".$a.")") or die("nao foi");
+	$sql=mysql_query("INSERT INTO frete (regiao,cep_inicial,cep_final".$ali.") VALUES ('$regiao','$cep_inicial','$cep_final'".$a.")") or erp_db_fail();
 if($sql){
-		$_SESSION["mensagem"]="Frete Incluído com sucesso!";
+		$_SESSION["mensagem"]="Frete IncluÃ­do com sucesso!";
 		$acao="entrar";
 	}else{
-		$_SESSION["mensagem"]="O Frete não pôde ser incluído!";
+		$_SESSION["mensagem"]="O Frete nÃ£o pÃ´de ser incluÃ­do!";
 		$acao="inc";
 	}
 }elseif($acao=="alterar"){
@@ -39,16 +39,16 @@ for($i=1; $i<=31; $i++){
 		$_SESSION["mensagem"]="Frete alterado com sucesso!";
 		$acao="entrar";
 	}else{
-		$_SESSION["mensagem"]="O Frete não pôde ser alterado!";
+		$_SESSION["mensagem"]="O Frete nÃ£o pÃ´de ser alterado!";
 		$acao="alt";
 	}
 }elseif($acao=="exc"){
 	if(!empty($id)){
 		$sql=mysql_query("DELETE FROM frete WHERE id='$id'");
 		if($sql){
-			$_SESSION["mensagem"]="Frete excluído com sucesso!";
+			$_SESSION["mensagem"]="Frete excluÃ­do com sucesso!";
 		}else{
-			$_SESSION["mensagem"]="O Frete não pôde ser excluído!";
+			$_SESSION["mensagem"]="O Frete nÃ£o pÃ´de ser excluÃ­do!";
 		}		
 	}
 	$acao="entrar";

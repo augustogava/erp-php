@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 include("seguranca.php");
 if(!empty($acao)){
@@ -29,7 +29,7 @@ if($acao=="alt"){
 	//Assinatura
 	if(!empty($img)){
 		if($_FILES["img"]["type"]!="image/x-png"){
-			$_SESSION["mensagem"]="\\nA imagem deve ter extens„o .png";
+			$_SESSION["mensagem"]="\\nA imagem deve ter extens√£o .png";
 			header("Location:clientes_login.php?acao=inc&id=$id");
 			exit;	
 		}else{
@@ -43,7 +43,7 @@ if($acao=="alt"){
 		}
 	}
 	if(strlen($senha)<6){
-		$_SESSION["mensagem"]="A senha deve ter mais de 6 DÌgitos!";		
+		$_SESSION["mensagem"]="A senha deve ter mais de 6 D√≠gitos!";		
 		header("Location:clientes_login.php?id=$id");
 		exit;		
 	}else{
@@ -53,14 +53,14 @@ if($acao=="alt"){
 			header("Location:clientes.php?bcod=$bcod&bnome=$bnome");
 			exit;				
 		}else{
-			$_SESSION["mensagem"]="O cadastro de login n„o pÙde ser alterado!";
+			$_SESSION["mensagem"]="O cadastro de login n√£o p√¥de ser alterado!";
 			$acao="alt";
 		}	
 	}
 }elseif($acao=="incluir"){
 	if(!empty($img)){
 		if($_FILES["img"]["type"]!="image/x-png"){
-			$_SESSION["mensagem"]="\\nA imagem deve ter extens„o .png";
+			$_SESSION["mensagem"]="\\nA imagem deve ter extens√£o .png";
 			header("Location:clientes_login.php?acao=inc&id=$id");
 			exit;	
 		}else{
@@ -73,7 +73,7 @@ if($acao=="alt"){
 		}
 	}
 	if(strlen($senha)<6){
-		$_SESSION["mensagem"]="A senha deve ter mais de 6 DÌgitos!";		
+		$_SESSION["mensagem"]="A senha deve ter mais de 6 D√≠gitos!";		
 		header("Location:clientes_login.php?acao=inc&id=$id");
 		exit;		
 	}else{
@@ -81,16 +81,16 @@ if($acao=="alt"){
 		if(!mysql_num_rows($sql)){
 			$sql=mysql_query("INSERT INTO cliente_login (cliente,login,senha,nivel,sit,assinatura,primeiro,perm) VALUES ('$id','$login','$senha','$nivel','$sit','$nomeid','$primeiro','$porra')");
 		}else{
-			$_SESSION["mensagem"]="Usu·rio j· existe!";		
+			$_SESSION["mensagem"]="Usu√°rio j√° existe!";		
 			header("Location:clientes_login.php");
 			exit;		
 		}
 		if($sql){
-			$_SESSION["mensagem"]="Cadastro de login concluÌdo!";
+			$_SESSION["mensagem"]="Cadastro de login conclu√≠do!";
 			header("Location:clientes.php?bcod=$bcod&bnome=$bnome");
 			exit;				
 		}else{
-			$_SESSION["mensagem"]="O cadastro de login n„o pÙde ser concluÌdo!";
+			$_SESSION["mensagem"]="O cadastro de login n√£o p√¥de ser conclu√≠do!";
 			$acao="inc";
 		}	
 	}
@@ -99,12 +99,13 @@ if($acao=="alt"){
 <html>
 <head>
 <title>CyberManager</title>
-<meta http-equiv="Content-Type" content="text/html; UTF-8">
+<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="style.css" rel="stylesheet" type="text/css">
 <script>
 function verifica(cad){
 	if(cad.login.value==''){
-		alert('Informe o nome de Usu·rio');
+		alert('Informe o nome de Usu√°rio');
 		cad.login.focus();
 		return false;
 	}
@@ -115,7 +116,7 @@ function verifica(cad){
 			return false;
 		}
 		if(cad.senha2.value!=cad.senha.value){
-			alert('A senha e a confirmaÁ„o n„o conferem');
+			alert('A senha e a confirma√ß√£o n√£o conferem');
 			cad.senha2.value='';
 			cad.senha2.focus();
 			return false;
@@ -150,41 +151,41 @@ function verifica(cad){
         </tr>
         <tr class="textobold">
           <td width="94">&nbsp;Usu&aacute;rio:</td>
-          <td width="353"><input name="login" type="text" class="formulario" id="login" value="<? print $login; ?>" size="50" maxlength="50"></td>
+          <td width="353"><input name="login" type="text" class="formulario" id="login" value="<?php print $login; ?>" size="50" maxlength="50"></td>
         </tr>
         <tr class="textobold">
           <td>&nbsp;Senha:</td>
-          <td><input name="senha" type="password" class="formulario" id="senha" value="<?= $senha; ?>" size="20" maxlength="20"></td>
+          <td><input name="senha" type="password" class="formulario" id="senha" value="<?php echo  $senha; ?>" size="20" maxlength="20"></td>
         </tr>
         <tr class="textobold">
           <td>&nbsp;Conf.&nbsp;Senha:</td>
-          <td><input name="senha2" type="password" class="formulario" id="senha2" value="<?= $senha; ?>" size="20" maxlength="20"></td>
+          <td><input name="senha2" type="password" class="formulario" id="senha2" value="<?php echo  $senha; ?>" size="20" maxlength="20"></td>
         </tr>
         <tr class="textobold">
           <td>&nbsp;N&iacute;vel:</td>
           <td><select name="nivel" class="formulario" id="nivel">
-              <?
+              <?php
 				$sql=mysql_query("SELECT * FROM niveis ORDER BY nome ASC");
 				while($resniv=mysql_fetch_array($sql)){
 				?>
-              <option value="<? print $resniv["id"]; ?>"<? if($resniv["id"]==$nivel) print "selected"; ?>><? print $resniv["nome"]; ?></option>
-              <?
+              <option value="<?php print $resniv["id"]; ?>"<?php if($resniv["id"]==$nivel) print "selected"; ?>><?php print $resniv["nome"]; ?></option>
+              <?php
 				}
 				?>
             </select>
               <font face="Verdana, Arial, Helvetica, sans-serif" size="1" color="#000066">
-              <input name="id" type="hidden" id="id" value="<? print $id; ?>">
-              <input name="acao" type="hidden" id="acao" value="<? if($acao=="inc"){ print "incluir"; }else{ print "alterar"; } ?>">
+              <input name="id" type="hidden" id="id" value="<?php print $id; ?>">
+              <input name="acao" type="hidden" id="acao" value="<?php if($acao=="inc"){ print "incluir"; }else{ print "alterar"; } ?>">
             </font></td>
         </tr>
         <tr class="textobold">
           <td>&nbsp;Permiss&atilde;o:</td>
           <td><select name="porra" class="textobold" id="porra">
               <option>Selecione</option>
-              <option value="4" <? if($per=="4"){ print "Selected"; } ?>>Total</option>
-              <option value="3" <? if($per=="3"){ print "Selected"; } ?>>Escrita</option>
-              <option value="2" <? if($per=="2"){ print "Selected"; } ?>>Exclus&atilde;o</option>
-              <option value="1" <? if($per=="1"){ print "Selected"; } ?>>Leitura</option>
+              <option value="4" <?php if($per=="4"){ print "Selected"; } ?>>Total</option>
+              <option value="3" <?php if($per=="3"){ print "Selected"; } ?>>Escrita</option>
+              <option value="2" <?php if($per=="2"){ print "Selected"; } ?>>Exclus&atilde;o</option>
+              <option value="1" <?php if($per=="1"){ print "Selected"; } ?>>Leitura</option>
             </select>
           </td>
         </tr>
@@ -195,24 +196,24 @@ function verifica(cad){
         <tr class="textobold">
           <td>&nbsp;Situa&ccedil;&atilde;o:</td>
           <td>&nbsp;
-              <input name="sit" type="radio" value="A" <? if($sit=="A" or empty($sit)) print "checked"; ?>>
+              <input name="sit" type="radio" value="A" <?php if($sit=="A" or empty($sit)) print "checked"; ?>>
             Ativo
-            <input type="radio" name="sit" value="I"<? if($sit=="I") print "checked"; ?>>
+            <input type="radio" name="sit" value="I"<?php if($sit=="I") print "checked"; ?>>
             Inativo</td>
         </tr>
         <tr class="textobold">
           <td>&nbsp;Trocar senha </td>
           <td>&nbsp;
-              <input name="primeiro" type="radio" value="S" <? if($prim=="S") print "checked"; ?>>
+              <input name="primeiro" type="radio" value="S" <?php if($prim=="S") print "checked"; ?>>
             Sim
-            <input type="radio" name="primeiro" value="N" <? if($prim=="N") print "checked"; ?>>
+            <input type="radio" name="primeiro" value="N" <?php if($prim=="N") print "checked"; ?>>
             N&atilde;o</td>
         </tr>
         <tr class="textobold">
-          <td colspan="2" align="center"><? if($acao=="alt"){ ?>
-              <input name="button12" type="button" class="microtxt" value="Voltar" onClick="window.location='funcionarios.php<? if(!empty($bcod) or!empty($bnome)) print "?webmst=cpp"; if(!empty($bcod)) print "&bcod=$bcod"; if(!empty($bnome)) print "&bnome=$bnome";?>';">
+          <td colspan="2" align="center"><?php if($acao=="alt"){ ?>
+              <input name="button12" type="button" class="microtxt" value="Voltar" onClick="window.location='funcionarios.php<?php if(!empty($bcod) or!empty($bnome)) print "?webmst=cpp"; if(!empty($bcod)) print "&bcod=$bcod"; if(!empty($bnome)) print "&bnome=$bnome";?>';">
             &nbsp;&nbsp;&nbsp;&nbsp;
-            <? } ?>
+            <?php } ?>
             <input name="button122" type="submit" class="microtxt" value="Continuar"></td>
         </tr>
       </table>
@@ -221,4 +222,4 @@ function verifica(cad){
 </table>
 </body>
 </html>
-<? include("mensagem.php"); ?>
+<?php include("mensagem.php"); ?>

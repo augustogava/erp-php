@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 include("seguranca.php");
 $acao=verifi($permi,$acao);
@@ -15,7 +15,8 @@ $sql=mysql_query("DELETE FROM proposta WHERE id='$id'");
 <html>
 <head>
 <title>CyberManager</title>
-<meta http-equiv="Content-Type" content="text/html; UTF-8">
+<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="style.css" rel="stylesheet" type="text/css">
 <script src="scripts.js"></script>
 <script src="mascaras.js"></script>
@@ -58,25 +59,25 @@ function MM_openBrWindow(theURL,winName,features) { //v2.0
                 <td width="19">&nbsp;</td>
                 <td width="21">&nbsp;</td>
               </tr>
-              <?
+              <?php
 			  $sql=mysql_query("SELECT * FROM proposta ORDER BY id DESC");
 			  if(mysql_num_rows($sql)==0){
 			  ?>
               <tr class="texto">
                 <td colspan="5" align="center" bgcolor="#FFFFFF" class="textobold">NENHUM FORNECEDOR ENCONTRADO </td>
               </tr>
-              <?
+              <?php
 			  }else{
 			  	while($res=mysql_fetch_array($sql)){
 			  ?>
               <tr bgcolor="#FFFFFF" class="texto" onMouseover="changeto('#CCCCCC')" onMouseout="changeback('#FFFFFF')">
-                <td align="center" ><? print $res["id"]; ?></td>
-                <td >&nbsp;<? print $res["razao"]; ?></td>
-                <td ><? print $res["fantasia"]; ?></td>
-                <td align="center" ><a href="fornecedores_site_list.php?p=<?= $res["id"]; ?>"><img src="imagens/icon14_box.gif" alt="Alterar" width="14" height="14" border="0"></a></td>
-                <td align="center" ><a href="#" onClick="pergunta('Deseja excluir fornecedor?','fornecedores_site.php?id=<?= $res[id]; ?>&acao=exc');"><img src="imagens/icon14_lixeira.gif" alt="Excluir" width="14" height="14" border="0"></a></td>
+                <td align="center" ><?php print $res["id"]; ?></td>
+                <td >&nbsp;<?php print $res["razao"]; ?></td>
+                <td ><?php print $res["fantasia"]; ?></td>
+                <td align="center" ><a href="fornecedores_site_list.php?p=<?php echo  $res["id"]; ?>"><img src="imagens/icon14_box.gif" alt="Alterar" width="14" height="14" border="0"></a></td>
+                <td align="center" ><a href="#" onClick="pergunta('Deseja excluir fornecedor?','fornecedores_site.php?id=<?php echo  $res[id]; ?>&acao=exc');"><img src="imagens/icon14_lixeira.gif" alt="Excluir" width="14" height="14" border="0"></a></td>
               </tr>
-              <?
+              <?php
 			  	}
 			  }
 			  ?>
@@ -87,4 +88,4 @@ function MM_openBrWindow(theURL,winName,features) { //v2.0
 </table>
 </body>
 </html>
-<? include("mensagem.php"); ?>
+<?php include("mensagem.php"); ?>

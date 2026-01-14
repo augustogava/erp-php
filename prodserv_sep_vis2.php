@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 $bd=new set_bd;
 $sql=mysql_query("SELECT MAX(prodserv.prazo_entrega) as prazo FROM prodserv,prodserv_sep_list WHERE prodserv_sep_list.est='$id' AND prodserv_sep_list.prodserv=prodserv.id"); $res=mysql_fetch_array($sql);
@@ -14,7 +14,8 @@ $resp=mysql_fetch_array($sqlp);
 <html>
 <head>
 <title>Cybermanager</title>
-<meta http-equiv="Content-Type" content="text/html; UTF-8">
+<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="style.css" rel="stylesheet" type="text/css">
 <script src="scripts.js"></script>
 <script src="mascaras.js"></script>
@@ -53,21 +54,21 @@ body {
         <td class="texto">&nbsp;</td>
       </tr>
       <tr>
-        <td class="texto"><strong>Razao Social:</strong> <? print $resp["nome"]; ?></td>
+        <td class="texto"><strong>Razao Social:</strong> <?php print $resp["nome"]; ?></td>
       </tr>
       <tr>
-        <td><strong>Endere&ccedil;o:</strong> <? print $resp["endereco"]." ".$resp["numero"]; ?></td>
+        <td><strong>Endere&ccedil;o:</strong> <?php print $resp["endereco"]." ".$resp["numero"]; ?></td>
       </tr>
       <tr>
-        <td><strong>Bairro:</strong> <? print $resp["bairro"]; ?></td>
+        <td><strong>Bairro:</strong> <?php print $resp["bairro"]; ?></td>
       </tr>
       
       <tr>
-        <td><strong>Cidade:</strong> <? print $resp["cidade"]; ?>&nbsp;&nbsp;&nbsp;<strong>UF:</strong>
-          <? $bd->pega_nome_bd("estado","nome",$resp["estado"]);  ?></td>
+        <td><strong>Cidade:</strong> <?php print $resp["cidade"]; ?>&nbsp;&nbsp;&nbsp;<strong>UF:</strong>
+          <?php $bd->pega_nome_bd("estado","nome",$resp["estado"]);  ?></td>
       </tr>
       <tr>
-        <td><strong>CEP:</strong> <? print $resp["cep"]; ?></td>
+        <td><strong>CEP:</strong> <?php print $resp["cep"]; ?></td>
       </tr>
       
     </table>      </td>
@@ -78,6 +79,6 @@ body {
     <td colspan="4"><a href="#"><img src="imagens/imprimir.gif" width="60" id="bot" name="bot" height="14" border="0" onClick="return imprimir(this)"></a></td>
   </tr>
 </table>
-    
+Â Â Â  
 </body>
 </html>

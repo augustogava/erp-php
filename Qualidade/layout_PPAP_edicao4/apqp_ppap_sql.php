@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 require('pdf/fpdf.php');
 $quem=$_SESSION["login_nome"];
@@ -31,19 +31,19 @@ if(!empty($acao)){
 }
 if($lingua=="usa"){
 	$cam="ingles/";
-	$lang="Inglês";
+	$lang="InglÃªs";
 }else if($lingua=="spa"){
 	$cam="espanhol/";
 	$lang="Espanhol";	
 }else if($lingua=="ger"){
 	$cam="alemao/";
-	$lang="Alemão";	
+	$lang="AlemÃ£o";	
 }else if($lingua=="fra"){
 	$cam="frances/";
-	$lang="Francês";
+	$lang="FrancÃªs";
 }else{
 	$cam="";
-	$lang="Português";	
+	$lang="PortuguÃªs";	
 }
 if($acao=="email"){
 	if(!strstr($email,"@") or !strstr($email,".")){
@@ -165,7 +165,7 @@ $headers .= "$boundary\n";
 				// cria followup do email
 					$sql_emp=mysql_query("SELECT fantasia FROM empresa");
 					$res_emp=mysql_fetch_array($sql_emp);
-						mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Envio de e-mail do PPAP da peça $npc.','O usuário $quem enviou por e-mail a impressão do PPAP em $lang da peça $npc para $email.','$who')");
+						mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Envio de e-mail do PPAP da peÃ§a $npc.','O usuÃ¡rio $quem enviou por e-mail a impressÃ£o do PPAP em $lang da peÃ§a $npc para $email.','$who')");
 				//
 				header("location:apqp_ppap.php");
 				exit;
@@ -173,10 +173,10 @@ $headers .= "$boundary\n";
 }
 
 if($acao=="salvar"){
-	// cria followup da impressão
+	// cria followup da impressÃ£o
 		$sql_emp=mysql_query("SELECT fantasia FROM empresa");
 		$res_emp=mysql_fetch_array($sql_emp);
-			mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Salvando impressão PPAP da peça $npc.','O usuário $quem salvou em disco a impressão do PPAP em $lang da peça $npc.','$who')");
+			mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Salvando impressÃ£o PPAP da peÃ§a $npc.','O usuÃ¡rio $quem salvou em disco a impressÃ£o do PPAP em $lang da peÃ§a $npc.','$who')");
 	//
 	
 	$pc=$_POST["pc"];
@@ -278,7 +278,7 @@ if($acao=="imp"){
 		foreach($nome as $nome1){
 			switch($nome1){
 				case "submissao": 
-					$estudo.="Certificado de Submissão";
+					$estudo.="Certificado de SubmissÃ£o";
 					if($tag=="S"){
 						include("pdf/".$cam."apqp_sub_imp2_2.php");
 					} else {
@@ -322,11 +322,11 @@ if($acao=="imp"){
 					include("pdf/".$cam."apqp_fluxo_imp2.php");
 					break;
 					case "sumario": 
-					$estudo.="Sumário e Aprovação do APQP, ";
+					$estudo.="SumÃ¡rio e AprovaÃ§Ã£o do APQP, ";
 					include("pdf/".$cam."apqp_sum_imp_2.php");
 					break;
 					case "inst": 
-					$estudo.="Instruções do Operador, ";
+					$estudo.="InstruÃ§Ãµes do Operador, ";
 					include("pdf/".$cam."apqp_inst_imp2.php");
 					break;
 					case "viabilidade":
@@ -342,7 +342,7 @@ if($acao=="imp"){
 					include("pdf/".$cam."apqp_fmeaope_imp2.php");
 					break;
 					case "interina":
-					$estudo.="Aprovação Interina, ";
+					$estudo.="AprovaÃ§Ã£o Interina, ";
 					include("pdf/".$cam."apqp_interina_imp.php");
 					break;
 			}
@@ -370,7 +370,7 @@ if($acao=="imp"){
 				include("pdf/".$cam."apqp_fmeaproj_imp2.php");
 				break;
 				case "aparencia": 
-				$estudo.="Aprovação de Aparência, ";
+				$estudo.="AprovaÃ§Ã£o de AparÃªncia, ";
 				include("pdf/".$cam."apqp_apro_imp2.php");
 				break;
 				case "chk":
@@ -382,10 +382,10 @@ if($acao=="imp"){
 		
 	}
 	$pdf->Output('relatorio.pdf','I');
-	// cria followup da impressão
+	// cria followup da impressÃ£o
 	$sql_emp=mysql_query("SELECT fantasia FROM empresa");
 	$res_emp=mysql_fetch_array($sql_emp);
-	mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Impressão PPAP da peça $npc.','O usuário $quem efetuou a impressão do PPAP dos seguintes estudos: $estudo em $lang da peça $npc.','$who')");
+	mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','ImpressÃ£o PPAP da peÃ§a $npc.','O usuÃ¡rio $quem efetuou a impressÃ£o do PPAP dos seguintes estudos: $estudo em $lang da peÃ§a $npc.','$who')");
 	//
 }
 ?>

@@ -1,10 +1,10 @@
-<?
+<?php
 include("conecta.php");
 include("seguranca.php");
 if(empty($acao)) $acao="entrar";
 $pc=$_SESSION["mpc"];
 $npc=$_SESSION["npc"];
-//VerificaÁ„o
+//Verifica√ß√£o
 $_SESSION["modulo"]="rr";
 $sqlm=mysql_query("SELECT * FROM online WHERE user<>'$iduser' and peca='$pc' and modulo='rr'");
 if(mysql_num_rows($sqlm)){
@@ -14,7 +14,7 @@ if(mysql_num_rows($sqlm)){
 	}else{
 		$sql2=mysql_query("SELECT * FROM clientes WHERE id='$resm[user]'"); $res2=mysql_fetch_array($sql2);
 	}
-	$_SESSION["mensagem"]="O usuario $res2[nome] est· alterando este mÛdulo!";
+	$_SESSION["mensagem"]="O usuario $res2[nome] est√° alterando este m√≥dulo!";
 	header("Location:apqp_menu.php");
 	exit;
 }
@@ -45,8 +45,8 @@ function MM_openBrWindow(theURL,winName,features) { //v2.0
   <tr> 
     <td align="left" valign="top" class="chamadas"><table width="590" border="0" cellpadding="0" cellspacing="0" class="texto">
       <tr>
-        <td width="27" align="center"><div align="left"><a href="#" onClick="MM_openBrWindow('help/mini_estudo_rr.html','','width=680,height=501,left=300,top=50')"><img src="imagens/icon14_ahn.gif" width="14" height="14" border="0" onMouseOver="this.T_STICKY=true; this.T_TITLE='Estudo de R&R'; this.T_DELAY=10; this.T_WIDTH=225;  return escape('Os estudos de Repetitividade e Reprodutibilidade - R&R devem ser realizados sobre as caracterÌsticas crÌticas utilizando-se o meio de mediÁ„o especificado.')"></a><span class="impTextoBold">&nbsp;</span></div></td>
-        <td width="563" align="right"><div align="left" class="textobold style1 style1 style1 style1 style1 style1 style1 style1">APQP - Estudo de R&amp;R <? print $npc; ?></div></td>
+        <td width="27" align="center"><div align="left"><a href="#" onClick="MM_openBrWindow('help/mini_estudo_rr.html','','width=680,height=501,left=300,top=50')"><img src="imagens/icon14_ahn.gif" width="14" height="14" border="0" onMouseOver="this.T_STICKY=true; this.T_TITLE='Estudo de R&R'; this.T_DELAY=10; this.T_WIDTH=225;  return escape('Os estudos de Repetitividade e Reprodutibilidade - R&R devem ser realizados sobre as caracter√≠sticas cr√≠ticas utilizando-se o meio de medi√ß√£o especificado.')"></a><span class="impTextoBold">&nbsp;</span></div></td>
+        <td width="563" align="right"><div align="left" class="textobold style1 style1 style1 style1 style1 style1 style1 style1">APQP - Estudo de R&amp;R <?php print $npc; ?></div></td>
       </tr>
       <tr>
         <td align="center">&nbsp;</td>
@@ -54,7 +54,7 @@ function MM_openBrWindow(theURL,winName,features) { //v2.0
       </tr>
     </table>    </td>
   </tr>
-  <? if($acao=="entrar"){ ?>
+  <?php if($acao=="entrar"){ ?>
   <tr>
     <td align="center" valign="top" class="textobold"><input name="button12" type="button" class="microtxt" value="Voltar" onClick="window.location='apqp_menu.php';"></td>
   </tr>
@@ -74,14 +74,14 @@ function MM_openBrWindow(theURL,winName,features) { //v2.0
         <td width="62" align="center">Disposi&ccedil;&atilde;o</td>
         <td width="16" align="center">&nbsp;</td>
         </tr>
-<?
+<?php
 $sql=mysql_query("SELECT * FROM apqp_car WHERE peca='$pc' AND pc='S' ORDER BY tipo ASC");
 if(mysql_num_rows($sql)==0){
 ?>
       <tr bgcolor="#FFFFFF">
         <td colspan="9" align="center" class="textopretobold">NENHUMA CARACTER&Iacute;STICA CADASTRADA </td>
       </tr>
-<?
+<?php
 }else{
 	while($res=mysql_fetch_array($sql)){
 		unset($resrr["disp"]);
@@ -99,17 +99,17 @@ if(mysql_num_rows($sql)==0){
 		}
 ?>
       <tr bgcolor="#FFFFFF" class="textopreto" onMouseover="changeto('#CCCCCC')" onMouseout="changeback('#FFFFFF')">
-        <td width="32" align="center">&nbsp;<? print $res["numero"]; ?></td>
-        <td>&nbsp;<? print $res["descricao"]; ?></td>
-        <td width="143">&nbsp;<? print $res["espec"]; ?></td>
-        <td width="30" align="center"><? print $res["tipo"]; ?></td>
-        <td width="30" align="center"><img src="<? if($res["pc"]=="S"){ print "apqp_fluxo/$res[simbolo].jpg"; }else{ print "imagens/dot.gif"; } ?>" width="15" height="15"></td>
-        <td width="58" align="center"><? if($resrr["tv"]) print banco2valor3($resrr["tv"]); ?></td>
-        <td width="70" align="center"><? if($resrr["prr"]) print banco2valor3($resrr["prr"]); ?></td>
-        <td width="62" align="center"><?= $resrr["disp"]; ?></td>
-        <td width="16" align="center"><a href="apqp_rr2.php?car=<? print $res["id"]; ?>"><img src="imagens/icon14_alterar.gif" alt="Alterar" width="14" height="14" border="0"></a></td>
+        <td width="32" align="center">&nbsp;<?php print $res["numero"]; ?></td>
+        <td>&nbsp;<?php print $res["descricao"]; ?></td>
+        <td width="143">&nbsp;<?php print $res["espec"]; ?></td>
+        <td width="30" align="center"><?php print $res["tipo"]; ?></td>
+        <td width="30" align="center"><img src="<?php if($res["pc"]=="S"){ print "apqp_fluxo/$res[simbolo].jpg"; }else{ print "imagens/dot.gif"; } ?>" width="15" height="15"></td>
+        <td width="58" align="center"><?php if($resrr["tv"]) print banco2valor3($resrr["tv"]); ?></td>
+        <td width="70" align="center"><?php if($resrr["prr"]) print banco2valor3($resrr["prr"]); ?></td>
+        <td width="62" align="center"><?php echo  $resrr["disp"]; ?></td>
+        <td width="16" align="center"><a href="apqp_rr2.php?car=<?php print $res["id"]; ?>"><img src="imagens/icon14_alterar.gif" alt="Alterar" width="14" height="14" border="0"></a></td>
         </tr>
-<?
+<?php
 	}
 }
 ?>
@@ -122,10 +122,10 @@ if(mysql_num_rows($sql)==0){
     <input name="button1" type="button" class="microtxt" value="Voltar" onClick="window.location='apqp_menu.php';">
     </td>
   </tr>
-  <? }else{ ?>
-  <? } ?>
+  <?php }else{ ?>
+  <?php } ?>
 </table>
 </body>
 </html>
 <script language="javascript" src="tooltip.js"></script>
-<? include("mensagem.php"); ?>
+<?php include("mensagem.php"); ?>

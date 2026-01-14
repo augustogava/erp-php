@@ -115,8 +115,8 @@ if($acao=="gerar"){
 <html lang="pt-BR">
 <head>
 <title>Backup do Sistema - ERP System</title>
-<meta charset="ISO-8859-1">
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <link href="style.css" rel="stylesheet" type="text/css">
@@ -135,7 +135,7 @@ if($acao=="gerar"){
     </div>
     
     <?php if(isset($_SESSION["mensagem"])): ?>
-    <div class="erp-alert erp-alert-<?=strpos($_SESSION["mensagem"],'sucesso')!==false?'success':'danger'?>">
+    <div class="erp-alert erp-alert-<?php echo strpos($_SESSION["mensagem"],'sucesso')!==false?'success':'danger'?>">
         <?php echo $_SESSION["mensagem"]; unset($_SESSION["mensagem"]); ?>
     </div>
     <?php endif; ?>
@@ -151,9 +151,9 @@ if($acao=="gerar"){
                 
                 <div class="erp-alert erp-alert-info" style="margin-bottom:24px;">
                     <strong><i class="fas fa-info-circle"></i> Informacoes:</strong><br>
-                    <i class="fas fa-circle" style="font-size:6px;margin-right:8px;"></i> Banco de dados: <strong><?=$bd?></strong><br>
-                    <i class="fas fa-circle" style="font-size:6px;margin-right:8px;"></i> Servidor: <strong><?=$host?></strong><br>
-                    <i class="fas fa-circle" style="font-size:6px;margin-right:8px;"></i> Data/Hora: <strong><?=date("d/m/Y H:i:s")?></strong>
+                    <i class="fas fa-circle" style="font-size:6px;margin-right:8px;"></i> Banco de dados: <strong><?php echo $bd?></strong><br>
+                    <i class="fas fa-circle" style="font-size:6px;margin-right:8px;"></i> Servidor: <strong><?php echo $host?></strong><br>
+                    <i class="fas fa-circle" style="font-size:6px;margin-right:8px;"></i> Data/Hora: <strong><?php echo date("d/m/Y H:i:s")?></strong>
                 </div>
                 
                 <form method="post" action="backup.php" onsubmit="return confirm('Deseja gerar o backup agora?');">
@@ -230,8 +230,8 @@ if($acao=="gerar"){
                     ?>
                     <tr style="background:#f8f9fa;font-weight:bold;">
                         <td>TOTAL</td>
-                        <td><?=number_format($total_rows, 0, ',', '.')?></td>
-                        <td><?=number_format($total_size, 2, ',', '.')?> KB</td>
+                        <td><?php echo number_format($total_rows, 0, ',', '.')?></td>
+                        <td><?php echo number_format($total_size, 2, ',', '.')?> KB</td>
                     </tr>
                 </tbody>
             </table>

@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 if(empty($acao)) exit;
 $acao=verifi($permi,$acao);
@@ -15,10 +15,10 @@ if($acao=="incluir"){
 	$co2=valor2banco($co2);
 	$sql=mysql_query("INSERT INTO portasp (perfil,pvc_inferior,pvc_superior,pvc_cristal,nome,b1,b2,b3,co1,co2) VALUES ('$perfil','$inferior','$superior','$cristal','$nome','$b1','$b2','$b3','$co1','$co2')");
 	if($sql){
-		$_SESSION["mensagem"]="Perfilincluído com sucesso!";
+		$_SESSION["mensagem"]="PerfilincluÃ­do com sucesso!";
 		$acao="entrar";
 	}else{
-		$_SESSION["mensagem"]="O Perfil não pôde ser incluído!";
+		$_SESSION["mensagem"]="O Perfil nÃ£o pÃ´de ser incluÃ­do!";
 		$acao="inc";
 	}
 }elseif($acao=="alterar"){
@@ -32,16 +32,16 @@ if($acao=="incluir"){
 		$_SESSION["mensagem"]="Perfil alterado com sucesso!";
 		$acao="entrar";
 	}else{
-		$_SESSION["mensagem"]="O Perfil não pôde ser alterado!";
+		$_SESSION["mensagem"]="O Perfil nÃ£o pÃ´de ser alterado!";
 		$acao="alt";
 	}
 }elseif($acao=="exc"){
 	if(!empty($id)){
 		$sql=mysql_query("DELETE FROM portasp WHERE id='$id'");
 		if($sql){
-			$_SESSION["mensagem"]="Perfil excluído com sucesso!";
+			$_SESSION["mensagem"]="Perfil excluÃ­do com sucesso!";
 		}else{
-			$_SESSION["mensagem"]="O Perfil não pôde ser excluído!";
+			$_SESSION["mensagem"]="O Perfil nÃ£o pÃ´de ser excluÃ­do!";
 		}		
 	}
 	$acao="entrar";

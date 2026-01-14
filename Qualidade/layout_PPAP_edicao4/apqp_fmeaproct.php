@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 include("seguranca.php");
 if($_GET["muda"]){
@@ -11,26 +11,26 @@ $pc=$_SESSION["mpc"];
 $npc=$_SESSION["npc"];
 $sql=mysql_query("SELECT * FROM apqp_fmeaproc WHERE peca='$pc'");
 if(!mysql_num_rows($sql)){
-	$_SESSION["mensagem"]="Preencha o cabeçalho";
+	$_SESSION["mensagem"]="Preencha o cabeÃ§alho";
 	print "<script>window.location='apqp_fmeaprocc.php';</script>";
 	exit;
 }else{
 	$res=mysql_fetch_array($sql);
-	$sqlb=mysql_query("SELECT * FROM apqp_cron WHERE perc='100' AND peca='$pc' AND ativ='Certificado de Submissão'");
+	$sqlb=mysql_query("SELECT * FROM apqp_cron WHERE perc='100' AND peca='$pc' AND ativ='Certificado de SubmissÃ£o'");
 	if(!mysql_num_rows($sqlb)){
 		$sqlb=mysql_query("SELECT * FROM apqp_cron WHERE perc='100' AND peca='$pc' AND ativ='FMEA de Processo'");
 		if(mysql_num_rows($sqlb)){
 			$sqlb=mysql_query("SELECT * FROM apqp_cron WHERE perc='100' AND peca='$pc' AND ativ='Plano de Controle'");
 			if(mysql_num_rows($sqlb)){
-				$btnsalva="if (confirm('Caso queira editar este documento terá que revisar todos os documentos a frente e aprová-los novamente.')){ form1.acao.value='altt'; lista.verifica(); } return false;";
-				$btnsalva2="if (confirm('Caso queira editar este documento terá que revisar todos os documentos a frente e aprová-los novamente.')){ form1.acao.value='altt'; lista.frmcar.maisum.value=1; lista.frmcar.submit(); return false; } return false;";
-				$btnsalva3="if (confirm('Caso queira editar este documento terá que revisar todos os documentos a frente e aprová-los novamente.')){ if(confirm('Deseja excluir as linhas?')) { form1.acao.value='altt';lista.frmcar.delsel.value=1; lista.frmcar.submit(); } return false; } return false;";
-				$btnsalva4="if (confirm('Caso queira editar este documento terá que revisar todos os documentos a frente e aprová-los novamente.')){ abre('apqp_fmeaproct_pop.php?peca=$pc&op=$wop','selimagem','width=625,height=600,scrollbars=yes'); } return false;";
+				$btnsalva="if (confirm('Caso queira editar este documento terÃ¡ que revisar todos os documentos a frente e aprovÃ¡-los novamente.')){ form1.acao.value='altt'; lista.verifica(); } return false;";
+				$btnsalva2="if (confirm('Caso queira editar este documento terÃ¡ que revisar todos os documentos a frente e aprovÃ¡-los novamente.')){ form1.acao.value='altt'; lista.frmcar.maisum.value=1; lista.frmcar.submit(); return false; } return false;";
+				$btnsalva3="if (confirm('Caso queira editar este documento terÃ¡ que revisar todos os documentos a frente e aprovÃ¡-los novamente.')){ if(confirm('Deseja excluir as linhas?')) { form1.acao.value='altt';lista.frmcar.delsel.value=1; lista.frmcar.submit(); } return false; } return false;";
+				$btnsalva4="if (confirm('Caso queira editar este documento terÃ¡ que revisar todos os documentos a frente e aprovÃ¡-los novamente.')){ abre('apqp_fmeaproct_pop.php?peca=$pc&op=$wop','selimagem','width=625,height=600,scrollbars=yes'); } return false;";
 			}else{
-				$btnsalva="if (confirm('Documento Aprovado! Caso queira alterá-lo será removida a aprovação')){ form1.acao.value='altt'; lista.verifica(); return false; } return false;";
-				$btnsalva2="if (confirm('Documento Aprovado! Caso queira alterá-lo será removida a aprovação')){ form1.acao.value='altt'; lista.frmcar.maisum.value=1; lista.frmcar.submit(); } return false;";
-				$btnsalva3="if (confirm('Documento Aprovado! Caso queira alterá-lo será removida a aprovação')){ if(confirm('Deseja excluir as linhas?')) { form1.acao.value='altt'; lista.frmcar.delsel.value=1; lista.frmcar.submit(); } } return false;";
-				$btnsalva4="if (confirm('Documento Aprovado! Caso queira alterá-lo será removida a aprovação')){ abre('apqp_fmeaproct_pop.php?peca=$pc&op=$wop','selimagem','width=625,height=600,scrollbars=yes'); } return false;";
+				$btnsalva="if (confirm('Documento Aprovado! Caso queira alterÃ¡-lo serÃ¡ removida a aprovaÃ§Ã£o')){ form1.acao.value='altt'; lista.verifica(); return false; } return false;";
+				$btnsalva2="if (confirm('Documento Aprovado! Caso queira alterÃ¡-lo serÃ¡ removida a aprovaÃ§Ã£o')){ form1.acao.value='altt'; lista.frmcar.maisum.value=1; lista.frmcar.submit(); } return false;";
+				$btnsalva3="if (confirm('Documento Aprovado! Caso queira alterÃ¡-lo serÃ¡ removida a aprovaÃ§Ã£o')){ if(confirm('Deseja excluir as linhas?')) { form1.acao.value='altt'; lista.frmcar.delsel.value=1; lista.frmcar.submit(); } } return false;";
+				$btnsalva4="if (confirm('Documento Aprovado! Caso queira alterÃ¡-lo serÃ¡ removida a aprovaÃ§Ã£o')){ abre('apqp_fmeaproct_pop.php?peca=$pc&op=$wop','selimagem','width=625,height=600,scrollbars=yes'); } return false;";
 			}
 		}else{
 				$btnsalva="form1.acao.value='altt'; lista.verifica(); return false;";
@@ -39,10 +39,10 @@ if(!mysql_num_rows($sql)){
 				$btnsalva4="abre('apqp_fmeaproct_pop.php?peca=$pc&op=$wop','selimagem','width=625,height=600,scrollbars=yes'); ";
 		}
 	}else{
-		$btnsalva="if(confirm('O Certificado de submissão já esta aprovado, caso queira remover a aprovação deste Estudo será removida a aprovação de todos os relatórios. Deseja remover?')){ if(confirm('Você tem certeza que deseja remover a aprovação? Terá que aprovar todos os relatórios novamente.')){ form1.acao.value='altt'; lista.verifica(); return false; }else{ return false; } }else{ return false; }";
-		$btnsalva2="if(confirm('O Certificado de submissão já esta aprovado, caso queira remover a aprovação deste Estudo será removida a aprovação de todos os relatórios. Deseja remover?')){ if(confirm('Você tem certeza que deseja remover a aprovação? Terá que aprovar todos os relatórios novamente.')){ form1.acao.value='altt'; lista.frmcar.maisum.value=1; lista.frmcar.submit(); }else{ return false; } }else{ return false; }";
-		$btnsalva3="if(confirm('O Certificado de submissão já esta aprovado, caso queira remover a aprovação deste Estudo será removida a aprovação de todos os relatórios. Deseja remover?')){ if(confirm('Você tem certeza que deseja remover a aprovação? Terá que aprovar todos os relatórios novamente.')){ if(confirm('Deseja excluir as linhas?')) { form1.acao.value='altt'; lista.frmcar.delsel.value=1; lista.frmcar.submit(); } }else{ return false; } }else{ return false; }";	
-		$btnsalva4="if(confirm('O Certificado de submissão já esta aprovado, caso queira remover a aprovação deste Estudo será removida a aprovação de todos os relatórios. Deseja remover?')){ if(confirm('Você tem certeza que deseja remover a aprovação? Terá que aprovar todos os relatórios novamente.')){ abre('apqp_fmeaproct_pop.php?peca=$pc&op=$wop','selimagem','width=625,height=600,scrollbars=yes');  	 }else{ return false; } }else{ return false; }";	
+		$btnsalva="if(confirm('O Certificado de submissÃ£o jÃ¡ esta aprovado, caso queira remover a aprovaÃ§Ã£o deste Estudo serÃ¡ removida a aprovaÃ§Ã£o de todos os relatÃ³rios. Deseja remover?')){ if(confirm('VocÃª tem certeza que deseja remover a aprovaÃ§Ã£o? TerÃ¡ que aprovar todos os relatÃ³rios novamente.')){ form1.acao.value='altt'; lista.verifica(); return false; }else{ return false; } }else{ return false; }";
+		$btnsalva2="if(confirm('O Certificado de submissÃ£o jÃ¡ esta aprovado, caso queira remover a aprovaÃ§Ã£o deste Estudo serÃ¡ removida a aprovaÃ§Ã£o de todos os relatÃ³rios. Deseja remover?')){ if(confirm('VocÃª tem certeza que deseja remover a aprovaÃ§Ã£o? TerÃ¡ que aprovar todos os relatÃ³rios novamente.')){ form1.acao.value='altt'; lista.frmcar.maisum.value=1; lista.frmcar.submit(); }else{ return false; } }else{ return false; }";
+		$btnsalva3="if(confirm('O Certificado de submissÃ£o jÃ¡ esta aprovado, caso queira remover a aprovaÃ§Ã£o deste Estudo serÃ¡ removida a aprovaÃ§Ã£o de todos os relatÃ³rios. Deseja remover?')){ if(confirm('VocÃª tem certeza que deseja remover a aprovaÃ§Ã£o? TerÃ¡ que aprovar todos os relatÃ³rios novamente.')){ if(confirm('Deseja excluir as linhas?')) { form1.acao.value='altt'; lista.frmcar.delsel.value=1; lista.frmcar.submit(); } }else{ return false; } }else{ return false; }";	
+		$btnsalva4="if(confirm('O Certificado de submissÃ£o jÃ¡ esta aprovado, caso queira remover a aprovaÃ§Ã£o deste Estudo serÃ¡ removida a aprovaÃ§Ã£o de todos os relatÃ³rios. Deseja remover?')){ if(confirm('VocÃª tem certeza que deseja remover a aprovaÃ§Ã£o? TerÃ¡ que aprovar todos os relatÃ³rios novamente.')){ abre('apqp_fmeaproct_pop.php?peca=$pc&op=$wop','selimagem','width=625,height=600,scrollbars=yes');  	 }else{ return false; } }else{ return false; }";	
 	}
 }
 ?>
@@ -67,7 +67,7 @@ function abrir(url,id){
 	return true;
 }
 function salvar(url,id){
-	window.open('apqp_impressao.php?acao=salvar&local='+ url +'&pc='+ <?=$pc?> + '');
+	window.open('apqp_impressao.php?acao=salvar&local='+ url +'&pc='+ <?php echo $pc?> + '');
 	return true;
 }
 
@@ -84,12 +84,12 @@ function fnlinha(){
 		lista.frmcar.wcar.value=wcar[wcar.selectedIndex].value;
 		lista.frmcar.submit();
 	}else{
-		alert('Esta característica já foi selecionada');
+		alert('Esta caracterÃ­stica jÃ¡ foi selecionada');
 	}
 }
 function mselop(){
 	if(form1.wop[form1.wop.selectedIndex].value==0){
-		alert('Selecione uma operação');
+		alert('Selecione uma operaÃ§Ã£o');
 		form1.wop.focus();
 	}else{
 		window.location='apqp_fmeaproct.php?muda=S&wop='+form1.wop[form1.wop.selectedIndex].value;
@@ -112,8 +112,8 @@ function MM_openBrWindow(theURL,winName,features) { //v2.0
   <tr>
     <td width="645" align="left" valign="top" class="chamadas"><table width="590" border="0" cellpadding="0" cellspacing="0" class="texto">
       <tr>
-        <td width="27" align="center"><div align="left"><a href="#" onClick="MM_openBrWindow('help/mini_fmea_process.html','','width=680,height=501,left=300,top=50')"><img src="imagens/icon14_ahn.gif" width="14" height="14" border="0" onMouseOver="this.T_STICKY=true; this.T_TITLE='FMEA de Processo'; this.T_DELAY=10; this.T_WIDTH=225;  return escape('<strong>Requisitos/Funções do Processo - </strong>Descrição simplificada do processo ou operação em análise. <br><strong>Modo de Falha Potencial (Processo) - </strong>É definido como a maneira pela qual o processo potencialmente falharia. <br><strong>Severidade (FMEA de Processo) </strong>Avaliação da gravidade do efeito do modo de falha potencial para o cliente. <br><strong>Classificação (Processo) - </strong>Esta coluna pode ser usada para classificar (ex.: crítica, maior, chave, significante) qualquer característica.<br><strong>Efeitos Potenciais da Falha (Processo) - </strong>É definido como o efeito do modo de falha no cliente.<br><strong>Mecanismo(s)/Causa(s) Potenciais de Falha (Processo) </strong>É definida como a forma pela qual a falha pode ocorrer, descrita de forma específica e objetiva.<br><strong>Ocorrência (FMEA de Processo) - </strong>a probabilidade de um mecanismo/causa específico (listado na coluna anterior) vir a ocorrer.<br><strong>Controles Atuais do Processo - </strong>São descrições dos controles que podem detectar a ocorrência do modo de falha<br><strong>Detecção (FMEA de Processo) - </strong>É uma avaliação da probabilidade dos controles de processo (listados na coluna anterior) identificarem o modo de falha durante o processo. <br><strong>Ações Recomendadas (Processo) -  </strong>Propostas ou medidas preventivas para os itens críticos/ com ponderação alta.')"></a><span class="impTextoBold">&nbsp;</span></div></td>
-        <td width="563" align="right"><div align="left" class="textobold style1 style1 style1 style1 style1 style1 style1">APQP - FMEA de Processo&nbsp;<? print $npc; ?></div></td>
+        <td width="27" align="center"><div align="left"><a href="#" onClick="MM_openBrWindow('help/mini_fmea_process.html','','width=680,height=501,left=300,top=50')"><img src="imagens/icon14_ahn.gif" width="14" height="14" border="0" onMouseOver="this.T_STICKY=true; this.T_TITLE='FMEA de Processo'; this.T_DELAY=10; this.T_WIDTH=225;  return escape('<strong>Requisitos/FunÃ§Ãµes do Processo - </strong>DescriÃ§Ã£o simplificada do processo ou operaÃ§Ã£o em anÃ¡lise. <br><strong>Modo de Falha Potencial (Processo) - </strong>Ã‰ definido como a maneira pela qual o processo potencialmente falharia. <br><strong>Severidade (FMEA de Processo) </strong>AvaliaÃ§Ã£o da gravidade do efeito do modo de falha potencial para o cliente. <br><strong>ClassificaÃ§Ã£o (Processo) - </strong>Esta coluna pode ser usada para classificar (ex.: crÃ­tica, maior, chave, significante) qualquer caracterÃ­stica.<br><strong>Efeitos Potenciais da Falha (Processo) - </strong>Ã‰ definido como o efeito do modo de falha no cliente.<br><strong>Mecanismo(s)/Causa(s) Potenciais de Falha (Processo) </strong>Ã‰ definida como a forma pela qual a falha pode ocorrer, descrita de forma especÃ­fica e objetiva.<br><strong>OcorrÃªncia (FMEA de Processo) - </strong>a probabilidade de um mecanismo/causa especÃ­fico (listado na coluna anterior) vir a ocorrer.<br><strong>Controles Atuais do Processo - </strong>SÃ£o descriÃ§Ãµes dos controles que podem detectar a ocorrÃªncia do modo de falha<br><strong>DetecÃ§Ã£o (FMEA de Processo) - </strong>Ã‰ uma avaliaÃ§Ã£o da probabilidade dos controles de processo (listados na coluna anterior) identificarem o modo de falha durante o processo. <br><strong>AÃ§Ãµes Recomendadas (Processo) -  </strong>Propostas ou medidas preventivas para os itens crÃ­ticos/ com ponderaÃ§Ã£o alta.')"></a><span class="impTextoBold">&nbsp;</span></div></td>
+        <td width="563" align="right"><div align="left" class="textobold style1 style1 style1 style1 style1 style1 style1">APQP - FMEA de Processo&nbsp;<?php print $npc; ?></div></td>
       </tr>
       <tr>
         <td align="center">&nbsp;</td>
@@ -142,17 +142,17 @@ function MM_openBrWindow(theURL,winName,features) { //v2.0
                 <td width="61" class="textobold">Opera&ccedil;&atilde;o</td>
                 <td width="520"><select name="wop" class="formularioselect" onChange="mselop();">
                     <option value="0">Selecione uma opera&ccedil;&atilde;o</option>
-                    <?
+                    <?php
 $ops=mysql_query("SELECT * FROM apqp_op WHERE peca='$pc' ORDER BY numero ASC");
 if(mysql_num_rows($ops)){
 	while($rops=mysql_fetch_array($ops)){
 ?>
-                    <option value="<?= $rops["id"]; ?>" <? if($rops["id"]==$wop) print "selected"; ?>>
-                    <?= htmlspecialchars($rops["numero"], ENT_QUOTES); ?>
+                    <option value="<?php echo  $rops["id"]; ?>" <?php if($rops["id"]==$wop) print "selected"; ?>>
+                    <?php echo  htmlspecialchars($rops["numero"], ENT_QUOTES); ?>
         -
-        <?= htmlspecialchars($rops["descricao"], ENT_QUOTES); ?>
+        <?php echo  htmlspecialchars($rops["descricao"], ENT_QUOTES); ?>
                     </option>
-                    <?
+                    <?php
 	}
 }
 ?>
@@ -172,21 +172,21 @@ if(mysql_num_rows($ops)){
          
                 <table width="601" border="0" align="center" cellpadding="3" cellspacing="0" class="texto">
                   <tr>
-				  <? if($_SESSION["e_mail"]=="S"){ ?>
+				  <?php if($_SESSION["e_mail"]=="S"){ ?>
                     <td width="16%" align="left" class="textobold">&nbsp;Enviar e-mail: </td>
                     <td width="56%"><input name="email" type="text" class="formularioselect" id="email3" value="Digite o e-mail aqui"></td> 
-					<? if(in_array("U",$emailt)){ ?>
-                    <td width="3%"><div align="center"><a href="#" onClick="return abre('busca_email2.php','a','width=320,height=380,scrollbars=1');"><img src="imagens/icon14_pessoas.gif" alt="Buscar Email de Funcionários" width="14" height="14" border="0"></a></div></td>
-					<? } if(in_array("G",$emailt)){ ?>
+					<?php if(in_array("U",$emailt)){ ?>
+                    <td width="3%"><div align="center"><a href="#" onClick="return abre('busca_email2.php','a','width=320,height=380,scrollbars=1');"><img src="imagens/icon14_pessoas.gif" alt="Buscar Email de FuncionÃ¡rios" width="14" height="14" border="0"></a></div></td>
+					<?php } if(in_array("G",$emailt)){ ?>
                     <td width="8%"><div align="center"><a href="#" onClick="return abre('busca_email_grupo.php','a','width=320,height=380,scrollbars=1');"><input name="grupo" type="hidden" id="grupo">
                 <input name="grupo_nome" type="hidden" id="grupo_nome"><img src="imagens/icon14_grupo.gif" alt="Buscar Grupo de Emails" width="26" height="13" border="0"></a></div></td>
-				 <? } if(in_array("C",$emailt)){ ?>
+				 <?php } if(in_array("C",$emailt)){ ?>
                     <td width="4%"><div align="center"><a href="#" onClick="return abre('busca_email.php','a','width=320,height=380,scrollbars=1');"></a><a href="#" onClick="return abre('busca_email.php','a','width=320,height=300,scrollbars=1');"><img src="imagens/icon_cli.gif" alt="Buscar Emails de Clientes" width="18" height="18" border="0"></a></div></td>
-				<? } ?>
-                    <td width="9%"><div align="center"><? if($_SESSION["login_funcionario"]=="S"){ ?><a href="#" onClick="vailogo1('email','<?= $pc; ?>');"><img src="imagens/icon14_mail.gif" alt="Enviar Email" width="16" height="10" border="0"></a><? } ?></div></td>
-					<? } if($_SESSION["i_mp"]=="S"){ ?>
+				<?php } ?>
+                    <td width="9%"><div align="center"><?php if($_SESSION["login_funcionario"]=="S"){ ?><a href="#" onClick="vailogo1('email','<?php echo  $pc; ?>');"><img src="imagens/icon14_mail.gif" alt="Enviar Email" width="16" height="10" border="0"></a><?php } ?></div></td>
+					<?php } if($_SESSION["i_mp"]=="S"){ ?>
                     <td width="4%"><div align="center"><a href="#" onClick="vailogo('imp');"><img src="imagens/icon14_imp.gif" alt="Imprimir" width="15" height="15" border="0"></a></div></td>
-					<? } ?>
+					<?php } ?>
                   </tr>
                   <tr>
                     <td colspan="7" align="left" class="textobold"><img src="imagens/spacer.gif" width="46" height="5"></td>
@@ -194,18 +194,18 @@ if(mysql_num_rows($ops)){
                 </table>			</td>
               </tr>
                 <tr>
-                  <td align="center" bordercolor="#FFFFFF" bgcolor="#FFFFFF"><input name="button1" type="button" class="microtxt" value="Importar" onClick="<?= $btnsalva4; ?>">
+                  <td align="center" bordercolor="#FFFFFF" bgcolor="#FFFFFF"><input name="button1" type="button" class="microtxt" value="Importar" onClick="<?php echo  $btnsalva4; ?>">
 &nbsp;
 <input name="button12" type="button" class="microtxt" value="Voltar" onClick="window.location='apqp_menu.php';">
 &nbsp;<input name="local" type="hidden" id="local" value="processo">
-<input name="acao2" type="button" class="microtxt" value="Salvar em Disco" onClick="salvar('processo','<?=$res["id"];?>')">
+<input name="acao2" type="button" class="microtxt" value="Salvar em Disco" onClick="salvar('processo','<?php echo $res["id"];?>')">
 <input name="acao" type="hidden">
 &nbsp;
-<input name="button1222" type="button" class="microtxt" value="Salvar" onClick="<?= $btnsalva; ?>">
+<input name="button1222" type="button" class="microtxt" value="Salvar" onClick="<?php echo  $btnsalva; ?>">
 &nbsp;
-<input name="button12222" type="button" class="microtxt" value="Adicionar Linha" onClick="<?= $btnsalva2; ?>">
+<input name="button12222" type="button" class="microtxt" value="Adicionar Linha" onClick="<?php echo  $btnsalva2; ?>">
 &nbsp;
-<input name="button12223" type="button" class="microtxt" value="Excluir Linha" onClick="<?= $btnsalva3; ?>"></td>
+<input name="button12223" type="button" class="microtxt" value="Excluir Linha" onClick="<?php echo  $btnsalva3; ?>"></td>
                 </tr>
               </table></form></td>
         </tr>
@@ -220,4 +220,4 @@ if(mysql_num_rows($ops)){
 </body>
 </html>
 <script language="javascript" src="tooltip.js"></script>
-<? include("mensagem.php"); ?>
+<?php include("mensagem.php"); ?>

@@ -94,8 +94,8 @@ if($acao=="incluir"){
 <html lang="pt-BR">
 <head>
 <title>Acoes de Marketing - ERP System</title>
-<meta charset="ISO-8859-1">
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <link href="style.css" rel="stylesheet" type="text/css">
@@ -286,7 +286,7 @@ function verifica(cad){
                             <option value="">Selecione</option>
                             <?php $sql2=mysql_query("select * from ramo");
                             while($res2=mysql_fetch_array($sql2)){ ?>
-                            <option value="<?=$res2["id"]?>" <?php if(isset($res["ramo"]) && $res["ramo"]==$res2["id"]) echo "selected"; ?>><?=$res2["nome"]?></option>
+                            <option value="<?php echo $res2["id"]?>" <?php if(isset($res["ramo"]) && $res["ramo"]==$res2["id"]) echo "selected"; ?>><?php echo $res2["nome"]?></option>
                             <?php } ?>
                         </select>
                     </div>
@@ -298,7 +298,7 @@ function verifica(cad){
                             <option value="">Selecione</option>
                             <?php $sql2=mysql_query("select * from grupos");
                             while($res2=mysql_fetch_array($sql2)){ ?>
-                            <option value="<?=$res2["id"]?>" <?php if(isset($res["grupo"]) && $res["grupo"]==$res2["id"]) echo "selected"; ?>><?=$res2["nome"]?></option>
+                            <option value="<?php echo $res2["id"]?>" <?php if(isset($res["grupo"]) && $res["grupo"]==$res2["id"]) echo "selected"; ?>><?php echo $res2["nome"]?></option>
                             <?php } ?>
                         </select>
                     </div>
@@ -323,7 +323,7 @@ function verifica(cad){
                             <option value="">Selecione</option>
                             <?php $sql2=mysql_query("SELECT * FROM estado");
                             while($res2=mysql_fetch_array($sql2)){ ?>
-                            <option value="<?=$res2["id"]?>" <?php if(isset($res["estado"]) && $res2["id"]==$res["estado"]) echo "selected"; ?>><?=$res2["nome"]?></option>
+                            <option value="<?php echo $res2["id"]?>" <?php if(isset($res["estado"]) && $res2["id"]==$res["estado"]) echo "selected"; ?>><?php echo $res2["nome"]?></option>
                             <?php } ?>
                         </select>
                     </div>

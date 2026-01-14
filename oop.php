@@ -1,4 +1,4 @@
-<?
+<?php
 Class ConexaoMysql{
     ////////////////Atributos da class//////////////////
     var $servidor="localhost";
@@ -32,7 +32,7 @@ Class ConexaoMysql{
        return $result;
     }    
 
-    // Metodo que retorna o ultimo id de um inserção
+    // Metodo que retorna o ultimo id de um inserÃ§Ã£o
     function id()
     {
         return mysql_insert_id($this->link);
@@ -45,7 +45,7 @@ Class ConexaoMysql{
     }
 } 
 ?>
-<?
+<?php
 //Instanciando um objeto
 $conexao = new ConexaoMysql();
     

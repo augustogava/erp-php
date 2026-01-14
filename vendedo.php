@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 include("seguranca.php");
 $nivel=$_SESSION["login_nivel"];
@@ -29,7 +29,8 @@ $sql=mysql_query("DELETE FROM funcionarios WHERE id='$id'");
 <html>
 <head>
 <title>CyberManager</title>
-<meta http-equiv="Content-Type" content="text/html; UTF-8">
+<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="style.css" rel="stylesheet" type="text/css">
 <script src="scripts.js"></script>
 <style type="text/css">
@@ -68,10 +69,10 @@ $sql=mysql_query("DELETE FROM funcionarios WHERE id='$id'");
                 <td width="37" align="center">C&oacute;d</td>
                 <td width="489">&nbsp;Nome</td>
                 <td width="10" align="center">&nbsp;</td>
-               <? if($nivel=="1"){ ?>  <td width="10" align="center">&nbsp;</td><? } ?>
+               <?php if($nivel=="1"){ ?>  <td width="10" align="center">&nbsp;</td><?php } ?>
                 <td width="20" align="center">&nbsp;</td>
               </tr>
-              <?
+              <?php
 			  
 			  $sql=mysql_query("SELECT c.fantasia,c.id FROM clientes AS c, cliente_login AS cl, niveis AS n WHERE cl.nivel=n.id AND n.vendedor=1 AND cl.cliente=c.id ORDER BY c.fantasia ASC");
 			  if(mysql_num_rows($sql)==0){
@@ -80,20 +81,20 @@ $sql=mysql_query("DELETE FROM funcionarios WHERE id='$id'");
                 <td colspan="5" align="center" class="textobold">NENHUM FUNCION&Aacute;RIO 
                   ENCONTRADO </td>
               </tr>
-              <?
+              <?php
 			  }else{
 			  	while($res=mysql_fetch_array($sql)){
 			  ?>
               <tr bgcolor="#FFFFFF" class="texto" onMouseover="changeto('#CCCCCC')" onMouseout="changeback('#FFFFFF')"> 
-                <td align="center"><? print $res["id"]; ?></td>
-                <td>&nbsp;<? print $res["fantasia"]; ?></td>
-                <td align="center"><a href="funcionarios_geral.php?id=<? print $res["id"]; print "&bcod=$bcod&bnome=$bnome";?>"><img src="imagens/icon14_pessoas.gif" alt="Dados Gerais" width="14" height="14" border="0"></a></td>
-               <? if($nivel=="1"){ ?>
-			    <td align="center"><a href="funcionario_login.php?id=<? print $res["id"]; ?>"><img src="imagens/icon14_key.gif" alt="Senha" width="24" height="14" border="0"></a></td>
-				<? } ?>
-                <td align="center"><a href="#" onClick="return pergunta('Deseja excluir este funcionário?','funcionarios.php?acao=exc&id=<? print $res["id"]; ?>')"><img src="imagens/icon14_lixeira.gif" alt="Excluir" width="14" height="14" border="0"></a></td>
+                <td align="center"><?php print $res["id"]; ?></td>
+                <td>&nbsp;<?php print $res["fantasia"]; ?></td>
+                <td align="center"><a href="funcionarios_geral.php?id=<?php print $res["id"]; print "&bcod=$bcod&bnome=$bnome";?>"><img src="imagens/icon14_pessoas.gif" alt="Dados Gerais" width="14" height="14" border="0"></a></td>
+               <?php if($nivel=="1"){ ?>
+			    <td align="center"><a href="funcionario_login.php?id=<?php print $res["id"]; ?>"><img src="imagens/icon14_key.gif" alt="Senha" width="24" height="14" border="0"></a></td>
+				<?php } ?>
+                <td align="center"><a href="#" onClick="return pergunta('Deseja excluir este funcionÃ¡rio?','funcionarios.php?acao=exc&id=<?php print $res["id"]; ?>')"><img src="imagens/icon14_lixeira.gif" alt="Excluir" width="14" height="14" border="0"></a></td>
               </tr>
-              <?
+              <?php
 			  	}
 			  }
 			  ?>
@@ -104,4 +105,4 @@ $sql=mysql_query("DELETE FROM funcionarios WHERE id='$id'");
 </table>
 </body>
 </html>
-<? include("mensagem.php"); ?>
+<?php include("mensagem.php"); ?>

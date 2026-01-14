@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 $hj=date("Y-m-d");
 if(empty($usu)){
@@ -12,7 +12,8 @@ if($acao=="mandar"){
 <html>
 <head>
 <title>CyberManager</title>
-<meta http-equiv="Content-Type" content="text/html; UTF-8">
+<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="style.css" rel="stylesheet" type="text/css">
 
 <style type="text/css">
@@ -34,9 +35,9 @@ if($acao=="mandar"){
       <table width="100%"  border="0" cellpadding="0" cellspacing="0" class="texto">
         <tr>
           <td>Mensagem Para usu&aacute;rio
-              <?= $nome; ?>
+              <?php echo  $nome; ?>
               :</td>
-          <td><input name="usu" type="hidden" id="usu" value="<?= $usu; ?>">
+          <td><input name="usu" type="hidden" id="usu" value="<?php echo  $usu; ?>">
             <input name="acao" type="hidden" id="acao" value="mandar"></td>
         </tr>
         <tr>

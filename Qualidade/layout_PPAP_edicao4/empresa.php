@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 include("seguranca.php");
 $sql=mysql_query("SELECT * FROM empresa");
@@ -45,69 +45,69 @@ if (file_exists($arquivo)) {
         </tr>
         <tr>
           <td width="118" class="textobold">Nome Fantasia:</td>
-          <td colspan="2"><input name="fantasia" type="text" class="formularioselect" id="fantasia" value="<? print $res["fantasia"]; ?>" maxlength="30"></td>
+          <td colspan="2"><input name="fantasia" type="text" class="formularioselect" id="fantasia" value="<?php print $res["fantasia"]; ?>" maxlength="30"></td>
         </tr>
         <tr>
           <td class="textobold">Raz&atilde;o Social:</td>
-          <td colspan="2"><input name="razao" type="text" class="formularioselect" id="razao" value="<? print $res["razao"]; ?>" maxlength="150"></td>
+          <td colspan="2"><input name="razao" type="text" class="formularioselect" id="razao" value="<?php print $res["razao"]; ?>" maxlength="150"></td>
         </tr>
         <tr>
           <td class="textobold">Endere&ccedil;o:</td>
-          <td colspan="2"><input name="endereco" type="text" class="formularioselect" id="endereco" value="<? print $res["endereco"]; ?>" maxlength="200"></td>
+          <td colspan="2"><input name="endereco" type="text" class="formularioselect" id="endereco" value="<?php print $res["endereco"]; ?>" maxlength="200"></td>
         </tr>
         <tr>
           <td class="textobold">CNPJ (sem pontos): </td>
-          <td colspan="2"><input name="cnpj" type="text" class="formularioselect" id="cnpj" value="<? print $res["cnpj"]; ?>" maxlength="200"></td>
+          <td colspan="2"><input name="cnpj" type="text" class="formularioselect" id="cnpj" value="<?php print $res["cnpj"]; ?>" maxlength="200"></td>
         </tr>
         <tr>
           <td class="textobold">Cidade:</td>
-          <td><input name="cidade" type="text" class="formularioselect" id="cidade" value="<? print $res["cidade"]; ?>" size="30" maxlength="100"></td>
-          <td width="176" rowspan="5" align="center" valign="middle"><a href="#" onClick="return abre('empresa_logo.php?img=<? print $wimg; ?>','foto','width=10,height=10');">
-            <? if($acao=="alt" and !empty($wimg)){ ?>
-            <img src="empresa_logo/gd.php?img=<? print $wimg; ?>&wid=100" border="0"></a>
-            <? } ?></td>
+          <td><input name="cidade" type="text" class="formularioselect" id="cidade" value="<?php print $res["cidade"]; ?>" size="30" maxlength="100"></td>
+          <td width="176" rowspan="5" align="center" valign="middle"><a href="#" onClick="return abre('empresa_logo.php?img=<?php print $wimg; ?>','foto','width=10,height=10');">
+            <?php if($acao=="alt" and !empty($wimg)){ ?>
+            <img src="empresa_logo/gd.php?img=<?php print $wimg; ?>&wid=100" border="0"></a>
+            <?php } ?></td>
         </tr>
         <tr>
           <td class="textobold">Estado:</td>
           <td width="192"><font face="Verdana, Arial, Helvetica, sans-serif" size="1" color="#000066">
             <select name="estado" class="formulario" id="UF">
-              <option value="AC"<? if($res["estado"]=="AC") print "selected"; ?>>AC</option>
-              <option value="AL"<? if($res["estado"]=="AL") print "selected"; ?>>AL</option>
-              <option value="AM"<? if($res["estado"]=="AM") print "selected"; ?>>AM</option>
-              <option value="AP"<? if($res["estado"]=="AP") print "selected"; ?>>AP</option>
-              <option value="BA"<? if($res["estado"]=="BA") print "selected"; ?>>BA</option>
-              <option value="CE"<? if($res["estado"]=="CE") print "selected"; ?>>CE</option>
-              <option value="DF"<? if($res["estado"]=="DF") print "selected"; ?>>DF</option>
-              <option value="ES"<? if($res["estado"]=="ES") print "selected"; ?>>ES</option>
-              <option value="GO"<? if($res["estado"]=="GO") print "selected"; ?>>GO</option>
-              <option value="MA"<? if($res["estado"]=="MA") print "selected"; ?>>MA</option>
-              <option value="MG"<? if($res["estado"]=="MG") print "selected"; ?>>MG</option>
-              <option value="MS"<? if($res["estado"]=="MS") print "selected"; ?>>MS</option>
-              <option value="MT"<? if($res["estado"]=="MT") print "selected"; ?>>MT</option>
-              <option value="PA"<? if($res["estado"]=="PA") print "selected"; ?>>PA</option>
-              <option value="PB"<? if($res["estado"]=="PB") print "selected"; ?>>PB</option>
-              <option value="PE"<? if($res["estado"]=="PE") print "selected"; ?>>PE</option>
-              <option value="PI"<? if($res["estado"]=="PI") print "selected"; ?>>PI</option>
-              <option value="PR"<? if($res["estado"]=="PR") print "selected"; ?>>PR</option>
-              <option value="RJ"<? if($res["estado"]=="RJ") print "selected"; ?>>RJ</option>
-              <option value="RN"<? if($res["estado"]=="RN") print "selected"; ?>>RN</option>
-              <option value="RO"<? if($res["estado"]=="RO") print "selected"; ?>>RO</option>
-              <option value="RR"<? if($res["estado"]=="RR") print "selected"; ?>>RR</option>
-              <option value="RS"<? if($res["estado"]=="RS") print "selected"; ?>>RS</option>
-              <option value="SC"<? if($res["estado"]=="SC") print "selected"; ?>>SC</option>
-              <option value="SE"<? if($res["estado"]=="SE") print "selected"; ?>>SE</option>
-              <option value="SP"<? if($res["estado"]=="SP" or empty($res["estado"])) print "selected"; ?>>SP</option>
-              <option value="TO"<? if($res["estado"]=="TO") print "selected"; ?>>TO</option>
+              <option value="AC"<?php if($res["estado"]=="AC") print "selected"; ?>>AC</option>
+              <option value="AL"<?php if($res["estado"]=="AL") print "selected"; ?>>AL</option>
+              <option value="AM"<?php if($res["estado"]=="AM") print "selected"; ?>>AM</option>
+              <option value="AP"<?php if($res["estado"]=="AP") print "selected"; ?>>AP</option>
+              <option value="BA"<?php if($res["estado"]=="BA") print "selected"; ?>>BA</option>
+              <option value="CE"<?php if($res["estado"]=="CE") print "selected"; ?>>CE</option>
+              <option value="DF"<?php if($res["estado"]=="DF") print "selected"; ?>>DF</option>
+              <option value="ES"<?php if($res["estado"]=="ES") print "selected"; ?>>ES</option>
+              <option value="GO"<?php if($res["estado"]=="GO") print "selected"; ?>>GO</option>
+              <option value="MA"<?php if($res["estado"]=="MA") print "selected"; ?>>MA</option>
+              <option value="MG"<?php if($res["estado"]=="MG") print "selected"; ?>>MG</option>
+              <option value="MS"<?php if($res["estado"]=="MS") print "selected"; ?>>MS</option>
+              <option value="MT"<?php if($res["estado"]=="MT") print "selected"; ?>>MT</option>
+              <option value="PA"<?php if($res["estado"]=="PA") print "selected"; ?>>PA</option>
+              <option value="PB"<?php if($res["estado"]=="PB") print "selected"; ?>>PB</option>
+              <option value="PE"<?php if($res["estado"]=="PE") print "selected"; ?>>PE</option>
+              <option value="PI"<?php if($res["estado"]=="PI") print "selected"; ?>>PI</option>
+              <option value="PR"<?php if($res["estado"]=="PR") print "selected"; ?>>PR</option>
+              <option value="RJ"<?php if($res["estado"]=="RJ") print "selected"; ?>>RJ</option>
+              <option value="RN"<?php if($res["estado"]=="RN") print "selected"; ?>>RN</option>
+              <option value="RO"<?php if($res["estado"]=="RO") print "selected"; ?>>RO</option>
+              <option value="RR"<?php if($res["estado"]=="RR") print "selected"; ?>>RR</option>
+              <option value="RS"<?php if($res["estado"]=="RS") print "selected"; ?>>RS</option>
+              <option value="SC"<?php if($res["estado"]=="SC") print "selected"; ?>>SC</option>
+              <option value="SE"<?php if($res["estado"]=="SE") print "selected"; ?>>SE</option>
+              <option value="SP"<?php if($res["estado"]=="SP" or empty($res["estado"])) print "selected"; ?>>SP</option>
+              <option value="TO"<?php if($res["estado"]=="TO") print "selected"; ?>>TO</option>
             </select>
           </font></td>
         </tr>
         <tr>
           <td class="textobold">Pa&iacute;s:</td>
-          <td><input name="pais" type="text" class="formularioselect" id="pais" value="<? print $res["pais"]; ?>" maxlength="50"></td>
+          <td><input name="pais" type="text" class="formularioselect" id="pais" value="<?php print $res["pais"]; ?>" maxlength="50"></td>
         </tr>
         <tr>
           <td class="textobold">CEP:</td>
-          <td><input name="cep" type="text" class="formulario" id="cep" value="<? print $res["cep"]; ?>" size="10" maxlength="9" onKeyUp="mcep(this)" onKeyPress="return validanum(this, event)">            </td>
+          <td><input name="cep" type="text" class="formulario" id="cep" value="<?php print $res["cep"]; ?>" size="10" maxlength="9" onKeyUp="mcep(this)" onKeyPress="return validanum(this, event)">            </td>
         </tr>
         <tr>
           <td class="textobold">Logotipo:</td>
@@ -115,13 +115,13 @@ if (file_exists($arquivo)) {
         </tr>
         <tr>
           <td class="textobold">Telefone:</td>
-          <td><input name="tel" type="text" class="formulario" id="tel" value="<? print $res["tel"]; ?>" size="20" maxlength="15"></td>
+          <td><input name="tel" type="text" class="formulario" id="tel" value="<?php print $res["tel"]; ?>" size="20" maxlength="15"></td>
           <td rowspan="5" class="textobold style17"><span class="style18">Obs.: Nomear a imagem como &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;logo.jpg. Tamanho 63x35 </span><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="style6">pixels.<br>
           </span></strong><span class="style6">Esta imagem ser&aacute; exibida nos relat&oacute;rios. </span></td>
         </tr>
         <tr>
           <td class="textobold">Fax:</td>
-          <td class="style17"><input name="fax" type="text" class="formulario" id="fax" value="<? print $res["fax"]; ?>" size="20" maxlength="15"></td>
+          <td class="style17"><input name="fax" type="text" class="formulario" id="fax" value="<?php print $res["fax"]; ?>" size="20" maxlength="15"></td>
         </tr>
         <tr>
           <td class="textobold">&nbsp;</td>
@@ -129,11 +129,11 @@ if (file_exists($arquivo)) {
         </tr>
         <tr>
           <td class="textobold">Data 4&ordm; Edi&ccedil;&atilde;o: </td>
-          <td class="style17"><input name="data" type="text" class="formulario" id="data" onKeyPress="return validanum(this, event)" onKeyUp="mdata(this)" value="<? print banco2data($res["data"]); ?>" size="10" maxlength="10"></td>
+          <td class="style17"><input name="data" type="text" class="formulario" id="data" onKeyPress="return validanum(this, event)" onKeyUp="mdata(this)" value="<?php print banco2data($res["data"]); ?>" size="10" maxlength="10"></td>
         </tr>
         <tr>
           <td class="textobold"><span class="textobold style17">
-            <input name="acao" type="hidden" id="acao" value="<? print $acao; ?>">
+            <input name="acao" type="hidden" id="acao" value="<?php print $acao; ?>">
           </span></td>
           <td class="style17">&nbsp;</td>
         </tr>
@@ -149,4 +149,4 @@ if (file_exists($arquivo)) {
 </table>
 </body>
 </html>
-<? include("mensagem.php"); ?>
+<?php include("mensagem.php"); ?>

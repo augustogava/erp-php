@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 $apqp=new set_apqp;
 $acao=verifi($permi,$acao);
@@ -33,7 +33,7 @@ if($acao=="email"){
 		//verificar Cliente
 		$apqp->cliente_apro("apqp_rr.php");
 		// - - - - - - - -  -
-		///Tirar Aprovaçõesss
+		///Tirar AprovaÃ§Ãµesss
 	$sql=mysql_query("SELECT * FROM apqp_cron WHERE perc='100' AND peca='$pc' AND ativ='Estudos de R&R'");
 	if(mysql_num_rows($sql)){
 			$sqlba=mysql_query("SELECT * FROM apqp_cron WHERE perc='100' AND peca='$pc' AND ativ<>'Viabilidade' AND ativ<>'Diagrama de Fluxo' AND ativ<>'FMEA de Processo' AND ativ<>'Plano de Controle'");
@@ -462,12 +462,12 @@ if($acao=="rr2"){
 	WHERE id='$id'");
 	$sql=mysql_query("UPDATE apqp_car SET disp='0',quem='', dtquem='' WHERE id='$car'");
 	if($sql){
-		$_SESSION["mensagem"]="Alterações salvas com sucesso";
+		$_SESSION["mensagem"]="AlteraÃ§Ãµes salvas com sucesso";
 		// cria followup caso salve o conteudo do Estudo de R&R
-			$sql_sal=mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Salvando alterações do Estudo de R&R da peça $npc.','O usuário $quem salvou as alterações do Estudo de R&R da peça $npc.','$user')");
+			$sql_sal=mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Salvando alteraÃ§Ãµes do Estudo de R&R da peÃ§a $npc.','O usuÃ¡rio $quem salvou as alteraÃ§Ãµes do Estudo de R&R da peÃ§a $npc.','$user')");
 		//	
 	}else{
-		$_SESSION["mensagem"]="As alterações não puderam ser salvas";
+		$_SESSION["mensagem"]="As alteraÃ§Ãµes nÃ£o puderam ser salvas";
 	}	
 	header("location:apqp_rr3.php?car=$car");
 }elseif($acao=="rr3"){
@@ -480,27 +480,27 @@ if($acao=="rr2"){
 		}
 		$sql=mysql_query("SELECT * FROM apqp_cron WHERE perc='100' AND peca='$pc' AND ativ='Plano de Controle'");
 		if(!mysql_num_rows($sql)){
-			$_SESSION["mensagem"]="Não pode ser aprovado pois existem relatórios anteriores abertos!!";
+			$_SESSION["mensagem"]="NÃ£o pode ser aprovado pois existem relatÃ³rios anteriores abertos!!";
 			header("Location:apqp_rr3.php?car=$car");
 			exit;
 		}
 		$sql=mysql_query("UPDATE apqp_cron SET resp='$tap123',fim=NOW(),perc='100' WHERE ativ='Estudos de R&R' AND peca='$pc'");
 			$_SESSION["mensagem"]="Aprovado com Sucesso!";
 			// cria followup caso aprove o conteudo do Estudo de R&R 
-				$sql_ap=mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Aprovação do Estudo de R&R da peça $npc.','O usuário $quem aprovou o Estudo de R&R da peça $npc.','$user')");
+				$sql_ap=mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','AprovaÃ§Ã£o do Estudo de R&R da peÃ§a $npc.','O usuÃ¡rio $quem aprovou o Estudo de R&R da peÃ§a $npc.','$user')");
 			header("Location:apqp_rr3.php?car=$car");
 			exit;
 	}	
 	if(isset($lim)){
 			$sql=mysql_query("UPDATE apqp_cron SET resp='$tap123',fim=NOW(),perc='95' WHERE ativ='Estudos de R&R' AND peca='$pc'");
-			// cria followup caso remova a aprovação do R&R e mude o status
-				mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Removendo a aprovação R&R da peça $npc.','O usuário $quem removeu a aprovação da peça $npc devido a remoção da aprovação do Estudo de R&R.','$user')");
+			// cria followup caso remova a aprovaÃ§Ã£o do R&R e mude o status
+				mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Removendo a aprovaÃ§Ã£o R&R da peÃ§a $npc.','O usuÃ¡rio $quem removeu a aprovaÃ§Ã£o da peÃ§a $npc devido a remoÃ§Ã£o da aprovaÃ§Ã£o do Estudo de R&R.','$user')");
 			// EMAIL	
-				$apqp->set_email("Remoção da aprovação da peça $npc.","O usuário $quem removeu a aprovação da peça $this->npc devido a remoção da aprovação do Estudo de R&R.");
+				$apqp->set_email("RemoÃ§Ã£o da aprovaÃ§Ã£o da peÃ§a $npc.","O usuÃ¡rio $quem removeu a aprovaÃ§Ã£o da peÃ§a $this->npc devido a remoÃ§Ã£o da aprovaÃ§Ã£o do Estudo de R&R.");
 				$apqp->email();
-			$_SESSION["mensagem"]="Aprovação excluída com sucesso!";
-			// cria followup caso remove a aprovação do Estudo de R&R 
-			mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Removendo aprovação da Característica no R&R da peça $npc.','O usuário $quem removeu a aprovação do Estudo de R&R da peça $npc.','$user')");	
+			$_SESSION["mensagem"]="AprovaÃ§Ã£o excluÃ­da com sucesso!";
+			// cria followup caso remove a aprovaÃ§Ã£o do Estudo de R&R 
+			mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Removendo aprovaÃ§Ã£o da CaracterÃ­stica no R&R da peÃ§a $npc.','O usuÃ¡rio $quem removeu a aprovaÃ§Ã£o do Estudo de R&R da peÃ§a $npc.','$user')");	
 		
 		//$sql=mysql_query("UPDATE apqp_cron SET resp='',fim='',perc='95' WHERE ativ='Estudos de R&R' AND peca='$pc'");
 		$sql=mysql_query("UPDATE apqp_car SET disp='0',quem='', dtquem='' WHERE id='$car'");
@@ -514,7 +514,7 @@ if($acao=="rr2"){
 		$sql=mysql_query("UPDATE apqp_car SET disp='2',quem='$tap123',dtquem=NOW() WHERE id='$car'");
 		$_SESSION["mensagem"]="Reprovado com Sucesso!";
 		// cria followup caso reprove o conteudo do Estudo de R&R 
-			$sql_ap=mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Reprovação da Característica no R&R da peça $npc.','O usuário $quem reprovou o Estudo da Característica no R&R peça $npc.','$user')");
+			$sql_ap=mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','ReprovaÃ§Ã£o da CaracterÃ­stica no R&R da peÃ§a $npc.','O usuÃ¡rio $quem reprovou o Estudo da CaracterÃ­stica no R&R peÃ§a $npc.','$user')");
 		//	
 		header("Location:apqp_rr3.php?car=$car");
 		exit;
@@ -525,7 +525,7 @@ if($acao=="rr2"){
 		}
 		$sql=mysql_query("SELECT * FROM apqp_cron WHERE perc='100' AND peca='$pc' AND ativ='Plano de Controle'");
 		if(!mysql_num_rows($sql)){
-			$_SESSION["mensagem"]="Não pode ser aprovado pois existem relatórios anteriores abertos!!";
+			$_SESSION["mensagem"]="NÃ£o pode ser aprovado pois existem relatÃ³rios anteriores abertos!!";
 			header("Location:apqp_rr3.php?car=$car");
 			exit;
 		}
@@ -534,19 +534,19 @@ if($acao=="rr2"){
 			$sql=mysql_query("UPDATE apqp_rr SET sit=2 WHERE id='$id'");
 			$_SESSION["mensagem"]="Aprovado com Sucesso!";
 			// cria followup caso aprove o conteudo do Estudo de R&R 
-				$sql_ap=mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Aprovação da Característica no R&R da peça $npc.','O usuário $quem aprovou o Estudo de R&R da peça $npc.','$user')");
+				$sql_ap=mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','AprovaÃ§Ã£o da CaracterÃ­stica no R&R da peÃ§a $npc.','O usuÃ¡rio $quem aprovou o Estudo de R&R da peÃ§a $npc.','$user')");
 			header("Location:apqp_rr3.php?car=$car");
 			exit;
 	}	
 	if(isset($lpt)){
-			// cria followup caso remova a aprovação do R&R e mude o status
-				mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Removendo a aprovação da Característica no R&R da peça $npc.','O usuário $quem removeu a aprovação da peça $npc devido a remoção da aprovação da Característica no R&R','$user')");
+			// cria followup caso remova a aprovaÃ§Ã£o do R&R e mude o status
+				mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Removendo a aprovaÃ§Ã£o da CaracterÃ­stica no R&R da peÃ§a $npc.','O usuÃ¡rio $quem removeu a aprovaÃ§Ã£o da peÃ§a $npc devido a remoÃ§Ã£o da aprovaÃ§Ã£o da CaracterÃ­stica no R&R','$user')");
 			// EMAIL	
-				$apqp->set_email("Remoção da aprovação da peça $npc.","O usuário $quem removeu a aprovação da peça $this->npc devido a remoção da aprovação da Característica no R&R");
+				$apqp->set_email("RemoÃ§Ã£o da aprovaÃ§Ã£o da peÃ§a $npc.","O usuÃ¡rio $quem removeu a aprovaÃ§Ã£o da peÃ§a $this->npc devido a remoÃ§Ã£o da aprovaÃ§Ã£o da CaracterÃ­stica no R&R");
 				$apqp->email();
-			$_SESSION["mensagem"]="Aprovação excluída com sucesso!";
-			// cria followup caso remove a aprovação do Estudo de R&R 
-			mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Removendo aprovação da Característica no R&R da peça $npc.','O usuário $quem removeu a aprovação da Característica no R&R da peça $npc.','$user')");	
+			$_SESSION["mensagem"]="AprovaÃ§Ã£o excluÃ­da com sucesso!";
+			// cria followup caso remove a aprovaÃ§Ã£o do Estudo de R&R 
+			mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Removendo aprovaÃ§Ã£o da CaracterÃ­stica no R&R da peÃ§a $npc.','O usuÃ¡rio $quem removeu a aprovaÃ§Ã£o da CaracterÃ­stica no R&R da peÃ§a $npc.','$user')");	
 		
 		//$sql=mysql_query("UPDATE apqp_cron SET resp='',fim='',perc='95' WHERE ativ='Estudos de R&R' AND peca='$pc'");
 		$sql=mysql_query("UPDATE apqp_rr SET sit=0 WHERE id='$id'");

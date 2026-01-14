@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 include("seguranca.php");
 if(empty($acao)){ $acao="entrar"; }
@@ -24,7 +24,7 @@ if($acao=="entrar"){
 		header("Location:corpo.php?cal_ano=$cal_ano&cal_mes=$cal_mes&cal_dia=$cal_dia");
 		exit;
 	}else{
-		$_SESSION["mensagem"]="O compromisso n„o pÙde ser alterado!";
+		$_SESSION["mensagem"]="O compromisso n√£o p√¥de ser alterado!";
 		$acao="entrar";
 	}	
 }	
@@ -32,7 +32,8 @@ if($acao=="entrar"){
 <html>
 <head>
 <title>CyberManager</title>
-<meta http-equiv="Content-Type" content="text/html; UTF-8">
+<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="style.css" rel="stylesheet" type="text/css">
 <script src="scripts.js"></script>
 <script src="mascaras.js"></script>
@@ -51,13 +52,13 @@ function verifica(cadastro){
     }	
 	if (cadastro.data.value != ""){
 		if (verifica_data(cadastro.data.value) == false) {
-			alert("Data Inv·lida");
+			alert("Data Inv√°lida");
 			cadastro.data.focus();
 			return(false);
 		}
 	}
 	if (cadastro.hora.value.length != 8){
-		alert("Hora Inv·lida");
+		alert("Hora Inv√°lida");
 		cadastro.hora.focus();
 		return(false);
     }
@@ -67,12 +68,12 @@ function verifica(cadastro){
 		return(false);
     }	
 	if (cadastro.titulo.value == ""){
-		alert("Informe o TÌtulo");
+		alert("Informe o T√≠tulo");
 		cadastro.titulo.focus();
 		return(false);
     }	
 	if (cadastro.texto.value == ""){
-		alert("Informe a DescriÁ„o do Compromisso");
+		alert("Informe a Descri√ß√£o do Compromisso");
 		cadastro.texto.focus();
 		return(false);
     }					
@@ -113,46 +114,46 @@ function MM_openBrWindow(theURL,winName,features) { //v2.0
           <tr> 
             <td height="16" class="textobold"> <select name="nome" class="formularioselect" id="select3">
                 <option value="" selected>Selecione</option>
-                <?
+                <?php
 							$sql=mysql_query("SELECT clientes.id AS cliente,clientes.nome AS nome FROM clientes,cliente_login,niveis WHERE clientes.id=cliente_login.cliente AND cliente_login.nivel=niveis.id AND niveis.tipo='F' ORDER BY clientes.nome ASC");
 							while($res=mysql_fetch_array($sql)){
 								$nome=$res["nome"];
 						   	    $ray=explode(" ",$nome);
  	                            $nome=$ray[0];
 							?>
-                <option value="<? print($nome); ?>"<? if($nome==$wnome) print "selected"; ?>><? print($nome); ?></option>
-                <? } ?>
+                <option value="<?php print($nome); ?>"<?php if($nome==$wnome) print "selected"; ?>><?php print($nome); ?></option>
+                <?php } ?>
               </select></td>
           </tr>
           <tr> 
             <td width="302" height="16" class="textobold">Data (dd/mm/aaaa)</td>
           </tr>
           <tr> 
-            <td><input name="data" type="text" class="formulario" id="data2" onKeyPress="return validanum(this, event)" onKeyUp="mdata(this)" value="<? print $data; ?>" size="10" maxlength="10"></td>
+            <td><input name="data" type="text" class="formulario" id="data2" onKeyPress="return validanum(this, event)" onKeyUp="mdata(this)" value="<?php print $data; ?>" size="10" maxlength="10"></td>
           </tr>
           <tr> 
             <td class="textobold">Hora (hh:mm:ss)</td>
           </tr>
           <tr> 
-            <td class="textobold"><input name="hora" type="text" class="formulario" id="hora" onKeyUp="mhora(this)" value="<? print $hora; ?>" size="8" maxlength="8"> 
+            <td class="textobold"><input name="hora" type="text" class="formulario" id="hora" onKeyUp="mhora(this)" value="<?php print $hora; ?>" size="8" maxlength="8"> 
               <input name="acao" type="hidden" id="acao" value="ok">
-              <input name="alt" type="hidden" id="alt" value="<? print($alt); ?>"> 
-              <input name="cal_ano" type="hidden" id="cal_ano" value="<? print($cal_ano); ?>"> 
-              <input name="cal_mes" type="hidden" id="cal_mes" value="<? print($cal_mes); ?>"> 
-              <input name="cal_dia" type="hidden" id="cal_dia" value="<? print($cal_dia); ?>">            </td>
+              <input name="alt" type="hidden" id="alt" value="<?php print($alt); ?>"> 
+              <input name="cal_ano" type="hidden" id="cal_ano" value="<?php print($cal_ano); ?>"> 
+              <input name="cal_mes" type="hidden" id="cal_mes" value="<?php print($cal_mes); ?>"> 
+              <input name="cal_dia" type="hidden" id="cal_dia" value="<?php print($cal_dia); ?>">            </td>
           </tr>
           <tr> 
             <td class="texto"><span class="textobold">T&iacute;tulo</span> <span class="texto">(m&aacute;ximo 
               30 caracteres)</span></td>
           </tr>
           <tr> 
-            <td><input name="titulo" type="text" class="formularioselect" id="titulo" value="<? print $titulo; ?>" size="50" maxlength="30"></td>
+            <td><input name="titulo" type="text" class="formularioselect" id="titulo" value="<?php print $titulo; ?>" size="50" maxlength="30"></td>
           </tr>
           <tr> 
             <td class="textobold">Descri&ccedil;&atilde;o do Compromisso</td>
           </tr>
           <tr> 
-            <td><textarea name="texto" cols="70" rows="6" wrap="VIRTUAL" class="formularioselect" id="textarea2" onFocus="enterativa=0;" onBlur="enterativa=1;"><? print $texto; ?></textarea></td>
+            <td><textarea name="texto" cols="70" rows="6" wrap="VIRTUAL" class="formularioselect" id="textarea2" onFocus="enterativa=0;" onBlur="enterativa=1;"><?php print $texto; ?></textarea></td>
           </tr>
           <tr> 
             <td align="center">&nbsp;</td>
@@ -161,7 +162,7 @@ function MM_openBrWindow(theURL,winName,features) { //v2.0
             <td align="center"><span class="textobold">
               <input name="Submit2" type="submit" class="microtxt" value="Continuar">
               &nbsp;&nbsp;&nbsp;
-              <input name="Submit22" type="button" class="microtxt" value="CRM" onClick="window.location='crm_infg.php?cli=<? print $cliente; ?>';">
+              <input name="Submit22" type="button" class="microtxt" value="CRM" onClick="window.location='crm_infg.php?cli=<?php print $cliente; ?>';">
             </span></td>
           </tr>
         </table>
@@ -170,4 +171,4 @@ function MM_openBrWindow(theURL,winName,features) { //v2.0
 </table>
 </body>
 </html>
-<? include("mensagem.php"); ?>
+<?php include("mensagem.php"); ?>

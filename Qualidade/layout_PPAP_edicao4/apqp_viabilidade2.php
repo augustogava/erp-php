@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 include("seguranca.php");
 if(empty($acao)) $acao="entrar";
@@ -12,7 +12,7 @@ if(mysql_num_rows($sql)){
 	$sql=mysql_query("SELECT * FROM apqp_viabilidade WHERE peca='$pc'");
 	$res=mysql_fetch_array($sql);
 }
-	$sqlb=mysql_query("SELECT * FROM apqp_cron WHERE perc='100' AND peca='$pc' AND ativ='Certificado de Submissão'");
+	$sqlb=mysql_query("SELECT * FROM apqp_cron WHERE perc='100' AND peca='$pc' AND ativ='Certificado de SubmissÃ£o'");
 	if(!mysql_num_rows($sqlb)){
 		$sqlb=mysql_query("SELECT * FROM apqp_cron WHERE perc='100' AND peca='$pc' AND ativ='Viabilidade'");
 		if(!mysql_num_rows($sqlb)){
@@ -20,13 +20,13 @@ if(mysql_num_rows($sql)){
 		}else{
 			$sqlb=mysql_query("SELECT * FROM apqp_cron WHERE perc='100' AND peca='$pc' AND ativ='Diagrama de Fluxo'");
 			if(mysql_num_rows($sqlb)){
-				$btnsalva="if (confirm('Caso queira editar este documento terá que revisar todos os documentos a frente e aprovalos novamente!?')){ form1.acao.value='v2'; form1.submit();  } return false;";
+				$btnsalva="if (confirm('Caso queira editar este documento terÃ¡ que revisar todos os documentos a frente e aprovalos novamente!?')){ form1.acao.value='v2'; form1.submit();  } return false;";
 			}else{
-				$btnsalva="if (confirm('Documento Aprovado! Caso queira alterá-lo será removida a aprovação')){ form1.acao.value='v2'; form1.submit(); return false; }else{ return false; }";
+				$btnsalva="if (confirm('Documento Aprovado! Caso queira alterÃ¡-lo serÃ¡ removida a aprovaÃ§Ã£o')){ form1.acao.value='v2'; form1.submit(); return false; }else{ return false; }";
 			}
 		}
 	}else{
-		$btnsalva="if(confirm('O Certificado de submissão já esta aprovado, caso queira remover a aprovação deste Estudo será removida a aprovação de todos os relatórios. Deseja remover?')){ if(confirm('Você tem certeza que deseja remover a aprovação? Terá que aprovar todos os relatórios novamente.')){ form1.acao.value='v2'; form1.submit(); }else{ return false; } }else{ return false; }";
+		$btnsalva="if(confirm('O Certificado de submissÃ£o jÃ¡ esta aprovado, caso queira remover a aprovaÃ§Ã£o deste Estudo serÃ¡ removida a aprovaÃ§Ã£o de todos os relatÃ³rios. Deseja remover?')){ if(confirm('VocÃª tem certeza que deseja remover a aprovaÃ§Ã£o? TerÃ¡ que aprovar todos os relatÃ³rios novamente.')){ form1.acao.value='v2'; form1.submit(); }else{ return false; } }else{ return false; }";
 	}
 ?>
 <html>
@@ -51,7 +51,7 @@ function abrir(url,id){
 	return true;
 }
 function salvar(url,id){
-	window.open('apqp_impressao.php?acao=salvar&local='+ url +'&pc='+ <?=$pc?> + '');
+	window.open('apqp_impressao.php?acao=salvar&local='+ url +'&pc='+ <?php echo $pc?> + '');
 	return true;
 }
 function MM_openBrWindow(theURL,winName,features) { //v2.0
@@ -68,8 +68,8 @@ function MM_openBrWindow(theURL,winName,features) { //v2.0
 <body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" onLoad="enterativa=1;"onkeypress="return ent()">
 <table width="590" border="0" cellpadding="0" cellspacing="0" class="texto">
       <tr>
-        <td width="27" align="center"><div align="left"><a href="#" onClick="MM_openBrWindow('help/mini_viabilidade.html','','width=680,height=501,left=300,top=50')"><img src="imagens/icon14_ahn.gif" width="14" height="14" border="0" onMouseOver="this.T_STICKY=true; this.T_TITLE='Comentários'; this.T_DELAY=10; this.T_WIDTH=225;  return escape('Para inserir Comentários / Explicações, selecione a aba Comentários, clique dentro da caixa de texto, digite o texto e clique no botão Salvar.')"></a><span class="impTextoBold">&nbsp;</span></div></td>
-        <td width="563" align="right"><div align="left" class="textobold style1 style1 style1 style1 style1 style1 style1 style1">APQP - Viabilidade <? print $npc; ?></div></td>
+        <td width="27" align="center"><div align="left"><a href="#" onClick="MM_openBrWindow('help/mini_viabilidade.html','','width=680,height=501,left=300,top=50')"><img src="imagens/icon14_ahn.gif" width="14" height="14" border="0" onMouseOver="this.T_STICKY=true; this.T_TITLE='ComentÃ¡rios'; this.T_DELAY=10; this.T_WIDTH=225;  return escape('Para inserir ComentÃ¡rios / ExplicaÃ§Ãµes, selecione a aba ComentÃ¡rios, clique dentro da caixa de texto, digite o texto e clique no botÃ£o Salvar.')"></a><span class="impTextoBold">&nbsp;</span></div></td>
+        <td width="563" align="right"><div align="left" class="textobold style1 style1 style1 style1 style1 style1 style1 style1">APQP - Viabilidade <?php print $npc; ?></div></td>
       </tr>
       <tr>
         <td align="center">&nbsp;</td>
@@ -117,7 +117,7 @@ function MM_openBrWindow(theURL,winName,features) { //v2.0
                       <td class="textobold">coment&aacute;rios / explica&ccedil;&otilde;es </td>
                     </tr>
                     <tr>
-                      <td><textarea name="obs" rows="15" wrap="VIRTUAL" class="formularioselect" id="obs" onFocus="enterativa=0;" onBlur="enterativa=1;"><?= $res["obs"]; ?>
+                      <td><textarea name="obs" rows="15" wrap="VIRTUAL" class="formularioselect" id="obs" onFocus="enterativa=0;" onBlur="enterativa=1;"><?php echo  $res["obs"]; ?>
     </textarea></td>
                     </tr>
                     <tr>
@@ -127,21 +127,21 @@ function MM_openBrWindow(theURL,winName,features) { //v2.0
                       <td align="center">
                 <table width="601" border="0" align="center" cellpadding="3" cellspacing="0" class="texto">
                   <tr>
-				  <? if($_SESSION["e_mail"]=="S"){ ?>
+				  <?php if($_SESSION["e_mail"]=="S"){ ?>
                     <td width="16%" align="left" class="textobold">&nbsp;Enviar e-mail: </td>
                     <td width="56%"><input name="email" type="text" class="formularioselect" id="email3" value="Digite o e-mail aqui"></td> 
-					<? if(in_array("U",$emailt)){ ?>
-                    <td width="3%"><div align="center"><a href="#" onClick="return abre('busca_email2.php','a','width=320,height=380,scrollbars=1');"><img src="imagens/icon14_pessoas.gif" alt="Buscar Email de Funcionários" width="14" height="14" border="0"></a></div></td>
-					<? } if(in_array("G",$emailt)){ ?>
+					<?php if(in_array("U",$emailt)){ ?>
+                    <td width="3%"><div align="center"><a href="#" onClick="return abre('busca_email2.php','a','width=320,height=380,scrollbars=1');"><img src="imagens/icon14_pessoas.gif" alt="Buscar Email de FuncionÃ¡rios" width="14" height="14" border="0"></a></div></td>
+					<?php } if(in_array("G",$emailt)){ ?>
                     <td width="8%"><div align="center"><a href="#" onClick="return abre('busca_email_grupo.php','a','width=320,height=380,scrollbars=1');"><input name="grupo" type="hidden" id="grupo">
                 <input name="grupo_nome" type="hidden" id="grupo_nome"><img src="imagens/icon14_grupo.gif" alt="Buscar Grupo de Emails" width="26" height="13" border="0"></a></div></td>
-				 <? } if(in_array("C",$emailt)){ ?>
+				 <?php } if(in_array("C",$emailt)){ ?>
                     <td width="4%"><div align="center"><a href="#" onClick="return abre('busca_email.php','a','width=320,height=380,scrollbars=1');"></a><a href="#" onClick="return abre('busca_email.php','a','width=320,height=300,scrollbars=1');"><img src="imagens/icon_cli.gif" alt="Buscar Emails de Clientes" width="18" height="18" border="0"></a></div></td>
-				<? } ?>
-                    <td width="9%"><div align="center"><? if($_SESSION["login_funcionario"]=="S"){ ?><a href="#" onClick="vailogo1('email','<?= $pc; ?>');"><img src="imagens/icon14_mail.gif" alt="Enviar Email" width="16" height="10" border="0"></a><? } ?></div></td>
-					<? } if($_SESSION["i_mp"]=="S"){ ?>
+				<?php } ?>
+                    <td width="9%"><div align="center"><?php if($_SESSION["login_funcionario"]=="S"){ ?><a href="#" onClick="vailogo1('email','<?php echo  $pc; ?>');"><img src="imagens/icon14_mail.gif" alt="Enviar Email" width="16" height="10" border="0"></a><?php } ?></div></td>
+					<?php } if($_SESSION["i_mp"]=="S"){ ?>
                     <td width="4%"><div align="center"><a href="#" onClick="vailogo('imp');"><img src="imagens/icon14_imp.gif" alt="Imprimir" width="15" height="15" border="0"></a></div></td>
-					<? } ?>
+					<?php } ?>
                   </tr>
                   <tr>
                     <td colspan="7" align="left" class="textobold"><img src="imagens/spacer.gif" width="46" height="5"></td>
@@ -150,9 +150,9 @@ function MM_openBrWindow(theURL,winName,features) { //v2.0
 			
                     <input name="button122" type="button" class="microtxt" value="Voltar" onClick="window.location='apqp_menu.php';">
 					&nbsp;
-                    <input name="acao2" type="button" class="microtxt" value="Salvar em Disco" onClick="salvar('viabilidade','<?=$res["id"];?>')">
+                    <input name="acao2" type="button" class="microtxt" value="Salvar em Disco" onClick="salvar('viabilidade','<?php echo $res["id"];?>')">
 					&nbsp;
-                    <input name="button12222" type="submit" class="microtxt" value="Salvar" onClick="<?= $btnsalva; ?>">
+                    <input name="button12222" type="submit" class="microtxt" value="Salvar" onClick="<?php echo  $btnsalva; ?>">
 					&nbsp;
                     <input name="acao" type="hidden" id="acao">
                     <a href="#" onClick="return abre('busca_email.php','a','width=320,height=380,scrollbars=1');"><span class="textobold">
@@ -171,4 +171,4 @@ function MM_openBrWindow(theURL,winName,features) { //v2.0
 </body>
 </html>
 <script language="javascript" src="tooltip.js"></script>
-<? include("mensagem.php"); ?>
+<?php include("mensagem.php"); ?>

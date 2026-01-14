@@ -1,8 +1,8 @@
-<?
+<?php
 include("conecta.php");
 $acao=verifi($permi,$acao);
 if(!empty($acao)){
-	$loc="Ordem Separação Imp.";
+	$loc="Ordem SeparaÃ§Ã£o Imp.";
 	$pagina=$_SERVER['SCRIPT_FILENAME'];
 	include("log.php");
 }
@@ -12,7 +12,7 @@ if($acao=="imp"){
 		$_SESSION["mensagem"]="Baixa com Sucesso!";
 		$acao="entrar";
 	}else{
-		$_SESSION["mensagem"]="Não pode ser dado Baixa!";
+		$_SESSION["mensagem"]="NÃ£o pode ser dado Baixa!";
 	}
 			print "<script>opener.location='prodserv_ordem.php';window.close();</script>";
 
@@ -27,7 +27,8 @@ $res2=mysql_fetch_array($sql2);
 <html>
 <head>
 <title>Ordem Produ&ccedil;&atilde;o</title>
-<meta http-equiv="Content-Type" content="text/html; UTF-8">
+<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="style.css" rel="stylesheet" type="text/css">
 <script src="scripts.js"></script>
 <script src="mascaras.js"></script>
@@ -69,17 +70,17 @@ body {
     <td colspan="4" align="center" class="titulos">&nbsp;</td>
   </tr>
   <tr>
-    <td width="187" align="left"><strong>Pedido: </strong><?= $res["compra"]; ?></td>
-    <td width="183"><strong>Data:</strong> <?= banco2data($res2["data"]); ?></td>
-    <td width="159"><strong>Hora:</strong> <?= $res2["hora"]; ?></td>
-    <td width="171"><strong>Previs&atilde;o Entrega:</strong><? if(!empty($res["previsao"])){ print $res3["prazo_entrega"]; } ?> Dias </td>
+    <td width="187" align="left"><strong>Pedido: </strong><?php echo  $res["compra"]; ?></td>
+    <td width="183"><strong>Data:</strong> <?php echo  banco2data($res2["data"]); ?></td>
+    <td width="159"><strong>Hora:</strong> <?php echo  $res2["hora"]; ?></td>
+    <td width="171"><strong>Previs&atilde;o Entrega:</strong><?php if(!empty($res["previsao"])){ print $res3["prazo_entrega"]; } ?> Dias </td>
   </tr>
   <tr>
     <td colspan="4" align="right"><hr class="texto"></td>
   </tr>
   <tr align="left">
     <td colspan="4">
-	<? if(empty($res3["porta"]) and empty($res3["cortina"]) and empty($res3["cortina_not"])){ ?>
+	<?php if(empty($res3["porta"]) and empty($res3["cortina"]) and empty($res3["cortina_not"])){ ?>
 	<table width="100%" border="0" cellpadding="0" cellspacing="1" bgcolor="#003366">
       <tr class="textoboldbranco">
         <td width="61">&nbsp;C&oacute;digo</td>
@@ -92,16 +93,16 @@ body {
       </tr>
 
       <tr bgcolor="#FFFFFF" class="texto" onMouseover="changeto('#CCCCCC')" onMouseout="changeback('#FFFFFF')">
-        <td>&nbsp;<? print $res3["codprod"]; ?></td>
-        <td>&nbsp;<? print $res3["nome"]; ?></td>
-        <td align="left">&nbsp;<? print $res["tamanho"]; ?></td>
-        <td width="38" align="left"> &nbsp;<? print $res["qtd"]; ?></td>
-        <td width="38" align="left">&nbsp;<? $sqlr=mysql_query("SELECT * FROM unidades WHERE id='$res3[unidade]'"); $resr=mysql_fetch_array($sqlr); print $resr["apelido"]; ?></td>
-        <td width="134" align="left">&nbsp;<? print $res["material"]; ?></td>
-        <td width="134" align="left">&nbsp;<? print $res["fixacao"]; ?></td>
+        <td>&nbsp;<?php print $res3["codprod"]; ?></td>
+        <td>&nbsp;<?php print $res3["nome"]; ?></td>
+        <td align="left">&nbsp;<?php print $res["tamanho"]; ?></td>
+        <td width="38" align="left"> &nbsp;<?php print $res["qtd"]; ?></td>
+        <td width="38" align="left">&nbsp;<?php $sqlr=mysql_query("SELECT * FROM unidades WHERE id='$res3[unidade]'"); $resr=mysql_fetch_array($sqlr); print $resr["apelido"]; ?></td>
+        <td width="134" align="left">&nbsp;<?php print $res["material"]; ?></td>
+        <td width="134" align="left">&nbsp;<?php print $res["fixacao"]; ?></td>
       </tr>
     </table>
-	<? }else if(!empty($res3["porta"])){ ?><br>
+	<?php }else if(!empty($res3["porta"])){ ?><br>
     <table width="100%" border="0" cellpadding="0" cellspacing="1" bgcolor="#003366">
       <tr class="textoboldbranco">
         <td width="50">&nbsp;Qtd</td>
@@ -111,14 +112,14 @@ body {
         <td width="72" align="left">Largura</td>
         </tr>
       <tr bgcolor="#FFFFFF" class="texto" onMouseover="changeto('#CCCCCC')" onMouseout="changeback('#FFFFFF')">
-        <td>&nbsp;<? print $res["qtd"]; ?></td>
-        <td>&nbsp;<? print $res3["nome"]; ?></td>
+        <td>&nbsp;<?php print $res["qtd"]; ?></td>
+        <td>&nbsp;<?php print $res3["nome"]; ?></td>
         <td align="left">&nbsp;
-          <? $sqlr=mysql_query("SELECT * FROM unidades WHERE id='$res3[unidade]'"); $resr=mysql_fetch_array($sqlr); print $resr["apelido"]; ?></td>
-        <td width="61" align="left">&nbsp;<? $dado=explode("X",$res["tamanho"]);
+          <?php $sqlr=mysql_query("SELECT * FROM unidades WHERE id='$res3[unidade]'"); $resr=mysql_fetch_array($sqlr); print $resr["apelido"]; ?></td>
+        <td width="61" align="left">&nbsp;<?php $dado=explode("X",$res["tamanho"]);
 		$altura=$dado[0];
 		$largura=$dado[1]; print banco2valor($altura); ?></td>
-        <td width="72" align="left">&nbsp;<? print banco2valor($largura); ?></td>
+        <td width="72" align="left">&nbsp;<?php print banco2valor($largura); ?></td>
         </tr>
     </table>
     <br>
@@ -130,7 +131,7 @@ body {
         <td width="347" align="left">Descri&ccedil;&atilde;o</td>
         <td width="99" align="center">Qtd utilizada </td>
         </tr>
-		<? 
+		<?php 
 		//Porta, calculo
 		$dado=explode("X",$res["tamanho"]);
 		$altura=$dado[0];
@@ -155,69 +156,69 @@ body {
 		$sqlp=mysql_query("SELECT * FROM prodserv WHERE id='$resi[item]'"); $resp=mysql_fetch_array($sqlp);
 		 ?>
       <tr bgcolor="#FFFFFF" class="texto" onMouseover="changeto('#CCCCCC')" onMouseout="changeback('#FFFFFF')">
-        <td>&nbsp;<? print $resi["qtd"]*$res["qtd"]; ?></td>
+        <td>&nbsp;<?php print $resi["qtd"]*$res["qtd"]; ?></td>
         <td>&nbsp;
-          <? $sqlr=mysql_query("SELECT * FROM unidades WHERE id='$resp[unidade]'"); $resr=mysql_fetch_array($sqlr); print $resr["apelido"]; ?> </td>
-        <td align="left">&nbsp;<? print $resp["codprod"]; ?></td>
-        <td width="347" align="left">&nbsp;<? print $resp["nome"]; ?></td>
+          <?php $sqlr=mysql_query("SELECT * FROM unidades WHERE id='$resp[unidade]'"); $resr=mysql_fetch_array($sqlr); print $resr["apelido"]; ?> </td>
+        <td align="left">&nbsp;<?php print $resp["codprod"]; ?></td>
+        <td width="347" align="left">&nbsp;<?php print $resp["nome"]; ?></td>
         <td width="99" align="center"> ___________</td>
         </tr>
-		<?
+		<?php
 		} if(!empty($cs)){
 		$sqlp=mysql_query("SELECT * FROM prodserv WHERE id='$csid'"); $resp=mysql_fetch_array($sqlp);
 		?>
 		
 		 <tr bgcolor="#FFFFFF" class="texto" onMouseover="changeto('#CCCCCC')" onMouseout="changeback('#FFFFFF')">
-		   <td>&nbsp;<? print $cs*$res["qtd"]; ?></td>
+		   <td>&nbsp;<?php print $cs*$res["qtd"]; ?></td>
 			<td>&nbsp;
-			  <? $sqlr=mysql_query("SELECT * FROM unidades WHERE id='$resp[unidade]'"); $resr=mysql_fetch_array($sqlr); print $resr["apelido"]; ?> </td>
-			<td align="left">&nbsp;<? print $resp["codprod"]; ?></td>
-			<td width="347" align="left">&nbsp;<? print $resp["nome"]; ?></td>
+			  <?php $sqlr=mysql_query("SELECT * FROM unidades WHERE id='$resp[unidade]'"); $resr=mysql_fetch_array($sqlr); print $resr["apelido"]; ?> </td>
+			<td align="left">&nbsp;<?php print $resp["codprod"]; ?></td>
+			<td width="347" align="left">&nbsp;<?php print $resp["nome"]; ?></td>
 			<td width="99" align="center">___________</td>
 		</tr>
-		<?
+		<?php
 		} if(!empty($ci)){
 		$sqlp=mysql_query("SELECT * FROM prodserv WHERE id='$ciid'"); $resp=mysql_fetch_array($sqlp);
 		?>
 		
 		 <tr bgcolor="#FFFFFF" class="texto" onMouseover="changeto('#CCCCCC')" onMouseout="changeback('#FFFFFF')">
-		   <td>&nbsp;<? print $ci*$res["qtd"]; ?></td>
+		   <td>&nbsp;<?php print $ci*$res["qtd"]; ?></td>
 			<td>&nbsp;
-			  <? $sqlr=mysql_query("SELECT * FROM unidades WHERE id='$resp[unidade]'"); $resr=mysql_fetch_array($sqlr); print $resr["apelido"]; ?> </td>
-			<td align="left">&nbsp;<? print $resp["codprod"]; ?></td>
-			<td width="347" align="left">&nbsp;<? print $resp["nome"]; ?></td>
+			  <?php $sqlr=mysql_query("SELECT * FROM unidades WHERE id='$resp[unidade]'"); $resr=mysql_fetch_array($sqlr); print $resr["apelido"]; ?> </td>
+			<td align="left">&nbsp;<?php print $resp["codprod"]; ?></td>
+			<td width="347" align="left">&nbsp;<?php print $resp["nome"]; ?></td>
 			<td width="99" align="center">___________</td>
 		</tr>
-	<?
+	<?php
 		} if(!empty($cr)){
 		$sqlp=mysql_query("SELECT * FROM prodserv WHERE id='$crid'"); $resp=mysql_fetch_array($sqlp);
 		?>
 		
 		 <tr bgcolor="#FFFFFF" class="texto" onMouseover="changeto('#CCCCCC')" onMouseout="changeback('#FFFFFF')">
-		   <td>&nbsp;<? print $cr*$res["qtd"]; ?></td>
+		   <td>&nbsp;<?php print $cr*$res["qtd"]; ?></td>
 			<td>&nbsp;
-			  <? $sqlr=mysql_query("SELECT * FROM unidades WHERE id='$resp[unidade]'"); $resr=mysql_fetch_array($sqlr); print $resr["apelido"]; ?> </td>
-			<td align="left">&nbsp;<? print $resp["codprod"]; ?></td>
-			<td width="347" align="left">&nbsp;<? print $resp["nome"]; ?></td>
+			  <?php $sqlr=mysql_query("SELECT * FROM unidades WHERE id='$resp[unidade]'"); $resr=mysql_fetch_array($sqlr); print $resr["apelido"]; ?> </td>
+			<td align="left">&nbsp;<?php print $resp["codprod"]; ?></td>
+			<td width="347" align="left">&nbsp;<?php print $resp["nome"]; ?></td>
 			<td width="99" align="center">___________</td>
 		</tr>
-		<?
+		<?php
 		} if(!empty($perfil)){
 	
 		$sqlp=mysql_query("SELECT * FROM prodserv WHERE id='$perfilid'"); $resp=mysql_fetch_array($sqlp);
 		?>
 		
 		 <tr bgcolor="#FFFFFF" class="texto" onMouseover="changeto('#CCCCCC')" onMouseout="changeback('#FFFFFF')">
-		   <td>&nbsp;<? print $perfil*$res["qtd"]; ?></td>
+		   <td>&nbsp;<?php print $perfil*$res["qtd"]; ?></td>
 			<td>&nbsp;
-			  <? $sqlr=mysql_query("SELECT * FROM unidades WHERE id='$resp[unidade]'"); $resr=mysql_fetch_array($sqlr); print $resr["apelido"]; ?> </td>
-			<td align="left">&nbsp;<? print $resp["codprod"]; ?></td>
-			<td width="347" align="left">&nbsp;<? print $resp["nome"]; ?></td>
+			  <?php $sqlr=mysql_query("SELECT * FROM unidades WHERE id='$resp[unidade]'"); $resr=mysql_fetch_array($sqlr); print $resr["apelido"]; ?> </td>
+			<td align="left">&nbsp;<?php print $resp["codprod"]; ?></td>
+			<td width="347" align="left">&nbsp;<?php print $resp["nome"]; ?></td>
 			<td width="99" align="center">___________</td>
 		</tr>
-		<? } ?>
+		<?php } ?>
     </table>
-	<? }else if(!empty($res3["cortina"])){ ?>
+	<?php }else if(!empty($res3["cortina"])){ ?>
 	<table width="100%" border="0" cellpadding="0" cellspacing="1" bgcolor="#003366">
       <tr class="textoboldbranco">
         <td width="49">&nbsp;Qtd</td>
@@ -227,15 +228,15 @@ body {
         <td width="72" align="left">Largura</td>
       </tr>
       <tr bgcolor="#FFFFFF" class="texto" onMouseover="changeto('#CCCCCC')" onMouseout="changeback('#FFFFFF')">
-        <td>&nbsp;<? print $res["qtd"]; ?></td>
-        <td>&nbsp;<? print $res3["nome"]; ?></td>
+        <td>&nbsp;<?php print $res["qtd"]; ?></td>
+        <td>&nbsp;<?php print $res3["nome"]; ?></td>
         <td align="left">&nbsp;
-            <? $sqlr=mysql_query("SELECT * FROM unidades WHERE id='$res3[unidade]'"); $resr=mysql_fetch_array($sqlr); print $resr["apelido"]; ?></td>
+            <?php $sqlr=mysql_query("SELECT * FROM unidades WHERE id='$res3[unidade]'"); $resr=mysql_fetch_array($sqlr); print $resr["apelido"]; ?></td>
         <td width="61" align="left">&nbsp;
-            <? $dado=explode("X",$res["tamanho"]);
+            <?php $dado=explode("X",$res["tamanho"]);
 		$altura=$dado[0];
 		$largura=$dado[1]; print banco2valor($altura); ?></td>
-        <td width="72" align="left">&nbsp;<? print banco2valor($largura); ?></td>
+        <td width="72" align="left">&nbsp;<?php print banco2valor($largura); ?></td>
       </tr>
     </table>
 	<br>
@@ -247,7 +248,7 @@ body {
         <td width="346" align="left">Descri&ccedil;&atilde;o</td>
         <td width="101" align="center">Qtd utilizada</td>
         </tr>
-		<? 
+		<?php 
 		//Porta, calculo
 		$dado=explode("X",$res["tamanho"]);
 		$altura=$dado[0];
@@ -270,107 +271,107 @@ body {
 		$sqlp=mysql_query("SELECT * FROM prodserv WHERE id='$resi[item]'"); $resp=mysql_fetch_array($sqlp);
 		 ?>
       <tr bgcolor="#FFFFFF" class="texto" onMouseover="changeto('#CCCCCC')" onMouseout="changeback('#FFFFFF')">
-        <td>&nbsp;<? print $resi["qtd"]*$res["qtd"]; ?></td>
+        <td>&nbsp;<?php print $resi["qtd"]*$res["qtd"]; ?></td>
         <td>&nbsp;
-          <? $sqlr=mysql_query("SELECT * FROM unidades WHERE id='$resp[unidade]'"); $resr=mysql_fetch_array($sqlr); print $resr["apelido"]; ?> </td>
-        <td align="left">&nbsp;<? print $resp["codprod"]; ?></td>
-        <td width="346" align="left">&nbsp;<? print $resp["nome"]; ?></td>
+          <?php $sqlr=mysql_query("SELECT * FROM unidades WHERE id='$resp[unidade]'"); $resr=mysql_fetch_array($sqlr); print $resr["apelido"]; ?> </td>
+        <td align="left">&nbsp;<?php print $resp["codprod"]; ?></td>
+        <td width="346" align="left">&nbsp;<?php print $resp["nome"]; ?></td>
         <td width="101" align="center">&nbsp;____________</td>
         </tr>
-		<?
+		<?php
 		} if(!empty($trilho)){
 		$sqlp=mysql_query("SELECT * FROM prodserv WHERE id='$trilho'"); $resp=mysql_fetch_array($sqlp);
 		?>
 		
 		 <tr bgcolor="#FFFFFF" class="texto" onMouseover="changeto('#CCCCCC')" onMouseout="changeback('#FFFFFF')">
-		   <td>&nbsp;<? print $a["trilho"]*$res["qtd"]; ?></td>
+		   <td>&nbsp;<?php print $a["trilho"]*$res["qtd"]; ?></td>
 			<td>&nbsp;
-			  <? $sqlr=mysql_query("SELECT * FROM unidades WHERE id='$resp[unidade]'"); $resr=mysql_fetch_array($sqlr); print $resr["apelido"]; ?> </td>
-			<td align="left">&nbsp;<? print $resp["codprod"]; ?></td>
-			<td width="346" align="left">&nbsp;<? print $resp["nome"]; ?></td>
+			  <?php $sqlr=mysql_query("SELECT * FROM unidades WHERE id='$resp[unidade]'"); $resr=mysql_fetch_array($sqlr); print $resr["apelido"]; ?> </td>
+			<td align="left">&nbsp;<?php print $resp["codprod"]; ?></td>
+			<td width="346" align="left">&nbsp;<?php print $resp["nome"]; ?></td>
 			<td width="101" align="center">____________</td>
 		</tr>
-		<?
+		<?php
 		} if(!empty($pvc)){
 		$sqlp=mysql_query("SELECT * FROM prodserv WHERE id='$pvc'"); $resp=mysql_fetch_array($sqlp);
 		?>
 		
 		 <tr bgcolor="#FFFFFF" class="texto" onMouseover="changeto('#CCCCCC')" onMouseout="changeback('#FFFFFF')">
-		   <td>&nbsp;<? print $a["pvc"]*$res["qtd"]; ?></td>
+		   <td>&nbsp;<?php print $a["pvc"]*$res["qtd"]; ?></td>
 			<td>&nbsp;
-			  <? $sqlr=mysql_query("SELECT * FROM unidades WHERE id='$resp[unidade]'"); $resr=mysql_fetch_array($sqlr); print $resr["apelido"]; ?> </td>
-			<td align="left">&nbsp;<?  print $resp["codprod"]; ?></td>
-			<td width="346" align="left">&nbsp;<? print $resp["nome"]; ?></td>
+			  <?php $sqlr=mysql_query("SELECT * FROM unidades WHERE id='$resp[unidade]'"); $resr=mysql_fetch_array($sqlr); print $resr["apelido"]; ?> </td>
+			<td align="left">&nbsp;<?php  print $resp["codprod"]; ?></td>
+			<td width="346" align="left">&nbsp;<?php print $resp["nome"]; ?></td>
 			<td width="101" align="center">____________</td>
 		</tr>
-		<?
+		<?php
 		} if(!empty($arrebites)){
 		$sqlp=mysql_query("SELECT * FROM prodserv WHERE id='$arrebites'"); $resp=mysql_fetch_array($sqlp);
 		?>
 		
 		 <tr bgcolor="#FFFFFF" class="texto" onMouseover="changeto('#CCCCCC')" onMouseout="changeback('#FFFFFF')">
-		   <td>&nbsp;<? print $a["arrebites"]*$res["qtd"]; ?></td>
+		   <td>&nbsp;<?php print $a["arrebites"]*$res["qtd"]; ?></td>
 			<td>&nbsp;
-			  <? $sqlr=mysql_query("SELECT * FROM unidades WHERE id='$resp[unidade]'"); $resr=mysql_fetch_array($sqlr); print $resr["apelido"]; ?> </td>
-			<td align="left">&nbsp;<? print $resp["codprod"]; ?></td>
-			<td width="346" align="left">&nbsp;<? print $resp["nome"]; ?></td>
+			  <?php $sqlr=mysql_query("SELECT * FROM unidades WHERE id='$resp[unidade]'"); $resr=mysql_fetch_array($sqlr); print $resr["apelido"]; ?> </td>
+			<td align="left">&nbsp;<?php print $resp["codprod"]; ?></td>
+			<td width="346" align="left">&nbsp;<?php print $resp["nome"]; ?></td>
 			<td width="101" align="center">____________</td>
 		</tr>
-		<?
+		<?php
 		} if(!empty($parafusos)){
 		$sqlp=mysql_query("SELECT * FROM prodserv WHERE id='$parafusos'"); $resp=mysql_fetch_array($sqlp);
 		?>
 		
 		 <tr bgcolor="#FFFFFF" class="texto" onMouseover="changeto('#CCCCCC')" onMouseout="changeback('#FFFFFF')">
-		   <td>&nbsp;<? print $a["parafusos"]*$res["qtd"]; ?></td>
+		   <td>&nbsp;<?php print $a["parafusos"]*$res["qtd"]; ?></td>
 			<td>&nbsp;
-			  <? $sqlr=mysql_query("SELECT * FROM unidades WHERE id='$resp[unidade]'"); $resr=mysql_fetch_array($sqlr); print $resr["apelido"]; ?> </td>
-			<td align="left">&nbsp;<? print $resp["codprod"]; ?></td>
-			<td width="346" align="left">&nbsp;<? print $resp["nome"]; ?></td>
+			  <?php $sqlr=mysql_query("SELECT * FROM unidades WHERE id='$resp[unidade]'"); $resr=mysql_fetch_array($sqlr); print $resr["apelido"]; ?> </td>
+			<td align="left">&nbsp;<?php print $resp["codprod"]; ?></td>
+			<td width="346" align="left">&nbsp;<?php print $resp["nome"]; ?></td>
 			<td width="101" align="center">____________</td>
 		</tr>
-			<?
+			<?php
 		} if(!empty($buchas)){
 		$sqlp=mysql_query("SELECT * FROM prodserv WHERE id='$buchas'"); $resp=mysql_fetch_array($sqlp);
 		?>
 		
 		 <tr bgcolor="#FFFFFF" class="texto" onMouseover="changeto('#CCCCCC')" onMouseout="changeback('#FFFFFF')">
-		   <td>&nbsp;<? print $a["buchas"]*$res["qtd"]; ?></td>
+		   <td>&nbsp;<?php print $a["buchas"]*$res["qtd"]; ?></td>
 			<td>&nbsp;
-			  <? $sqlr=mysql_query("SELECT * FROM unidades WHERE id='$resp[unidade]'"); $resr=mysql_fetch_array($sqlr); print $resr["apelido"]; ?> </td>
-			<td align="left">&nbsp;<? print $resp["codprod"];  ?></td>
-			<td width="346" align="left">&nbsp;<? print $resp["nome"]; ?></td>
+			  <?php $sqlr=mysql_query("SELECT * FROM unidades WHERE id='$resp[unidade]'"); $resr=mysql_fetch_array($sqlr); print $resr["apelido"]; ?> </td>
+			<td align="left">&nbsp;<?php print $resp["codprod"];  ?></td>
+			<td width="346" align="left">&nbsp;<?php print $resp["nome"]; ?></td>
 			<td width="101" align="center">____________</td>
 		</tr>
-			<?
+			<?php
 		} if(!empty($penduralg)){
 		$sqlp=mysql_query("SELECT * FROM prodserv WHERE id='$penduralg'"); $resp=mysql_fetch_array($sqlp);
 		?>
 		
 		 <tr bgcolor="#FFFFFF" class="texto" onMouseover="changeto('#CCCCCC')" onMouseout="changeback('#FFFFFF')">
-		   <td>&nbsp;<? print $a["penduralg"]*$res["qtd"]; ?></td>
+		   <td>&nbsp;<?php print $a["penduralg"]*$res["qtd"]; ?></td>
 			<td>&nbsp;
-			  <? $sqlr=mysql_query("SELECT * FROM unidades WHERE id='$resp[unidade]'"); $resr=mysql_fetch_array($sqlr); print $resr["apelido"]; ?> </td>
-			<td align="left">&nbsp;<? print $resp["codprod"];  ?></td>
-			<td width="346" align="left">&nbsp;<? print $resp["nome"]; ?></td>
+			  <?php $sqlr=mysql_query("SELECT * FROM unidades WHERE id='$resp[unidade]'"); $resr=mysql_fetch_array($sqlr); print $resr["apelido"]; ?> </td>
+			<td align="left">&nbsp;<?php print $resp["codprod"];  ?></td>
+			<td width="346" align="left">&nbsp;<?php print $resp["nome"]; ?></td>
 			<td width="101" align="center">____________</td>
 		</tr>
-		<?
+		<?php
 		} if(!empty($penduralp)){
 		$sqlp=mysql_query("SELECT * FROM prodserv WHERE id='$penduralp'"); $resp=mysql_fetch_array($sqlp);
 		?>
 		
 		 <tr bgcolor="#FFFFFF" class="texto" onMouseover="changeto('#CCCCCC')" onMouseout="changeback('#FFFFFF')">
-		   <td>&nbsp;<? print $a["penduralp"]*$res["qtd"]; ?></td>
+		   <td>&nbsp;<?php print $a["penduralp"]*$res["qtd"]; ?></td>
 			<td>&nbsp;
-			  <? $sqlr=mysql_query("SELECT * FROM unidades WHERE id='$resp[unidade]'"); $resr=mysql_fetch_array($sqlr); print $resr["apelido"]; ?> </td>
-			<td align="left">&nbsp;<? print $resp["codprod"];  ?></td>
-			<td width="346" align="left">&nbsp;<? print $resp["nome"]; ?></td>
+			  <?php $sqlr=mysql_query("SELECT * FROM unidades WHERE id='$resp[unidade]'"); $resr=mysql_fetch_array($sqlr); print $resr["apelido"]; ?> </td>
+			<td align="left">&nbsp;<?php print $resp["codprod"];  ?></td>
+			<td width="346" align="left">&nbsp;<?php print $resp["nome"]; ?></td>
 			<td width="101" align="center">____________</td>
 		</tr>
-		<? } ?>
+		<?php } ?>
     </table>
-	<? }else if(!empty($res3["cortina_not"])){ ?>
+	<?php }else if(!empty($res3["cortina_not"])){ ?>
     <table width="100%" border="0" cellpadding="0" cellspacing="1" bgcolor="#003366">
       <tr class="textoboldbranco">
         <td width="49">&nbsp;Qtd</td>
@@ -380,15 +381,15 @@ body {
         <td width="72" align="left">Largura</td>
       </tr>
       <tr bgcolor="#FFFFFF" class="texto" onMouseover="changeto('#CCCCCC')" onMouseout="changeback('#FFFFFF')">
-        <td>&nbsp;<? print $res["qtd"]; ?></td>
-        <td>&nbsp;<? print $res3["nome"]; ?></td>
+        <td>&nbsp;<?php print $res["qtd"]; ?></td>
+        <td>&nbsp;<?php print $res3["nome"]; ?></td>
         <td align="left">&nbsp;
-            <? $sqlr=mysql_query("SELECT * FROM unidades WHERE id='$res3[unidade]'"); $resr=mysql_fetch_array($sqlr); print $resr["apelido"]; ?></td>
+            <?php $sqlr=mysql_query("SELECT * FROM unidades WHERE id='$res3[unidade]'"); $resr=mysql_fetch_array($sqlr); print $resr["apelido"]; ?></td>
         <td width="61" align="left">&nbsp;
-            <? $dado=explode("X",$res["tamanho"]);
+            <?php $dado=explode("X",$res["tamanho"]);
 		$altura=$dado[0];
 		$largura=$dado[1]; print banco2valor($altura); ?></td>
-        <td width="72" align="left">&nbsp;<? print banco2valor($largura); ?></td>
+        <td width="72" align="left">&nbsp;<?php print banco2valor($largura); ?></td>
       </tr>
     </table>
     <br>
@@ -400,7 +401,7 @@ body {
         <td width="346" align="left">Descri&ccedil;&atilde;o</td>
         <td width="101" align="center">Qtd utilizada</td>
       </tr>
-      <? 
+      <?php 
 		//Porta, calculo
 		$dado=explode("X",$res["tamanho"]);
 		$altura=$dado[0];
@@ -418,82 +419,82 @@ body {
 		$sqlp=mysql_query("SELECT * FROM prodserv WHERE id='$resi[item]'"); $resp=mysql_fetch_array($sqlp);
 		 ?>
       <tr bgcolor="#FFFFFF" class="texto" onMouseover="changeto('#CCCCCC')" onMouseout="changeback('#FFFFFF')">
-        <td>&nbsp;<? print $resi["qtd"]*$res["qtd"]; ?></td>
+        <td>&nbsp;<?php print $resi["qtd"]*$res["qtd"]; ?></td>
         <td>&nbsp;
-            <? $sqlr=mysql_query("SELECT * FROM unidades WHERE id='$resp[unidade]'"); $resr=mysql_fetch_array($sqlr); print $resr["apelido"]; ?>        </td>
-        <td align="left">&nbsp;<? print $resp["codprod"]; ?></td>
-        <td width="346" align="left">&nbsp;<? print $resp["nome"]; ?></td>
+            <?php $sqlr=mysql_query("SELECT * FROM unidades WHERE id='$resp[unidade]'"); $resr=mysql_fetch_array($sqlr); print $resr["apelido"]; ?>        </td>
+        <td align="left">&nbsp;<?php print $resp["codprod"]; ?></td>
+        <td width="346" align="left">&nbsp;<?php print $resp["nome"]; ?></td>
         <td width="101" align="center">&nbsp;____________</td>
       </tr>
-      <?
+      <?php
 		} if(!empty($tubo)){
 		$sqlp=mysql_query("SELECT * FROM prodserv WHERE id='$tubo'"); $resp=mysql_fetch_array($sqlp);
 		?>
       <tr bgcolor="#FFFFFF" class="texto" onMouseover="changeto('#CCCCCC')" onMouseout="changeback('#FFFFFF')">
-        <td>&nbsp;<? print $largura*$res["qtd"]; ?></td>
+        <td>&nbsp;<?php print $largura*$res["qtd"]; ?></td>
         <td>&nbsp;
-            <? $sqlr=mysql_query("SELECT * FROM unidades WHERE id='$resp[unidade]'"); $resr=mysql_fetch_array($sqlr); print $resr["apelido"]; ?>        </td>
-        <td align="left">&nbsp;<? print $resp["codprod"]; ?></td>
-        <td width="346" align="left">&nbsp;<? print $resp["nome"]; ?></td>
+            <?php $sqlr=mysql_query("SELECT * FROM unidades WHERE id='$resp[unidade]'"); $resr=mysql_fetch_array($sqlr); print $resr["apelido"]; ?>        </td>
+        <td align="left">&nbsp;<?php print $resp["codprod"]; ?></td>
+        <td width="346" align="left">&nbsp;<?php print $resp["nome"]; ?></td>
         <td width="101" align="center">____________</td>
       </tr>
-      <?
+      <?php
 		} if(!empty($perfil1)){
 		$sqlp=mysql_query("SELECT * FROM prodserv WHERE id='$perfil1'"); $resp=mysql_fetch_array($sqlp);
 		?>
       <tr bgcolor="#FFFFFF" class="texto" onMouseover="changeto('#CCCCCC')" onMouseout="changeback('#FFFFFF')">
-        <td>&nbsp;<? print $largura*$res["qtd"]; ?></td>
+        <td>&nbsp;<?php print $largura*$res["qtd"]; ?></td>
         <td>&nbsp;
-            <? $sqlr=mysql_query("SELECT * FROM unidades WHERE id='$resp[unidade]'"); $resr=mysql_fetch_array($sqlr); print $resr["apelido"]; ?>        </td>
+            <?php $sqlr=mysql_query("SELECT * FROM unidades WHERE id='$resp[unidade]'"); $resr=mysql_fetch_array($sqlr); print $resr["apelido"]; ?>        </td>
         <td align="left">&nbsp;
-            <?  print $resp["codprod"]; ?></td>
-        <td width="346" align="left">&nbsp;<? print $resp["nome"]; ?></td>
+            <?php  print $resp["codprod"]; ?></td>
+        <td width="346" align="left">&nbsp;<?php print $resp["nome"]; ?></td>
         <td width="101" align="center">____________</td>
       </tr>
-      <?
+      <?php
 		} if(!empty($perfil2)){
 		$sqlp=mysql_query("SELECT * FROM prodserv WHERE id='$perfil2'"); $resp=mysql_fetch_array($sqlp);
 		?>
       <tr bgcolor="#FFFFFF" class="texto" onMouseover="changeto('#CCCCCC')" onMouseout="changeback('#FFFFFF')">
-        <td>&nbsp;<? print $largura*$res["qtd"]; ?></td>
+        <td>&nbsp;<?php print $largura*$res["qtd"]; ?></td>
         <td>&nbsp;
-            <? $sqlr=mysql_query("SELECT * FROM unidades WHERE id='$resp[unidade]'"); $resr=mysql_fetch_array($sqlr); print $resr["apelido"]; ?>        </td>
-        <td align="left">&nbsp;<? print $resp["codprod"]; ?></td>
-        <td width="346" align="left">&nbsp;<? print $resp["nome"]; ?></td>
+            <?php $sqlr=mysql_query("SELECT * FROM unidades WHERE id='$resp[unidade]'"); $resr=mysql_fetch_array($sqlr); print $resr["apelido"]; ?>        </td>
+        <td align="left">&nbsp;<?php print $resp["codprod"]; ?></td>
+        <td width="346" align="left">&nbsp;<?php print $resp["nome"]; ?></td>
         <td width="101" align="center">____________</td>
       </tr>
-      <?
+      <?php
 		} if(!empty($parafusos)){
 		$sqlp=mysql_query("SELECT * FROM prodserv WHERE id='$parafusos'"); $resp=mysql_fetch_array($sqlp);
 		?>
 
-      <?
+      <?php
 		} if(!empty($buchas)){
 		$sqlp=mysql_query("SELECT * FROM prodserv WHERE id='$buchas'"); $resp=mysql_fetch_array($sqlp);
 		?>
 
-      <?
+      <?php
 		} if(!empty($penduralg)){
 		$sqlp=mysql_query("SELECT * FROM prodserv WHERE id='$penduralg'"); $resp=mysql_fetch_array($sqlp);
 		?>
 
-      <?
+      <?php
 		} if(!empty($penduralp)){
 		$sqlp=mysql_query("SELECT * FROM prodserv WHERE id='$penduralp'"); $resp=mysql_fetch_array($sqlp);
 		?>
 
-      <? } ?>
+      <?php } ?>
     </table>
-    <? } ?></td>
+    <?php } ?></td>
   </tr>
   <tr align="center">
     <td colspan="4">&nbsp;</td>
   </tr>
   <tr>
-    <td colspan="4">Obs: <?= $res["obs"]; ?> </td>
+    <td colspan="4">Obs: <?php echo  $res["obs"]; ?> </td>
   </tr>
   <tr align="center">
-    <td colspan="4"><a href="#"><img src="imagens/imprimir.gif" width="60" id="bot" name="bot" height="14" border="0" onClick="return imprimir(this,'<?= $res["pedido"]; ?>','<?= $res["prodserv"]; ?>')"></a></td>
+    <td colspan="4"><a href="#"><img src="imagens/imprimir.gif" width="60" id="bot" name="bot" height="14" border="0" onClick="return imprimir(this,'<?php echo  $res["pedido"]; ?>','<?php echo  $res["prodserv"]; ?>')"></a></td>
   </tr>
 </table>
 </body>

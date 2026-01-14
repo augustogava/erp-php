@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 $acao=verifi($permi,$acao);
 if(!empty($acao)){
@@ -13,7 +13,7 @@ if($acao=="enviar"){
 	foreach($lines as $line){
 		$msg.=$line;
 	}
-	mail("$email","Proposta","$msg","From:E-sinalizaÁ„o<$res2[email]>\nContent-type: text/html\n");
+	mail("$email","Proposta","$msg","From:E-sinaliza√ß√£o<$res2[email]>\nContent-type: text/html\n");
 	print "<script>window.alert('Enviado com sucesso!');window.close();</script>";
 }
 $sql=mysql_query("SELECT * FROM vendas_orcamento WHERE id='$id'");
@@ -24,7 +24,8 @@ $res=mysql_fetch_array($sql);
 <html>
 <head>
 <title>Untitled Document</title>
-<meta http-equiv="Content-Type" content="text/html; UTF-8">
+<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="style.css" rel="stylesheet" type="text/css">
 <style type="text/css">
 <!--
@@ -67,20 +68,20 @@ body {
       <tr>
         <td width="40" rowspan="2"><div align="center">
           
-            <input name="email" type="radio" value="<? print $res["email"]; ?>">
+            <input name="email" type="radio" value="<?php print $res["email"]; ?>">
           
         </div></td>
         <td width="61">Contato:</td>
-        <td width="285">&nbsp;<? print $res["nome"]; ?></td>
+        <td width="285">&nbsp;<?php print $res["nome"]; ?></td>
       </tr>
       <tr>
         <td>Email:</td>
-        <td>&nbsp;<? print $res["email"]; ?></td>
+        <td>&nbsp;<?php print $res["email"]; ?></td>
       </tr>
     </table></td>
   </tr>
   <tr>
-    <td align="center" class="titulos"><input name="acao" type="hidden" id="acao" value="enviar">      <input name="compra" type="hidden" id="compra" value="<?= $id; ?>">      <input type="submit" name="Submit" value="Enviar"></td>
+    <td align="center" class="titulos"><input name="acao" type="hidden" id="acao" value="enviar">      <input name="compra" type="hidden" id="compra" value="<?php echo  $id; ?>">      <input type="submit" name="Submit" value="Enviar"></td>
   </tr>
 </table>
 </form>

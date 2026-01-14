@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 include("seguranca.php");
 if(empty($acao)) exit;
@@ -11,10 +11,10 @@ if(!empty($acao)){
 if($acao=="inc"){
 	$sql=mysql_query("INSERT INTO prodserv_cat (idpai,codigo,texto,ativo) VALUES ('$idpai','$codigo','$texto','$ativo')");
 	if($sql){
-		$_SESSION["mensagem"]="Categoria incluída com sucesso!";
+		$_SESSION["mensagem"]="Categoria incluÃ­da com sucesso!";
 		$acao="entrar";
 	}else{
-		$_SESSION["mensagem"]="A categoria não pôde ser incluída!";
+		$_SESSION["mensagem"]="A categoria nÃ£o pÃ´de ser incluÃ­da!";
 		$acao="inc";
 	}
 }elseif($acao=="alt"){
@@ -23,7 +23,7 @@ if($acao=="inc"){
 		$_SESSION["mensagem"]="Categoria alterada com sucesso!";
 		$acao="entrar";
 	}else{
-		$_SESSION["mensagem"]="A categoria não pôde ser alterada!";
+		$_SESSION["mensagem"]="A categoria nÃ£o pÃ´de ser alterada!";
 		$acao="alt";
 	}
 }elseif($acao=="exc"){
@@ -42,9 +42,9 @@ if($acao=="inc"){
 				}
 			}
 			delno($id);
-			$_SESSION["mensagem"]="Categoria excluída com sucesso!";
+			$_SESSION["mensagem"]="Categoria excluÃ­da com sucesso!";
 		}else{
-			$_SESSION["mensagem"]="A categoria não pôde ser excluída!";
+			$_SESSION["mensagem"]="A categoria nÃ£o pÃ´de ser excluÃ­da!";
 		}
 	}
 	$acao="entrar";

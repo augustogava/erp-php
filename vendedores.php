@@ -1,11 +1,12 @@
-<?
+<?php
 include("conecta.php");
 include("seguranca.php");
 ?>
 <html>
 <head>
 <title>CyberManager</title>
-<meta http-equiv="Content-Type" content="text/html; UTF-8">
+<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="style.css" rel="stylesheet" type="text/css">
 <script src="scripts.js"></script>
 </head>
@@ -35,13 +36,13 @@ include("seguranca.php");
       <tr>
         <td width="116" class="textobold">Selecione os n&iacute;veis:</td>
         <td width="478"><select name="vendedores[]" size="5" multiple class="formularioselect" id="vendedores">
-<?
+<?php
 $sql=mysql_query("SELECT * FROM niveis ORDER BY nome ASC");
 if(mysql_num_rows($sql)){
 	while($res=mysql_fetch_array($sql)){
 ?>
-		  <option value="<?= $res["id"]; ?>" <? if($res["vendedor"]==1) print "selected"; ?>><?= $res["nome"]; ?></option>
-<?
+		  <option value="<?php echo  $res["id"]; ?>" <?php if($res["vendedor"]==1) print "selected"; ?>><?php echo  $res["nome"]; ?></option>
+<?php
 	}
 }
 ?>
@@ -60,4 +61,4 @@ if(mysql_num_rows($sql)){
 </table>
 </body>
 </html>
-<? include("mensagem.php"); ?>
+<?php include("mensagem.php"); ?>

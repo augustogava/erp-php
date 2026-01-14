@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 include("seguranca.php");
 $bd=new set_bd();
@@ -16,7 +16,7 @@ if($acao=="verificar"){
 				$cp=$res["id"];
 				header("Location:etiqueta.php?acao=ver&cp=$cp");
 			}else{
-				$_SESSION["mensagem"]="Pedido não encontrado!!";
+				$_SESSION["mensagem"]="Pedido nÃ£o encontrado!!";
 				header("Location:etiqueta.php?acao=entrar");
 				exit;
 			}
@@ -30,7 +30,8 @@ if($acao=="verificar"){
 <html>
 <head>
 <title>CyberManager</title>
-<meta http-equiv="Content-Type" content="text/html; UTF-8">
+<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="style.css" rel="stylesheet" type="text/css">
 <script src="scripts.js"></script>
 <script src="mascaras.js"></script>
@@ -45,7 +46,7 @@ if($acao=="verificar"){
 </head>
 <body background="imagens/mdagua.gif" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" onLoad="enterativa=1;"onkeypress="return ent()">
 <table width="594" border="0" cellpadding="0" cellspacing="0">
-<? if($acao=="entrar"){ ?>
+<?php if($acao=="entrar"){ ?>
   <tr> 
     <td align="left" valign="top"><form action="" method="post" name="formid" id="formid">
         <table width="99%" border="0" align="center" cellpadding="0" cellspacing="2" class="texto">
@@ -64,12 +65,12 @@ if($acao=="verificar"){
       </tr>
     </table></td>
           </tr>
-          <? if($err){ ?>
+          <?php if($err){ ?>
 
           <tr>
             <td colspan="2" class="texto_azul"><strong><font color="#FF0000">Pedido n&atilde;o encontrado, digite novamente!</font></strong></td>
           </tr>
-          <? } ?>
+          <?php } ?>
           <tr>
             <td colspan="2">&nbsp;</td>
           </tr>
@@ -95,12 +96,12 @@ if($acao=="verificar"){
         </table>
       </form></td>
   </tr>
-  <? }else{ ?>
+  <?php }else{ ?>
   <tr>
     <td align="left" valign="top">
         <table width="99%"  border="0" cellpadding="0" cellspacing="0" class="texto">
           <tr>
-            <td bgcolor="#FFFFFF"><span class="preto style4"><strong>Etiqueta do Pedido <?= $cp; ?>
+            <td bgcolor="#FFFFFF"><span class="preto style4"><strong>Etiqueta do Pedido <?php echo  $cp; ?>
             </strong></span></td>
           </tr>
         </table>
@@ -116,24 +117,24 @@ if($acao=="verificar"){
                 <td class="texto style2">&nbsp;</td>
               </tr>
               <tr>
-                <td class="texto style2"><span class="style5"><strong>Razao Social:</strong> <? print $resp["nome"]; ?></span></td>
+                <td class="texto style2"><span class="style5"><strong>Razao Social:</strong> <?php print $resp["nome"]; ?></span></td>
               </tr>
               <tr>
-                <td><span class="style5"><strong>Endere&ccedil;o:</strong> <? print $resp["endereco"]." ".$resp["numero"]; ?></span></td>
+                <td><span class="style5"><strong>Endere&ccedil;o:</strong> <?php print $resp["endereco"]." ".$resp["numero"]; ?></span></td>
               </tr>
               <tr>
-                <td><span class="style5"><strong>Bairro:</strong> <? print $resp["bairro"]; ?></span></td>
+                <td><span class="style5"><strong>Bairro:</strong> <?php print $resp["bairro"]; ?></span></td>
               </tr>
               <tr>
-                <td><span class="style5"><strong>Cidade:</strong> <? print $resp["cidade"]; ?>&nbsp;&nbsp;&nbsp;<strong>UF:</strong>
-                    <? $bd->pega_nome_bd("estado","nome",$resp["estado"]);  ?>
+                <td><span class="style5"><strong>Cidade:</strong> <?php print $resp["cidade"]; ?>&nbsp;&nbsp;&nbsp;<strong>UF:</strong>
+                    <?php $bd->pega_nome_bd("estado","nome",$resp["estado"]);  ?>
                 </span></td>
               </tr>
               <tr>
-                <td><span class="style5"><strong>CEP:</strong> <? print $resp["cep"]; ?></span></td>
+                <td><span class="style5"><strong>CEP:</strong> <?php print $resp["cep"]; ?></span></td>
               </tr>
               <tr>
-                <td><span class="style5"><strong>NF:</strong> <? print $rnf["numero"]; ?></span></td>
+                <td><span class="style5"><strong>NF:</strong> <?php print $rnf["numero"]; ?></span></td>
               </tr>
             </table>
               <table width="100%" border="0" cellpadding="0" cellspacing="0" class="texto">
@@ -153,32 +154,32 @@ if($acao=="verificar"){
                   <td class="texto">&nbsp;</td>
                 </tr>
                 <tr>
-                  <td class="texto style4"><span class="style6"><strong>Razao Social:</strong> <? print $resp["nome"]; ?></span></td>
+                  <td class="texto style4"><span class="style6"><strong>Razao Social:</strong> <?php print $resp["nome"]; ?></span></td>
                 </tr>
                 <tr>
-                  <td><span class="style6"><strong>Endere&ccedil;o:</strong> <? print $resp["endereco"]." ".$resp["numero"]; ?></span></td>
+                  <td><span class="style6"><strong>Endere&ccedil;o:</strong> <?php print $resp["endereco"]." ".$resp["numero"]; ?></span></td>
                 </tr>
                 <tr>
-                  <td><span class="style6"><strong>Bairro:</strong> <? print $resp["bairro"]; ?></span></td>
+                  <td><span class="style6"><strong>Bairro:</strong> <?php print $resp["bairro"]; ?></span></td>
                 </tr>
                 <tr>
-                  <td><span class="style6"><strong>Cidade:</strong> <? print $resp["cidade"]; ?>&nbsp;&nbsp;&nbsp;<strong>UF:</strong>
-                  <? $bd->pega_nome_bd("estado","nome",$resp["estado"]);  ?>
+                  <td><span class="style6"><strong>Cidade:</strong> <?php print $resp["cidade"]; ?>&nbsp;&nbsp;&nbsp;<strong>UF:</strong>
+                  <?php $bd->pega_nome_bd("estado","nome",$resp["estado"]);  ?>
                   </span></td>
                 </tr>
                 <tr>
-                  <td><span class="style6"><strong>CEP:</strong> <? print $resp["cep"]; ?></span></td>
+                  <td><span class="style6"><strong>CEP:</strong> <?php print $resp["cep"]; ?></span></td>
                 </tr>
                 <tr>
-                  <td><span class="style6"><strong>NF:</strong><? print $rnf["numero"]; ?></span></td>
+                  <td><span class="style6"><strong>NF:</strong><?php print $rnf["numero"]; ?></span></td>
                 </tr>
               </table></td>
           </tr>
         </table>
     </td>
-	<? } ?>
+	<?php } ?>
 </tr>
 </table>
 </body>
 </html>
-<? include("mensagem.php"); ?>
+<?php include("mensagem.php"); ?>

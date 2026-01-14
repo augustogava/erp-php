@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 include("seguranca.php");
 ?>
@@ -13,7 +13,7 @@ include("seguranca.php");
 <!--
 function verifica(cad){
 	if(cad.numero.value==''){
-		alert('Preencha o Número Interno');
+		alert('Preencha o NÃºmero Interno');
 		cad.numero.focus();
 		return false;
 	}
@@ -35,7 +35,7 @@ function MM_openBrWindow(theURL,winName,features) { //v2.0
 <body  leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" onLoad="enterativa=1;"onkeypress="return ent()">
 <table width="590" border="0" cellpadding="0" cellspacing="0" class="texto">
       <tr>
-        <td width="27" align="center"><div align="left"><a href="#" onClick="MM_openBrWindow('help/mini_cad_pecas.html','','width=680,height=501,left=300,top=50')"><img src="imagens/icon14_ahn.gif" width="14" height="14" border="0" onMouseOver="this.T_STICKY=true; this.T_TITLE='Cadastro de peças'; this.T_DELAY=10; this.T_WIDTH=225;  return escape('Preencha os campos obrigatórios, Numero interno, Rev, Data, Nome da peça, Cliente, N° peça Cli e depois de um clique em Cadastrar')"></a><span class="impTextoBold">&nbsp;</span></div></td>
+        <td width="27" align="center"><div align="left"><a href="#" onClick="MM_openBrWindow('help/mini_cad_pecas.html','','width=680,height=501,left=300,top=50')"><img src="imagens/icon14_ahn.gif" width="14" height="14" border="0" onMouseOver="this.T_STICKY=true; this.T_TITLE='Cadastro de peÃ§as'; this.T_DELAY=10; this.T_WIDTH=225;  return escape('Preencha os campos obrigatÃ³rios, Numero interno, Rev, Data, Nome da peÃ§a, Cliente, NÂ° peÃ§a Cli e depois de um clique em Cadastrar')"></a><span class="impTextoBold">&nbsp;</span></div></td>
         <td width="563" align="right"><div align="left" class="titulos">Recebimento - Notifica&ccedil;&atilde;o de N&atilde;o-Conformidade </div></td>
       </tr>
 </table>
@@ -114,7 +114,7 @@ function MM_openBrWindow(theURL,winName,features) { //v2.0
             </tr>
             <tr>
               <td class="textobold"><div align="left">&nbsp;Causas da N/C:&nbsp;</div></td>
-              <td width="77%" rowspan="2" class="textobold"><textarea name="historico" rows="4" wrap="VIRTUAL" class="formularioselect" id="historico" onFocus="enterativa=0;" onBlur="enterativa=1;"><? print $res["historico"]; ?></textarea></td>
+              <td width="77%" rowspan="2" class="textobold"><textarea name="historico" rows="4" wrap="VIRTUAL" class="formularioselect" id="historico" onFocus="enterativa=0;" onBlur="enterativa=1;"><?php print $res["historico"]; ?></textarea></td>
               <td width="1%" rowspan="2"><a href="#" class="" onClick="window.open('agenda_pop.php?window_position=apqp_pc_inc_2&var_field=dteng','','scrollbars=no,width=155,height=138');"></a></td>
             </tr>
             <tr>
@@ -125,7 +125,7 @@ function MM_openBrWindow(theURL,winName,features) { //v2.0
             </tr>
             <tr>
               <td class="textobold"><div align="left">&nbsp;A&ccedil;&otilde;es Imediatas:&nbsp;</div></td>
-              <td rowspan="2" class="textobold"><textarea name="historico" rows="4" wrap="VIRTUAL" class="formularioselect" id="historico" onFocus="enterativa=0;" onBlur="enterativa=1;"><? print $res["historico"]; ?></textarea></td>
+              <td rowspan="2" class="textobold"><textarea name="historico" rows="4" wrap="VIRTUAL" class="formularioselect" id="historico" onFocus="enterativa=0;" onBlur="enterativa=1;"><?php print $res["historico"]; ?></textarea></td>
               <td rowspan="2"><a href="#" class="" onClick="window.open('agenda_pop.php?window_position=apqp_pc_inc_2&var_field=dteng','','scrollbars=no,width=155,height=138');"></a></td>
             </tr>
             <tr>
@@ -136,7 +136,7 @@ function MM_openBrWindow(theURL,winName,features) { //v2.0
             </tr>
             <tr>
               <td class="textobold"><div align="left">&nbsp;A&ccedil;&otilde;es a Longo&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Prazo:</div></td>
-              <td rowspan="2" class="textobold"><textarea name="historico" rows="4" wrap="VIRTUAL" class="formularioselect" id="historico" onFocus="enterativa=0;" onBlur="enterativa=1;"><? print $res["historico"]; ?></textarea></td>
+              <td rowspan="2" class="textobold"><textarea name="historico" rows="4" wrap="VIRTUAL" class="formularioselect" id="historico" onFocus="enterativa=0;" onBlur="enterativa=1;"><?php print $res["historico"]; ?></textarea></td>
               <td rowspan="2"><a href="#" class="" onClick="window.open('agenda_pop.php?window_position=apqp_pc_inc_2&var_field=dteng','','scrollbars=no,width=155,height=138');"></a></td>
             </tr>
             <tr>
@@ -147,7 +147,7 @@ function MM_openBrWindow(theURL,winName,features) { //v2.0
             </tr>
             <tr>
               <td class="textobold"><div align="left">&nbsp;Estimativas:&nbsp;</div></td>
-              <td rowspan="2" class="textobold"><textarea name="historico" rows="4" wrap="VIRTUAL" class="formularioselect" id="historico" onFocus="enterativa=0;" onBlur="enterativa=1;"><? print $res["historico"]; ?></textarea></td>
+              <td rowspan="2" class="textobold"><textarea name="historico" rows="4" wrap="VIRTUAL" class="formularioselect" id="historico" onFocus="enterativa=0;" onBlur="enterativa=1;"><?php print $res["historico"]; ?></textarea></td>
               <td rowspan="2"><a href="#" class="" onClick="window.open('agenda_pop.php?window_position=apqp_pc_inc_2&var_field=dteng','','scrollbars=no,width=155,height=138');"></a></td>
             </tr>
             <tr>
@@ -174,4 +174,4 @@ function MM_openBrWindow(theURL,winName,features) { //v2.0
 </body>
 </html>
 <script language="javascript" src="tooltip.js"></script>
-<? include("mensagem.php"); ?>
+<?php include("mensagem.php"); ?>

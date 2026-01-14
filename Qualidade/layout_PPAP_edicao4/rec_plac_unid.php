@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 $popup=true;
 include("seguranca.php");
@@ -23,22 +23,22 @@ windowHeight=50;
 
 if (parseInt(navigator.appVersion) >= 4) window.moveTo((screen.width/2)-(windowWidth/2+10),(screen.height/2)-(windowHeight/2+20));
 function marca(id,apelido){
-<?	 if($campo=="1"){ ?>
+<?php	 if($campo=="1"){ ?>
 		opener.form1.unie1.value=apelido;
 		opener.form1.idunie1.value=id;
-<?	} else if($campo=="2"){ ?>
+<?php	} else if($campo=="2"){ ?>
 		opener.form1.unie2.value=apelido;
 		opener.form1.idunie2.value=id;
-<?	} else if($campo=="3"){ ?>
+<?php	} else if($campo=="3"){ ?>
 		opener.form1.unia1.value=apelido;
 		opener.form1.idunia1.value=id;		
-<?	} else if($campo=="4"){ ?>
+<?php	} else if($campo=="4"){ ?>
 		opener.form1.unia2.value=apelido;
 		opener.form1.idunia2.value=id;		
-<?	} else if($campo=="5"){ ?>
+<?php	} else if($campo=="5"){ ?>
 		opener.form1.unim.value=apelido;
 		opener.form1.idunim.value=id;		
-<?	} ?>
+<?php	} ?>
 	window.close();
 }
 function fec(){
@@ -79,14 +79,14 @@ function fec(){
     <td width="95">Nome</td>
     <td width="197">Descri&ccedil;&atilde;o</td>
   </tr>
-	<?
+	<?php
 	$sql=mysql_query("SELECT * FROM unidades WHERE 1 $cond ORDER BY apelido ASC");
 	if(mysql_num_rows($sql)==0){
 	?>
   <tr bgcolor="#FFFFFF">
     <td colspan="2" align="center" class="textopretobold">NENHUMA UNIDADE DE MEDIDA CADASTRADA </td>
   </tr>
-	<?
+	<?php
 	}else{
 		//BLOCO PAGINACAO
 		$results_tot=mysql_num_rows($sql); //total de registros encontrados
@@ -122,16 +122,16 @@ function fec(){
 	  	while($res=mysql_fetch_array($sql)){
 			$reg_final++; // PAGINACAO conta quantos registros imprimiu
 	?>
-  <tr bgcolor="#FFFFFF" class="textopreto" onMouseover="changeto('#CCCCCC')" onMouseout="changeback('#FFFFFF')"><a href="#" onClick="return marca('<? print $res["id"]; ?>','<? print $res["apelido"]; ?>');">
-    <td>&nbsp;<?=$res["apelido"];?></td>
-    <td><?= $res["nome"];?></td></a>  </tr>
-	<?
+  <tr bgcolor="#FFFFFF" class="textopreto" onMouseover="changeto('#CCCCCC')" onMouseout="changeback('#FFFFFF')"><a href="#" onClick="return marca('<?php print $res["id"]; ?>','<?php print $res["apelido"]; ?>');">
+    <td>&nbsp;<?php echo $res["apelido"];?></td>
+    <td><?php echo  $res["nome"];?></td></a>  </tr>
+	<?php
 		}
 	}
 	?>
 </table>
-<a href="javascript:window.close();" onClick="marca('<? print $res["id"]; ?>','<?=$res["apelido"]." - ".$res["nome"];?>');"></a>
-<? if($wpaginar){ ?>
+<a href="javascript:window.close();" onClick="marca('<?php print $res["id"]; ?>','<?php echo $res["apelido"]." - ".$res["nome"];?>');"></a>
+<?php if($wpaginar){ ?>
 <table width="296" border="0" align="center" cellpadding="0" cellspacing="0">
             <tr>
               <td width="296"><img src="imagens/dot.gif" width="20" height="8"></td>
@@ -141,19 +141,19 @@ function fec(){
                 <table width="1%" border="0" cellspacing="0" cellpadding="0">
                   <tr valign="top">
                     <td align="right">
-                      <? 
+                      <?php 
 				$antz=false;
 				if($wp>1){
 					$antz=true;
 				?>
-                      <a href="<? print "rec_plac_unid.php?wp=$pg_anterior&bnome=$bnome&bapelido=$bapelido"; ?>" class="texto">
-                      <? } ?>
+                      <a href="<?php print "rec_plac_unid.php?wp=$pg_anterior&bnome=$bnome&bapelido=$bapelido"; ?>" class="texto">
+                      <?php } ?>
                       <img src="imagens/pag_f.gif" border="0">
-                      <? if($antz){ ?>
+                      <?php if($antz){ ?>
                       <br>
             Anterior</a>
-                      <? } ?>                    </td>
-                    <?
+                      <?php } ?>                    </td>
+                    <?php
 				$link_impressos=0;
 				if ($temp > $wpaginacao){
 		    	    $n_start  = $temp - ceil($wpaginacao/2);
@@ -167,30 +167,30 @@ function fec(){
 					$link_impressos++;
 				?>
                     <td align="center">
-                      <? if($pg_atual != $link_impressos){ ?>
-                      <a href="<? print "rec_plac_unid.php?wp=$link_impressos&bnome=$bnome&bapelido=$bapelido"; ?>" class="texto">
-                      <? } ?>
-                      <img src="imagens/pag_e<? if($pg_atual==$link_impressos) { print "2"; }else{ print ""; } ?>.gif" border="0"><br>
-                      <? if($pg_atual==$link_impressos){ print "<span class=\"textobold\">$link_impressos</span>"; }else{ print $link_impressos; }?>
-                      <? if($pg_atual != $link_impressos){ ?>
+                      <?php if($pg_atual != $link_impressos){ ?>
+                      <a href="<?php print "rec_plac_unid.php?wp=$link_impressos&bnome=$bnome&bapelido=$bapelido"; ?>" class="texto">
+                      <?php } ?>
+                      <img src="imagens/pag_e<?php if($pg_atual==$link_impressos) { print "2"; }else{ print ""; } ?>.gif" border="0"><br>
+                      <?php if($pg_atual==$link_impressos){ print "<span class=\"textobold\">$link_impressos</span>"; }else{ print $link_impressos; }?>
+                      <?php if($pg_atual != $link_impressos){ ?>
                       </a>
-                      <? } ?></td>
-                    <?
+                      <?php } ?></td>
+                    <?php
 				}
 				?>
                     <td>
-                      <? if($reg_final<$results_tot){ ?>
-                      <a href="<? print "rec_plac_unid.php?wp=$pg_proxima&bnome=$bnome&bapelido=$bapelido"; ?>" class="texto">
-                      <? } ?>
+                      <?php if($reg_final<$results_tot){ ?>
+                      <a href="<?php print "rec_plac_unid.php?wp=$pg_proxima&bnome=$bnome&bapelido=$bapelido"; ?>" class="texto">
+                      <?php } ?>
                       <img src="imagens/pag_der.gif" border="0">
-                      <? if($reg_final<$results_tot){ ?>
+                      <?php if($reg_final<$results_tot){ ?>
                       <br>
             Pr&oacute;ximo</a>
-                      <? } ?>                    </td>
+                      <?php } ?>                    </td>
                   </tr>
               </table></td>
             </tr>
-</table>            <? } ?>
+</table>            <?php } ?>
 </body>
 </html>
-<? include("mensagem.php"); ?>
+<?php include("mensagem.php"); ?>

@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 if(empty($acao)) exit;
 $acao=verifi($permi,$acao);
@@ -13,16 +13,16 @@ if($acao=="alterar"){
 		$_SESSION["mensagem"]="Cortina alterado com sucesso!";
 		$acao="entrar";
 	}else{
-		$_SESSION["mensagem"]="A Cortina não pôde ser alterado!";
+		$_SESSION["mensagem"]="A Cortina nÃ£o pÃ´de ser alterado!";
 		$acao="alt";
 	}
 }else if($acao=="incluir"){
 		$sql=mysql_query("INSERT INTO cortinas (nome,trilho,pvc,arrebites,parafusos,buchas,penduralg,penduralp) VALUES ('$nome','$trilho','$pvc','$arrebites','$parafusos','$buchas','$penduralg','$penduralp')");
 	if($sql){
-		$_SESSION["mensagem"]="Cortina incluída com sucesso!";
+		$_SESSION["mensagem"]="Cortina incluÃ­da com sucesso!";
 		$acao="entrar";
 	}else{
-		$_SESSION["mensagem"]="A Cortina não pôde ser incluído!";
+		$_SESSION["mensagem"]="A Cortina nÃ£o pÃ´de ser incluÃ­do!";
 		$acao="inc";
 	}
 }

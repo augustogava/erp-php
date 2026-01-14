@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 include("seguranca.php");
 if(!empty($acao)){
@@ -85,7 +85,7 @@ if($acao=="alt"){
 		header("Location:clientes.php?bcod=$bcod&bnome=$bnome");
 		exit;				
 	}else{
-		$_SESSION["mensagem"]="O cadastro financeiro não pôde ser alterado!";
+		$_SESSION["mensagem"]="O cadastro financeiro nÃ£o pÃ´de ser alterado!";
 		$desconto=banco2valor($desconto);
 		$credito_lim=banco2valor($credito_lim);
 		$compra_mai=banco2valor($compra_mai);
@@ -131,11 +131,11 @@ if($acao=="alt"){
 	$cheques_ult=data2banco($cheques_ult);	
 	$sql=mysql_query("INSERT INTO cliente_financeiro (cliente,classe,frete,cond,desconto,prioridade,risco,credito_lim,credito_ven,compra_mai,atraso_med,saldo_mai,compra_num,compra_pri,compra_ult,visitas_freq,visitas_ult,mensagem,pagamentos,saldo_titulo,saldo_lib,suframa,atrasados,acumulado,saldo_ped,protestos_tit,protestos_ult,cheques_dev,cheques_ult,atraso_mai,dupl_mai,tabela,natureza,iss,icms,agregador,saldo_moe,pagtos_atras,grupo_cli,suframa_desc) VALUES ('$id','$classe','$frete','$cond','$desconto','$prioridade','$risco','$credito_lim','$credito_ven','$compra_mai','$atraso_med','$saldo_mai','$compra_num','$compra_pri','$compra_ult','$visitas_freq','$visitas_ult','$mens','$pagamentos','$saldo_titulo','$saldo_lib','$suframa','$atrasados','$acumulado','$saldo_ped','$protestos_tit','$protestos_ult','$cheques_dev','$cheques_ult','$atraso_mai','$dupl_mai','$tabela','$natureza','$iss','$icms','$agregador','$saldo_moe','$pagtos_atras','$grupo_cli','$suframa_desc')");
 	if($sql){
-		$_SESSION["mensagem"]="Cadastro financeiro concluído!";
+		$_SESSION["mensagem"]="Cadastro financeiro concluÃ­do!";
 		header("Location:clientes.php");
 		exit;				
 	}else{
-		$_SESSION["mensagem"]="O cadastro financeiro não pôde ser concluído!";
+		$_SESSION["mensagem"]="O cadastro financeiro nÃ£o pÃ´de ser concluÃ­do!";
 		$desconto=banco2valor($desconto);
 		$credito_lim=banco2valor($credito_lim);
 		$compra_mai=banco2valor($compra_mai);
@@ -163,14 +163,15 @@ if($acao=="alt"){
 <html>
 <head>
 <title>CyberManager</title>
-<meta http-equiv="Content-Type" content="text/html; UTF-8">
+<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="style.css" rel="stylesheet" type="text/css">
 <script src="mascaras.js"></script>
 <script src="scripts.js"></script>
 <script>
 function verifica(cad){
 	if(cad.cond.value==''){
-		alert('Informe a condição de pagamento');
+		alert('Informe a condiÃ§Ã£o de pagamento');
 		cad.cond.focus();
 		return false;
 	}
@@ -210,208 +211,208 @@ function verifica(cad){
           <tr class="textobold"> 
             <td width="94">&nbsp;Classe Cred.:</td>
             <td width="353">
-<input name="classe" type="text" class="formulario" id="classe" value="<? print $classe; ?>" size="30" maxlength="20"></td>
+<input name="classe" type="text" class="formulario" id="classe" value="<?php print $classe; ?>" size="30" maxlength="20"></td>
           </tr>
           <tr class="textobold"> 
             <td>&nbsp;Tipo Frete:</td>
             <td>
-<input name="frete" type="text" class="formulario" id="frete" value="<? print $frete; ?>" size="10" maxlength="1"></td>
+<input name="frete" type="text" class="formulario" id="frete" value="<?php print $frete; ?>" size="10" maxlength="1"></td>
           </tr>
           <tr class="textobold"> 
             <td>&nbsp;Cond. Pagto:</td>
             <td>
-<input name="cond" type="text" class="formulario" id="cond" value="<? print $cond; ?>" size="30" maxlength="20"></td>
+<input name="cond" type="text" class="formulario" id="cond" value="<?php print $cond; ?>" size="30" maxlength="20"></td>
           </tr>
           <tr class="textobold"> 
             <td>&nbsp;Desconto:</td>
             <td>
-<input name="desconto" type="text" class="formulario" id="desconto" value="<? print $desconto; ?>" size="10" onKeyDown="formataMoeda(this,retornaKeyCode(event))" onKeyUp="formataMoeda(this,retornaKeyCode(event))"></td>
+<input name="desconto" type="text" class="formulario" id="desconto" value="<?php print $desconto; ?>" size="10" onKeyDown="formataMoeda(this,retornaKeyCode(event))" onKeyUp="formataMoeda(this,retornaKeyCode(event))"></td>
           </tr>
           <tr class="textobold"> 
             <td>&nbsp;Prioridade:</td>
             <td>
-<input name="prioridade" type="text" class="formulario" id="prioridade" value="<? print $prioridade; ?>" size="10" maxlength="1"></td>
+<input name="prioridade" type="text" class="formulario" id="prioridade" value="<?php print $prioridade; ?>" size="10" maxlength="1"></td>
           </tr>
           <tr class="textobold"> 
             <td>&nbsp;Risco:</td>
             <td>
-<input name="risco" type="text" class="formulario" id="risco" value="<? print $risco; ?>" size="10" maxlength="1"></td>
+<input name="risco" type="text" class="formulario" id="risco" value="<?php print $risco; ?>" size="10" maxlength="1"></td>
           </tr>
           <tr class="textobold"> 
             <td>&nbsp;Lim. Credito:</td>
             <td>
-<input name="credito_lim" type="text" class="formulario" id="credito_lim" value="<? print $credito_lim; ?>" size="10" onKeyDown="formataMoeda(this,retornaKeyCode(event))" onKeyUp="formataMoeda(this,retornaKeyCode(event))"></td>
+<input name="credito_lim" type="text" class="formulario" id="credito_lim" value="<?php print $credito_lim; ?>" size="10" onKeyDown="formataMoeda(this,retornaKeyCode(event))" onKeyUp="formataMoeda(this,retornaKeyCode(event))"></td>
           </tr>
           <tr class="textobold"> 
             <td>&nbsp;Venc. Lim. Cred.:</td>
             <td>
-<input name="credito_ven" type="text" class="formulario" id="credito_ven" value="<? print $credito_ven; ?>" size="10" maxlength="10" onKeyPress="return validanum(this, event)" onKeyUp="mdata(this)"></td>
+<input name="credito_ven" type="text" class="formulario" id="credito_ven" value="<?php print $credito_ven; ?>" size="10" maxlength="10" onKeyPress="return validanum(this, event)" onKeyUp="mdata(this)"></td>
           </tr>
           <tr class="textobold"> 
             <td>&nbsp;Maior Compra:</td>
             <td>
-<input name="compra_mai" type="text" class="formulario" id="compra_mai" value="<? print $compra_mai; ?>" size="10" onKeyDown="formataMoeda(this,retornaKeyCode(event))" onKeyUp="formataMoeda(this,retornaKeyCode(event))"></td>
+<input name="compra_mai" type="text" class="formulario" id="compra_mai" value="<?php print $compra_mai; ?>" size="10" onKeyDown="formataMoeda(this,retornaKeyCode(event))" onKeyUp="formataMoeda(this,retornaKeyCode(event))"></td>
           </tr>
           <tr class="textobold"> 
             <td>&nbsp;M&eacute;dia Atraso:</td>
             <td>
-<input name="atraso_med" type="text" class="formulario" id="atraso_med" value="<? print $atraso_med; ?>" size="10" onKeyDown="formataMoeda(this,retornaKeyCode(event))" onKeyUp="formataMoeda(this,retornaKeyCode(event))"></td>
+<input name="atraso_med" type="text" class="formulario" id="atraso_med" value="<?php print $atraso_med; ?>" size="10" onKeyDown="formataMoeda(this,retornaKeyCode(event))" onKeyUp="formataMoeda(this,retornaKeyCode(event))"></td>
           </tr>
           <tr class="textobold"> 
             <td>&nbsp;Maior Saldo:</td>
             <td>
-<input name="saldo_mai" type="text" class="formulario" id="saldo_mai" value="<? print $saldo_mai; ?>" size="10" onKeyDown="formataMoeda(this,retornaKeyCode(event))" onKeyUp="formataMoeda(this,retornaKeyCode(event))"></td>
+<input name="saldo_mai" type="text" class="formulario" id="saldo_mai" value="<?php print $saldo_mai; ?>" size="10" onKeyDown="formataMoeda(this,retornaKeyCode(event))" onKeyUp="formataMoeda(this,retornaKeyCode(event))"></td>
           </tr>
           <tr class="textobold"> 
             <td>&nbsp;N&ordm; de Compras:</td>
             <td>
-<input name="compra_num" type="text" class="formulario" id="compra_num" value="<? print $compra_num; ?>" size="10" onKeyPress="return validanum(this, event)"></td>
+<input name="compra_num" type="text" class="formulario" id="compra_num" value="<?php print $compra_num; ?>" size="10" onKeyPress="return validanum(this, event)"></td>
           </tr>
           <tr class="textobold"> 
             <td>&nbsp;1&ordf; Compra:</td>
             <td>
-<input name="compra_pri" type="text" class="formulario" id="compra_pri" onKeyPress="return validanum(this, event)" onKeyUp="mdata(this)" value="<? print $compra_pri; ?>" size="10" maxlength="10"></td>
+<input name="compra_pri" type="text" class="formulario" id="compra_pri" onKeyPress="return validanum(this, event)" onKeyUp="mdata(this)" value="<?php print $compra_pri; ?>" size="10" maxlength="10"></td>
           </tr>
           <tr class="textobold"> 
             <td>&nbsp;&Uacute;ltima Compra:</td>
             <td>
-<input name="compra_ult" type="text" class="formulario" id="compra_ult" value="<? print $compra_ult; ?>" size="10" maxlength="10" onKeyPress="return validanum(this, event)" onKeyUp="mdata(this)"></td>
+<input name="compra_ult" type="text" class="formulario" id="compra_ult" value="<?php print $compra_ult; ?>" size="10" maxlength="10" onKeyPress="return validanum(this, event)" onKeyUp="mdata(this)"></td>
           </tr>
           <tr class="textobold"> 
             <td>&nbsp;Freq. Visitas:</td>
             <td>
-<input name="visitas_freq" type="text" class="formulario" id="visitas_freq" value="<? print $visitas_freq; ?>" size="10" onKeyPress="return validanum(this, event)"></td>
+<input name="visitas_freq" type="text" class="formulario" id="visitas_freq" value="<?php print $visitas_freq; ?>" size="10" onKeyPress="return validanum(this, event)"></td>
           </tr>
           <tr class="textobold"> 
             <td>&nbsp;&Ugrave;ltima Visita:</td>
             <td>
-<input name="visitas_ult" type="text" class="formulario" id="visitas_ult" value="<? print $visitas_ult; ?>" size="10" maxlength="10" onKeyPress="return validanum(this, event)" onKeyUp="mdata(this)"></td>
+<input name="visitas_ult" type="text" class="formulario" id="visitas_ult" value="<?php print $visitas_ult; ?>" size="10" maxlength="10" onKeyPress="return validanum(this, event)" onKeyUp="mdata(this)"></td>
           </tr>
           <tr class="textobold"> 
             <td>&nbsp;Mensagem:</td>
             <td>
-<input name="mens" type="text" class="formulario" id="mens" value="<? print $mens; ?>" size="50" maxlength="100"></td>
+<input name="mens" type="text" class="formulario" id="mens" value="<?php print $mens; ?>" size="50" maxlength="100"></td>
           </tr>
           <tr class="textobold"> 
             <td>&nbsp;N&ordm; Pagamentos:</td>
             <td>
-<input name="pagamentos" type="text" class="formulario" id="pagamentos" value="<? print $pagamentos; ?>" size="10" onKeyPress="return validanum(this, event)"></td>
+<input name="pagamentos" type="text" class="formulario" id="pagamentos" value="<?php print $pagamentos; ?>" size="10" onKeyPress="return validanum(this, event)"></td>
           </tr>
           <tr class="textobold"> 
             <td>&nbsp;Saldo T&iacute;tulo:</td>
             <td>
-<input name="saldo_titulo" type="text" class="formulario" id="saldo_titulo" value="<? print $saldo_titulo; ?>" size="10" onKeyDown="formataMoeda(this,retornaKeyCode(event))" onKeyUp="formataMoeda(this,retornaKeyCode(event))"></td>
+<input name="saldo_titulo" type="text" class="formulario" id="saldo_titulo" value="<?php print $saldo_titulo; ?>" size="10" onKeyDown="formataMoeda(this,retornaKeyCode(event))" onKeyUp="formataMoeda(this,retornaKeyCode(event))"></td>
           </tr>
           <tr class="textobold"> 
             <td>&nbsp;Sld. Ped. Lib.:</td>
             <td>
-<input name="saldo_lib" type="text" class="formulario" id="saldo_lib" value="<? print $saldo_lib; ?>" size="10" onKeyDown="formataMoeda(this,retornaKeyCode(event))" onKeyUp="formataMoeda(this,retornaKeyCode(event))"></td>
+<input name="saldo_lib" type="text" class="formulario" id="saldo_lib" value="<?php print $saldo_lib; ?>" size="10" onKeyDown="formataMoeda(this,retornaKeyCode(event))" onKeyUp="formataMoeda(this,retornaKeyCode(event))"></td>
           </tr>
           <tr class="textobold"> 
             <td>&nbsp;Suframa:</td>
             <td>
-<input name="suframa" type="text" class="formulario" id="suframa" value="<? print $suframa; ?>" size="20" maxlength="20"></td>
+<input name="suframa" type="text" class="formulario" id="suframa" value="<?php print $suframa; ?>" size="20" maxlength="20"></td>
           </tr>
           <tr class="textobold"> 
             <td>&nbsp;Atrasados:</td>
             <td>
-<input name="atrasados" type="text" class="formulario" id="atrasados" value="<? print $atrasados; ?>" size="10" onKeyDown="formataMoeda(this,retornaKeyCode(event))" onKeyUp="formataMoeda(this,retornaKeyCode(event))"></td>
+<input name="atrasados" type="text" class="formulario" id="atrasados" value="<?php print $atrasados; ?>" size="10" onKeyDown="formataMoeda(this,retornaKeyCode(event))" onKeyUp="formataMoeda(this,retornaKeyCode(event))"></td>
           </tr>
           <tr class="textobold"> 
             <td>&nbsp;Vl. Acumulado:</td>
             <td>
-<input name="acumulado" type="text" class="formulario" id="acumulado" value="<? print $acumulado; ?>" size="10" onKeyDown="formataMoeda(this,retornaKeyCode(event))" onKeyUp="formataMoeda(this,retornaKeyCode(event))"></td>
+<input name="acumulado" type="text" class="formulario" id="acumulado" value="<?php print $acumulado; ?>" size="10" onKeyDown="formataMoeda(this,retornaKeyCode(event))" onKeyUp="formataMoeda(this,retornaKeyCode(event))"></td>
           </tr>
           <tr class="textobold"> 
             <td>&nbsp;Saldo Pedido:</td>
             <td>
-<input name="saldo_ped" type="text" class="formulario" id="saldo_ped" value="<? print $saldo_ped; ?>" size="10" onKeyDown="formataMoeda(this,retornaKeyCode(event))" onKeyUp="formataMoeda(this,retornaKeyCode(event))"></td>
+<input name="saldo_ped" type="text" class="formulario" id="saldo_ped" value="<?php print $saldo_ped; ?>" size="10" onKeyDown="formataMoeda(this,retornaKeyCode(event))" onKeyUp="formataMoeda(this,retornaKeyCode(event))"></td>
           </tr>
           <tr class="textobold"> 
             <td>&nbsp;Tit. Protestados:</td>
             <td>
-<input name="protestos_tit" type="text" class="formulario" id="protestos_tit" value="<? print $protestos_tit; ?>" size="10" onKeyPress="return validanum(this, event)"></td>
+<input name="protestos_tit" type="text" class="formulario" id="protestos_tit" value="<?php print $protestos_tit; ?>" size="10" onKeyPress="return validanum(this, event)"></td>
           </tr>
           <tr class="textobold"> 
             <td>&nbsp;&Uacute;ltimo Protesto:</td>
             <td>
-<input name="protestos_ult" type="text" class="formulario" id="protestos_ult" value="<? print $protestos_ult; ?>" size="10" maxlength="10" onKeyPress="return validanum(this, event)" onKeyUp="mdata(this)"></td>
+<input name="protestos_ult" type="text" class="formulario" id="protestos_ult" value="<?php print $protestos_ult; ?>" size="10" maxlength="10" onKeyPress="return validanum(this, event)" onKeyUp="mdata(this)"></td>
           </tr>
           <tr class="textobold"> 
             <td>&nbsp;Cheques Dev.:</td>
             <td>
-<input name="cheques_dev" type="text" class="formulario" id="cheques_dev" value="<? print $cheques_dev; ?>" size="10" onKeyPress="return validanum(this, event)"></td>
+<input name="cheques_dev" type="text" class="formulario" id="cheques_dev" value="<?php print $cheques_dev; ?>" size="10" onKeyPress="return validanum(this, event)"></td>
           </tr>
           <tr class="textobold"> 
             <td>&nbsp;&Uacute;lt. Cheque Dev.::</td>
             <td>
-<input name="cheques_ult" type="text" class="formulario" id="cheques_ult" value="<? print $cheques_ult; ?>" size="10" maxlength="10" onKeyPress="return validanum(this, event)" onKeyUp="mdata(this)"></td>
+<input name="cheques_ult" type="text" class="formulario" id="cheques_ult" value="<?php print $cheques_ult; ?>" size="10" maxlength="10" onKeyPress="return validanum(this, event)" onKeyUp="mdata(this)"></td>
           </tr>
           <tr class="textobold"> 
             <td>&nbsp;Maior Atraso:</td>
             <td>
-<input name="atraso_mai" type="text" class="formulario" id="atraso_mai" value="<? print $atraso_mai; ?>" size="10" onKeyPress="return validanum(this, event)"></td>
+<input name="atraso_mai" type="text" class="formulario" id="atraso_mai" value="<?php print $atraso_mai; ?>" size="10" onKeyPress="return validanum(this, event)"></td>
           </tr>
           <tr class="textobold"> 
             <td>&nbsp;Maior Dupl.:</td>
             <td>
-<input name="dupl_mai" type="text" class="formulario" id="dupl_mai" value="<? print $dupl_mai; ?>" size="10" onKeyDown="formataMoeda(this,retornaKeyCode(event))" onKeyUp="formataMoeda(this,retornaKeyCode(event))"></td>
+<input name="dupl_mai" type="text" class="formulario" id="dupl_mai" value="<?php print $dupl_mai; ?>" size="10" onKeyDown="formataMoeda(this,retornaKeyCode(event))" onKeyUp="formataMoeda(this,retornaKeyCode(event))"></td>
           </tr>
           <tr class="textobold"> 
             <td>&nbsp;Tabela Pre&ccedil;o:</td>
             <td>
-<input name="tabela" type="text" class="formulario" id="tabela" value="<? print $tabela; ?>" size="20" maxlength="20"></td>
+<input name="tabela" type="text" class="formulario" id="tabela" value="<?php print $tabela; ?>" size="20" maxlength="20"></td>
           </tr>
           <tr class="textobold"> 
             <td>&nbsp;Natureza:</td>
             <td>
-<input name="natureza" type="text" class="formulario" id="natureza" value="<? print $natureza; ?>" size="10" onKeyPress="return validanum(this, event)"></td>
+<input name="natureza" type="text" class="formulario" id="natureza" value="<?php print $natureza; ?>" size="10" onKeyPress="return validanum(this, event)"></td>
           </tr>
           <tr class="textobold"> 
             <td>&nbsp;ISS:</td>
             <td>
-<input name="iss" type="text" class="formulario" id="iss" value="<? print $iss; ?>" size="20" maxlength="20"></td>
+<input name="iss" type="text" class="formulario" id="iss" value="<?php print $iss; ?>" size="20" maxlength="20"></td>
           </tr>
           <tr class="textobold"> 
             <td>&nbsp;ICMS:</td>
             <td>
-<input name="icms" type="text" class="formulario" id="icms" value="<? print $icms; ?>" size="20" maxlength="20" onKeyDown="formataMoeda(this,retornaKeyCode(event))" onKeyUp="formataMoeda(this,retornaKeyCode(event))"></td>
+<input name="icms" type="text" class="formulario" id="icms" value="<?php print $icms; ?>" size="20" maxlength="20" onKeyDown="formataMoeda(this,retornaKeyCode(event))" onKeyUp="formataMoeda(this,retornaKeyCode(event))"></td>
           </tr>
           <tr class="textobold"> 
             <td>&nbsp;Agre. Liber.:</td>
             <td>
-<input name="agregador" type="text" class="formulario" id="agregador" value="<? print $agregador; ?>" size="20" maxlength="20"></td>
+<input name="agregador" type="text" class="formulario" id="agregador" value="<?php print $agregador; ?>" size="20" maxlength="20"></td>
           </tr>
           <tr class="textobold"> 
             <td>&nbsp;Sld. Moe. Forte:</td>
             <td>
-<input name="saldo_moe" type="text" class="formulario" id="saldo_moe" value="<? print $saldo_moe; ?>" size="10" onKeyDown="formataMoeda(this,retornaKeyCode(event))" onKeyUp="formataMoeda(this,retornaKeyCode(event))"></td>
+<input name="saldo_moe" type="text" class="formulario" id="saldo_moe" value="<?php print $saldo_moe; ?>" size="10" onKeyDown="formataMoeda(this,retornaKeyCode(event))" onKeyUp="formataMoeda(this,retornaKeyCode(event))"></td>
           </tr>
           <tr class="textobold"> 
             <td>&nbsp;Pag. Atrasados:</td>
             <td>
-<input name="pagtos_atras" type="text" class="formulario" id="pagtos_atras" value="<? print $pagtos_atras; ?>" size="10" onKeyDown="formataMoeda(this,retornaKeyCode(event))" onKeyUp="formataMoeda(this,retornaKeyCode(event))"></td>
+<input name="pagtos_atras" type="text" class="formulario" id="pagtos_atras" value="<?php print $pagtos_atras; ?>" size="10" onKeyDown="formataMoeda(this,retornaKeyCode(event))" onKeyUp="formataMoeda(this,retornaKeyCode(event))"></td>
           </tr>
           <tr class="textobold"> 
             <td>&nbsp;Grupo Clientes:</td>
             <td>
-<input name="grupo_cli" type="text" class="formulario" id="grupo_cli" value="<? print $grupo_cli; ?>" size="20" maxlength="20"></td>
+<input name="grupo_cli" type="text" class="formulario" id="grupo_cli" value="<?php print $grupo_cli; ?>" size="20" maxlength="20"></td>
           </tr>
           <tr class="textobold"> 
             <td>&nbsp;Desc. p/ Suframa:</td>
             <td class="textobold"> Sim 
-              <input type="radio" name="suframa_desc" value="S" <? if($suframa_desc=="S") print "checked"; ?>>
+              <input type="radio" name="suframa_desc" value="S" <?php if($suframa_desc=="S") print "checked"; ?>>
               N&atilde;o
-              <input type="radio" name="suframa_desc" value="N" <? if($suframa_desc=="N" or empty($suframa_desc)) print "checked"; ?>> 
-              <input name="id" type="hidden" id="id" value="<? print $id; ?>"> 
-              <input name="acao" type="hidden" id="acao2" value="<? if($acao=="inc"){ print "incluir"; }else{ print "alterar"; } ?>"></td>
+              <input type="radio" name="suframa_desc" value="N" <?php if($suframa_desc=="N" or empty($suframa_desc)) print "checked"; ?>> 
+              <input name="id" type="hidden" id="id" value="<?php print $id; ?>"> 
+              <input name="acao" type="hidden" id="acao2" value="<?php if($acao=="inc"){ print "incluir"; }else{ print "alterar"; } ?>"></td>
           </tr>
           <tr class="textobold"> 
             <td colspan="2" align="center"> 
-              <? if($acao=="alt"){ ?>
-              <input name="Button" type="button" class="microtxt" value="Voltar" onClick="window.location='clientes.php<? if(!empty($bcod) or !empty($bnome)) print "?webmst=cpp"; if(!empty($bcod)) print "&bcod=$bcod"; if(!empty($bnome)) print "&bnome=$bnome";?>';">
+              <?php if($acao=="alt"){ ?>
+              <input name="Button" type="button" class="microtxt" value="Voltar" onClick="window.location='clientes.php<?php if(!empty($bcod) or !empty($bnome)) print "?webmst=cpp"; if(!empty($bcod)) print "&bcod=$bcod"; if(!empty($bnome)) print "&bnome=$bnome";?>';">
               &nbsp;&nbsp;&nbsp;&nbsp;
-              <? } ?>
+              <?php } ?>
               <input name="Submit" type="submit" class="microtxt" value="Continuar"></td>
           </tr>
         </table>
@@ -421,4 +422,4 @@ function verifica(cad){
 &nbsp; 
 </body>
 </html>
-<? include("mensagem.php"); ?>
+<?php include("mensagem.php"); ?>

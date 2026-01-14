@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 include("seguranca.php");
 $sql=mysql_query("SELECT *,cp_itens.valor AS valor FROM cp_itens,cp WHERE cp_itens.conta=cp.id AND cp_itens.id='$id'");
@@ -13,14 +13,15 @@ $res2=mysql_fetch_array($sqln);
 <html>
 <head>
 <title>CyberManager</title>
-<meta http-equiv="Content-Type" content="text/html; UTF-8">
+<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="style.css" rel="stylesheet" type="text/css">
 <script src="scripts.js"></script>
 <script src="mascaras.js"></script>
 <script>
 function verifica(cad){
 	if(!verifica_data(cad.pagto.value)){
-		alert('Data de pagamento inválida');
+		alert('Data de pagamento invÃ¡lida');
 		cad.pagto.focus();
 		return false;
 	}
@@ -40,15 +41,15 @@ if (parseInt(navigator.appVersion) >= 4) window.moveTo((screen.width/2)-(windowW
 <form name="form1" method="post" action="cp_sql.php" onSubmit="return verifica(this)">
   <table width="300" border="0" align="center" cellpadding="0" cellspacing="0">
     <tr align="center" bgcolor="#003366"> 
-      <td colspan="2" valign="top" class="textoboldbranco"><? print $res2["nome"]; ?></td>
+      <td colspan="2" valign="top" class="textoboldbranco"><?php print $res2["nome"]; ?></td>
     </tr>
     <tr> 
       <td width="83" align="left" valign="top" class="textobold">Valor:</td>
-      <td width="267" align="left" valign="top" class="texto"><? print banco2valor($res["valor"]); ?></td>
+      <td width="267" align="left" valign="top" class="texto"><?php print banco2valor($res["valor"]); ?></td>
     </tr>
     <tr> 
       <td align="left" valign="top" class="textobold">Vencimento:</td>
-      <td align="left" valign="top" class="texto"><? print banco2data($res["vencimento"]); ?></td>
+      <td align="left" valign="top" class="texto"><?php print banco2data($res["vencimento"]); ?></td>
     </tr>
     <tr> 
       <td align="left" valign="top" class="textobold">Pagamento:</td>
@@ -61,12 +62,12 @@ if (parseInt(navigator.appVersion) >= 4) window.moveTo((screen.width/2)-(windowW
     <tr> 
       <td align="left" valign="top" class="textobold">Opera&ccedil;&atilde;o:</td>
       <td align="left" valign="top"><select name="operacao" class="formularioselect" id="operacao">
-          <?
+          <?php
 				$sqlo=mysql_query("SELECT * FROM operacoes ORDER BY nome ASC");
 				while($reso=mysql_fetch_array($sqlo)){
 				?>
-          <option value="<? print $reso["id"]; ?>"><? print $reso["nome"]; ?></option>
-          <?
+          <option value="<?php print $reso["id"]; ?>"><?php print $reso["nome"]; ?></option>
+          <?php
 				}
 				?>
         </select></td>
@@ -74,12 +75,12 @@ if (parseInt(navigator.appVersion) >= 4) window.moveTo((screen.width/2)-(windowW
     <tr> 
       <td align="left" valign="top" class="textobold">Filial:</td>
       <td align="left" valign="top"><select name="banco" class="formularioselect" id="banco">
-          <?
+          <?php
 				$sqlo=mysql_query("SELECT * FROM bancos ORDER BY apelido ASC");
 				while($reso=mysql_fetch_array($sqlo)){
 				?>
-          <option value="<? print $reso["id"]; ?>" <? if($res["banco"]==$reso["id"]) print "selected"; ?>><? print $reso["apelido"]; ?></option>
-          <?
+          <option value="<?php print $reso["id"]; ?>" <?php if($res["banco"]==$reso["id"]) print "selected"; ?>><?php print $reso["apelido"]; ?></option>
+          <?php
 				}
 				?>
         </select></td>
@@ -87,7 +88,7 @@ if (parseInt(navigator.appVersion) >= 4) window.moveTo((screen.width/2)-(windowW
     <tr> 
       <td align="left" valign="top" class="textobold">Diferen&ccedil;a:</td>
       <td align="left" valign="top"><input name="diferenca" type="text" class="formulario" id="diferenca" onKeyDown="formataMoeda(this,retornaKeyCode(event))" onKeyUp="formataMoeda(this,retornaKeyCode(event))" value="0,00" size="10"> 
-        <input name="id" type="hidden" id="id" value="<? print $id; ?>"> <input name="acao" type="hidden" id="acao" value="bxitem"></td>
+        <input name="id" type="hidden" id="id" value="<?php print $id; ?>"> <input name="acao" type="hidden" id="acao" value="bxitem"></td>
     </tr>
     <tr>
       <td colspan="2" align="center" valign="top"><img src="imagens/dot.gif" width="50" height="8"></td>
@@ -103,4 +104,4 @@ if (parseInt(navigator.appVersion) >= 4) window.moveTo((screen.width/2)-(windowW
 </form>
 </body>
 </html>
-<? include("mensagem.php"); ?>
+<?php include("mensagem.php"); ?>

@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 include("seguranca.php");
 $acao=verifi($permi,$acao);
@@ -11,10 +11,10 @@ if(empty($acao)) $acao="entrar";
 if($acao=="incluir"){
 	$sql=mysql_query("INSERT INTO cortinas_not (nome,tubo,perfil1,perfil2) VALUES ('$nome','$tubo','$perfil1','$perfil2')");
 	if($sql){
-		$_SESSION["mensagem"]="Cortina incluída com sucesso!";
+		$_SESSION["mensagem"]="Cortina incluÃ­da com sucesso!";
 		$acao="entrar";
 	}else{
-		$_SESSION["mensagem"]="A Cortina não pôde ser incluído!";
+		$_SESSION["mensagem"]="A Cortina nÃ£o pÃ´de ser incluÃ­do!";
 		$acao="inc";
 	}
 }elseif($acao=="alterar"){
@@ -23,16 +23,16 @@ if($acao=="incluir"){
 		$_SESSION["mensagem"]="Cortina alterada com sucesso!";
 		$acao="entrar";
 	}else{
-		$_SESSION["mensagem"]="A Cortina não pôde ser alterada!";
+		$_SESSION["mensagem"]="A Cortina nÃ£o pÃ´de ser alterada!";
 		$acao="alt";
 	}
 }elseif($acao=="exc"){
 	if(!empty($id)){
 		$sql=mysql_query("DELETE FROM cortinas_not WHERE id='$id'");
 		if($sql){
-			$_SESSION["mensagem"]="Cortina excluída com sucesso!";
+			$_SESSION["mensagem"]="Cortina excluÃ­da com sucesso!";
 		}else{
-			$_SESSION["mensagem"]="A Cortina não pôde ser excluída!";
+			$_SESSION["mensagem"]="A Cortina nÃ£o pÃ´de ser excluÃ­da!";
 		}		
 	}
 	$acao="entrar";
@@ -41,7 +41,8 @@ if($acao=="incluir"){
 <html>
 <head>
 <title>CyberManager</title>
-<meta http-equiv="Content-Type" content="text/html; UTF-8">
+<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="style.css" rel="stylesheet" type="text/css">
 <script src="scripts.js"></script>
 <script src="mascaras.js"></script>
@@ -63,7 +64,7 @@ if($acao=="incluir"){
 	    </tr>
   <tr> 
     <td><table width="594" border="0" cellspacing="0" cellpadding="0">
-        <? if($acao=="entrar"){ ?>
+        <?php if($acao=="entrar"){ ?>
 		<tr> 
           <td><table width="300" border="0" cellspacing="0" cellpadding="0">
               <tr>
@@ -77,8 +78,8 @@ if($acao=="incluir"){
                 <td width="20">&nbsp;</td>
                 <td width="20">&nbsp;</td>
               </tr>
-              <?
-			  $sql=mysql_query("SELECT * FROM cortinas_not ORDER BY id ASC") or die(mysql_error());
+              <?php
+			  $sql=mysql_query("SELECT * FROM cortinas_not ORDER BY id ASC") or erp_db_fail();
 			  
 			  if(mysql_num_rows($sql)==0){
 			  ?>
@@ -86,23 +87,23 @@ if($acao=="incluir"){
                 <td colspan="3" align="center" class="textobold">NENHUMA CORTINA 
                   CADASTRADO </td>
               </tr>
-			  <?
+			  <?php
 			  }else{
 			  	while($res=mysql_fetch_array($sql)){
 			  ?>
               <tr bgcolor="#FFFFFF" class="texto" onMouseover="changeto('#CCCCCC')" onMouseout="changeback('#FFFFFF')"> 
-                <td>&nbsp;<? print $res["nome"]; ?></td>
-                <td width="20" align="center"><a href="cortina.php?acao=alt&id=<? print $res["id"]; ?>"><img src="imagens/icon14_alterar.gif" alt="Alterar" width="14" height="14" border="0"></a></td>
-                <td width="20" align="center"><a href="#" onClick="return pergunta('Deseja excluir esta Cortina?','cortina.php?acao=exc&id=<? print $res["id"]; ?>')"><img src="imagens/icon14_lixeira.gif" alt="Excluir" width="14" height="14" border="0"></a></td>
+                <td>&nbsp;<?php print $res["nome"]; ?></td>
+                <td width="20" align="center"><a href="cortina.php?acao=alt&id=<?php print $res["id"]; ?>"><img src="imagens/icon14_alterar.gif" alt="Alterar" width="14" height="14" border="0"></a></td>
+                <td width="20" align="center"><a href="#" onClick="return pergunta('Deseja excluir esta Cortina?','cortina.php?acao=exc&id=<?php print $res["id"]; ?>')"><img src="imagens/icon14_lixeira.gif" alt="Excluir" width="14" height="14" border="0"></a></td>
               </tr>
-			  <?
+			  <?php
 			  	}
 			  }
 			  ?>
             </table>
             </td>
         </tr>
-		<? }elseif($acao=="inc" or $acao=="alt"){
+		<?php }elseif($acao=="inc" or $acao=="alt"){
 				$sql=mysql_query("SELECT * FROM cortinas_not WHERE id='$id'");
 				$res=mysql_fetch_array($sql);
 		 ?>
@@ -111,47 +112,47 @@ if($acao=="incluir"){
               <table width="400" border="0" cellpadding="0" cellspacing="0">
                 <tr bgcolor="#003366"> 
                   <td colspan="2" align="center" class="textoboldbranco"> 
-                    <? if($acao=="inc"){ print"Incluir Cortina"; }else{ print"Alterar Cortina";} ?>                  </td>
+                    <?php if($acao=="inc"){ print"Incluir Cortina"; }else{ print"Alterar Cortina";} ?>                  </td>
                 </tr>
                 <tr>
                   <td width="73" valign="middle" class="textobold">&nbsp;Nome</td>
-                  <td width="227" class="textobold"><input name="nome" type="text" class="formularioselect" id="nome" value="<?= $res["nome"]; ?>"></td>
+                  <td width="227" class="textobold"><input name="nome" type="text" class="formularioselect" id="nome" value="<?php echo  $res["nome"]; ?>"></td>
                 </tr>
                 <tr>
                   <td valign="middle" class="textobold">&nbsp;Tubo Alum&iacute;nio 7/8
-<input name="tubo" type="hidden" id="tubo" value="<?= $res["tubo"]; ?>"></td>
+<input name="tubo" type="hidden" id="tubo" value="<?php echo  $res["tubo"]; ?>"></td>
                   <td class="textobold"><table width="100%"  border="0" cellspacing="0" cellpadding="0">
                       <tr>
-                        <?
+                        <?php
 				$sql2=mysql_query("SELECT * FROM prodserv WHERE id='$res[tubo]'"); $res2=mysql_fetch_array($sql2);
 				?>
-                        <td><input name="perfiln" type="text" class="formularioselect" id="perfiln" value="<? print $res2["nome"]; ?>" size="7" maxlength="50" readonly></td>
+                        <td><input name="perfiln" type="text" class="formularioselect" id="perfiln" value="<?php print $res2["nome"]; ?>" size="7" maxlength="50" readonly></td>
                         <td width="20" align="center"><a href="#" onClick="return abre('cortina_prod.php?cp1=tubo&cp2=perfiln','busca','width=420,height=300,scrollbars=1');"><img src="imagens/icon_14_search.gif" alt="Selecione um Item" width="14" height="14" border="0"></a></td>
                       </tr>
                   </table></td>
                 </tr>
                 <tr>
                   <td valign="middle" class="textobold">&nbsp;Perfil Puxador
-                    <input name="perfil1" type="hidden" id="perfil1" value="<?= $res["perfil1"]; ?>"></td>
+                    <input name="perfil1" type="hidden" id="perfil1" value="<?php echo  $res["perfil1"]; ?>"></td>
                   <td class="textobold"><table width="100%"  border="0" cellspacing="0" cellpadding="0">
                       <tr>
-                        <?
+                        <?php
 				$sql2=mysql_query("SELECT * FROM prodserv WHERE id='$res[perfil1]'"); $res2=mysql_fetch_array($sql2);
 				?>
-                        <td><input name="perfiln2" type="text" class="formularioselect" id="perfiln2" value="<? print $res2["nome"]; ?>" size="7" maxlength="50" readonly></td>
+                        <td><input name="perfiln2" type="text" class="formularioselect" id="perfiln2" value="<?php print $res2["nome"]; ?>" size="7" maxlength="50" readonly></td>
                         <td width="20" align="center"><a href="#" onClick="return abre('cortina_prod.php?cp1=perfil1&cp2=perfiln2','busca','width=420,height=300,scrollbars=1');"><img src="imagens/icon_14_search.gif" alt="Selecione um Item" width="14" height="14" border="0"></a><a href="#" onClick="return abre('perfil_prod.php','busca','width=420,height=300,scrollbars=1');"></a></td>
                       </tr>
                   </table></td>
                 </tr>
                 <tr>
                   <td valign="middle" class="textobold">&nbsp;Perfil Caixa 
-                    <input name="perfil2" type="hidden" id="perfil2" value="<?= $res["perfil2"]; ?>"></td>
+                    <input name="perfil2" type="hidden" id="perfil2" value="<?php echo  $res["perfil2"]; ?>"></td>
                   <td class="textobold"><table width="100%"  border="0" cellspacing="0" cellpadding="0">
                       <tr>
-                        <?
+                        <?php
 				$sql2=mysql_query("SELECT * FROM prodserv WHERE id='$res[perfil2]'"); $res2=mysql_fetch_array($sql2);
 				?>
-                        <td><input name="perfiln3" type="text" class="formularioselect" id="perfiln3" value="<? print $res2["nome"]; ?>" size="7" maxlength="50" readonly></td>
+                        <td><input name="perfiln3" type="text" class="formularioselect" id="perfiln3" value="<?php print $res2["nome"]; ?>" size="7" maxlength="50" readonly></td>
                         <td width="20" align="center"><a href="#" onClick="return abre('cortina_prod.php?cp1=perfil2&cp2=perfiln3','busca','width=420,height=300,scrollbars=1');"><img src="imagens/icon_14_search.gif" alt="Selecione um Item" width="14" height="14" border="0"></a><a href="#" onClick="return abre('perfil_prod.php','busca','width=420,height=300,scrollbars=1');"></a></td>
                       </tr>
                   </table></td>
@@ -163,16 +164,16 @@ if($acao=="incluir"){
                     <input name="Submit22" type="button" class="microtxt" value="voltar" onClick="window.location='cortina.php?acao=entrar'">
                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                   <input name="Submit2" type="submit" class="microtxt" value="Continuar">
-                  <input name="acao" type="hidden" id="acao2" value="<? if($acao=="alt"){ print "alterar"; }else{ print "incluir"; } ?>">
-                  <input name="id" type="hidden" id="id" value="<?= $id; ?>"></td>
+                  <input name="acao" type="hidden" id="acao2" value="<?php if($acao=="alt"){ print "alterar"; }else{ print "incluir"; } ?>">
+                  <input name="id" type="hidden" id="id" value="<?php echo  $id; ?>"></td>
                 </tr>
               </table>
             </form></td>
         </tr>
-		<? } ?>
+		<?php } ?>
       </table></td>
   </tr>
 </table>
 </body>
 </html>
-<? include("mensagem.php"); ?>
+<?php include("mensagem.php"); ?>

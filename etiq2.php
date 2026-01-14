@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 require_once('classes/PDF_Label.php');
 	$data=date("Y-m-d");
@@ -15,7 +15,7 @@ $pdf->Set_Char_Size(1);
 		$sql2=mysql_query("SELECT * FROM cliente_contato WHERE cliente='$res[id]' AND atuacao='$res[cto]'");
 		if(mysql_num_rows($sql2)){ $res2=mysql_fetch_array($sql2); $contato=$res2["nome"]; }else{ $contato=$res["contato"]; }
 		//FollowUp
-		mysql_query("INSERT INTO followup (cliente,data,hora,titulo,descricao,tipo) VALUES('$res[id]','$data','$hora','Ação Marketing','Foi enviado a seguinte Ação de Marketing para este cliente: $nome','3')");
+		mysql_query("INSERT INTO followup (cliente,data,hora,titulo,descricao,tipo) VALUES('$res[id]','$data','$hora','AÃ§Ã£o Marketing','Foi enviado a seguinte AÃ§Ã£o de Marketing para este cliente: $nome','3')");
 			
 			$estado=$bd->pega_nome_bd2("estado","nome","$res[estado]");
 	   		$pdf->Add_PDF_Label(sprintf("%s\n%s\n%s\n%s", "$contato", "$res[endereco]", "$res[bairro]   $res[cidade]   $estado", "CEP $res[cep]"));

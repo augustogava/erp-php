@@ -1,4 +1,4 @@
-<?
+<?php
 session_start();
 session_cache_expire(86400);
 $wonline="qualitest";
@@ -42,10 +42,22 @@ case "feeder":
 	break;
 }
 $wenvmenda="compras@molasfeeder.com.br";
-$wpaginacao=10; // numero de links da paginacao E¥s do FEEEEEDER
+$wpaginacao=10; // numero de links da paginacao E¬¥s do FEEEEEDER
 $caminho=ereg_replace("\\\\","/",__FILE__);
 $caminho = dirname ($caminho);
 $patch=$caminho;
+
+/**
+ * Centralized DB failure handler (Qualidade module).
+ * Avoids leaking raw SQL errors to users while still logging for debugging.
+ */
+function erp_db_fail(string $userMessage = "Erro no banco de dados. Tente novamente ou contate o administrador."): void {
+	$err = function_exists('mysql_error') ? mysql_error() : '';
+	if (!empty($err)) {
+		error_log("DB_ERROR: " . $err);
+	}
+	die($userMessage);
+}
 $emailt=explode(",",$_SESSION["e_mail_t"]);
 $iduser=$_SESSION["login_codigo"];
 $permi=$_SESSION["permissao"];
@@ -119,7 +131,7 @@ $resultado2=11-$soma;
 }
 if ($resultado2==$Numero[11])
 {
-return 1; //echo "<h1>CPF V·lido</h1>";
+return 1; //echo "<h1>CPF V√°lido</h1>";
 }
 else
 {
@@ -132,7 +144,7 @@ return 0;
 }
 }
 }
-//FunÁ„o que calcula CNPJ
+//Fun√ß√£o que calcula CNPJ
 
   function CalculaCNPJ($CampoNumero)
   {
@@ -331,21 +343,21 @@ function verifi($valor,$ac){
 		if($valor=="4" or $valor=="2"){
 			$acao=$ac;
 		}else{
-			print "<script>window.alert('VocÍ n„o tem permiss„o para isso, entre em contato com administrador');window.location='javascript:history.go(-1)';</script>";
+			print "<script>window.alert('Voc√™ n√£o tem permiss√£o para isso, entre em contato com administrador');window.location='javascript:history.go(-1)';</script>";
 			$acao="";
 		}
 	}else if($ac=="incluir" or $ac=="inc"){
 		if($valor=="4" or $valor=="3"){
 			$acao=$ac;
 		}else{
-			print "<script>window.alert('VocÍ n„o tem permiss„o para isso, entre em contato com administrador');window.location='javascript:history.go(-1)';</script>";
+			print "<script>window.alert('Voc√™ n√£o tem permiss√£o para isso, entre em contato com administrador');window.location='javascript:history.go(-1)';</script>";
 			$acao="";
 		}
 	}else if($ac=="salvar" or $ac=="sel" or $ac=="alterar" or $ac=="alt" or $ac=="altc" or $ac=="altt" or $ac=="v1" or $ac=="v2" or $ac=="v3" or $ac=="v4" or $ac=="rr2" or $ac=="rr3" or $ac=="cap2" or $ac=="cap3" or $ac=="s1" or $ac=="s2" or $ac=="s3" or $ac=="s4" or $ac=="i0" or $ac=="i1" or $ac=="altp" or $ac=="g2"){
 		if($valor=="4" or $valor=="3"){
 			$acao=$ac;
 		}else{
-			print "<script>window.alert('VocÍ n„o tem permiss„o para isso, entre em contato com administrador');window.location='javascript:history.go(-1)';</script>";
+			print "<script>window.alert('Voc√™ n√£o tem permiss√£o para isso, entre em contato com administrador');window.location='javascript:history.go(-1)';</script>";
 			$acao="";
 		}
 	}else{
@@ -449,7 +461,7 @@ class apqp {
 		$this->nivel=$_SESSION["login_nivel"];
 	}
 	function email(){
-		// enviar e-mail para a gerÍncia
+		// enviar e-mail para a ger√™ncia
 		$query = mysql_query("SELECT * FROM emails");
 		$sql4=mysql_query("SELECT * FROM funcionarios WHERE id='$this->user'");	
 		$res4=mysql_fetch_array($sql4);
@@ -469,13 +481,13 @@ class apqp {
 		$sqlv=mysql_query("SELECT * FROM apqp_pc WHERE id='$this->pc'");
 		$resv=mysql_fetch_array($sqlv);
 		if($resv["status"]>2){
-			$_SESSION["mensagem"]="N„o pode ser alterado pois o cliente j· aprovou!!";
+			$_SESSION["mensagem"]="N√£o pode ser alterado pois o cliente j√° aprovou!!";
 			header("Location:$pag");
 			exit;
 		}
-	//Se est· aprovado Sub - - - - - - - - - - - - - - - - - - -  - - - - - - - - -
-		$sqlb=mysql_query("SELECT * FROM apqp_cron WHERE perc='100' AND peca='$this->pc' AND ativ='Certificado de Submiss„o'");
-		//print "SELECT * FROM apqp_cron WHERE perc='100' AND peca='$this->pc' AND ativ='Certificado de Submiss„o'";
+	//Se est√° aprovado Sub - - - - - - - - - - - - - - - - - - -  - - - - - - - - -
+		$sqlb=mysql_query("SELECT * FROM apqp_cron WHERE perc='100' AND peca='$this->pc' AND ativ='Certificado de Submiss√£o'");
+		//print "SELECT * FROM apqp_cron WHERE perc='100' AND peca='$this->pc' AND ativ='Certificado de Submiss√£o'";
 		//exit;
 		if(mysql_num_rows($sqlb)){
 				$sqlb=mysql_query("SELECT * FROM apqp_cron WHERE perc='100' AND peca='$this->pc'");
@@ -518,16 +530,16 @@ class apqp {
 		$sqla=mysql_query("SELECT * FROM agenda WHERE pc='$this->pc' AND estudo='$esta' AND sit='N'");
 		$resa=mysql_fetch_array($sqla);
 			if($resa["nome"]==$_SESSION["login_nome"] or $this->nivel==1){
-				$tarefa="return pergunta('VocÍ j· realizou este compromisso?','apqp_agendaf.php?conf=$resa[numero]&pc=$this->pc&es=$est&pag=$page');";
+				$tarefa="return pergunta('Voc√™ j√° realizou este compromisso?','apqp_agendaf.php?conf=$resa[numero]&pc=$this->pc&es=$est&pag=$page');";
 			}else{
-				$tarefa="return mensagem('Este compromisso n„o foi agendado para vocÍ');";
+				$tarefa="return mensagem('Este compromisso n√£o foi agendado para voc√™');";
 			}
 		if(mysql_num_rows($sqla)){
 			print "<input name=\"finaliza_\" type=\"submit\" class=\"microtxt\" value=\"Finalizar Tarefa\" onClick=\"$tarefa\">";
 		}
 	}
 	function agenda($es){
-		//selecionar n˙mero
+		//selecionar n√∫mero
 		$sqla=mysql_query("SELECT * FROM agenda WHERE pc='$this->pc' AND estudo='$es' AND sit='N'");
 		$resa=mysql_fetch_array($sqla);
 		$conf=$resa["numero"];
@@ -541,14 +553,14 @@ class apqp {
 		$tit=$res_agenda["titulo"];
 		$ray1=explode("-",$tit);
 		
-		mysql_query("INSERT INTO postit (quem,titulo,msg,data,hora,de,denum) VALUES ('$res_agenda[user_apro]', '$ray1[0]', 'O usu·rio $login_nome j· finalizou o estudo $ray1[0] e est· aguardando a sua aprovaÁ„o.', '$data', '$now', '$login_nome', '$codigo')");
-		// e-mail para o respons·vel do cronograma
-		//pegar usuario responsavel aprovaÁao
+		mysql_query("INSERT INTO postit (quem,titulo,msg,data,hora,de,denum) VALUES ('$res_agenda[user_apro]', '$ray1[0]', 'O usu√°rio $login_nome j√° finalizou o estudo $ray1[0] e est√° aguardando a sua aprova√ß√£o.', '$data', '$now', '$login_nome', '$codigo')");
+		// e-mail para o respons√°vel do cronograma
+		//pegar usuario responsavel aprova√ßao
 			$sql3=mysql_query("SELECT * FROM agenda WHERE numero='$conf'");	
 			$res3=mysql_fetch_array($sql3);
 			$sql4=mysql_query("SELECT * FROM funcionarios WHERE id='$res3[user_apro]'");	
 			$res4=mysql_fetch_array($sql4);
-		//pegar resp respons·vel pelo estudo
+		//pegar resp respons√°vel pelo estudo
 			$sql5=mysql_query("SELECT id FROM funcionarios WHERE nome='$login_nome'");	
 			$res5=mysql_fetch_array($sql5);
 			$sql6=mysql_query("SELECT * FROM funcionarios WHERE id='$res5[id]'");	
@@ -556,7 +568,7 @@ class apqp {
 			
 			$inicio=banco2data($res3[ini]);
 			$prazo=banco2data($res3[prazo]);
-			$mensagem="$res4[nome], o $res6[nome] j· finalizou o estudo $ray1[0] da peÁa $ray1[1]-$ray1[2].";
+			$mensagem="$res4[nome], o $res6[nome] j√° finalizou o estudo $ray1[0] da pe√ßa $ray1[1]-$ray1[2].";
 			$from="From: $login_nome<$res4[email]>";
 			mail($res4["email"],$ray1[0],$mensagem,$from);
 		//
@@ -565,7 +577,7 @@ class apqp {
 			
 			$sql_emp=mysql_query("SELECT fantasia FROM empresa");
 			$res_emp=mysql_fetch_array($sql_emp);
-			mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao) VALUES ('$res_emp[fantasia]','$data','$now','FinalizaÁ„o da $ray1[0]$ray1[1]-$ray1[2].','O usu·rio $login_nome finalizou a atividade $ray1[0]$ray1[1]-$ray1[2].')");
+			mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao) VALUES ('$res_emp[fantasia]','$data','$now','Finaliza√ß√£o da $ray1[0]$ray1[1]-$ray1[2].','O usu√°rio $login_nome finalizou a atividade $ray1[0]$ray1[1]-$ray1[2].')");
 		//
 	}
 	

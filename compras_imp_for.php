@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 $bd=new set_bd;
 $sql=mysql_query("SELECT * FROM compras WHERE id='$id'");
@@ -7,7 +7,8 @@ $res=mysql_fetch_array($sql);
 <html>
 <head>
 <title>Untitled Document</title>
-<meta http-equiv="Content-Type" content="text/html; UTF-8">
+<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="http://www.e-sinalizacao.com.br/cybermanager/style.css" rel="stylesheet" type="text/css">
 <script>
 <!--
@@ -50,11 +51,11 @@ body {
     <td class="textoboldbranco"><table width="550" border="0" align="center" cellpadding="0" cellspacing="0">
         <tr class="texto">
           <td width="32%" align="left"><strong>Data:</strong>
-              <?= banco2data($res["emissao"]); ?></td>
+              <?php echo  banco2data($res["emissao"]); ?></td>
           <td width="40%"><strong>Previs&atilde;o Entrega: </strong>
-              <?= $prazo; ?></td>
+              <?php echo  $prazo; ?></td>
           <td width="28%"><strong>N&uacute;mero:
-                <?= $res["id"]; ?>
+                <?php echo  $res["id"]; ?>
           </strong></td>
         </tr>
     </table></td>
@@ -64,24 +65,24 @@ body {
         <table width="100%"  border="0" cellpadding="0" cellspacing="0" class="texto">
           <tr>
             <td><strong>Fornecedor:</strong> </td>
-            <td width="234"><? $sql3=mysql_query("SELECT * FROM fornecedores WHERE id='$res[fornecedor]'"); $res3=mysql_fetch_array($sql3); print $res3["nome"]; ?></td>
+            <td width="234"><?php $sql3=mysql_query("SELECT * FROM fornecedores WHERE id='$res[fornecedor]'"); $res3=mysql_fetch_array($sql3); print $res3["nome"]; ?></td>
             <td width="150">&nbsp;</td>
             <td width="202">&nbsp;</td>
           </tr>
           <tr>
             <td width="114"><strong>Endere&ccedil;o:</strong></td>
-            <td colspan="3"><? print $res3["endereco"]; ?> - <? print $res3["bairro"]; ?> - <? print $res3["cep"]; ?> - <? print $res3["estado"]; ?> - <? print $res3["cidade"]; ?> </td>
+            <td colspan="3"><?php print $res3["endereco"]; ?> - <?php print $res3["bairro"]; ?> - <?php print $res3["cep"]; ?> - <?php print $res3["estado"]; ?> - <?php print $res3["cidade"]; ?> </td>
           </tr>
           <tr>
             <td><strong>CNPJ:</strong></td>
-            <td><? print $res3["cnpj"]; ?></td>
-            <td><strong>IE: <? print $res3["ie"]; ?></strong></td>
+            <td><?php print $res3["cnpj"]; ?></td>
+            <td><strong>IE: <?php print $res3["ie"]; ?></strong></td>
             <td>&nbsp;</td>
           </tr>
           <tr>
             <td><strong>Contato:</strong></td>
-            <td><? print $res3["contato"]; ?></td>
-            <td><strong>Tel: </strong><? print $res3["fone"]; ?></td>
+            <td><?php print $res3["contato"]; ?></td>
+            <td><strong>Tel: </strong><?php print $res3["fone"]; ?></td>
             <td>&nbsp;</td>
           </tr>
           <tr>
@@ -92,7 +93,7 @@ body {
           </tr>
           <tr>
             <td colspan="2"><strong>Respons&aacute;vel pela compra:</strong> <strong>
-              <?= $res["responsavel"]; ?>
+              <?php echo  $res["responsavel"]; ?>
             </strong></td>
             <td>&nbsp;</td>
             <td>&nbsp;</td>
@@ -112,29 +113,29 @@ body {
           <td width="63" align="center">IPI</td>
           <td width="86" align="center">Total</td>
         </tr>
-        <? 
+        <?php 
 $sql2=mysql_query("SELECT * FROM compras_list WHERE compra='$id'"); 
 	if(!mysql_num_rows($sql2)){
 ?>
         <tr bgcolor="#FFFFFF">
           <td colspan="6" align="center" class="textobold">NENHUM PRODUTO ENCONTRADO </td>
         </tr>
-        <? }else{  while($res2=mysql_fetch_array($sql2)){ 
+        <?php }else{  while($res2=mysql_fetch_array($sql2)){ 
 				$tot+=($res2["qtd"]*$res2["unitario"])+(($res2["qtd"]*$res2["unitario"])*($res2["ipi"]/100));
 				$totdesc+=($res2["qtd"]*$res2["unitario"])*($res2["ipi"]/100);
 				$totpro+=($res2["qtd"]*$res2["unitario"]);
  ?>
         <tr bgcolor="#FFFFFF" class="texto" onMouseover="changeto('#CCCCCC')" onMouseout="changeback('#FFFFFF')">
           <td>&nbsp;
-              <? $sql3=mysql_query("SELECT * FROM prodserv WHERE id='$res2[produto]'"); $res3=mysql_fetch_array($sql3); print $res3["codprod"]; ?></td>
-          <td>&nbsp;<? print $res3["nome"]; ?></td>
-          <td align="left">&nbsp;<? print $res2["qtd"]; ?></td>
-          <td width="63" align="center"> &nbsp;<? print banco2valor($res2["unitario"]); ?></td>
-          <td width="63" align="center"><? print banco2valor($res2["ipi"]); ?></td>
+              <?php $sql3=mysql_query("SELECT * FROM prodserv WHERE id='$res2[produto]'"); $res3=mysql_fetch_array($sql3); print $res3["codprod"]; ?></td>
+          <td>&nbsp;<?php print $res3["nome"]; ?></td>
+          <td align="left">&nbsp;<?php print $res2["qtd"]; ?></td>
+          <td width="63" align="center"> &nbsp;<?php print banco2valor($res2["unitario"]); ?></td>
+          <td width="63" align="center"><?php print banco2valor($res2["ipi"]); ?></td>
           <td width="86" align="left">&nbsp;
-              <?= banco2valor(($res2["qtd"]*$res2["unitario"])+(($res2["qtd"]*$res2["unitario"])*($res2["ipi"]/100))); ?></td>
+              <?php echo  banco2valor(($res2["qtd"]*$res2["unitario"])+(($res2["qtd"]*$res2["unitario"])*($res2["ipi"]/100))); ?></td>
         </tr>
-        <? } } ?>
+        <?php } } ?>
     </table></td>
   </tr>
   <tr align="center">
@@ -142,62 +143,62 @@ $sql2=mysql_query("SELECT * FROM compras_list WHERE compra='$id'");
   </tr>
   <tr align="center">
     <td align="left"><strong>Obs:
-          <?= $res["obs"]; ?>
+          <?php echo  $res["obs"]; ?>
     </strong></td>
   </tr>
   <tr align="center">
     <td align="right"><table width="150"  border="0" cellpadding="0" cellspacing="0" class="texto">
         <tr>
           <td width="30%" align="right" class="textobold">Frete:
-              <?= banco2valor($res["frete"]); ?></td>
+              <?php echo  banco2valor($res["frete"]); ?></td>
         </tr>
         <tr>
           <td align="right" class="textobold">Despesas:
-              <?= banco2valor($res["despesas"]); ?></td>
+              <?php echo  banco2valor($res["despesas"]); ?></td>
         </tr>
         <tr>
           <td align="right" class="textobold">Total:
-              <?= banco2valor($tot+$res["despesas"]+$res["frete"]); ?></td>
+              <?php echo  banco2valor($tot+$res["despesas"]+$res["frete"]); ?></td>
         </tr>
     </table></td>
   </tr>
   <tr align="center">
     <td align="left"><span class="style1">Dados Para Faturamento </span></td>
   </tr>
-  <? $fat=mysql_query("SELECT * FROM empresa WHERE id='$res[faturamento]'"); $fatr=mysql_fetch_array($fat); ?>
+  <?php $fat=mysql_query("SELECT * FROM empresa WHERE id='$res[faturamento]'"); $fatr=mysql_fetch_array($fat); ?>
   <tr align="center">
     <td align="left"><table width="100%" border="0" cellpadding="0" cellspacing="0" class="texto">
         <tr>
           <td width="93"><strong> Nome Empresa: </strong></td>
-          <td width="154"><?= $fatr["nome"]; ?></td>
+          <td width="154"><?php echo  $fatr["nome"]; ?></td>
           <td width="55"><strong>CNPJ:</strong> </td>
-          <td width="120"><?= $fatr["cnpj"]; ?></td>
+          <td width="120"><?php echo  $fatr["cnpj"]; ?></td>
           <td width="54"><strong>IE:</strong> </td>
-          <td width="124"><?= $fatr["ie"]; ?></td>
+          <td width="124"><?php echo  $fatr["ie"]; ?></td>
         </tr>
         <tr>
           <td><strong>Contato:</strong> </td>
-          <td><?= $fatr["contato"]; ?></td>
+          <td><?php echo  $fatr["contato"]; ?></td>
           <td><strong>Telefone:</strong> </td>
-          <td><?= $fatr["tel"]; ?></td>
+          <td><?php echo  $fatr["tel"]; ?></td>
           <td>&nbsp;</td>
           <td>&nbsp;</td>
         </tr>
         <tr>
           <td><strong>Endere&ccedil;o:</strong> </td>
-          <td><?= $fatr["end_fat"]; ?></td>
+          <td><?php echo  $fatr["end_fat"]; ?></td>
           <td><strong>Bairro:</strong> </td>
-          <td><?= $fatr["bairro_fat"]; ?></td>
+          <td><?php echo  $fatr["bairro_fat"]; ?></td>
           <td><strong>CEP:</strong> </td>
-          <td><?= $fatr["cep_fat"]; ?></td>
+          <td><?php echo  $fatr["cep_fat"]; ?></td>
         </tr>
         <tr>
           <td>&nbsp;</td>
           <td>&nbsp;</td>
           <td><strong>Cidade: </strong> </td>
-          <td><? $bd->pega_nome_bd("cidade","nome",$fatr["cidade_fat"]); ?></td>
+          <td><?php $bd->pega_nome_bd("cidade","nome",$fatr["cidade_fat"]); ?></td>
           <td><strong>Estado:</strong> </td>
-          <td><? $bd->pega_nome_bd("estado","nome",$fatr["estado_fat"]); ?></td>
+          <td><?php $bd->pega_nome_bd("estado","nome",$fatr["estado_fat"]); ?></td>
         </tr>
     </table></td>
   </tr>
@@ -207,17 +208,17 @@ $sql2=mysql_query("SELECT * FROM compras_list WHERE compra='$id'");
   <tr align="center">
     <td align="left">
       <table width="267" border="0" cellpadding="0" cellspacing="0" class="texto">
-        <?
+        <?php
 $ent=mysql_query("SELECT * FROM empresa WHERE id='$res[dentrega]'"); $entr=mysql_fetch_array($ent);
 $n=$res["dentregan"]; 
 ?>
         <tr>
           <td width="105"><strong> Nome Empresa: </strong> </td>
-          <td width="162"><?= eval("print \$entr[nome];"); ?></td>
+          <td width="162"><?php echo  eval("print \$entr[nome];"); ?></td>
         </tr>
         <tr>
           <td><strong>Local de entrega: </strong> </td>
-          <td><?= eval("print \$entr[apelido_ent$n];"); ?></td>
+          <td><?php echo  eval("print \$entr[apelido_ent$n];"); ?></td>
         </tr>
         <tr>
           <td><img src="../layout/layout_menu/spacer.gif" width="1" height="5"></td>
@@ -225,23 +226,23 @@ $n=$res["dentregan"];
         </tr>
         <tr>
           <td><strong>Endere&ccedil;o:</strong> </td>
-          <td><?= eval("print \$entr[end_$n];"); ?></td>
+          <td><?php echo  eval("print \$entr[end_$n];"); ?></td>
         </tr>
         <tr>
           <td><strong>Bairro</strong> </td>
-          <td><?= eval("print \$entr[bairro_$n];"); ?></td>
+          <td><?php echo  eval("print \$entr[bairro_$n];"); ?></td>
         </tr>
         <tr>
           <td><strong>CEP:</strong> </td>
-          <td><?= eval("print \$entr[cep_$n];"); ?></td>
+          <td><?php echo  eval("print \$entr[cep_$n];"); ?></td>
         </tr>
         <tr>
           <td><strong>Cidade:</strong> </td>
-          <td><? $a=eval("\$entr[cidade_$n];"); $bd->pega_nome_bd("cidade","nome",$a); ?></td>
+          <td><?php $a=eval("\$entr[cidade_$n];"); $bd->pega_nome_bd("cidade","nome",$a); ?></td>
         </tr>
         <tr>
           <td><strong>Estado:</strong> </td>
-          <td><? $a=eval("\$entr[estado_$n];"); $bd->pega_nome_bd("estado","nome",$b);  ?></td>
+          <td><?php $a=eval("\$entr[estado_$n];"); $bd->pega_nome_bd("estado","nome",$b);  ?></td>
         </tr>
         
         <tr>
@@ -251,7 +252,7 @@ $n=$res["dentregan"];
     </table></td>
   </tr>
   <tr align="center">
-    <td><a href="#"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="compras_email.php?id=<?= $id; ?>&fornecedor=<?= $res["fornecedor"]; ?>"></a></td>
+    <td><a href="#"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="compras_email.php?id=<?php echo  $id; ?>&fornecedor=<?php echo  $res["fornecedor"]; ?>"></a></td>
   </tr>
   <tr align="center">
     <td>&nbsp;</td>

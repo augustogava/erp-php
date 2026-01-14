@@ -1,37 +1,37 @@
-<?
+<?php
 include("conecta.php");
 if(empty($acao)) exit;
 $acao=verifi($permi,$acao);
 if(!empty($acao)){
-	$loc="Situação T.";
+	$loc="SituaÃ§Ã£o T.";
 	$pagina=$_SERVER['SCRIPT_FILENAME'];
 	include("log.php");
 }
 if($acao=="incluir"){
 	$sql=mysql_query("INSERT INTO sitri (nome,apelido) VALUES ('$nome','$apelido')");
 	if($sql){
-		$_SESSION["mensagem"]="Situação incluída com sucesso!";
+		$_SESSION["mensagem"]="SituaÃ§Ã£o incluÃ­da com sucesso!";
 		$acao="entrar";
 	}else{
-		$_SESSION["mensagem"]="A situação não pôde ser incluída!";
+		$_SESSION["mensagem"]="A situaÃ§Ã£o nÃ£o pÃ´de ser incluÃ­da!";
 		$acao="inc";
 	}
 }elseif($acao=="alterar"){
 	$sql=mysql_query("UPDATE sitri SET nome='$nome',apelido='$apelido' WHERE id='$id'");
 	if($sql){
-		$_SESSION["mensagem"]="Situação alterada com sucesso!";
+		$_SESSION["mensagem"]="SituaÃ§Ã£o alterada com sucesso!";
 		$acao="entrar";
 	}else{
-		$_SESSION["mensagem"]="A situação não pôde ser alterada!";
+		$_SESSION["mensagem"]="A situaÃ§Ã£o nÃ£o pÃ´de ser alterada!";
 		$acao="alt";
 	}
 }elseif($acao=="exc"){
 	if(!empty($id)){
 		$sql=mysql_query("DELETE FROM sitri WHERE id='$id'");
 		if($sql){
-			$_SESSION["mensagem"]="Situação excluída com sucesso!";
+			$_SESSION["mensagem"]="SituaÃ§Ã£o excluÃ­da com sucesso!";
 		}else{
-			$_SESSION["mensagem"]="A situação não pôde ser excluída!";
+			$_SESSION["mensagem"]="A situaÃ§Ã£o nÃ£o pÃ´de ser excluÃ­da!";
 		}		
 	}
 	$acao="entrar";

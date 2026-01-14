@@ -1,11 +1,11 @@
-<?
+<?php
 include("conecta.php");
 include("seguranca.php");
 $apqp=new set_apqp;
 if(empty($acao)) $acao="entrar";
 $pc=$_SESSION["mpc"];
 $npc=$_SESSION["npc"];
-//VerificaÁ„o
+//Verifica√ß√£o
 $_SESSION["modulo"]="fluxo";
 $sqlm=mysql_query("SELECT * FROM online WHERE user<>'$iduser' and peca='$pc' and modulo='fluxo'");
 if(mysql_num_rows($sqlm)){
@@ -15,7 +15,7 @@ if(mysql_num_rows($sqlm)){
 	}else{
 		$sql2=mysql_query("SELECT * FROM clientes WHERE id='$resm[user]'"); $res2=mysql_fetch_array($sql2);
 	}
-	$_SESSION["mensagem"]="O usuario $res2[nome] est· alterando este mÛdulo!";
+	$_SESSION["mensagem"]="O usuario $res2[nome] est√° alterando este m√≥dulo!";
 	header("Location:apqp_menu.php");
 	exit;
 }
@@ -41,7 +41,7 @@ $sql=mysql_query("SELECT * FROM apqp_fluxo WHERE peca='$pc' ORDER BY ordem ASC")
 		}else{
 			$linha=1;
 		}
-	$sqlb=mysql_query("SELECT * FROM apqp_cron WHERE perc='100' AND peca='$pc' AND ativ='Certificado de Submiss„o'");
+	$sqlb=mysql_query("SELECT * FROM apqp_cron WHERE perc='100' AND peca='$pc' AND ativ='Certificado de Submiss√£o'");
 	if(!mysql_num_rows($sqlb)){
 		$sqlb=mysql_query("SELECT * FROM apqp_cron WHERE perc='100' AND peca='$pc' AND ativ='Diagrama de Fluxo'");
 		if(!mysql_num_rows($sqlb)){
@@ -51,27 +51,27 @@ $sql=mysql_query("SELECT * FROM apqp_fluxo WHERE peca='$pc' ORDER BY ordem ASC")
 		}else{
 			$sqlb=mysql_query("SELECT * FROM apqp_cron WHERE perc='100' AND peca='$pc' AND ativ='FMEA de Processo'");
 			if(mysql_num_rows($sqlb)){
-				$btnsalva="if (confirm('Caso queira editar este documento ter· que revisar todos os documentos a frente e aprovalos novamente!?')){ form1.acao.value='salvar'; form1.submit();  } return false;";
-				$btnsalva2="if (confirm('Caso queira editar este documento ter· que revisar todos os documentos a frente e aprovalos novamente!?')){ form1.acao.value='linha'; form1.submit();  } return false;";
-				$btnsalva3="if (confirm('Caso queira editar este documento ter· que revisar todos os documentos a frente e aprovalos novamente!?')){ if(form1.linha.value==''){ alert('Informe a linha a ser removida'); }else{ form1.acao.value='remover'; form1.submit(); } return false;  } return false;";
+				$btnsalva="if (confirm('Caso queira editar este documento ter√° que revisar todos os documentos a frente e aprovalos novamente!?')){ form1.acao.value='salvar'; form1.submit();  } return false;";
+				$btnsalva2="if (confirm('Caso queira editar este documento ter√° que revisar todos os documentos a frente e aprovalos novamente!?')){ form1.acao.value='linha'; form1.submit();  } return false;";
+				$btnsalva3="if (confirm('Caso queira editar este documento ter√° que revisar todos os documentos a frente e aprovalos novamente!?')){ if(form1.linha.value==''){ alert('Informe a linha a ser removida'); }else{ form1.acao.value='remover'; form1.submit(); } return false;  } return false;";
 			}else{
-				$btnsalva="if (confirm('Documento Aprovado! Caso queira alter·-lo ser· removida a aprovaÁ„o')){ form1.acao.value='salvar'; form1.submit();  } return false;";
-				$btnsalva2="if (confirm('Documento Aprovado! Caso queira alter·-lo ser· removida a aprovaÁ„o')){ form1.acao.value='linha'; form1.submit();  } return false;";
-				$btnsalva3="if (confirm('Documento Aprovado! Caso queira alter·-lo ser· removida a aprovaÁ„o')){ if(form1.linha.value==''){ alert('Informe a linha a ser removida'); }else{ form1.acao.value='remover'; form1.submit(); } return false;  } return false;";
+				$btnsalva="if (confirm('Documento Aprovado! Caso queira alter√°-lo ser√° removida a aprova√ß√£o')){ form1.acao.value='salvar'; form1.submit();  } return false;";
+				$btnsalva2="if (confirm('Documento Aprovado! Caso queira alter√°-lo ser√° removida a aprova√ß√£o')){ form1.acao.value='linha'; form1.submit();  } return false;";
+				$btnsalva3="if (confirm('Documento Aprovado! Caso queira alter√°-lo ser√° removida a aprova√ß√£o')){ if(form1.linha.value==''){ alert('Informe a linha a ser removida'); }else{ form1.acao.value='remover'; form1.submit(); } return false;  } return false;";
 			}
 
 		}
 		$sqlfmea=mysql_query("SELECT * FROM apqp_cron WHERE perc='100' AND peca='$pc' AND ativ='FMEA de Processo'");
 		if(!mysql_num_rows($sqlfmea)){
-			$javalimp="if(confirm('Deseja remover a aprovaÁ„o?')){ form1.submit(); } else{ return false; }";
+			$javalimp="if(confirm('Deseja remover a aprova√ß√£o?')){ form1.submit(); } else{ return false; }";
 		 } else {
-			$javalimp="if(confirm('Deseja remover a aprovaÁ„o?')){ if(confirm('Caso queira remover a aprovaÁ„o, ter· que revisar todos os documentos a frente e aprov·-los novamente.')){ form1.submit(); }else{ return false; } } else { return false; }";
+			$javalimp="if(confirm('Deseja remover a aprova√ß√£o?')){ if(confirm('Caso queira remover a aprova√ß√£o, ter√° que revisar todos os documentos a frente e aprov√°-los novamente.')){ form1.submit(); }else{ return false; } } else { return false; }";
 		}
 	}else{
-			$btnsalva="if(confirm('O Certificado de submiss„o j· esta aprovado, caso queira remover a aprovaÁ„o deste Estudo ser· removida a aprovaÁ„o de todos os relatÛrios. Deseja remover?')){ if(confirm('VocÍ tem certeza que deseja remover a aprovaÁ„o? Ter· que aprovar todos os relatÛrios novamente.')){ form1.acao.value='salvar'; form1.submit(); }else{ return false; } }else{ return false; }";
-			$btnsalva2="if(confirm('O Certificado de submiss„o j· esta aprovado, caso queira remover a aprovaÁ„o deste Estudo ser· removida a aprovaÁ„o de todos os relatÛrios. Deseja remover?')){ if(confirm('VocÍ tem certeza que deseja remover a aprovaÁ„o? Ter· que aprovar todos os relatÛrios novamente.')){ form1.acao.value='linha'; form1.submit(); }else{ return false; } }else{ return false; }";
-			$btnsalva3="if(confirm('O Certificado de submiss„o j· esta aprovado, caso queira remover a aprovaÁ„o deste Estudo ser· removida a aprovaÁ„o de todos os relatÛrios. Deseja remover?')){ if(confirm('VocÍ tem certeza que deseja remover a aprovaÁ„o? Ter· que aprovar todos os relatÛrios novamente.')){ if(form1.linha.value==''){ alert('Informe a linha a ser removida'); }else{ form1.acao.value='remover'; form1.submit(); } return false; }else{ return false; } }else{ return false; }";
-			$javalimp="if(confirm('O Certificado de submiss„o j· esta aprovado, caso queira remover a aprovaÁ„o deste Estudo ser· removida a aprovaÁ„o de todos os relatÛrios. Deseja remover?')){ if(confirm('VocÍ tem certeza que deseja remover a aprovaÁ„o? Ter· que aprovar todos os relatÛrios novamente.')){ form1.submit(); }else{ return false; } }else{ return false; }";
+			$btnsalva="if(confirm('O Certificado de submiss√£o j√° esta aprovado, caso queira remover a aprova√ß√£o deste Estudo ser√° removida a aprova√ß√£o de todos os relat√≥rios. Deseja remover?')){ if(confirm('Voc√™ tem certeza que deseja remover a aprova√ß√£o? Ter√° que aprovar todos os relat√≥rios novamente.')){ form1.acao.value='salvar'; form1.submit(); }else{ return false; } }else{ return false; }";
+			$btnsalva2="if(confirm('O Certificado de submiss√£o j√° esta aprovado, caso queira remover a aprova√ß√£o deste Estudo ser√° removida a aprova√ß√£o de todos os relat√≥rios. Deseja remover?')){ if(confirm('Voc√™ tem certeza que deseja remover a aprova√ß√£o? Ter√° que aprovar todos os relat√≥rios novamente.')){ form1.acao.value='linha'; form1.submit(); }else{ return false; } }else{ return false; }";
+			$btnsalva3="if(confirm('O Certificado de submiss√£o j√° esta aprovado, caso queira remover a aprova√ß√£o deste Estudo ser√° removida a aprova√ß√£o de todos os relat√≥rios. Deseja remover?')){ if(confirm('Voc√™ tem certeza que deseja remover a aprova√ß√£o? Ter√° que aprovar todos os relat√≥rios novamente.')){ if(form1.linha.value==''){ alert('Informe a linha a ser removida'); }else{ form1.acao.value='remover'; form1.submit(); } return false; }else{ return false; } }else{ return false; }";
+			$javalimp="if(confirm('O Certificado de submiss√£o j√° esta aprovado, caso queira remover a aprova√ß√£o deste Estudo ser√° removida a aprova√ß√£o de todos os relat√≥rios. Deseja remover?')){ if(confirm('Voc√™ tem certeza que deseja remover a aprova√ß√£o? Ter√° que aprovar todos os relat√≥rios novamente.')){ form1.submit(); }else{ return false; } }else{ return false; }";
 
 	}
 		
@@ -103,7 +103,7 @@ function abrir(url,id){
 	return true;
 }
 function salvar(url,id){
-	window.open('apqp_impressao.php?acao=salvar&local='+ url +'&pc='+ <?=$pc?> + '');
+	window.open('apqp_impressao.php?acao=salvar&local='+ url +'&pc='+ <?php echo $pc?> + '');
 	return true;
 }
 function mudaseta(num,pos){
@@ -128,7 +128,7 @@ function mudaseta2(num,pos){
 }
 function seta(num,tipo){
 	if(form1.linha.value=='' || form1.posicao.value==''){
-		alert('Selecione um campo para modific·-lo');
+		alert('Selecione um campo para modific√°-lo');
 	}else{
 		if(tipo==1){
 			tipo='s';
@@ -141,7 +141,7 @@ function seta(num,tipo){
 		}else{
 			tipo='op_';
 			if(num==0){
-				alert('Selecione uma operaÁ„o');
+				alert('Selecione uma opera√ß√£o');
 				return false;
 			}
 			form1.all['t1'+form1.linha.value].value=arop1[num];
@@ -187,8 +187,8 @@ function MM_openBrWindow(theURL,winName,features) { //v2.0
 <body  leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" onLoad="enterativa=1;"onkeypress="return ent()">
 <table width="590" border="0" cellpadding="0" cellspacing="0" class="texto">
      <tr>
-      <td width="27" align="center"><div align="left"><a href="#" onClick="MM_openBrWindow('help/mini_diagrama_fluxo.html','','width=680,height=501')"><img src="imagens/icon14_ahn.gif" width="14" height="14" border="0" onMouseOver="this.T_STICKY=true; this.T_TITLE='Diagrama de Fluxo de Dados'; this.T_DELAY=10; this.T_WIDTH=225;  return escape('Para preencher o Diagrama de Fluxo, as operaÁıes devem ter sido previamente registradas no Cadastro de OperaÁıes.')"></a><span class="impTextoBold">&nbsp;</span></div></td>
-      <td width="563" align="right"><div align="left" class="textobold style1 style1 style1 style1 style1 style1 style1">APQP - Diagrama de Fluxo <? print $npc; ?></div></td>
+      <td width="27" align="center"><div align="left"><a href="#" onClick="MM_openBrWindow('help/mini_diagrama_fluxo.html','','width=680,height=501')"><img src="imagens/icon14_ahn.gif" width="14" height="14" border="0" onMouseOver="this.T_STICKY=true; this.T_TITLE='Diagrama de Fluxo de Dados'; this.T_DELAY=10; this.T_WIDTH=225;  return escape('Para preencher o Diagrama de Fluxo, as opera√ß√µes devem ter sido previamente registradas no Cadastro de Opera√ß√µes.')"></a><span class="impTextoBold">&nbsp;</span></div></td>
+      <td width="563" align="right"><div align="left" class="textobold style1 style1 style1 style1 style1 style1 style1">APQP - Diagrama de Fluxo <?php print $npc; ?></div></td>
     </tr>
     <tr>
      <td align="center">&nbsp;</td>
@@ -211,7 +211,7 @@ function MM_openBrWindow(theURL,winName,features) { //v2.0
                 <td width="30"><a href="#" onClick="return seta(selectop[selectop.selectedIndex].value,2);"><img src="imagens/apqp_setas2.gif" name="imgop" width="30" height="30" border="0" id="imgop"></a></td>
                 <td width="0"><select name="selectop" class="formularioselect" id="selectop" onChange="mselop();">
                     <option value="0">Selecione uma opera&ccedil;&atilde;o</option>
-                    <?
+                    <?php
 if(mysql_num_rows($ops)){
 	while($rops=mysql_fetch_array($ops)){
 		$montaray.="arop1[".$rops["id"]."]='".htmlspecialchars($rops["numero"], ENT_QUOTES)."';\n";
@@ -219,12 +219,12 @@ if(mysql_num_rows($ops)){
 		$montaray.="arop3[".$rops["id"]."]='".htmlspecialchars($rops["obs"], ENT_QUOTES)."';\n";
 		$montaray.="arop4[".$rops["id"]."]='".$rops["tipo"]."';\n";
 ?>
-                    <option value="<?= $rops["id"]; ?>">
-                    <?= htmlspecialchars($rops["numero"], ENT_QUOTES); ?>
+                    <option value="<?php echo  $rops["id"]; ?>">
+                    <?php echo  htmlspecialchars($rops["numero"], ENT_QUOTES); ?>
                 -
-                <?= htmlspecialchars($rops["descricao"], ENT_QUOTES); ?>
+                <?php echo  htmlspecialchars($rops["descricao"], ENT_QUOTES); ?>
                     </option>
-                    <?
+                    <?php
 	}
 }
 ?>
@@ -236,7 +236,7 @@ if(mysql_num_rows($ops)){
           </table></td>
         </tr>
         <tr>
-          <td align="center" valign="top"><?
+          <td align="center" valign="top"><?php
 if(mysql_num_rows($sql)){
 ?>
               <table width="100%"  border="0" cellpadding="3" cellspacing="1" bgcolor="#999999">
@@ -246,7 +246,7 @@ if(mysql_num_rows($sql)){
                   <td width="379" align="center" bordercolor="#FFFFFF">Descri&ccedil;&atilde;o da Opera&ccedil;&atilde;o </td>
                   <td width="364" align="center" bordercolor="#FFFFFF">Observa&ccedil;&otilde;es</td>
                 </tr>
-                <?
+                <?php
 	while($res=mysql_fetch_array($sql)){
 		unset($resop);
 		if($res["op"]){
@@ -259,22 +259,22 @@ if(mysql_num_rows($sql)){
 		if(empty($res["fluxo2"])) $res["fluxo2"]="op_";
 ?>
                 <tr bgcolor="#FFFFFF">
-                  <td width="27" align="center" valign="middle"><img src="imagens/op_.jpg" name="seta<?= $res["id"]; ?>" width="16" height="15" id="seta<?= $res["id"]; ?>"></td>
-                  <td width="54" align="center" valign="middle"><a href="#" onClick="mudaseta(<?= $res["id"]; ?>,1); return false;"><img src="imagens/<?= $res["fluxo1"]; ?>.jpg" name="img1<?= $res["id"]; ?>" border="0" id="img1<?= $res["id"]; ?>"></a></td>
-                  <td width="30" align="center" valign="middle"><img src="imagens/op_.jpg" name="setaa<?= $res["id"]; ?>" width="16" height="15" id="setaa<?= $res["id"]; ?>"></td>
-                  <td width="54" align="center" valign="middle"><a href="#" onClick="mudaseta2(<?= $res["id"]; ?>,2); return false;"><img src="imagens/<?= $res["fluxo2"]; ?>.jpg" name="img2<?= $res["id"]; ?>" border="0" id="img2<?= $res["id"]; ?>"></a></td>
-                  <td><input name="t1<?= $res["id"]; ?>" type="text" class="formularioselectsemborda" id="t1<?= $res["id"]; ?>" value="<?= $resop["numero"]; ?>" size="1" readonly=""></td>
-                  <td width="379"><input name="t2<?= $res["id"]; ?>" type="text" class="formularioselectsemborda" id="t2<?= $res["id"]; ?>" value="<?= $resop["descricao"]; ?>" size="1" readonly=""></td>
-                  <td><input name="t3<?= $res["id"]; ?>" type="text" class="formularioselectsemborda" id="t3<?= $res["id"]; ?>" value="<?= $resop["obs"]; ?>" size="1" readonly=""></td>
-                  <input name="op[<?= $res["id"]; ?>]" type="hidden" id="op<?= $res["id"]; ?>" value="<?= $res["op"]; ?>">
-                  <input name="i1[<?= $res["id"]; ?>]" type="hidden" id="i1<?= $res["id"]; ?>" value="<?= $res["fluxo1"]; ?>">
-                  <input name="i2[<?= $res["id"]; ?>]" type="hidden" id="i2<?= $res["id"]; ?>" value="<?= $res["fluxo2"]; ?>">
+                  <td width="27" align="center" valign="middle"><img src="imagens/op_.jpg" name="seta<?php echo  $res["id"]; ?>" width="16" height="15" id="seta<?php echo  $res["id"]; ?>"></td>
+                  <td width="54" align="center" valign="middle"><a href="#" onClick="mudaseta(<?php echo  $res["id"]; ?>,1); return false;"><img src="imagens/<?php echo  $res["fluxo1"]; ?>.jpg" name="img1<?php echo  $res["id"]; ?>" border="0" id="img1<?php echo  $res["id"]; ?>"></a></td>
+                  <td width="30" align="center" valign="middle"><img src="imagens/op_.jpg" name="setaa<?php echo  $res["id"]; ?>" width="16" height="15" id="setaa<?php echo  $res["id"]; ?>"></td>
+                  <td width="54" align="center" valign="middle"><a href="#" onClick="mudaseta2(<?php echo  $res["id"]; ?>,2); return false;"><img src="imagens/<?php echo  $res["fluxo2"]; ?>.jpg" name="img2<?php echo  $res["id"]; ?>" border="0" id="img2<?php echo  $res["id"]; ?>"></a></td>
+                  <td><input name="t1<?php echo  $res["id"]; ?>" type="text" class="formularioselectsemborda" id="t1<?php echo  $res["id"]; ?>" value="<?php echo  $resop["numero"]; ?>" size="1" readonly=""></td>
+                  <td width="379"><input name="t2<?php echo  $res["id"]; ?>" type="text" class="formularioselectsemborda" id="t2<?php echo  $res["id"]; ?>" value="<?php echo  $resop["descricao"]; ?>" size="1" readonly=""></td>
+                  <td><input name="t3<?php echo  $res["id"]; ?>" type="text" class="formularioselectsemborda" id="t3<?php echo  $res["id"]; ?>" value="<?php echo  $resop["obs"]; ?>" size="1" readonly=""></td>
+                  <input name="op[<?php echo  $res["id"]; ?>]" type="hidden" id="op<?php echo  $res["id"]; ?>" value="<?php echo  $res["op"]; ?>">
+                  <input name="i1[<?php echo  $res["id"]; ?>]" type="hidden" id="i1<?php echo  $res["id"]; ?>" value="<?php echo  $res["fluxo1"]; ?>">
+                  <input name="i2[<?php echo  $res["id"]; ?>]" type="hidden" id="i2<?php echo  $res["id"]; ?>" value="<?php echo  $res["fluxo2"]; ?>">
                 </tr>
-                <?
+                <?php
 	}
 ?>
               </table>
-              <?
+              <?php
 }
 ?>
           </td>
@@ -304,43 +304,43 @@ if(mysql_num_rows($sql)){
         <tr>
           <td width="85"><span class="textobold"> Aprovado por:</span></td>
           <td width="363"><span class="textobold">
-            <?  $sel=mysql_query("SELECT * FROM apqp_cron WHERE peca='$pc' AND ativ='Diagrama de Fluxo'"); $sele=mysql_fetch_array($sel); if(!empty($sele["resp"])){  $quem=$sele["resp"]; }else{ } ?>
-            <input name="quem1" type="text" class="formularioselect" id="quem2" value="<?= $quem; ?>">
+            <?php  $sel=mysql_query("SELECT * FROM apqp_cron WHERE peca='$pc' AND ativ='Diagrama de Fluxo'"); $sele=mysql_fetch_array($sel); if(!empty($sele["resp"])){  $quem=$sele["resp"]; }else{ } ?>
+            <input name="quem1" type="text" class="formularioselect" id="quem2" value="<?php echo  $quem; ?>">
           </span></td>
           <td width="124"><div align="center">
-		   <? 
+		   <?php 
 				  if(empty($sele["resp"])){
 				  	$javas="if(confirm('Deseja Aprovar Diagrama de Fluxo?')){form1.submit();}else{ return false; }";
-					$javalimp="window.alert('O Estudo Diagrama de Fluxo n„o foi aprovado ainda, se deseja aprovar, clique em Aprovar.');return false;";
+					$javalimp="window.alert('O Estudo Diagrama de Fluxo n√£o foi aprovado ainda, se deseja aprovar, clique em Aprovar.');return false;";
 				  }else{
-				  $javas="window.alert('O Diagrama de Fluxo j· foi aprovado, caso deseje retirar a aprovaÁ„o, clique no bot„o limpar.');return false;";
+				  $javas="window.alert('O Diagrama de Fluxo j√° foi aprovado, caso deseje retirar a aprova√ß√£o, clique no bot√£o limpar.');return false;";
 				  }
 				  ?>
-		   <input name="ap" type="submit" class="microtxt" id="ap" value="aprovar" onClick="<?= $javas; ?>">
+		   <input name="ap" type="submit" class="microtxt" id="ap" value="aprovar" onClick="<?php echo  $javas; ?>">
 		   &nbsp;
-              <input name="lap" type="submit" class="microtxt" id="lap" value="limpar" onClick="<?= $javalimp;?>">
+              <input name="lap" type="submit" class="microtxt" id="lap" value="limpar" onClick="<?php echo  $javalimp;?>">
           </div></td>
         </tr>
       </table>
-	   <? if($aprov=="N") print "<script>bloke();</script>"; ?>
+	   <?php if($aprov=="N") print "<script>bloke();</script>"; ?>
         
                 <table width="601" border="0" align="center" cellpadding="3" cellspacing="0" class="texto">
                   <tr>
-				  <? if($_SESSION["e_mail"]=="S"){ ?>
+				  <?php if($_SESSION["e_mail"]=="S"){ ?>
                     <td width="16%" align="left" class="textobold">&nbsp;Enviar e-mail: </td>
                     <td width="56%"><input name="email" type="text" class="formularioselect" id="email3" value="Digite o e-mail aqui"></td> 
-					<? if(in_array("U",$emailt)){ ?>
-                    <td width="3%"><div align="center"><a href="#" onClick="return abre('busca_email2.php','a','width=320,height=380,scrollbars=1');"><img src="imagens/icon14_pessoas.gif" alt="Buscar Email de Funcion·rios" width="14" height="14" border="0"></a></div></td>
-					<? } if(in_array("G",$emailt)){ ?>
+					<?php if(in_array("U",$emailt)){ ?>
+                    <td width="3%"><div align="center"><a href="#" onClick="return abre('busca_email2.php','a','width=320,height=380,scrollbars=1');"><img src="imagens/icon14_pessoas.gif" alt="Buscar Email de Funcion√°rios" width="14" height="14" border="0"></a></div></td>
+					<?php } if(in_array("G",$emailt)){ ?>
                     <td width="8%"><div align="center"><a href="#" onClick="return abre('busca_email_grupo.php','a','width=320,height=380,scrollbars=1');"><input name="grupo" type="hidden" id="grupo">
                 <input name="grupo_nome" type="hidden" id="grupo_nome"><img src="imagens/icon14_grupo.gif" alt="Buscar Grupo de Emails" width="26" height="13" border="0"></a></div></td>
-				 <? } if(in_array("C",$emailt)){ ?>
+				 <?php } if(in_array("C",$emailt)){ ?>
                     <td width="4%"><div align="center"><a href="#" onClick="return abre('busca_email.php','a','width=320,height=380,scrollbars=1');"></a><a href="#" onClick="return abre('busca_email.php','a','width=320,height=300,scrollbars=1');"><img src="imagens/icon_cli.gif" alt="Buscar Emails de Clientes" width="18" height="18" border="0"></a></div></td>
-				<? } ?>
-                    <td width="9%"><div align="center"><? if($_SESSION["login_funcionario"]=="S"){ ?><a href="#" onClick="vailogo1('email','<?= $pc; ?>');"><img src="imagens/icon14_mail.gif" alt="Enviar Email" width="16" height="10" border="0"></a><? } ?></div></td>
-					<? } if($_SESSION["i_mp"]=="S"){ ?>
+				<?php } ?>
+                    <td width="9%"><div align="center"><?php if($_SESSION["login_funcionario"]=="S"){ ?><a href="#" onClick="vailogo1('email','<?php echo  $pc; ?>');"><img src="imagens/icon14_mail.gif" alt="Enviar Email" width="16" height="10" border="0"></a><?php } ?></div></td>
+					<?php } if($_SESSION["i_mp"]=="S"){ ?>
                     <td width="4%"><div align="center"><a href="#" onClick="vailogo('imp');"><img src="imagens/icon14_imp.gif" alt="Imprimir" width="15" height="15" border="0"></a></div></td>
-					<? } ?>
+					<?php } ?>
                   </tr>
                   <tr>
                     <td colspan="7" align="left" class="textobold"><img src="imagens/spacer.gif" width="46" height="5"></td>
@@ -355,15 +355,15 @@ if(mysql_num_rows($sql)){
             <td><div align="center">
                 <input name="button122" type="button" class="microtxt" value="Voltar" onClick="window.location='apqp_menu.php';">
 &nbsp;
-              <input name="acao2" type="button" class="microtxt" value="Salvar em Disco" onClick="salvar('fluxo','<?=$res["id"];?>')">
+              <input name="acao2" type="button" class="microtxt" value="Salvar em Disco" onClick="salvar('fluxo','<?php echo $res["id"];?>')">
 &nbsp;
-              <input name="button1223" type="button" class="microtxt" value="Salvar Altera&ccedil;oes" onClick="<?= $btnsalva; ?>">
+              <input name="button1223" type="button" class="microtxt" value="Salvar Altera&ccedil;oes" onClick="<?php echo  $btnsalva; ?>">
 &nbsp;
-              <input name="button12232" type="button" class="microtxt" value="Adicionar Linha" onClick="<?= $btnsalva2; ?>">
+              <input name="button12232" type="button" class="microtxt" value="Adicionar Linha" onClick="<?php echo  $btnsalva2; ?>">
 &nbsp;
-              <input name="button122322" type="button" class="microtxt" value="Remover Linha" onClick="<?= $btnsalva3; ?>">
+              <input name="button122322" type="button" class="microtxt" value="Remover Linha" onClick="<?php echo  $btnsalva3; ?>">
 			  &nbsp;&nbsp;
-<?
+<?php
 $apqp->agenda_p("Diagrama de Fluxo","apqp_fluxo.php");
 ?>
               <input name="linha" type="hidden" id="linha">
@@ -399,7 +399,7 @@ arop1=new Array;
 arop2=new Array;
 arop3=new Array;
 arop4=new Array;
-<?= $montaray; ?>
+<?php echo  $montaray; ?>
 </script>
 <script language="javascript" src="tooltip.js"></script>
-<? include("mensagem.php"); ?>
+<?php include("mensagem.php"); ?>

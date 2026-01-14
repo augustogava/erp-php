@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 include("seguranca.php");
 $hora=hora();
@@ -33,14 +33,14 @@ if($acao=="inc"){
 	$descricao3=$descricao2." ".$descricao;
 		$sql=mysql_query("INSERT INTO apqp_car (peca,descricao,espec,numero,pc,simbolo,tipo,lie,lse,tol) VALUES ('$id','$descricao3','$espec','$numero','$pc','$simbolo','$tipo','$lie','$lse','$tol')");
 	if($sql){
-	// cria followup caso inclua uma característica na peça
+	// cria followup caso inclua uma caracterÃ­stica na peÃ§a
 		$sql_emp=mysql_query("SELECT fantasia FROM empresa");
 		$res_emp=mysql_fetch_array($sql_emp);
-		mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Inclusão de Característica $numero na peça $npc.','O usuário $quem1 incluiu uma nova Característica $numero na peça $npc.','$user')");
+		mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','InclusÃ£o de CaracterÃ­stica $numero na peÃ§a $npc.','O usuÃ¡rio $quem1 incluiu uma nova CaracterÃ­stica $numero na peÃ§a $npc.','$user')");
 	//	
 		header("Location:apqp_car.php?id=$id&acao=inc");
 	}else{
-		$_SESSION["mensagem"]="A característica não pôde ser incluída";
+		$_SESSION["mensagem"]="A caracterÃ­stica nÃ£o pÃ´de ser incluÃ­da";
 		
 	}
 }elseif($acao=="alt"){
@@ -62,35 +62,35 @@ if($acao=="inc"){
 	$descricao3=$descricao2." ".$descricao;
 	$sql=mysql_query("UPDATE apqp_car SET peca='$id',descricao='$descricao3',espec='$espec',numero='$numero',pc='$pc',simbolo='$simbolo',tipo='$tipo',lie='$lie',lse='$lse',tol='$tol' WHERE id='$car'");
 	if($sql){
-		$_SESSION["mensagem"]="Característica alterada com sucesso";
-	// cria followup caso altere uma característica da peça
+		$_SESSION["mensagem"]="CaracterÃ­stica alterada com sucesso";
+	// cria followup caso altere uma caracterÃ­stica da peÃ§a
 		$sql_emp=mysql_query("SELECT fantasia FROM empresa");
 		$res_emp=mysql_fetch_array($sql_emp);
-		mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Alteração de Característica $numero da peça $npc.','O usuário $quem1 alterou a Característica $numero da peça $npc.','$user')");
+		mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','AlteraÃ§Ã£o de CaracterÃ­stica $numero da peÃ§a $npc.','O usuÃ¡rio $quem1 alterou a CaracterÃ­stica $numero da peÃ§a $npc.','$user')");
 	//	
 		
 		header("Location:apqp_car.php?id=$id&acao=inc");
 	}else{
-		$_SESSION["mensagem"]="A característica não pôde ser alterada";
+		$_SESSION["mensagem"]="A caracterÃ­stica nÃ£o pÃ´de ser alterada";
 		$comp="&acao=alt&car=$car";
 	}
 }elseif($acao=="exc"){
-	// cria followup caso exclua uma característica da peça
+	// cria followup caso exclua uma caracterÃ­stica da peÃ§a
 		$sql_emp=mysql_query("SELECT fantasia FROM empresa");
 		$res_emp=mysql_fetch_array($sql_emp);
 		$sql_num=mysql_query("SELECT numero FROM apqp_car WHERE id='$key'");
 		$res_num=mysql_fetch_array($sql_num);
-		mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Exclusão de Característica $res_num[numero] da peça $npc.','O usuário $quem1 excluiu a Característica $res_num[numero] da peça $npc.','$user')");
+		mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','ExclusÃ£o de CaracterÃ­stica $res_num[numero] da peÃ§a $npc.','O usuÃ¡rio $quem1 excluiu a CaracterÃ­stica $res_num[numero] da peÃ§a $npc.','$user')");
 	//	
 
 	foreach($del as $key=>$valor){
 	$sql=mysql_query("DELETE FROM apqp_car WHERE id='$key'");
 	}
 	if($sql){
-		$_SESSION["mensagem"]="Característica excluída com sucesso";
+		$_SESSION["mensagem"]="CaracterÃ­stica excluÃ­da com sucesso";
 		header("Location:apqp_car.php?id=$id&acao=inc");
 	}else{
-		$_SESSION["mensagem"]="A característica não pôde ser excluída";
+		$_SESSION["mensagem"]="A caracterÃ­stica nÃ£o pÃ´de ser excluÃ­da";
 	}
 }
 ?>

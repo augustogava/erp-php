@@ -1,11 +1,12 @@
-<?
+<?php
 include("conecta.php");
 include("seguranca.php");
 ?>
 <html>
 <head>
 <title>CyberManager</title>
-<meta http-equiv="Content-Type" content="text/html; UTF-8">
+<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="style.css" rel="stylesheet" type="text/css">
 <script src="scripts.js"></script>
 <script>
@@ -59,7 +60,7 @@ function some(num){
 <table width="590" border="0" cellpadding="0" cellspacing="0" class="texto">
       <tr>
         <td width="27" align="center"><div align="left"><img src="imagens/icon14_ahn.gif" width="14" height="14"><span class="impTextoBold">&nbsp;</span></div></td>
-        <td width="563" align="right"><div align="left" class="textobold style1 style1 style1 style1 style1 style1 style1 style1">Movimentação </div></td>
+        <td width="563" align="right"><div align="left" class="textobold style1 style1 style1 style1 style1 style1 style1 style1">MovimentaÃ§Ã£o </div></td>
       </tr>
       <tr>
         <td align="center">&nbsp;</td>
@@ -72,7 +73,7 @@ function some(num){
       <tr>
         <td><table width="100%" border="0" cellpadding="0" cellspacing="1" bgcolor="#003366">
             <tr>
-              <td width="569" class="textoboldbranco">&nbsp;Movimentação </td>
+              <td width="569" class="textoboldbranco">&nbsp;MovimentaÃ§Ã£o </td>
               <td width="22" align="center" class="textoboldbranco"><a href="#" onClick="return some('4');"><img src="imagens/icon14_min.gif" name="minmax4" width="16" height="16" border="0" id="minmax4"></a></td>
             </tr>
             <tr align="left" bgcolor="#FFFFFF">
@@ -89,7 +90,7 @@ function some(num){
                   </tr>
                   <tr align="center" class="textobold">
                     <td width="124"><a href="prodserv_est.php" class="textobold">Estoque</a></td>
-                    <td width="124"><a href="prodserv_sep.php" class="textobold">Logística </a></td>
+                    <td width="124"><a href="prodserv_sep.php" class="textobold">LogÃ­stica </a></td>
                     <td width="124"><a href="prodserv_ordem.php" class="textobold">Ordem de Produ&ccedil;&atilde;o </a></td>
                     <td width="124"><a href="romaneio.php" class="textobold">Romaneio</a></td>
                     <td width="124">&nbsp;</td>
@@ -137,4 +138,4 @@ function some(num){
 </table>
 </body>
 </html>
-<? include("mensagem.php"); ?>
+<?php include("mensagem.php"); ?>

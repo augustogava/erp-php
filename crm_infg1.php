@@ -1,11 +1,12 @@
-<?
+<?php
 include("conecta.php");
 include("seguranca.php");
 ?>
 <html>
 <head>
 <title>CyberManager</title>
-<meta http-equiv="Content-Type" content="text/html; UTF-8">
+<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="style.css" rel="stylesheet" type="text/css">
 <script src="scripts.js"></script>
 <script src="mascaras.js"></script>
@@ -23,14 +24,14 @@ include("seguranca.php");
     <td align="left" valign="top">
 	
 	<table width="100%" border="0" cellpadding="3" cellspacing="1" bgcolor="#999999">
-	<? 
+	<?php 
 	$sql=mysql_query("SELECT * FROM followup WHERE cliente='$cli' ORDER By id DESC");
 	if(!mysql_num_rows($sql)){
 	?>
 	<tr bgcolor="#FFFFFF">
         <td colspan="6" align="center" class="textopretobold">NENHUM DADO ENCONTRADO </td>
     </tr>
-		<? }else{ ?>
+		<?php }else{ ?>
      
 	  
      
@@ -43,18 +44,18 @@ include("seguranca.php");
         <td class="textoboldbranco"><div align="center">Contato</div></td>
         <td align="center" class="textoboldbranco">T&iacute;tulo</td>
       </tr>
-	   <? while($res=mysql_fetch_array($sql)){ ?>
-      <a href="#" onClick="return abre('crm_followup_inc.php?idf=<?= $res["id"]; ?>&acao=vis','FollowUp','width=620,height=350,scrollbars=1');">
+	   <?php while($res=mysql_fetch_array($sql)){ ?>
+      <a href="#" onClick="return abre('crm_followup_inc.php?idf=<?php echo  $res["id"]; ?>&acao=vis','FollowUp','width=620,height=350,scrollbars=1');">
 	  <tr bgcolor="#FFFFFF" class="textopreto" onMouseover="changeto('#CCCCCC')" onMouseout="changeback('#FFFFFF')">
-       <td width="53" height="18" align="center"><? print banco2data($res["data"]); ?></td>
-        <td width="40" align="center"><? print $res["hora"]; ?></td>
-        <td align="center"><? $sql2=mysql_query("SELECT * FROM followup_tipo WHERE id='$res[tipo]'"); $res2=mysql_fetch_array($sql2); print $res2["nome"]; ?></td>
-        <td><? $sql2=mysql_query("SELECT * FROM clientes WHERE id='$res[vendedor]'"); $res2=mysql_fetch_array($sql2); print substr($res2["nome"],0,25)."..."; ?></td>
-        <td><? $sql2=mysql_query("SELECT * FROM cliente_contato WHERE id='$res[contato]'"); $res2=mysql_fetch_array($sql2); print substr($res2["nome"],0,25)."..."; ?></td>
-        <td align="center">&nbsp;<? print $res["titulo"]; ?></td>
+       <td width="53" height="18" align="center"><?php print banco2data($res["data"]); ?></td>
+        <td width="40" align="center"><?php print $res["hora"]; ?></td>
+        <td align="center"><?php $sql2=mysql_query("SELECT * FROM followup_tipo WHERE id='$res[tipo]'"); $res2=mysql_fetch_array($sql2); print $res2["nome"]; ?></td>
+        <td><?php $sql2=mysql_query("SELECT * FROM clientes WHERE id='$res[vendedor]'"); $res2=mysql_fetch_array($sql2); print substr($res2["nome"],0,25)."..."; ?></td>
+        <td><?php $sql2=mysql_query("SELECT * FROM cliente_contato WHERE id='$res[contato]'"); $res2=mysql_fetch_array($sql2); print substr($res2["nome"],0,25)."..."; ?></td>
+        <td align="center">&nbsp;<?php print $res["titulo"]; ?></td>
       </tr>
 	  </a>
-	   <? } } ?>
+	   <?php } } ?>
     </table>
     </td>
   </tr>
@@ -62,4 +63,4 @@ include("seguranca.php");
 </body>
 </html>
 <script language="javascript" src="tooltip.js"></script>
-<? include("mensagem.php"); ?>
+<?php include("mensagem.php"); ?>

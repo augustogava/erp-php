@@ -56,8 +56,8 @@ if($acao=="incluir"){
 <html lang="pt-BR">
 <head>
 <title>Representantes - ERP System</title>
-<meta charset="ISO-8859-1">
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <link href="style.css" rel="stylesheet" type="text/css">
@@ -170,7 +170,7 @@ function verifica(cad){
                             $sql2=mysql_query("SELECT * FROM cidade ORDER By nome ASC");
                             while($res2=mysql_fetch_array($sql2)){
                             ?>
-                            <option value="<?=$res2["id"]?>" <?php if(in_array($res2["id"],$ex)) echo "selected"; ?>><?=$res2["nome"]?></option>
+                            <option value="<?php echo $res2["id"]?>" <?php if(in_array($res2["id"],$ex)) echo "selected"; ?>><?php echo $res2["nome"]?></option>
                             <?php } ?>
                         </select>
                     </div>

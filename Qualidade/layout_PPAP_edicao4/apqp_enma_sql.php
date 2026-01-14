@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 $apqp=new set_apqp;
 $acao=verifi($permi,$acao);
@@ -35,7 +35,7 @@ if($acao=="email"){
 		}
 		// - - - - - - - -  -
 if($acao=="alt"){
-///Tirar AprovaÁıesss
+///Tirar Aprova√ß√µesss
 	if($_SESSION["login_funcionario"]=="S"){
 		$sql=mysql_query("SELECT * FROM apqp_cron WHERE perc='100' AND peca='$pc' AND ativ='Ensaio Material'");
 		if(mysql_num_rows($sql)){
@@ -58,11 +58,11 @@ if($acao=="alt"){
 // - - - - - - - - - - - - - - - - - - - - - -  --  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -- - - - - - -
 
 	$dtrep=data2banco($dtrep);
-	$sql=mysql_query("UPDATE apqp_enma SET local='$locall', rep='$rep', dtrep='$dtrep', forn_mat='$forn_mat', forncod='$forncod' WHERE peca='$pc'") or die("nao");
+	$sql=mysql_query("UPDATE apqp_enma SET local='$locall', rep='$rep', dtrep='$dtrep', forn_mat='$forn_mat', forncod='$forncod' WHERE peca='$pc'") or erp_db_fail();
 	if(isset($forn)){
 		reset($forn);
 		foreach($forn AS $linha => $linha2){
-		// foi excluÌdo o tipo='".$tipo[$linha]."',
+		// foi exclu√≠do o tipo='".$tipo[$linha]."',
 			$sql=mysql_query("UPDATE apqp_enmal SET forn='".$forn[$linha]."', cli='".$cli[$linha]."', ok='".$ok[$linha]."', data_t='".data2banco($data_t[$linha])."', quant_test='".$quant_test[$linha]."' WHERE id='$linha'");
 		}
 	}
@@ -76,44 +76,44 @@ if($acao=="alt"){
 			}
 			$sql=mysql_query("SELECT * FROM apqp_cron WHERE perc='100' AND peca='$pc' AND ativ='Ensaio Dimensional'");
 			if(!mysql_num_rows($sql)){
-				$_SESSION["mensagem"]="N„o pode ser aprovado pois existem relatÛrios anteriores abertos!!";
+				$_SESSION["mensagem"]="N√£o pode ser aprovado pois existem relat√≥rios anteriores abertos!!";
 				header("Location:apqp_enma.php");
 				exit;
 			}
 			$sql2=mysql_query("UPDATE apqp_enma SET sit='S', quem='$quem1', dtquem=NOW() WHERE peca='$pc'");
 			$sql3=mysql_query("UPDATE apqp_cron SET resp='$quem1',fim=NOW(), perc='100' WHERE ativ='Ensaio Material' AND peca='$pc'");
 			// cria followup caso aprove o Ensaio Material
-				mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','AprovaÁ„o do Ensaio Material da peÁa $npc.','O usu·rio $quem aprovou o Ensaio Material da peÁa $npc.','$user')");
+				mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Aprova√ß√£o do Ensaio Material da pe√ßa $npc.','O usu√°rio $quem aprovou o Ensaio Material da pe√ßa $npc.','$user')");
 			//	
 			if($sql2 && $sql3){
 				$_SESSION["mensagem"]="Aprovado com Sucesso!";
 			}else{
-				$_SESSION["mensagem"]="AprovaÁ„o n„o concluÌda!";
+				$_SESSION["mensagem"]="Aprova√ß√£o n√£o conclu√≠da!";
 			}			
 		}elseif(isset($lap)){
 			$sql_status=mysql_query("SELECT status FROM apqp_pc WHERE id='$pc'");
 			$res_status=mysql_fetch_array($sql_status);
 			if($res_status["status"]=="2"){
 				mysql_query("UPDATE apqp_pc SET status='1' WHERE id='$pc'");
-				// cria followup caso remova a aprovaÁ„o do R&R e mude o status
-					mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Removendo a aprovaÁ„o do Ensaio Material da peÁa $npc.','O usu·rio $quem removeu a aprovaÁ„o da peÁa $npc devido a remoÁ„o da aprovaÁ„o do Ensaio Material.','$user')");
+				// cria followup caso remova a aprova√ß√£o do R&R e mude o status
+					mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Removendo a aprova√ß√£o do Ensaio Material da pe√ßa $npc.','O usu√°rio $quem removeu a aprova√ß√£o da pe√ßa $npc devido a remo√ß√£o da aprova√ß√£o do Ensaio Material.','$user')");
 				//	
-					$apqp->set_email("RemoÁ„o da aprovaÁ„o da peÁa $npc.","O usu·rio $quem removeu a aprovaÁ„o da peÁa $this->npc devido a remoÁ„o da aprovaÁ„o do Ensaio Material.");
+					$apqp->set_email("Remo√ß√£o da aprova√ß√£o da pe√ßa $npc.","O usu√°rio $quem removeu a aprova√ß√£o da pe√ßa $this->npc devido a remo√ß√£o da aprova√ß√£o do Ensaio Material.");
 					$apqp->email();
 				//
 			}else{
-			// cria followup caso remove a aprovaÁ„o do Ensaio Material
-				mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Removendo aprovaÁ„o do Ensaio Material da peÁa $npc.','O usu·rio $quem removeu a aprovaÁ„o do Ensaio Material da peÁa $npc.','$user')");
+			// cria followup caso remove a aprova√ß√£o do Ensaio Material
+				mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Removendo aprova√ß√£o do Ensaio Material da pe√ßa $npc.','O usu√°rio $quem removeu a aprova√ß√£o do Ensaio Material da pe√ßa $npc.','$user')");
 			//	
 			}
 			$sql2=mysql_query("UPDATE apqp_enma SET sit='N', quem='', dtquem='0000-00-00' WHERE peca='$pc'");
 			$sql3=mysql_query("UPDATE apqp_cron SET resp=' ',fim='', perc='95' WHERE ativ='Ensaio Material' AND peca='$pc'");
 			if($sql2 && $sql3){
-				$_SESSION["mensagem"]="AprovaÁ„o removida com Sucesso!";
+				$_SESSION["mensagem"]="Aprova√ß√£o removida com Sucesso!";
 				header("Location:apqp_enma.php");
 				exit;
 			}else{
-				$_SESSION["mensagem"]="RemoÁ„o da aprovaÁ„o n„o concluÌda!";
+				$_SESSION["mensagem"]="Remo√ß√£o da aprova√ß√£o n√£o conclu√≠da!";
 				header("Location:apqp_enma.php");
 				exit;
 			}
@@ -121,21 +121,21 @@ if($acao=="alt"){
 			if(empty($rep1)){
 			$rep1=$quem;
 			}
-			$sql_sub=mysql_query("SELECT * FROM apqp_cron WHERE perc='100' AND peca='$pc' AND ativ='Certificado de Submiss„o'");
+			$sql_sub=mysql_query("SELECT * FROM apqp_cron WHERE perc='100' AND peca='$pc' AND ativ='Certificado de Submiss√£o'");
 			if(!mysql_num_rows($sql_sub)){
-				$_SESSION["mensagem"]="N„o pode ser alterado pois Certificado de Submiss„o deve ser aprovado pelo fornecedor primeiro!!";
+				$_SESSION["mensagem"]="N√£o pode ser alterado pois Certificado de Submiss√£o deve ser aprovado pelo fornecedor primeiro!!";
 				header("Location:apqp_planoc.php?fase=$fase");
 				exit;
 			}
 			$sql2=mysql_query("UPDATE apqp_enma SET rep='$rep1', dtrep=NOW() WHERE peca='$pc'");
 			$sql3=mysql_query("UPDATE apqp_cron SET resp='$quem1',fim=NOW(), perc='100' WHERE ativ='Ensaio Dimensional' AND peca='$pc'");
 			// cria followup caso aprove o conteudo do ensaio dimensional
-				mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','AprovaÁ„o do Ensaio Material da peÁa $npc.','O cliente $quem aprovou o Ensaio Material da peÁa $npc.','$user')");
+				mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Aprova√ß√£o do Ensaio Material da pe√ßa $npc.','O cliente $quem aprovou o Ensaio Material da pe√ßa $npc.','$user')");
 			//		
 			if($sql2 && $sql3){
 				$_SESSION["mensagem"]="Aprovado com Sucesso!";
 			}else{
-				$_SESSION["mensagem"]="AprovaÁ„o n„o concluÌda!";
+				$_SESSION["mensagem"]="Aprova√ß√£o n√£o conclu√≠da!";
 			}
 		}elseif($maisum!=0){
 			$sql=mysql_query("SELECT * FROM apqp_enmal WHERE ensaio='$id' AND car='$maisum'");
@@ -143,23 +143,23 @@ if($acao=="alt"){
 				$sql=mysql_query("INSERT INTO apqp_enmal (ensaio,car) VALUES ('$id','$maisum')");
 				unset($_SESSION["mensagem"]);
 			}else{
-				$_SESSION["mensagem"]="CaracterÌstica j· selecionada!";
+				$_SESSION["mensagem"]="Caracter√≠stica j√° selecionada!";
 			}
 		}elseif($delsel==1){
 			if(isset($del)){
 				foreach($del AS $linha){
 					$sql=mysql_query("DELETE FROM apqp_enmal WHERE id='$linha'");
 				}
-				$_SESSION["mensagem"]="Linhas excluÌdas com sucesso";
+				$_SESSION["mensagem"]="Linhas exclu√≠das com sucesso";
 			}else{
 				$_SESSION["mensagem"]="Selecione as linhas que deseja excluir";
 			}
 		}
 	// cria followup caso salve o conteudo do Ensaio Material
-		mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Salvando alteraÁıes do Ensaio Material da peÁa $npc.','O usu·rio $quem salvou as alteraÁıes do Ensaio Material da peÁa $npc.','$user')");
+		mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Salvando altera√ß√µes do Ensaio Material da pe√ßa $npc.','O usu√°rio $quem salvou as altera√ß√µes do Ensaio Material da pe√ßa $npc.','$user')");
 	//	
 	}else{
-		$_SESSION["mensagem"]="As alteraÁıes n„o puderam ser salvas";
+		$_SESSION["mensagem"]="As altera√ß√µes n√£o puderam ser salvas";
 	}
 }elseif($acao=="auto"){
 	$sql=mysql_query("SELECT * FROM apqp_enma WHERE peca='$pc'");
@@ -171,12 +171,12 @@ if($acao=="alt"){
 		while($res=mysql_fetch_array($sql)){
 			$sql1=mysql_query("INSERT INTO apqp_enmal (ensaio,car) VALUES ('$id','$res[id]')");
 		}
-		$_SESSION["mensagem"]="AlteraÁıes salvas com sucesso";
+		$_SESSION["mensagem"]="Altera√ß√µes salvas com sucesso";
 		// cria followup caso salve o conteudo do Ensaio Material
-			$sql_sal=mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Salvando alteraÁıes do Ensaio Material da peÁa $npc.','O usu·rio $quem salvou as alteraÁıes do Ensaio Material da peÁa $npc.','$user')");
+			$sql_sal=mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Salvando altera√ß√µes do Ensaio Material da pe√ßa $npc.','O usu√°rio $quem salvou as altera√ß√µes do Ensaio Material da pe√ßa $npc.','$user')");
 		//	
 	}else{
-		$_SESSION["mensagem"]="Nenhuma caracterÌstica encontrada";
+		$_SESSION["mensagem"]="Nenhuma caracter√≠stica encontrada";
 	}
 }
 unset($acao);

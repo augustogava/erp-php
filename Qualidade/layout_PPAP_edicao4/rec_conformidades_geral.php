@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 include("seguranca.php");
 $acao=verifi($permi,$acao);
@@ -8,7 +8,7 @@ $quem1=$_SESSION["login_nome"];
 $user=$_SESSION["login_codigo"];
 
 if(!empty($acao)){
-	$loc="Recebimento - Não Conformidades";
+	$loc="Recebimento - NÃ£o Conformidades";
 	$pagina=$_SERVER['SCRIPT_FILENAME'];
 	include("log.php");
 }
@@ -27,37 +27,37 @@ $cod=strtoupper($cod);
 
 	$sql2=mysql_query("SELECT cod FROM conformidades WHERE cod='$cod'");
 		if(!mysql_num_rows($sql2)==0){
-		$_SESSION["mensagem"]="O cadastro da Não Conformidade não foi incluída. Digite outro código para a Não Conformidade, este já existe!";
+		$_SESSION["mensagem"]="O cadastro da NÃ£o Conformidade nÃ£o foi incluÃ­da. Digite outro cÃ³digo para a NÃ£o Conformidade, este jÃ¡ existe!";
 		header("Location:rec_conformidades_geral.php?acao=inc&cod=$cod&descricao=$descricao&classe=$classe");
 		exit;		
 	}
 
 	$sql=mysql_query("INSERT INTO conformidades (cod,descricao,classe) VALUES ('$cod','$descricao','$classe')");
 	if($sql){
-		$_SESSION["mensagem"]="Não Conformidade incluída com sucesso!";
+		$_SESSION["mensagem"]="NÃ£o Conformidade incluÃ­da com sucesso!";
 		// cria followup caso inclua
 			$sql_emp=mysql_query("SELECT fantasia FROM empresa");
 			$res_emp=mysql_fetch_array($sql_emp);
-			mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Inclusão de Não Conformidade.','O usuário $quem1 incluiu um nova Não Conformidade chamada $descricao.','$user')");
+			mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','InclusÃ£o de NÃ£o Conformidade.','O usuÃ¡rio $quem1 incluiu um nova NÃ£o Conformidade chamada $descricao.','$user')");
 		//	
 		header("Location:rec_conformidades.php");
 		exit;
 	}else{
-		$_SESSION["mensagem"]="A Não Conformidade não pôde ser concluída!";
+		$_SESSION["mensagem"]="A NÃ£o Conformidade nÃ£o pÃ´de ser concluÃ­da!";
 	}	
 }elseif($acao=="alterar"){
 	$sql=mysql_query("UPDATE conformidades SET cod='$cod',descricao='$descricao',classe='$classe' WHERE id='$id'");
 	if($sql){
-		$_SESSION["mensagem"]="Não Conformidade alterada com sucesso!";
+		$_SESSION["mensagem"]="NÃ£o Conformidade alterada com sucesso!";
 		// cria followup caso altere
 			$sql_emp=mysql_query("SELECT fantasia FROM empresa");
 			$res_emp=mysql_fetch_array($sql_emp);
-			mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Alteração do cadastro da Não Conformidade.','O usuário $quem1 alterou o cadastro da Não Conformidade $descricao.','$user')");
+			mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','AlteraÃ§Ã£o do cadastro da NÃ£o Conformidade.','O usuÃ¡rio $quem1 alterou o cadastro da NÃ£o Conformidade $descricao.','$user')");
 		//	
 		header("Location:rec_conformidades.php");
 		exit;		
 	}else{
-		$_SESSION["mensagem"]="A Não Conformidade não pôde ser alterada!";
+		$_SESSION["mensagem"]="A NÃ£o Conformidade nÃ£o pÃ´de ser alterada!";
 	}
 }
 
@@ -70,12 +70,12 @@ $cod=strtoupper($cod);
 <script>
 function verifica(cad){
 	if(cad.cod.value==''){
-		alert('Preencha o Código');
+		alert('Preencha o CÃ³digo');
 		cad.cod.focus();
 		return false;
 	}
 	if(cad.descricao.value==''){
-		alert('Preencha a Descrição');
+		alert('Preencha a DescriÃ§Ã£o');
 		cad.descricao.focus();
 		return false;
 	}
@@ -118,20 +118,20 @@ function verifica(cad){
             </tr>
             <tr class="textobold">
               <td>Cod. Conformidade: </td>
-              <td><input name="cod" type="text" class="formulario" id="cod" value="<? print $cod; ?>" size="10" maxlength="10"></td>
+              <td><input name="cod" type="text" class="formulario" id="cod" value="<?php print $cod; ?>" size="10" maxlength="10"></td>
             </tr>
             <tr class="textobold">
               <td width="144">&nbsp;Descri&ccedil;&atilde;o:</td>
-              <td width="306"><input name="descricao" type="text" class="formularioselect" id="descricao" value="<? print $descricao; ?>" size="40" maxlength="100"></td>
+              <td width="306"><input name="descricao" type="text" class="formularioselect" id="descricao" value="<?php print $descricao; ?>" size="40" maxlength="100"></td>
             </tr>
             <tr class="textobold">
               <td>&nbsp;Classe:</td>
               <td><label>
                 <select name="classe" class="textopreto" id="classe">
-                  <option value="0"<? if($classe==0){ print "selected";}?>>Selecione</option>
-                  <option value="1"<? if($classe==1){ print "selected";}?>>A - Muito S&eacute;rio</option>
-                  <option value="2"<? if($classe==2){ print "selected";}?>>B - Moderadamente S&eacute;rio</option>
-                  <option value="3"<? if($classe==3){ print "selected";}?>>C - Controle Interno</option>
+                  <option value="0"<?php if($classe==0){ print "selected";}?>>Selecione</option>
+                  <option value="1"<?php if($classe==1){ print "selected";}?>>A - Muito S&eacute;rio</option>
+                  <option value="2"<?php if($classe==2){ print "selected";}?>>B - Moderadamente S&eacute;rio</option>
+                  <option value="3"<?php if($classe==3){ print "selected";}?>>C - Controle Interno</option>
                 </select>
                 </label></td>
             </tr>
@@ -145,16 +145,16 @@ function verifica(cad){
           </tr>
           <tr>
             <td><div align="center">
-              <input name="id" type="hidden" id="id2" value="<? print $id; ?>">
-              <input name="acao" type="hidden" id="acao2" value="<? if($acao=="inc"){ print "incluir"; }else{ print "alterar"; } ?>">
+              <input name="id" type="hidden" id="id2" value="<?php print $id; ?>">
+              <input name="acao" type="hidden" id="acao2" value="<?php if($acao=="inc"){ print "incluir"; }else{ print "alterar"; } ?>">
               <input name="button12" type="button" class="microtxt" value="Voltar" onClick="window.location='rec_conformidades.php';">
               &nbsp;&nbsp;&nbsp;&nbsp;<span class="textobold">
-              <? if ($acao=="alt"){ ?>
+              <?php if ($acao=="alt"){ ?>
               <input name="Alterar" type="submit" class="microtxt" value="Alterar">
-              <? } ?>
-              <? if($acao=="inc"){ ?>
+              <?php } ?>
+              <?php if($acao=="inc"){ ?>
               <input name="Incluir" type="submit" class="microtxt" id="Incluir" value="Incluir">
-              <? } ?>
+              <?php } ?>
               </span></div></td>
           </tr>
         </table>
@@ -164,4 +164,4 @@ function verifica(cad){
 &nbsp; 
 </body>
 </html>
-<? include("mensagem.php"); ?>
+<?php include("mensagem.php"); ?>

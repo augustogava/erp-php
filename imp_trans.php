@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 $arquivo=file("trans.txt");
 foreach($arquivo as $linha){

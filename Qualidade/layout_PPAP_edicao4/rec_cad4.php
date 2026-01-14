@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 include("seguranca.php");
 
@@ -24,7 +24,7 @@ if($acao=="exc"){
 	// cria followup caso exclua
 		$sql_emp=mysql_query("SELECT fantasia FROM empresa");
 		$res_emp=mysql_fetch_array($sql_emp);
-		mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','Exclusão de Instrumento de Medição.','O usuário $quem1 excluiu o Instrumento de Medição código $res2[metr_inst_cod].','$user')");
+		mysql_query("INSERT INTO followup (empresa,data,hora,titulo,descricao,funcionarios) VALUES ('$res_emp[fantasia]','$hj','$hora','ExclusÃ£o de Instrumento de MediÃ§Ã£o.','O usuÃ¡rio $quem1 excluiu o Instrumento de MediÃ§Ã£o cÃ³digo $res2[metr_inst_cod].','$user')");
 	//	
 	$sql=mysql_query("DELETE FROM metrologia_cad WHERE metr_cad_id='$id'");
 	header("Location:metr_insm_busca.php");
@@ -89,14 +89,14 @@ if($acao=="exc"){
                 <td width="82" div align="center">Data do Teste</td>
                 <td width="79" align="center">Resultado N&ordm;</td>
               </tr>
-              <?
+              <?php
 			  $sql=mysql_query("SELECT * FROM metrologia_cad $cond ORDER BY metr_tipi_nome ASC");
 			  if(mysql_num_rows($sql)==0){
 			  ?>
               <tr bgcolor="#FFFFFF" class="textopreto"> 
                 <td colspan="4" align="center" class="textopretobold">NENHUM MONITORAMENTO DE TESTE ENCONTRADO</td>
               </tr>
-              <?
+              <?php
 			  }else{
 				//BLOCO PAGINACAO
 				$results_tot=mysql_num_rows($sql); //total de registros encontrados
@@ -138,7 +138,7 @@ if($acao=="exc"){
                 <td>&nbsp;</td>
                 <td align="center">&nbsp;</td>
               </tr>
-              <?
+              <?php
 			  	}
 			  }
 			  ?>
@@ -146,7 +146,7 @@ if($acao=="exc"){
         </tr>
       </table></td>
   </tr>
-  <? if($wpaginar){ ?>
+  <?php if($wpaginar){ ?>
   <tr>
     <td colspan="3"><img src="imagens/dot.gif" width="200" height="10"></td>
   </tr>
@@ -154,19 +154,19 @@ if($acao=="exc"){
     <td align="center"> <table width="1%" border="0" cellspacing="0" cellpadding="0">
         <tr valign="top"> 
           <td align="right"> 
-            <? 
+            <?php 
 				$antz=false;
 				if($wp>1){
 					$antz=true;
 				?>
-            <a href="<? print "metr_insm_busca.php?wp=$pg_anterior&bnome=$bnome&bcod=$bcod"; ?>" class="paginacao2"> 
-            <? } ?>
+            <a href="<?php print "metr_insm_busca.php?wp=$pg_anterior&bnome=$bnome&bcod=$bcod"; ?>" class="paginacao2"> 
+            <?php } ?>
             <img src="imagens/pag_f.gif" width="27" height="14" border="0"> 
-            <? if($antz){ ?>
+            <?php if($antz){ ?>
             <br>
             Anterior</a>
-            <? } ?>          </td>
-          <?
+            <?php } ?>          </td>
+          <?php
 				$link_impressos=0;
 				if ($temp > $wpaginacao){
 		    	    $n_start  = $temp - ceil($wpaginacao/2);
@@ -180,30 +180,30 @@ if($acao=="exc"){
 					$link_impressos++;
 				?>
           <td align="center"> 
-            <? if($pg_atual != $link_impressos){ ?>
-            <a href="<? print "metr_insm_busca.php?wp=$link_impressos&bnome=$bnome&bcod=$bcod"; ?>" class="paginacao"> 
-            <? } ?>
-            <img src="imagens/pag_e<? if($pg_atual==$link_impressos) print "2"; ?>.gif" width="10" height="14" border="0"><br>
-            <? if($pg_atual==$link_impressos){ print "<span class=\"paginacao2\">$link_impressos</span>"; }else{ print $link_impressos; }?>
-            <? if($pg_atual != $link_impressos){ ?>
+            <?php if($pg_atual != $link_impressos){ ?>
+            <a href="<?php print "metr_insm_busca.php?wp=$link_impressos&bnome=$bnome&bcod=$bcod"; ?>" class="paginacao"> 
+            <?php } ?>
+            <img src="imagens/pag_e<?php if($pg_atual==$link_impressos) print "2"; ?>.gif" width="10" height="14" border="0"><br>
+            <?php if($pg_atual==$link_impressos){ print "<span class=\"paginacao2\">$link_impressos</span>"; }else{ print $link_impressos; }?>
+            <?php if($pg_atual != $link_impressos){ ?>
             </a>
-            <? } ?>          </td>
-          <?
+            <?php } ?>          </td>
+          <?php
 				}
 				?>
           <td> 
-            <? if($reg_final<$results_tot){ ?>
-            <a href="<? print "metr_insm_busca.php?wp=$pg_proxima&bnome=$bnome&bcod=$bcod"; ?>" class="paginacao2"> 
-            <? } ?>
+            <?php if($reg_final<$results_tot){ ?>
+            <a href="<?php print "metr_insm_busca.php?wp=$pg_proxima&bnome=$bnome&bcod=$bcod"; ?>" class="paginacao2"> 
+            <?php } ?>
             <img src="imagens/pag_der.gif" width="26" height="14" border="0"> 
-            <? if($reg_final<$results_tot){ ?>
+            <?php if($reg_final<$results_tot){ ?>
             <br>
-            Próximo</a>
-            <? } ?>          </td>
+            PrÃ³ximo</a>
+            <?php } ?>          </td>
         </tr>
       </table></td>
   </tr>
-    <? } ?>
+    <?php } ?>
   <tr>
     <td align="center">&nbsp;</td>
   </tr>
@@ -215,4 +215,4 @@ if($acao=="exc"){
 </table>
 </body>
 </html>
-<? include("mensagem.php"); ?>
+<?php include("mensagem.php"); ?>

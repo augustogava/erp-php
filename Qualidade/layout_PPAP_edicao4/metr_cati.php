@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 include("seguranca.php");
 
@@ -75,7 +75,7 @@ $sql=mysql_query("DELETE FROM ins_medicao WHERE id='$id'");
         <tr> 
           <td><table width="244" border="0" align="center" cellpadding="0" cellspacing="0">
             <tr>
-              <td width="218" align="center"><a href="metr_medg.php?acao=inc" class="textobold"><strong>IncluirTipo de Instrumento de medição </strong></a></td>
+              <td width="218" align="center"><a href="metr_medg.php?acao=inc" class="textobold"><strong>IncluirTipo de Instrumento de mediÃ§Ã£o </strong></a></td>
             </tr>
           </table><table width="594" border="0" cellpadding="0" cellspacing="1" bgcolor="#999999">
               <tr bgcolor="#003366" class="textoboldbranco"> 
@@ -84,7 +84,7 @@ $sql=mysql_query("DELETE FROM ins_medicao WHERE id='$id'");
                 <td width="33" align="center">&nbsp;</td>
                 <td width="24" align="center">&nbsp;</td>
               </tr>
-              <?
+              <?php
 			  $sql=mysql_query("SELECT * FROM ins_medicao $cond ORDER BY tipo DESC");
 			  if(mysql_num_rows($sql)==0){
 			  ?>
@@ -92,17 +92,17 @@ $sql=mysql_query("DELETE FROM ins_medicao WHERE id='$id'");
                 <td colspan="4" align="center" class="textopretobold">NENHUM INSTRUMENTO 
                   ENCONTRADO </td>
               </tr>
-              <?
+              <?php
 			  }else{
 			  	while($res=mysql_fetch_array($sql)){
 			  ?>
               <tr bgcolor="#FFFFFF" class="textopreto" onMouseover="changeto('#CCCCCC')" onMouseout="changeback('#FFFFFF')">
-                <td width="113" height="18"><? print $res["tipo"]; ?></td>
-                <td height="18">&nbsp;<? print $res["descricao"]; ?></td>
-                <td height="18" align="center"><a href="metr_medg.php?acao=alt&id=<? print $res["id"]; print "&desc=$desc&bnome=$bnome";?>"><img src="imagens/icon14_alterar.gif" alt="Entrega" width="14" height="14" border="0"></a></td>
-                <td height="18" align="center"><a href="#" onClick="return pergunta('Deseja excluir este Instrumento?','metr_cati.php?acao=exc&id=<? print $res["id"]; ?>')"><img src="imagens/icon14_lixeira.gif" alt="Excluir" width="14" height="14" border="0"></a></td>
+                <td width="113" height="18"><?php print $res["tipo"]; ?></td>
+                <td height="18">&nbsp;<?php print $res["descricao"]; ?></td>
+                <td height="18" align="center"><a href="metr_medg.php?acao=alt&id=<?php print $res["id"]; print "&desc=$desc&bnome=$bnome";?>"><img src="imagens/icon14_alterar.gif" alt="Entrega" width="14" height="14" border="0"></a></td>
+                <td height="18" align="center"><a href="#" onClick="return pergunta('Deseja excluir este Instrumento?','metr_cati.php?acao=exc&id=<?php print $res["id"]; ?>')"><img src="imagens/icon14_lixeira.gif" alt="Excluir" width="14" height="14" border="0"></a></td>
               </tr>
-              <?
+              <?php
 			  	}
 			  }
 			  ?>
@@ -121,4 +121,4 @@ $sql=mysql_query("DELETE FROM ins_medicao WHERE id='$id'");
 </table>
 </body>
 </html>
-<? include("mensagem.php"); ?>
+<?php include("mensagem.php"); ?>

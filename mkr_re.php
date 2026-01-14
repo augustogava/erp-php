@@ -1,11 +1,12 @@
-<?
+<?php
 include("conecta.php");
 include("seguranca.php");
 ?>
 <html>
 <head>
 <title>CyberManager</title>
-<meta http-equiv="Content-Type" content="text/html; UTF-8">
+<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="style.css" rel="stylesheet" type="text/css">
 <script src="scripts.js"></script>
 <script>
@@ -59,7 +60,7 @@ function some(num){
       <tr>
         <td><table width="100%" border="0" cellpadding="0" cellspacing="1" bgcolor="#003366">
             <tr>
-              <td width="988" class="textoboldbranco">&nbsp;Relatórios</td>
+              <td width="988" class="textoboldbranco">&nbsp;RelatÃ³rios</td>
               <td width="20" align="center" class="textoboldbranco"><a href="#" onClick="return some('4');"><img src="imagens/icon14_min.gif" name="minmax4" width="16" height="16" border="0" id="minmax4"></a></td>
             </tr>
             <tr align="left" bgcolor="#FFFFFF">
@@ -97,4 +98,4 @@ function some(num){
 <p>&nbsp;</p>
 </body>
 </html>
-<? include("mensagem.php"); ?>
+<?php include("mensagem.php"); ?>

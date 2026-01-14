@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 $qtd=perfil(1,1,2);
 

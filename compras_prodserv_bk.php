@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 if($abre=="S"){
 	$_SESSION["compras_prodserv_line"]=$line;
@@ -30,14 +30,15 @@ if(!empty($codi) and !empty($categoria)){
 <html>
 <head>
 <title>CyberManager</title>
-<meta http-equiv="Content-Type" content="text/html; UTF-8">
+<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="style.css" rel="stylesheet" type="text/css">
 <script src="scripts.js"></script>
 <script src="mascaras.js"></script>
 <script>
 function seleciona(id,nome){
-	opener.form1.prodserv<? print $line; ?>.value=id;
-	opener.form1.descricao<? print $line; ?>.value=nome;
+	opener.form1.prodserv<?php print $line; ?>.value=id;
+	opener.form1.descricao<?php print $line; ?>.value=nome;
 	window.close();
 }
 windowWidth=320;
@@ -57,12 +58,12 @@ if (parseInt(navigator.appVersion) >= 4) window.moveTo((screen.width/2)-(windowW
             <td>&nbsp;Categoria:</td>
             <td><select name="categoria" class="formularioselect" id="categoria">
                 <option value="">Selecione</option>
-                <?
+                <?php
 $sqlr=mysql_query("SELECT * FROM categorias ORDER BY nome ASC");
 while($resr=mysql_fetch_array($sqlr)){
 ?>
-                <option value="<? print $resr["id"]; ?>"<? if($res["categoria"]==$resr["id"]) print "selected"; ?>><? print($resr["nome"]); ?></option>
-                <? } ?>
+                <option value="<?php print $resr["id"]; ?>"<?php if($res["categoria"]==$resr["id"]) print "selected"; ?>><?php print($resr["nome"]); ?></option>
+                <?php } ?>
             </select></td>
           </tr>
           <tr class="textobold">
@@ -93,14 +94,14 @@ while($resr=mysql_fetch_array($sqlr)){
             <td width="80">Ult. compra </td>
             <td width="16" align="center">&nbsp;</td>
           </tr>
-		<?
+		<?php
 		$sql=mysql_query("SELECT * FROM prodserv $busca ORDER BY categoria ASC");
 		if(mysql_num_rows($sql)==0){
 		?>
           <tr bgcolor="#FFFFFF" class="texto"> 
             <td colspan="6" align="center">NENHUM PRODUTO ENCONTRADO</td>
           </tr>
-          <?
+          <?php
 		}else{
 			//BLOCO PAGINACAO
 			$results_tot=mysql_num_rows($sql); //total de registros encontrados
@@ -138,38 +139,38 @@ while($resr=mysql_fetch_array($sqlr)){
 				$resnome=str_replace("'","",$res["nome"]);
 		?>
 		  <tr bgcolor="#FFFFFF" class="texto"> 
-            <td>&nbsp;<? print $res["codprod"]; ?></td>
-            <td>&nbsp;<? print $res["nome"]; ?></td>
-            <td><? $sql2=mysql_query("SELECT * FROM categorias WHERE id='$res[categoria]'"); $res2=mysql_fetch_array($sql2); print $res2["nome"]; ?></td>
-            <td>&nbsp;<? print banco2data($res["ultima_entrega"]); ?></td>
-            <td>&nbsp;R$ <? print banco2valor($res["preco_ult_compra"]); ?></td>
-            <td width="16" align="center"><a href="#" onClick="return seleciona('<? print $res["id"]; ?>','<?= htmlspecialchars($resnome,ENT_QUOTES); ?>');"><img src="imagens/icon_14_use.gif" alt="Selecionar" width="14" height="14" border="0"></a></td>
+            <td>&nbsp;<?php print $res["codprod"]; ?></td>
+            <td>&nbsp;<?php print $res["nome"]; ?></td>
+            <td><?php $sql2=mysql_query("SELECT * FROM categorias WHERE id='$res[categoria]'"); $res2=mysql_fetch_array($sql2); print $res2["nome"]; ?></td>
+            <td>&nbsp;<?php print banco2data($res["ultima_entrega"]); ?></td>
+            <td>&nbsp;R$ <?php print banco2valor($res["preco_ult_compra"]); ?></td>
+            <td width="16" align="center"><a href="#" onClick="return seleciona('<?php print $res["id"]; ?>','<?php echo  htmlspecialchars($resnome,ENT_QUOTES); ?>');"><img src="imagens/icon_14_use.gif" alt="Selecionar" width="14" height="14" border="0"></a></td>
           </tr>
-		  <?
+		  <?php
 			}
 		}
 		?>
     </table></td></tr>
   <tr>
-    <td align="center">      <? if($wpaginar) { ?>
+    <td align="center">      <?php if($wpaginar) { ?>
       <table width="300" border="0" cellspacing="0" cellpadding="0">
         <tr> 
           <td align="center"><table width="1%" border="0" cellspacing="0" cellpadding="0">
               <tr valign="top"> 
                 <td align="right"> 
-                  <? 
+                  <?php 
 				$antz=false;
 				if($wp>1){
 					$antz=true;
 				?>
-                  <a href="<? print "compras_prodserv.php?wp=$pg_anterior&bcli=$bcli&categoria=$categoria"; ?>" class="paginacao2"> 
-                  <? } ?>
+                  <a href="<?php print "compras_prodserv.php?wp=$pg_anterior&bcli=$bcli&categoria=$categoria"; ?>" class="paginacao2"> 
+                  <?php } ?>
                   <img src="imagens/pag_f.gif" border="0"> 
-                  <? if($antz){ ?>
+                  <?php if($antz){ ?>
                   <br>
                   Anterior</a> 
-                <? } ?>                </td>
-                <?
+                <?php } ?>                </td>
+                <?php
 				$link_impressos=0;
 				if ($temp > $wpaginacao){
 		    	    $n_start  = $temp - ceil($wpaginacao/2);
@@ -183,32 +184,32 @@ while($resr=mysql_fetch_array($sqlr)){
 					$link_impressos++;
 				?>
                 <td align="center"> 
-                  <? if($pg_atual != $link_impressos){ ?>
-                  <a href="<? print "compras_prodserv.php?wp=$link_impressos&bcli=$bcli&categoria=$categoria"; ?>" class="paginacao"> 
-                  <? } ?>
-                  <img src="imagens/pag_e<? if($pg_atual==$link_impressos) print "2"; ?>.gif" border="0"><br>
-                  <? if($pg_atual==$link_impressos){ print "<span class=\"paginacao2\">$link_impressos</span>"; }else{ print $link_impressos; }?>
-                  <? if($pg_atual != $link_impressos){ ?>
+                  <?php if($pg_atual != $link_impressos){ ?>
+                  <a href="<?php print "compras_prodserv.php?wp=$link_impressos&bcli=$bcli&categoria=$categoria"; ?>" class="paginacao"> 
+                  <?php } ?>
+                  <img src="imagens/pag_e<?php if($pg_atual==$link_impressos) print "2"; ?>.gif" border="0"><br>
+                  <?php if($pg_atual==$link_impressos){ print "<span class=\"paginacao2\">$link_impressos</span>"; }else{ print $link_impressos; }?>
+                  <?php if($pg_atual != $link_impressos){ ?>
                   </a> 
-                  <? } ?>
+                  <?php } ?>
                 </td>
-                <?
+                <?php
 				}
 				?>
                 <td> 
-                  <? if($reg_final<$results_tot){ ?>
-                  <a href="<? print "compras_prodserv.php?wp=$pg_proxima&bcli=$bcli&categoria=$categoria"; ?>" class="paginacao2"> 
-                  <? } ?>
+                  <?php if($reg_final<$results_tot){ ?>
+                  <a href="<?php print "compras_prodserv.php?wp=$pg_proxima&bcli=$bcli&categoria=$categoria"; ?>" class="paginacao2"> 
+                  <?php } ?>
                   <img src="imagens/pag_der.gif" border="0"> 
-                  <? if($reg_final<$results_tot){ ?>
+                  <?php if($reg_final<$results_tot){ ?>
                   <br>
-                  Próximo</a> 
-                <? } ?>                </td>
+                  PrÃ³ximo</a> 
+                <?php } ?>                </td>
               </tr>
             </table></td>
         </tr>
       </table>
-      <? } ?></td>
+      <?php } ?></td>
   </tr>
 </table>
 </body>

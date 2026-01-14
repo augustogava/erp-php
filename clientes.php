@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 include("seguranca.php");
 $nivel=$_SESSION["login_nivel"];
@@ -32,9 +32,9 @@ if($acao=="exc"){
 	$sql=mysql_query("DELETE FROM cliente_login WHERE cliente='$id'");
 	if($sql){
 		$sql=mysql_query("DELETE FROM clientes WHERE id='$id'");
-		$_SESSION["mensagem"]="Cliente exclua­do com sucesso!";
+		$_SESSION["mensagem"]="Cliente excluido com sucesso!";
 	}else{
-		$_SESSION["mensagem"]="O cliente nao pa´de ser exclua­do!";
+		$_SESSION["mensagem"]="O cliente nao pode ser excluido!";
 	}
 }
 ?>
@@ -42,8 +42,8 @@ if($acao=="exc"){
 <html lang="pt-BR">
 <head>
 <title>Clientes - ERP System</title>
-<meta charset="ISO-8859-1">
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <link href="style.css" rel="stylesheet" type="text/css">
@@ -60,7 +60,7 @@ if($acao=="exc"){
         <div class="erp-card-header">
             <h1 class="erp-card-title"><i class="fas fa-users"></i> Clientes</h1>
             <div>
-                <a href="clientes_geral.php?acao=inc" target="_parent" class="erp-btn erp-btn-primary">
+                <a href="clientes_geral.php?acao=inc" class="erp-btn erp-btn-primary">
                     + Novo Cliente
                 </a>
             </div>
@@ -106,7 +106,7 @@ if($acao=="exc"){
         <table class="erp-table">
             <thead>
                 <tr>
-                    <th width="60">Ca³d</th>
+                    <th width="60">Cod</th>
                     <th>Nome</th>
                     <th width="150">Telefone</th>
                     <th width="120">Cidade</th>
@@ -129,32 +129,32 @@ if($acao=="exc"){
                     $status_text = $res["sit"]=="A" ? "Ativo" : "Inativo";
                     ?>
                     <tr>
-                        <td><strong><?=$res["id"]?></strong></td>
+                        <td><strong><?php echo $res["id"]?></strong></td>
                         <td>
-                            <div style="font-weight:600;"><?=$res["nome"]?></div>
+                            <div style="font-weight:600;"><?php echo $res["nome"]?></div>
                             <?php if(!empty($res["fantasia"])): ?>
-                            <div style="font-size:12px;color:#6c757d;"><?=$res["fantasia"]?></div>
+                            <div style="font-size:12px;color:#6c757d;"><?php echo $res["fantasia"]?></div>
                             <?php endif; ?>
                         </td>
-                        <td><?=$res["fone1"]?></td>
-                        <td><?=$res["cidade"]?></td>
+                        <td><?php echo $res["fone1"]?></td>
+                        <td><?php echo $res["cidade"]?></td>
                         <td>
-                            <span class="erp-badge erp-badge-<?=$status_class?>"><?=$status_text?></span>
+                            <span class="erp-badge erp-badge-<?php echo $status_class?>"><?php echo $status_text?></span>
                         </td>
                         <td>
                             <div class="erp-table-actions" style="justify-content:center;">
-                                <a href="clientes_geral.php?alt=<?=$res["id"]?>" class="erp-table-action" title="Editar">
-                                    âï¸
+                                <a href="clientes_geral.php?alt=<?php echo $res["id"]?>" class="erp-table-action" title="Editar">
+                                    <i class="fas fa-edit"></i>
                                 </a>
-                                <a href="crm_clientes_geral.php?alt=<?=$res["id"]?>" class="erp-table-action" title="CRM">
-                                    <i class="fas fa-search"></i>
+                                <a href="crm_clientes_geral.php?alt=<?php echo $res["id"]?>" class="erp-table-action" title="CRM">
+                                    <i class="fas fa-chart-line"></i>
                                 </a>
-                                <a href="cliente_contatos.php?cliente=<?=$res["id"]?>" class="erp-table-action" title="Contatos">
-                                    <i class="fas fa-search"></i>
+                                <a href="cliente_contatos.php?cliente=<?php echo $res["id"]?>" class="erp-table-action" title="Contatos">
+                                    <i class="fas fa-address-book"></i>
                                 </a>
                                 <?php if($nivel=="1"): ?>
-                                <a href="#" onclick="return pergunta('Confirma exclusao?','clientes.php?acao=exc&id=<?=$res["id"]?>');" class="erp-table-action" title="Excluir" style="color:#e74c3c;">
-                                    <i class="fas fa-search"></i>ï¸
+                                <a href="#" onclick="return pergunta('Confirma exclusao?','clientes.php?acao=exc&id=<?php echo $res["id"]?>');" class="erp-table-action" title="Excluir" style="color:#e74c3c;">
+                                    <i class="fas fa-trash"></i>
                                 </a>
                                 <?php endif; ?>
                             </div>
@@ -179,25 +179,25 @@ if($acao=="exc"){
     ?>
     <div class="erp-pagination">
         <?php if($pagina_atual > 1): ?>
-        <a href="?wp=<?=$pagina_atual-1?>" class="erp-pagination-item">â¹ Anterior</a>
+        <a href="?wp=<?php echo $pagina_atual-1?>" class="erp-pagination-item"><i class="fas fa-chevron-left"></i> Anterior</a>
         <?php endif; ?>
         
         <?php for($i=1; $i<=$total_paginas; $i++): ?>
             <?php if($i==$pagina_atual): ?>
-                <span class="erp-pagination-item active"><?=$i?></span>
+                <span class="erp-pagination-item active"><?php echo $i?></span>
             <?php else: ?>
-                <a href="?wp=<?=$i?>" class="erp-pagination-item"><?=$i?></a>
+                <a href="?wp=<?php echo $i?>" class="erp-pagination-item"><?php echo $i?></a>
             <?php endif; ?>
         <?php endfor; ?>
         
         <?php if($pagina_atual < $total_paginas): ?>
-        <a href="?wp=<?=$pagina_atual+1?>" class="erp-pagination-item">Pra³xima âº</a>
+        <a href="?wp=<?php echo $pagina_atual+1?>" class="erp-pagination-item">Proxima <i class="fas fa-chevron-right"></i></a>
         <?php endif; ?>
     </div>
     <?php endif; ?>
     
 </div>
 
-<? include("mensagem.php"); ?>
+<?php include("mensagem.php"); ?>
 </body>
 </html>

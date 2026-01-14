@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 include("seguranca.php");
 if(empty($acao)) $acao="entrar";
@@ -15,7 +15,8 @@ if($acao=="alt"){
 <html>
 <head>
 <title>CyberManager</title>
-<meta http-equiv="Content-Type" content="text/html; UTF-8">
+<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="style.css" rel="stylesheet" type="text/css">
 <script src="scripts.js"></script>
 <script src="mascaras.js"></script>
@@ -52,7 +53,7 @@ function verifica(cad){
       </tr>
     </table></td>
   </tr>
-<? if($acao=="entrar"){ ?>
+<?php if($acao=="entrar"){ ?>
   <tr> 
     <td align="left" valign="top"><table width="450" border="0" cellspacing="0" cellpadding="0">
         <tr> 
@@ -69,26 +70,26 @@ function verifica(cad){
           <td width="21" align="center">&nbsp;</td>
           <td width="25" align="center">&nbsp;</td>
         </tr>
-        <?
+        <?php
 			  $sql=mysql_query("SELECT prodserv_item.id,prodserv_item.qtd,prodserv_item.fixo,prodserv.nome,unidades.nome AS unidade FROM prodserv_item,prodserv,unidades WHERE prodserv_item.item=prodserv.id AND prodserv.unidade=unidades.id AND prodserv_item.prodserv=$ps ORDER BY prodserv.nome ASC");
 			  if(mysql_num_rows($sql)==0){
 			  ?>
         <tr bgcolor="#FFFFFF"> 
           <td colspan="6" align="center" class="textobold">NENHUM ITEM INFORMADO </td>
         </tr>
-        <?
+        <?php
 			  }else{
 			  	while($res=mysql_fetch_array($sql)){
 			  ?>
         <tr bgcolor="#FFFFFF" class="texto" onMouseover="changeto('#CCCCCC')" onMouseout="changeback('#FFFFFF')"> 
-          <td width="0">&nbsp;<? print $res["nome"]; ?></td>
-          <td width="78" align="right"><? print banco2valor($res["qtd"]); ?>&nbsp;</td>
-          <td width="78">&nbsp;<? print $res["unidade"]; ?></td>
-          <td width="21" align="center"><? print $res["fixo"]; ?></td>
-          <td width="21" align="center"><a href="prodserv_item.php?acao=alt&id=<? print $res["id"]; ?>"><img src="imagens/icon14_alterar.gif" alt="Alterar" width="14" height="14" border="0"></a></td>
-          <td width="25" align="center"><a href="#" onClick="return pergunta('Deseja excluir este Item?','prodserv_item_sql.php?acao=exc&id=<? print $res["id"]; ?>')"><img src="imagens/icon14_lixeira.gif" alt="Excluir" width="14" height="14" border="0"></a></td>
+          <td width="0">&nbsp;<?php print $res["nome"]; ?></td>
+          <td width="78" align="right"><?php print banco2valor($res["qtd"]); ?>&nbsp;</td>
+          <td width="78">&nbsp;<?php print $res["unidade"]; ?></td>
+          <td width="21" align="center"><?php print $res["fixo"]; ?></td>
+          <td width="21" align="center"><a href="prodserv_item.php?acao=alt&id=<?php print $res["id"]; ?>"><img src="imagens/icon14_alterar.gif" alt="Alterar" width="14" height="14" border="0"></a></td>
+          <td width="25" align="center"><a href="#" onClick="return pergunta('Deseja excluir este Item?','prodserv_item_sql.php?acao=exc&id=<?php print $res["id"]; ?>')"><img src="imagens/icon14_lixeira.gif" alt="Excluir" width="14" height="14" border="0"></a></td>
         </tr>
-        <?
+        <?php
 			  	}
 			  }
 			  ?>
@@ -102,46 +103,46 @@ function verifica(cad){
         </tr>
       </table></td>
   </tr>
-  <? }else{ ?>
+  <?php }else{ ?>
   <tr>
     <td align="left" valign="top"><form name="form1" method="post" action="prodserv_item_sql.php" onSubmit="return verifica(this);">
         <table width="350" border="0" cellpadding="0" cellspacing="0">
           <tr bgcolor="#003366"> 
             <td colspan="2" align="center" class="textoboldbranco"> 
-              <? if($acao=="inc"){ print"Incluir Item"; }else{ print"Alterar Item";} ?>            </td>
+              <?php if($acao=="inc"){ print"Incluir Item"; }else{ print"Alterar Item";} ?>            </td>
           </tr>
           <tr> 
             <td width="41" class="textobold">&nbsp;Item</td>
             <td width="359" class="textobold"><table width="100%"  border="0" cellspacing="0" cellpadding="0">
               <tr>
-                <td><input name="nome" type="text" class="formularioselect" id="nome3" value="<? print $res["nome"]; ?>" size="7" maxlength="50" readonly></td>
-                <td width="20" align="center"><a href="#" onClick="return abre('prodserv_bus.php?psb=<? print $ps; ?>','busca','width=420,height=300,scrollbars=1');"><img src="imagens/icon14_box.gif" alt="Selecione um Item" width="14" height="14" border="0"></a></td>
+                <td><input name="nome" type="text" class="formularioselect" id="nome3" value="<?php print $res["nome"]; ?>" size="7" maxlength="50" readonly></td>
+                <td width="20" align="center"><a href="#" onClick="return abre('prodserv_bus.php?psb=<?php print $ps; ?>','busca','width=420,height=300,scrollbars=1');"><img src="imagens/icon14_box.gif" alt="Selecione um Item" width="14" height="14" border="0"></a></td>
               </tr>
             </table></td>
           </tr>
           <tr>
             <td class="textobold">&nbsp;Qtd</td>
-            <td class="textobold"><input name="qtd" type="text" class="formulario" id="qtd" value="<? print banco2valor($res["qtd"]); ?>" size="10" onKeyDown="formataMoeda(this,retornaKeyCode(event))" onKeyUp="formataMoeda(this,retornaKeyCode(event))" <? if($class=="I") print "readonly"; ?> onBlur="ccusto(this.form);"></td>
+            <td class="textobold"><input name="qtd" type="text" class="formulario" id="qtd" value="<?php print banco2valor($res["qtd"]); ?>" size="10" onKeyDown="formataMoeda(this,retornaKeyCode(event))" onKeyUp="formataMoeda(this,retornaKeyCode(event))" <?php if($class=="I") print "readonly"; ?> onBlur="ccusto(this.form);"></td>
           </tr>
           
           <tr align="center"> 
             <td colspan="2" class="textobold">
-              <input name="Submit22" type="button" class="microtxt" value="voltar" onClick="window.location='prodserv_item.php?ps=<? print $ps; ?>'">
+              <input name="Submit22" type="button" class="microtxt" value="voltar" onClick="window.location='prodserv_item.php?ps=<?php print $ps; ?>'">
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               <input name="Submit2" type="submit" class="microtxt" value="Continuar">
-              <input name="acao" type="hidden" id="acao" value="<? if($acao=="alt"){ print "alterar"; }else{ print "incluir"; } ?>"> 
-            <input name="id" type="hidden" id="id3" value="<? print $id; ?>">
-            <input name="item" type="hidden" id="item" value="<? print $res["item"]; ?>">
-            <input name="ps" type="hidden" id="ps" value="<? print $ps; ?>">
-            <input name="psb" type="hidden" id="psb" value="<? print $ps; ?>"></td>
+              <input name="acao" type="hidden" id="acao" value="<?php if($acao=="alt"){ print "alterar"; }else{ print "incluir"; } ?>"> 
+            <input name="id" type="hidden" id="id3" value="<?php print $id; ?>">
+            <input name="item" type="hidden" id="item" value="<?php print $res["item"]; ?>">
+            <input name="ps" type="hidden" id="ps" value="<?php print $ps; ?>">
+            <input name="psb" type="hidden" id="psb" value="<?php print $ps; ?>"></td>
           </tr>
         </table>
       </form>
       
     </td>
-	<? } ?>
+	<?php } ?>
   </tr>
 </table>
 </body>
 </html>
-<? include("mensagem.php"); ?>
+<?php include("mensagem.php"); ?>
