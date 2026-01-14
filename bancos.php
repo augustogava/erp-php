@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 include("seguranca.php");
 $acao=verifi($permi,$acao);
@@ -13,7 +13,7 @@ if(!empty($acao)){
 if($acao=="exc"){
 	$sql=mysql_query("DELETE FROM bancos WHERE id='$id'");
 	if($sql){
-		$_SESSION["mensagem"]="Banco exclua­do com sucesso!";
+		$_SESSION["mensagem"]="Banco excluido com sucesso!";
 	}
 }
 ?>
@@ -36,10 +36,10 @@ if($acao=="exc"){
 <div class="erp-container-fluid">
     <div class="erp-card">
         <div class="erp-card-header">
-            <h1 class="erp-card-title">ð¦ Bancos</h1>
+            <h1 class="erp-card-title"><i class="fas fa-university"></i> Bancos</h1>
             <div>
                 <a href="bancos_sql.php?acao=inc" class="erp-btn erp-btn-primary">
-                    + Novo Banco
+                    <i class="fas fa-plus"></i> Novo Banco
                 </a>
             </div>
         </div>
@@ -55,13 +55,13 @@ if($acao=="exc"){
         <table class="erp-table">
             <thead>
                 <tr>
-                    <th width="60">Ca³d</th>
+                    <th width="60">Cod</th>
                     <th>Banco / Apelido</th>
-                    <th width="120">Agaªncia</th>
+                    <th width="120">Agencia</th>
                     <th width="120">Conta</th>
                     <th width="120" class="erp-text-right">Saldo</th>
                     <th width="120" class="erp-text-right">Limite</th>
-                    <th width="200" class="erp-text-center">Acaµes</th>
+                    <th width="200" class="erp-text-center">Acoes</th>
                 </tr>
             </thead>
             <tbody>
@@ -78,34 +78,34 @@ if($acao=="exc"){
                     $saldo_class = $res["saldo"] >= 0 ? "#27AE60" : "#E74C3C";
                     ?>
                     <tr>
-                        <td><strong><?=$res["id"]?></strong></td>
+                        <td><strong><?php echo $res["id"]; ?></strong></td>
                         <td>
-                            <div style="font-weight:600;"><?=$res["apelido"]?></div>
-                            <div style="font-size:12px;color:#6c757d;">Banco: <?=$res["bco"]?></div>
+                            <div style="font-weight:600;"><?php echo $res["apelido"]; ?></div>
+                            <div style="font-size:12px;color:#6c757d;">Banco: <?php echo $res["bco"]; ?></div>
                         </td>
-                        <td><?=$res["agencia"]?></td>
-                        <td><?=$res["conta"]?></td>
+                        <td><?php echo $res["agencia"]; ?></td>
+                        <td><?php echo $res["conta"]; ?></td>
                         <td class="erp-text-right">
-                            <strong style="color:<?=$saldo_class?>">R$ <?=banco2valor($res["saldo"])?></strong>
+                            <strong style="color:<?php echo $saldo_class; ?>">R$ <?php echo banco2valor($res["saldo"]); ?></strong>
                         </td>
                         <td class="erp-text-right">
-                            <div>R$ <?=banco2valor($res["limite"])?></div>
-                            <div style="font-size:11px;color:#6c757d;">Disp: R$ <?=banco2valor($saldo_disponivel)?></div>
+                            <div>R$ <?php echo banco2valor($res["limite"]); ?></div>
+                            <div style="font-size:11px;color:#6c757d;">Disp: R$ <?php echo banco2valor($saldo_disponivel); ?></div>
                         </td>
                         <td>
                             <div class="erp-table-actions" style="justify-content:center;">
-                                <a href="bancos_lan.php?setbco=<?=$res["id"]?>" class="erp-table-action" title="Lancamentos">
-                                    ð°
+                                <a href="bancos_lan.php?setbco=<?php echo $res["id"]; ?>" class="erp-table-action" title="Lancamentos">
+                                    <i class="fas fa-list-alt"></i>
                                 </a>
-                                <a href="bancos_sql.php?acao=alt&id=<?=$res["id"]?>" class="erp-table-action" title="Editar">
-                                    âï¸
+                                <a href="bancos_sql.php?acao=alt&id=<?php echo $res["id"]; ?>" class="erp-table-action" title="Editar">
+                                    <i class="fas fa-edit"></i>
                                 </a>
-                                <a href="bancos_lan_imp.php?banco=<?=$res["id"]?>" target="_blank" class="erp-table-action" title="Extrato">
-                                    ð
+                                <a href="bancos_lan_imp.php?banco=<?php echo $res["id"]; ?>" target="_blank" class="erp-table-action" title="Extrato">
+                                    <i class="fas fa-print"></i>
                                 </a>
                                 <?php if($nivel=="1"): ?>
-                                <a href="#" onclick="return pergunta('Confirma exclusao?','bancos.php?acao=exc&id=<?=$res["id"]?>');" class="erp-table-action" title="Excluir" style="color:#e74c3c;">
-                                    ðï¸
+                                <a href="#" onclick="return pergunta('Confirma exclusao?','bancos.php?acao=exc&id=<?php echo $res["id"]; ?>');" class="erp-table-action" title="Excluir" style="color:#e74c3c;">
+                                    <i class="fas fa-trash"></i>
                                 </a>
                                 <?php endif; ?>
                             </div>
@@ -116,8 +116,8 @@ if($acao=="exc"){
                 ?>
                 <tr style="background:#f8f9fa;font-weight:600;">
                     <td colspan="4" class="erp-text-right">SALDO TOTAL:</td>
-                    <td class="erp-text-right" style="color:<?=$total_saldo>=0?'#27AE60':'#E74C3C'?>;font-size:16px;">
-                        R$ <?=banco2valor($total_saldo)?>
+                    <td class="erp-text-right" style="color:<?php echo ($total_saldo>=0) ? '#27AE60' : '#E74C3C'; ?>;font-size:16px;">
+                        R$ <?php echo banco2valor($total_saldo); ?>
                     </td>
                     <td colspan="2"></td>
                 </tr>
@@ -129,6 +129,6 @@ if($acao=="exc"){
     </div>
 </div>
 
-<? include("mensagem.php"); ?>
+<?php include("mensagem.php"); ?>
 </body>
 </html>

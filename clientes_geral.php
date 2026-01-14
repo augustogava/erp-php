@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 include("seguranca.php");
 
@@ -159,7 +159,7 @@ if(empty($tipop)) $tipop="J";
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<title><?=$acao=="alt"?"Editar":"Novo"?> Cliente - ERP System</title>
+<title><?php echo $acao=="alt"?"Editar":"Novo"?> Cliente - ERP System</title>
 <meta charset="ISO-8859-1">
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -178,40 +178,41 @@ if(empty($tipop)) $tipop="J";
     <div class="erp-card">
         <div class="erp-card-header">
             <h1 class="erp-card-title">
-                <?=$acao=="alt"?"âï¸ Editar":"â Novo"?> Cliente
-                <?=$acao=="alt"?" #".$id:""?>
+                <i class="fas fa-<?php echo $acao=="alt"?"edit":"plus-circle"?>"></i>
+                <?php echo $acao=="alt"?"Editar":"Novo"?> Cliente
+                <?php echo $acao=="alt"?" #".$id:""?>
             </h1>
             <div>
                 <a href="clientes.php" class="erp-btn erp-btn-outline">
-                    â Voltar
+                    <i class="fas fa-arrow-left"></i> Voltar
                 </a>
             </div>
         </div>
     </div>
     
     <?php if(isset($_SESSION["mensagem"])): ?>
-    <div class="erp-alert erp-alert-<?=strpos($_SESSION["mensagem"],'sucesso')!==false?'success':'danger'?>">
+    <div class="erp-alert erp-alert-<?php echo strpos($_SESSION["mensagem"],'sucesso')!==false?'success':'danger'?>">
         <?php echo $_SESSION["mensagem"]; unset($_SESSION["mensagem"]); ?>
     </div>
     <?php endif; ?>
     
     <form name="form1" method="post" action="">
-        <input type="hidden" name="id" value="<?=$id?>">
-        <input type="hidden" name="tipop" value="<?=$tipop?>">
+        <input type="hidden" name="id" value="<?php echo $id?>">
+        <input type="hidden" name="tipop" value="<?php echo $tipop?>">
         
         <div class="erp-card">
-            <h3 style="margin-bottom:20px;font-size:18px;color:#2c3e50;">ð Dados Principais</h3>
+            <h3 style="margin-bottom:20px;font-size:18px;color:#2c3e50;"><i class="fas fa-clipboard-list"></i> Dados Principais</h3>
             <div class="erp-row">
                 <div class="erp-col" style="flex:3;">
                     <div class="erp-form-group">
                         <label class="erp-form-label">Nome / Razao Social *</label>
-                        <input type="text" name="nome" class="erp-form-control" value="<?=$nome?>" required>
+                        <input type="text" name="nome" class="erp-form-control" value="<?php echo $nome?>" required>
                     </div>
                 </div>
                 <div class="erp-col" style="flex:2;">
                     <div class="erp-form-group">
                         <label class="erp-form-label">Nome Fantasia</label>
-                        <input type="text" name="fantasia" class="erp-form-control" value="<?=$fantasia?>">
+                        <input type="text" name="fantasia" class="erp-form-control" value="<?php echo $fantasia?>">
                     </div>
                 </div>
             </div>
@@ -221,51 +222,51 @@ if(empty($tipop)) $tipop="J";
                     <div class="erp-form-group">
                         <label class="erp-form-label">Tipo Pessoa</label>
                         <select name="tipo" class="erp-form-control">
-                            <option value="J" <?=$tipo=="J"?"selected":""?>>Jura­dica</option>
-                            <option value="F" <?=$tipo=="F"?"selected":""?>>Fa­sica</option>
+                            <option value="J" <?php echo $tipo=="J"?"selected":""?>>Juridica</option>
+                            <option value="F" <?php echo $tipo=="F"?"selected":""?>>Fisica</option>
                         </select>
                     </div>
                 </div>
                 <div class="erp-col">
                     <div class="erp-form-group">
-                        <label class="erp-form-label"><?=$tipop=="J"?"CNPJ":"CPF"?></label>
-                        <input type="text" name="<?=$tipop=="J"?"cnpj":"cpf"?>" class="erp-form-control" value="<?=$cpfcnpj?>">
+                        <label class="erp-form-label"><?php echo $tipop=="J"?"CNPJ":"CPF"?></label>
+                        <input type="text" name="<?php echo $tipop=="J"?"cnpj":"cpf"?>" class="erp-form-control" value="<?php echo $cpfcnpj?>">
                     </div>
                 </div>
                 <div class="erp-col">
                     <div class="erp-form-group">
                         <label class="erp-form-label">IE / RG</label>
-                        <input type="text" name="ie" class="erp-form-control" value="<?=$ie?>">
+                        <input type="text" name="ie" class="erp-form-control" value="<?php echo $ie?>">
                     </div>
                 </div>
                 <div class="erp-col">
                     <div class="erp-form-group">
                         <label class="erp-form-label">Inscricao Municipal</label>
-                        <input type="text" name="im" class="erp-form-control" value="<?=$im?>">
+                        <input type="text" name="im" class="erp-form-control" value="<?php echo $im?>">
                     </div>
                 </div>
             </div>
         </div>
         
         <div class="erp-card">
-            <h3 style="margin-bottom:20px;font-size:18px;color:#2c3e50;">ð Endereco Principal</h3>
+            <h3 style="margin-bottom:20px;font-size:18px;color:#2c3e50;"><i class="fas fa-map-marker-alt"></i> Endereco Principal</h3>
             <div class="erp-row">
                 <div class="erp-col" style="flex:1;">
                     <div class="erp-form-group">
                         <label class="erp-form-label">CEP</label>
-                        <input type="text" name="cep" class="erp-form-control" value="<?=$cep?>" maxlength="9" onBlur="busca_cep(this.value,'','');">
+                        <input type="text" name="cep" class="erp-form-control" value="<?php echo $cep?>" maxlength="9" onBlur="busca_cep(this.value,'','');">
                     </div>
                 </div>
                 <div class="erp-col" style="flex:3;">
                     <div class="erp-form-group">
                         <label class="erp-form-label">Endereco</label>
-                        <input type="text" name="endereco" id="endereco" class="erp-form-control" value="<?=$endereco?>">
+                        <input type="text" name="endereco" id="endereco" class="erp-form-control" value="<?php echo $endereco?>">
                     </div>
                 </div>
                 <div class="erp-col" style="flex:1;">
                     <div class="erp-form-group">
                         <label class="erp-form-label">Complemento</label>
-                        <input type="text" name="complemento" class="erp-form-control" value="<?=$complemento?>">
+                        <input type="text" name="complemento" class="erp-form-control" value="<?php echo $complemento?>">
                     </div>
                 </div>
             </div>
@@ -274,49 +275,49 @@ if(empty($tipop)) $tipop="J";
                 <div class="erp-col">
                     <div class="erp-form-group">
                         <label class="erp-form-label">Bairro</label>
-                        <input type="text" name="bairro" id="bairro" class="erp-form-control" value="<?=$bairro?>">
+                        <input type="text" name="bairro" id="bairro" class="erp-form-control" value="<?php echo $bairro?>">
                     </div>
                 </div>
                 <div class="erp-col">
                     <div class="erp-form-group">
                         <label class="erp-form-label">Cidade</label>
-                        <input type="text" name="cidade" id="cidade" class="erp-form-control" value="<?=$cidade?>">
+                        <input type="text" name="cidade" id="cidade" class="erp-form-control" value="<?php echo $cidade?>">
                     </div>
                 </div>
                 <div class="erp-col" style="flex:0.5;">
                     <div class="erp-form-group">
                         <label class="erp-form-label">UF</label>
-                        <input type="text" name="estado" id="estado" class="erp-form-control" value="<?=$estado?>" maxlength="2">
+                        <input type="text" name="estado" id="estado" class="erp-form-control" value="<?php echo $estado?>" maxlength="2">
                     </div>
                 </div>
             </div>
         </div>
         
         <div class="erp-card">
-            <h3 style="margin-bottom:20px;font-size:18px;color:#2c3e50;">ð Contato</h3>
+            <h3 style="margin-bottom:20px;font-size:18px;color:#2c3e50;"><i class="fas fa-phone"></i> Contato</h3>
             <div class="erp-row">
                 <div class="erp-col">
                     <div class="erp-form-group">
                         <label class="erp-form-label">DDD</label>
-                        <input type="text" name="ddd" class="erp-form-control" value="<?=$ddd?>" maxlength="2">
+                        <input type="text" name="ddd" class="erp-form-control" value="<?php echo $ddd?>" maxlength="2">
                     </div>
                 </div>
                 <div class="erp-col" style="flex:2;">
                     <div class="erp-form-group">
                         <label class="erp-form-label">Telefone</label>
-                        <input type="text" name="fone" class="erp-form-control" value="<?=$fone?>">
+                        <input type="text" name="fone" class="erp-form-control" value="<?php echo $fone?>">
                     </div>
                 </div>
                 <div class="erp-col">
                     <div class="erp-form-group">
                         <label class="erp-form-label">DDD 2</label>
-                        <input type="text" name="ddd2" class="erp-form-control" value="<?=$ddd2?>" maxlength="2">
+                        <input type="text" name="ddd2" class="erp-form-control" value="<?php echo $ddd2?>" maxlength="2">
                     </div>
                 </div>
                 <div class="erp-col" style="flex:2;">
                     <div class="erp-form-group">
                         <label class="erp-form-label">Telefone 2</label>
-                        <input type="text" name="fone2" class="erp-form-control" value="<?=$fone2?>">
+                        <input type="text" name="fone2" class="erp-form-control" value="<?php echo $fone2?>">
                     </div>
                 </div>
             </div>
@@ -325,20 +326,20 @@ if(empty($tipop)) $tipop="J";
                 <div class="erp-col">
                     <div class="erp-form-group">
                         <label class="erp-form-label">E-mail</label>
-                        <input type="email" name="email" class="erp-form-control" value="<?=$email?>">
+                        <input type="email" name="email" class="erp-form-control" value="<?php echo $email?>">
                     </div>
                 </div>
                 <div class="erp-col">
                     <div class="erp-form-group">
                         <label class="erp-form-label">Website</label>
-                        <input type="text" name="site" class="erp-form-control" value="<?=$site?>">
+                        <input type="text" name="site" class="erp-form-control" value="<?php echo $site?>">
                     </div>
                 </div>
             </div>
         </div>
         
         <div class="erp-card">
-            <h3 style="margin-bottom:20px;font-size:18px;color:#2c3e50;">ð¼ Dados Comerciais</h3>
+            <h3 style="margin-bottom:20px;font-size:18px;color:#2c3e50;"><i class="fas fa-briefcase"></i> Dados Comerciais</h3>
             <div class="erp-row">
                 <div class="erp-col">
                     <div class="erp-form-group">
@@ -358,13 +359,13 @@ if(empty($tipop)) $tipop="J";
                 <div class="erp-col">
                     <div class="erp-form-group">
                         <label class="erp-form-label">Comissao (%)</label>
-                        <input type="text" name="comissao" class="erp-form-control" value="<?=$comissao?>">
+                        <input type="text" name="comissao" class="erp-form-control" value="<?php echo $comissao?>">
                     </div>
                 </div>
                 <div class="erp-col">
                     <div class="erp-form-group">
                         <label class="erp-form-label">Ramo Atividade</label>
-                        <input type="text" name="ramo" class="erp-form-control" value="<?=$ramo?>">
+                        <input type="text" name="ramo" class="erp-form-control" value="<?php echo $ramo?>">
                     </div>
                 </div>
             </div>
@@ -372,13 +373,14 @@ if(empty($tipop)) $tipop="J";
         
         <div style="display:flex;gap:12px;justify-content:flex-end;margin-top:24px;">
             <a href="clientes.php" class="erp-btn erp-btn-secondary">Cancelar</a>
-            <button type="submit" name="acao" value="<?=$acao=="alt"?"alterar":"incluir"?>" class="erp-btn erp-btn-success">
-                â <?=$acao=="alt"?"Salvar Alteracaµes":"Cadastrar Cliente"?>
+            <button type="submit" name="acao" value="<?php echo $acao=="alt"?"alterar":"incluir"?>" class="erp-btn erp-btn-success">
+                <i class="fas fa-<?php echo $acao=="alt"?"save":"check"?>"></i>
+                <?php echo $acao=="alt"?"Salvar Alteracoes":"Cadastrar Cliente"?>
             </button>
         </div>
     </form>
 </div>
 
-<? include("mensagem.php"); ?>
+<?php include("mensagem.php"); ?>
 </body>
 </html>

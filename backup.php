@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 include("seguranca.php");
 
@@ -130,7 +130,7 @@ if($acao=="gerar"){
 <div class="erp-container-fluid">
     <div class="erp-card">
         <div class="erp-card-header">
-            <h1 class="erp-card-title">ð¾ Backup do Sistema</h1>
+            <h1 class="erp-card-title"><i class="fas fa-database"></i> Backup do Sistema</h1>
         </div>
     </div>
     
@@ -143,23 +143,23 @@ if($acao=="gerar"){
     <div class="erp-row">
         <div class="erp-col">
             <div class="erp-card">
-                <h3 style="margin-bottom:16px;font-size:18px;color:#2c3e50;">ð¦ Gerar Backup Completo</h3>
+                <h3 style="margin-bottom:16px;font-size:18px;color:#2c3e50;"><i class="fas fa-box"></i> Gerar Backup Completo</h3>
                 <p style="color:#6c757d;margin-bottom:24px;">
                     Gera um arquivo ZIP contendo toda a estrutura e dados do banco de dados.<br>
                     O backup inclui todas as tabelas e registros do sistema.
                 </p>
                 
                 <div class="erp-alert erp-alert-info" style="margin-bottom:24px;">
-                    <strong>â¹ï¸ Informacaµes:</strong><br>
-                    â¢ Banco de dados: <strong><?=$bd?></strong><br>
-                    â¢ Servidor: <strong><?=$host?></strong><br>
-                    â¢ Data/Hora: <strong><?=date("d/m/Y H:i:s")?></strong>
+                    <strong><i class="fas fa-info-circle"></i> Informacoes:</strong><br>
+                    <i class="fas fa-circle" style="font-size:6px;margin-right:8px;"></i> Banco de dados: <strong><?=$bd?></strong><br>
+                    <i class="fas fa-circle" style="font-size:6px;margin-right:8px;"></i> Servidor: <strong><?=$host?></strong><br>
+                    <i class="fas fa-circle" style="font-size:6px;margin-right:8px;"></i> Data/Hora: <strong><?=date("d/m/Y H:i:s")?></strong>
                 </div>
                 
                 <form method="post" action="backup.php" onsubmit="return confirm('Deseja gerar o backup agora?');">
                     <input type="hidden" name="acao" value="gerar">
                     <button type="submit" class="erp-btn erp-btn-success" style="width:100%;padding:16px;font-size:16px;">
-                        ð¾ Gerar Backup Agora
+                        <i class="fas fa-download"></i> Gerar Backup Agora
                     </button>
                 </form>
             </div>
@@ -167,29 +167,29 @@ if($acao=="gerar"){
         
         <div class="erp-col">
             <div class="erp-card">
-                <h3 style="margin-bottom:16px;font-size:18px;color:#2c3e50;">ð Informacaµes sobre Backup</h3>
+                <h3 style="margin-bottom:16px;font-size:18px;color:#2c3e50;"><i class="fas fa-book"></i> Informacoes sobre Backup</h3>
                 
                 <div style="padding:12px;background:#f8f9fa;border-radius:8px;margin-bottom:12px;">
-                    <strong style="color:#2c3e50;">â O que a© inclua­do:</strong>
+                    <strong style="color:#2c3e50;"><i class="fas fa-check-circle" style="color:#27ae60;"></i> O que e incluido:</strong>
                     <ul style="margin:8px 0 0 20px;color:#6c757d;">
                         <li>Estrutura completa das tabelas</li>
                         <li>Todos os dados cadastrados</li>
-                        <li>Relacionamentos e a­ndices</li>
+                        <li>Relacionamentos e indices</li>
                     </ul>
                 </div>
                 
                 <div style="padding:12px;background:#fff3cd;border-radius:8px;margin-bottom:12px;border-left:4px solid #ffc107;">
-                    <strong style="color:#856404;">â ï¸ Recomendacaµes:</strong>
+                    <strong style="color:#856404;"><i class="fas fa-exclamation-triangle"></i> Recomendacoes:</strong>
                     <ul style="margin:8px 0 0 20px;color:#856404;">
-                        <li>Faca backups regulares (dia¡rios)</li>
+                        <li>Faca backups regulares (diarios)</li>
                         <li>Armazene em local seguro</li>
                         <li>Teste a restauracao periodicamente</li>
-                        <li>Mantenha maºltiplas ca³pias</li>
+                        <li>Mantenha multiplas copias</li>
                     </ul>
                 </div>
                 
                 <div style="padding:12px;background:#d1ecf1;border-radius:8px;border-left:4px solid #17a2b8;">
-                    <strong style="color:#0c5460;">ð¡ Dica:</strong>
+                    <strong style="color:#0c5460;"><i class="fas fa-lightbulb"></i> Dica:</strong>
                     <p style="margin:8px 0 0 0;color:#0c5460;">
                         O arquivo gerado pode ser restaurado usando ferramentas como phpMyAdmin ou linha de comando MySQL.
                     </p>
@@ -199,7 +199,7 @@ if($acao=="gerar"){
     </div>
     
     <div class="erp-card">
-        <h3 style="margin-bottom:16px;font-size:18px;color:#2c3e50;">ð Estata­sticas do Banco de Dados</h3>
+        <h3 style="margin-bottom:16px;font-size:18px;color:#2c3e50;"><i class="fas fa-chart-bar"></i> Estatisticas do Banco de Dados</h3>
         
         <div class="erp-table-container">
             <table class="erp-table">
@@ -239,6 +239,6 @@ if($acao=="gerar"){
     </div>
 </div>
 
-<? include("mensagem.php"); ?>
+<?php include("mensagem.php"); ?>
 </body>
 </html>

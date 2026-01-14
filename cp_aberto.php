@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 include("seguranca.php");
 
@@ -59,10 +59,10 @@ $hj=mktime(0,0,0,date("n"),date("d"),date("Y"));
 <div class="erp-container-fluid">
     <div class="erp-card">
         <div class="erp-card-header">
-            <h1 class="erp-card-title">ð³ Contas a Pagar</h1>
+            <h1 class="erp-card-title"><i class="fas fa-credit-card"></i> Contas a Pagar</h1>
             <div style="display:flex;gap:8px;">
                 <a href="cp.php" class="erp-btn erp-btn-primary">
-                    + Nova Conta
+                    <i class="fas fa-plus"></i> Nova Conta
                 </a>
             </div>
         </div>
@@ -75,27 +75,27 @@ $hj=mktime(0,0,0,date("n"),date("d"),date("Y"));
                     <div class="erp-form-group">
                         <label class="erp-form-label">Situacao</label>
                         <select name="wsit" class="erp-form-control">
-                            <option value="N" <?=$wsit=="N"?"selected":""?>>A Pagar</option>
-                            <option value="S" <?=$wsit=="S"?"selected":""?>>Pagas</option>
-                            <option value="A" <?=$wsit=="A"?"selected":""?>>Todas</option>
+                            <option value="N" <?php echo ($wsit=="N") ? "selected" : ""; ?>>A Pagar</option>
+                            <option value="S" <?php echo ($wsit=="S") ? "selected" : ""; ?>>Pagas</option>
+                            <option value="A" <?php echo ($wsit=="A") ? "selected" : ""; ?>>Todas</option>
                         </select>
                     </div>
                 </div>
                 <div class="erp-col">
                     <div class="erp-form-group">
                         <label class="erp-form-label">Venc. Inicial</label>
-                        <input name="vencimento" type="text" class="erp-form-control" value="<?=$vencimento?>" maxlength="10" onKeyPress="return validanum(this, event)" onKeyUp="mdata(this)">
+                        <input name="vencimento" type="text" class="erp-form-control" value="<?php echo $vencimento; ?>" maxlength="10" onKeyPress="return validanum(this, event)" onKeyUp="mdata(this)">
                     </div>
                 </div>
                 <div class="erp-col">
                     <div class="erp-form-group">
                         <label class="erp-form-label">Venc. Final</label>
-                        <input name="vencimento2" type="text" class="erp-form-control" value="<?=$vencimento2?>" maxlength="10" onKeyPress="return validanum(this, event)" onKeyUp="mdata(this)">
+                        <input name="vencimento2" type="text" class="erp-form-control" value="<?php echo $vencimento2; ?>" maxlength="10" onKeyPress="return validanum(this, event)" onKeyUp="mdata(this)">
                     </div>
                 </div>
                 <div class="erp-col">
                     <div class="erp-form-group">
-                        <label class="erp-form-label">Conta Banca¡ria</label>
+                        <label class="erp-form-label">Conta Bancaria</label>
                         <select name="banco" class="erp-form-control">
                             <option value="">Todas</option>
                             <?php
@@ -111,7 +111,7 @@ $hj=mktime(0,0,0,date("n"),date("d"),date("Y"));
                 <div class="erp-col" style="flex:0 0 auto;display:flex;align-items:flex-end;">
                     <div class="erp-form-group" style="margin-bottom:0;">
                         <button type="submit" class="erp-btn erp-btn-primary" style="height:42px;">
-                            ð Filtrar
+                            <i class="fas fa-search"></i> Filtrar
                         </button>
                     </div>
                 </div>
@@ -129,7 +129,7 @@ $hj=mktime(0,0,0,date("n"),date("d"),date("Y"));
                     <th width="120" class="erp-text-right">Valor</th>
                     <th width="80">Status</th>
                     <th width="100">Banco</th>
-                    <th width="150" class="erp-text-center">Acaµes</th>
+                    <th width="150" class="erp-text-center">Acoes</th>
                 </tr>
             </thead>
             <tbody>
@@ -174,33 +174,33 @@ $hj=mktime(0,0,0,date("n"),date("d"),date("Y"));
                     ?>
                     <tr>
                         <td>
-                            <?=banco2data($res["vencimento"])?>
+                            <?php echo banco2data($res["vencimento"]); ?>
                             <?php if($dias_atraso > 0 && $res["pago"]=="N"): ?>
-                            <div style="font-size:11px;color:#e74c3c;font-weight:600;"><?=$dias_atraso?> dias</div>
+                            <div style="font-size:11px;color:#e74c3c;font-weight:600;"><?php echo $dias_atraso; ?> dias</div>
                             <?php endif; ?>
                         </td>
                         <td>
-                            <div style="font-weight:600;"><?=$nome?></div>
-                            <div style="font-size:12px;color:#6c757d;">Conta #<?=$res["conta"]?></div>
+                            <div style="font-weight:600;"><?php echo $nome; ?></div>
+                            <div style="font-size:12px;color:#6c757d;">Conta #<?php echo $res["conta"]; ?></div>
                         </td>
-                        <td><?=$res["documento"]?></td>
-                        <td class="erp-text-right"><strong>R$ <?=banco2valor($res["valor"])?></strong></td>
+                        <td><?php echo $res["documento"]; ?></td>
+                        <td class="erp-text-right"><strong>R$ <?php echo banco2valor($res["valor"]); ?></strong></td>
                         <td>
-                            <span class="erp-badge erp-badge-<?=$status_class?>"><?=$status_text?></span>
+                            <span class="erp-badge erp-badge-<?php echo $status_class; ?>"><?php echo $status_text; ?></span>
                         </td>
-                        <td><?=$banco_nome?></td>
+                        <td><?php echo $banco_nome; ?></td>
                         <td>
                             <div class="erp-table-actions" style="justify-content:center;">
-                                <a href="cp.php?acao=alt&id=<?=$res["conta"]?>" class="erp-table-action" title="Visualizar Conta">
-                                    ðï¸
+                                <a href="cp.php?acao=alt&id=<?php echo $res["conta"]; ?>" class="erp-table-action" title="Visualizar Conta">
+                                    <i class="fas fa-eye"></i>
                                 </a>
                                 <?php if($res["pago"]=="N"): ?>
-                                <a href="cp_conf.php?id=<?=$res["item"]?>" class="erp-table-action" title="Pagar">
-                                    ðµ
+                                <a href="cp_conf.php?id=<?php echo $res["item"]; ?>" class="erp-table-action" title="Pagar">
+                                    <i class="fas fa-dollar-sign"></i>
                                 </a>
                                 <?php endif; ?>
-                                <a href="cp_hist.php?id=<?=$res["item"]?>" onclick="return abre(this.href,'','width=470,height=300,scrollbars=1');" class="erp-table-action" title="Hista³rico">
-                                    ð
+                                <a href="cp_hist.php?id=<?php echo $res["item"]; ?>" onclick="return abre(this.href,'','width=470,height=300,scrollbars=1');" class="erp-table-action" title="Historico">
+                                    <i class="fas fa-history"></i>
                                 </a>
                             </div>
                         </td>
@@ -210,11 +210,11 @@ $hj=mktime(0,0,0,date("n"),date("d"),date("Y"));
                 ?>
                 <tr style="background:#f8f9fa;font-weight:600;">
                     <td colspan="3" class="erp-text-right">
-                        <div>Total Vencido: <span style="color:#E74C3C;">R$ <?=banco2valor($total_vencido)?></span></div>
-                        <div>Total a Vencer: <span style="color:#F39C12;">R$ <?=banco2valor($total_avencer)?></span></div>
+                        <div>Total Vencido: <span style="color:#E74C3C;">R$ <?php echo banco2valor($total_vencido); ?></span></div>
+                        <div>Total a Vencer: <span style="color:#F39C12;">R$ <?php echo banco2valor($total_avencer); ?></span></div>
                     </td>
                     <td colspan="4" class="erp-text-right" style="font-size:16px;">
-                        <div>TOTAL GERAL: <span style="color:#27AE60;">R$ <?=banco2valor($total)?></span></div>
+                        <div>TOTAL GERAL: <span style="color:#27AE60;">R$ <?php echo banco2valor($total); ?></span></div>
                     </td>
                 </tr>
                 <?php
@@ -225,6 +225,6 @@ $hj=mktime(0,0,0,date("n"),date("d"),date("Y"));
     </div>
 </div>
 
-<? include("mensagem.php"); ?>
+<?php include("mensagem.php"); ?>
 </body>
 </html>

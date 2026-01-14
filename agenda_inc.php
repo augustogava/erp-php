@@ -1,12 +1,12 @@
-<?
+<?php
 include("conecta.php");
 include("seguranca.php");
 $nivel=$_SESSION["login_nivel"];
 $agendador=$_SESSION["login_nome"];
 if($acao=="entrar"){
-	settype($dia,string);
+	settype($dia,"string");
 	if(strlen($dia)==1) $dia="0$dia";
-	settype($mes,string);
+	settype($mes,"string");
 	if(strlen($mes)==1) $mes="0$mes";	
 }elseif($acao=="ok"){
 	$data=date("Y-m-d",mktime(0,0,0,date("m"),date("d")+$dias,date("Y")));
@@ -17,35 +17,38 @@ if($acao=="entrar"){
 		header("Location:crm_infg.php?cli=$cli");
 		exit;
 	}else{
-		$_SESSION["mensagem"]="O compromisso não pôde ser agendado!";
+		$_SESSION["mensagem"]="O compromisso nao pode ser agendado!";
 		$acao="entrar";
 	}	
 }	
 ?>
-<html>
+<!DOCTYPE html>
+<html lang="pt-BR">
 <head>
-<title>CyberManager</title>
-<meta http-equiv="Content-Type" content="text/html; UTF-8">
-<link href="style.css" rel="stylesheet" type="text/css">
+<title>Agenda - ERP System</title>
+<meta charset="ISO-8859-1">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link href="style.css" rel="stylesheet" type="text/css">
 <link href="components.css" rel="stylesheet" type="text/css">
+<link href="layout-fixes.css" rel="stylesheet" type="text/css">
 <script src="scripts.js"></script>
 <script src="mascaras.js"></script>
 <script>
-<!--
 function verifica(cadastro){
 	if(cadastro.nome[cadastro.nome.selectedIndex].value==''){
 		alert("Informe o Nome");
 		cadastro.nome.focus();
 		return false;
 	}
-	if (cadastro.data.value == ""){
-		alert("Informe a Data");
-		cadastro.data.focus();
+	if (cadastro.dias.value == ""){
+		alert("Informe os Dias");
+		cadastro.dias.focus();
 		return(false);
     }	
 	if (cadastro.hora.value.length != 8){
-		alert("Hora Inválida");
+		alert("Hora Invalida");
 		cadastro.hora.focus();
 		return(false);
     }
@@ -55,104 +58,100 @@ function verifica(cadastro){
 		return(false);
     }	
 	if (cadastro.titulo.value == ""){
-		alert("Informe o Título");
+		alert("Informe o Titulo");
 		cadastro.titulo.focus();
 		return(false);
     }	
 	if (cadastro.texto.value == ""){
-		alert("Informe a Descrição do Compromisso");
+		alert("Informe a Descricao do Compromisso");
 		cadastro.texto.focus();
 		return(false);
     }					
 	return(true);
 }
-
-function MM_openBrWindow(theURL,winName,features) { //v2.0
-  window.open(theURL,winName,features);
-}
-//-->
 </script>
-<style type="text/css">
-<!--
-.style1 {font-size: 14px}
--->
-</style>
 </head>
-<body background="imagens/mdagua.gif" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" onLoad="enterativa=1;"onkeypress="return ent()">
-<table width="594" border="0" cellpadding="0" cellspacing="0">
-  <tr>
-    <td align="left" valign="top"><table width="590" border="0" cellpadding="0" cellspacing="0" class="texto">
-      <tr>
-        <td width="27" align="center"><div align="left"><a href="#" onClick="MM_openBrWindow('help/mini_estudo_capabi.html','','width=680,height=501')"><img src="imagens/icon14_ahn.gif" width="14" height="14" border="0" onMouseOver="this.T_STICKY=true; this.T_TITLE='Estudo de Capabilidade'; this.T_DELAY=10; this.T_WIDTH=225;  return escape('<strong>Caracter&iacute;stica - </strong>Caracter&iacute;stica da pe&ccedil;a a ser estudada.<br><strong>Especifica&ccedil;&atilde;o - </strong>Forma ou medida para ser seguida.<br><strong>Realizado por - </strong>Nome do respons&aacute;vel pelo estudo de R&R.<br><strong>Opera&ccedil;&atilde;o - </strong>Opera&ccedil;&atilde;o da manufatura na qual a especifica&ccedil;&atilde;o de engenharia &eacute; originada.')"></a><span class="impTextoBold">&nbsp;</span></div></td>
-        <td width="563" align="right"><div align="left" class="textobold style1 style1 style1 style1">Agenda</div></td>
-      </tr>
-      <tr>
-        <td align="center">&nbsp;</td>
-        <td align="right">&nbsp;</td>
-      </tr>
-    </table></td>
-  </tr>
-  <tr> 
-    <td align="left" valign="top"><form action="" onSubmit="return verifica(this)" method="post" name="form1" >
-        <table width="400" border="0" cellpadding="0" cellspacing="0">
-          <tr> 
-            <td height="16" class="textobold">Agendar compromisso para</td>
-          </tr>
-          <tr> 
-            <td height="16" class="textobold"> <select name="nome" class="formularioselect" id="select3">
-                <option value="" selected>Selecione</option>
-                <?
-							$sql=mysql_query("SELECT clientes.id AS cliente,clientes.nome AS nome FROM clientes,cliente_login,niveis WHERE clientes.id=cliente_login.cliente AND cliente_login.nivel=niveis.id AND niveis.tipo='F' ORDER BY clientes.nome ASC");
-							while($res=mysql_fetch_array($sql)){
-								$nome=$res["nome"];
-						   	    $ray=explode(" ",$nome);
- 	                            $nome=$ray[0];
-							?>
-                <option value="<? print($nome); ?>"><? print($nome); ?></option>
-                <? } ?>
-              </select></td>
-          </tr>
-          <tr> 
-            <td width="302" height="16" class="textobold">Dias</td>
-          </tr>
-          <tr> 
-            <td><span class="textobold">
-              <input name="dias" type="text" class="formulario" id="dias" size="8" maxlength="8">
-            </span></td>
-          </tr>
-          <tr> 
-            <td class="textobold">Hora (hh:mm:ss)</td>
-          </tr>
-          <tr> 
-            <td class="textobold"><input name="hora" type="text" class="formulario" id="hora" onKeyUp="mhora(this)" value="00:00:00" size="8" maxlength="8">
-              <input name="acao" type="hidden" id="acao" value="ok">
-              <input name="cli" type="hidden" id="acao2" value="<? print $cli; ?>"></td>
-          </tr>
-          <tr> 
-            <td class="texto"><span class="textobold">T&iacute;tulo</span> <span class="texto">(m&aacute;ximo 
-              30 caracteres)</span></td>
-          </tr>
-          <tr> 
-            <td><input name="titulo" type="text" class="formularioselect" id="titulo" size="50" maxlength="30"></td>
-          </tr>
-          <tr> 
-            <td class="textobold">Descri&ccedil;&atilde;o do Compromisso</td>
-          </tr>
-          <tr> 
-            <td><textarea name="texto" cols="70" rows="6" wrap="VIRTUAL" class="formularioselect" id="textarea2" onFocus="enterativa=0;" onBlur="enterativa=1;"></textarea></td>
-          </tr>
-          <tr> 
-            <td align="center">&nbsp;</td>
-          </tr>
-          <tr> 
-            <td align="center"><span class="textobold">
-              <input name="Submit2" type="submit" class="microtxt" value="Continuar">
-            </span></td>
-          </tr>
-        </table>
-      </form></td>
-  </tr>
-</table>
+
+<body style="background:#f8f9fa;padding:24px;">
+
+<div class="erp-container-fluid">
+    <div class="erp-card">
+        <div class="erp-card-header">
+            <h1 class="erp-card-title"><i class="fas fa-calendar-alt"></i> Agenda</h1>
+        </div>
+    </div>
+    
+    <?php if(isset($_SESSION["mensagem"])): ?>
+    <div class="erp-alert erp-alert-success">
+        <?php echo $_SESSION["mensagem"]; unset($_SESSION["mensagem"]); ?>
+    </div>
+    <?php endif; ?>
+    
+    <div class="erp-card">
+        <h3 style="margin-bottom:20px;font-size:18px;color:#2c3e50;">
+            <i class="fas fa-plus"></i> Agendar Compromisso
+        </h3>
+        <form action="" onsubmit="return verifica(this)" method="post" name="form1">
+            <div class="erp-row">
+                <div class="erp-col">
+                    <div class="erp-form-group">
+                        <label class="erp-form-label">Agendar compromisso para</label>
+                        <select name="nome" class="erp-form-control">
+                            <option value="">Selecione</option>
+                            <?php
+                            $sql=mysql_query("SELECT clientes.id AS cliente,clientes.nome AS nome FROM clientes,cliente_login,niveis WHERE clientes.id=cliente_login.cliente AND cliente_login.nivel=niveis.id AND niveis.tipo='F' ORDER BY clientes.nome ASC");
+                            while($res=mysql_fetch_array($sql)){
+                                $nome=$res["nome"];
+                                $ray=explode(" ",$nome);
+                                $nome=$ray[0];
+                            ?>
+                            <option value="<?php echo $nome; ?>"><?php echo $nome; ?></option>
+                            <?php } ?>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="erp-row">
+                <div class="erp-col" style="max-width:150px;">
+                    <div class="erp-form-group">
+                        <label class="erp-form-label">Dias</label>
+                        <input name="dias" type="text" class="erp-form-control" maxlength="8">
+                    </div>
+                </div>
+                <div class="erp-col" style="max-width:150px;">
+                    <div class="erp-form-group">
+                        <label class="erp-form-label">Hora (hh:mm:ss)</label>
+                        <input name="hora" type="text" class="erp-form-control" onKeyUp="mhora(this)" value="00:00:00" maxlength="8">
+                    </div>
+                </div>
+            </div>
+            <div class="erp-row">
+                <div class="erp-col">
+                    <div class="erp-form-group">
+                        <label class="erp-form-label">Titulo (maximo 30 caracteres)</label>
+                        <input name="titulo" type="text" class="erp-form-control" maxlength="30">
+                    </div>
+                </div>
+            </div>
+            <div class="erp-row">
+                <div class="erp-col">
+                    <div class="erp-form-group">
+                        <label class="erp-form-label">Descricao do Compromisso</label>
+                        <textarea name="texto" class="erp-form-control" rows="6"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div style="margin-top:20px;">
+                <input name="acao" type="hidden" value="ok">
+                <input name="cli" type="hidden" value="<?php echo $cli; ?>">
+                <button type="submit" class="erp-btn erp-btn-primary">
+                    <i class="fas fa-check"></i> Salvar
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<?php include("mensagem.php"); ?>
 </body>
 </html>
-<? include("mensagem.php"); ?>

@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 include("seguranca.php");
 
@@ -23,7 +23,7 @@ $ate=date("Y-m-d",mktime(0,0,0,date("m"),date("d")-$bdias,date("Y")));
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<title>Lancamentos Banca¡rios - ERP System</title>
+<title>Lancamentos Bancarios - ERP System</title>
 <meta charset="ISO-8859-1">
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -36,7 +36,7 @@ $ate=date("Y-m-d",mktime(0,0,0,date("m"),date("d")-$bdias,date("Y")));
 <script>
 function verifica(cad){
 	if(!verifica_data(cad.data.value)){
-		alert('Data inva¡lida');
+		alert('Data invalida');
 		cad.data.focus();
 		return false;
 	}
@@ -51,7 +51,7 @@ function verifica(cad){
 		return false;
 	}
 	if(cad.hist.value==''){
-		alert('Informe o hista³rico');
+		alert('Informe o historico');
 		cad.hist.focus();
 		return false;
 	}
@@ -67,31 +67,31 @@ function verifica(cad){
     <div class="erp-card">
         <div class="erp-card-header">
             <div>
-                <h1 class="erp-card-title" style="margin-bottom:4px;">ð° Lancamentos Banca¡rios</h1>
-                <div style="font-size:13px;color:#6c757d;">Conta: <strong><?=$bank?></strong></div>
+                <h1 class="erp-card-title" style="margin-bottom:4px;"><i class="fas fa-exchange-alt"></i> Lancamentos Bancarios</h1>
+                <div style="font-size:13px;color:#6c757d;">Conta: <strong><?php echo $bank; ?></strong></div>
             </div>
             <div style="display:flex;gap:12px;align-items:center;">
                 <div style="text-align:right;">
                     <div style="font-size:12px;color:#6c757d;">Saldo Atual</div>
-                    <div style="font-size:20px;font-weight:700;color:<?=$res["saldo"]>=0?'#27AE60':'#E74C3C'?>">R$ <?=$sld?></div>
+                    <div style="font-size:20px;font-weight:700;color:<?php echo ($res["saldo"]>=0) ? '#27AE60' : '#E74C3C'; ?>">R$ <?php echo $sld; ?></div>
                 </div>
                 <div style="text-align:right;padding-left:16px;border-left:1px solid #e8ebf3;">
                     <div style="font-size:12px;color:#6c757d;">Saldo + Limite</div>
-                    <div style="font-size:20px;font-weight:700;color:#4169E1;">R$ <?=$sld2?></div>
+                    <div style="font-size:20px;font-weight:700;color:#4169E1;">R$ <?php echo $sld2; ?></div>
                 </div>
             </div>
         </div>
     </div>
     
-    <!-- Formula¡rio de Lancamento -->
+    <!-- Formulario de Lancamento -->
     <div class="erp-card">
-        <h3 style="margin-bottom:20px;font-size:16px;color:#2c3e50;">â Novo Lancamento</h3>
+        <h3 style="margin-bottom:20px;font-size:16px;color:#2c3e50;"><i class="fas fa-plus-circle"></i> Novo Lancamento</h3>
         <form name="form1" method="post" action="bancos_sql.php?acao=lanc" onSubmit="return verifica(this)">
             <div class="erp-row">
                 <div class="erp-col" style="flex:2;">
                     <div class="erp-form-group">
                         <label class="erp-form-label">Banco / Conta</label>
-                        <input type="text" class="erp-form-control" value="<?=$bank?>" readonly style="background:#f8f9fa;">
+                        <input type="text" class="erp-form-control" value="<?php echo $bank; ?>" readonly style="background:#f8f9fa;">
                     </div>
                 </div>
                 <div class="erp-col">
@@ -125,12 +125,12 @@ function verifica(cad){
                 <div class="erp-col" style="flex:1;">
                     <div class="erp-form-group">
                         <label class="erp-form-label">Documento</label>
-                        <input name="documento" type="text" class="erp-form-control" maxlength="25" placeholder="NÂº do cheque, boleto, etc">
+                        <input name="documento" type="text" class="erp-form-control" maxlength="25" placeholder="No do cheque, boleto, etc">
                     </div>
                 </div>
                 <div class="erp-col" style="flex:3;">
                     <div class="erp-form-group">
-                        <label class="erp-form-label">Hista³rico</label>
+                        <label class="erp-form-label">Historico</label>
                         <input name="hist" type="text" class="erp-form-control" maxlength="40" placeholder="Descricao do lancamento">
                     </div>
                 </div>
@@ -144,7 +144,7 @@ function verifica(cad){
                             </label>
                             <label style="display:flex;align-items:center;gap:6px;cursor:pointer;">
                                 <input type="radio" name="tipo" value="S" style="width:18px;height:18px;">
-                                <span style="font-weight:500;color:#E74C3C;">Saa­da</span>
+                                <span style="font-weight:500;color:#E74C3C;">Saida</span>
                             </label>
                         </div>
                     </div>
@@ -152,7 +152,7 @@ function verifica(cad){
                 <div class="erp-col" style="flex:0 0 auto;display:flex;align-items:flex-end;">
                     <div class="erp-form-group" style="margin-bottom:0;">
                         <button type="submit" class="erp-btn erp-btn-success" style="height:42px;padding:0 32px;">
-                            â Lancar
+                            <i class="fas fa-check"></i> Lancar
                         </button>
                     </div>
                 </div>
@@ -160,34 +160,34 @@ function verifica(cad){
         </form>
     </div>
     
-    <!-- Filtro de Pera­odo -->
+    <!-- Filtro de Periodo -->
     <div class="erp-card">
         <form method="get" style="display:flex;align-items:center;gap:16px;">
-            <label class="erp-form-label" style="margin:0;">Exibir lancamentos dos aºltimos</label>
+            <label class="erp-form-label" style="margin:0;">Exibir lancamentos dos ultimos</label>
             <select name="bdias" class="erp-form-control" style="width:auto;" onchange="this.form.submit()">
-                <option value="0" <?=$bdias==0?'selected':''?>>Hoje</option>
-                <option value="7" <?=$bdias==7?'selected':''?>>7 dias</option>
-                <option value="15" <?=$bdias==15?'selected':''?>>15 dias</option>
-                <option value="30" <?=$bdias==30?'selected':''?>>30 dias</option>
-                <option value="60" <?=$bdias==60?'selected':''?>>60 dias</option>
-                <option value="90" <?=$bdias==90?'selected':''?>>90 dias</option>
+                <option value="0" <?php echo ($bdias==0) ? 'selected' : ''; ?>>Hoje</option>
+                <option value="7" <?php echo ($bdias==7) ? 'selected' : ''; ?>>7 dias</option>
+                <option value="15" <?php echo ($bdias==15) ? 'selected' : ''; ?>>15 dias</option>
+                <option value="30" <?php echo ($bdias==30) ? 'selected' : ''; ?>>30 dias</option>
+                <option value="60" <?php echo ($bdias==60) ? 'selected' : ''; ?>>60 dias</option>
+                <option value="90" <?php echo ($bdias==90) ? 'selected' : ''; ?>>90 dias</option>
             </select>
         </form>
     </div>
     
-    <!-- Hista³rico de Lancamentos -->
+    <!-- Historico de Lancamentos -->
     <div class="erp-table-container">
         <table class="erp-table">
             <thead>
                 <tr>
                     <th width="80">Data</th>
                     <th width="100">Documento</th>
-                    <th>Hista³rico</th>
+                    <th>Historico</th>
                     <th width="120">Operacao</th>
                     <th width="120" class="erp-text-right">Entrada</th>
-                    <th width="120" class="erp-text-right">Saa­da</th>
+                    <th width="120" class="erp-text-right">Saida</th>
                     <th width="120" class="erp-text-right">Saldo</th>
-                    <th width="80" class="erp-text-center">Acaµes</th>
+                    <th width="80" class="erp-text-center">Acoes</th>
                 </tr>
             </thead>
             <tbody>
@@ -195,15 +195,15 @@ function verifica(cad){
             $sql=mysql_query("SELECT * FROM bancos_lan WHERE banco='$setbco' AND data>='$ate' ORDER BY data DESC, id DESC");
             
             if(mysql_num_rows($sql)==0){
-                echo '<tr><td colspan="8" class="erp-text-center" style="padding:40px;">Nenhum lancamento encontrado neste pera­odo</td></tr>';
+                echo '<tr><td colspan="8" class="erp-text-center" style="padding:40px;">Nenhum lancamento encontrado neste periodo</td></tr>';
             }else{
                 $saldo_periodo = $res["saldo"];
                 while($rlan=mysql_fetch_array($sql)){
                     ?>
                     <tr>
-                        <td><?=banco2data($rlan["data"])?></td>
-                        <td><?=$rlan["documento"]?></td>
-                        <td><?=$rlan["hist"]?></td>
+                        <td><?php echo banco2data($rlan["data"]); ?></td>
+                        <td><?php echo $rlan["documento"]; ?></td>
+                        <td><?php echo $rlan["hist"]; ?></td>
                         <td>
                             <?php
                             $sqlo=mysql_query("SELECT nome FROM operacoes WHERE id='".$rlan["operacao"]."'");
@@ -213,21 +213,21 @@ function verifica(cad){
                         </td>
                         <td class="erp-text-right">
                             <?php if($rlan["tipo"]=="E"): ?>
-                            <span style="color:#27AE60;font-weight:600;">+ R$ <?=banco2valor($rlan["valor"])?></span>
+                            <span style="color:#27AE60;font-weight:600;">+ R$ <?php echo banco2valor($rlan["valor"]); ?></span>
                             <?php endif; ?>
                         </td>
                         <td class="erp-text-right">
                             <?php if($rlan["tipo"]=="S"): ?>
-                            <span style="color:#E74C3C;font-weight:600;">- R$ <?=banco2valor($rlan["valor"])?></span>
+                            <span style="color:#E74C3C;font-weight:600;">- R$ <?php echo banco2valor($rlan["valor"]); ?></span>
                             <?php endif; ?>
                         </td>
                         <td class="erp-text-right">
-                            <strong style="color:#2c3e50;">R$ <?=banco2valor($saldo_periodo)?></strong>
+                            <strong style="color:#2c3e50;">R$ <?php echo banco2valor($saldo_periodo); ?></strong>
                         </td>
                         <td>
                             <div class="erp-table-actions" style="justify-content:center;">
-                                <a href="bancos_sql.php?acao=exc&id=<?=$rlan["id"]?>" onclick="return pergunta('Confirma exclusao?',this.href);" class="erp-table-action" style="color:#e74c3c;">
-                                    ðï¸
+                                <a href="bancos_sql.php?acao=exc&id=<?php echo $rlan["id"]; ?>" onclick="return pergunta('Confirma exclusao?',this.href);" class="erp-table-action" style="color:#e74c3c;">
+                                    <i class="fas fa-trash"></i>
                                 </a>
                             </div>
                         </td>
@@ -246,6 +246,6 @@ function verifica(cad){
     </div>
 </div>
 
-<? include("mensagem.php"); ?>
+<?php include("mensagem.php"); ?>
 </body>
 </html>

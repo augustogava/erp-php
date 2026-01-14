@@ -104,12 +104,12 @@ if($acao=="alt"){
     <div class="erp-card">
         <div class="erp-card-header">
             <h1 class="erp-card-title">
-                <?=$acao=="alt"?"âï¸ Editar":"â Novo"?> Fornecedor
+                <i class="fas fa-<?=$acao=="alt"?"edit":"plus"?>"></i> <?=$acao=="alt"?"Editar":"Novo"?> Fornecedor
                 <?=$acao=="alt"?" #".$id:""?>
             </h1>
             <div>
                 <a href="fornecedores.php" class="erp-btn erp-btn-outline">
-                    â Voltar
+                    <i class="fas fa-arrow-left"></i> Voltar
                 </a>
             </div>
         </div>
@@ -126,7 +126,7 @@ if($acao=="alt"){
         <input type="hidden" name="loja" value="<?=$loja?>">
         
         <div class="erp-card">
-            <h3 style="margin-bottom:20px;font-size:18px;color:#2c3e50;">ð Dados Principais</h3>
+            <h3 style="margin-bottom:20px;font-size:18px;color:#2c3e50;"><i class="fas fa-building"></i> Dados Principais</h3>
             <div class="erp-row">
                 <div class="erp-col" style="flex:3;">
                     <div class="erp-form-group">
@@ -147,8 +147,8 @@ if($acao=="alt"){
                     <div class="erp-form-group">
                         <label class="erp-form-label">Tipo</label>
                         <select name="tipo" class="erp-form-control">
-                            <option value="J" <?=$tipo=="J"?"selected":""?>>Jura­dica</option>
-                            <option value="F" <?=$tipo=="F"?"selected":""?>>Fa­sica</option>
+                            <option value="J" <?=$tipo=="J"?"selected":""?>>Juridica</option>
+                            <option value="F" <?=$tipo=="F"?"selected":""?>>Fisica</option>
                         </select>
                     </div>
                 </div>
@@ -180,7 +180,7 @@ if($acao=="alt"){
         </div>
         
         <div class="erp-card">
-            <h3 style="margin-bottom:20px;font-size:18px;color:#2c3e50;">ð Endereco</h3>
+            <h3 style="margin-bottom:20px;font-size:18px;color:#2c3e50;"><i class="fas fa-map-marker-alt"></i> Endereco</h3>
             <div class="erp-row">
                 <div class="erp-col" style="flex:1;">
                     <div class="erp-form-group">
@@ -219,7 +219,7 @@ if($acao=="alt"){
         </div>
         
         <div class="erp-card">
-            <h3 style="margin-bottom:20px;font-size:18px;color:#2c3e50;">ð Contato</h3>
+            <h3 style="margin-bottom:20px;font-size:18px;color:#2c3e50;"><i class="fas fa-phone"></i> Contato</h3>
             <div class="erp-row">
                 <div class="erp-col">
                     <div class="erp-form-group">
@@ -270,7 +270,7 @@ if($acao=="alt"){
         </div>
         
         <div class="erp-card">
-            <h3 style="margin-bottom:20px;font-size:18px;color:#2c3e50;">âï¸ Configuracaµes</h3>
+            <h3 style="margin-bottom:20px;font-size:18px;color:#2c3e50;"><i class="fas fa-cog"></i> Configuracoes</h3>
             <div class="erp-row">
                 <div class="erp-col">
                     <div class="erp-form-group">
@@ -287,7 +287,7 @@ if($acao=="alt"){
         <div style="display:flex;gap:12px;justify-content:flex-end;margin-top:24px;">
             <a href="fornecedores.php" class="erp-btn erp-btn-secondary">Cancelar</a>
             <button type="submit" name="acao" value="<?=$acao=="alt"?"alterar":"incluir"?>" class="erp-btn erp-btn-success">
-                â <?=$acao=="alt"?"Salvar Alteracaµes":"Cadastrar Fornecedor"?>
+                <i class="fas fa-check"></i> <?=$acao=="alt"?"Salvar Alteracoes":"Cadastrar Fornecedor"?>
             </button>
         </div>
     </form>

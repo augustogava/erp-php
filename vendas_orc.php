@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 include("seguranca.php");
 
@@ -15,7 +15,7 @@ if($acao=="canc"){
 	$hora=hora();
 	
 	$motivos = array(
-		1 => "Concorraªncia",
+		1 => "Concorrencia",
 		2 => "Investimento futuro",
 		3 => "Prazo",
 		4 => "Qualidade",
@@ -90,17 +90,17 @@ if($acao=="listar"){
 <div class="erp-container-fluid">
     <div class="erp-card">
         <div class="erp-card-header">
-            <h1 class="erp-card-title">ð Orcamentos de Vendas</h1>
+            <h1 class="erp-card-title"><i class="fas fa-file-invoice-dollar"></i> Orcamentos de Vendas</h1>
             <div>
                 <a href="vendas_orca.php?acao=inc" class="erp-btn erp-btn-primary">
-                    â Novo Orcamento
+                    <i class="fas fa-plus"></i> Novo Orcamento
                 </a>
             </div>
         </div>
     </div>
     
     <?php if(isset($_SESSION["mensagem"])): ?>
-    <div class="erp-alert erp-alert-<?=strpos($_SESSION["mensagem"],'sucesso')!==false?'success':'danger'?>">
+    <div class="erp-alert erp-alert-<?php echo (strpos($_SESSION["mensagem"],'sucesso')!==false) ? 'success' : 'danger'; ?>">
         <?php echo $_SESSION["mensagem"]; unset($_SESSION["mensagem"]); ?>
     </div>
     <?php endif; ?>
@@ -113,25 +113,25 @@ if($acao=="listar"){
                 <div class="erp-col">
                     <div class="erp-form-group">
                         <label class="erp-form-label">Data Inicial</label>
-                        <input type="text" name="bde" class="erp-form-control" value="<?=$bde?>" placeholder="DD/MM/AAAA">
+                        <input type="text" name="bde" class="erp-form-control" value="<?php echo $bde; ?>" placeholder="DD/MM/AAAA">
                     </div>
                 </div>
                 <div class="erp-col">
                     <div class="erp-form-group">
                         <label class="erp-form-label">Data Final</label>
-                        <input type="text" name="bate" class="erp-form-control" value="<?=$bate?>" placeholder="DD/MM/AAAA">
+                        <input type="text" name="bate" class="erp-form-control" value="<?php echo $bate; ?>" placeholder="DD/MM/AAAA">
                     </div>
                 </div>
                 <div class="erp-col" style="flex:2;">
                     <div class="erp-form-group">
                         <label class="erp-form-label">Cliente</label>
-                        <input type="text" name="cliente_busca" class="erp-form-control" value="<?=$cliente_busca?>" placeholder="Buscar por nome...">
+                        <input type="text" name="cliente_busca" class="erp-form-control" value="<?php echo $cliente_busca; ?>" placeholder="Buscar por nome...">
                     </div>
                 </div>
                 <div class="erp-col">
                     <div class="erp-form-group">
-                        <label class="erp-form-label">NÂº Proposta</label>
-                        <input type="text" name="proposta" class="erp-form-control" value="<?=$proposta?>">
+                        <label class="erp-form-label">No Proposta</label>
+                        <input type="text" name="proposta" class="erp-form-control" value="<?php echo $proposta; ?>">
                     </div>
                 </div>
             </div>
@@ -142,9 +142,9 @@ if($acao=="listar"){
                         <label class="erp-form-label">Status</label>
                         <select name="status" class="erp-form-control">
                             <option value="">Todos</option>
-                            <option value="1" <?=$status=="1"?"selected":""?>>Em Aberto</option>
-                            <option value="2" <?=$status=="2"?"selected":""?>>Aprovado</option>
-                            <option value="3" <?=$status=="3"?"selected":""?>>Cancelado</option>
+                            <option value="1" <?php echo ($status=="1") ? "selected" : ""; ?>>Em Aberto</option>
+                            <option value="2" <?php echo ($status=="2") ? "selected" : ""; ?>>Aprovado</option>
+                            <option value="3" <?php echo ($status=="3") ? "selected" : ""; ?>>Cancelado</option>
                         </select>
                     </div>
                 </div>
@@ -164,7 +164,7 @@ if($acao=="listar"){
                     </div>
                 </div>
                 <div class="erp-col" style="flex:0.5;display:flex;align-items:flex-end;">
-                    <button type="submit" class="erp-btn erp-btn-primary" style="width:100%;">ð Buscar</button>
+                    <button type="submit" class="erp-btn erp-btn-primary" style="width:100%;"><i class="fas fa-search"></i> Buscar</button>
                 </div>
             </div>
         </form>
@@ -175,13 +175,13 @@ if($acao=="listar"){
             <table class="erp-table">
                 <thead>
                     <tr>
-                        <th>NÂº</th>
-                        <th>Data</th>
+                        <th width="60">No</th>
+                        <th width="100">Data</th>
                         <th>Cliente</th>
-                        <th>Representante</th>
-                        <th>Valor Total</th>
-                        <th>Status</th>
-                        <th class="erp-table-actions">Acaµes</th>
+                        <th width="150">Representante</th>
+                        <th width="120" class="erp-text-right">Valor Total</th>
+                        <th width="100">Status</th>
+                        <th width="150" class="erp-text-center">Acoes</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -206,24 +206,26 @@ if($acao=="listar"){
                             $cliente_exibir = !empty($res["fantasia"]) ? $res["fantasia"] : $res["cliente_nome"];
                     ?>
                     <tr>
-                        <td><?=$res["id"]?></td>
-                        <td><?=$data_emissao?></td>
-                        <td><?=$cliente_exibir?></td>
-                        <td><?=$rep_nome?></td>
-                        <td>R$ <?=$valor_total?></td>
-                        <td><span class="erp-badge erp-badge-<?=$status_class?>"><?=$status_texto?></span></td>
-                        <td class="erp-table-actions">
-                            <a href="vendas_orca.php?acao=alt&id=<?=$res["id"]?>" class="erp-btn erp-btn-sm erp-btn-outline" title="Editar">
-                                âï¸
-                            </a>
-                            <a href="vendas_orc_imp.php?id=<?=$res["id"]?>" class="erp-btn erp-btn-sm erp-btn-outline" title="Imprimir" target="_blank">
-                                ð¨ï¸
-                            </a>
-                            <?php if($res["nivel"]=="1"): ?>
-                            <a href="#" onclick="if(confirm('Deseja cancelar este orcamento?')) window.location='vendas_orc.php?acao=canc&id=<?=$res["id"]?>&cliente=<?=$res["cliente"]?>&contato=<?=$res["contato"]?>&vendedor=<?=$res["representante"]?>&mot=5'; return false;" class="erp-btn erp-btn-sm erp-btn-danger" title="Cancelar">
-                                â
-                            </a>
-                            <?php endif; ?>
+                        <td><strong>#<?php echo $res["id"]; ?></strong></td>
+                        <td><?php echo $data_emissao; ?></td>
+                        <td><?php echo $cliente_exibir; ?></td>
+                        <td><?php echo $rep_nome; ?></td>
+                        <td class="erp-text-right"><strong>R$ <?php echo $valor_total; ?></strong></td>
+                        <td><span class="erp-badge erp-badge-<?php echo $status_class; ?>"><?php echo $status_texto; ?></span></td>
+                        <td>
+                            <div class="erp-table-actions" style="justify-content:center;">
+                                <a href="vendas_orca.php?acao=alt&id=<?php echo $res["id"]; ?>" class="erp-table-action" title="Editar">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                                <a href="vendas_orc_imp.php?id=<?php echo $res["id"]; ?>" class="erp-table-action" title="Imprimir" target="_blank">
+                                    <i class="fas fa-print"></i>
+                                </a>
+                                <?php if($res["nivel"]=="1"): ?>
+                                <a href="#" onclick="if(confirm('Deseja cancelar este orcamento?')) window.location='vendas_orc.php?acao=canc&id=<?php echo $res["id"]; ?>&cliente=<?php echo $res["cliente"]; ?>&contato=<?php echo $res["contato"]; ?>&vendedor=<?php echo $res["representante"]; ?>&mot=5'; return false;" class="erp-table-action" title="Cancelar" style="color:#e74c3c;">
+                                    <i class="fas fa-times"></i>
+                                </a>
+                                <?php endif; ?>
+                            </div>
                         </td>
                     </tr>
                     <?php
@@ -238,6 +240,6 @@ if($acao=="listar"){
     </div>
 </div>
 
-<? include("mensagem.php"); ?>
+<?php include("mensagem.php"); ?>
 </body>
 </html>

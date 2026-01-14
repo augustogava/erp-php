@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 include("seguranca.php");
 $acao=verifi($permi,$acao);
@@ -13,11 +13,17 @@ if($acao=="alt"){
 	$res=mysql_fetch_array($sql);
 }
 ?>
-<html>
+<!DOCTYPE html>
+<html lang="pt-BR">
 <head>
-<title>CyberManager</title>
-<meta http-equiv="Content-Type" content="text/html; UTF-8">
+<title>E-Categorias - ERP System</title>
+<meta charset="ISO-8859-1">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <link href="style.css" rel="stylesheet" type="text/css">
+<link href="components.css" rel="stylesheet" type="text/css">
+<link href="layout-fixes.css" rel="stylesheet" type="text/css">
 <script src="scripts.js"></script>
 <script>
 function verifica(cad){
@@ -30,154 +36,178 @@ function verifica(cad){
 }
 </script>
 </head>
-<body background="imagens/mdagua.gif" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" onLoad="enterativa=1;"onkeypress="return ent()">
-<table width="594" border="0" cellpadding="0" cellspacing="0">
-  <tr>
-    <td align="left" valign="top"><table width="590" border="0" cellpadding="0" cellspacing="0" class="texto">
-      <tr>
-        <td width="27" align="center"><div align="left"><a href="#" onClick="MM_openBrWindow('help/mini_estudo_capabi.html','','width=680,height=501')"><img src="imagens/icon14_ahn.gif" width="14" height="14" border="0" onMouseOver="this.T_STICKY=true; this.T_TITLE='Estudo de Capabilidade'; this.T_DELAY=10; this.T_WIDTH=225;  return escape('<strong>Caracter&iacute;stica - </strong>Caracter&iacute;stica da pe&ccedil;a a ser estudada.<br><strong>Especifica&ccedil;&atilde;o - </strong>Forma ou medida para ser seguida.<br><strong>Realizado por - </strong>Nome do respons&aacute;vel pelo estudo de R&R.<br><strong>Opera&ccedil;&atilde;o - </strong>Opera&ccedil;&atilde;o da manufatura na qual a especifica&ccedil;&atilde;o de engenharia &eacute; originada.')"></a><span class="impTextoBold">&nbsp;</span></div></td>
-        <td width="563" align="right"><div align="left" class="titulos">E-Categorias</div></td>
-      </tr>
-      <tr>
-        <td align="center">&nbsp;</td>
-        <td align="right">&nbsp;</td>
-      </tr>
-    </table></td>
-  </tr>
-  <tr> 
-    <td align="left" valign="top"><table width="594" border="0" cellpadding="0" cellspacing="0">
-      <? if($acao=="entrar"){ ?>
-      <tr>
-        <td align="left" valign="top"><table width="500" border="0" cellspacing="0" cellpadding="0">
-            <tr>
-              <td class="textoNegrito">
-                <div align="center"><a href="prodserv_cat.php?acao=inc" class="textobold">Incluir uma Categoria</a></div></td>
-            </tr>
-          </table>
-            <table width="500" border="0" cellpadding="0" cellspacing="1" bgcolor="#003366">
-              <tr bgcolor="#FFFFFF">
-                <td colspan="3" align="center" bgcolor="#003366" class="textoboldbranco">Listagem das Categorias</td>
-              </tr>
-              <?
-function lista($idpai){
-	$sql=mysql_query("SELECT * FROM prodserv_cat WHERE idpai='$idpai' ORDER BY codigo ASC");
-	if(mysql_num_rows($sql)!=0){
-		while($res=mysql_fetch_array($sql)){
-			$sql2=mysql_query("SELECT * FROM prodserv_cat WHERE idpai='$res[id]' ORDER BY texto ASC");
-			$widpai=$res["id"];
-			$esp=0;
-			while($widpai!=0){
-				$sql3=mysql_query("SELECT idpai FROM prodserv_cat WHERE id='$widpai'");
-				$res3=mysql_fetch_array($sql3);
-				$widpai=$res3["idpai"];
-				if($widpai!=0) $esp++;
-			}
-			$esps=str_repeat("&nbsp;", $esp*4);
-			//aki
-        print"
-		<tr bgcolor=\"#FFFFFF\" class=\"texto\" onMouseover=\"changeto('#CCCCCC')\" onMouseout=\"changeback('#FFFFFF')\"> 
-          <td width=\"406\">&nbsp;$esps$res[codigo] $res[texto]</td>
-          <td width=\"20\" align=\"center\"><a href=\"prodserv_cat.php?acao=alt&id=$res[id]\"><img src=\"imagens/icon14_alterar.gif\" alt=\"Alterar\" width=\"14\" height=\"14\" border=\"0\"></a></td>
-          <td width=\"20\" align=\"center\"><a href=\"#\" onClick=\"return pergunta('Deseja excluir esta Categoria?','prodserv_cat_sql.php?acao=exc&id=$res[id]')\"><img src=\"imagens/icon14_lixeira.gif\" alt=\"Excluir\" width=\"14\" height=\"14\" border=\"0\"></a></td>
-        </tr>
-		";
-			//aki
-			if(mysql_fetch_array($sql2)){
-				lista($res["id"]);
-			}
-		}
-	}
-}
-$sqlw=mysql_query("SELECT * FROM prodserv_cat");
-if(!mysql_num_rows($sqlw)){
-?>
-              <tr bgcolor="#FFFFFF">
-                <td colspan="3" align="center" class="textobold">NENHUM MENU CADASTRADO</td>
-              </tr>
-              <?
-	}else{
-		lista(0);
-	}
-?>
-          </table></td>
-      </tr>
-      <? }else{ ?>
-      <tr>
-        <td align="left" valign="top"><form name="form1" method="post" action="prodserv_cat_sql.php" onSubmit="return verifica(this);">
-            <table width="500" border="0" cellpadding="0" cellspacing="0">
-              <tr bgcolor="#003366">
-                <td colspan="2" align="center" class="textoboldbranco">
-                  <? if($acao=="inc"){ print"Incluir"; }else{ print"Alterar";} ?>
-              Categoria</td>
-              </tr>
-              <tr>
-                <td class="textobold">&nbsp;C&oacute;digo:</td>
-                <td class="textobold"><input name="codigo" type="text" class="formularioselect" id="texto2" value="<?= $res["codigo"]; ?>" size="10" maxlength="255"></td>
-              </tr>
-              <tr>
-                <td width="67" class="textobold">&nbsp;T&iacute;tulo:</td>
-                <td width="433" class="textobold"><input name="texto" type="text" class="formularioselect" id="texto2" value="<?= $res["texto"]; ?>" size="10" maxlength="255"></td>
-              </tr>
-              <tr>
-                <td class="textobold">&nbsp;Dentro de: </td>
-                <td class="textobold"><select name="idpai" class="formularioselect" id="idpai">
-                    <option value="0" <? if($res["idpai"]==0) print "selected"; ?>>Raiz</option>
-                    <?
-function no($idpai,$wcat){
-	$sql=mysql_query("SELECT * FROM prodserv_cat WHERE idpai='$idpai' ORDER BY texto ASC");
-	if(mysql_num_rows($sql)!=0){
-		while($res=mysql_fetch_array($sql)){
-			$sql2=mysql_query("SELECT * FROM prodserv_cat WHERE idpai='$res[id]' ORDER BY texto ASC");
-			$widpai=$res["id"];
-			$esp=0;
-			while($widpai!=0){
-				$sql3=mysql_query("SELECT idpai FROM prodserv_cat WHERE id='$widpai'");
-				$res3=mysql_fetch_array($sql3);
-				$widpai=$res3["idpai"];
-				if($widpai!=0) $esp++;
-			}
-			if($res["id"]==$wcat){
-				$selsel="selected";
-			}else{
-				$selsel="";
-			}
-			print "<option value=\"$res[id]\" $selsel>".str_repeat("&nbsp;", $esp*4)."$res[texto]</option>\n";
-			if(mysql_fetch_array($sql2)){
-				no($res["id"],$wcat);
-			}
-		}
-	}
-}
-no(0,$res["idpai"]);
-?>
-                </select></td>
-              </tr>
-              <tr>
-                <td valign="top" class="textobold">&nbsp;Ativo:</td>
-                <td class="textobold"><input name="ativo" type="radio" value="1" <? if($res["ativo"]) print "checked"; ?>>
-                  sim
-                    <input name="ativo" type="radio" value="0" <? if(!$res["ativo"]) print "checked"; ?>> 
-                  n&atilde;o </td>
-              </tr>
-              <tr>
-                <td class="textobold">&nbsp;</td>
-                <td class="textobold">&nbsp;</td>
-              </tr>
-              <tr align="center">
-                <td colspan="2" class="textobold">             
-                  <input name="Submit22" type="button" class="microtxt" value="voltar" onClick="window.location='prodserv_cat.php'">
-             <img src="imagens/dot.gif" width="20" height="5">
-                  <input name="Submit2" type="submit" class="microtxt" value="Continuar">
-                  <input name="acao" type="hidden" id="acao" value="<?= $acao; ?>">
-                  <input name="id" type="hidden" id="id3" value="<? print $id; ?>"></td>
-              </tr>
-            </table>
-        </form></td>
-        <? } ?>
-      </tr>
-    </table></td>
-  </tr>
-</table>
+
+<body style="background:#f8f9fa;padding:24px;" onLoad="enterativa=1;" onkeypress="return ent()">
+
+<div class="erp-container-fluid">
+    <div class="erp-card">
+        <div class="erp-card-header">
+            <h1 class="erp-card-title"><i class="fas fa-sitemap"></i> E-Categorias</h1>
+            <?php if($acao=="entrar"): ?>
+            <a href="prodserv_cat.php?acao=inc" class="erp-btn erp-btn-primary">
+                <i class="fas fa-plus"></i> Nova Categoria
+            </a>
+            <?php else: ?>
+            <a href="prodserv_cat.php" class="erp-btn erp-btn-outline">
+                <i class="fas fa-arrow-left"></i> Voltar
+            </a>
+            <?php endif; ?>
+        </div>
+    </div>
+    
+    <?php if(isset($_SESSION["mensagem"])): ?>
+    <div class="erp-alert erp-alert-success">
+        <?php echo $_SESSION["mensagem"]; unset($_SESSION["mensagem"]); ?>
+    </div>
+    <?php endif; ?>
+    
+    <?php if($acao=="entrar"){ ?>
+    <div class="erp-table-container">
+        <table class="erp-table">
+            <thead>
+                <tr>
+                    <th>Codigo / Nome da Categoria</th>
+                    <th width="120" class="erp-text-center">Acoes</th>
+                </tr>
+            </thead>
+            <tbody>
+            <?php
+            function lista($idpai){
+                $sql=mysql_query("SELECT * FROM prodserv_cat WHERE idpai='$idpai' ORDER BY codigo ASC");
+                if(mysql_num_rows($sql)!=0){
+                    while($res=mysql_fetch_array($sql)){
+                        $sql2=mysql_query("SELECT * FROM prodserv_cat WHERE idpai='$res[id]' ORDER BY texto ASC");
+                        $widpai=$res["id"];
+                        $esp=0;
+                        while($widpai!=0){
+                            $sql3=mysql_query("SELECT idpai FROM prodserv_cat WHERE id='$widpai'");
+                            $res3=mysql_fetch_array($sql3);
+                            $widpai=$res3["idpai"];
+                            if($widpai!=0) $esp++;
+                        }
+                        $esps=str_repeat("&nbsp;&nbsp;&nbsp;&nbsp;", $esp);
+                        $icon = ($esp > 0) ? '<i class="fas fa-level-up-alt fa-rotate-90" style="color:#ccc;margin-right:8px;"></i>' : '<i class="fas fa-folder" style="color:#f1c40f;margin-right:8px;"></i>';
+                        ?>
+                        <tr>
+                            <td><?php echo $esps . $icon . "<strong>$res[codigo]</strong> $res[texto]"; ?></td>
+                            <td>
+                                <div class="erp-table-actions" style="justify-content:center;">
+                                    <a href="prodserv_cat.php?acao=alt&id=<?php echo $res["id"]; ?>" class="erp-table-action" title="Alterar">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                    <a href="#" onclick="return pergunta('Deseja excluir esta Categoria?','prodserv_cat_sql.php?acao=exc&id=<?php echo $res["id"]; ?>');" class="erp-table-action" title="Excluir" style="color:#e74c3c;">
+                                        <i class="fas fa-trash"></i>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                        <?php
+                        if(mysql_fetch_array($sql2)){
+                            lista($res["id"]);
+                        }
+                    }
+                }
+            }
+            $sqlw=mysql_query("SELECT * FROM prodserv_cat");
+            if(!mysql_num_rows($sqlw)){
+            ?>
+                <tr>
+                    <td colspan="2" class="erp-text-center" style="padding:40px;">Nenhuma categoria cadastrada</td>
+                </tr>
+            <?php
+            }else{
+                lista(0);
+            }
+            ?>
+            </tbody>
+        </table>
+    </div>
+    <?php }else{ ?>
+    <div class="erp-card">
+        <h3 style="margin-bottom:20px;font-size:18px;color:#2c3e50;">
+            <?php if($acao=="inc"){ echo "<i class='fas fa-plus'></i> Incluir"; }else{ echo "<i class='fas fa-edit'></i> Alterar";} ?> Categoria
+        </h3>
+        <form name="form1" method="post" action="prodserv_cat_sql.php" onSubmit="return verifica(this);">
+            <div class="erp-row">
+                <div class="erp-col" style="max-width:150px;">
+                    <div class="erp-form-group">
+                        <label class="erp-form-label">Codigo</label>
+                        <input name="codigo" type="text" class="erp-form-control" value="<?php echo $res["codigo"]; ?>" maxlength="20">
+                    </div>
+                </div>
+                <div class="erp-col">
+                    <div class="erp-form-group">
+                        <label class="erp-form-label">Titulo</label>
+                        <input name="texto" type="text" class="erp-form-control" value="<?php echo $res["texto"]; ?>" maxlength="255">
+                    </div>
+                </div>
+            </div>
+            <div class="erp-row">
+                <div class="erp-col">
+                    <div class="erp-form-group">
+                        <label class="erp-form-label">Dentro de</label>
+                        <select name="idpai" class="erp-form-control">
+                            <option value="0" <?php if($res["idpai"]==0) echo "selected"; ?>>Raiz</option>
+                            <?php
+                            function no($idpai,$wcat){
+                                $sql=mysql_query("SELECT * FROM prodserv_cat WHERE idpai='$idpai' ORDER BY texto ASC");
+                                if(mysql_num_rows($sql)!=0){
+                                    while($res=mysql_fetch_array($sql)){
+                                        $sql2=mysql_query("SELECT * FROM prodserv_cat WHERE idpai='$res[id]' ORDER BY texto ASC");
+                                        $widpai=$res["id"];
+                                        $esp=0;
+                                        while($widpai!=0){
+                                            $sql3=mysql_query("SELECT idpai FROM prodserv_cat WHERE id='$widpai'");
+                                            $res3=mysql_fetch_array($sql3);
+                                            $widpai=$res3["idpai"];
+                                            if($widpai!=0) $esp++;
+                                        }
+                                        if($res["id"]==$wcat){
+                                            $selsel="selected";
+                                        }else{
+                                            $selsel="";
+                                        }
+                                        echo "<option value=\"$res[id]\" $selsel>".str_repeat("&nbsp;&nbsp;&nbsp;&nbsp;", $esp)."$res[texto]</option>\n";
+                                        if(mysql_fetch_array($sql2)){
+                                            no($res["id"],$wcat);
+                                        }
+                                    }
+                                }
+                            }
+                            no(0,$res["idpai"]);
+                            ?>
+                        </select>
+                    </div>
+                </div>
+                <div class="erp-col">
+                    <div class="erp-form-group">
+                        <label class="erp-form-label">Ativo</label>
+                        <div style="display:flex;gap:20px;margin-top:8px;">
+                            <label style="display:flex;align-items:center;gap:8px;cursor:pointer;">
+                                <input name="ativo" type="radio" value="1" <?php if($res["ativo"]) echo "checked"; ?>> Sim
+                            </label>
+                            <label style="display:flex;align-items:center;gap:8px;cursor:pointer;">
+                                <input name="ativo" type="radio" value="0" <?php if(!$res["ativo"]) echo "checked"; ?>> Nao
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div style="display:flex;gap:12px;margin-top:20px;">
+                <button type="button" class="erp-btn erp-btn-outline" onclick="window.location='prodserv_cat.php'">
+                    Voltar
+                </button>
+                <button type="submit" class="erp-btn erp-btn-primary">
+                    <i class="fas fa-check"></i> Salvar
+                </button>
+            </div>
+            <input name="acao" type="hidden" value="<?php echo $acao; ?>">
+            <input name="id" type="hidden" value="<?php echo $id; ?>">
+        </form>
+    </div>
+    <?php } ?>
+</div>
+
+<?php include("mensagem.php"); ?>
 </body>
 </html>
-<? include("mensagem.php"); ?>

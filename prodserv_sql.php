@@ -10,7 +10,7 @@ if(!empty($acao)){
 if($acao=="incluir"){
 	$sql=mysql_query("SELECT * FROM prodserv WHERE codprod='$codprod'");
 	if(mysql_num_rows($sql)){
-				$_SESSION["mensagem"]="Já existe um produto com esse código!";
+				$_SESSION["mensagem"]="Jï¿½ existe um produto com esse cï¿½digo!";
 				header("Location:prodserv.php?acao=inc");
 				exit;
 	}
@@ -53,7 +53,7 @@ if($acao=="incluir"){
 				$erros=0;
 				if($_FILES["arquivo"]["size"] > 512000){
 					$erros++;
-					$_SESSION["mensagem"].="\\nA imagem deve ter no máximo 500Kb";
+					$_SESSION["mensagem"].="\\nA imagem deve ter no mï¿½ximo 500Kb";
 				}
 				if($erros==0){
 					$arquivo="foto/$id.jpg";
@@ -63,7 +63,7 @@ if($acao=="incluir"){
 					$upa=copy($_FILES["arquivo"]["tmp_name"], $arquivo);
 					if(!$upa){
 						$pau=true;
-						$_SESSION["mensagem"].="\\nA imagem não pôde ser carregada";
+						$_SESSION["mensagem"].="\\nA imagem nï¿½o pï¿½de ser carregada";
 					}else{
 						$sql=mysql_query("UPDATE prodserv SET foto='$id.jpg' WHERE id='$id'");
 					}
@@ -72,14 +72,14 @@ if($acao=="incluir"){
 				}
 			}
 			if(!$pau){
-				$_SESSION["mensagem"]="Produto / Serviço incluído com sucesso!";
+				$_SESSION["mensagem"]="Produto / Serviï¿½o incluï¿½do com sucesso!";
 				$acao="entrar";
 			}else{
-				$_SESSION["mensagem"]="Produto / Serviço incluído com sucesso porém".$_SESSION["mensagem"];
+				$_SESSION["mensagem"]="Produto / Serviï¿½o incluï¿½do com sucesso porï¿½m".$_SESSION["mensagem"];
 				$acao="alt";
 			}
 		}else{
-			$_SESSION["mensagem"]="O Produto / Serviço não pôde ser incluído!";
+			$_SESSION["mensagem"]="O Produto / Serviï¿½o nï¿½o pï¿½de ser incluï¿½do!";
 			$acao="inc";
 		}
 }elseif($acao=="alterar"){
@@ -119,7 +119,7 @@ if($acao=="incluir"){
 			$erros=0;
 			if($_FILES["arquivo"]["size"] > 512000){
 				$erros++;
-				$_SESSION["mensagem"].="\\nA imagem deve ter no máximo 500Kb";
+				$_SESSION["mensagem"].="\\nA imagem deve ter no mï¿½ximo 500Kb";
 			}
 			if($erros==0){
 				$arquivo="foto/$id.jpg";
@@ -129,22 +129,22 @@ if($acao=="incluir"){
 				$upa=copy($_FILES["arquivo"]["tmp_name"], $arquivo);
 				if(!$upa){
 					$pau=true;
-					$_SESSION["mensagem"].="\\nA imagem não pôde ser carregada";
+					$_SESSION["mensagem"].="\\nA imagem nï¿½o pï¿½de ser carregada";
 				}else{
-					$sql=mysql_query("UPDATE prodserv SET foto='$id.jpg' WHERE id='$id'") or die("Nun foi");
+					$sql=mysql_query("UPDATE prodserv SET foto='$id.jpg' WHERE id='$id'");
 				}
 			}else{
 				$pau=true;
 			}
 		}
 		if(!$pau){
-			$_SESSION["mensagem"]="Produto / Serviço alterado com sucesso!";
+			$_SESSION["mensagem"]="Produto / Serviï¿½o alterado com sucesso!";
 		}else{
-			$_SESSION["mensagem"]="Produto / Serviço alterado com sucesso porém".$_SESSION["mensagem"];
+			$_SESSION["mensagem"]="Produto / Serviï¿½o alterado com sucesso porï¿½m".$_SESSION["mensagem"];
 			$acao="alt";
 		}
 	}else{
-		$_SESSION["mensagem"]="O Produto / Serviço não pôde ser alterado!";
+		$_SESSION["mensagem"]="O Produto / Serviï¿½o nï¿½o pï¿½de ser alterado!";
 		$acao="alt";
 	}
 	header("Location:prodserv.php?buscar=true&cat=$cat");
@@ -157,9 +157,9 @@ if($acao=="incluir"){
 			if (file_exists($arquivo)) { 
 				unlink($arquivo);
 			}
-			$_SESSION["mensagem"]="Produto / serviço excluído com sucesso!";
+			$_SESSION["mensagem"]="Produto / serviï¿½o excluï¿½do com sucesso!";
 		}else{
-			$_SESSION["mensagem"]="O produto / serviço não pôde ser excluído!";
+			$_SESSION["mensagem"]="O produto / serviï¿½o nï¿½o pï¿½de ser excluï¿½do!";
 		}		
 	}
 	$acao="entrar";
@@ -187,10 +187,10 @@ if($acao=="incluir"){
 	$sql=mysql_query("UPDATE prodserv_custo SET icms='$icms',icmsv='$icmsv',icmstv='$icmstv',ipi='$ipi',ipiv='$ipiv',ipitv='$ipitv',frete='$frete',fretev='$fretev',seguro='$seguro',segurov='$segurov',ii='$ii',di='$di',valor='$valor',qtd='$qtd',rateado='$rateado',custo='$custo' WHERE prodserv='$id'");
 	if($sql){
 		$sql=mysql_query("UPDATE prodserv SET cs='$custo' WHERE id='$id'");
-		$_SESSION["mensagem"]="Custo de aquisição alterado com sucesso!";
+		$_SESSION["mensagem"]="Custo de aquisiï¿½ï¿½o alterado com sucesso!";
 		$acao="entrar";
 	}else{
-		$_SESSION["mensagem"]="O custo de aquisição não pôde ser alterado!";
+		$_SESSION["mensagem"]="O custo de aquisiï¿½ï¿½o nï¿½o pï¿½de ser alterado!";
 		header("Location:prodserv_custo.php?id=$id");
 		exit;
 	}
@@ -206,21 +206,21 @@ if($acao=="incluir"){
 	$sql=mysql_query("UPDATE prodserv_venda SET imp='$imp',comi='$comi',marg='$marg',venda='$venda' WHERE prodserv='$id'");
 	if($sql){
 		$sql=mysql_query("UPDATE prodserv SET pv='$venda' WHERE id='$id'");
-		$_SESSION["mensagem"]="Preço de venda alterado com sucesso!";
+		$_SESSION["mensagem"]="Preï¿½o de venda alterado com sucesso!";
 		$acao="entrar";
 	}else{
-		$_SESSION["mensagem"]="O preço de venda não pôde ser alterado!";
+		$_SESSION["mensagem"]="O preï¿½o de venda nï¿½o pï¿½de ser alterado!";
 		header("Location:prodserv_venda.php?id=$id");
 		exit;
 	}	
 }elseif($acao=="ordemcan"){
 	$sql=mysql_query("DELETE FROM prodserv_ordem WHERE id='$id'");
 	if($sql){
-		$_SESSION["mensagem"]="Ordem de Produção cancelada com sucesso!";
+		$_SESSION["mensagem"]="Ordem de Produï¿½ï¿½o cancelada com sucesso!";
 		header("Location:prodserv_ordem.php");
 		exit;
 	}else{
-		$_SESSION["mensagem"]="A Ordem de Produção não pôde ser cancelada!";
+		$_SESSION["mensagem"]="A Ordem de Produï¿½ï¿½o nï¿½o pï¿½de ser cancelada!";
 		header("Location:prodserv_ordem_abre.php?acao=alt&id=$id");
 		exit;
 	}
@@ -234,15 +234,15 @@ if($acao=="incluir"){
 			$sql=mysql_query("SELECT MAX(id) AS id FROM prodserv_ordem");
 			$res=mysql_fetch_array($sql);
 			$id=$res["id"];
-			$_SESSION["mensagem"]="Ordem de Produção aberta com sucesso!";
+			$_SESSION["mensagem"]="Ordem de Produï¿½ï¿½o aberta com sucesso!";
 			$acao="ordemver";
 		}else{
-			$_SESSION["mensagem"]="A Ordem de Produção não pôde ser aberta!";
+			$_SESSION["mensagem"]="A Ordem de Produï¿½ï¿½o nï¿½o pï¿½de ser aberta!";
 			header("Location:prodserv_ordem_abre.php");
 			exit;
 		}
 	}else{
-			$_SESSION["mensagem"]="A Ordem de Produção não pôde ser aberta!\\nEste produto é virtual, verifique e tente novamente";
+			$_SESSION["mensagem"]="A Ordem de Produï¿½ï¿½o nï¿½o pï¿½de ser aberta!\\nEste produto ï¿½ virtual, verifique e tente novamente";
 			header("Location:prodserv_ordem_abre.php");
 			exit;	
 	}
@@ -251,10 +251,10 @@ if($acao=="incluir"){
 	$usuario=$_SESSION["login_nome"];
 	$sql=mysql_query("UPDATE prodserv_ordem SET qtd='$qtd',usuario='$usuario' WHERE id='$id'");
 	if($sql){
-		$_SESSION["mensagem"]="Ordem de Produção alterada com sucesso!";
+		$_SESSION["mensagem"]="Ordem de Produï¿½ï¿½o alterada com sucesso!";
 		$acao="ordemver";
 	}else{
-		$_SESSION["mensagem"]="A Ordem de Produção não pôde ser alterada!";
+		$_SESSION["mensagem"]="A Ordem de Produï¿½ï¿½o nï¿½o pï¿½de ser alterada!";
 		header("Location:prodserv_ordem_abre.php?acao=alt&id=$id");
 		exit;
 	}
@@ -271,7 +271,7 @@ if($acao=="incluir"){
 		$_SESSION["mensagem"]="Produto alterado com sucesso!";
 		$acao="entrar";
 	}else{
-		$_SESSION["mensagem"]="O produto não pôde ser alterado!";
+		$_SESSION["mensagem"]="O produto nï¿½o pï¿½de ser alterado!";
 		header("Location:prodserv_ecom.php?id=$id");
 		exit;
 	}
@@ -291,14 +291,14 @@ if($acao=="ordemver"){
 			$pqtd=$precisa[$i]["qtd"];
 			$sql=mysql_query("SELECT * FROM prodserv WHERE id='$pid' AND est>=$pqtd");
 			if(!mysql_num_rows($sql)){
-				$_SESSION["mensagem"].="\\nPorém faltam alguns produtos no estoque";
+				$_SESSION["mensagem"].="\\nPorï¿½m faltam alguns produtos no estoque";
 				$erro=true;
 				break;
 			}
 		}
 		if(!$erro){
 			$quem=$_SESSION["login_nome"];
-			$doc="OP nº $id";
+			$doc="OP nï¿½ $id";
 			for($i=0;$i<sizeof($precisa);$i++){
 				$pid=$precisa[$i]["id"];
 				$pqtd=$precisa[$i]["qtd"];
@@ -322,7 +322,7 @@ if($acao=="ordemver"){
 			$sql=mysql_query("INSERT INTO prodserv_est (prodserv,data,qtde,valor,doc,origem,tipomov,quem) VALUES ('$item',NOW(),'$qtd','$valor','$doc',2,5,'$quem')");
 			$sql=mysql_query("UPDATE prodserv SET est=est+$qtd WHERE id='$item'");
 			$sql=mysql_query("UPDATE prodserv_ordem SET sit=1 WHERE id='$id'");
-			$_SESSION["mensagem"]="Ordem de Produção finalizada com sucesso";
+			$_SESSION["mensagem"]="Ordem de Produï¿½ï¿½o finalizada com sucesso";
 			$data=urlencode(date("Y-m-d"));
 			header("Location:prodserv_ordem.php?sit=1&bde=$data&bate=$data&item=$item");
 			exit;

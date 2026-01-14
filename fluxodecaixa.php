@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 include("seguranca.php");
 
@@ -40,7 +40,7 @@ $saldo = $total_entrada - $total_saida;
 <div class="erp-container-fluid">
     <div class="erp-card">
         <div class="erp-card-header">
-            <h1 class="erp-card-title">ðµ Fluxo de Caixa</h1>
+            <h1 class="erp-card-title"><i class="fas fa-money-bill-wave"></i> Fluxo de Caixa</h1>
         </div>
     </div>
     
@@ -50,19 +50,19 @@ $saldo = $total_entrada - $total_saida;
                 <div class="erp-col">
                     <div class="erp-form-group">
                         <label class="erp-form-label">Data Inicial</label>
-                        <input name="emissao_de" type="text" class="erp-form-control" value="<?=banco2data($emissao_de)?>" maxlength="10" onKeyPress="return validanum(this, event)" onKeyUp="mdata(this)">
+                        <input name="emissao_de" type="text" class="erp-form-control" value="<?php echo banco2data($emissao_de); ?>" maxlength="10" onKeyPress="return validanum(this, event)" onKeyUp="mdata(this)">
                     </div>
                 </div>
                 <div class="erp-col">
                     <div class="erp-form-group">
                         <label class="erp-form-label">Data Final</label>
-                        <input name="emissao_ate" type="text" class="erp-form-control" value="<?=banco2data($emissao_ate)?>" maxlength="10" onKeyPress="return validanum(this, event)" onKeyUp="mdata(this)">
+                        <input name="emissao_ate" type="text" class="erp-form-control" value="<?php echo banco2data($emissao_ate); ?>" maxlength="10" onKeyPress="return validanum(this, event)" onKeyUp="mdata(this)">
                     </div>
                 </div>
                 <div class="erp-col" style="flex:0 0 auto;display:flex;align-items:flex-end;">
                     <div class="erp-form-group" style="margin-bottom:0;">
                         <button type="submit" class="erp-btn erp-btn-primary" style="height:42px;">
-                            ð Filtrar
+                            <i class="fas fa-search"></i> Filtrar
                         </button>
                     </div>
                 </div>
@@ -72,21 +72,21 @@ $saldo = $total_entrada - $total_saida;
     
     <div class="dashboard-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px;margin-bottom:24px;">
         <div class="stat-card green" style="background:linear-gradient(135deg,#27AE60,#229954);color:white;padding:32px;border-radius:12px;">
-            <div style="font-size:14px;opacity:0.9;margin-bottom:8px;">ð° Total de Entradas</div>
-            <div style="font-size:36px;font-weight:700;">R$ <?=banco2valor($total_entrada)?></div>
-            <div style="font-size:12px;opacity:0.8;">Pera­odo selecionado</div>
+            <div style="font-size:14px;opacity:0.9;margin-bottom:8px;"><i class="fas fa-arrow-circle-down"></i> Total de Entradas</div>
+            <div style="font-size:36px;font-weight:700;">R$ <?php echo banco2valor($total_entrada); ?></div>
+            <div style="font-size:12px;opacity:0.8;">Periodo selecionado</div>
         </div>
         
         <div class="stat-card red" style="background:linear-gradient(135deg,#E74C3C,#C0392B);color:white;padding:32px;border-radius:12px;">
-            <div style="font-size:14px;opacity:0.9;margin-bottom:8px;">ð³ Total de Saa­das</div>
-            <div style="font-size:36px;font-weight:700;">R$ <?=banco2valor($total_saida)?></div>
-            <div style="font-size:12px;opacity:0.8;">Pera­odo selecionado</div>
+            <div style="font-size:14px;opacity:0.9;margin-bottom:8px;"><i class="fas fa-arrow-circle-up"></i> Total de Saidas</div>
+            <div style="font-size:36px;font-weight:700;">R$ <?php echo banco2valor($total_saida); ?></div>
+            <div style="font-size:12px;opacity:0.8;">Periodo selecionado</div>
         </div>
         
-        <div class="stat-card" style="background:linear-gradient(135deg,<?=$saldo>=0?'#4169E1':'#F39C12'?>,<?=$saldo>=0?'#2E4FC7':'#E67E22'?>);color:white;padding:32px;border-radius:12px;">
-            <div style="font-size:14px;opacity:0.9;margin-bottom:8px;">ð Saldo do Pera­odo</div>
-            <div style="font-size:36px;font-weight:700;">R$ <?=banco2valor($saldo)?></div>
-            <div style="font-size:12px;opacity:0.8;"><?=$saldo>=0?'Positivo':'Negativo'?></div>
+        <div class="stat-card" style="background:linear-gradient(135deg,<?php echo ($saldo>=0) ? '#4169E1' : '#F39C12'; ?>,<?php echo ($saldo>=0) ? '#2E4FC7' : '#E67E22'; ?>);color:white;padding:32px;border-radius:12px;">
+            <div style="font-size:14px;opacity:0.9;margin-bottom:8px;"><i class="fas fa-chart-line"></i> Saldo do Periodo</div>
+            <div style="font-size:36px;font-weight:700;">R$ <?php echo banco2valor($saldo); ?></div>
+            <div style="font-size:12px;opacity:0.8;"><?php echo ($saldo>=0) ? 'Positivo' : 'Negativo'; ?></div>
         </div>
     </div>
     
@@ -94,7 +94,7 @@ $saldo = $total_entrada - $total_saida;
         <div class="erp-col">
             <div class="erp-card">
                 <div class="erp-card-header">
-                    <h3 style="font-size:16px;font-weight:600;">ð° Entradas (Contas a Receber)</h3>
+                    <h3 style="font-size:16px;font-weight:600;"><i class="fas fa-arrow-circle-down" style="color:#27AE60;"></i> Entradas (Contas a Receber)</h3>
                 </div>
                 <div class="erp-table-container" style="max-height:400px;overflow-y:auto;">
                     <table class="erp-table">
@@ -113,9 +113,9 @@ $saldo = $total_entrada - $total_saida;
                             $resn=mysql_fetch_array($sqln);
                             ?>
                             <tr>
-                                <td><?=banco2data($res["pagto"])?></td>
-                                <td><?=$resn["nome"]?></td>
-                                <td class="erp-text-right" style="color:#27AE60;font-weight:600;">R$ <?=banco2valor($res["valor"])?></td>
+                                <td><?php echo banco2data($res["pagto"]); ?></td>
+                                <td><?php echo $resn["nome"]; ?></td>
+                                <td class="erp-text-right" style="color:#27AE60;font-weight:600;">R$ <?php echo banco2valor($res["valor"]); ?></td>
                             </tr>
                             <?php
                         }
@@ -129,7 +129,7 @@ $saldo = $total_entrada - $total_saida;
         <div class="erp-col">
             <div class="erp-card">
                 <div class="erp-card-header">
-                    <h3 style="font-size:16px;font-weight:600;">ð³ Saa­das (Contas a Pagar)</h3>
+                    <h3 style="font-size:16px;font-weight:600;"><i class="fas fa-arrow-circle-up" style="color:#E74C3C;"></i> Saidas (Contas a Pagar)</h3>
                 </div>
                 <div class="erp-table-container" style="max-height:400px;overflow-y:auto;">
                     <table class="erp-table">
@@ -152,9 +152,9 @@ $saldo = $total_entrada - $total_saida;
                             $resn=mysql_fetch_array($sqln);
                             ?>
                             <tr>
-                                <td><?=banco2data($res["pagto"])?></td>
-                                <td><?=$resn["nome"]?></td>
-                                <td class="erp-text-right" style="color:#E74C3C;font-weight:600;">R$ <?=banco2valor($res["valor"])?></td>
+                                <td><?php echo banco2data($res["pagto"]); ?></td>
+                                <td><?php echo $resn["nome"]; ?></td>
+                                <td class="erp-text-right" style="color:#E74C3C;font-weight:600;">R$ <?php echo banco2valor($res["valor"]); ?></td>
                             </tr>
                             <?php
                         }
@@ -167,6 +167,6 @@ $saldo = $total_entrada - $total_saida;
     </div>
 </div>
 
-<? include("mensagem.php"); ?>
+<?php include("mensagem.php"); ?>
 </body>
 </html>

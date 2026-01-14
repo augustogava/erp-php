@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 include("seguranca.php");
 if(!empty($acao)){
@@ -14,23 +14,28 @@ if(empty($acao)){
 		$acao="alt";
 	}
 }
+$login = "";
+$senha = "";
+$per = "";
+$nivel = "";
+$sit = "";
+$prim = "";
+
 if($acao=="alt"){
 	$sql=mysql_query("SELECT * FROM cliente_login WHERE funcionario='$id'");
 	if(mysql_num_rows($sql)!=0){
 		$res=mysql_fetch_array($sql);
+		$login=$res["login"];
+		$senha=$res["senha"];
+		$per=$res["perm"];
+		$nivel=$res["nivel"];
+		$sit=$res["sit"];
+		$prim=$res["primeiro"];
 	}
-	$login=$res["login"];
-	$senha=$res["senha"];
-	$per=$res["perm"];
-	$nivel=$res["nivel"];
-	$sit=$res["sit"];
-	$prim=$res["primeiro"];
 }elseif($acao=="alterar"){
-	//Assinatura
-	$ima=stristr($_FILES["img"]["name"],".png");
-	if(!empty($img)){
+	if(!empty($img) && isset($_FILES["img"])){
 		if($_FILES["img"]["type"]!="image/x-png"){
-			$_SESSION["mensagem"]="\\nA imagem deve ter extensão .png";
+			$_SESSION["mensagem"]="A imagem deve ter extensao .png";
 			header("Location:funcionario_login.php?id=$id");
 			exit;	
 		}else{
@@ -40,11 +45,10 @@ if($acao=="alt"){
 			$arquivo="$patch/assinaturas/$nomeid.png";
 			copy($img, "$arquivo");
 			$sql=mysql_query("UPDATE cliente_login SET assinatura='$nomeid' WHERE funcionario='$id'");
-		//fim
 		}
 	}
 	if(strlen($senha)<6){
-		$_SESSION["mensagem"]="A senha deve ter mais de 6 Dígitos!";		
+		$_SESSION["mensagem"]="A senha deve ter mais de 6 Digitos!";		
 		header("Location:funcionario_login.php?acao=inc&id=$id");
 		exit;		
 	}else{
@@ -54,14 +58,15 @@ if($acao=="alt"){
 			header("Location:funcionarios.php");
 			exit;				
 		}else{
-			$_SESSION["mensagem"]="O cadastro de login não pôde ser alterado!";
+			$_SESSION["mensagem"]="O cadastro de login nao pode ser alterado!";
 			$acao="alt";
 		}	
 	}
 }elseif($acao=="incluir"){
-	if(!empty($img)){
+	$nomeid = 0;
+	if(!empty($img) && isset($_FILES["img"])){
 		if($_FILES["img"]["type"]!="image/x-png"){
-			$_SESSION["mensagem"]="\\nA imagem deve ter extensão .png";
+			$_SESSION["mensagem"]="A imagem deve ter extensao .png";
 			header("Location:funcionario_login.php?acao=inc&id=$id");
 			exit;	
 		}else{
@@ -70,11 +75,10 @@ if($acao=="alt"){
 			$nomeid=$res["assinatura"]+1;
 			$arquivo="$patch/assinaturas/$nomeid.png";
 			copy($img, "$arquivo");
-		//fim
 		}
 	}
 	if(strlen($senha)<6){
-		$_SESSION["mensagem"]="A senha deve ter mais de 6 Dígitos!";		
+		$_SESSION["mensagem"]="A senha deve ter mais de 6 Digitos!";		
 		header("Location:funcionario_login.php?acao=inc&id=$id");
 		exit;		
 	}else{
@@ -82,32 +86,38 @@ if($acao=="alt"){
 		if(!mysql_num_rows($sql)){
 			$sql=mysql_query("INSERT INTO cliente_login (funcionario,login,senha,nivel,sit,assinatura,primeiro,perm) VALUES ('$id','$login','$senha','$nivel','$sit','$nomeid','$primeiro','$porra')");
 		}else{
-			$_SESSION["mensagem"]="Usuário já existe!";		
+			$_SESSION["mensagem"]="Usuario ja existe!";		
 			header("Location:funcionario_login.php?id=$id");
 			exit;		
 		}
 		if($sql){
-			$_SESSION["mensagem"]="Cadastro de login concluído!";
+			$_SESSION["mensagem"]="Cadastro de login concluido!";
 			header("Location:funcionarios.php");
 			exit;				
 		}else{
-			$_SESSION["mensagem"]="O cadastro de login não pôde ser concluído!";
+			$_SESSION["mensagem"]="O cadastro de login nao pode ser concluido!";
 			$acao="inc";
 		}	
 	}
 }
 ?>
-<html>
+<!DOCTYPE html>
+<html lang="pt-BR">
 <head>
-<title>CyberManager</title>
-<meta http-equiv="Content-Type" content="text/html; UTF-8">
-<link href="style.css" rel="stylesheet" type="text/css">
+<title>Cadastro de Funcionarios - Login - ERP System</title>
+<meta charset="ISO-8859-1">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link href="style.css" rel="stylesheet" type="text/css">
 <link href="components.css" rel="stylesheet" type="text/css">
+<link href="layout-fixes.css" rel="stylesheet" type="text/css">
+<script src="scripts.js"></script>
+<script src="mascaras.js"></script>
 <script>
 function verifica(cad){
 	if(cad.login.value==''){
-		alert('Informe o nome de Usuário');
+		alert('Informe o nome de Usuario');
 		cad.login.focus();
 		return false;
 	}
@@ -118,7 +128,7 @@ function verifica(cad){
 			return false;
 		}
 		if(cad.senha2.value!=cad.senha.value){
-			alert('A senha e a confirmação não conferem');
+			alert('A senha e a confirmacao nao conferem');
 			cad.senha2.value='';
 			cad.senha2.focus();
 			return false;
@@ -131,105 +141,126 @@ function verifica(cad){
 	return true;
 }
 </script>
-<script src="scripts.js"></script>
-<style type="text/css">
-<!--
-.style1 {font-size: 14px}
--->
-</style>
 </head>
-<body  leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" onLoad="enterativa=1;"onkeypress="return ent()">
-<table width="594" border="0" cellpadding="0" cellspacing="0">
-  <tr> 
-    <td><form name="form1" method="post" action="" onSubmit="return verifica(this)" enctype="multipart/form-data">
-        <table width="450" border="0" cellpadding="0" cellspacing="0">
-          <tr bgcolor="#FFFFFF"> 
-            <td colspan="2" align="center" class="titulos"><table width="591" border="0" cellpadding="0" cellspacing="0" class="texto">
-              <tr>
-                <td width="27" align="center" bgcolor="#FFFFFF"><div align="left"><img src="imagens/icon14_ahn.gif" width="14" height="14" onMouseOver="this.T_TITLE='Campos Preenchimentos obrigatorio'; this.T_DELAY=10; this.T_WIDTH=225;  return escape('Nome: Entre com nome<br>Nascimento: xx/xx/xxxx<br>RG: xx.xxx.xxx-x<br>Cart. Profissional: xxxxx<br>Admiss&atilde;o: xx/xx/xxxx<br>Cargo: Escolha um item na lista')"><span class="impTextoBold">&nbsp;</span></div></td>
-                <td width="564" align="right" bgcolor="#FFFFFF"><div align="left" class="titulos">Cadastro de funcion&aacute;rios- Login</div></td>
-              </tr>
-              <tr>
-                <td align="center" bgcolor="#FFFFFF">&nbsp;</td>
-                <td align="right" bgcolor="#FFFFFF">&nbsp;</td>
-              </tr>
-            </table></td>
-          </tr>
-          <tr class="textobold"> 
-            <td width="94">&nbsp;Usu&aacute;rio:</td>
-            <td width="353">
-<input name="login" type="text" class="formulario" id="login" value="<? print $login; ?>" size="50" maxlength="50" ></td>
-          </tr>
-          <tr class="textobold"> 
-            <td>&nbsp;Senha:</td>
-            <td>
-<input name="senha" type="password" class="formulario" id="senha" value="<?= $senha; ?>" size="20" maxlength="20"></td>
-          </tr>
-          <tr class="textobold"> 
-            <td>&nbsp;Conf.&nbsp;Senha:</td>
-            <td>
-<input name="senha2" type="password" class="formulario" id="senha2" value="<?= $senha; ?>" size="20" maxlength="20"></td>
-          </tr>
-          <tr class="textobold"> 
-            <td>&nbsp;N&iacute;vel:</td>
-            <td>
-<select name="nivel" class="formulario" id="nivel">
-                <?
-				$sql=mysql_query("SELECT * FROM niveis WHERE nome<>'cliente' and nome<>'clientes' ORDER BY nome ASC");
-				while($resniv=mysql_fetch_array($sql)){
-				?>
-				<option value="<? print $resniv["id"]; ?>"<? if($resniv["id"]==$nivel) print "selected"; ?>><? print $resniv["nome"]; ?></option>
-				<?
-				}
-				?>
-              </select> <font face="Verdana, Arial, Helvetica, sans-serif" size="1" color="#000066"> 
-              <input name="id" type="hidden" id="id" value="<? print $id; ?>">
-              <input name="acao" type="hidden" id="acao" value="<? if($acao=="inc"){ print "incluir"; }else{ print "alterar"; } ?>">
-              </font></td>
-          </tr>
-          <tr class="textobold">
-            <td>&nbsp;Permiss&atilde;o:</td>
-            <td><select name="porra" class="textobold" id="porra">
-                <option>Selecione</option>
-                <option value="4" <? if($per=="4"){ print "Selected"; } ?>>Total</option>
-                <option value="3" <? if($per=="3"){ print "Selected"; } ?>>Escrita</option>
-                <option value="2" <? if($per=="2"){ print "Selected"; } ?>>Exclus&atilde;o</option>
-                <option value="1" <? if($per=="1"){ print "Selected"; } ?>>Leitura</option>
-              </select>
-            </td>
-          </tr>
-          <tr class="textobold">
-            <td>&nbsp;Assinatura Digital:  </td>
-            <td><input name="img" type="file" class="formularioselect" id="img"></td>
-          </tr>
-          <tr class="textobold">
-            <td>&nbsp;Situa&ccedil;&atilde;o:</td>
-            <td>&nbsp;
-                <input name="sit" type="radio" value="A" <? if($sit=="A" or empty($sit)) print "checked"; ?>>
-              Ativo
-              <input type="radio" name="sit" value="I"<? if($sit=="I") print "checked"; ?>>
-              Inativo</td>
-          </tr>
-          <tr class="textobold"> 
-            <td>&nbsp;Trocar senha </td>
-            <td>&nbsp; 
-              <input name="primeiro" type="radio" value="S" <? if($prim=="S") print "checked"; ?>>
-              Sim
-              <input type="radio" name="primeiro" value="N" <? if($prim=="N") print "checked"; ?>>
-N&atilde;o</td>
-          </tr>
-          <tr class="textobold"> 
-            <td colspan="2" align="center"> 
-              <? if($acao=="alt"){ ?>
-              <input name="button12" type="button" class="microtxt" value="Voltar" onClick="window.location='funcionarios.php<? if(!empty($bcod) or!empty($bnome)) print "?webmst=cpp"; if(!empty($bcod)) print "&bcod=$bcod"; if(!empty($bnome)) print "&bnome=$bnome";?>';">
-              &nbsp;&nbsp;&nbsp;&nbsp;
-              <? } ?>
-              <input name="button122" type="submit" class="microtxt" value="Continuar"></td>
-          </tr>
-        </table>
-      </form></td>
-  </tr>
-</table>
+
+<body style="background:#f8f9fa;padding:24px;">
+
+<div class="erp-container-fluid">
+    <div class="erp-card">
+        <div class="erp-card-header">
+            <h1 class="erp-card-title"><i class="fas fa-user-lock"></i> Cadastro de Funcionarios - Login</h1>
+        </div>
+    </div>
+    
+    <?php if(isset($_SESSION["mensagem"])): ?>
+    <div class="erp-alert erp-alert-success">
+        <?php echo $_SESSION["mensagem"]; unset($_SESSION["mensagem"]); ?>
+    </div>
+    <?php endif; ?>
+    
+    <div class="erp-card">
+        <form name="form1" method="post" action="" onsubmit="return verifica(this)" enctype="multipart/form-data">
+            <div class="erp-row">
+                <div class="erp-col">
+                    <div class="erp-form-group">
+                        <label class="erp-form-label">Usuario</label>
+                        <input name="login" type="text" class="erp-form-control" value="<?php echo $login; ?>" maxlength="50">
+                    </div>
+                </div>
+            </div>
+            <div class="erp-row">
+                <div class="erp-col">
+                    <div class="erp-form-group">
+                        <label class="erp-form-label">Senha</label>
+                        <input name="senha" type="password" class="erp-form-control" value="<?php echo $senha; ?>" maxlength="20">
+                    </div>
+                </div>
+                <div class="erp-col">
+                    <div class="erp-form-group">
+                        <label class="erp-form-label">Confirmar Senha</label>
+                        <input name="senha2" type="password" class="erp-form-control" value="<?php echo $senha; ?>" maxlength="20">
+                    </div>
+                </div>
+            </div>
+            <div class="erp-row">
+                <div class="erp-col">
+                    <div class="erp-form-group">
+                        <label class="erp-form-label">Nivel</label>
+                        <select name="nivel" class="erp-form-control">
+                            <?php
+                            $sql=mysql_query("SELECT * FROM niveis WHERE nome<>'cliente' and nome<>'clientes' ORDER BY nome ASC");
+                            while($resniv=mysql_fetch_array($sql)){
+                            ?>
+                            <option value="<?php echo $resniv["id"]; ?>"<?php if($resniv["id"]==$nivel) echo " selected"; ?>><?php echo $resniv["nome"]; ?></option>
+                            <?php } ?>
+                        </select>
+                    </div>
+                </div>
+                <div class="erp-col">
+                    <div class="erp-form-group">
+                        <label class="erp-form-label">Permissao</label>
+                        <select name="porra" class="erp-form-control">
+                            <option value="">Selecione</option>
+                            <option value="4" <?php if($per=="4") echo "selected"; ?>>Total</option>
+                            <option value="3" <?php if($per=="3") echo "selected"; ?>>Escrita</option>
+                            <option value="2" <?php if($per=="2") echo "selected"; ?>>Exclusao</option>
+                            <option value="1" <?php if($per=="1") echo "selected"; ?>>Leitura</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="erp-row">
+                <div class="erp-col">
+                    <div class="erp-form-group">
+                        <label class="erp-form-label">Assinatura Digital</label>
+                        <input name="img" type="file" class="erp-form-control">
+                    </div>
+                </div>
+            </div>
+            <div class="erp-row">
+                <div class="erp-col">
+                    <div class="erp-form-group">
+                        <label class="erp-form-label">Situacao</label>
+                        <div style="display:flex;gap:20px;margin-top:8px;">
+                            <label style="display:flex;align-items:center;gap:8px;cursor:pointer;">
+                                <input name="sit" type="radio" value="A" <?php if($sit=="A" or empty($sit)) echo "checked"; ?>> Ativo
+                            </label>
+                            <label style="display:flex;align-items:center;gap:8px;cursor:pointer;">
+                                <input name="sit" type="radio" value="I" <?php if($sit=="I") echo "checked"; ?>> Inativo
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="erp-col">
+                    <div class="erp-form-group">
+                        <label class="erp-form-label">Trocar senha no primeiro acesso</label>
+                        <div style="display:flex;gap:20px;margin-top:8px;">
+                            <label style="display:flex;align-items:center;gap:8px;cursor:pointer;">
+                                <input name="primeiro" type="radio" value="S" <?php if($prim=="S") echo "checked"; ?>> Sim
+                            </label>
+                            <label style="display:flex;align-items:center;gap:8px;cursor:pointer;">
+                                <input name="primeiro" type="radio" value="N" <?php if($prim=="N") echo "checked"; ?>> Nao
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div style="display:flex;gap:12px;margin-top:20px;">
+                <?php if($acao=="alt"){ ?>
+                <button type="button" class="erp-btn erp-btn-outline" onclick="window.location='funcionarios.php<?php if(!empty($bcod) or!empty($bnome)) echo "?webmst=cpp"; if(!empty($bcod)) echo "&bcod=$bcod"; if(!empty($bnome)) echo "&bnome=$bnome";?>';">
+                    Voltar
+                </button>
+                <?php } ?>
+                <button type="submit" class="erp-btn erp-btn-primary">
+                    <i class="fas fa-check"></i> Salvar
+                </button>
+            </div>
+            <input name="id" type="hidden" value="<?php echo $id; ?>">
+            <input name="acao" type="hidden" value="<?php if($acao=="inc"){ echo "incluir"; }else{ echo "alterar"; } ?>">
+        </form>
+    </div>
+</div>
+
+<?php include("mensagem.php"); ?>
 </body>
 </html>
-<? include("mensagem.php"); ?>

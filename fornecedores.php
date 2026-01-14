@@ -25,7 +25,7 @@ if(!empty($bnome) and !empty($bcod)){
 if($acao=="exc"){
 	$sql=mysql_query("DELETE FROM fornecedores WHERE id='$id'");
 	if($sql){
-		$_SESSION["mensagem"]="Fornecedor exclua­do com sucesso!";
+		$_SESSION["mensagem"]="Fornecedor excluido com sucesso!";
 	}else{
 		$_SESSION["mensagem"]="Erro ao excluir fornecedor!";
 	}
@@ -50,7 +50,7 @@ if($acao=="exc"){
 <div class="erp-container-fluid">
     <div class="erp-card">
         <div class="erp-card-header">
-            <h1 class="erp-card-title">ð­ Fornecedores</h1>
+            <h1 class="erp-card-title"><i class="fas fa-industry"></i> Fornecedores</h1>
             <div>
                 <a href="fornecedores_geral.php?acao=inc" class="erp-btn erp-btn-primary">
                     + Novo Fornecedor
@@ -70,14 +70,14 @@ if($acao=="exc"){
                 </div>
                 <div class="erp-col">
                     <div class="erp-form-group">
-                        <label class="erp-form-label">Ca³digo</label>
+                        <label class="erp-form-label">Codigo</label>
                         <input name="bcod" type="text" class="erp-form-control" placeholder="000">
                     </div>
                 </div>
                 <div class="erp-col" style="flex:0 0 auto;display:flex;align-items:flex-end;">
                     <div class="erp-form-group" style="margin-bottom:0;">
                         <button type="submit" class="erp-btn erp-btn-primary" style="height:42px;">
-                            ð Buscar
+                            <i class="fas fa-search"></i> Buscar
                         </button>
                     </div>
                 </div>
@@ -95,11 +95,11 @@ if($acao=="exc"){
         <table class="erp-table">
             <thead>
                 <tr>
-                    <th width="60">Ca³d</th>
+                    <th width="60">Cod</th>
                     <th>Nome Fantasia</th>
                     <th width="150">Telefone</th>
                     <th width="120">Cidade</th>
-                    <th width="150" class="erp-text-center">Acaµes</th>
+                    <th width="150" class="erp-text-center">Acoes</th>
                 </tr>
             </thead>
             <tbody>
@@ -124,16 +124,16 @@ if($acao=="exc"){
                         <td>
                             <div class="erp-table-actions" style="justify-content:center;">
                                 <a href="fornecedores_geral.php?acao=alt&id=<?=$res["id"]?>&bcod=<?=$bcod?>&bnome=<?=$bnome?>" class="erp-table-action" title="Editar">
-                                    âï¸
+                                    <i class="fas fa-edit"></i>
                                 </a>
                                 <a href="fornecedores_financeiro.php?id=<?=$res["id"]?>&bcod=<?=$bcod?>&bnome=<?=$bnome?>" class="erp-table-action" title="Financeiro">
-                                    ð°
+                                    <i class="fas fa-dollar-sign"></i>
                                 </a>
                                 <a href="fornecedores_site_list.php?id=<?=$res["id"]?>" class="erp-table-action" title="Website">
-                                    ð
+                                    <i class="fas fa-globe"></i>
                                 </a>
                                 <a href="#" onclick="return pergunta('Confirma exclusao?','fornecedores.php?acao=exc&id=<?=$res["id"]?>');" class="erp-table-action" title="Excluir" style="color:#e74c3c;">
-                                    ðï¸
+                                    <i class="fas fa-trash"></i>
                                 </a>
                             </div>
                         </td>

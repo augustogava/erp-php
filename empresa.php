@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 include("seguranca.php");
 
@@ -36,7 +36,7 @@ if($acao=="incluir"){
 }elseif($acao=="excluir"){
 	$sql=mysql_query("DELETE FROM empresa WHERE id='$id'");
 	if($sql){
-		$_SESSION["mensagem"]="Empresa exclua­da com sucesso!";
+		$_SESSION["mensagem"]="Empresa excluida com sucesso!";
 	}else{
 		$_SESSION["mensagem"]="Erro ao excluir empresa!";
 	}
@@ -64,7 +64,7 @@ if(empty($acao)) $acao="listar";
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<title><?=$acao=="listar"?"Empresas":"Configurar Empresa"?> - ERP System</title>
+<title><?php echo ($acao=="listar") ? "Empresas" : "Configurar Empresa"; ?> - ERP System</title>
 <meta charset="ISO-8859-1">
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -81,18 +81,24 @@ if(empty($acao)) $acao="listar";
     <div class="erp-card">
         <div class="erp-card-header">
             <h1 class="erp-card-title">
-                <?=$acao=="listar"?"ð¢ Empresas do Sistema":($acao=="alt"?"âï¸ Editar Empresa":"â Nova Empresa")?>
+                <?php if($acao=="listar"){ ?>
+                <i class="fas fa-building"></i> Empresas do Sistema
+                <?php }elseif($acao=="alt"){ ?>
+                <i class="fas fa-edit"></i> Editar Empresa
+                <?php }else{ ?>
+                <i class="fas fa-plus"></i> Nova Empresa
+                <?php } ?>
             </h1>
             <?php if($acao=="listar"): ?>
             <div>
                 <a href="empresa.php?acao=inc" class="erp-btn erp-btn-primary">
-                    â Nova Empresa
+                    <i class="fas fa-plus"></i> Nova Empresa
                 </a>
             </div>
             <?php else: ?>
             <div>
                 <a href="empresa.php" class="erp-btn erp-btn-outline">
-                    â Voltar
+                    <i class="fas fa-arrow-left"></i> Voltar
                 </a>
             </div>
             <?php endif; ?>
@@ -100,7 +106,7 @@ if(empty($acao)) $acao="listar";
     </div>
     
     <?php if(isset($_SESSION["mensagem"])): ?>
-    <div class="erp-alert erp-alert-<?=strpos($_SESSION["mensagem"],'sucesso')!==false?'success':'danger'?>">
+    <div class="erp-alert erp-alert-<?php echo (strpos($_SESSION["mensagem"],'sucesso')!==false) ? 'success' : 'danger'; ?>">
         <?php echo $_SESSION["mensagem"]; unset($_SESSION["mensagem"]); ?>
     </div>
     <?php endif; ?>
@@ -111,11 +117,11 @@ if(empty($acao)) $acao="listar";
             <table class="erp-table">
                 <thead>
                     <tr>
-                        <th>Ca³d</th>
+                        <th width="60">Cod</th>
                         <th>Nome / Razao Social</th>
-                        <th>CNPJ</th>
-                        <th>Cidade</th>
-                        <th class="erp-table-actions">Acaµes</th>
+                        <th width="150">CNPJ</th>
+                        <th width="150">Cidade</th>
+                        <th width="120" class="erp-text-center">Acoes</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -125,17 +131,19 @@ if(empty($acao)) $acao="listar";
                         while($res=mysql_fetch_array($sql)){
                     ?>
                     <tr>
-                        <td><?=$res["id"]?></td>
-                        <td><?=$res["nome"]?></td>
-                        <td><?=$res["cnpj_fat"]?></td>
-                        <td><?=$res["cidade_fat"]?></td>
-                        <td class="erp-table-actions">
-                            <a href="empresa.php?acao=alt&id=<?=$res["id"]?>" class="erp-btn erp-btn-sm erp-btn-outline" title="Editar">
-                                âï¸
-                            </a>
-                            <a href="#" onclick="if(confirm('Deseja excluir esta empresa?')) window.location='empresa.php?acao=excluir&id=<?=$res["id"]?>'; return false;" class="erp-btn erp-btn-sm erp-btn-danger" title="Excluir">
-                                ðï¸
-                            </a>
+                        <td><?php echo $res["id"]; ?></td>
+                        <td><?php echo $res["nome"]; ?></td>
+                        <td><?php echo $res["cnpj_fat"]; ?></td>
+                        <td><?php echo $res["cidade_fat"]; ?></td>
+                        <td>
+                            <div class="erp-table-actions" style="justify-content:center;">
+                                <a href="empresa.php?acao=alt&id=<?php echo $res["id"]; ?>" class="erp-table-action" title="Editar">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                                <a href="#" onclick="if(confirm('Deseja excluir esta empresa?')) window.location='empresa.php?acao=excluir&id=<?php echo $res["id"]; ?>'; return false;" class="erp-table-action" title="Excluir" style="color:#e74c3c;">
+                                    <i class="fas fa-trash"></i>
+                                </a>
+                            </div>
                         </td>
                     </tr>
                     <?php
@@ -150,52 +158,56 @@ if(empty($acao)) $acao="listar";
     </div>
     <?php else: ?>
     <form name="form1" method="post" action="">
-        <input type="hidden" name="id" value="<?=$id?>">
+        <input type="hidden" name="id" value="<?php echo $id; ?>">
         
         <div class="erp-card">
-            <h3 style="margin-bottom:20px;font-size:18px;color:#2c3e50;">ð Dados da Empresa</h3>
+            <h3 style="margin-bottom:20px;font-size:18px;color:#2c3e50;">
+                <i class="fas fa-building"></i> Dados da Empresa
+            </h3>
             
             <div class="erp-form-group">
                 <label class="erp-form-label">Nome / Razao Social *</label>
-                <input type="text" name="nome" class="erp-form-control" value="<?=$nome?>" required>
+                <input type="text" name="nome" class="erp-form-control" value="<?php echo $nome; ?>" required>
             </div>
             
             <div class="erp-row">
                 <div class="erp-col">
                     <div class="erp-form-group">
                         <label class="erp-form-label">Apelido para Fatura</label>
-                        <input type="text" name="apelido_fat" class="erp-form-control" value="<?=$apelido_fat?>">
+                        <input type="text" name="apelido_fat" class="erp-form-control" value="<?php echo $apelido_fat; ?>">
                     </div>
                 </div>
                 <div class="erp-col">
                     <div class="erp-form-group">
                         <label class="erp-form-label">CNPJ</label>
-                        <input type="text" name="cnpj_fat" class="erp-form-control" value="<?=$cnpj_fat?>">
+                        <input type="text" name="cnpj_fat" class="erp-form-control" value="<?php echo $cnpj_fat; ?>">
                     </div>
                 </div>
                 <div class="erp-col">
                     <div class="erp-form-group">
                         <label class="erp-form-label">IE</label>
-                        <input type="text" name="ie_fat" class="erp-form-control" value="<?=$ie_fat?>">
+                        <input type="text" name="ie_fat" class="erp-form-control" value="<?php echo $ie_fat; ?>">
                     </div>
                 </div>
             </div>
         </div>
         
         <div class="erp-card">
-            <h3 style="margin-bottom:20px;font-size:18px;color:#2c3e50;">ð Endereco</h3>
+            <h3 style="margin-bottom:20px;font-size:18px;color:#2c3e50;">
+                <i class="fas fa-map-marker-alt"></i> Endereco
+            </h3>
             
             <div class="erp-row">
                 <div class="erp-col" style="flex:1;">
                     <div class="erp-form-group">
                         <label class="erp-form-label">CEP</label>
-                        <input type="text" name="cep_fat" class="erp-form-control" value="<?=$cep_fat?>">
+                        <input type="text" name="cep_fat" class="erp-form-control" value="<?php echo $cep_fat; ?>">
                     </div>
                 </div>
                 <div class="erp-col" style="flex:4;">
                     <div class="erp-form-group">
                         <label class="erp-form-label">Endereco</label>
-                        <input type="text" name="endereco_fat" class="erp-form-control" value="<?=$endereco_fat?>">
+                        <input type="text" name="endereco_fat" class="erp-form-control" value="<?php echo $endereco_fat; ?>">
                     </div>
                 </div>
             </div>
@@ -204,19 +216,19 @@ if(empty($acao)) $acao="listar";
                 <div class="erp-col">
                     <div class="erp-form-group">
                         <label class="erp-form-label">Bairro</label>
-                        <input type="text" name="bairro_fat" class="erp-form-control" value="<?=$bairro_fat?>">
+                        <input type="text" name="bairro_fat" class="erp-form-control" value="<?php echo $bairro_fat; ?>">
                     </div>
                 </div>
                 <div class="erp-col">
                     <div class="erp-form-group">
                         <label class="erp-form-label">Cidade</label>
-                        <input type="text" name="cidade_fat" class="erp-form-control" value="<?=$cidade_fat?>">
+                        <input type="text" name="cidade_fat" class="erp-form-control" value="<?php echo $cidade_fat; ?>">
                     </div>
                 </div>
                 <div class="erp-col" style="flex:0.5;">
                     <div class="erp-form-group">
                         <label class="erp-form-label">UF</label>
-                        <input type="text" name="estado_fat" class="erp-form-control" value="<?=$estado_fat?>" maxlength="2">
+                        <input type="text" name="estado_fat" class="erp-form-control" value="<?php echo $estado_fat; ?>" maxlength="2">
                     </div>
                 </div>
             </div>
@@ -225,22 +237,22 @@ if(empty($acao)) $acao="listar";
                 <div class="erp-col">
                     <div class="erp-form-group">
                         <label class="erp-form-label">Telefone</label>
-                        <input type="text" name="fone_fat" class="erp-form-control" value="<?=$fone_fat?>">
+                        <input type="text" name="fone_fat" class="erp-form-control" value="<?php echo $fone_fat; ?>">
                     </div>
                 </div>
             </div>
         </div>
         
         <div style="display:flex;gap:12px;justify-content:flex-end;margin-top:24px;">
-            <a href="empresa.php" class="erp-btn erp-btn-secondary">Cancelar</a>
-            <button type="submit" name="acao" value="<?=$acao=="alt"?"alterar":"incluir"?>" class="erp-btn erp-btn-success">
-                â <?=$acao=="alt"?"Salvar Alteracaµes":"Cadastrar Empresa"?>
+            <a href="empresa.php" class="erp-btn erp-btn-outline">Cancelar</a>
+            <button type="submit" name="acao" value="<?php echo ($acao=="alt") ? "alterar" : "incluir"; ?>" class="erp-btn erp-btn-primary">
+                <i class="fas fa-check"></i> <?php echo ($acao=="alt") ? "Salvar Alteracoes" : "Cadastrar Empresa"; ?>
             </button>
         </div>
     </form>
     <?php endif; ?>
 </div>
 
-<? include("mensagem.php"); ?>
+<?php include("mensagem.php"); ?>
 </body>
 </html>

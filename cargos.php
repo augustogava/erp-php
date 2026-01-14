@@ -1,4 +1,4 @@
-<?
+<?php
 include("conecta.php");
 include("seguranca.php");
 $acao=verifi($permi,$acao);
@@ -11,10 +11,10 @@ if(empty($acao)) $acao="entrar";
 if($acao=="incluir"){
 	$sql=mysql_query("INSERT INTO cargos (nome) VALUES ('$nome')");
 	if($sql){
-		$_SESSION["mensagem"]="Cargo incluído com sucesso!";
+		$_SESSION["mensagem"]="Cargo incluido com sucesso!";
 		$acao="entrar";
 	}else{
-		$_SESSION["mensagem"]="O cargo não pôde ser incluído!";
+		$_SESSION["mensagem"]="O cargo nao pode ser incluido!";
 		$acao="inc";
 	}
 }elseif($acao=="alterar"){
@@ -23,32 +23,35 @@ if($acao=="incluir"){
 		$_SESSION["mensagem"]="Cargo alterado com sucesso!";
 		$acao="entrar";
 	}else{
-		$_SESSION["mensagem"]="O cargo não pôde ser alterado!";
+		$_SESSION["mensagem"]="O cargo nao pode ser alterado!";
 		$acao="alt";
 	}
 }elseif($acao=="exc"){
 	if(!empty($id)){
 		$sql=mysql_query("DELETE FROM cargos WHERE id='$id'");
 		if($sql){
-			$_SESSION["mensagem"]="Cargo excluído com sucesso!";
+			$_SESSION["mensagem"]="Cargo excluido com sucesso!";
 		}else{
-			$_SESSION["mensagem"]="O cargo não pôde ser excluído!";
+			$_SESSION["mensagem"]="O cargo nao pode ser excluido!";
 		}		
 	}
 	$acao="entrar";
 }
 ?>
-<html>
+<!DOCTYPE html>
+<html lang="pt-BR">
 <head>
-<title>CyberManager</title>
-<meta http-equiv="Content-Type" content="text/html; UTF-8">
-<link href="style.css" rel="stylesheet" type="text/css">
+<title>Cargos - ERP System</title>
+<meta charset="ISO-8859-1">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link href="style.css" rel="stylesheet" type="text/css">
 <link href="components.css" rel="stylesheet" type="text/css">
+<link href="layout-fixes.css" rel="stylesheet" type="text/css">
 <script src="scripts.js"></script>
+<script src="mascaras.js"></script>
 <script>
-<!--
-
 function verifica(cad){
 	if(cad.nome.value==''){
 		alert('Informe o Cargo');
@@ -57,108 +60,117 @@ function verifica(cad){
 	}
 	return true;
 }
-//-->
 </script>
-<style type="text/css">
-<!--
-.style1 {font-size: 14px}
--->
-</style>
 </head>
 
-<body background="imagens/mdagua.gif" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
-<table width="594" border="0" cellpadding="0" cellspacing="0">
-  <tr> 
-    <td><table width="594" border="0" cellspacing="0" cellpadding="0">
-	  <tr>
-    <td align="left" valign="top"><table width="590" border="0" cellpadding="0" cellspacing="0" class="texto">
-      <tr>
-        <td width="27" align="center"><div align="left"><a href="#" onClick="MM_openBrWindow('help/mini_estudo_capabi.html','','width=680,height=501')"><img src="imagens/icon14_ahn.gif" width="14" height="14" border="0" onMouseOver="this.T_STICKY=true; this.T_TITLE='Estudo de Capabilidade'; this.T_DELAY=10; this.T_WIDTH=225;  return escape('<strong>Caracter&iacute;stica - </strong>Caracter&iacute;stica da pe&ccedil;a a ser estudada.<br><strong>Especifica&ccedil;&atilde;o - </strong>Forma ou medida para ser seguida.<br><strong>Realizado por - </strong>Nome do respons&aacute;vel pelo estudo de R&R.<br><strong>Opera&ccedil;&atilde;o - </strong>Opera&ccedil;&atilde;o da manufatura na qual a especifica&ccedil;&atilde;o de engenharia &eacute; originada.')"></a><span class="impTextoBold">&nbsp;</span></div></td>
-        <td width="563" align="right"><div align="left" class="textobold style1 style1 style1 style1">Cargos</div></td>
-      </tr>
-      <tr>
-        <td align="center">&nbsp;</td>
-        <td align="right">&nbsp;</td>
-      </tr>
-    </table></td>
-  </tr>
-        <? if($acao=="entrar"){ ?>
-		<tr> 
-          <td><table width="300" border="0" cellspacing="0" cellpadding="0">
-              <tr>
-                <td><div align="center"><a href="cargos.php?acao=inc" class="textobold">Incluir 
-                    um Cargo</a> </div></td>
-              </tr>
-            </table>
-            <table width="300" border="0" cellpadding="0" cellspacing="1" bgcolor="#003366">
-              <tr class="textoboldbranco"> 
-                <td width="406">&nbsp;Cargo</td>
-                <td width="20">&nbsp;</td>
-                <td width="20">&nbsp;</td>
-              </tr>
-              <?
-			  $sql=mysql_query("SELECT * FROM cargos ORDER BY nome ASC");
-			  if(mysql_num_rows($sql)==0){
-			  ?>
-			  <tr bgcolor="#FFFFFF"> 
-                <td colspan="3" align="center" class="textobold">NENHUM CARGO 
-                  CADASTRADO </td>
-              </tr>
-			  <?
-			  }else{
-			  	while($res=mysql_fetch_array($sql)){
-			  ?>
-              <tr bgcolor="#FFFFFF" class="texto" onMouseover="changeto('#CCCCCC')" onMouseout="changeback('#FFFFFF')"> 
-                <td>&nbsp;<? print $res["nome"]; ?></td>
-                <td width="20" align="center"><a href="cargos.php?acao=alt&id=<? print $res["id"]; ?>"><img src="imagens/icon14_alterar.gif" alt="Alterar" width="14" height="14" border="0"></a></td>
-                <td width="20" align="center"><a href="#" onClick="return pergunta('Deseja excluir este cargo?','cargos.php?acao=exc&id=<? print $res["id"]; ?>')"><img src="imagens/icon14_lixeira.gif" alt="Excluir" width="14" height="14" border="0"></a></td>
-              </tr>
-			  <?
-			  	}
-			  }
-			  ?>
-            </table>
-          </td>
-        </tr>
-		<? }elseif($acao=="inc" or $acao=="alt"){ ?>
-        <tr> 
-          <td><form name="form1" method="post" action="" onSubmit="return verifica(this)">
-              <table width="300" border="0" cellpadding="0" cellspacing="0">
-                <tr bgcolor="#003366"> 
-                  <td colspan="2" align="center" class="textoboldbranco"> 
-                    <? if($acao=="inc"){ print"Incluir Cargo"; }else{ print"Alterar Cargo";} ?>
-                  </td>
+<body style="background:#f8f9fa;padding:24px;">
+
+<div class="erp-container-fluid">
+    <div class="erp-card">
+        <div class="erp-card-header">
+            <h1 class="erp-card-title"><i class="fas fa-user-tie"></i> Cargos</h1>
+            <?php if($acao=="entrar"): ?>
+            <a href="cargos.php?acao=inc" class="erp-btn erp-btn-primary">
+                + Novo Cargo
+            </a>
+            <?php endif; ?>
+        </div>
+    </div>
+    
+    <?php if(isset($_SESSION["mensagem"])): ?>
+    <div class="erp-alert erp-alert-success">
+        <?php echo $_SESSION["mensagem"]; unset($_SESSION["mensagem"]); ?>
+    </div>
+    <?php endif; ?>
+    
+    <?php if($acao=="entrar"){ ?>
+    <div class="erp-table-container">
+        <table class="erp-table">
+            <thead>
+                <tr>
+                    <th>Cargo</th>
+                    <th width="120" class="erp-text-center">Acoes</th>
                 </tr>
-                <? if($acao=="alt"){
-				$sql=mysql_query("SELECT * FROM cargos WHERE id='$id'");
-				$res=mysql_fetch_array($sql);
-				?>
-                <tr> 
-                  <td width="39" class="textobold">&nbsp;ID</td>
-                  <td width="258" class="texto"><input name="id2" type="text" class="formulario" id="id2" value="<? print $res["id"]; ?>" size="3" readonly>
-                    <input name="id" type="hidden" id="id3" value="<? print $id; ?>">
-                  </td>
+            </thead>
+            <tbody>
+            <?php
+            $sql=mysql_query("SELECT * FROM cargos ORDER BY nome ASC");
+            if(mysql_num_rows($sql)==0){
+            ?>
+                <tr>
+                    <td colspan="2" class="erp-text-center" style="padding:40px;">Nenhum cargo cadastrado</td>
                 </tr>
-                <? } ?>
-                <tr> 
-                  <td class="textobold">&nbsp;Cargo</td>
-                  <td class="textobold"> <input name="nome" type="text" class="formulario" id="nome" value="<? print $res["nome"]; ?>" size="45" maxlength="50">
-                  </td>
+            <?php
+            }else{
+                while($res=mysql_fetch_array($sql)){
+            ?>
+                <tr>
+                    <td><?php echo $res["nome"]; ?></td>
+                    <td>
+                        <div class="erp-table-actions" style="justify-content:center;">
+                            <a href="cargos.php?acao=alt&id=<?php echo $res["id"]; ?>" class="erp-table-action" title="Editar">
+                                <i class="fas fa-edit"></i>
+                            </a>
+                            <a href="#" onclick="return pergunta('Deseja excluir este cargo?','cargos.php?acao=exc&id=<?php echo $res["id"]; ?>');" class="erp-table-action" title="Excluir" style="color:#e74c3c;">
+                                <i class="fas fa-trash"></i>
+                            </a>
+                        </div>
+                    </td>
                 </tr>
-                <tr align="center"> 
-                  <td colspan="2" class="textobold">
-                    <input name="Submit222" type="button" class="microtxt" value="Cargos" onClick="window.location='cliente_contatos.php?cli=<? print $cli; ?>'">
-                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <input name="Submit2" type="submit" class="microtxt" value="Continuar">
-                  <input name="acao" type="hidden" id="acao2" value="<? if($acao=="alt"){ print "alterar"; }else{ print "incluir"; } ?>"></td>
-                </tr>
-              </table>
-            </form></td>
-        </tr>
-		<? } ?>
-      </table></td>
-  </tr>
-</table>
+            <?php
+                }
+            }
+            ?>
+            </tbody>
+        </table>
+    </div>
+    <?php }elseif($acao=="inc" or $acao=="alt"){ 
+        $res = array();
+        if($acao=="alt"){
+            $sql=mysql_query("SELECT * FROM cargos WHERE id='$id'");
+            if($sql && mysql_num_rows($sql) > 0){
+                $res=mysql_fetch_array($sql);
+            }
+        }
+    ?>
+    <div class="erp-card">
+        <h3 style="margin-bottom:20px;font-size:18px;color:#2c3e50;">
+            <?php echo ($acao=="inc") ? "Incluir Cargo" : "Alterar Cargo"; ?>
+        </h3>
+        <form name="form1" method="post" action="" onsubmit="return verifica(this)">
+            <?php if($acao=="alt"){ ?>
+            <div class="erp-row">
+                <div class="erp-col" style="max-width:100px;">
+                    <div class="erp-form-group">
+                        <label class="erp-form-label">ID</label>
+                        <input type="text" class="erp-form-control" value="<?php echo $res["id"]; ?>" readonly style="background:#e9ecef;">
+                    </div>
+                </div>
+            </div>
+            <?php } ?>
+            <div class="erp-row">
+                <div class="erp-col">
+                    <div class="erp-form-group">
+                        <label class="erp-form-label">Cargo</label>
+                        <input name="nome" type="text" class="erp-form-control" value="<?php echo isset($res["nome"]) ? $res["nome"] : ''; ?>" maxlength="50">
+                    </div>
+                </div>
+            </div>
+            <div style="display:flex;gap:12px;margin-top:20px;">
+                <button type="button" class="erp-btn erp-btn-outline" onclick="window.location='cargos.php'">
+                    Voltar
+                </button>
+                <button type="submit" class="erp-btn erp-btn-primary">
+                    Salvar
+                </button>
+            </div>
+            <input name="acao" type="hidden" value="<?php echo ($acao=="alt") ? "alterar" : "incluir"; ?>">
+            <input name="id" type="hidden" value="<?php echo $id; ?>">
+        </form>
+    </div>
+    <?php } ?>
+</div>
+
+<?php include("mensagem.php"); ?>
 </body>
 </html>
-<? include("mensagem.php"); ?>
