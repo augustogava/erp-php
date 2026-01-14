@@ -33,7 +33,7 @@ services:
     volumes:
       - mysql_data:/var/lib/mysql
       - ./database/schema.sql:/docker-entrypoint-initdb.d/01-schema.sql
-    command: --character-set-server=latin1 --collation-server=latin1_swedish_ci
+    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
     networks:
       - erp_network
     restart: unless-stopped

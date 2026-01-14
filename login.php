@@ -1,131 +1,195 @@
 <?php
-error_reporting(E_ALL & ~E_NOTICE & ~E_DEPRECATED & ~E_STRICT);
-include("conecta.php");
+declare(strict_types=1);
 
-$usuario = isset($_POST['usuario']) ? $_POST['usuario'] : (isset($usuario) ? $usuario : '');
-$senha = isset($_POST['senha']) ? $_POST['senha'] : (isset($senha) ? $senha : '');
+error_reporting(E_ALL & ~E_NOTICE & ~E_DEPRECATED);
+require_once(__DIR__ . '/conecta.php');
 
-$ip = isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : '127.0.0.1';
-$data = date("Y-m-d");
-$hora = date("H:i:s");
-$pip = explode(".", $ip);
-$ext = ($pip[0] != "192");
+// Helper: fetch one row (assoc) from a prepared statement
+$fetchOne = static function (mysqli_stmt $stmt): ?array {
+    $res = mysqli_stmt_get_result($stmt);
+    if (!$res) {
+        return null;
+    }
+    $row = mysqli_fetch_assoc($res);
+    return $row ?: null;
+};
 
-if($ext && !empty($usuario)){
-    @mysql_query("INSERT INTO externo (usuario,data,hora,ip) VALUES('$usuario','$data','$hora','$ip')");
-}
+$usuario = Input::post('usuario', '');
+$senha = Input::post('senha', '');
 
-@mysql_query("DELETE FROM online WHERE (UNIX_TIMESTAMP()-UNIX_TIMESTAMP(data)) > 100");
+$ip = isset($_SERVER['REMOTE_ADDR']) ? (string)$_SERVER['REMOTE_ADDR'] : '127.0.0.1';
+$data = date('Y-m-d');
+$hora = date('H:i:s');
+$pip = explode('.', $ip);
+$ext = (($pip[0] ?? '') !== '192');
 
-$sqlb = @mysql_query("SELECT * FROM bloquear WHERE id=1");
-$resb = @mysql_fetch_array($sqlb);
-if(isset($resb["block"]) && $resb["block"]=="S"){
-    $_SESSION["lerro"] = "Sistema em Manutencao";
-    header("Location:login_page.php");
-    exit;
-}
-
-if($ext && isset($resb["externo"]) && $resb["externo"]=="N"){
-    $_SESSION["lerro"] = "Acesso Externo Proibido";
-    header("Location:login_page.php");
-    exit;
-}
-
-$erro = false;
-$erro2 = false;
-
-if(empty($usuario) || empty($senha)){
-    $erro = true;
-}else{
-    $usuario = @mysql_real_escape_string($usuario);
-    $senha = @mysql_real_escape_string($senha);
-    
-    if(!$ext){
-        $sql = @mysql_query("SELECT * FROM cliente_login WHERE login='$usuario' AND senha='$senha' AND sit='A' AND blok='0'");
-        if(!$sql || mysql_num_rows($sql)==0){
-            $erro = true;
-        }
-    }else{
-        $sql = @mysql_query("SELECT * FROM cliente_login WHERE login='$usuario' AND senha='$senha' AND sit='A' AND blok='0' AND blok_externo='0'");
-        if(!$sql || mysql_num_rows($sql)==0){
-            $erro2 = true;
-        }
+// Log external login attempts
+if ($ext && $usuario !== '') {
+    if ($stmt = mysqli_prepare($cnx, 'INSERT INTO externo (usuario, data, hora, ip) VALUES (?, ?, ?, ?)')) {
+        mysqli_stmt_bind_param($stmt, 'ssss', $usuario, $data, $hora, $ip);
+        @mysqli_stmt_execute($stmt);
+        mysqli_stmt_close($stmt);
     }
 }
 
-if($erro){
-    $_SESSION["lerro"] = "Login ou senha incorretos";
-    header("Location:login_page.php");
-    exit;
-}else if($erro2){
-    $_SESSION["lerro"] = "Usuario bloqueado para acesso externo";
-    header("Location:login_page.php");
-    exit;
-}else{
-    $res = @mysql_fetch_array($sql);
-    $nome = "";
-    $nivel = "";
-    $cargo = "";
-    $nivelnum = isset($res["nivel"]) ? $res["nivel"] : 1;
-    $cliente = 0;
-    
-    if(empty($res["funcionario"])){
-        $cliente = isset($res["cliente"]) ? $res["cliente"] : 0;
-        $sql2 = @mysql_query("SELECT clientes.nome as clinome, niveis.nome as nivel, cliente_login.primeiro as primeiro, cliente_login.id as ids, cliente_login.perm as permissao FROM clientes, niveis, cliente_login WHERE clientes.id='$cliente' AND clientes.id=cliente_login.cliente AND cliente_login.nivel=niveis.id");
-        if($sql2 && mysql_num_rows($sql2)!=0){
-            $res2 = mysql_fetch_array($sql2);
-            $nome = $res2["clinome"];
-            $nivel = $res2["nivel"];
-            $res["primeiro"] = $res2["primeiro"];
-            $res["ids"] = $res2["ids"];
-            $res["permissao"] = $res2["permissao"];
-        }else{
-            $nome = "Usuario";
-            $nivel = "Padrao";
-        }
-        $sql3 = @mysql_query("SELECT cargos.nome as cargonome FROM funcionarios, cargos WHERE funcionarios.cliente='$cliente' AND cargos.id=funcionarios.cargo");
-        if($sql3 && mysql_num_rows($sql3)){
-            $res3 = mysql_fetch_array($sql3);
-            $cargo = isset($res3["cargonome"]) ? $res3["cargonome"] : "";
-        }
-        $_SESSION["login_funcionario"] = "N";
-    }else{
-        $cliente = $res["funcionario"];
-        $sql2 = @mysql_query("SELECT funcionarios.nome as clinome, niveis.nome as nivel, cliente_login.primeiro as primeiro, cliente_login.id as ids, cliente_login.perm as permissao FROM funcionarios, niveis, cliente_login WHERE funcionarios.id='$cliente' AND funcionarios.id=cliente_login.funcionario AND cliente_login.nivel=niveis.id");
-        if($sql2 && mysql_num_rows($sql2)!=0){
-            $res2 = mysql_fetch_array($sql2);
-            $nome = $res2["clinome"];
-            $nivel = $res2["nivel"];
-            $res["primeiro"] = $res2["primeiro"];
-            $res["ids"] = $res2["ids"];
-            $res["permissao"] = $res2["permissao"];
-        }else{
-            $nome = "Administrador";
-            $nivel = "Administrador";
-        }
-        $sql3 = @mysql_query("SELECT cargo FROM funcionarios WHERE id='$cliente'");
-        if($sql3 && mysql_num_rows($sql3)){
-            $res3 = mysql_fetch_array($sql3);
-            $cargo = isset($res3["cargo"]) ? $res3["cargo"] : "";
-        }
-        $_SESSION["login_funcionario"] = "S";
-    }
-    
-    $_SESSION["permissao"] = isset($res["permissao"]) ? $res["permissao"] : "4";
-    $_SESSION["login_codigo"] = $cliente;
-    $_SESSION["login_nome"] = $nome;
-    $_SESSION["login_cargo"] = $cargo;
-    $_SESSION["login_nivel_nome"] = $nivel;
-    $_SESSION["login_nivel"] = $nivelnum;
-    $_SESSION["login_c1"] = $usuario;
-    
-    @mysql_query("INSERT INTO online (user, data) VALUES ('$cliente', NOW())");
-    
-    if(isset($res["primeiro"]) && $res["primeiro"]=="S"){
-        header("Location:primeiro.php?id=".$res["ids"]);
-    }else{
-        header("Location:index.php");
-    }
+// Cleanup "online" table
+@mysqli_query($cnx, 'DELETE FROM online WHERE (UNIX_TIMESTAMP()-UNIX_TIMESTAMP(data)) > 100');
+
+// Maintenance / external access flags
+$blockRow = null;
+if ($stmt = mysqli_prepare($cnx, 'SELECT block, externo FROM bloquear WHERE id = 1')) {
+    mysqli_stmt_execute($stmt);
+    $blockRow = $fetchOne($stmt);
+    mysqli_stmt_close($stmt);
+}
+
+if (($blockRow['block'] ?? '') === 'S') {
+    $_SESSION['lerro'] = 'Sistema em Manutencao';
+    header('Location: login_page.php');
     exit;
 }
+
+if ($ext && ($blockRow['externo'] ?? 'S') === 'N') {
+    $_SESSION['lerro'] = 'Acesso Externo Proibido';
+    header('Location: login_page.php');
+    exit;
+}
+
+if ($usuario === '' || $senha === '') {
+    $_SESSION['lerro'] = 'Login ou senha incorretos';
+    header('Location: login_page.php');
+    exit;
+}
+
+// Authenticate (prepared statements)
+$sql = 'SELECT * FROM cliente_login WHERE login = ? AND senha = ? AND sit = \'A\' AND blok = \'0\'';
+if ($ext) {
+    $sql .= ' AND blok_externo = \'0\'';
+}
+
+$loginRow = null;
+if ($stmt = mysqli_prepare($cnx, $sql)) {
+    mysqli_stmt_bind_param($stmt, 'ss', $usuario, $senha);
+    mysqli_stmt_execute($stmt);
+    $loginRow = $fetchOne($stmt);
+    mysqli_stmt_close($stmt);
+}
+
+if (!$loginRow) {
+    $_SESSION['lerro'] = $ext ? 'Usuario bloqueado para acesso externo' : 'Login ou senha incorretos';
+    header('Location: login_page.php');
+    exit;
+}
+
+$nome = '';
+$nivelNome = '';
+$cargo = '';
+$nivelnum = isset($loginRow['nivel']) ? (int)$loginRow['nivel'] : 1;
+$clienteId = 0;
+
+if (empty($loginRow['funcionario'])) {
+    // Cliente login
+    $clienteId = isset($loginRow['cliente']) ? (int)$loginRow['cliente'] : 0;
+
+    if ($stmt = mysqli_prepare(
+        $cnx,
+        'SELECT clientes.nome AS clinome, niveis.nome AS nivel, cliente_login.primeiro AS primeiro, cliente_login.id AS ids, cliente_login.perm AS permissao
+         FROM clientes, niveis, cliente_login
+         WHERE clientes.id = ? AND clientes.id = cliente_login.cliente AND cliente_login.nivel = niveis.id'
+    )) {
+        mysqli_stmt_bind_param($stmt, 'i', $clienteId);
+        mysqli_stmt_execute($stmt);
+        $row = $fetchOne($stmt);
+        mysqli_stmt_close($stmt);
+
+        if ($row) {
+            $nome = (string)($row['clinome'] ?? '');
+            $nivelNome = (string)($row['nivel'] ?? '');
+            $loginRow['primeiro'] = $row['primeiro'] ?? null;
+            $loginRow['ids'] = $row['ids'] ?? null;
+            $loginRow['permissao'] = $row['permissao'] ?? null;
+        }
+    }
+
+    if ($nome === '') {
+        $nome = 'Usuario';
+        $nivelNome = 'Padrao';
+    }
+
+    // Cargo by cliente linkage
+    if ($stmt = mysqli_prepare(
+        $cnx,
+        'SELECT cargos.nome AS cargonome
+         FROM funcionarios, cargos
+         WHERE funcionarios.cliente = ? AND cargos.id = funcionarios.cargo'
+    )) {
+        mysqli_stmt_bind_param($stmt, 'i', $clienteId);
+        mysqli_stmt_execute($stmt);
+        $row = $fetchOne($stmt);
+        mysqli_stmt_close($stmt);
+        $cargo = (string)($row['cargonome'] ?? '');
+    }
+
+    $_SESSION['login_funcionario'] = 'N';
+} else {
+    // Funcionario login
+    $clienteId = (int)$loginRow['funcionario'];
+
+    if ($stmt = mysqli_prepare(
+        $cnx,
+        'SELECT funcionarios.nome AS clinome, niveis.nome AS nivel, cliente_login.primeiro AS primeiro, cliente_login.id AS ids, cliente_login.perm AS permissao
+         FROM funcionarios, niveis, cliente_login
+         WHERE funcionarios.id = ? AND funcionarios.id = cliente_login.funcionario AND cliente_login.nivel = niveis.id'
+    )) {
+        mysqli_stmt_bind_param($stmt, 'i', $clienteId);
+        mysqli_stmt_execute($stmt);
+        $row = $fetchOne($stmt);
+        mysqli_stmt_close($stmt);
+
+        if ($row) {
+            $nome = (string)($row['clinome'] ?? '');
+            $nivelNome = (string)($row['nivel'] ?? '');
+            $loginRow['primeiro'] = $row['primeiro'] ?? null;
+            $loginRow['ids'] = $row['ids'] ?? null;
+            $loginRow['permissao'] = $row['permissao'] ?? null;
+        }
+    }
+
+    if ($nome === '') {
+        $nome = 'Administrador';
+        $nivelNome = 'Administrador';
+    }
+
+    if ($stmt = mysqli_prepare($cnx, 'SELECT cargo FROM funcionarios WHERE id = ?')) {
+        mysqli_stmt_bind_param($stmt, 'i', $clienteId);
+        mysqli_stmt_execute($stmt);
+        $row = $fetchOne($stmt);
+        mysqli_stmt_close($stmt);
+        $cargo = (string)($row['cargo'] ?? '');
+    }
+
+    $_SESSION['login_funcionario'] = 'S';
+}
+
+$_SESSION['permissao'] = isset($loginRow['permissao']) ? (string)$loginRow['permissao'] : '4';
+$_SESSION['login_codigo'] = $clienteId;
+$_SESSION['login_nome'] = $nome;
+$_SESSION['login_cargo'] = $cargo;
+$_SESSION['login_nivel_nome'] = $nivelNome;
+$_SESSION['login_nivel'] = $nivelnum;
+$_SESSION['login_c1'] = $usuario;
+
+// Insert into online
+if ($stmt = mysqli_prepare($cnx, 'INSERT INTO online (user, data) VALUES (?, NOW())')) {
+    mysqli_stmt_bind_param($stmt, 'i', $clienteId);
+    @mysqli_stmt_execute($stmt);
+    mysqli_stmt_close($stmt);
+}
+
+if (($loginRow['primeiro'] ?? '') === 'S') {
+    header('Location: primeiro.php?id=' . urlencode((string)($loginRow['ids'] ?? '')));
+} else {
+    header('Location: index.php');
+}
+exit;
 ?>

@@ -95,7 +95,7 @@ if($acao=="alt"){
 <link href="layout-fixes.css" rel="stylesheet" type="text/css">
 <script src="scripts.js"></script>
 <script src="mascaras.js"></script>
-<script src="cep_re.php"></script>
+<script src="cep_re.js"></script>
 </head>
 
 <body style="background:#f8f9fa;padding:24px;" onLoad="enterativa=1;" onkeypress="return ent()">
